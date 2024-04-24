@@ -81,7 +81,7 @@ class MixinEmitter extends ClassEmitter {
                     e = EmitUtils.begin_method(this, methodInfo, modifiers);
                     e.load_this();
                     e.getfield(FIELD_NAME);
-                    e.aaload((route != null) ? route[i] : i);
+                    e.aaload(route != null ? route[i] : i);
                     e.checkcast(methodInfo.getClassInfo().getType());
                     e.load_args();
                     e.invoke(methodInfo);

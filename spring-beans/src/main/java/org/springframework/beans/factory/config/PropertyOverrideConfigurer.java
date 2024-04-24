@@ -72,7 +72,7 @@ public class PropertyOverrideConfigurer extends PropertyResourceConfigurer {
 
 	private String beanNameSeparator = DEFAULT_BEAN_NAME_SEPARATOR;
 
-	private boolean ignoreInvalidKeys = false;
+	private boolean ignoreInvalidKeys;
 
 	/**
 	 * Contains names of beans that have overrides.

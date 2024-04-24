@@ -54,7 +54,7 @@ class MatrixVariablesMethodArgumentResolverTests {
 
 	private MockHttpServletRequest request;
 
-	private ResolvableMethod testMethod = ResolvableMethod.on(this.getClass()).named("handle").build();
+	private final ResolvableMethod testMethod = ResolvableMethod.on(this.getClass()).named("handle").build();
 
 
 	@BeforeEach

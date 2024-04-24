@@ -42,8 +42,8 @@ public class AspectComponentDefinition extends CompositeComponentDefinition {
 			@Nullable BeanReference[] beanReferences, @Nullable Object source) {
 
 		super(aspectName, source);
-		this.beanDefinitions = (beanDefinitions != null ? beanDefinitions : new BeanDefinition[0]);
-		this.beanReferences = (beanReferences != null ? beanReferences : new BeanReference[0]);
+		this.beanDefinitions = beanDefinitions != null ? beanDefinitions : new BeanDefinition[0];
+		this.beanReferences = beanReferences != null ? beanReferences : new BeanReference[0];
 	}
 
 

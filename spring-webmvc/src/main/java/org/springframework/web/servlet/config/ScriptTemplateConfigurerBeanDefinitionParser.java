@@ -87,9 +87,9 @@ public class ScriptTemplateConfigurerBeanDefinitionParser extends AbstractSimple
 
 	@Override
 	protected boolean isEligibleAttribute(String name) {
-		return (name.equals("engine-name") || name.equals("scripts") || name.equals("render-object") ||
-				name.equals("render-function") || name.equals("content-type") ||
-				name.equals("charset") || name.equals("resource-loader-path"));
+		return "engine-name".equals(name) || "scripts".equals(name) || "render-object".equals(name) ||
+				"render-function".equals(name) || "content-type".equals(name) ||
+				"charset".equals(name) || "resource-loader-path".equals(name);
 	}
 
 }

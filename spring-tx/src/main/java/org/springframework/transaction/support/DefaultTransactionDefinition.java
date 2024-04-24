@@ -83,7 +83,7 @@ public class DefaultTransactionDefinition implements TransactionDefinition, Seri
 
 	private int timeout = TIMEOUT_DEFAULT;
 
-	private boolean readOnly = false;
+	private boolean readOnly;
 
 	@Nullable
 	private String name;
@@ -282,7 +282,7 @@ public class DefaultTransactionDefinition implements TransactionDefinition, Seri
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof TransactionDefinition && toString().equals(other.toString())));
+		return this == other || (other instanceof TransactionDefinition && toString().equals(other.toString()));
 	}
 
 	/**

@@ -166,7 +166,7 @@ public class FileSystemResource extends AbstractResource implements WritableReso
 	 */
 	@Override
 	public boolean exists() {
-		return (this.file != null ? this.file.exists() : Files.exists(this.filePath));
+		return this.file != null ? this.file.exists() : Files.exists(this.filePath);
 	}
 
 	/**
@@ -179,8 +179,8 @@ public class FileSystemResource extends AbstractResource implements WritableReso
 	 */
 	@Override
 	public boolean isReadable() {
-		return (this.file != null ? this.file.canRead() && !this.file.isDirectory() :
-				Files.isReadable(this.filePath) && !Files.isDirectory(this.filePath));
+		return this.file != null ? this.file.canRead() && !this.file.isDirectory() :
+				Files.isReadable(this.filePath) && !Files.isDirectory(this.filePath);
 	}
 
 	/**
@@ -227,8 +227,8 @@ public class FileSystemResource extends AbstractResource implements WritableReso
 	 */
 	@Override
 	public boolean isWritable() {
-		return (this.file != null ? this.file.canWrite() && !this.file.isDirectory() :
-				Files.isWritable(this.filePath) && !Files.isDirectory(this.filePath));
+		return this.file != null ? this.file.canWrite() && !this.file.isDirectory() :
+				Files.isWritable(this.filePath) && !Files.isDirectory(this.filePath);
 	}
 
 	/**
@@ -247,7 +247,7 @@ public class FileSystemResource extends AbstractResource implements WritableReso
 	 */
 	@Override
 	public URL getURL() throws IOException {
-		return (this.file != null ? this.file.toURI().toURL() : this.filePath.toUri().toURL());
+		return this.file != null ? this.file.toURI().toURL() : this.filePath.toUri().toURL();
 	}
 
 	/**
@@ -289,7 +289,7 @@ public class FileSystemResource extends AbstractResource implements WritableReso
 	 */
 	@Override
 	public File getFile() {
-		return (this.file != null ? this.file : this.filePath.toFile());
+		return this.file != null ? this.file : this.filePath.toFile();
 	}
 
 	/**
@@ -364,8 +364,8 @@ public class FileSystemResource extends AbstractResource implements WritableReso
 	@Override
 	public Resource createRelative(String relativePath) {
 		String pathToUse = StringUtils.applyRelativePath(this.path, relativePath);
-		return (this.file != null ? new FileSystemResource(pathToUse) :
-				new FileSystemResource(this.filePath.getFileSystem(), pathToUse));
+		return this.file != null ? new FileSystemResource(pathToUse) :
+				new FileSystemResource(this.filePath.getFileSystem(), pathToUse);
 	}
 
 	/**
@@ -375,7 +375,7 @@ public class FileSystemResource extends AbstractResource implements WritableReso
 	 */
 	@Override
 	public String getFilename() {
-		return (this.file != null ? this.file.getName() : this.filePath.getFileName().toString());
+		return this.file != null ? this.file.getName() : this.filePath.getFileName().toString();
 	}
 
 	/**
@@ -396,7 +396,7 @@ public class FileSystemResource extends AbstractResource implements WritableReso
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof FileSystemResource that && this.path.equals(that.path)));
+		return this == other || (other instanceof FileSystemResource that && this.path.equals(that.path));
 	}
 
 	/**

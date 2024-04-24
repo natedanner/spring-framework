@@ -71,7 +71,7 @@ public class AutowiredRuleTests {
 
 	static class AutowiredTestRule implements TestRule {
 
-		private boolean applied = false;
+		private boolean applied;
 
 		@Override
 		public Statement apply(Statement base, Description description) {

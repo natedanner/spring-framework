@@ -138,7 +138,7 @@ class ComparatorTests {
 	}
 
 	// A silly comparator declaring everything to be equal
-	private TypeComparator customComparator = new TypeComparator() {
+	private final TypeComparator customComparator = new TypeComparator() {
 		@Override
 		public boolean canCompare(@Nullable Object firstObject, @Nullable Object secondObject) {
 			return true;

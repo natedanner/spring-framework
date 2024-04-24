@@ -92,7 +92,7 @@ public class WebExchangeDataBinder extends WebDataBinder {
 	@Override
 	protected boolean shouldConstructArgument(MethodParameter param) {
 		Class<?> type = param.nestedIfOptional().getNestedParameterType();
-		return (super.shouldConstructArgument(param) && !Part.class.isAssignableFrom(type));
+		return super.shouldConstructArgument(param) && !Part.class.isAssignableFrom(type);
 	}
 
 	/**

@@ -65,9 +65,9 @@ import org.springframework.web.util.WebUtils;
  */
 public class InternalResourceView extends AbstractUrlBasedView {
 
-	private boolean alwaysInclude = false;
+	private boolean alwaysInclude;
 
-	private boolean preventDispatchLoop = false;
+	private boolean preventDispatchLoop;
 
 
 	/**
@@ -244,7 +244,7 @@ public class InternalResourceView extends AbstractUrlBasedView {
 	 * @see org.springframework.web.util.WebUtils#isIncludeRequest
 	 */
 	protected boolean useInclude(HttpServletRequest request, HttpServletResponse response) {
-		return (this.alwaysInclude || WebUtils.isIncludeRequest(request) || response.isCommitted());
+		return this.alwaysInclude || WebUtils.isIncludeRequest(request) || response.isCommitted();
 	}
 
 }

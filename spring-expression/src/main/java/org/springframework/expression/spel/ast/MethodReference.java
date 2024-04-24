@@ -300,7 +300,7 @@ public class MethodReference extends SpelNodeImpl {
 		}
 
 		Class<?> clazz = executor.getMethod().getDeclaringClass();
-		return (Modifier.isPublic(clazz.getModifiers()) || executor.getPublicDeclaringClass() != null);
+		return Modifier.isPublic(clazz.getModifiers()) || executor.getPublicDeclaringClass() != null;
 	}
 
 	@Override
@@ -437,12 +437,12 @@ public class MethodReference extends SpelNodeImpl {
 		}
 
 		public boolean isSuitable(Object value, @Nullable TypeDescriptor target, List<TypeDescriptor> argumentTypes) {
-			return ((this.staticClass == null || this.staticClass == value) &&
-					ObjectUtils.nullSafeEquals(this.target, target) && this.argumentTypes.equals(argumentTypes));
+			return (this.staticClass == null || this.staticClass == value) &&
+					ObjectUtils.nullSafeEquals(this.target, target) && this.argumentTypes.equals(argumentTypes);
 		}
 
 		public boolean hasProxyTarget() {
-			return (this.target != null && Proxy.isProxyClass(this.target.getType()));
+			return this.target != null && Proxy.isProxyClass(this.target.getType());
 		}
 
 		public MethodExecutor get() {

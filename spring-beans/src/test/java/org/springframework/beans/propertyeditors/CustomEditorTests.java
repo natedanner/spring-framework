@@ -80,7 +80,7 @@ class CustomEditorTests {
 		pvs.addPropertyValue(new PropertyValue("spouse", tbString));
 		bw.setPropertyValues(pvs);
 		assertThat(tb.getSpouse()).as("spouse is non-null").isNotNull();
-		assertThat(tb.getSpouse().getName().equals("Kerry") && tb.getSpouse().getAge() == 34).as("spouse name is Kerry and age is 34").isTrue();
+		assertThat("Kerry".equals(tb.getSpouse().getName()) && tb.getSpouse().getAge() == 34).as("spouse name is Kerry and age is 34").isTrue();
 	}
 
 	@Test
@@ -100,7 +100,7 @@ class CustomEditorTests {
 
 		bw.setPropertyValues(pvs);
 		assertThat(tb.getSpouse()).as("spouse is non-null").isNotNull();
-		assertThat(tb.getSpouse().getName().equals("Kerry") && tb.getSpouse().getAge() == 34).as("spouse name is Kerry and age is 34").isTrue();
+		assertThat("Kerry".equals(tb.getSpouse().getName()) && tb.getSpouse().getAge() == 34).as("spouse name is Kerry and age is 34").isTrue();
 		ITestBean spouse = tb.getSpouse();
 
 		bw.setPropertyValues(pvs);
@@ -848,10 +848,10 @@ class CustomEditorTests {
 		});
 		TestBean tb0 = bean.getArray()[0];
 		TestBean tb1 = bean.getArray()[1];
-		TestBean tb2 = ((TestBean) bean.getList().get(0));
-		TestBean tb3 = ((TestBean) bean.getList().get(1));
-		TestBean tb4 = ((TestBean) bean.getMap().get("key1"));
-		TestBean tb5 = ((TestBean) bean.getMap().get("key2"));
+		TestBean tb2 = (TestBean) bean.getList().get(0);
+		TestBean tb3 = (TestBean) bean.getList().get(1);
+		TestBean tb4 = (TestBean) bean.getMap().get("key1");
+		TestBean tb5 = (TestBean) bean.getMap().get("key2");
 		assertThat(tb0.getName()).isEqualTo("name0");
 		assertThat(tb1.getName()).isEqualTo("name1");
 		assertThat(tb2.getName()).isEqualTo("name2");
@@ -915,10 +915,10 @@ class CustomEditorTests {
 
 		TestBean tb0 = bean.getArray()[0];
 		TestBean tb1 = bean.getArray()[1];
-		TestBean tb2 = ((TestBean) bean.getList().get(0));
-		TestBean tb3 = ((TestBean) bean.getList().get(1));
-		TestBean tb4 = ((TestBean) bean.getMap().get("key1"));
-		TestBean tb5 = ((TestBean) bean.getMap().get("key2"));
+		TestBean tb2 = (TestBean) bean.getList().get(0);
+		TestBean tb3 = (TestBean) bean.getList().get(1);
+		TestBean tb4 = (TestBean) bean.getMap().get("key1");
+		TestBean tb5 = (TestBean) bean.getMap().get("key2");
 		assertThat(tb0.getName()).isEqualTo("name0");
 		assertThat(tb1.getName()).isEqualTo("name1");
 		assertThat(tb2.getName()).isEqualTo("name2");
@@ -1000,10 +1000,10 @@ class CustomEditorTests {
 
 		TestBean tb0 = bean.getArray()[0];
 		TestBean tb1 = bean.getArray()[1];
-		TestBean tb2 = ((TestBean) bean.getList().get(0));
-		TestBean tb3 = ((TestBean) bean.getList().get(1));
-		TestBean tb4 = ((TestBean) bean.getMap().get("key1"));
-		TestBean tb5 = ((TestBean) bean.getMap().get("key2"));
+		TestBean tb2 = (TestBean) bean.getList().get(0);
+		TestBean tb3 = (TestBean) bean.getList().get(1);
+		TestBean tb4 = (TestBean) bean.getMap().get("key1");
+		TestBean tb5 = (TestBean) bean.getMap().get("key2");
 		assertThat(tb0.getName()).isEqualTo("name0");
 		assertThat(tb1.getName()).isEqualTo("name1");
 		assertThat(tb2.getName()).isEqualTo("name2");
@@ -1046,10 +1046,10 @@ class CustomEditorTests {
 		IndexedTestBean bean = new IndexedTestBean();
 		TestBean tb0 = bean.getArray()[0];
 		TestBean tb1 = bean.getArray()[1];
-		TestBean tb2 = ((TestBean) bean.getList().get(0));
-		TestBean tb3 = ((TestBean) bean.getList().get(1));
-		TestBean tb4 = ((TestBean) bean.getMap().get("key1"));
-		TestBean tb5 = ((TestBean) bean.getMap().get("key2"));
+		TestBean tb2 = (TestBean) bean.getList().get(0);
+		TestBean tb3 = (TestBean) bean.getList().get(1);
+		TestBean tb4 = (TestBean) bean.getMap().get("key1");
+		TestBean tb5 = (TestBean) bean.getMap().get("key2");
 		tb0.setNestedIndexedBean(new IndexedTestBean());
 		tb1.setNestedIndexedBean(new IndexedTestBean());
 		tb2.setNestedIndexedBean(new IndexedTestBean());
@@ -1130,10 +1130,10 @@ class CustomEditorTests {
 		IndexedTestBean bean = new IndexedTestBean();
 		TestBean tb0 = bean.getArray()[0];
 		TestBean tb1 = bean.getArray()[1];
-		TestBean tb2 = ((TestBean) bean.getList().get(0));
-		TestBean tb3 = ((TestBean) bean.getList().get(1));
-		TestBean tb4 = ((TestBean) bean.getMap().get("key1"));
-		TestBean tb5 = ((TestBean) bean.getMap().get("key2"));
+		TestBean tb2 = (TestBean) bean.getList().get(0);
+		TestBean tb3 = (TestBean) bean.getList().get(1);
+		TestBean tb4 = (TestBean) bean.getMap().get("key1");
+		TestBean tb5 = (TestBean) bean.getMap().get("key2");
 		tb0.setNestedIndexedBean(new IndexedTestBean());
 		tb1.setNestedIndexedBean(new IndexedTestBean());
 		tb2.setNestedIndexedBean(new IndexedTestBean());

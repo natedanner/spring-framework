@@ -149,8 +149,8 @@ public abstract class AbstractSimpleBeanDefinitionParser extends AbstractSingleB
 	 */
 	protected boolean isEligibleAttribute(Attr attribute, ParserContext parserContext) {
 		String fullName = attribute.getName();
-		return (!fullName.equals("xmlns") && !fullName.startsWith("xmlns:") &&
-				isEligibleAttribute(parserContext.getDelegate().getLocalName(attribute)));
+		return !"xmlns".equals(fullName) && !fullName.startsWith("xmlns:") &&
+				isEligibleAttribute(parserContext.getDelegate().getLocalName(attribute));
 	}
 
 	/**

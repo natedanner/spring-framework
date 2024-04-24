@@ -173,7 +173,7 @@ public class FacesRequestAttributes implements RequestAttributes {
 		Object session = externalContext.getSession(true);
 		Object mutex = externalContext.getSessionMap().get(WebUtils.SESSION_MUTEX_ATTRIBUTE);
 		if (mutex == null) {
-			mutex = (session != null ? session : externalContext);
+			mutex = session != null ? session : externalContext;
 		}
 		return mutex;
 	}

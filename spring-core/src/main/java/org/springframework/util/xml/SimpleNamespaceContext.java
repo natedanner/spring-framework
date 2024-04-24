@@ -69,7 +69,7 @@ public class SimpleNamespaceContext implements NamespaceContext {
 	@Nullable
 	public String getPrefix(String namespaceUri) {
 		Set<String> prefixes = getPrefixesSet(namespaceUri);
-		return (!prefixes.isEmpty() ? prefixes.iterator().next() : null);
+		return prefixes.isEmpty() ? null : prefixes.iterator().next();
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class SimpleNamespaceContext implements NamespaceContext {
 		}
 		else {
 			Set<String> prefixes = this.namespaceUriToPrefixes.get(namespaceUri);
-			return (prefixes != null ? Collections.unmodifiableSet(prefixes) : Collections.emptySet());
+			return prefixes != null ? Collections.unmodifiableSet(prefixes) : Collections.emptySet();
 		}
 	}
 

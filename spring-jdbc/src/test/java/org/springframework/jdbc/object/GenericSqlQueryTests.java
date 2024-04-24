@@ -51,13 +51,13 @@ class GenericSqlQueryTests {
 			"select id, forename from custmr where id = ? and country = ?";
 
 
-	private DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+	private final DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
 
-	private Connection connection = mock();
+	private final Connection connection = mock();
 
-	private PreparedStatement preparedStatement = mock();
+	private final PreparedStatement preparedStatement = mock();
 
-	private ResultSet resultSet = mock();
+	private final ResultSet resultSet = mock();
 
 
 	@BeforeEach

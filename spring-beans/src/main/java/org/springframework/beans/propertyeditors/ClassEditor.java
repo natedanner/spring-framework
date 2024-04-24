@@ -55,7 +55,7 @@ public class ClassEditor extends PropertyEditorSupport {
 	 * (or {@code null} for the thread context ClassLoader)
 	 */
 	public ClassEditor(@Nullable ClassLoader classLoader) {
-		this.classLoader = (classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader());
+		this.classLoader = classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader();
 	}
 
 

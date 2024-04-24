@@ -689,7 +689,7 @@ public abstract class RequestPredicates {
 		@Override
 		public void accept(Visitor visitor) {
 			visitor.header(HttpHeaders.CONTENT_TYPE,
-					(this.mediaTypes.size() == 1) ?
+					this.mediaTypes.size() == 1 ?
 							this.mediaTypes.iterator().next().toString() :
 							this.mediaTypes.toString());
 		}
@@ -697,7 +697,7 @@ public abstract class RequestPredicates {
 		@Override
 		public String toString() {
 			return String.format("Content-Type: %s",
-					(this.mediaTypes.size() == 1) ?
+					this.mediaTypes.size() == 1 ?
 							this.mediaTypes.iterator().next().toString() :
 							this.mediaTypes.toString());
 		}
@@ -739,7 +739,7 @@ public abstract class RequestPredicates {
 		@Override
 		public void accept(Visitor visitor) {
 			visitor.header(HttpHeaders.ACCEPT,
-					(this.mediaTypes.size() == 1) ?
+					this.mediaTypes.size() == 1 ?
 							this.mediaTypes.iterator().next().toString() :
 							this.mediaTypes.toString());
 		}
@@ -747,7 +747,7 @@ public abstract class RequestPredicates {
 		@Override
 		public String toString() {
 			return String.format("Accept: %s",
-					(this.mediaTypes.size() == 1) ?
+					this.mediaTypes.size() == 1 ?
 							this.mediaTypes.iterator().next().toString() :
 							this.mediaTypes.toString());
 		}
@@ -787,7 +787,7 @@ public abstract class RequestPredicates {
 		@Override
 		public void accept(Visitor visitor) {
 			visitor.pathExtension(
-					(this.extension != null) ?
+					this.extension != null ?
 							this.extension :
 							this.extensionPredicate.toString());
 		}
@@ -795,7 +795,7 @@ public abstract class RequestPredicates {
 		@Override
 		public String toString() {
 			return String.format("*.%s",
-					(this.extension != null) ?
+					this.extension != null ?
 							this.extension :
 							this.extensionPredicate);
 		}
@@ -836,7 +836,7 @@ public abstract class RequestPredicates {
 		@Override
 		public void accept(Visitor visitor) {
 			visitor.param(this.name,
-					(this.value != null) ?
+					this.value != null ?
 							this.value :
 							this.valuePredicate.toString());
 		}
@@ -844,7 +844,7 @@ public abstract class RequestPredicates {
 		@Override
 		public String toString() {
 			return String.format("?%s %s", this.name,
-					(this.value != null) ?
+					this.value != null ?
 							this.value :
 							this.valuePredicate);
 		}

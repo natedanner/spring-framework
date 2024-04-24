@@ -289,8 +289,8 @@ public abstract class ScriptUtils {
 		return DataBufferUtils.join(DataBufferUtils.read(resource.getResource(), dataBufferFactory, 8192))
 				.handle((it, sink) -> {
 					try (InputStream is = it.asInputStream()) {
-						InputStreamReader in = (resource.getCharset() != null ?
-								new InputStreamReader(is, resource.getCharset()) : new InputStreamReader(is));
+						InputStreamReader in = resource.getCharset() != null ?
+								new InputStreamReader(is, resource.getCharset()) : new InputStreamReader(is);
 						LineNumberReader lnr = new LineNumberReader(in);
 						String script = readScript(lnr, separator);
 						sink.next(script);

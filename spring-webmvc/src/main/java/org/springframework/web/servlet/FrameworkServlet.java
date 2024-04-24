@@ -209,23 +209,23 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 	private boolean publishEvents = true;
 
 	/** Expose LocaleContext and RequestAttributes as inheritable for child threads?. */
-	private boolean threadContextInheritable = false;
+	private boolean threadContextInheritable;
 
 	/** Should we dispatch an HTTP OPTIONS request to {@link #doService}?. */
-	private boolean dispatchOptionsRequest = false;
+	private boolean dispatchOptionsRequest;
 
 	/** Should we dispatch an HTTP TRACE request to {@link #doService}?. */
-	private boolean dispatchTraceRequest = false;
+	private boolean dispatchTraceRequest;
 
 	/** Whether to log potentially sensitive info (request params at DEBUG + headers at TRACE). */
-	private boolean enableLoggingRequestDetails = false;
+	private boolean enableLoggingRequestDetails;
 
 	/** WebApplicationContext for this servlet. */
 	@Nullable
 	private WebApplicationContext webApplicationContext;
 
 	/** If the WebApplicationContext was injected via {@link #setApplicationContext}. */
-	private boolean webApplicationContextInjected = false;
+	private boolean webApplicationContextInjected;
 
 	/** Flag used to detect whether onRefresh has already been called. */
 	private volatile boolean refreshEventReceived;
@@ -365,7 +365,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 	 * no custom namespace was set: e.g. "test-servlet" for a servlet named "test".
 	 */
 	public String getNamespace() {
-		return (this.namespace != null ? this.namespace : getServletName() + DEFAULT_NAMESPACE_SUFFIX);
+		return this.namespace != null ? this.namespace : getServletName() + DEFAULT_NAMESPACE_SUFFIX;
 	}
 
 	/**
@@ -1093,7 +1093,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 		}
 
 		DispatcherType dispatchType = request.getDispatcherType();
-		boolean initialDispatch = (dispatchType == DispatcherType.REQUEST);
+		boolean initialDispatch = dispatchType == DispatcherType.REQUEST;
 
 		if (failureCause != null) {
 			if (!initialDispatch) {
@@ -1165,7 +1165,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 	@Nullable
 	protected String getUsernameForRequest(HttpServletRequest request) {
 		Principal userPrincipal = request.getUserPrincipal();
-		return (userPrincipal != null ? userPrincipal.getName() : null);
+		return userPrincipal != null ? userPrincipal.getName() : null;
 	}
 
 

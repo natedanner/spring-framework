@@ -54,7 +54,7 @@ public class InternetAddressEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		InternetAddress value = (InternetAddress) getValue();
-		return (value != null ? value.toUnicodeString() : "");
+		return value != null ? value.toUnicodeString() : "";
 	}
 
 }

@@ -71,7 +71,7 @@ public interface ServerHttpResponse extends ReactiveHttpOutputMessage {
 	@Nullable
 	default Integer getRawStatusCode() {
 		HttpStatusCode httpStatus = getStatusCode();
-		return (httpStatus != null ? httpStatus.value() : null);
+		return httpStatus != null ? httpStatus.value() : null;
 	}
 
 	/**

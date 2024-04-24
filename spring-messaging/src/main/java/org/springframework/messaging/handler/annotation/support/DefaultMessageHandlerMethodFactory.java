@@ -157,8 +157,8 @@ public class DefaultMessageHandlerMethodFactory
 
 	protected List<HandlerMethodArgumentResolver> initArgumentResolvers() {
 		List<HandlerMethodArgumentResolver> resolvers = new ArrayList<>();
-		ConfigurableBeanFactory beanFactory = (this.beanFactory instanceof ConfigurableBeanFactory cbf ?
-				cbf : null);
+		ConfigurableBeanFactory beanFactory = this.beanFactory instanceof ConfigurableBeanFactory cbf ?
+				cbf : null;
 
 		// Annotation-based argument resolution
 		resolvers.add(new HeaderMethodArgumentResolver(this.conversionService, beanFactory));

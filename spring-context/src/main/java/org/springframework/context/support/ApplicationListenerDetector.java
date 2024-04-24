@@ -108,14 +108,14 @@ class ApplicationListenerDetector implements DestructionAwareBeanPostProcessor, 
 
 	@Override
 	public boolean requiresDestruction(Object bean) {
-		return (bean instanceof ApplicationListener);
+		return bean instanceof ApplicationListener;
 	}
 
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ApplicationListenerDetector that &&
-				this.applicationContext == that.applicationContext));
+		return this == other || (other instanceof ApplicationListenerDetector that &&
+				this.applicationContext == that.applicationContext);
 	}
 
 	@Override

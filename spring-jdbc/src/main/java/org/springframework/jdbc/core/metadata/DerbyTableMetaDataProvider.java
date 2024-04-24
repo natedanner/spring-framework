@@ -28,7 +28,7 @@ import java.sql.SQLException;
  */
 public class DerbyTableMetaDataProvider extends GenericTableMetaDataProvider {
 
-	private boolean supportsGeneratedKeysOverride = false;
+	private boolean supportsGeneratedKeysOverride;
 
 
 	public DerbyTableMetaDataProvider(DatabaseMetaData databaseMetaData) throws SQLException {
@@ -50,7 +50,7 @@ public class DerbyTableMetaDataProvider extends GenericTableMetaDataProvider {
 
 	@Override
 	public boolean isGetGeneratedKeysSupported() {
-		return (super.isGetGeneratedKeysSupported() || this.supportsGeneratedKeysOverride);
+		return super.isGetGeneratedKeysSupported() || this.supportsGeneratedKeysOverride;
 	}
 
 }

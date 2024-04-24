@@ -181,7 +181,7 @@ public class CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBean
 
 	private boolean fallbackToDefaultTypeMatch = true;
 
-	private boolean alwaysUseJndiLookup = false;
+	private boolean alwaysUseJndiLookup;
 
 	@Nullable
 	private transient BeanFactory jndiFactory;
@@ -397,7 +397,7 @@ public class CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBean
 
 	private InjectionMetadata findResourceMetadata(String beanName, Class<?> clazz, @Nullable PropertyValues pvs) {
 		// Fall back to class name as cache key, for backwards compatibility with custom callers.
-		String cacheKey = (StringUtils.hasLength(beanName) ? beanName : clazz.getName());
+		String cacheKey = StringUtils.hasLength(beanName) ? beanName : clazz.getName();
 		// Quick check on the concurrent map first, with minimal locking.
 		InjectionMetadata metadata = this.injectionMetadataCache.get(cacheKey);
 		if (InjectionMetadata.needsRefresh(metadata, clazz)) {
@@ -535,8 +535,8 @@ public class CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBean
 		if (element.lookupType.isInterface()) {
 			pf.addInterface(element.lookupType);
 		}
-		ClassLoader classLoader = (this.beanFactory instanceof ConfigurableBeanFactory configurableBeanFactory ?
-				configurableBeanFactory.getBeanClassLoader() : null);
+		ClassLoader classLoader = this.beanFactory instanceof ConfigurableBeanFactory configurableBeanFactory ?
+				configurableBeanFactory.getBeanClassLoader() : null;
 		return pf.getProxy(classLoader);
 	}
 
@@ -642,7 +642,7 @@ public class CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBean
 
 		protected String name = "";
 
-		protected boolean isDefaultName = false;
+		protected boolean isDefaultName;
 
 		protected Class<?> lookupType = Object.class;
 
@@ -722,18 +722,18 @@ public class CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBean
 				// No resource type specified... check field/method.
 				resourceType = getResourceType();
 			}
-			this.name = (resourceName != null ? resourceName : "");
+			this.name = resourceName != null ? resourceName : "";
 			this.lookupType = resourceType;
 			String lookupValue = resource.lookup();
-			this.mappedName = (StringUtils.hasLength(lookupValue) ? lookupValue : resource.mappedName());
+			this.mappedName = StringUtils.hasLength(lookupValue) ? lookupValue : resource.mappedName();
 			Lazy lazy = ae.getAnnotation(Lazy.class);
-			this.lazyLookup = (lazy != null && lazy.value());
+			this.lazyLookup = lazy != null && lazy.value();
 		}
 
 		@Override
 		protected Object getResourceToInject(Object target, @Nullable String requestingBeanName) {
-			return (this.lazyLookup ? buildLazyResourceProxy(this, requestingBeanName) :
-					getResource(this, requestingBeanName));
+			return this.lazyLookup ? buildLazyResourceProxy(this, requestingBeanName) :
+					getResource(this, requestingBeanName);
 		}
 
 		@Override
@@ -773,18 +773,18 @@ public class CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBean
 				// No resource type specified... check field/method.
 				resourceType = getResourceType();
 			}
-			this.name = (resourceName != null ? resourceName : "");
+			this.name = resourceName != null ? resourceName : "";
 			this.lookupType = resourceType;
 			String lookupValue = resource.lookup();
-			this.mappedName = (StringUtils.hasLength(lookupValue) ? lookupValue : resource.mappedName());
+			this.mappedName = StringUtils.hasLength(lookupValue) ? lookupValue : resource.mappedName();
 			Lazy lazy = ae.getAnnotation(Lazy.class);
-			this.lazyLookup = (lazy != null && lazy.value());
+			this.lazyLookup = lazy != null && lazy.value();
 		}
 
 		@Override
 		protected Object getResourceToInject(Object target, @Nullable String requestingBeanName) {
-			return (this.lazyLookup ? buildLazyResourceProxy(this, requestingBeanName) :
-					getResource(this, requestingBeanName));
+			return this.lazyLookup ? buildLazyResourceProxy(this, requestingBeanName) :
+					getResource(this, requestingBeanName);
 		}
 
 		@Override

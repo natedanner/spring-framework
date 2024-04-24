@@ -44,7 +44,7 @@ public class MapAccessor implements CompilablePropertyAccessor {
 
 	@Override
 	public boolean canRead(EvaluationContext context, @Nullable Object target, String name) throws AccessException {
-		return (target instanceof Map<?, ?> map && map.containsKey(name));
+		return target instanceof Map<?, ?> map && map.containsKey(name);
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class MapAccessor implements CompilablePropertyAccessor {
 	@Override
 	public void generateCode(String propertyName, MethodVisitor mv, CodeFlow cf) {
 		String descriptor = cf.lastDescriptor();
-		if (descriptor == null || !descriptor.equals("Ljava/util/Map")) {
+		if (descriptor == null || !"Ljava/util/Map".equals(descriptor)) {
 			if (descriptor == null) {
 				cf.loadTarget(mv);
 			}

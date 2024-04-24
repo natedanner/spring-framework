@@ -40,7 +40,7 @@ public abstract class AspectJAopUtils {
 		if (precedenceInfo != null) {
 			return precedenceInfo.isBeforeAdvice();
 		}
-		return (anAdvisor.getAdvice() instanceof BeforeAdvice);
+		return anAdvisor.getAdvice() instanceof BeforeAdvice;
 	}
 
 	/**
@@ -51,7 +51,7 @@ public abstract class AspectJAopUtils {
 		if (precedenceInfo != null) {
 			return precedenceInfo.isAfterAdvice();
 		}
-		return (anAdvisor.getAdvice() instanceof AfterAdvice);
+		return anAdvisor.getAdvice() instanceof AfterAdvice;
 	}
 
 	/**

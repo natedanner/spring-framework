@@ -42,7 +42,7 @@ public class DefaultSessionAttributeStore implements SessionAttributeStore {
 	 * same name as in the model.
 	 */
 	public void setAttributeNamePrefix(@Nullable String attributeNamePrefix) {
-		this.attributeNamePrefix = (attributeNamePrefix != null ? attributeNamePrefix : "");
+		this.attributeNamePrefix = attributeNamePrefix != null ? attributeNamePrefix : "";
 	}
 
 

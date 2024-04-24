@@ -124,7 +124,7 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 	@Nullable
 	private DataSource dataSource;
 
-	private boolean enforceReadOnly = false;
+	private boolean enforceReadOnly;
 
 
 	/**
@@ -255,7 +255,7 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 	@Override
 	protected boolean isExistingTransaction(Object transaction) {
 		DataSourceTransactionObject txObject = (DataSourceTransactionObject) transaction;
-		return (txObject.hasConnectionHolder() && txObject.getConnectionHolder().isTransactionActive());
+		return txObject.hasConnectionHolder() && txObject.getConnectionHolder().isTransactionActive();
 	}
 
 	@Override

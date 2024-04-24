@@ -559,8 +559,7 @@ public class Enhancer extends AbstractClassGenerator {
 				serialVersionUID);
 		// SPRING PATCH END
 		this.currentKey = key;
-		Object result = super.create(key);
-		return result;
+		return super.create(key);
 	}
 
 	@Override
@@ -625,7 +624,7 @@ public class Enhancer extends AbstractClassGenerator {
 
 	private static void getMethods(Class superclass, Class[] interfaces, List methods, List interfaceMethods, Set forcePublic) {
 		ReflectUtils.addAllMethods(superclass, methods);
-		List target = (interfaceMethods != null) ? interfaceMethods : methods;
+		List target = interfaceMethods != null ? interfaceMethods : methods;
 		if (interfaces != null) {
 			for (Class element : interfaces) {
 				if (element != Factory.class) {
@@ -647,7 +646,7 @@ public class Enhancer extends AbstractClassGenerator {
 
 	@Override
 	public void generateClass(ClassVisitor v) throws Exception {
-		Class sc = (superclass == null) ? Object.class : superclass;
+		Class sc = superclass == null ? Object.class : superclass;
 
 		if (TypeUtils.isFinal(sc.getModifiers())) {
 			throw new IllegalArgumentException("Cannot subclass final class " + sc.getName());
@@ -751,7 +750,7 @@ public class Enhancer extends AbstractClassGenerator {
 	 */
 	protected void filterConstructors(Class sc, List constructors) {
 		CollectionUtils.filter(constructors, new VisibilityPredicate(sc, true));
-		if (constructors.size() == 0) {
+		if (constructors.isEmpty()) {
 			throw new IllegalArgumentException("No visible constructors in " + sc);
 		}
 	}
@@ -818,8 +817,7 @@ public class Enhancer extends AbstractClassGenerator {
 	@Override
 	protected Object unwrapCachedValue(Object cached) {
 		if (currentKey instanceof EnhancerKey) {
-			EnhancerFactoryData data = ((WeakReference<EnhancerFactoryData>) cached).get();
-			return data;
+			return ((WeakReference<EnhancerFactoryData>) cached).get();
 		}
 		return super.unwrapCachedValue(cached);
 	}
@@ -952,7 +950,7 @@ public class Enhancer extends AbstractClassGenerator {
 	 * @param interfaces array of interfaces to implement, or null
 	 * @param callback the callback to use for all methods
 	 */
-	public static Object create(Class superclass, Class interfaces[], Callback callback) {
+	public static Object create(Class superclass, Class[] interfaces, Callback callback) {
 		Enhancer e = new Enhancer();
 		e.setSuperclass(superclass);
 		e.setInterfaces(interfaces);
@@ -1008,7 +1006,7 @@ public class Enhancer extends AbstractClassGenerator {
 			e.dup();
 			e.load_args();
 			Signature sig = constructor.getSignature();
-			seenNull = seenNull || sig.getDescriptor().equals("()V");
+			seenNull = seenNull || "()V".equals(sig.getDescriptor());
 			e.super_invoke_constructor(sig);
 			if (currentData == null) {
 				e.invoke_static_this(BIND_CALLBACKS);
@@ -1173,7 +1171,7 @@ public class Enhancer extends AbstractClassGenerator {
 			@Override
 			public void processCase(Object key, Label end) {
 				MethodInfo constructor = (MethodInfo) key;
-				Type types[] = constructor.getSignature().getArgumentTypes();
+				Type[] types = constructor.getSignature().getArgumentTypes();
 				for (int i = 0; i < types.length; i++) {
 					e.load_arg(1);
 					e.push(i);
@@ -1205,11 +1203,11 @@ public class Enhancer extends AbstractClassGenerator {
 		final Map declToBridge = new HashMap();
 
 		Iterator it1 = methods.iterator();
-		Iterator it2 = (actualMethods != null) ? actualMethods.iterator() : null;
+		Iterator it2 = actualMethods != null ? actualMethods.iterator() : null;
 
 		while (it1.hasNext()) {
 			MethodInfo method = (MethodInfo) it1.next();
-			Method actualMethod = (it2 != null) ? (Method) it2.next() : null;
+			Method actualMethod = it2 != null ? (Method) it2.next() : null;
 			int index = filter.accept(actualMethod);
 			if (index >= callbackTypes.length) {
 				throw new IllegalArgumentException("Callback filter returned an index that is too large: " + index);
@@ -1405,17 +1403,17 @@ public class Enhancer extends AbstractClassGenerator {
 		e.getfield(THREAD_CALLBACKS_FIELD);
 		e.invoke_virtual(THREAD_LOCAL, THREAD_LOCAL_GET);
 		e.dup();
-		Label found_callback = e.make_label();
-		e.ifnonnull(found_callback);
+		Label foundCallback = e.make_label();
+		e.ifnonnull(foundCallback);
 		e.pop();
 
 		e.getfield(STATIC_CALLBACKS_FIELD);
 		e.dup();
-		e.ifnonnull(found_callback);
+		e.ifnonnull(foundCallback);
 		e.pop();
 		e.goTo(end);
 
-		e.mark(found_callback);
+		e.mark(foundCallback);
 		e.checkcast(CALLBACK_ARRAY);
 		e.load_local(me);
 		e.swap();

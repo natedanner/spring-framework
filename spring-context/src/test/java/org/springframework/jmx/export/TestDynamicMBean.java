@@ -79,7 +79,7 @@ public class TestDynamicMBean implements DynamicMBean {
 
 	@Override
 	public boolean equals(@Nullable Object obj) {
-		return (obj instanceof TestDynamicMBean);
+		return obj instanceof TestDynamicMBean;
 	}
 
 	@Override

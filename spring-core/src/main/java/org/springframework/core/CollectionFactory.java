@@ -95,9 +95,9 @@ public final class CollectionFactory {
 	 * @return {@code true} if the type is <em>approximable</em>
 	 */
 	public static boolean isApproximableCollectionType(@Nullable Class<?> collectionType) {
-		return (collectionType != null && (approximableCollectionTypes.contains(collectionType) ||
-				collectionType.getName().equals("java.util.SequencedSet") ||
-				collectionType.getName().equals("java.util.SequencedCollection")));
+		return collectionType != null && (approximableCollectionTypes.contains(collectionType) ||
+				"java.util.SequencedSet".equals(collectionType.getName()) ||
+				"java.util.SequencedCollection".equals(collectionType.getName()));
 	}
 
 	/**
@@ -183,8 +183,8 @@ public final class CollectionFactory {
 		Assert.notNull(collectionType, "Collection type must not be null");
 		if (LinkedHashSet.class == collectionType ||
 				Set.class == collectionType || Collection.class == collectionType ||
-				collectionType.getName().equals("java.util.SequencedSet") ||
-				collectionType.getName().equals("java.util.SequencedCollection")) {
+				"java.util.SequencedSet".equals(collectionType.getName()) ||
+				"java.util.SequencedCollection".equals(collectionType.getName())) {
 			return new LinkedHashSet<>(capacity);
 		}
 		else if (ArrayList.class == collectionType || List.class == collectionType) {
@@ -225,8 +225,8 @@ public final class CollectionFactory {
 	 * @return {@code true} if the type is <em>approximable</em>
 	 */
 	public static boolean isApproximableMapType(@Nullable Class<?> mapType) {
-		return (mapType != null && (approximableMapTypes.contains(mapType) ||
-				mapType.getName().equals("java.util.SequencedMap")));
+		return mapType != null && (approximableMapTypes.contains(mapType) ||
+				"java.util.SequencedMap".equals(mapType.getName()));
 	}
 
 	/**
@@ -306,7 +306,7 @@ public final class CollectionFactory {
 	public static <K, V> Map<K, V> createMap(Class<?> mapType, @Nullable Class<?> keyType, int capacity) {
 		Assert.notNull(mapType, "Map type must not be null");
 		if (LinkedHashMap.class == mapType || Map.class == mapType ||
-				mapType.getName().equals("java.util.SequencedMap")) {
+				"java.util.SequencedMap".equals(mapType.getName())) {
 			return new LinkedHashMap<>(capacity);
 		}
 		else if (LinkedMultiValueMap.class == mapType || MultiValueMap.class == mapType) {
@@ -352,7 +352,7 @@ public final class CollectionFactory {
 			@Nullable
 			public String getProperty(String key) {
 				Object value = get(key);
-				return (value != null ? value.toString() : null);
+				return value != null ? value.toString() : null;
 			}
 		};
 	}

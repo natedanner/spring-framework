@@ -93,9 +93,9 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
  */
 class AutowiredAnnotationBeanPostProcessorTests {
 
-	private DefaultListableBeanFactory bf = new DefaultListableBeanFactory();
+	private final DefaultListableBeanFactory bf = new DefaultListableBeanFactory();
 
-	private AutowiredAnnotationBeanPostProcessor bpp = new AutowiredAnnotationBeanPostProcessor();
+	private final AutowiredAnnotationBeanPostProcessor bpp = new AutowiredAnnotationBeanPostProcessor();
 
 
 	@BeforeEach
@@ -2609,7 +2609,7 @@ class AutowiredAnnotationBeanPostProcessorTests {
 
 		protected BeanFactory beanFactory;
 
-		public boolean baseInjected = false;
+		public boolean baseInjected;
 
 		public NonPublicResourceInjectionBean() {
 		}
@@ -2658,7 +2658,7 @@ class AutowiredAnnotationBeanPostProcessorTests {
 	public static class TypedExtendedResourceInjectionBean extends NonPublicResourceInjectionBean<NestedTestBean>
 			implements DisposableBean {
 
-		public boolean destroyed = false;
+		public boolean destroyed;
 
 		@Override
 		public void destroy() {
@@ -2669,7 +2669,7 @@ class AutowiredAnnotationBeanPostProcessorTests {
 
 	public static class OverriddenExtendedResourceInjectionBean extends NonPublicResourceInjectionBean<NestedTestBean> {
 
-		public boolean subInjected = false;
+		public boolean subInjected;
 
 		@Override
 		public void setTestBean2(TestBean testBean2) {
@@ -2705,7 +2705,7 @@ class AutowiredAnnotationBeanPostProcessorTests {
 	public static class DefaultMethodResourceInjectionBean extends NonPublicResourceInjectionBean<NestedTestBean>
 			implements InterfaceWithDefaultMethod {
 
-		public boolean subInjected = false;
+		public boolean subInjected;
 
 		@Override
 		public void setTestBean2(TestBean testBean2) {
@@ -4136,14 +4136,14 @@ class AutowiredAnnotationBeanPostProcessorTests {
 
 	public static class SometimesNullFactoryMethods {
 
-		public static boolean active = false;
+		public static boolean active;
 
 		public static TestBean createTestBean() {
-			return (active ? new TestBean() : null);
+			return active ? new TestBean() : null;
 		}
 
 		public static NestedTestBean createNestedTestBean() {
-			return (active ? new NestedTestBean() : null);
+			return active ? new NestedTestBean() : null;
 		}
 	}
 

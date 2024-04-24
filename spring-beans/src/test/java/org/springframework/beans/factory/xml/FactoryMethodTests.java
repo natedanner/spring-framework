@@ -348,7 +348,7 @@ class FactoryMethodTests {
 		names = xbf.getBeanNamesForType(List.class);
 		assertThat(Arrays.asList(names)).contains("listInstance");
 		List<?> list = (List<?>) xbf.getBean("listInstance");
-		assertThat(list).isEqualTo(Collections.EMPTY_LIST);
+		assertThat(list).isEqualTo(Collections.emptyList());
 	}
 
 	@Test
@@ -364,7 +364,7 @@ class FactoryMethodTests {
 }
 
 
-class MailSession {
+final class MailSession {
 
 	private Properties props;
 

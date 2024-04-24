@@ -64,8 +64,8 @@ public class RequestParamMapMethodArgumentResolver implements HandlerMethodArgum
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		RequestParam requestParam = parameter.getParameterAnnotation(RequestParam.class);
-		return (requestParam != null && Map.class.isAssignableFrom(parameter.getParameterType()) &&
-				!StringUtils.hasText(requestParam.name()));
+		return requestParam != null && Map.class.isAssignableFrom(parameter.getParameterType()) &&
+				!StringUtils.hasText(requestParam.name());
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class RequestParamMapMethodArgumentResolver implements HandlerMethodArgum
 			Class<?> valueType = resolvableType.as(MultiValueMap.class).getGeneric(1).resolve();
 			if (valueType == MultipartFile.class) {
 				MultipartRequest multipartRequest = MultipartResolutionDelegate.resolveMultipartRequest(webRequest);
-				return (multipartRequest != null ? multipartRequest.getMultiFileMap() : new LinkedMultiValueMap<>(0));
+				return multipartRequest != null ? multipartRequest.getMultiFileMap() : new LinkedMultiValueMap<>(0);
 			}
 			else if (valueType == Part.class) {
 				HttpServletRequest servletRequest = webRequest.getNativeRequest(HttpServletRequest.class);
@@ -110,7 +110,7 @@ public class RequestParamMapMethodArgumentResolver implements HandlerMethodArgum
 			Class<?> valueType = resolvableType.asMap().getGeneric(1).resolve();
 			if (valueType == MultipartFile.class) {
 				MultipartRequest multipartRequest = MultipartResolutionDelegate.resolveMultipartRequest(webRequest);
-				return (multipartRequest != null ? multipartRequest.getFileMap() : new LinkedHashMap<>(0));
+				return multipartRequest != null ? multipartRequest.getFileMap() : new LinkedHashMap<>(0);
 			}
 			else if (valueType == Part.class) {
 				HttpServletRequest servletRequest = webRequest.getNativeRequest(HttpServletRequest.class);

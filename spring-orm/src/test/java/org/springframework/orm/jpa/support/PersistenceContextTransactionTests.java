@@ -44,15 +44,15 @@ import static org.mockito.Mockito.verify;
  */
 class PersistenceContextTransactionTests {
 
-	private EntityManagerFactory factory = mock();
+	private final EntityManagerFactory factory = mock();
 
-	private EntityManager manager = mock();
+	private final EntityManager manager = mock();
 
-	private EntityTransaction tx = mock();
+	private final EntityTransaction tx = mock();
 
-	private TransactionTemplate tt = new TransactionTemplate(new JpaTransactionManager(factory));
+	private final TransactionTemplate tt = new TransactionTemplate(new JpaTransactionManager(factory));
 
-	private EntityManagerHoldingBean bean = new EntityManagerHoldingBean();
+	private final EntityManagerHoldingBean bean = new EntityManagerHoldingBean();
 
 
 	@BeforeEach

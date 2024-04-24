@@ -104,7 +104,7 @@ public class SpringTransactionAnnotationParser implements TransactionAnnotationP
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (other instanceof SpringTransactionAnnotationParser);
+		return other instanceof SpringTransactionAnnotationParser;
 	}
 
 	@Override

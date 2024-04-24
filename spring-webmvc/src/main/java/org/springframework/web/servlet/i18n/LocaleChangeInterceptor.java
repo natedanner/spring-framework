@@ -55,7 +55,7 @@ public class LocaleChangeInterceptor implements HandlerInterceptor {
 	@Nullable
 	private String[] httpMethods;
 
-	private boolean ignoreInvalidLocale = false;
+	private boolean ignoreInvalidLocale;
 
 
 	/**

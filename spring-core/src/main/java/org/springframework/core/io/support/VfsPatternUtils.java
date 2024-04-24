@@ -40,7 +40,7 @@ abstract class VfsPatternUtils extends VfsUtils {
 
 	static String getPath(Object resource) {
 		String path = doGetPath(resource);
-		return (path != null ? path : "");
+		return path != null ? path : "";
 	}
 
 	static Object findRoot(URL url) throws IOException {

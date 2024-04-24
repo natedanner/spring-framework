@@ -132,7 +132,7 @@ public interface Decoder<T> {
 	 * @since 5.3.4
 	 */
 	default List<MimeType> getDecodableMimeTypes(ResolvableType targetType) {
-		return (canDecode(targetType, null) ? getDecodableMimeTypes() : Collections.emptyList());
+		return canDecode(targetType, null) ? getDecodableMimeTypes() : Collections.emptyList();
 	}
 
 }

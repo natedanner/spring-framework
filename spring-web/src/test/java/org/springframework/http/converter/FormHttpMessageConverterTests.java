@@ -410,7 +410,7 @@ class FormHttpMessageConverterTests {
 	}
 
 
-	private static class MockHttpOutputMessageRequestContext implements UploadContext {
+	private static final class MockHttpOutputMessageRequestContext implements UploadContext {
 
 		private final MockHttpOutputMessage outputMessage;
 
@@ -424,13 +424,13 @@ class FormHttpMessageConverterTests {
 		@Override
 		public String getCharacterEncoding() {
 			MediaType type = this.outputMessage.getHeaders().getContentType();
-			return (type != null && type.getCharset() != null ? type.getCharset().name() : null);
+			return type != null && type.getCharset() != null ? type.getCharset().name() : null;
 		}
 
 		@Override
 		public String getContentType() {
 			MediaType type = this.outputMessage.getHeaders().getContentType();
-			return (type != null ? type.toString() : null);
+			return type != null ? type.toString() : null;
 		}
 
 		@Override

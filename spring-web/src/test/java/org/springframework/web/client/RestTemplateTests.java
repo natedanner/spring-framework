@@ -519,7 +519,7 @@ class RestTemplateTests {
 			RecordedRequest request = server.takeRequest();
 
 			final List<List<String>> accepts = request.getHeaders().toMultimap().entrySet().stream()
-					.filter(entry -> entry.getKey().equalsIgnoreCase("accept"))
+					.filter(entry -> "accept".equalsIgnoreCase(entry.getKey()))
 					.map(Entry::getValue)
 					.toList();
 

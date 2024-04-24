@@ -19,7 +19,7 @@ import org.springframework.asm.ClassVisitor;
 import org.springframework.cglib.core.ClassTransformer;
 import org.springframework.cglib.core.Constants;
 
-abstract public class AbstractClassTransformer extends ClassTransformer {
+public abstract class AbstractClassTransformer extends ClassTransformer {
     protected AbstractClassTransformer() {
         super(Constants.ASM_API);
     }

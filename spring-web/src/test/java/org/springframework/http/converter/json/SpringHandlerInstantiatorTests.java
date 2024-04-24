@@ -162,13 +162,13 @@ class SpringHandlerInstantiatorTests {
 		@Autowired
 		private Capitalizer capitalizer;
 
-		public static boolean isAutowiredFiledInitialized = false;
+		public static boolean isAutowiredFiledInitialized;
 
 		@Override
 		public TypeSerializer buildTypeSerializer(SerializationConfig config, JavaType baseType,
 				Collection<NamedType> subtypes) {
 
-			isAutowiredFiledInitialized = (this.capitalizer != null);
+			isAutowiredFiledInitialized = this.capitalizer != null;
 			return super.buildTypeSerializer(config, baseType, subtypes);
 		}
 
@@ -186,7 +186,7 @@ class SpringHandlerInstantiatorTests {
 		@Autowired
 		private Capitalizer capitalizer;
 
-		public static boolean isAutowiredFiledInitialized = false;
+		public static boolean isAutowiredFiledInitialized;
 
 		public CustomTypeIdResolver() {
 		}
@@ -203,7 +203,7 @@ class SpringHandlerInstantiatorTests {
 
 		@Override
 		public String idFromValue(Object value) {
-			isAutowiredFiledInitialized = (this.capitalizer != null);
+			isAutowiredFiledInitialized = this.capitalizer != null;
 			return value.getClass().getName();
 		}
 

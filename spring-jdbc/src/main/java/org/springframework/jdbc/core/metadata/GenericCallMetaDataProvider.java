@@ -59,9 +59,9 @@ public class GenericCallMetaDataProvider implements CallMetaDataProvider {
 
 	private boolean storesUpperCaseIdentifiers = true;
 
-	private boolean storesLowerCaseIdentifiers = false;
+	private boolean storesLowerCaseIdentifiers;
 
-	private boolean procedureColumnMetaDataUsed = false;
+	private boolean procedureColumnMetaDataUsed;
 
 	private final List<CallParameterMetaData> callParameterMetaData = new ArrayList<>();
 
@@ -310,10 +310,10 @@ public class GenericCallMetaDataProvider implements CallMetaDataProvider {
 			String escapedSchemaName = escapeNamePattern(metaDataSchemaName, searchStringEscape);
 			String escapedProcedureName = escapeNamePattern(metaDataProcedureName, searchStringEscape);
 			if (logger.isDebugEnabled()) {
-				String schemaInfo = (Objects.equals(escapedSchemaName, metaDataSchemaName)
-						? metaDataSchemaName : metaDataCatalogName + "(" + escapedSchemaName + ")");
-				String procedureInfo = (Objects.equals(escapedProcedureName, metaDataProcedureName)
-						? metaDataProcedureName : metaDataProcedureName + "(" + escapedProcedureName + ")");
+				String schemaInfo = Objects.equals(escapedSchemaName, metaDataSchemaName)
+						? metaDataSchemaName : metaDataCatalogName + "(" + escapedSchemaName + ")";
+				String procedureInfo = Objects.equals(escapedProcedureName, metaDataProcedureName)
+						? metaDataProcedureName : metaDataProcedureName + "(" + escapedProcedureName + ")";
 				logger.debug("Retrieving meta-data for " + metaDataCatalogName + '/' +
 						schemaInfo + '/' + procedureInfo);
 			}
@@ -386,7 +386,7 @@ public class GenericCallMetaDataProvider implements CallMetaDataProvider {
 						}
 					}
 					else {
-						int nullable = (function ? DatabaseMetaData.functionNullable : DatabaseMetaData.procedureNullable);
+						int nullable = function ? DatabaseMetaData.functionNullable : DatabaseMetaData.procedureNullable;
 						CallParameterMetaData meta = new CallParameterMetaData(function, columnName, columnType,
 								columns.getInt("DATA_TYPE"), columns.getString("TYPE_NAME"),
 								columns.getInt("NULLABLE") == nullable);
@@ -426,14 +426,14 @@ public class GenericCallMetaDataProvider implements CallMetaDataProvider {
 
 	private static boolean isInOrOutColumn(int columnType, boolean function) {
 		if (function) {
-			return (columnType == DatabaseMetaData.functionColumnIn ||
+			return columnType == DatabaseMetaData.functionColumnIn ||
 					columnType == DatabaseMetaData.functionColumnInOut ||
-					columnType == DatabaseMetaData.functionColumnOut);
+					columnType == DatabaseMetaData.functionColumnOut;
 		}
 		else {
-			return (columnType == DatabaseMetaData.procedureColumnIn ||
+			return columnType == DatabaseMetaData.procedureColumnIn ||
 					columnType == DatabaseMetaData.procedureColumnInOut ||
-					columnType == DatabaseMetaData.procedureColumnOut);
+					columnType == DatabaseMetaData.procedureColumnOut;
 		}
 	}
 

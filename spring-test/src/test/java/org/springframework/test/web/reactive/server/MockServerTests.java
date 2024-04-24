@@ -45,7 +45,7 @@ public class MockServerTests {
 
 		WebTestClient client = WebTestClient
 				.bindToWebHandler(exchange -> {
-					if (exchange.getRequest().getURI().getPath().equals("/set")) {
+					if ("/set".equals(exchange.getRequest().getURI().getPath())) {
 						return exchange.getSession()
 								.doOnNext(session -> session.getAttributes().put("foo", "bar"))
 								.then();
@@ -118,7 +118,7 @@ public class MockServerTests {
 		ExchangeResult result = WebTestClient
 				.bindToWebHandler(exchange -> {
 					ServerHttpResponse response = exchange.getResponse();
-					if (exchange.getRequest().getURI().getPath().equals("/cookie")) {
+					if ("/cookie".equals(exchange.getRequest().getURI().getPath())) {
 						response.addCookie(ResponseCookie.from("a", "alpha").path("/pathA").build());
 						response.addCookie(ResponseCookie.from("b", "beta").path("/pathB").build());
 					}

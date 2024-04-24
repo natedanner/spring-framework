@@ -214,7 +214,7 @@ class RestTemplateXhrTransportTests {
 	}
 
 
-	private static class TestRestTemplate extends RestTemplate {
+	private static final class TestRestTemplate extends RestTemplate {
 
 		private Queue<ClientHttpResponse> responses = new LinkedBlockingDeque<>();
 

@@ -164,7 +164,7 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 	 */
 	@Override
 	public boolean isDeliveryTransacted(Method method) throws NoSuchMethodException {
-		return (this.transactionFactory != null);
+		return this.transactionFactory != null;
 	}
 
 	/**
@@ -209,7 +209,7 @@ public abstract class AbstractMessageEndpointFactory implements MessageEndpointF
 		@Nullable
 		private TransactionDelegate transactionDelegate;
 
-		private boolean beforeDeliveryCalled = false;
+		private boolean beforeDeliveryCalled;
 
 		@Nullable
 		private ClassLoader previousContextClassLoader;

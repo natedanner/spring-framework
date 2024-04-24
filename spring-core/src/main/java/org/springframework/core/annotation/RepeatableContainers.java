@@ -166,7 +166,7 @@ public abstract class RepeatableContainers {
 		private static Method getRepeatedAnnotationsMethod(Class<? extends Annotation> annotationType) {
 			Object result = cache.computeIfAbsent(annotationType,
 					StandardRepeatableContainers::computeRepeatedAnnotationsMethod);
-			return (result != NONE ? (Method) result : null);
+			return result != NONE ? (Method) result : null;
 		}
 
 		private static Object computeRepeatedAnnotationsMethod(Class<? extends Annotation> annotationType) {
@@ -253,7 +253,7 @@ public abstract class RepeatableContainers {
 				return false;
 			}
 			ExplicitRepeatableContainer otherErc = (ExplicitRepeatableContainer) other;
-			return (this.container.equals(otherErc.container) && this.repeatable.equals(otherErc.repeatable));
+			return this.container.equals(otherErc.container) && this.repeatable.equals(otherErc.repeatable);
 		}
 
 		@Override

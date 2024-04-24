@@ -476,10 +476,10 @@ class ReflectionHelperTests extends AbstractExpressionTests {
 		String property;
 		public int field = 3;
 		public int field2;
-		public int field3 = 0;
+		public int field3;
 		String property2;
 		String property3 = "doodoo";
-		boolean property4 = false;
+		boolean property4;
 		String iD = "iD";
 		String id = "id";
 		String ID = "ID";

@@ -39,7 +39,7 @@ public class SimpleMessageConverter implements MessageConverter {
 	@Nullable
 	public Object fromMessage(Message<?> message, Class<?> targetClass) {
 		Object payload = message.getPayload();
-		return (ClassUtils.isAssignableValue(targetClass, payload) ? payload : null);
+		return ClassUtils.isAssignableValue(targetClass, payload) ? payload : null;
 	}
 
 	@Override

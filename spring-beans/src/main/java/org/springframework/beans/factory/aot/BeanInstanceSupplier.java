@@ -244,8 +244,8 @@ public final class BeanInstanceSupplier<T> extends AutowiredElementResolver impl
 	private AutowiredArguments resolveArguments(RegisteredBean registeredBean, Executable executable) {
 		Assert.isInstanceOf(AbstractAutowireCapableBeanFactory.class, registeredBean.getBeanFactory());
 
-		int startIndex = (executable instanceof Constructor<?> constructor &&
-				ClassUtils.isInnerClass(constructor.getDeclaringClass())) ? 1 : 0;
+		int startIndex = executable instanceof Constructor<?> constructor &&
+				ClassUtils.isInnerClass(constructor.getDeclaringClass()) ? 1 : 0;
 		int parameterCount = executable.getParameterCount();
 		Object[] resolved = new Object[parameterCount - startIndex];
 		Assert.isTrue(this.shortcuts == null || this.shortcuts.length == resolved.length,
@@ -256,7 +256,7 @@ public final class BeanInstanceSupplier<T> extends AutowiredElementResolver impl
 		for (int i = startIndex; i < parameterCount; i++) {
 			MethodParameter parameter = getMethodParameter(executable, i);
 			DependencyDescriptor descriptor = new DependencyDescriptor(parameter, true);
-			String shortcut = (this.shortcuts != null ? this.shortcuts[i - startIndex] : null);
+			String shortcut = this.shortcuts != null ? this.shortcuts[i - startIndex] : null;
 			if (shortcut != null) {
 				descriptor = new ShortcutDependencyDescriptor(descriptor, shortcut);
 			}
@@ -292,7 +292,7 @@ public final class BeanInstanceSupplier<T> extends AutowiredElementResolver impl
 			Set<ValueHolder> usedValueHolders = new HashSet<>(parameters.length);
 			for (int i = 0; i < parameters.length; i++) {
 				Class<?> parameterType = parameters[i].getType();
-				String parameterName = (parameters[i].isNamePresent() ? parameters[i].getName() : null);
+				String parameterName = parameters[i].isNamePresent() ? parameters[i].getName() : null;
 				ValueHolder valueHolder = values.getArgumentValue(
 						i, parameterType, parameterName, usedValueHolders);
 				if (valueHolder != null) {
@@ -333,9 +333,9 @@ public final class BeanInstanceSupplier<T> extends AutowiredElementResolver impl
 
 		TypeConverter typeConverter = registeredBean.getBeanFactory().getTypeConverter();
 		if (argumentValue != null) {
-			return (argumentValue.isConverted() ? argumentValue.getConvertedValue() :
+			return argumentValue.isConverted() ? argumentValue.getConvertedValue() :
 					typeConverter.convertIfNecessary(argumentValue.getValue(),
-							descriptor.getDependencyType(), descriptor.getMethodParameter()));
+							descriptor.getDependencyType(), descriptor.getMethodParameter());
 		}
 		try {
 			return registeredBean.resolveAutowiredArgument(descriptor, typeConverter, autowiredBeanNames);
@@ -431,7 +431,7 @@ public final class BeanInstanceSupplier<T> extends AutowiredElementResolver impl
 		public Executable get(RegisteredBean registeredBean) {
 			Class<?> beanClass = registeredBean.getBeanClass();
 			try {
-				Class<?>[] actualParameterTypes = (!ClassUtils.isInnerClass(beanClass)) ?
+				Class<?>[] actualParameterTypes = !ClassUtils.isInnerClass(beanClass) ?
 						this.parameterTypes : ObjectUtils.addObjectToArray(
 								this.parameterTypes, beanClass.getEnclosingClass(), 0);
 				return beanClass.getDeclaredConstructor(actualParameterTypes);

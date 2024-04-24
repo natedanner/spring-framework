@@ -68,7 +68,7 @@ public class JCacheAspectSupport extends AbstractCacheInvoker implements Initial
 	@Nullable
 	private CacheRemoveAllInterceptor cacheRemoveAllInterceptor;
 
-	private boolean initialized = false;
+	private boolean initialized;
 
 
 	/**

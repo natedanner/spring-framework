@@ -96,9 +96,9 @@ abstract class AbstractXMLStreamReader implements XMLStreamReader {
 	@Override
 	public boolean hasText() {
 		int eventType = getEventType();
-		return (eventType == XMLStreamConstants.SPACE || eventType == XMLStreamConstants.CHARACTERS ||
+		return eventType == XMLStreamConstants.SPACE || eventType == XMLStreamConstants.CHARACTERS ||
 				eventType == XMLStreamConstants.COMMENT || eventType == XMLStreamConstants.CDATA ||
-				eventType == XMLStreamConstants.ENTITY_REFERENCE);
+				eventType == XMLStreamConstants.ENTITY_REFERENCE;
 	}
 
 	@Override
@@ -115,7 +115,7 @@ abstract class AbstractXMLStreamReader implements XMLStreamReader {
 	@Override
 	public boolean hasName() {
 		int eventType = getEventType();
-		return (eventType == XMLStreamConstants.START_ELEMENT || eventType == XMLStreamConstants.END_ELEMENT);
+		return eventType == XMLStreamConstants.START_ELEMENT || eventType == XMLStreamConstants.END_ELEMENT;
 	}
 
 	@Override

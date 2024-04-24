@@ -34,7 +34,7 @@ public class ManagedResource extends AbstractJmxAttribute {
 	@Nullable
 	private String objectName;
 
-	private boolean log = false;
+	private boolean log;
 
 	@Nullable
 	private String logFile;

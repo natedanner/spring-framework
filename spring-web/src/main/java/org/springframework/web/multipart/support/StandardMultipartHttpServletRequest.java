@@ -179,7 +179,7 @@ public class StandardMultipartHttpServletRequest extends AbstractMultipartHttpSe
 	public String getMultipartContentType(String paramOrFileName) {
 		try {
 			Part part = getPart(paramOrFileName);
-			return (part != null ? part.getContentType() : null);
+			return part != null ? part.getContentType() : null;
 		}
 		catch (Throwable ex) {
 			throw new MultipartException("Could not access multipart servlet request", ex);
@@ -239,7 +239,7 @@ public class StandardMultipartHttpServletRequest extends AbstractMultipartHttpSe
 
 		@Override
 		public boolean isEmpty() {
-			return (this.part.getSize() == 0);
+			return this.part.getSize() == 0;
 		}
 
 		@Override

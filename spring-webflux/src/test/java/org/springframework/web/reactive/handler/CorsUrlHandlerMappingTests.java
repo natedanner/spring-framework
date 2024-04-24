@@ -41,9 +41,9 @@ class CorsUrlHandlerMappingTests {
 
 	private AbstractUrlHandlerMapping handlerMapping;
 
-	private Object welcomeController = new Object();
+	private final Object welcomeController = new Object();
 
-	private CorsAwareHandler corsController = new CorsAwareHandler();
+	private final CorsAwareHandler corsController = new CorsAwareHandler();
 
 
 	@BeforeEach

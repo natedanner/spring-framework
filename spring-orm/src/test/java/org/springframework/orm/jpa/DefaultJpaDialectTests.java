@@ -36,7 +36,7 @@ import static org.mockito.Mockito.mock;
  */
 class DefaultJpaDialectTests {
 
-	private JpaDialect dialect = new DefaultJpaDialect();
+	private final JpaDialect dialect = new DefaultJpaDialect();
 
 	@Test
 	void testDefaultTransactionDefinition() {

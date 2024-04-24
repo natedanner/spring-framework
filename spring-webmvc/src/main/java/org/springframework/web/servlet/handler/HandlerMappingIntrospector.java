@@ -119,7 +119,7 @@ public class HandlerMappingIntrospector
 
 			this.pathPatternMappings = this.handlerMappings.stream()
 					.filter(m -> m instanceof MatchableHandlerMapping hm && hm.getPatternParser() != null)
-					.map(mapping -> (MatchableHandlerMapping) mapping)
+					.map(MatchableHandlerMapping.class::cast)
 					.collect(Collectors.toMap(mapping -> mapping, PathPatternMatchableHandlerMapping::new));
 		}
 	}
@@ -169,7 +169,7 @@ public class HandlerMappingIntrospector
 	 * Return the configured or detected {@code HandlerMapping}s.
 	 */
 	public List<HandlerMapping> getHandlerMappings() {
-		return (this.handlerMappings != null ? this.handlerMappings : Collections.emptyList());
+		return this.handlerMappings != null ? this.handlerMappings : Collections.emptyList();
 	}
 
 
@@ -398,8 +398,8 @@ public class HandlerMappingIntrospector
 		}
 
 		public boolean matches(HttpServletRequest request) {
-			return (this.dispatcherType.equals(request.getDispatcherType()) &&
-					this.requestURI.equals(request.getRequestURI()));
+			return this.dispatcherType.equals(request.getDispatcherType()) &&
+					this.requestURI.equals(request.getRequestURI());
 		}
 
 		@Nullable
@@ -430,7 +430,7 @@ public class HandlerMappingIntrospector
 		@Nullable
 		public static CachedResult getResultFor(HttpServletRequest request) {
 			CachedResult result = (CachedResult) request.getAttribute(CACHED_RESULT_ATTRIBUTE);
-			return (result != null && result.matches(request) ? result : null);
+			return result != null && result.matches(request) ? result : null;
 		}
 	}
 
@@ -527,8 +527,8 @@ public class HandlerMappingIntrospector
 		LookupPathMatchableHandlerMapping(MatchableHandlerMapping delegate, Object lookupPath) {
 			this.delegate = delegate;
 			this.lookupPath = lookupPath;
-			this.pathAttributeName = (lookupPath instanceof RequestPath ?
-					ServletRequestPathUtils.PATH_ATTRIBUTE : UrlPathHelper.PATH_ATTRIBUTE);
+			this.pathAttributeName = lookupPath instanceof RequestPath ?
+					ServletRequestPathUtils.PATH_ATTRIBUTE : UrlPathHelper.PATH_ATTRIBUTE;
 		}
 
 		@Override
@@ -551,7 +551,7 @@ public class HandlerMappingIntrospector
 		}
 
 		private String initFullPathPattern(String pattern) {
-			PathPatternParser parser = (getPatternParser() != null ? getPatternParser() : PathPatternParser.defaultInstance);
+			PathPatternParser parser = getPatternParser() != null ? getPatternParser() : PathPatternParser.defaultInstance;
 			return parser.initFullPathPattern(pattern);
 		}
 

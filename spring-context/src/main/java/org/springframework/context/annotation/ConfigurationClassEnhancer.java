@@ -257,10 +257,10 @@ class ConfigurationClassEnhancer {
 		}
 
 		public static boolean isSetBeanFactory(Method candidateMethod) {
-			return (candidateMethod.getName().equals("setBeanFactory") &&
+			return "setBeanFactory".equals(candidateMethod.getName()) &&
 					candidateMethod.getParameterCount() == 1 &&
 					BeanFactory.class == candidateMethod.getParameterTypes()[0] &&
-					BeanFactoryAware.class.isAssignableFrom(candidateMethod.getDeclaringClass()));
+					BeanFactoryAware.class.isAssignableFrom(candidateMethod.getDeclaringClass());
 		}
 	}
 
@@ -358,8 +358,8 @@ class ConfigurationClassEnhancer {
 						}
 					}
 				}
-				Object beanInstance = (useArgs ? beanFactory.getBean(beanName, beanMethodArgs) :
-						beanFactory.getBean(beanName));
+				Object beanInstance = useArgs ? beanFactory.getBean(beanName, beanMethodArgs) :
+						beanFactory.getBean(beanName);
 				if (!ClassUtils.isAssignableValue(beanMethod.getReturnType(), beanInstance)) {
 					// Detect package-protected NullBean instance through equals(null) check
 					if (beanInstance.equals(null)) {
@@ -402,9 +402,9 @@ class ConfigurationClassEnhancer {
 
 		@Override
 		public boolean isMatch(Method candidateMethod) {
-			return (candidateMethod.getDeclaringClass() != Object.class &&
+			return candidateMethod.getDeclaringClass() != Object.class &&
 					!BeanFactoryAwareMethodInterceptor.isSetBeanFactory(candidateMethod) &&
-					BeanAnnotationHelper.isBeanAnnotated(candidateMethod));
+					BeanAnnotationHelper.isBeanAnnotated(candidateMethod);
 		}
 
 		private ConfigurableBeanFactory getBeanFactory(Object enhancedConfigInstance) {
@@ -431,7 +431,7 @@ class ConfigurationClassEnhancer {
 		 * @return whether <var>beanName</var> already exists in the factory
 		 */
 		private boolean factoryContainsBean(ConfigurableBeanFactory beanFactory, String beanName) {
-			return (beanFactory.containsBean(beanName) && !beanFactory.isCurrentlyInCreation(beanName));
+			return beanFactory.containsBean(beanName) && !beanFactory.isCurrentlyInCreation(beanName);
 		}
 
 		/**
@@ -442,8 +442,8 @@ class ConfigurationClassEnhancer {
 		 */
 		private boolean isCurrentlyInvokedFactoryMethod(Method method) {
 			Method currentlyInvoked = SimpleInstantiationStrategy.getCurrentlyInvokedFactoryMethod();
-			return (currentlyInvoked != null && method.getName().equals(currentlyInvoked.getName()) &&
-					Arrays.equals(method.getParameterTypes(), currentlyInvoked.getParameterTypes()));
+			return currentlyInvoked != null && method.getName().equals(currentlyInvoked.getName()) &&
+					Arrays.equals(method.getParameterTypes(), currentlyInvoked.getParameterTypes());
 		}
 
 		/**
@@ -495,7 +495,7 @@ class ConfigurationClassEnhancer {
 			return Proxy.newProxyInstance(
 					factoryBean.getClass().getClassLoader(), new Class<?>[] {interfaceType},
 					(proxy, method, args) -> {
-						if (method.getName().equals("getObject") && args == null) {
+						if ("getObject".equals(method.getName()) && args == null) {
 							return beanFactory.getBean(beanName);
 						}
 						return ReflectionUtils.invokeMethod(method, factoryBean, args);
@@ -537,7 +537,7 @@ class ConfigurationClassEnhancer {
 			}
 
 			((Factory) fbProxy).setCallback(0, (MethodInterceptor) (obj, method, args, proxy) -> {
-				if (method.getName().equals("getObject") && args.length == 0) {
+				if ("getObject".equals(method.getName()) && args.length == 0) {
 					return beanFactory.getBean(beanName);
 				}
 				return method.invoke(factoryBean, args);

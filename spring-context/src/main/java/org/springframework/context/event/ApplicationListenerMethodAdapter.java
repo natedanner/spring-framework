@@ -111,20 +111,20 @@ public class ApplicationListenerMethodAdapter implements GenericApplicationListe
 	public ApplicationListenerMethodAdapter(String beanName, Class<?> targetClass, Method method) {
 		this.beanName = beanName;
 		this.method = BridgeMethodResolver.findBridgedMethod(method);
-		this.targetMethod = (!Proxy.isProxyClass(targetClass) ?
-				AopUtils.getMostSpecificMethod(method, targetClass) : this.method);
+		this.targetMethod = Proxy.isProxyClass(targetClass) ? this.method :
+				AopUtils.getMostSpecificMethod(method, targetClass);
 		this.methodKey = new AnnotatedElementKey(this.targetMethod, targetClass);
 
 		EventListener ann = AnnotatedElementUtils.findMergedAnnotation(this.targetMethod, EventListener.class);
 		this.declaredEventTypes = resolveDeclaredEventTypes(method, ann);
-		this.condition = (ann != null ? ann.condition() : null);
+		this.condition = ann != null ? ann.condition() : null;
 		this.order = resolveOrder(this.targetMethod);
-		String id = (ann != null ? ann.id() : "");
-		this.listenerId = (!id.isEmpty() ? id : null);
+		String id = ann != null ? ann.id() : "";
+		this.listenerId = id.isEmpty() ? null : id;
 	}
 
 	private static List<ResolvableType> resolveDeclaredEventTypes(Method method, @Nullable EventListener ann) {
-		int count = (KotlinDetector.isSuspendingFunction(method) ? method.getParameterCount() - 1 : method.getParameterCount());
+		int count = KotlinDetector.isSuspendingFunction(method) ? method.getParameterCount() - 1 : method.getParameterCount();
 		if (count > 1) {
 			throw new IllegalStateException(
 					"Maximum one parameter is allowed for event listener method: " + method);
@@ -150,7 +150,7 @@ public class ApplicationListenerMethodAdapter implements GenericApplicationListe
 
 	private static int resolveOrder(Method method) {
 		Order ann = AnnotatedElementUtils.findMergedAnnotation(method, Order.class);
-		return (ann != null ? ann.value() : Ordered.LOWEST_PRECEDENCE);
+		return ann != null ? ann.value() : Ordered.LOWEST_PRECEDENCE;
 	}
 
 

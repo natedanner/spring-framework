@@ -35,7 +35,7 @@ public class AutowiredQualifierFooService implements FooService {
 	@Qualifier("testing")
 	private FooDao fooDao;
 
-	private boolean initCalled = false;
+	private boolean initCalled;
 
 	@PostConstruct
 	private void init() {

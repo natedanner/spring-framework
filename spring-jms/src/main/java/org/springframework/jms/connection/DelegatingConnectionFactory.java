@@ -63,7 +63,7 @@ public class DelegatingConnectionFactory
 	@Nullable
 	private ConnectionFactory targetConnectionFactory;
 
-	private boolean shouldStopConnections = false;
+	private boolean shouldStopConnections;
 
 
 	/**

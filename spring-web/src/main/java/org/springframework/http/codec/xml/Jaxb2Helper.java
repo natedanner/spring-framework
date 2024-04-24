@@ -153,7 +153,7 @@ abstract class Jaxb2Helper {
 		@Nullable
 		private List<XMLEvent> events;
 
-		private int elementDepth = 0;
+		private int elementDepth;
 
 		private int barrier = Integer.MAX_VALUE;
 

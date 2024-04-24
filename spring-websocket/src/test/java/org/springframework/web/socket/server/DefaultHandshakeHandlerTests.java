@@ -43,9 +43,9 @@ import static org.mockito.Mockito.verify;
  */
 class DefaultHandshakeHandlerTests extends AbstractHttpRequestTests {
 
-	private RequestUpgradeStrategy upgradeStrategy = mock();
+	private final RequestUpgradeStrategy upgradeStrategy = mock();
 
-	private DefaultHandshakeHandler handshakeHandler = new DefaultHandshakeHandler(this.upgradeStrategy);
+	private final DefaultHandshakeHandler handshakeHandler = new DefaultHandshakeHandler(this.upgradeStrategy);
 
 
 	@Test

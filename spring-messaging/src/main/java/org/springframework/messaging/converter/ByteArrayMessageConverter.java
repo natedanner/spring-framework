@@ -37,7 +37,7 @@ public class ByteArrayMessageConverter extends AbstractMessageConverter {
 
 	@Override
 	protected boolean supports(Class<?> clazz) {
-		return (byte[].class == clazz);
+		return byte[].class == clazz;
 	}
 
 	@Override

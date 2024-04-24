@@ -47,6 +47,6 @@ abstract class RestClientUtils {
 	public static Charset getCharset(HttpMessage response) {
 		HttpHeaders headers = response.getHeaders();
 		MediaType contentType = headers.getContentType();
-		return (contentType != null ? contentType.getCharset() : null);
+		return contentType != null ? contentType.getCharset() : null;
 	}
 }

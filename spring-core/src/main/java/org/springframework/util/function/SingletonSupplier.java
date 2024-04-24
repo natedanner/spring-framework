@@ -146,7 +146,7 @@ public class SingletonSupplier<T> implements Supplier<T> {
 	 */
 	@Nullable
 	public static <T> SingletonSupplier<T> ofNullable(@Nullable T instance) {
-		return (instance != null ? new SingletonSupplier<>(instance) : null);
+		return instance != null ? new SingletonSupplier<>(instance) : null;
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class SingletonSupplier<T> implements Supplier<T> {
 	 */
 	@Nullable
 	public static <T> SingletonSupplier<T> ofNullable(@Nullable Supplier<T> supplier) {
-		return (supplier != null ? new SingletonSupplier<>(supplier) : null);
+		return supplier != null ? new SingletonSupplier<>(supplier) : null;
 	}
 
 }

@@ -323,8 +323,8 @@ public class SpringJUnit4ClassRunner extends BlockJUnit4ClassRunner {
 	 */
 	protected boolean isTestMethodIgnored(FrameworkMethod frameworkMethod) {
 		Method method = frameworkMethod.getMethod();
-		return (method.isAnnotationPresent(Ignore.class) ||
-				!ProfileValueUtils.isTestEnabledInThisEnvironment(method, getTestClass().getJavaClass()));
+		return method.isAnnotationPresent(Ignore.class) ||
+				!ProfileValueUtils.isTestEnabledInThisEnvironment(method, getTestClass().getJavaClass());
 	}
 
 	/**
@@ -336,7 +336,7 @@ public class SpringJUnit4ClassRunner extends BlockJUnit4ClassRunner {
 	@Override
 	protected Statement possiblyExpectingExceptions(FrameworkMethod frameworkMethod, Object testInstance, Statement next) {
 		Class<? extends Throwable> expectedException = getExpectedException(frameworkMethod);
-		return (expectedException != null ? new ExpectException(next, expectedException) : next);
+		return expectedException != null ? new ExpectException(next, expectedException) : next;
 	}
 
 	/**
@@ -349,7 +349,7 @@ public class SpringJUnit4ClassRunner extends BlockJUnit4ClassRunner {
 	@Nullable
 	protected Class<? extends Throwable> getExpectedException(FrameworkMethod frameworkMethod) {
 		Test test = frameworkMethod.getAnnotation(Test.class);
-		return (test != null && test.expected() != Test.None.class ? test.expected() : null);
+		return test != null && test.expected() != Test.None.class ? test.expected() : null;
 	}
 
 	/**
@@ -400,7 +400,7 @@ public class SpringJUnit4ClassRunner extends BlockJUnit4ClassRunner {
 	 */
 	protected long getJUnitTimeout(FrameworkMethod frameworkMethod) {
 		Test test = frameworkMethod.getAnnotation(Test.class);
-		return (test == null ? 0 : Math.max(0, test.timeout()));
+		return test == null ? 0 : Math.max(0, test.timeout());
 	}
 
 	/**

@@ -38,12 +38,12 @@ import static org.mockito.Mockito.verify;
  */
 class SimpSessionScopeTests {
 
-	private SimpSessionScope scope = new SimpSessionScope();
+	private final SimpSessionScope scope = new SimpSessionScope();
 
 	@SuppressWarnings("rawtypes")
 	private ObjectFactory objectFactory = mock();
 
-	private SimpAttributes simpAttributes = new SimpAttributes("session1", new ConcurrentHashMap<>());
+	private final SimpAttributes simpAttributes = new SimpAttributes("session1", new ConcurrentHashMap<>());
 
 
 	@BeforeEach

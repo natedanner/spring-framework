@@ -333,9 +333,9 @@ class HibernateNativeEntityManagerFactorySpringBeanContainerIntegrationTests
 
 	private static class NoDefinitionInSpringContextTestBeanInstanceProducer implements BeanInstanceProducer {
 
-		private int unnamedInstantiationCount = 0;
+		private int unnamedInstantiationCount;
 
-		private int namedInstantiationCount = 0;
+		private int namedInstantiationCount;
 
 		@Override
 		public <B> B produceBeanInstance(Class<B> beanType) {

@@ -24,9 +24,9 @@ import org.springframework.lang.Nullable;
 
 public class LogUserAdvice implements MethodBeforeAdvice, ThrowsAdvice {
 
-	private int countBefore = 0;
+	private int countBefore;
 
-	private int countThrows = 0;
+	private int countThrows;
 
 	@Override
 	public void before(Method method, Object[] objects, @Nullable Object o) {

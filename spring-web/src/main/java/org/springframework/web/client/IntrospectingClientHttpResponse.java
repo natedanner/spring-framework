@@ -62,10 +62,7 @@ class IntrospectingClientHttpResponse extends ClientHttpResponseDecorator {
 				statusCode == HttpStatus.NOT_MODIFIED) {
 			return false;
 		}
-		if (getHeaders().getContentLength() == 0) {
-			return false;
-		}
-		return true;
+		return !(getHeaders().getContentLength() == 0);
 	}
 
 	/**
@@ -111,7 +108,7 @@ class IntrospectingClientHttpResponse extends ClientHttpResponseDecorator {
 
 	@Override
 	public InputStream getBody() throws IOException {
-		return (this.pushbackInputStream != null ? this.pushbackInputStream : getDelegate().getBody());
+		return this.pushbackInputStream != null ? this.pushbackInputStream : getDelegate().getBody();
 	}
 
 }

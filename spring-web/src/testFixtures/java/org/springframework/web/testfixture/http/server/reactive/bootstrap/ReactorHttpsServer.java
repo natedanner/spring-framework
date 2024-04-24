@@ -34,7 +34,7 @@ public class ReactorHttpsServer extends AbstractHttpServer {
 
 	private reactor.netty.http.server.HttpServer reactorServer;
 
-	private AtomicReference<DisposableServer> serverRef = new AtomicReference<>();
+	private final AtomicReference<DisposableServer> serverRef = new AtomicReference<>();
 
 
 	@Override

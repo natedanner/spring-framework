@@ -69,7 +69,7 @@ public abstract class AbstractConfigurableMBeanInfoAssembler extends AbstractRef
 		if (result == null) {
 			result = this.notificationInfos;
 		}
-		return (result != null ? result : new ModelMBeanNotificationInfo[0]);
+		return result != null ? result : new ModelMBeanNotificationInfo[0];
 	}
 
 	private ModelMBeanNotificationInfo[] extractNotificationMetadata(Object mapValue) {

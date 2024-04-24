@@ -103,7 +103,7 @@ final class SimpleMethodMetadata implements MethodMetadata {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof SimpleMethodMetadata that && this.source.equals(that.source)));
+		return this == other || (other instanceof SimpleMethodMetadata that && this.source.equals(that.source));
 	}
 
 	@Override

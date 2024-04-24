@@ -90,7 +90,7 @@ public class MappingJackson2HttpMessageConverter extends AbstractJackson2HttpMes
 	 * @see #setJsonPrefix
 	 */
 	public void setPrefixJson(boolean prefixJson) {
-		this.jsonPrefix = (prefixJson ? ")]}', " : null);
+		this.jsonPrefix = prefixJson ? ")]}', " : null;
 	}
 
 

@@ -42,7 +42,7 @@ public class DefaultAdvisorAutoProxyCreator extends AbstractAdvisorAutoProxyCrea
 	public static final String SEPARATOR = ".";
 
 
-	private boolean usePrefix = false;
+	private boolean usePrefix;
 
 	@Nullable
 	private String advisorBeanNamePrefix;
@@ -103,7 +103,7 @@ public class DefaultAdvisorAutoProxyCreator extends AbstractAdvisorAutoProxyCrea
 			return true;
 		}
 		String prefix = getAdvisorBeanNamePrefix();
-		return (prefix != null && beanName.startsWith(prefix));
+		return prefix != null && beanName.startsWith(prefix);
 	}
 
 }

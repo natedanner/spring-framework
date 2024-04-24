@@ -93,7 +93,7 @@ public class Jaxb2CollectionHttpMessageConverter<T extends Collection>
 		if (!(parameterizedType.getRawType() instanceof Class<?> rawType)) {
 			return false;
 		}
-		if (!(Collection.class.isAssignableFrom(rawType))) {
+		if (!Collection.class.isAssignableFrom(rawType)) {
 			return false;
 		}
 		if (parameterizedType.getActualTypeArguments().length != 1) {

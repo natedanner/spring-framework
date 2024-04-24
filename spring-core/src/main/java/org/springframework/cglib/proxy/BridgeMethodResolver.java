@@ -82,7 +82,7 @@ class BridgeMethodResolver {
         private Map/*<Signature, Signature>*/ resolved;
         private Set/*<Signature>*/ eligibleMethods;
 
-        private Signature currentMethod = null;
+        private Signature currentMethod;
 
         BridgedFinder(Set eligibleMethods, Map resolved) {
             super(Constants.ASM_API);

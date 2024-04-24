@@ -153,20 +153,8 @@ class CustomizableTraceInterceptorTests {
 		given(log.isTraceEnabled()).willReturn(true);
 
 		CustomizableTraceInterceptor interceptor = new StubCustomizableTraceInterceptor(log);
-		interceptor.setEnterMessage(new StringBuilder()
-			.append("Entering the '").append(PLACEHOLDER_METHOD_NAME)
-			.append("' method of the [").append(PLACEHOLDER_TARGET_CLASS_NAME)
-			.append("] class with the following args (").append(PLACEHOLDER_ARGUMENTS)
-			.append(") and arg types (").append(PLACEHOLDER_ARGUMENT_TYPES)
-			.append(").").toString());
-		interceptor.setExitMessage(new StringBuilder()
-			.append("Exiting the '").append(PLACEHOLDER_METHOD_NAME)
-			.append("' method of the [").append(PLACEHOLDER_TARGET_CLASS_SHORT_NAME)
-			.append("] class with the following args (").append(PLACEHOLDER_ARGUMENTS)
-			.append(") and arg types (").append(PLACEHOLDER_ARGUMENT_TYPES)
-			.append("), returning '").append(PLACEHOLDER_RETURN_VALUE)
-			.append("' and taking '").append(PLACEHOLDER_INVOCATION_TIME)
-			.append("' this long.").toString());
+		interceptor.setEnterMessage("Entering the '" + PLACEHOLDER_METHOD_NAME + "' method of the [" + PLACEHOLDER_TARGET_CLASS_NAME + "] class with the following args (" + PLACEHOLDER_ARGUMENTS + ") and arg types (" + PLACEHOLDER_ARGUMENT_TYPES + ").");
+		interceptor.setExitMessage("Exiting the '" + PLACEHOLDER_METHOD_NAME + "' method of the [" + PLACEHOLDER_TARGET_CLASS_SHORT_NAME + "] class with the following args (" + PLACEHOLDER_ARGUMENTS + ") and arg types (" + PLACEHOLDER_ARGUMENT_TYPES + "), returning '" + PLACEHOLDER_RETURN_VALUE + "' and taking '" + PLACEHOLDER_INVOCATION_TIME + "' this long.");
 		interceptor.invoke(methodInvocation);
 
 		verify(log, times(2)).trace(anyString());

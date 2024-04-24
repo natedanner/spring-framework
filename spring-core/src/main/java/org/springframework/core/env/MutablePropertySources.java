@@ -160,7 +160,7 @@ public class MutablePropertySources implements PropertySources {
 	public PropertySource<?> remove(String name) {
 		synchronized (this.propertySourceList) {
 			int index = this.propertySourceList.indexOf(PropertySource.named(name));
-			return (index != -1 ? this.propertySourceList.remove(index) : null);
+			return index != -1 ? this.propertySourceList.remove(index) : null;
 		}
 	}
 

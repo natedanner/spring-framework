@@ -454,7 +454,7 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 	 */
 	public List<String> getOrEmpty(Object headerName) {
 		List<String> values = get(headerName);
-		return (values != null ? values : Collections.emptyList());
+		return values != null ? values : Collections.emptyList();
 	}
 
 	/**
@@ -502,7 +502,7 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 	 */
 	public List<Locale.LanguageRange> getAcceptLanguage() {
 		String value = getFirst(ACCEPT_LANGUAGE);
-		return (StringUtils.hasText(value) ? Locale.LanguageRange.parse(value) : Collections.emptyList());
+		return StringUtils.hasText(value) ? Locale.LanguageRange.parse(value) : Collections.emptyList();
 	}
 
 	/**
@@ -656,7 +656,7 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 	 */
 	public long getAccessControlMaxAge() {
 		String value = getFirst(ACCESS_CONTROL_MAX_AGE);
-		return (value != null ? Long.parseLong(value) : -1);
+		return value != null ? Long.parseLong(value) : -1;
 	}
 
 	/**
@@ -724,7 +724,7 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 				else {
 					charsetName = token.substring(0, paramIdx);
 				}
-				if (!charsetName.equals("*")) {
+				if (!"*".equals(charsetName)) {
 					result.add(Charset.forName(charsetName));
 				}
 			}
@@ -970,7 +970,7 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 	 */
 	public long getContentLength() {
 		String value = getFirst(CONTENT_LENGTH);
-		return (value != null ? Long.parseLong(value) : -1);
+		return value != null ? Long.parseLong(value) : -1;
 	}
 
 	/**
@@ -997,7 +997,7 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 	@Nullable
 	public MediaType getContentType() {
 		String value = getFirst(CONTENT_TYPE);
-		return (StringUtils.hasLength(value) ? MediaType.parseMediaType(value) : null);
+		return StringUtils.hasLength(value) ? MediaType.parseMediaType(value) : null;
 	}
 
 	/**
@@ -1138,7 +1138,7 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 
 		String host = null;
 		int port = 0;
-		int separator = (value.startsWith("[") ? value.indexOf(':', value.indexOf(']')) : value.lastIndexOf(':'));
+		int separator = value.startsWith("[") ? value.indexOf(':', value.indexOf(']')) : value.lastIndexOf(':');
 		if (separator != -1) {
 			host = value.substring(0, separator);
 			String portString = value.substring(separator + 1);
@@ -1334,7 +1334,7 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 	@Nullable
 	public URI getLocation() {
 		String value = getFirst(LOCATION);
-		return (value != null ? URI.create(value) : null);
+		return value != null ? URI.create(value) : null;
 	}
 
 	/**
@@ -1476,7 +1476,7 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 	 */
 	private long getFirstDate(String headerName, boolean rejectInvalid) {
 		ZonedDateTime zonedDateTime = getFirstZonedDateTime(headerName, rejectInvalid);
-		return (zonedDateTime != null ? zonedDateTime.toInstant().toEpochMilli() : -1);
+		return zonedDateTime != null ? zonedDateTime.toInstant().toEpochMilli() : -1;
 	}
 
 	/**
@@ -1666,7 +1666,7 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 	@Nullable
 	protected String getFieldValues(String headerName) {
 		List<String> headerValues = get(headerName);
-		return (headerValues != null ? toCommaDelimitedString(headerValues) : null);
+		return headerValues != null ? toCommaDelimitedString(headerValues) : null;
 	}
 
 	/**
@@ -1835,7 +1835,7 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof HttpHeaders that && unwrap(this).equals(unwrap(that))));
+		return this == other || (other instanceof HttpHeaders that && unwrap(this).equals(unwrap(that)));
 	}
 
 	@Override
@@ -1858,8 +1858,8 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 	 * @since 5.3
 	 */
 	public static HttpHeaders readOnlyHttpHeaders(MultiValueMap<String, String> headers) {
-		return (headers instanceof HttpHeaders httpHeaders ? readOnlyHttpHeaders(httpHeaders) :
-				new ReadOnlyHttpHeaders(headers));
+		return headers instanceof HttpHeaders httpHeaders ? readOnlyHttpHeaders(httpHeaders) :
+				new ReadOnlyHttpHeaders(headers);
 	}
 
 	/**
@@ -1870,7 +1870,7 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 	 */
 	public static HttpHeaders readOnlyHttpHeaders(HttpHeaders headers) {
 		Assert.notNull(headers, "HttpHeaders must not be null");
-		return (headers instanceof ReadOnlyHttpHeaders ? headers : new ReadOnlyHttpHeaders(headers.headers));
+		return headers instanceof ReadOnlyHttpHeaders ? headers : new ReadOnlyHttpHeaders(headers.headers);
 	}
 
 	/**
@@ -1885,7 +1885,7 @@ public class HttpHeaders implements MultiValueMap<String, String>, Serializable 
 		if (headers == EMPTY) {
 			return new HttpHeaders();
 		}
-		return (headers instanceof ReadOnlyHttpHeaders ? new HttpHeaders(headers.headers) : headers);
+		return headers instanceof ReadOnlyHttpHeaders ? new HttpHeaders(headers.headers) : headers;
 	}
 
 	/**

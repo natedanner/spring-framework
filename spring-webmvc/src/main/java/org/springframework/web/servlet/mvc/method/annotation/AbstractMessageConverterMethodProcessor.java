@@ -127,7 +127,7 @@ public abstract class AbstractMessageConverterMethodProcessor extends AbstractMe
 
 		super(converters, requestResponseBodyAdvice);
 
-		this.contentNegotiationManager = (manager != null ? manager : new ContentNegotiationManager());
+		this.contentNegotiationManager = manager != null ? manager : new ContentNegotiationManager();
 		this.safeExtensions.addAll(this.contentNegotiationManager.getAllFileExtensions());
 		this.safeExtensions.addAll(SAFE_EXTENSIONS);
 	}
@@ -281,7 +281,7 @@ public abstract class AbstractMessageConverterMethodProcessor extends AbstractMe
 			selectedMediaType = selectedMediaType.removeQualityValue();
 			for (HttpMessageConverter<?> converter : this.messageConverters) {
 				GenericHttpMessageConverter genericConverter =
-						(converter instanceof GenericHttpMessageConverter ghmc ? ghmc : null);
+						converter instanceof GenericHttpMessageConverter ghmc ? ghmc : null;
 				if (genericConverter != null ?
 						((GenericHttpMessageConverter) converter).canWrite(targetType, valueType, selectedMediaType) :
 						converter.canWrite(valueType, selectedMediaType)) {
@@ -330,7 +330,7 @@ public abstract class AbstractMessageConverterMethodProcessor extends AbstractMe
 	 * (e.g. {@code ResponseEntity<T>}).
 	 */
 	protected Class<?> getReturnValueType(@Nullable Object value, MethodParameter returnType) {
-		return (value != null ? value.getClass() : returnType.getParameterType());
+		return value != null ? value.getClass() : returnType.getParameterType();
 	}
 
 	/**
@@ -392,7 +392,7 @@ public abstract class AbstractMessageConverterMethodProcessor extends AbstractMe
 				result.addAll(converter.getSupportedMediaTypes(valueClass));
 			}
 		}
-		return (result.isEmpty() ? Collections.singletonList(MediaType.ALL) : new ArrayList<>(result));
+		return result.isEmpty() ? Collections.singletonList(MediaType.ALL) : new ArrayList<>(result);
 	}
 
 	private List<MediaType> getAcceptableMediaTypes(HttpServletRequest request)
@@ -488,7 +488,7 @@ public abstract class AbstractMessageConverterMethodProcessor extends AbstractMe
 		if (pattern != null && pattern.endsWith("." + extension)) {
 			return true;
 		}
-		if (extension.equals("html")) {
+		if ("html".equals(extension)) {
 			String name = HandlerMapping.PRODUCIBLE_MEDIA_TYPES_ATTRIBUTE;
 			Set<MediaType> mediaTypes = (Set<MediaType>) request.getAttribute(name);
 			if (!CollectionUtils.isEmpty(mediaTypes) && mediaTypes.contains(MediaType.TEXT_HTML)) {
@@ -496,7 +496,7 @@ public abstract class AbstractMessageConverterMethodProcessor extends AbstractMe
 			}
 		}
 		MediaType mediaType = resolveMediaType(request, extension);
-		return (mediaType != null && (safeMediaType(mediaType)));
+		return mediaType != null && (safeMediaType(mediaType));
 	}
 
 	@Nullable
@@ -513,8 +513,8 @@ public abstract class AbstractMessageConverterMethodProcessor extends AbstractMe
 	}
 
 	private boolean safeMediaType(MediaType mediaType) {
-		return (SAFE_MEDIA_BASE_TYPES.contains(mediaType.getType()) ||
-				mediaType.getSubtype().endsWith("+xml"));
+		return SAFE_MEDIA_BASE_TYPES.contains(mediaType.getType()) ||
+				mediaType.getSubtype().endsWith("+xml");
 	}
 
 }

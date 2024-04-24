@@ -87,7 +87,7 @@ public class DelegatingMessageSource extends MessageSourceSupport implements Hie
 				return renderDefaultMessage(resolvable.getDefaultMessage(), resolvable.getArguments(), locale);
 			}
 			String[] codes = resolvable.getCodes();
-			String code = (codes != null && codes.length > 0 ? codes[0] : "");
+			String code = codes != null && codes.length > 0 ? codes[0] : "";
 			throw new NoSuchMessageException(code, locale);
 		}
 	}
@@ -95,7 +95,7 @@ public class DelegatingMessageSource extends MessageSourceSupport implements Hie
 
 	@Override
 	public String toString() {
-		return (this.parentMessageSource != null ? this.parentMessageSource.toString() : "Empty MessageSource");
+		return this.parentMessageSource != null ? this.parentMessageSource.toString() : "Empty MessageSource";
 	}
 
 }

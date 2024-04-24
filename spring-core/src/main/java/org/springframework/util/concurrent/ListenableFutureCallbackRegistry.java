@@ -96,9 +96,11 @@ public class ListenableFutureCallbackRegistry<T> {
 	public void addSuccessCallback(SuccessCallback<? super T> callback) {
 		Assert.notNull(callback, "'callback' must not be null");
 		synchronized (this.mutex) {
-			switch (this.state) {
-				case NEW -> this.successCallbacks.add(callback);
-				case SUCCESS -> notifySuccess(callback);
+			if (this.state == org.springframework.util.concurrent.ListenableFutureCallbackRegistry.State.NEW) {
+				this.successCallbacks.add(callback);
+			}
+			else if (this.state == org.springframework.util.concurrent.ListenableFutureCallbackRegistry.State.SUCCESS) {
+				notifySuccess(callback);
 			}
 		}
 	}
@@ -111,9 +113,11 @@ public class ListenableFutureCallbackRegistry<T> {
 	public void addFailureCallback(FailureCallback callback) {
 		Assert.notNull(callback, "'callback' must not be null");
 		synchronized (this.mutex) {
-			switch (this.state) {
-				case NEW -> this.failureCallbacks.add(callback);
-				case FAILURE -> notifyFailure(callback);
+			if (this.state == org.springframework.util.concurrent.ListenableFutureCallbackRegistry.State.NEW) {
+				this.failureCallbacks.add(callback);
+			}
+			else if (this.state == org.springframework.util.concurrent.ListenableFutureCallbackRegistry.State.FAILURE) {
+				notifyFailure(callback);
 			}
 		}
 	}

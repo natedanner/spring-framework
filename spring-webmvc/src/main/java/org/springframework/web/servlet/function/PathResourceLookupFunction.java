@@ -97,7 +97,7 @@ class PathResourceLookupFunction implements Function<ServerRequest, Optional<Res
 				return path;
 			}
 		}
-		return (slash ? "/" : "");
+		return slash ? "/" : "";
 	}
 
 	private boolean isInvalidPath(String path) {
@@ -105,7 +105,7 @@ class PathResourceLookupFunction implements Function<ServerRequest, Optional<Res
 			return true;
 		}
 		if (path.contains(":/")) {
-			String relativePath = (path.charAt(0) == '/' ? path.substring(1) : path);
+			String relativePath = path.charAt(0) == '/' ? path.substring(1) : path;
 			if (ResourceUtils.isUrl(relativePath) || relativePath.startsWith("url:")) {
 				return true;
 			}
@@ -137,7 +137,7 @@ class PathResourceLookupFunction implements Function<ServerRequest, Optional<Res
 		if (locationPath.equals(resourcePath)) {
 			return true;
 		}
-		locationPath = (locationPath.endsWith("/") || locationPath.isEmpty() ? locationPath : locationPath + "/");
+		locationPath = locationPath.endsWith("/") || locationPath.isEmpty() ? locationPath : locationPath + "/";
 		if (!resourcePath.startsWith(locationPath)) {
 			return false;
 		}

@@ -65,13 +65,13 @@ public class DelegatingWebFluxConfiguration extends WebFluxConfigurationSupport 
 	@Override
 	protected Validator getValidator() {
 		Validator validator = this.configurers.getValidator();
-		return (validator != null ? validator : super.getValidator());
+		return validator != null ? validator : super.getValidator();
 	}
 
 	@Override
 	protected MessageCodesResolver getMessageCodesResolver() {
 		MessageCodesResolver messageCodesResolver = this.configurers.getMessageCodesResolver();
-		return (messageCodesResolver != null ? messageCodesResolver : super.getMessageCodesResolver());
+		return messageCodesResolver != null ? messageCodesResolver : super.getMessageCodesResolver();
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class DelegatingWebFluxConfiguration extends WebFluxConfigurationSupport 
 	@Override
 	protected WebSocketService getWebSocketService() {
 		WebSocketService service = this.configurers.getWebSocketService();
-		return (service != null ? service : super.getWebSocketService());
+		return service != null ? service : super.getWebSocketService();
 	}
 
 }

@@ -127,7 +127,7 @@ public class ResourceWebHandler implements WebHandler, InitializingBean {
 	@Nullable
 	private Function<Resource, String> etagGenerator;
 
-	private boolean optimizeLocations = false;
+	private boolean optimizeLocations;
 
 
 	/**
@@ -347,7 +347,7 @@ public class ResourceWebHandler implements WebHandler, InitializingBean {
 	 * @since 5.3.2
 	 */
 	public Map<String, MediaType> getMediaTypes() {
-		return (this.mediaTypes != null ? this.mediaTypes : Collections.emptyMap());
+		return this.mediaTypes != null ? this.mediaTypes : Collections.emptyMap();
 	}
 
 
@@ -445,7 +445,7 @@ public class ResourceWebHandler implements WebHandler, InitializingBean {
 						}
 
 						// Header phase
-						String eTagValue = (this.getEtagGenerator() != null) ? this.getEtagGenerator().apply(resource) : null;
+						String eTagValue = this.getEtagGenerator() != null ? this.getEtagGenerator().apply(resource) : null;
 						Instant lastModified = isUseLastModified() ? Instant.ofEpochMilli(resource.lastModified()) : Instant.MIN;
 						if (exchange.checkNotModified(eTagValue, lastModified)) {
 							logger.trace(exchange.getLogPrefix() + "Resource not modified");
@@ -546,7 +546,7 @@ public class ResourceWebHandler implements WebHandler, InitializingBean {
 				prev = curr;
 			}
 		}
-		return (sb != null ? sb.toString() : path);
+		return sb != null ? sb.toString() : path;
 	}
 
 	private String cleanLeadingSlash(String path) {
@@ -559,10 +559,10 @@ public class ResourceWebHandler implements WebHandler, InitializingBean {
 				if (i == 0 || (i == 1 && slash)) {
 					return path;
 				}
-				return (slash ? "/" + path.substring(i) : path.substring(i));
+				return slash ? "/" + path.substring(i) : path.substring(i);
 			}
 		}
-		return (slash ? "/" : "");
+		return slash ? "/" : "";
 	}
 
 	/**
@@ -614,7 +614,7 @@ public class ResourceWebHandler implements WebHandler, InitializingBean {
 			return true;
 		}
 		if (path.contains(":/")) {
-			String relativePath = (path.charAt(0) == '/' ? path.substring(1) : path);
+			String relativePath = path.charAt(0) == '/' ? path.substring(1) : path;
 			if (ResourceUtils.isUrl(relativePath) || relativePath.startsWith("url:")) {
 				if (logger.isWarnEnabled()) {
 					logger.warn(LogFormatUtils.formatValue(

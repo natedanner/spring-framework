@@ -234,7 +234,7 @@ public class JmsListenerAnnotationBeanPostProcessor
 					(MethodIntrospector.MetadataLookup<Set<JmsListener>>) method -> {
 						Set<JmsListener> listenerMethods = AnnotatedElementUtils.getMergedRepeatableAnnotations(
 								method, JmsListener.class, JmsListeners.class);
-						return (!listenerMethods.isEmpty() ? listenerMethods : null);
+						return listenerMethods.isEmpty() ? null : listenerMethods;
 					});
 			if (annotatedMethods.isEmpty()) {
 				this.nonAnnotatedClasses.add(targetClass);
@@ -317,7 +317,7 @@ public class JmsListenerAnnotationBeanPostProcessor
 	private String getEndpointId(JmsListener jmsListener) {
 		if (StringUtils.hasText(jmsListener.id())) {
 			String id = resolve(jmsListener.id());
-			return (id != null ? id : "");
+			return id != null ? id : "";
 		}
 		else {
 			return "org.springframework.jms.JmsListenerEndpointContainer#" + this.counter.getAndIncrement();
@@ -326,7 +326,7 @@ public class JmsListenerAnnotationBeanPostProcessor
 
 	@Nullable
 	private String resolve(String value) {
-		return (this.embeddedValueResolver != null ? this.embeddedValueResolver.resolveStringValue(value) : value);
+		return this.embeddedValueResolver != null ? this.embeddedValueResolver.resolveStringValue(value) : value;
 	}
 
 

@@ -60,7 +60,7 @@ enum IntrospectionFailureLogger {
 
 
 	void log(String message, @Nullable Object source, Exception ex) {
-		String on = (source != null ? " on " + source : "");
+		String on = source != null ? " on " + source : "";
 		log(message + on + ": " + ex);
 	}
 

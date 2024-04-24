@@ -164,21 +164,21 @@ public abstract class AbstractMessageSendingTemplate<D> implements MessageSendin
 			@Nullable MessagePostProcessor postProcessor) {
 
 		MessageHeaders messageHeaders = null;
-		Object conversionHint = (headers != null ? headers.get(CONVERSION_HINT_HEADER) : null);
+		Object conversionHint = headers != null ? headers.get(CONVERSION_HINT_HEADER) : null;
 
 		Map<String, Object> headersToUse = processHeadersToSend(headers);
 		if (headersToUse != null) {
-			messageHeaders = (headersToUse instanceof MessageHeaders _messageHeaders ?
-					_messageHeaders : new MessageHeaders(headersToUse));
+			messageHeaders = headersToUse instanceof MessageHeaders _messageHeaders ?
+					_messageHeaders : new MessageHeaders(headersToUse);
 		}
 
 		MessageConverter converter = getMessageConverter();
-		Message<?> message = (converter instanceof SmartMessageConverter smartMessageConverter ?
+		Message<?> message = converter instanceof SmartMessageConverter smartMessageConverter ?
 				smartMessageConverter.toMessage(payload, messageHeaders, conversionHint) :
-				converter.toMessage(payload, messageHeaders));
+				converter.toMessage(payload, messageHeaders);
 		if (message == null) {
 			String payloadType = payload.getClass().getName();
-			Object contentType = (messageHeaders != null ? messageHeaders.get(MessageHeaders.CONTENT_TYPE) : null);
+			Object contentType = messageHeaders != null ? messageHeaders.get(MessageHeaders.CONTENT_TYPE) : null;
 			throw new MessageConversionException("Unable to convert payload with type='" + payloadType +
 					"', contentType='" + contentType + "', converter=[" + getMessageConverter() + "]");
 		}

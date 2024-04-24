@@ -122,7 +122,7 @@ public class DuplicatesPredicate implements Predicate {
   private static class UnnecessaryBridgeFinder extends ClassVisitor {
     private final Set rejected;
 
-    private Signature currentMethodSig = null;
+    private Signature currentMethodSig;
     private Map methods = new HashMap();
 
     UnnecessaryBridgeFinder(Set rejected) {

@@ -261,7 +261,7 @@ public class TagWriter {
 
 		public SafeWriter append(String value) throws JspException {
 			try {
-				getWriterToUse().write(String.valueOf(value));
+				getWriterToUse().write(value);
 				return this;
 			}
 			catch (IOException ex) {
@@ -270,7 +270,7 @@ public class TagWriter {
 		}
 
 		private Writer getWriterToUse() {
-			Writer writer = (this.pageContext != null ? this.pageContext.getOut() : this.writer);
+			Writer writer = this.pageContext != null ? this.pageContext.getOut() : this.writer;
 			Assert.state(writer != null, "No Writer available");
 			return writer;
 		}

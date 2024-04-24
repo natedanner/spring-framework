@@ -61,8 +61,8 @@ public class RequestPartMethodArgumentResolver extends AbstractMessageReaderArgu
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		return (parameter.hasParameterAnnotation(RequestPart.class) ||
-				checkParameterType(parameter, Part.class::isAssignableFrom));
+		return parameter.hasParameterAnnotation(RequestPart.class) ||
+				checkParameterType(parameter, Part.class::isAssignableFrom);
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class RequestPartMethodArgumentResolver extends AbstractMessageReaderArgu
 			MethodParameter parameter, BindingContext bindingContext, ServerWebExchange exchange) {
 
 		RequestPart requestPart = parameter.getParameterAnnotation(RequestPart.class);
-		boolean isRequired = (requestPart == null || requestPart.required());
+		boolean isRequired = requestPart == null || requestPart.required();
 		Class<?> paramType = parameter.getParameterType();
 		Flux<Part> partValues = getPartValues(parameter, requestPart, isRequired, exchange);
 

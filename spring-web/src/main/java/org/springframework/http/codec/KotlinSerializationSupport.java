@@ -88,8 +88,8 @@ public abstract class KotlinSerializationSupport<T extends SerialFormat> {
 			return false;
 		}
 		else {
-			return (supports(mimeType) && !String.class.isAssignableFrom(type.toClass()) &&
-					!ServerSentEvent.class.isAssignableFrom(type.toClass()));
+			return supports(mimeType) && !String.class.isAssignableFrom(type.toClass()) &&
+					!ServerSentEvent.class.isAssignableFrom(type.toClass());
 		}
 
 	}

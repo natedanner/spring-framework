@@ -79,7 +79,7 @@ public class OpenEntityManagerInViewInterceptor extends EntityManagerFactoryAcce
 		if (TransactionSynchronizationManager.hasResource(emf)) {
 			// Do not modify the EntityManager: just mark the request accordingly.
 			Integer count = (Integer) request.getAttribute(key, WebRequest.SCOPE_REQUEST);
-			int newCount = (count != null ? count + 1 : 1);
+			int newCount = count != null ? count + 1 : 1;
 			request.setAttribute(getParticipateAttributeName(), newCount, WebRequest.SCOPE_REQUEST);
 		}
 		else {

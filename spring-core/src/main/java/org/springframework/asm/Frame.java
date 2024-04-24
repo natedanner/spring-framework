@@ -577,7 +577,7 @@ class Frame {
       return outputStack[--outputStackTop];
     } else {
       // If the output frame stack is empty, pop from the input stack.
-      return STACK_KIND | -(--outputStackStart);
+      return STACK_KIND | ---outputStackStart;
     }
   }
 
@@ -1371,7 +1371,7 @@ class Frame {
     int i = 0;
     while (i < localTypes.length) {
       int localType = localTypes[i];
-      i += (localType == LONG || localType == DOUBLE) ? 2 : 1;
+      i += localType == LONG || localType == DOUBLE ? 2 : 1;
       if (localType == TOP) {
         numTrailingTop++;
       } else {
@@ -1385,7 +1385,7 @@ class Frame {
     i = 0;
     while (i < stackTypes.length) {
       int stackType = stackTypes[i];
-      i += (stackType == LONG || stackType == DOUBLE) ? 2 : 1;
+      i += stackType == LONG || stackType == DOUBLE ? 2 : 1;
       numStack++;
     }
     // Visit the frame and its content.
@@ -1393,13 +1393,13 @@ class Frame {
     i = 0;
     while (numLocal-- > 0) {
       int localType = localTypes[i];
-      i += (localType == LONG || localType == DOUBLE) ? 2 : 1;
+      i += localType == LONG || localType == DOUBLE ? 2 : 1;
       methodWriter.visitAbstractType(frameIndex++, localType);
     }
     i = 0;
     while (numStack-- > 0) {
       int stackType = stackTypes[i];
-      i += (stackType == LONG || stackType == DOUBLE) ? 2 : 1;
+      i += stackType == LONG || stackType == DOUBLE ? 2 : 1;
       methodWriter.visitAbstractType(frameIndex++, stackType);
     }
     methodWriter.visitFrameEnd();

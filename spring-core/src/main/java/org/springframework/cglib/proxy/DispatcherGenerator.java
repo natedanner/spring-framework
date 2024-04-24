@@ -26,7 +26,7 @@ import org.springframework.cglib.core.Signature;
 import org.springframework.cglib.core.TypeUtils;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-class DispatcherGenerator implements CallbackGenerator {
+final class DispatcherGenerator implements CallbackGenerator {
     public static final DispatcherGenerator INSTANCE =
       new DispatcherGenerator(false);
     public static final DispatcherGenerator PROXY_REF_INSTANCE =

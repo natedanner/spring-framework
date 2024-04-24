@@ -172,8 +172,8 @@ public abstract class PropertiesLoaderUtils {
 		if (classLoaderToUse == null) {
 			classLoaderToUse = ClassUtils.getDefaultClassLoader();
 		}
-		Enumeration<URL> urls = (classLoaderToUse != null ? classLoaderToUse.getResources(resourceName) :
-				ClassLoader.getSystemResources(resourceName));
+		Enumeration<URL> urls = classLoaderToUse != null ? classLoaderToUse.getResources(resourceName) :
+				ClassLoader.getSystemResources(resourceName);
 		Properties props = new Properties();
 		while (urls.hasMoreElements()) {
 			URL url = urls.nextElement();

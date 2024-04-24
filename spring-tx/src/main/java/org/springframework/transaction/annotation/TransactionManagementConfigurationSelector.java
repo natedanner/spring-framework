@@ -53,9 +53,9 @@ public class TransactionManagementConfigurationSelector extends AdviceModeImport
 	}
 
 	private String determineTransactionAspectClass() {
-		return (ClassUtils.isPresent("jakarta.transaction.Transactional", getClass().getClassLoader()) ?
+		return ClassUtils.isPresent("jakarta.transaction.Transactional", getClass().getClassLoader()) ?
 				TransactionManagementConfigUtils.JTA_TRANSACTION_ASPECT_CONFIGURATION_CLASS_NAME :
-				TransactionManagementConfigUtils.TRANSACTION_ASPECT_CONFIGURATION_CLASS_NAME);
+				TransactionManagementConfigUtils.TRANSACTION_ASPECT_CONFIGURATION_CLASS_NAME;
 	}
 
 }

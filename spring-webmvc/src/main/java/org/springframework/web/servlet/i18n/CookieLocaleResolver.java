@@ -99,7 +99,7 @@ public class CookieLocaleResolver extends AbstractLocaleContextResolver {
 
 	private Function<HttpServletRequest, Locale> defaultLocaleFunction = request -> {
 		Locale defaultLocale = getDefaultLocale();
-		return (defaultLocale != null ? defaultLocale : request.getLocale());
+		return defaultLocale != null ? defaultLocale : request.getLocale();
 	};
 
 	private Function<HttpServletRequest, TimeZone> defaultTimeZoneFunction = request -> getDefaultTimeZone();
@@ -159,7 +159,7 @@ public class CookieLocaleResolver extends AbstractLocaleContextResolver {
 	 */
 	@Deprecated
 	public void setCookieMaxAge(@Nullable Integer cookieMaxAge) {
-		setCookieMaxAge(Duration.ofSeconds((cookieMaxAge != null) ? cookieMaxAge : -1));
+		setCookieMaxAge(Duration.ofSeconds(cookieMaxAge != null ? cookieMaxAge : -1));
 	}
 
 	/**
@@ -330,7 +330,7 @@ public class CookieLocaleResolver extends AbstractLocaleContextResolver {
 					timeZonePart = value.substring(separatorIndex + 1);
 				}
 				try {
-					locale = (!"-".equals(localePart) ? parseLocaleValue(localePart) : null);
+					locale = "-".equals(localePart) ? null : parseLocaleValue(localePart);
 					if (timeZonePart != null) {
 						timeZone = StringUtils.parseTimeZoneString(timeZonePart);
 					}
@@ -411,7 +411,7 @@ public class CookieLocaleResolver extends AbstractLocaleContextResolver {
 	 * @see #isLanguageTagCompliant()
 	 */
 	protected String toLocaleValue(Locale locale) {
-		return (isLanguageTagCompliant() ? locale.toLanguageTag() : locale.toString());
+		return isLanguageTagCompliant() ? locale.toLanguageTag() : locale.toString();
 	}
 
 	/**

@@ -91,7 +91,7 @@ public abstract class AbstractListenerWriteProcessor<T> implements Processor<T, 
 		// AbstractListenerFlushProcessor calls cancelAndSetCompleted directly, so this cancel task
 		// won't be used for HTTP responses, but it can be for a WebSocket session.
 		this.resultPublisher = new WriteResultPublisher(logPrefix + "[WP] ", this::cancelAndSetCompleted);
-		this.logPrefix = (StringUtils.hasText(logPrefix) ? logPrefix : "");
+		this.logPrefix = StringUtils.hasText(logPrefix) ? logPrefix : "";
 	}
 
 

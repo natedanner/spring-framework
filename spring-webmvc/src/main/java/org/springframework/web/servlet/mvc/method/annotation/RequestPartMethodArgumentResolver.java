@@ -125,7 +125,7 @@ public class RequestPartMethodArgumentResolver extends AbstractMessageConverterM
 		Assert.state(servletRequest != null, "No HttpServletRequest");
 
 		RequestPart requestPart = parameter.getParameterAnnotation(RequestPart.class);
-		boolean isRequired = ((requestPart == null || requestPart.required()) && !parameter.isOptional());
+		boolean isRequired = (requestPart == null || requestPart.required()) && !parameter.isOptional();
 
 		String name = getPartName(parameter, requestPart);
 		parameter = parameter.nestedIfOptional();
@@ -172,7 +172,7 @@ public class RequestPartMethodArgumentResolver extends AbstractMessageConverterM
 	}
 
 	private String getPartName(MethodParameter methodParam, @Nullable RequestPart requestPart) {
-		String partName = (requestPart != null ? requestPart.name() : "");
+		String partName = requestPart != null ? requestPart.name() : "";
 		if (partName.isEmpty()) {
 			partName = methodParam.getParameterName();
 			if (partName == null) {

@@ -58,8 +58,8 @@ class DefaultApplicationEvents implements ApplicationEvents {
 	}
 
 	private Object unwrapPayloadEvent(Object source) {
-		return ((source instanceof PayloadApplicationEvent<?> payloadApplicationEvent) ?
-				payloadApplicationEvent.getPayload() : source);
+		return source instanceof PayloadApplicationEvent<?> payloadApplicationEvent ?
+				payloadApplicationEvent.getPayload() : source;
 	}
 
 }

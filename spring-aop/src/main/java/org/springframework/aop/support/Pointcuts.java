@@ -82,7 +82,7 @@ public abstract class Pointcuts {
 			MethodMatcher mm = pointcut.getMethodMatcher();
 			if (mm.matches(method, targetClass)) {
 				// We may need additional runtime (argument) check.
-				return (!mm.isRuntime() || mm.matches(method, targetClass, args));
+				return !mm.isRuntime() || mm.matches(method, targetClass, args);
 			}
 		}
 		return false;
@@ -99,9 +99,9 @@ public abstract class Pointcuts {
 
 		@Override
 		public boolean matches(Method method, Class<?> targetClass) {
-			return (method.getName().startsWith("set") &&
+			return method.getName().startsWith("set") &&
 					method.getParameterCount() == 1 &&
-					method.getReturnType() == Void.TYPE);
+					method.getReturnType() == Void.TYPE;
 		}
 
 		private Object readResolve() {
@@ -125,9 +125,9 @@ public abstract class Pointcuts {
 
 		@Override
 		public boolean matches(Method method, Class<?> targetClass) {
-			return (method.getName().startsWith("get") &&
+			return method.getName().startsWith("get") &&
 					method.getParameterCount() == 0 &&
-					method.getReturnType() != Void.TYPE);
+					method.getReturnType() != Void.TYPE;
 		}
 
 		private Object readResolve() {

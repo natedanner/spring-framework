@@ -47,8 +47,8 @@ public class RootClassFilter implements ClassFilter, Serializable {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof RootClassFilter that &&
-				this.clazz.equals(that.clazz)));
+		return this == other || (other instanceof RootClassFilter that &&
+				this.clazz.equals(that.clazz));
 	}
 
 	@Override

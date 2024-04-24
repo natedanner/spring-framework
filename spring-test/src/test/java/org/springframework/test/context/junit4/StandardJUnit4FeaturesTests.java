@@ -47,7 +47,7 @@ import static org.junit.Assume.assumeTrue;
  */
 public class StandardJUnit4FeaturesTests {
 
-	private static int staticBeforeCounter = 0;
+	private static int staticBeforeCounter;
 
 
 	@BeforeClass
@@ -56,7 +56,7 @@ public class StandardJUnit4FeaturesTests {
 	}
 
 
-	private int beforeCounter = 0;
+	private int beforeCounter;
 
 
 	@Test

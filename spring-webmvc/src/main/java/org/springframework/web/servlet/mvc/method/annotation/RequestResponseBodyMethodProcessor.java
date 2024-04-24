@@ -116,8 +116,8 @@ public class RequestResponseBodyMethodProcessor extends AbstractMessageConverter
 
 	@Override
 	public boolean supportsReturnType(MethodParameter returnType) {
-		return (AnnotatedElementUtils.hasAnnotation(returnType.getContainingClass(), ResponseBody.class) ||
-				returnType.hasMethodAnnotation(ResponseBody.class));
+		return AnnotatedElementUtils.hasAnnotation(returnType.getContainingClass(), ResponseBody.class) ||
+				returnType.hasMethodAnnotation(ResponseBody.class);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class RequestResponseBodyMethodProcessor extends AbstractMessageConverter
 
 	protected boolean checkRequired(MethodParameter parameter) {
 		RequestBody requestBody = parameter.getParameterAnnotation(RequestBody.class);
-		return (requestBody != null && requestBody.required() && !parameter.isOptional());
+		return requestBody != null && requestBody.required() && !parameter.isOptional();
 	}
 
 	@Override

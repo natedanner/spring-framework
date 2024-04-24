@@ -694,7 +694,7 @@ class CheckboxTagTests extends AbstractFormTagTests {
 
 	private static class MyStringTrimmerEditor extends StringTrimmerEditor {
 
-		public int count = 0;
+		public int count;
 
 		public MyStringTrimmerEditor() {
 			super(false);
@@ -710,7 +710,7 @@ class CheckboxTagTests extends AbstractFormTagTests {
 
 	private static class MyIntegerEditor extends PropertyEditorSupport {
 
-		public int count = 0;
+		public int count;
 
 		@Override
 		public void setAsText(String text) {

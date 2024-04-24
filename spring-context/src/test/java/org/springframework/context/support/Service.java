@@ -41,7 +41,7 @@ public class Service implements ApplicationContextAware, MessageSourceAware, Dis
 
 	private Set<Resource> resourceSet;
 
-	private boolean properlyDestroyed = false;
+	private boolean properlyDestroyed;
 
 
 	@Override

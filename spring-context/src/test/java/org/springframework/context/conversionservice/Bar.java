@@ -21,7 +21,7 @@ package org.springframework.context.conversionservice;
  */
 public class Bar {
 
-	private String value;
+	private final String value;
 
 	public Bar(String value) {
 		this.value = value;

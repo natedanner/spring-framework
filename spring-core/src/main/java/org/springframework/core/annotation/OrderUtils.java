@@ -55,7 +55,7 @@ public abstract class OrderUtils {
 	 */
 	public static int getOrder(Class<?> type, int defaultOrder) {
 		Integer order = getOrder(type);
-		return (order != null ? order : defaultOrder);
+		return order != null ? order : defaultOrder;
 	}
 
 	/**
@@ -69,7 +69,7 @@ public abstract class OrderUtils {
 	@Nullable
 	public static Integer getOrder(Class<?> type, @Nullable Integer defaultOrder) {
 		Integer order = getOrder(type);
-		return (order != null ? order : defaultOrder);
+		return order != null ? order : defaultOrder;
 	}
 
 	/**
@@ -111,7 +111,7 @@ public abstract class OrderUtils {
 		}
 		Object cached = orderCache.get(element);
 		if (cached != null) {
-			return (cached instanceof Integer integer ? integer : null);
+			return cached instanceof Integer integer ? integer : null;
 		}
 		Integer result = findOrder(annotations);
 		orderCache.put(element, result != null ? result : NOT_ANNOTATED);

@@ -113,18 +113,18 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 
 	private AdvisorAdapterRegistry advisorAdapterRegistry = GlobalAdvisorAdapterRegistry.getInstance();
 
-	private boolean freezeProxy = false;
+	private boolean freezeProxy;
 
 	@Nullable
 	private transient ClassLoader proxyClassLoader = ClassUtils.getDefaultClassLoader();
 
-	private transient boolean classLoaderConfigured = false;
+	private transient boolean classLoaderConfigured;
 
 	@Nullable
 	private transient BeanFactory beanFactory;
 
 	/** Whether the advisor chain has already been initialized. */
-	private boolean advisorChainInitialized = false;
+	private boolean advisorChainInitialized;
 
 	/** If this is a singleton, the cached singleton proxy instance. */
 	@Nullable
@@ -221,7 +221,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	 */
 	public void setProxyClassLoader(@Nullable ClassLoader classLoader) {
 		this.proxyClassLoader = classLoader;
-		this.classLoaderConfigured = (classLoader != null);
+		this.classLoaderConfigured = classLoader != null;
 	}
 
 	@Override
@@ -396,7 +396,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 		Assert.state(this.beanFactory != null, "No BeanFactory set");
 		Class<?> namedBeanClass = this.beanFactory.getType(beanName);
 		if (namedBeanClass != null) {
-			return (Advisor.class.isAssignableFrom(namedBeanClass) || Advice.class.isAssignableFrom(namedBeanClass));
+			return Advisor.class.isAssignableFrom(namedBeanClass) || Advice.class.isAssignableFrom(namedBeanClass);
 		}
 		// Treat it as a target bean if we can't tell.
 		if (logger.isDebugEnabled()) {
@@ -547,7 +547,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 				logger.debug("Refreshing target with name '" + this.targetName + "'");
 			}
 			Object target = this.beanFactory.getBean(this.targetName);
-			return (target instanceof TargetSource targetSource ? targetSource : new SingletonTargetSource(target));
+			return target instanceof TargetSource targetSource ? targetSource : new SingletonTargetSource(target);
 		}
 	}
 

@@ -168,7 +168,7 @@ public class ReflectiveMethodInvocation implements ProxyMethodInvocation, Clonea
 		if (interceptorOrInterceptionAdvice instanceof InterceptorAndDynamicMethodMatcher dm) {
 			// Evaluate dynamic method matcher here: static part will already have
 			// been evaluated and found to match.
-			Class<?> targetClass = (this.targetClass != null ? this.targetClass : this.method.getDeclaringClass());
+			Class<?> targetClass = this.targetClass != null ? this.targetClass : this.method.getDeclaringClass();
 			if (dm.matcher().matches(this.method, targetClass, this.arguments)) {
 				return dm.interceptor().invoke(this);
 			}
@@ -262,7 +262,7 @@ public class ReflectiveMethodInvocation implements ProxyMethodInvocation, Clonea
 	@Override
 	@Nullable
 	public Object getUserAttribute(String key) {
-		return (this.userAttributes != null ? this.userAttributes.get(key) : null);
+		return this.userAttributes != null ? this.userAttributes.get(key) : null;
 	}
 
 	/**

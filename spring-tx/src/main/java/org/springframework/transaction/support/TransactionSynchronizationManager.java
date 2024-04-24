@@ -107,7 +107,7 @@ public abstract class TransactionSynchronizationManager {
 	 */
 	public static Map<Object, Object> getResourceMap() {
 		Map<Object, Object> map = resources.get();
-		return (map != null ? Collections.unmodifiableMap(map) : Collections.emptyMap());
+		return map != null ? Collections.unmodifiableMap(map) : Collections.emptyMap();
 	}
 
 	/**
@@ -119,7 +119,7 @@ public abstract class TransactionSynchronizationManager {
 	public static boolean hasResource(Object key) {
 		Object actualKey = TransactionSynchronizationUtils.unwrapResourceIfNecessary(key);
 		Object value = doGetResource(actualKey);
-		return (value != null);
+		return value != null;
 	}
 
 	/**
@@ -243,7 +243,7 @@ public abstract class TransactionSynchronizationManager {
 	 * @see #registerSynchronization
 	 */
 	public static boolean isSynchronizationActive() {
-		return (synchronizations.get() != null);
+		return synchronizations.get() != null;
 	}
 
 	/**
@@ -370,7 +370,7 @@ public abstract class TransactionSynchronizationManager {
 	 * @see TransactionSynchronization#beforeCommit(boolean)
 	 */
 	public static boolean isCurrentTransactionReadOnly() {
-		return (currentTransactionReadOnly.get() != null);
+		return currentTransactionReadOnly.get() != null;
 	}
 
 	/**
@@ -437,7 +437,7 @@ public abstract class TransactionSynchronizationManager {
 	 * @see #isSynchronizationActive()
 	 */
 	public static boolean isActualTransactionActive() {
-		return (actualTransactionActive.get() != null);
+		return actualTransactionActive.get() != null;
 	}
 
 

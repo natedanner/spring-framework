@@ -532,7 +532,7 @@ public class ComplexWebApplicationContext extends StaticWebApplicationContext {
 
 	public static class TestApplicationListener implements ApplicationListener<RequestHandledEvent> {
 
-		public int counter = 0;
+		public int counter;
 
 		@Override
 		public void onApplicationEvent(RequestHandledEvent event) {

@@ -34,15 +34,15 @@ public class ProxyConfig implements Serializable {
 	private static final long serialVersionUID = -8409359707199703185L;
 
 
-	private boolean proxyTargetClass = false;
+	private boolean proxyTargetClass;
 
-	private boolean optimize = false;
+	private boolean optimize;
 
-	boolean opaque = false;
+	boolean opaque;
 
-	boolean exposeProxy = false;
+	boolean exposeProxy;
 
-	private boolean frozen = false;
+	private boolean frozen;
 
 
 	/**

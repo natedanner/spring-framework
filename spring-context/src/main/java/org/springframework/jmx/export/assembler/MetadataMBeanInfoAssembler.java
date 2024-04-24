@@ -125,7 +125,7 @@ public class MetadataMBeanInfoAssembler extends AbstractReflectiveMBeanInfoAssem
 	 */
 	@Override
 	public boolean includeBean(Class<?> beanClass, String beanName) {
-		return (obtainAttributeSource().getManagedResource(getClassToExpose(beanClass)) != null);
+		return obtainAttributeSource().getManagedResource(getClassToExpose(beanClass)) != null;
 	}
 
 	/**
@@ -166,14 +166,14 @@ public class MetadataMBeanInfoAssembler extends AbstractReflectiveMBeanInfoAssem
 	 * Checks to see if the given Method has the {@code ManagedAttribute} attribute.
 	 */
 	private boolean hasManagedAttribute(Method method) {
-		return (obtainAttributeSource().getManagedAttribute(method) != null);
+		return obtainAttributeSource().getManagedAttribute(method) != null;
 	}
 
 	/**
 	 * Checks to see if the given Method has the {@code ManagedMetric} attribute.
 	 */
 	private boolean hasManagedMetric(Method method) {
-		return (obtainAttributeSource().getManagedMetric(method) != null);
+		return obtainAttributeSource().getManagedMetric(method) != null;
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class MetadataMBeanInfoAssembler extends AbstractReflectiveMBeanInfoAssem
 	 * @param method the method to check
 	 */
 	private boolean hasManagedOperation(Method method) {
-		return (obtainAttributeSource().getManagedOperation(method) != null);
+		return obtainAttributeSource().getManagedOperation(method) != null;
 	}
 
 
@@ -192,7 +192,7 @@ public class MetadataMBeanInfoAssembler extends AbstractReflectiveMBeanInfoAssem
 	@Override
 	protected String getDescription(Object managedBean, String beanKey) {
 		ManagedResource mr = obtainAttributeSource().getManagedResource(getClassToExpose(managedBean));
-		return (mr != null ? mr.getDescription() : "");
+		return mr != null ? mr.getDescription() : "";
 	}
 
 	/**
@@ -206,9 +206,9 @@ public class MetadataMBeanInfoAssembler extends AbstractReflectiveMBeanInfoAssem
 		Method writeMethod = propertyDescriptor.getWriteMethod();
 
 		ManagedAttribute getter =
-				(readMethod != null ? obtainAttributeSource().getManagedAttribute(readMethod) : null);
+				readMethod != null ? obtainAttributeSource().getManagedAttribute(readMethod) : null;
 		ManagedAttribute setter =
-				(writeMethod != null ? obtainAttributeSource().getManagedAttribute(writeMethod) : null);
+				writeMethod != null ? obtainAttributeSource().getManagedAttribute(writeMethod) : null;
 
 		if (getter != null && StringUtils.hasText(getter.getDescription())) {
 			return getter.getDescription();
@@ -217,7 +217,7 @@ public class MetadataMBeanInfoAssembler extends AbstractReflectiveMBeanInfoAssem
 			return setter.getDescription();
 		}
 
-		ManagedMetric metric = (readMethod != null ? obtainAttributeSource().getManagedMetric(readMethod) : null);
+		ManagedMetric metric = readMethod != null ? obtainAttributeSource().getManagedMetric(readMethod) : null;
 		if (metric != null && StringUtils.hasText(metric.getDescription())) {
 			return metric.getDescription();
 		}
@@ -346,8 +346,8 @@ public class MetadataMBeanInfoAssembler extends AbstractReflectiveMBeanInfoAssem
 			}
 		}
 
-		ManagedAttribute gma = (getter != null ? obtainAttributeSource().getManagedAttribute(getter) : null);
-		ManagedAttribute sma = (setter != null ? obtainAttributeSource().getManagedAttribute(setter) : null);
+		ManagedAttribute gma = getter != null ? obtainAttributeSource().getManagedAttribute(getter) : null;
+		ManagedAttribute sma = setter != null ? obtainAttributeSource().getManagedAttribute(setter) : null;
 		populateAttributeDescriptor(desc,
 				(gma != null ? gma : ManagedAttribute.EMPTY),
 				(sma != null ? sma : ManagedAttribute.EMPTY));
@@ -430,7 +430,7 @@ public class MetadataMBeanInfoAssembler extends AbstractReflectiveMBeanInfoAssem
 	 */
 	@Nullable
 	private Object resolveObjectDescriptor(@Nullable Object getter, @Nullable Object setter) {
-		return (getter != null ? getter : setter);
+		return getter != null ? getter : setter;
 	}
 
 	/**
@@ -445,7 +445,7 @@ public class MetadataMBeanInfoAssembler extends AbstractReflectiveMBeanInfoAssem
 	 */
 	@Nullable
 	private String resolveStringDescriptor(@Nullable String getter, @Nullable String setter) {
-		return (StringUtils.hasLength(getter) ? getter : setter);
+		return StringUtils.hasLength(getter) ? getter : setter;
 	}
 
 }

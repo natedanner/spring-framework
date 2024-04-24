@@ -181,7 +181,7 @@ public abstract class AbstractReflectiveMBeanInfoAssembler extends AbstractMBean
 	 */
 	private boolean useStrictCasing = true;
 
-	private boolean exposeClassDescriptor = false;
+	private boolean exposeClassDescriptor;
 
 	@Nullable
 	private ParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
@@ -511,7 +511,7 @@ public abstract class AbstractReflectiveMBeanInfoAssembler extends AbstractMBean
 	 */
 	protected MBeanParameterInfo[] getOperationParameters(Method method, String beanKey) {
 		ParameterNameDiscoverer paramNameDiscoverer = getParameterNameDiscoverer();
-		String[] paramNames = (paramNameDiscoverer != null ? paramNameDiscoverer.getParameterNames(method) : null);
+		String[] paramNames = paramNameDiscoverer != null ? paramNameDiscoverer.getParameterNames(method) : null;
 		if (paramNames == null) {
 			return new MBeanParameterInfo[0];
 		}

@@ -39,7 +39,7 @@ class SessionLocaleResolverTests {
 
 	private MockHttpServletRequest request = new MockHttpServletRequest();
 
-	private MockHttpServletResponse response = new MockHttpServletResponse();
+	private final MockHttpServletResponse response = new MockHttpServletResponse();
 
 	private SessionLocaleResolver resolver = new SessionLocaleResolver();
 

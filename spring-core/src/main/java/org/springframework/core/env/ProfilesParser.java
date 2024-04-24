@@ -113,7 +113,7 @@ final class ProfilesParser {
 			return elements.get(0);
 		}
 		Profiles[] profiles = elements.toArray(new Profiles[0]);
-		return (operator == Operator.AND ? and(profiles) : or(profiles));
+		return operator == Operator.AND ? and(profiles) : or(profiles);
 	}
 
 	private static void assertWellFormed(String expression, boolean wellFormed) {
@@ -169,8 +169,8 @@ final class ProfilesParser {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof ParsedProfiles that &&
-					this.expressions.equals(that.expressions)));
+			return this == other || (other instanceof ParsedProfiles that &&
+					this.expressions.equals(that.expressions));
 		}
 
 		@Override

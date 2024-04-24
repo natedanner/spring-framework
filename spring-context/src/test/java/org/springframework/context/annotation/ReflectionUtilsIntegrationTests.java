@@ -40,7 +40,7 @@ class ReflectionUtilsIntegrationTests {
 		int m1MethodCount = 0;
 		Method[] methods = ReflectionUtils.getUniqueDeclaredMethods(cglibLeaf);
 		for (Method method : methods) {
-			if (method.getName().equals("m1")) {
+			if ("m1".equals(method.getName())) {
 				m1MethodCount++;
 			}
 		}

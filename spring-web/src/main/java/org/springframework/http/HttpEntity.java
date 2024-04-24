@@ -122,7 +122,7 @@ public class HttpEntity<T> {
 	 * Indicates whether this entity has a body.
 	 */
 	public boolean hasBody() {
-		return (this.body != null);
+		return this.body != null;
 	}
 
 
@@ -135,8 +135,8 @@ public class HttpEntity<T> {
 			return false;
 		}
 		HttpEntity<?> otherEntity = (HttpEntity<?>) other;
-		return (ObjectUtils.nullSafeEquals(this.headers, otherEntity.headers) &&
-				ObjectUtils.nullSafeEquals(this.body, otherEntity.body));
+		return ObjectUtils.nullSafeEquals(this.headers, otherEntity.headers) &&
+				ObjectUtils.nullSafeEquals(this.body, otherEntity.body);
 	}
 
 	@Override

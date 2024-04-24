@@ -169,8 +169,8 @@ public final class ParamsRequestCondition extends AbstractRequestCondition<Param
 
 		@Override
 		protected boolean matchValue(ServerWebExchange exchange) {
-			return (this.value != null &&
-					this.value.equals(exchange.getRequest().getQueryParams().getFirst(this.name)));
+			return this.value != null &&
+					this.value.equals(exchange.getRequest().getQueryParams().getFirst(this.name));
 		}
 	}
 

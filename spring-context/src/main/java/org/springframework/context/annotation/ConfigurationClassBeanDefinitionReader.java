@@ -193,7 +193,7 @@ class ConfigurationClassBeanDefinitionReader {
 
 		// Consider name and any aliases
 		List<String> names = new ArrayList<>(Arrays.asList(bean.getStringArray("name")));
-		String beanName = (!names.isEmpty() ? names.remove(0) : methodName);
+		String beanName = names.isEmpty() ? methodName : names.remove(0);
 
 		// Register aliases even when overridden
 		for (String alias : names) {
@@ -431,8 +431,8 @@ class ConfigurationClassBeanDefinitionReader {
 
 		@Override
 		public boolean isFactoryMethod(Method candidate) {
-			return (super.isFactoryMethod(candidate) && BeanAnnotationHelper.isBeanAnnotated(candidate) &&
-					BeanAnnotationHelper.determineBeanNameFor(candidate).equals(this.derivedBeanName));
+			return super.isFactoryMethod(candidate) && BeanAnnotationHelper.isBeanAnnotated(candidate) &&
+					BeanAnnotationHelper.determineBeanNameFor(candidate).equals(this.derivedBeanName);
 		}
 
 		@Override

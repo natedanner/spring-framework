@@ -43,7 +43,7 @@ class ListBasedXMLEventReader extends AbstractXMLEventReader {
 	@Nullable
 	private XMLEvent currentEvent;
 
-	private int cursor = 0;
+	private int cursor;
 
 
 	public ListBasedXMLEventReader(List<XMLEvent> events) {
@@ -54,7 +54,7 @@ class ListBasedXMLEventReader extends AbstractXMLEventReader {
 
 	@Override
 	public boolean hasNext() {
-		return (this.cursor < this.events.size());
+		return this.cursor < this.events.size();
 	}
 
 	@Override

@@ -316,7 +316,7 @@ public class SimpleNamingContext implements Context {
 					int startIndex = root.length();
 					int endIndex = boundName.indexOf('/', startIndex);
 					String strippedName =
-							(endIndex != -1 ? boundName.substring(startIndex, endIndex) : boundName.substring(startIndex));
+							endIndex != -1 ? boundName.substring(startIndex, endIndex) : boundName.substring(startIndex);
 					if (!contents.containsKey(strippedName)) {
 						try {
 							contents.put(strippedName, createObject(strippedName, context.lookup(proot + strippedName)));

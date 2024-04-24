@@ -18,7 +18,7 @@ package org.springframework.cglib.proxy;
 import org.springframework.asm.Type;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-class CallbackInfo
+final class CallbackInfo
 {
     public static Type[] determineTypes(Class[] callbackTypes) {
         return determineTypes(callbackTypes, true);

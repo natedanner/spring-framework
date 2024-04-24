@@ -158,7 +158,7 @@ public abstract class AbstractHttpSockJsSession extends AbstractSockJsSession {
 	@Override
 	public boolean isActive() {
 		ServerHttpAsyncRequestControl control = this.asyncRequestControl;
-		return (control != null && !control.isCompleted());
+		return control != null && !control.isCompleted();
 	}
 
 	@Override

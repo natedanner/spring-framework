@@ -99,7 +99,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	private Set<Exception> suppressedExceptions;
 
 	/** Flag that indicates whether we're currently within destroySingletons. */
-	private boolean singletonsCurrentlyInDestruction = false;
+	private boolean singletonsCurrentlyInDestruction;
 
 	/** Disposable bean instances: bean name to disposable instance. */
 	private final Map<String, DisposableBean> disposableBeans = new LinkedHashMap<>();
@@ -226,7 +226,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 				}
 				beforeSingletonCreation(beanName);
 				boolean newSingleton = false;
-				boolean recordSuppressedExceptions = (this.suppressedExceptions == null);
+				boolean recordSuppressedExceptions = this.suppressedExceptions == null;
 				if (recordSuppressedExceptions) {
 					this.suppressedExceptions = new LinkedHashSet<>();
 				}
@@ -328,7 +328,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 
 	public boolean isCurrentlyInCreation(String beanName) {
 		Assert.notNull(beanName, "Bean name must not be null");
-		return (!this.inCreationCheckExclusions.contains(beanName) && isActuallyInCreation(beanName));
+		return !this.inCreationCheckExclusions.contains(beanName) && isActuallyInCreation(beanName);
 	}
 
 	protected boolean isActuallyInCreation(String beanName) {

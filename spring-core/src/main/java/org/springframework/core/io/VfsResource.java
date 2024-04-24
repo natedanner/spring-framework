@@ -131,7 +131,7 @@ public class VfsResource extends AbstractResource {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof VfsResource that && this.resource.equals(that.resource)));
+		return this == other || (other instanceof VfsResource that && this.resource.equals(that.resource));
 	}
 
 	@Override

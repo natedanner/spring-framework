@@ -70,9 +70,9 @@ public class ResourceDatabasePopulator implements DatabasePopulator {
 
 	private String blockCommentEndDelimiter = ScriptUtils.DEFAULT_BLOCK_COMMENT_END_DELIMITER;
 
-	private boolean continueOnError = false;
+	private boolean continueOnError;
 
-	private boolean ignoreFailedDrops = false;
+	private boolean ignoreFailedDrops;
 
 	private DataBufferFactory dataBufferFactory = DefaultDataBufferFactory.sharedInstance;
 

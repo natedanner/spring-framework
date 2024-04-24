@@ -108,7 +108,7 @@ public class NestedPathTag extends TagSupport implements TryCatchFinally {
 		this.previousNestedPath =
 				(String) this.pageContext.getAttribute(NESTED_PATH_VARIABLE_NAME, PageContext.REQUEST_SCOPE);
 		String nestedPath =
-				(this.previousNestedPath != null ? this.previousNestedPath + getPath() : getPath());
+				this.previousNestedPath != null ? this.previousNestedPath + getPath() : getPath();
 		this.pageContext.setAttribute(NESTED_PATH_VARIABLE_NAME, nestedPath, PageContext.REQUEST_SCOPE);
 
 		return EVAL_BODY_INCLUDE;

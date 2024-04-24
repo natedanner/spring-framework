@@ -103,7 +103,7 @@ class DefaultWebTestClient implements WebTestClient {
 		this.defaultHeaders = headers;
 		this.defaultCookies = cookies;
 		this.entityResultConsumer = entityResultConsumer;
-		this.responseTimeout = (responseTimeout != null ? responseTimeout : Duration.ofSeconds(5));
+		this.responseTimeout = responseTimeout != null ? responseTimeout : Duration.ofSeconds(5);
 		this.builder = clientBuilder;
 	}
 
@@ -351,9 +351,9 @@ class DefaultWebTestClient implements WebTestClient {
 
 		@Override
 		public ResponseSpec exchange() {
-			ClientRequest request = (this.inserter != null ?
+			ClientRequest request = this.inserter != null ?
 					initRequestBuilder().body(this.inserter).build() :
-					initRequestBuilder().build());
+					initRequestBuilder().build();
 
 			ClientResponse response = DefaultWebTestClient.this.exchangeFunction.exchange(request).block(getResponseTimeout());
 			Assert.state(response != null, "No ClientResponse");
@@ -387,7 +387,7 @@ class DefaultWebTestClient implements WebTestClient {
 		}
 
 		private URI initUri() {
-			return (this.uri != null ? this.uri : DefaultWebTestClient.this.uriBuilderFactory.expand(""));
+			return this.uri != null ? this.uri : DefaultWebTestClient.this.uriBuilderFactory.expand("");
 		}
 
 	}
@@ -464,7 +464,7 @@ class DefaultWebTestClient implements WebTestClient {
 		@Override
 		public BodyContentSpec expectBody() {
 			ByteArrayResource resource = this.response.bodyToMono(ByteArrayResource.class).block(this.timeout);
-			byte[] body = (resource != null ? resource.getByteArray() : null);
+			byte[] body = resource != null ? resource.getByteArray() : null;
 			EntityExchangeResult<byte[]> entityResult = initEntityExchangeResult(body);
 			return new DefaultBodyContentSpec(entityResult);
 		}
@@ -629,7 +629,7 @@ class DefaultWebTestClient implements WebTestClient {
 
 		DefaultBodyContentSpec(EntityExchangeResult<byte[]> result) {
 			this.result = result;
-			this.isEmpty = (result.getResponseBody() == null || result.getResponseBody().length == 0);
+			this.isEmpty = result.getResponseBody() == null || result.getResponseBody().length == 0;
 		}
 
 		@Override

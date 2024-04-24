@@ -204,7 +204,7 @@ public class SampleTests {
 	}
 
 
-	private static class ContentInterceptor implements ClientHttpRequestInterceptor {
+	private static final class ContentInterceptor implements ClientHttpRequestInterceptor {
 
 		private final Resource resource;
 

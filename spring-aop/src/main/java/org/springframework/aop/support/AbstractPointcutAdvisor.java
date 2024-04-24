@@ -61,9 +61,9 @@ public abstract class AbstractPointcutAdvisor implements PointcutAdvisor, Ordere
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof PointcutAdvisor otherAdvisor &&
+		return this == other || (other instanceof PointcutAdvisor otherAdvisor &&
 				ObjectUtils.nullSafeEquals(getAdvice(), otherAdvisor.getAdvice()) &&
-				ObjectUtils.nullSafeEquals(getPointcut(), otherAdvisor.getPointcut())));
+				ObjectUtils.nullSafeEquals(getPointcut(), otherAdvisor.getPointcut()));
 	}
 
 	@Override

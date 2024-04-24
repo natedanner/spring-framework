@@ -175,8 +175,8 @@ public class FreeMarkerView extends AbstractTemplateView {
 	 */
 	protected ObjectWrapper getObjectWrapper() {
 		ObjectWrapper ow = obtainConfiguration().getObjectWrapper();
-		return (ow != null ? ow :
-				new DefaultObjectWrapperBuilder(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS).build());
+		return ow != null ? ow :
+				new DefaultObjectWrapperBuilder(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS).build();
 	}
 
 	/**
@@ -311,9 +311,9 @@ public class FreeMarkerView extends AbstractTemplateView {
 	 * @throws IOException if the template file could not be retrieved
 	 */
 	protected Template getTemplate(String name, Locale locale) throws IOException {
-		return (getEncoding() != null ?
+		return getEncoding() != null ?
 				obtainConfiguration().getTemplate(name, locale, getEncoding()) :
-				obtainConfiguration().getTemplate(name, locale));
+				obtainConfiguration().getTemplate(name, locale);
 	}
 
 	/**

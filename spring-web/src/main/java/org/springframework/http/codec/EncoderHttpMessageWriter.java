@@ -159,7 +159,7 @@ public class EncoderHttpMessageWriter<T> implements HttpMessageWriter<T> {
 			return result;
 		}
 		MediaType fallback = this.defaultMediaType;
-		result = (useFallback(mediaType, fallback) ? fallback : mediaType);
+		result = useFallback(mediaType, fallback) ? fallback : mediaType;
 		if (result != null) {
 			result = addDefaultCharset(result, fallback);
 			message.getHeaders().setContentType(result);
@@ -168,8 +168,8 @@ public class EncoderHttpMessageWriter<T> implements HttpMessageWriter<T> {
 	}
 
 	private static boolean useFallback(@Nullable MediaType main, @Nullable MediaType fallback) {
-		return (main == null || !main.isConcrete() ||
-				main.equals(MediaType.APPLICATION_OCTET_STREAM) && fallback != null);
+		return main == null || !main.isConcrete() ||
+				main.equals(MediaType.APPLICATION_OCTET_STREAM) && fallback != null;
 	}
 
 	private static MediaType addDefaultCharset(MediaType main, @Nullable MediaType defaultType) {

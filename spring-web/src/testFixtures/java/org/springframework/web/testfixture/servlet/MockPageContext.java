@@ -120,10 +120,10 @@ public class MockPageContext extends PageContext {
 	public MockPageContext(@Nullable ServletContext servletContext, @Nullable HttpServletRequest request,
 			@Nullable HttpServletResponse response, @Nullable ServletConfig servletConfig) {
 
-		this.servletContext = (servletContext != null ? servletContext : new MockServletContext());
-		this.request = (request != null ? request : new MockHttpServletRequest(servletContext));
-		this.response = (response != null ? response : new MockHttpServletResponse());
-		this.servletConfig = (servletConfig != null ? servletConfig : new MockServletConfig(servletContext));
+		this.servletContext = servletContext != null ? servletContext : new MockServletContext();
+		this.request = request != null ? request : new MockHttpServletRequest(servletContext);
+		this.response = response != null ? response : new MockHttpServletResponse();
+		this.servletConfig = servletConfig != null ? servletConfig : new MockServletConfig(servletContext);
 	}
 
 

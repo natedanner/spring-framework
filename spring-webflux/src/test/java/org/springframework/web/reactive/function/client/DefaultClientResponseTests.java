@@ -72,7 +72,7 @@ class DefaultClientResponseTests {
 	private final ExchangeStrategies mockExchangeStrategies = mock();
 
 	@Nullable
-	private HttpRequest httpRequest = null;
+	private HttpRequest httpRequest;
 
 	private DefaultClientResponse defaultClientResponse;
 

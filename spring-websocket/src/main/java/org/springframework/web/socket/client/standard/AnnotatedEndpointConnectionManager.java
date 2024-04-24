@@ -102,7 +102,7 @@ public class AnnotatedEndpointConnectionManager extends ConnectionManagerSupport
 	@Override
 	public boolean isConnected() {
 		Session session = this.session;
-		return (session != null && session.isOpen());
+		return session != null && session.isOpen();
 	}
 
 	@Override

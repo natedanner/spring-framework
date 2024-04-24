@@ -75,7 +75,7 @@ public abstract class NestedCheckedException extends Exception {
 	 */
 	public Throwable getMostSpecificCause() {
 		Throwable rootCause = getRootCause();
-		return (rootCause != null ? rootCause : this);
+		return rootCause != null ? rootCause : this;
 	}
 
 	/**

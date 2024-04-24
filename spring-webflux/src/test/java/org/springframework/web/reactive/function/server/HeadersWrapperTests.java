@@ -40,9 +40,9 @@ import static org.mockito.Mockito.mock;
  */
 class HeadersWrapperTests {
 
-	private ServerRequest.Headers mockHeaders = mock();
+	private final ServerRequest.Headers mockHeaders = mock();
 
-	private ServerRequestWrapper.HeadersWrapper wrapper = new ServerRequestWrapper.HeadersWrapper(mockHeaders);
+	private final ServerRequestWrapper.HeadersWrapper wrapper = new ServerRequestWrapper.HeadersWrapper(mockHeaders);
 
 
 	@Test

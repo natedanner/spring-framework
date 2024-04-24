@@ -150,7 +150,7 @@ class AnnotationDrivenEventListenerTests {
 		this.eventCollector.assertTotalEventsCount(1);
 
 		context.getBean(ApplicationEventMulticaster.class).removeApplicationListeners(l ->
-				l instanceof SmartApplicationListener sal && sal.getListenerId().equals("foo"));
+				l instanceof SmartApplicationListener sal && "foo".equals(sal.getListenerId()));
 		this.eventCollector.clear();
 		this.context.publishEvent(event);
 		this.eventCollector.assertNoEventReceived(bean);
@@ -800,7 +800,7 @@ class AnnotationDrivenEventListenerTests {
 				return null;
 			}
 			else if (event.content instanceof String s) {
-				if (s.equals("String")) {
+				if ("String".equals(s)) {
 					return event.content;
 				}
 				else {
@@ -1099,7 +1099,7 @@ class AnnotationDrivenEventListenerTests {
 
 		public boolean active = true;
 
-		private Object instance = null;
+		private Object instance;
 
 		@Override
 		public Object get(String name, ObjectFactory<?> objectFactory) {

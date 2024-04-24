@@ -81,7 +81,7 @@ public interface RequestPredicate {
 	 * @see RouterFunctions#nest(RequestPredicate, RouterFunction)
 	 */
 	default Optional<ServerRequest> nest(ServerRequest request) {
-		return (test(request) ? Optional.of(request) : Optional.empty());
+		return test(request) ? Optional.of(request) : Optional.empty();
 	}
 
 	/**

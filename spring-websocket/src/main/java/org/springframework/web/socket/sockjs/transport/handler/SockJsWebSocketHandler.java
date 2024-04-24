@@ -69,8 +69,8 @@ public class SockJsWebSocketHandler extends TextWebSocketHandler implements SubP
 		this.sockJsSession = sockJsSession;
 
 		webSocketHandler = WebSocketHandlerDecorator.unwrap(webSocketHandler);
-		this.subProtocols = ((webSocketHandler instanceof SubProtocolCapable subProtocolCapable) ?
-				new ArrayList<>(subProtocolCapable.getSubProtocols()) : Collections.emptyList());
+		this.subProtocols = webSocketHandler instanceof SubProtocolCapable subProtocolCapable ?
+				new ArrayList<>(subProtocolCapable.getSubProtocols()) : Collections.emptyList();
 	}
 
 	@Override

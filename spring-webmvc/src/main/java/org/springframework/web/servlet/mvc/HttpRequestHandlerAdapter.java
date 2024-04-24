@@ -41,7 +41,7 @@ public class HttpRequestHandlerAdapter implements HandlerAdapter {
 
 	@Override
 	public boolean supports(Object handler) {
-		return (handler instanceof HttpRequestHandler);
+		return handler instanceof HttpRequestHandler;
 	}
 
 	@Override

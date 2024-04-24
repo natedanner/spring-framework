@@ -135,12 +135,12 @@ class DefaultWebTestClientBuilder implements WebTestClient.Builder {
 				"To use WebTestClient, please add spring-webflux to the test classpath.");
 
 		this.connector = connector;
-		this.httpHandlerBuilder = (httpHandlerBuilder != null ? httpHandlerBuilder.clone() : null);
+		this.httpHandlerBuilder = httpHandlerBuilder != null ? httpHandlerBuilder.clone() : null;
 	}
 
 	/** Copy constructor. */
 	DefaultWebTestClientBuilder(DefaultWebTestClientBuilder other) {
-		this.httpHandlerBuilder = (other.httpHandlerBuilder != null ? other.httpHandlerBuilder.clone() : null);
+		this.httpHandlerBuilder = other.httpHandlerBuilder != null ? other.httpHandlerBuilder.clone() : null;
 		this.connector = other.connector;
 		this.responseTimeout = other.responseTimeout;
 
@@ -153,13 +153,13 @@ class DefaultWebTestClientBuilder implements WebTestClient.Builder {
 		else {
 			this.defaultHeaders = null;
 		}
-		this.defaultCookies = (other.defaultCookies != null ?
-				new LinkedMultiValueMap<>(other.defaultCookies) : null);
-		this.filters = (other.filters != null ? new ArrayList<>(other.filters) : null);
+		this.defaultCookies = other.defaultCookies != null ?
+				new LinkedMultiValueMap<>(other.defaultCookies) : null;
+		this.filters = other.filters != null ? new ArrayList<>(other.filters) : null;
 		this.entityResultConsumer = other.entityResultConsumer;
 		this.strategies = other.strategies;
-		this.strategiesConfigurers = (other.strategiesConfigurers != null ?
-				new ArrayList<>(other.strategiesConfigurers) : null);
+		this.strategiesConfigurers = other.strategiesConfigurers != null ?
+				new ArrayList<>(other.strategiesConfigurers) : null;
 	}
 
 
@@ -331,10 +331,10 @@ class DefaultWebTestClientBuilder implements WebTestClient.Builder {
 
 	private ExchangeStrategies initExchangeStrategies() {
 		if (CollectionUtils.isEmpty(this.strategiesConfigurers)) {
-			return (this.strategies != null ? this.strategies : ExchangeStrategies.withDefaults());
+			return this.strategies != null ? this.strategies : ExchangeStrategies.withDefaults();
 		}
 		ExchangeStrategies.Builder builder =
-				(this.strategies != null ? this.strategies.mutate() : ExchangeStrategies.builder());
+				this.strategies != null ? this.strategies.mutate() : ExchangeStrategies.builder();
 		this.strategiesConfigurers.forEach(configurer -> configurer.accept(builder));
 		return builder.build();
 	}
@@ -343,7 +343,7 @@ class DefaultWebTestClientBuilder implements WebTestClient.Builder {
 		if (this.uriBuilderFactory != null) {
 			return this.uriBuilderFactory;
 		}
-		return (this.baseUrl != null ?
-				new DefaultUriBuilderFactory(this.baseUrl) : new DefaultUriBuilderFactory());
+		return this.baseUrl != null ?
+				new DefaultUriBuilderFactory(this.baseUrl) : new DefaultUriBuilderFactory();
 	}
 }

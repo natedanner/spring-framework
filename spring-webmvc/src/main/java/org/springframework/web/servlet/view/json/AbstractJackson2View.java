@@ -58,7 +58,7 @@ public abstract class AbstractJackson2View extends AbstractView {
 
 	private boolean disableCaching = true;
 
-	protected boolean updateContentLength = false;
+	protected boolean updateContentLength;
 
 
 	protected AbstractJackson2View(ObjectMapper objectMapper, String contentType) {
@@ -216,8 +216,8 @@ public abstract class AbstractJackson2View extends AbstractView {
 				filters = container.getFilters();
 			}
 
-			ObjectWriter objectWriter = (serializationView != null ?
-					this.objectMapper.writerWithView(serializationView) : this.objectMapper.writer());
+			ObjectWriter objectWriter = serializationView != null ?
+					this.objectMapper.writerWithView(serializationView) : this.objectMapper.writer();
 			if (filters != null) {
 				objectWriter = objectWriter.with(filters);
 			}

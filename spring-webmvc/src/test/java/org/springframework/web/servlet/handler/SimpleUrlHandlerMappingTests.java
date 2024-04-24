@@ -97,7 +97,7 @@ class SimpleUrlHandlerMappingTests {
 		HandlerMapping hm = (HandlerMapping) wac.getBean(beanName);
 		wac.close();
 
-		boolean usePathPatterns = (((AbstractHandlerMapping) hm).getPatternParser() != null);
+		boolean usePathPatterns = ((AbstractHandlerMapping) hm).getPatternParser() != null;
 		MockHttpServletRequest request = PathPatternsTestUtils.initRequest("GET", "/welcome.html", usePathPatterns);
 		HandlerExecutionChain chain = getHandler(hm, request);
 		assertThat(chain.getHandler()).isSameAs(bean);

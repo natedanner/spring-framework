@@ -46,7 +46,7 @@ abstract class ValueFormatter {
 	 */
 	public static String getDisplayString(@Nullable Object value, boolean htmlEscape) {
 		String displayValue = ObjectUtils.getDisplayString(value);
-		return (htmlEscape ? HtmlUtils.htmlEscape(displayValue) : displayValue);
+		return htmlEscape ? HtmlUtils.htmlEscape(displayValue) : displayValue;
 	}
 
 	/**

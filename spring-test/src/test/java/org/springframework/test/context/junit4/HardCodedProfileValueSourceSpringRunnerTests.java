@@ -54,7 +54,7 @@ public class HardCodedProfileValueSourceSpringRunnerTests extends EnabledAndIgno
 
 		@Override
 		public String get(final String key) {
-			return (key.equals(NAME) ? VALUE : null);
+			return key.equals(NAME) ? VALUE : null;
 		}
 	}
 }

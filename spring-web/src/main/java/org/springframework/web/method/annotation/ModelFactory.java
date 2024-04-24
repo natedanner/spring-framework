@@ -239,8 +239,8 @@ public final class ModelFactory {
 			return true;
 		}
 
-		return (!value.getClass().isArray() && !(value instanceof Collection) &&
-				!(value instanceof Map) && !BeanUtils.isSimpleValueType(value.getClass()));
+		return !value.getClass().isArray() && !(value instanceof Collection) &&
+				!(value instanceof Map) && !BeanUtils.isSimpleValueType(value.getClass());
 	}
 
 
@@ -254,8 +254,8 @@ public final class ModelFactory {
 	 */
 	public static String getNameForParameter(MethodParameter parameter) {
 		ModelAttribute ann = parameter.getParameterAnnotation(ModelAttribute.class);
-		String name = (ann != null ? ann.value() : null);
-		return (StringUtils.hasText(name) ? name : Conventions.getVariableNameForParameter(parameter));
+		String name = ann != null ? ann.value() : null;
+		return StringUtils.hasText(name) ? name : Conventions.getVariableNameForParameter(parameter);
 	}
 
 	/**

@@ -140,7 +140,7 @@ public class ServerHttpObservationFilter extends OncePerRequestFilter {
 	}
 
 	private Throwable unwrapServletException(Throwable ex) {
-		return (ex instanceof ServletException) ? ex.getCause() : ex;
+		return ex instanceof ServletException ? ex.getCause() : ex;
 	}
 
 	@Nullable

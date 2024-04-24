@@ -59,7 +59,7 @@ public class ModelAndViewContainer {
 	@Nullable
 	private ModelMap redirectModel;
 
-	private boolean redirectModelScenario = false;
+	private boolean redirectModelScenario;
 
 	@Nullable
 	private HttpStatusCode status;
@@ -70,7 +70,7 @@ public class ModelAndViewContainer {
 
 	private final SessionStatus sessionStatus = new SimpleSessionStatus();
 
-	private boolean requestHandled = false;
+	private boolean requestHandled;
 
 
 	/**
@@ -106,7 +106,7 @@ public class ModelAndViewContainer {
 	 */
 	@Nullable
 	public String getViewName() {
-		return (this.view instanceof String viewName ? viewName : null);
+		return this.view instanceof String viewName ? viewName : null;
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class ModelAndViewContainer {
 	 * resolved by the DispatcherServlet via a ViewResolver.
 	 */
 	public boolean isViewReference() {
-		return (this.view instanceof String);
+		return this.view instanceof String;
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class ModelAndViewContainer {
 	 * Whether to use the default model or the redirect model.
 	 */
 	private boolean useDefaultModel() {
-		return (!this.redirectModelScenario || (this.redirectModel == null && !this.ignoreDefaultModelOnRedirect));
+		return !this.redirectModelScenario || (this.redirectModel == null && !this.ignoreDefaultModelOnRedirect);
 	}
 
 	/**
@@ -224,7 +224,7 @@ public class ModelAndViewContainer {
 	 * @since 4.3
 	 */
 	public boolean isBindingDisabled(String name) {
-		return (this.bindingDisabled.contains(name) || this.noBinding.contains(name));
+		return this.bindingDisabled.contains(name) || this.noBinding.contains(name);
 	}
 
 	/**

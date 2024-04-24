@@ -654,7 +654,7 @@ class GenericConversionServiceTests {
 
 	private static class MyConditionalConverter implements Converter<String, Color>, ConditionalConverter {
 
-		private int matchAttempts = 0;
+		private int matchAttempts;
 
 		@Override
 		public boolean matches(TypeDescriptor sourceType, TypeDescriptor targetType) {
@@ -719,7 +719,7 @@ class GenericConversionServiceTests {
 
 		private MyConditionalConverter converter = new MyConditionalConverter();
 
-		private int matchAttempts = 0;
+		private int matchAttempts;
 
 		@Override
 		public boolean matches(TypeDescriptor sourceType, TypeDescriptor targetType) {
@@ -915,7 +915,7 @@ class GenericConversionServiceTests {
 		@Override
 		public boolean matches(TypeDescriptor sourceType, TypeDescriptor targetType) {
 			ExampleAnnotation ann = targetType.getAnnotation(ExampleAnnotation.class);
-			return (ann != null && ann.active());
+			return ann != null && ann.active();
 		}
 
 		@Override

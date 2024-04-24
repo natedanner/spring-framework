@@ -82,8 +82,8 @@ public class BeanNameAutoProxyCreator extends AbstractAutoProxyCreator {
 	 */
 	@Override
 	protected TargetSource getCustomTargetSource(Class<?> beanClass, String beanName) {
-		return (isSupportedBeanName(beanClass, beanName) ?
-				super.getCustomTargetSource(beanClass, beanName) : null);
+		return isSupportedBeanName(beanClass, beanName) ?
+				super.getCustomTargetSource(beanClass, beanName) : null;
 	}
 
 	/**
@@ -96,8 +96,8 @@ public class BeanNameAutoProxyCreator extends AbstractAutoProxyCreator {
 	protected Object[] getAdvicesAndAdvisorsForBean(
 			Class<?> beanClass, String beanName, @Nullable TargetSource targetSource) {
 
-		return (isSupportedBeanName(beanClass, beanName) ?
-				PROXY_WITHOUT_ADDITIONAL_INTERCEPTORS : DO_NOT_PROXY);
+		return isSupportedBeanName(beanClass, beanName) ?
+				PROXY_WITHOUT_ADDITIONAL_INTERCEPTORS : DO_NOT_PROXY;
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class BeanNameAutoProxyCreator extends AbstractAutoProxyCreator {
 			}
 
 			BeanFactory beanFactory = getBeanFactory();
-			String[] aliases = (beanFactory != null ? beanFactory.getAliases(beanName) : NO_ALIASES);
+			String[] aliases = beanFactory != null ? beanFactory.getAliases(beanName) : NO_ALIASES;
 			for (String alias : aliases) {
 				for (String mappedName : this.beanNames) {
 					if (isMatch(alias, mappedName)) {

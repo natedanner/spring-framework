@@ -452,7 +452,7 @@ class RestTemplateIntegrationTests extends AbstractMockWebServerTests {
 	public interface MyJacksonView2 {}
 
 
-	public static class MySampleBean {
+	public static final class MySampleBean {
 
 		@JsonView(MyJacksonView1.class)
 		private String with1;

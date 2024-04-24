@@ -123,7 +123,7 @@ public class ConcurrentMapCache extends AbstractValueAdaptingCache {
 	 * @since 4.3
 	 */
 	public final boolean isStoreByValue() {
-		return (this.serialization != null);
+		return this.serialization != null;
 	}
 
 	@Override
@@ -160,8 +160,8 @@ public class ConcurrentMapCache extends AbstractValueAdaptingCache {
 	@Nullable
 	public CompletableFuture<?> retrieve(Object key) {
 		Object value = lookup(key);
-		return (value != null ? CompletableFuture.completedFuture(
-				isAllowNullValues() ? toValueWrapper(value) : fromStoreValue(value)) : null);
+		return value != null ? CompletableFuture.completedFuture(
+				isAllowNullValues() ? toValueWrapper(value) : fromStoreValue(value)) : null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -190,7 +190,7 @@ public class ConcurrentMapCache extends AbstractValueAdaptingCache {
 
 	@Override
 	public boolean evictIfPresent(Object key) {
-		return (this.store.remove(key) != null);
+		return this.store.remove(key) != null;
 	}
 
 	@Override

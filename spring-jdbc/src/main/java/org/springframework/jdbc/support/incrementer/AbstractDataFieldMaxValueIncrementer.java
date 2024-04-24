@@ -40,7 +40,7 @@ public abstract class AbstractDataFieldMaxValueIncrementer implements DataFieldM
 	private String incrementerName;
 
 	/** The length to which a string result should be pre-pended with zeroes. */
-	protected int paddingLength = 0;
+	protected int paddingLength;
 
 
 	/**

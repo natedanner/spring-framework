@@ -68,15 +68,15 @@ class SimpleJdbcCallTests {
 
 	@Test
 	void noSuchStoredProcedure() throws Exception {
-		final String NO_SUCH_PROC = "x";
+		final String noSuchProc = "x";
 		SQLException sqlException = new SQLException("Syntax error or access violation exception", "42000");
 		given(databaseMetaData.getDatabaseProductName()).willReturn("MyDB");
 		given(databaseMetaData.getDatabaseProductName()).willReturn("MyDB");
 		given(databaseMetaData.getUserName()).willReturn("me");
 		given(databaseMetaData.storesLowerCaseIdentifiers()).willReturn(true);
 		given(callableStatement.execute()).willThrow(sqlException);
-		given(connection.prepareCall("{call " + NO_SUCH_PROC + "()}")).willReturn(callableStatement);
-		SimpleJdbcCall sproc = new SimpleJdbcCall(dataSource).withProcedureName(NO_SUCH_PROC);
+		given(connection.prepareCall("{call " + noSuchProc + "()}")).willReturn(callableStatement);
+		SimpleJdbcCall sproc = new SimpleJdbcCall(dataSource).withProcedureName(noSuchProc);
 		try {
 			assertThatExceptionOfType(BadSqlGrammarException.class)
 				.isThrownBy(sproc::execute)
@@ -90,8 +90,8 @@ class SimpleJdbcCallTests {
 
 	@Test
 	void unnamedParameterHandling() {
-		final String MY_PROC = "my_proc";
-		SimpleJdbcCall sproc = new SimpleJdbcCall(dataSource).withProcedureName(MY_PROC);
+		final String myProc = "my_proc";
+		SimpleJdbcCall sproc = new SimpleJdbcCall(dataSource).withProcedureName(myProc);
 		// Shouldn't succeed in adding unnamed parameter
 		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class).isThrownBy(() ->
 				sproc.addDeclaredParameter(new SqlParameter(1)));

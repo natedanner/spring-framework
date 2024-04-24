@@ -40,7 +40,7 @@ public abstract class ConnectionManagerSupport implements SmartLifecycle {
 
 	private final URI uri;
 
-	private boolean autoStartup = false;
+	private boolean autoStartup;
 
 	private int phase = DEFAULT_PHASE;
 

@@ -71,7 +71,7 @@ public class CookieValueMethodArgumentResolver extends AbstractNamedValueSyncArg
 		if (HttpCookie.class.isAssignableFrom(paramType)) {
 			return cookie;
 		}
-		return (cookie != null ? cookie.getValue() : null);
+		return cookie != null ? cookie.getValue() : null;
 	}
 
 	@Override

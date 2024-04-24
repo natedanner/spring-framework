@@ -75,7 +75,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 	private static final Object NO_ARG_VALUE = new Object();
 
 	private static final ReflectionUtils.MethodFilter boxImplFilter =
-			(method -> method.isSynthetic() && Modifier.isStatic(method.getModifiers()) && method.getName().equals("box-impl"));
+			method -> method.isSynthetic() && Modifier.isStatic(method.getModifiers()) && "box-impl".equals(method.getName());
 
 
 	private final HandlerMethodArgumentResolverComposite resolvers = new HandlerMethodArgumentResolverComposite();
@@ -153,8 +153,8 @@ public class InvocableHandlerMethod extends HandlerMethod {
 	 */
 	public void setMethodValidator(@Nullable MethodValidator methodValidator) {
 		this.methodValidator = methodValidator;
-		this.validationGroups = (methodValidator != null ?
-				methodValidator.determineValidationGroups(getBean(), getBridgedMethod()) : EMPTY_GROUPS);
+		this.validationGroups = methodValidator != null ?
+				methodValidator.determineValidationGroups(getBean(), getBridgedMethod()) : EMPTY_GROUPS;
 	}
 
 
@@ -187,7 +187,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 			}
 			catch (IllegalArgumentException ex) {
 				assertTargetBean(getBridgedMethod(), getBean(), args);
-				String text = (ex.getMessage() != null ? ex.getMessage() : "Illegal argument");
+				String text = ex.getMessage() != null ? ex.getMessage() : "Illegal argument";
 				return Mono.error(new IllegalStateException(formatInvokeError(text, args), ex));
 			}
 			catch (InvocationTargetException ex) {
@@ -209,7 +209,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 				ReactiveAdapter adapter = this.reactiveAdapterRegistry.getAdapter(parameterType);
 				boolean asyncVoid = isAsyncVoidReturnType(returnType, adapter);
 				if (value == null || asyncVoid) {
-					return (asyncVoid ? Mono.from(adapter.toPublisher(value)) : Mono.empty());
+					return asyncVoid ? Mono.from(adapter.toPublisher(value)) : Mono.empty();
 				}
 				if (isSuspendingFunction && parameterType == void.class) {
 					return (Mono<HandlerResult>) value;
@@ -345,7 +345,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 					}
 				}
 				Object result = function.callBy(argMap);
-				return (result == Unit.INSTANCE ? null : result);
+				return result == Unit.INSTANCE ? null : result;
 			}
 		}
 	}

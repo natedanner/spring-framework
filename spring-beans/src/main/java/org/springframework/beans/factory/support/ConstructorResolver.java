@@ -165,8 +165,8 @@ class ConstructorResolver {
 			if (candidates == null) {
 				Class<?> beanClass = mbd.getBeanClass();
 				try {
-					candidates = (mbd.isNonPublicAccessAllowed() ?
-							beanClass.getDeclaredConstructors() : beanClass.getConstructors());
+					candidates = mbd.isNonPublicAccessAllowed() ?
+							beanClass.getDeclaredConstructors() : beanClass.getConstructors();
 				}
 				catch (Throwable ex) {
 					throw new BeanCreationException(mbd.getResourceDescription(), beanName,
@@ -189,8 +189,8 @@ class ConstructorResolver {
 			}
 
 			// Need to resolve the constructor.
-			boolean autowiring = (chosenCtors != null ||
-					mbd.getResolvedAutowireMode() == AutowireCapableBeanFactory.AUTOWIRE_CONSTRUCTOR);
+			boolean autowiring = chosenCtors != null ||
+					mbd.getResolvedAutowireMode() == AutowireCapableBeanFactory.AUTOWIRE_CONSTRUCTOR;
 			ConstructorArgumentValues resolvedValues = null;
 
 			int minNrOfArgs;
@@ -257,8 +257,8 @@ class ConstructorResolver {
 					argsHolder = new ArgumentsHolder(explicitArgs);
 				}
 
-				int typeDiffWeight = (mbd.isLenientConstructorResolution() ?
-						argsHolder.getTypeDifferenceWeight(paramTypes) : argsHolder.getAssignabilityWeight(paramTypes));
+				int typeDiffWeight = mbd.isLenientConstructorResolution() ?
+						argsHolder.getTypeDifferenceWeight(paramTypes) : argsHolder.getAssignabilityWeight(paramTypes);
 				// Choose this constructor if it represents the closest match.
 				if (typeDiffWeight < minTypeDiffWeight) {
 					constructorToUse = candidate;
@@ -357,8 +357,8 @@ class ConstructorResolver {
 	private boolean isParamMismatch(Method uniqueCandidate, Method candidate) {
 		int uniqueCandidateParameterCount = uniqueCandidate.getParameterCount();
 		int candidateParameterCount = candidate.getParameterCount();
-		return (uniqueCandidateParameterCount != candidateParameterCount ||
-				!Arrays.equals(uniqueCandidate.getParameterTypes(), candidate.getParameterTypes()));
+		return uniqueCandidateParameterCount != candidateParameterCount ||
+				!Arrays.equals(uniqueCandidate.getParameterTypes(), candidate.getParameterTypes());
 	}
 
 	/**
@@ -367,12 +367,12 @@ class ConstructorResolver {
 	 * Called as the starting point for factory method determination.
 	 */
 	private Method[] getCandidateMethods(Class<?> factoryClass, RootBeanDefinition mbd) {
-		return (mbd.isNonPublicAccessAllowed() ?
-				ReflectionUtils.getUniqueDeclaredMethods(factoryClass) : factoryClass.getMethods());
+		return mbd.isNonPublicAccessAllowed() ?
+				ReflectionUtils.getUniqueDeclaredMethods(factoryClass) : factoryClass.getMethods();
 	}
 
 	private boolean isStaticCandidate(Method method, Class<?> factoryClass) {
-		return (Modifier.isStatic(method.getModifiers()) && method.getDeclaringClass() == factoryClass);
+		return Modifier.isStatic(method.getModifiers()) && method.getDeclaringClass() == factoryClass;
 	}
 
 	/**
@@ -492,7 +492,7 @@ class ConstructorResolver {
 			}
 
 			ConstructorArgumentValues resolvedValues = null;
-			boolean autowiring = (mbd.getResolvedAutowireMode() == AutowireCapableBeanFactory.AUTOWIRE_CONSTRUCTOR);
+			boolean autowiring = mbd.getResolvedAutowireMode() == AutowireCapableBeanFactory.AUTOWIRE_CONSTRUCTOR;
 			int minTypeDiffWeight = Integer.MAX_VALUE;
 			Set<Method> ambiguousFactoryMethods = null;
 
@@ -555,8 +555,8 @@ class ConstructorResolver {
 						}
 					}
 
-					int typeDiffWeight = (mbd.isLenientConstructorResolution() ?
-							argsHolder.getTypeDifferenceWeight(paramTypes) : argsHolder.getAssignabilityWeight(paramTypes));
+					int typeDiffWeight = mbd.isLenientConstructorResolution() ?
+							argsHolder.getTypeDifferenceWeight(paramTypes) : argsHolder.getAssignabilityWeight(paramTypes);
 					// Choose this factory method if it represents the closest match.
 					if (typeDiffWeight < minTypeDiffWeight) {
 						factoryMethodToUse = candidate;
@@ -602,8 +602,8 @@ class ConstructorResolver {
 					valueHolders.addAll(resolvedValues.getIndexedArgumentValues().values());
 					valueHolders.addAll(resolvedValues.getGenericArgumentValues());
 					for (ValueHolder value : valueHolders) {
-						String argType = (value.getType() != null ? ClassUtils.getShortName(value.getType()) :
-								(value.getValue() != null ? value.getValue().getClass().getSimpleName() : "null"));
+						String argType = value.getType() != null ? ClassUtils.getShortName(value.getType()) :
+								(value.getValue() != null ? value.getValue().getClass().getSimpleName() : "null");
 						argTypes.add(argType);
 					}
 				}
@@ -661,7 +661,7 @@ class ConstructorResolver {
 			ConstructorArgumentValues cargs, ConstructorArgumentValues resolvedValues) {
 
 		TypeConverter customConverter = this.beanFactory.getCustomTypeConverter();
-		TypeConverter converter = (customConverter != null ? customConverter : bw);
+		TypeConverter converter = customConverter != null ? customConverter : bw;
 		BeanDefinitionValueResolver valueResolver =
 				new BeanDefinitionValueResolver(this.beanFactory, beanName, mbd, converter);
 
@@ -717,7 +717,7 @@ class ConstructorResolver {
 			boolean autowiring, boolean fallback) throws UnsatisfiedDependencyException {
 
 		TypeConverter customConverter = this.beanFactory.getCustomTypeConverter();
-		TypeConverter converter = (customConverter != null ? customConverter : bw);
+		TypeConverter converter = customConverter != null ? customConverter : bw;
 
 		ArgumentsHolder args = new ArgumentsHolder(paramTypes.length);
 		Set<ConstructorArgumentValues.ValueHolder> usedValueHolders = new HashSet<>(paramTypes.length);
@@ -725,7 +725,7 @@ class ConstructorResolver {
 
 		for (int paramIndex = 0; paramIndex < paramTypes.length; paramIndex++) {
 			Class<?> paramType = paramTypes[paramIndex];
-			String paramName = (paramNames != null ? paramNames[paramIndex] : "");
+			String paramName = paramNames != null ? paramNames[paramIndex] : "";
 			// Try to find matching constructor argument value, either indexed or generic.
 			ConstructorArgumentValues.ValueHolder valueHolder = null;
 			if (resolvedValues != null) {
@@ -812,7 +812,7 @@ class ConstructorResolver {
 			Executable executable, Object[] argsToResolve) {
 
 		TypeConverter customConverter = this.beanFactory.getCustomTypeConverter();
-		TypeConverter converter = (customConverter != null ? customConverter : bw);
+		TypeConverter converter = customConverter != null ? customConverter : bw;
 		BeanDefinitionValueResolver valueResolver =
 				new BeanDefinitionValueResolver(this.beanFactory, beanName, mbd, converter);
 		Class<?>[] paramTypes = executable.getParameterTypes();
@@ -957,8 +957,8 @@ class ConstructorResolver {
 
 	public Executable resolveConstructorOrFactoryMethod(String beanName, RootBeanDefinition mbd) {
 		Supplier<ResolvableType> beanType = () -> getBeanType(beanName, mbd);
-		List<ResolvableType> valueTypes = (mbd.hasConstructorArgumentValues() ?
-				determineParameterValueTypes(mbd) : Collections.emptyList());
+		List<ResolvableType> valueTypes = mbd.hasConstructorArgumentValues() ?
+				determineParameterValueTypes(mbd) : Collections.emptyList();
 		Method resolvedFactoryMethod = resolveFactoryMethod(beanName, mbd, valueTypes);
 		if (resolvedFactoryMethod != null) {
 			return resolvedFactoryMethod;
@@ -1020,8 +1020,8 @@ class ConstructorResolver {
 			String nameToUse = "(inner bean)";
 			ResolvableType type = getBeanType(nameToUse,
 					this.beanFactory.getMergedBeanDefinition(nameToUse, innerBd, mbd));
-			return (FactoryBean.class.isAssignableFrom(type.toClass()) ?
-					type.as(FactoryBean.class).getGeneric(0) : type);
+			return FactoryBean.class.isAssignableFrom(type.toClass()) ?
+					type.as(FactoryBean.class).getGeneric(0) : type;
 		}
 		if (value instanceof TypedStringValue typedValue) {
 			if (typedValue.hasTargetType()) {
@@ -1046,7 +1046,7 @@ class ConstructorResolver {
 				ctors = mbd.getPreferredConstructors();
 			}
 			if (ctors == null) {
-				ctors = (mbd.isNonPublicAccessAllowed() ? type.getDeclaredConstructors() : type.getConstructors());
+				ctors = mbd.isNonPublicAccessAllowed() ? type.getDeclaredConstructors() : type.getConstructors();
 			}
 		}
 		if (ctors.length == 1) {
@@ -1080,7 +1080,7 @@ class ConstructorResolver {
 				.filter(executable -> match(parameterTypesFactory.apply(executable),
 						valueTypes, FallbackMode.TYPE_CONVERSION))
 				.toList();
-		return (typeConversionFallbackMatches.size() == 1 ? typeConversionFallbackMatches.get(0) : null);
+		return typeConversionFallbackMatches.size() == 1 ? typeConversionFallbackMatches.get(0) : null;
 	}
 
 	@Nullable
@@ -1167,7 +1167,7 @@ class ConstructorResolver {
 				.toList();
 		Assert.state(typeConversionFallbackMatches.size() <= 1,
 				() -> "Multiple matches with parameters '" + valueTypes + "': " + typeConversionFallbackMatches);
-		return (typeConversionFallbackMatches.size() == 1 ? typeConversionFallbackMatches.get(0) : null);
+		return typeConversionFallbackMatches.size() == 1 ? typeConversionFallbackMatches.get(0) : null;
 	}
 
 	private boolean match(
@@ -1229,7 +1229,7 @@ class ConstructorResolver {
 			if (predicateProvider.apply(extractElementType(valueType)).test(extractElementType(parameterType))) {
 				return true;
 			}
-			return (predicateProvider.apply(valueType).test(extractElementType(parameterType)));
+			return predicateProvider.apply(valueType).test(extractElementType(parameterType));
 		};
 	}
 
@@ -1255,7 +1255,7 @@ class ConstructorResolver {
 	@Nullable
 	private Class<?> getFactoryBeanClass(String beanName, RootBeanDefinition mbd) {
 		Class<?> beanClass = this.beanFactory.resolveBeanClass(mbd, beanName);
-		return (beanClass != null && FactoryBean.class.isAssignableFrom(beanClass) ? beanClass : null);
+		return beanClass != null && FactoryBean.class.isAssignableFrom(beanClass) ? beanClass : null;
 	}
 
 	private ResolvableType getBeanType(String beanName, RootBeanDefinition mbd) {
@@ -1338,7 +1338,7 @@ class ConstructorResolver {
 
 		public final Object[] preparedArguments;
 
-		public boolean resolveNecessary = false;
+		public boolean resolveNecessary;
 
 		public ArgumentsHolder(int size) {
 			this.rawArguments = new Object[size];
@@ -1434,13 +1434,13 @@ class ConstructorResolver {
 		}
 
 		public boolean hasShortcut() {
-			return (this.shortcut != null);
+			return this.shortcut != null;
 		}
 
 		@Override
 		public Object resolveShortcut(BeanFactory beanFactory) {
 			String shortcut = this.shortcut;
-			return (shortcut != null ? beanFactory.getBean(shortcut, getDependencyType()) : null);
+			return shortcut != null ? beanFactory.getBean(shortcut, getDependencyType()) : null;
 		}
 	}
 

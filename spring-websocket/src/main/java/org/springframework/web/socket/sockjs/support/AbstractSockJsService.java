@@ -94,7 +94,7 @@ public abstract class AbstractSockJsService implements SockJsService, CorsConfig
 
 	private boolean webSocketEnabled = true;
 
-	private boolean suppressCors = false;
+	private boolean suppressCors;
 
 	protected final CorsConfiguration corsConfiguration;
 
@@ -392,10 +392,10 @@ public abstract class AbstractSockJsService implements SockJsService, CorsConfig
 			// As per SockJS protocol content-type can be ignored (it's always json)
 		}
 
-		String requestInfo = (logger.isDebugEnabled() ? request.getMethod() + " " + request.getURI() : null);
+		String requestInfo = logger.isDebugEnabled() ? request.getMethod() + " " + request.getURI() : null;
 
 		try {
-			if (sockJsPath.isEmpty() || sockJsPath.equals("/")) {
+			if (sockJsPath.isEmpty() || "/".equals(sockJsPath)) {
 				if (requestInfo != null) {
 					logger.debug("Processing transport request: " + requestInfo);
 				}
@@ -407,7 +407,7 @@ public abstract class AbstractSockJsService implements SockJsService, CorsConfig
 				response.getBody().write("Welcome to SockJS!\n".getBytes(StandardCharsets.UTF_8));
 			}
 
-			else if (sockJsPath.equals("/info")) {
+			else if ("/info".equals(sockJsPath)) {
 				if (requestInfo != null) {
 					logger.debug("Processing transport request: " + requestInfo);
 				}
@@ -433,7 +433,7 @@ public abstract class AbstractSockJsService implements SockJsService, CorsConfig
 				this.iframeHandler.handle(request, response);
 			}
 
-			else if (sockJsPath.equals("/websocket")) {
+			else if ("/websocket".equals(sockJsPath)) {
 				if (isWebSocketEnabled()) {
 					if (requestInfo != null) {
 						logger.debug("Processing transport request: " + requestInfo);
@@ -463,7 +463,7 @@ public abstract class AbstractSockJsService implements SockJsService, CorsConfig
 				String sessionId = pathSegments[1];
 				String transport = pathSegments[2];
 
-				if (!isWebSocketEnabled() && transport.equals("websocket")) {
+				if (!isWebSocketEnabled() && "websocket".equals(transport)) {
 					if (requestInfo != null) {
 						logger.debug("WebSocket disabled. Ignoring transport request: " + requestInfo);
 					}
@@ -517,7 +517,7 @@ public abstract class AbstractSockJsService implements SockJsService, CorsConfig
 	private boolean validatePath(ServerHttpRequest request) {
 		String path = request.getURI().getPath();
 		int index = path.lastIndexOf('/') + 1;
-		return (path.indexOf(';', index) == -1);
+		return path.indexOf(';', index) == -1;
 	}
 
 	protected boolean checkOrigin(ServerHttpRequest request, ServerHttpResponse response, HttpMethod... httpMethods)

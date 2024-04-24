@@ -58,7 +58,7 @@ public class RequestParamMapMethodArgumentResolver extends HandlerMethodArgument
 	}
 
 	private boolean allParams(RequestParam requestParam, Class<?> type) {
-		return (Map.class.isAssignableFrom(type) && !StringUtils.hasText(requestParam.name()));
+		return Map.class.isAssignableFrom(type) && !StringUtils.hasText(requestParam.name());
 	}
 
 
@@ -68,7 +68,7 @@ public class RequestParamMapMethodArgumentResolver extends HandlerMethodArgument
 
 		boolean isMultiValueMap = MultiValueMap.class.isAssignableFrom(methodParameter.getParameterType());
 		MultiValueMap<String, String> queryParams = exchange.getRequest().getQueryParams();
-		return (isMultiValueMap ? queryParams : queryParams.toSingleValueMap());
+		return isMultiValueMap ? queryParams : queryParams.toSingleValueMap();
 	}
 
 }

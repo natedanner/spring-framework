@@ -58,7 +58,7 @@ public class BshScriptFactory implements ScriptFactory, BeanClassLoaderAware {
 
 	private final Object scriptClassMonitor = new Object();
 
-	private boolean wasModifiedForTypeCheck = false;
+	private boolean wasModifiedForTypeCheck;
 
 
 	/**
@@ -130,7 +130,7 @@ public class BshScriptFactory implements ScriptFactory, BeanClassLoaderAware {
 
 		try {
 			synchronized (this.scriptClassMonitor) {
-				boolean requiresScriptEvaluation = (this.wasModifiedForTypeCheck && this.scriptClass == null);
+				boolean requiresScriptEvaluation = this.wasModifiedForTypeCheck && this.scriptClass == null;
 				this.wasModifiedForTypeCheck = false;
 
 				if (scriptSource.isModified() || requiresScriptEvaluation) {
@@ -205,7 +205,7 @@ public class BshScriptFactory implements ScriptFactory, BeanClassLoaderAware {
 	@Override
 	public boolean requiresScriptedObjectRefresh(ScriptSource scriptSource) {
 		synchronized (this.scriptClassMonitor) {
-			return (scriptSource.isModified() || this.wasModifiedForTypeCheck);
+			return scriptSource.isModified() || this.wasModifiedForTypeCheck;
 		}
 	}
 

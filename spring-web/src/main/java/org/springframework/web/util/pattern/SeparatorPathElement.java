@@ -46,12 +46,12 @@ class SeparatorPathElement extends PathElement {
 					return true;
 				}
 				else {
-					return (pathIndex + 1 == matchingContext.pathLength);
+					return pathIndex + 1 == matchingContext.pathLength;
 				}
 			}
 			else {
 				pathIndex++;
-				return (this.next != null && this.next.matches(pathIndex, matchingContext));
+				return this.next != null && this.next.matches(pathIndex, matchingContext);
 			}
 		}
 		return false;

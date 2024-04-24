@@ -93,7 +93,7 @@ public class DefaultServerWebExchange implements ServerWebExchange {
 
 	private final Mono<MultiValueMap<String, Part>> multipartDataMono;
 
-	private volatile boolean multipartRead = false;
+	private volatile boolean multipartRead;
 
 	@Nullable
 	private final ApplicationContext applicationContext;
@@ -159,7 +159,7 @@ public class DefaultServerWebExchange implements ServerWebExchange {
 	private Mono<MultiValueMap<String, Part>> initMultipartData(ServerCodecConfigurer configurer, String logPrefix) {
 
 		MediaType contentType = getContentType(this.request);
-		if (contentType == null || !contentType.getType().equalsIgnoreCase("multipart")) {
+		if (contentType == null || !"multipart".equalsIgnoreCase(contentType.getType())) {
 			return EMPTY_MULTIPART_DATA;
 		}
 

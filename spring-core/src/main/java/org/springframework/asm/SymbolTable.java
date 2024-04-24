@@ -247,7 +247,7 @@ final class SymbolTable {
           throw new IllegalArgumentException();
       }
       itemIndex +=
-          (itemTag == Symbol.CONSTANT_LONG_TAG || itemTag == Symbol.CONSTANT_DOUBLE_TAG) ? 2 : 1;
+          itemTag == Symbol.CONSTANT_LONG_TAG || itemTag == Symbol.CONSTANT_DOUBLE_TAG ? 2 : 1;
     }
 
     // Copy the BootstrapMethods, if any.

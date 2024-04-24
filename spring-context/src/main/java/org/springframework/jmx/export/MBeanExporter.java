@@ -163,7 +163,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 	Integer autodetectMode;
 
 	/** Whether to eagerly initialize candidate beans when auto-detecting MBeans. */
-	private boolean allowEagerInit = false;
+	private boolean allowEagerInit;
 
 	/** Stores the MBeanInfoAssembler to use for this exporter. */
 	private MBeanInfoAssembler assembler = new SimpleReflectiveMBeanInfoAssembler();
@@ -232,7 +232,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 	 * @see #isMBean
 	 */
 	public void setAutodetect(boolean autodetect) {
-		this.autodetectMode = (autodetect ? AUTODETECT_ALL : AUTODETECT_NONE);
+		this.autodetectMode = autodetect ? AUTODETECT_ALL : AUTODETECT_NONE;
 	}
 
 	/**
@@ -547,7 +547,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 		}
 
 		// Perform auto-detection, if desired.
-		int mode = (this.autodetectMode != null ? this.autodetectMode : AUTODETECT_NONE);
+		int mode = this.autodetectMode != null ? this.autodetectMode : AUTODETECT_NONE;
 		if (mode != AUTODETECT_NONE) {
 			if (this.beanFactory == null) {
 				throw new MBeanExportException("Cannot autodetect MBeans if not running in a BeanFactory");
@@ -577,8 +577,8 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 	 * @see org.springframework.beans.factory.config.BeanDefinition#isLazyInit
 	 */
 	protected boolean isBeanDefinitionLazyInit(ListableBeanFactory beanFactory, String beanName) {
-		return (beanFactory instanceof ConfigurableListableBeanFactory clbf && beanFactory.containsBeanDefinition(beanName) &&
-				clbf.getBeanDefinition(beanName).isLazyInit());
+		return beanFactory instanceof ConfigurableListableBeanFactory clbf && beanFactory.containsBeanDefinition(beanName) &&
+				clbf.getBeanDefinition(beanName).isLazyInit();
 	}
 
 	/**
@@ -852,7 +852,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 	 * @throws javax.management.MBeanException if creation of the ModelMBean failed
 	 */
 	protected ModelMBean createModelMBean() throws MBeanException {
-		return (this.exposeManagedResourceClassLoader ? new SpringModelMBean() : new RequiredModelMBean());
+		return this.exposeManagedResourceClassLoader ? new SpringModelMBean() : new RequiredModelMBean();
 	}
 
 	/**
@@ -932,17 +932,17 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 	 * Indicates whether a particular bean name is present in the excluded beans list.
 	 */
 	private boolean isExcluded(String beanName) {
-		return (this.excludedBeans.contains(beanName) ||
+		return this.excludedBeans.contains(beanName) ||
 					(beanName.startsWith(BeanFactory.FACTORY_BEAN_PREFIX) &&
-							this.excludedBeans.contains(beanName.substring(BeanFactory.FACTORY_BEAN_PREFIX.length()))));
+							this.excludedBeans.contains(beanName.substring(BeanFactory.FACTORY_BEAN_PREFIX.length())));
 	}
 
 	/**
 	 * Return whether the specified bean definition should be considered as abstract.
 	 */
 	private boolean isBeanDefinitionAbstract(ListableBeanFactory beanFactory, String beanName) {
-		return (beanFactory instanceof ConfigurableListableBeanFactory clbf && beanFactory.containsBeanDefinition(beanName) &&
-				clbf.getBeanDefinition(beanName).isAbstract());
+		return beanFactory instanceof ConfigurableListableBeanFactory clbf && beanFactory.containsBeanDefinition(beanName) &&
+				clbf.getBeanDefinition(beanName).isAbstract();
 	}
 
 

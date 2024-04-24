@@ -83,7 +83,7 @@ public class TransactionSystemException extends TransactionException {
 	 */
 	@Nullable
 	public Throwable getOriginalException() {
-		return (this.applicationException != null ? this.applicationException : getCause());
+		return this.applicationException != null ? this.applicationException : getCause();
 	}
 
 	@Override

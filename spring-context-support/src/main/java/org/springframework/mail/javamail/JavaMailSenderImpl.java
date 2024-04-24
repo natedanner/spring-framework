@@ -404,7 +404,7 @@ public class JavaMailSenderImpl implements JavaMailSender {
 					catch (Exception ex) {
 						// Effectively, all remaining messages failed...
 						for (int j = i; j < mimeMessages.length; j++) {
-							Object original = (originalMessages != null ? originalMessages[j] : mimeMessages[j]);
+							Object original = originalMessages != null ? originalMessages[j] : mimeMessages[j];
 							failedMessages.put(original, ex);
 						}
 						throw new MailSendException("Mail server connection failed", ex, failedMessages);
@@ -427,7 +427,7 @@ public class JavaMailSenderImpl implements JavaMailSender {
 					transport.sendMessage(mimeMessage, (addresses != null ? addresses : new Address[0]));
 				}
 				catch (Exception ex) {
-					Object original = (originalMessages != null ? originalMessages[i] : mimeMessage);
+					Object original = originalMessages != null ? originalMessages[i] : mimeMessage;
 					failedMessages.put(original, ex);
 				}
 			}

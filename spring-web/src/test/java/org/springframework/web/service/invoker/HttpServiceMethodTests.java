@@ -190,7 +190,7 @@ class HttpServiceMethodTests {
 	void typeAndMethodAnnotatedService() {
 		HttpServiceProxyFactory proxyFactory = HttpServiceProxyFactory.builder()
 			.exchangeAdapter(this.client)
-			.embeddedValueResolver(value -> (value.equals("${baseUrl}") ? "/base" : value))
+			.embeddedValueResolver(value -> ("${baseUrl}".equals(value) ? "/base" : value))
 			.build();
 
 		MethodLevelAnnotatedService service = proxyFactory.createClient(TypeAndMethodLevelAnnotatedService.class);

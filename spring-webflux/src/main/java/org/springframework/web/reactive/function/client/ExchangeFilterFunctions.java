@@ -162,13 +162,13 @@ public abstract class ExchangeFilterFunctions {
 		 */
 		public static Consumer<Map<String, Object>> basicAuthenticationCredentials(String username, String password) {
 			Credentials credentials = new Credentials(username, password);
-			return (map -> map.put(BASIC_AUTHENTICATION_CREDENTIALS_ATTRIBUTE, credentials));
+			return map -> map.put(BASIC_AUTHENTICATION_CREDENTIALS_ATTRIBUTE, credentials);
 		}
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other ||(other instanceof Credentials that &&
-					this.username.equals(that.username) && this.password.equals(that.password)));
+			return this == other ||(other instanceof Credentials that &&
+					this.username.equals(that.username) && this.password.equals(that.password));
 		}
 
 		@Override

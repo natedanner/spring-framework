@@ -327,7 +327,7 @@ public abstract class UriUtils {
 	public static Map<String, String> encodeUriVariables(Map<String, ?> uriVariables) {
 		Map<String, String> result = CollectionUtils.newLinkedHashMap(uriVariables.size());
 		uriVariables.forEach((key, value) -> {
-			String stringValue = (value != null ? value.toString() : "");
+			String stringValue = value != null ? value.toString() : "";
 			result.put(key, encode(stringValue, StandardCharsets.UTF_8));
 		});
 		return result;
@@ -343,7 +343,7 @@ public abstract class UriUtils {
 	public static Object[] encodeUriVariables(Object... uriVariables) {
 		return Arrays.stream(uriVariables)
 				.map(value -> {
-					String stringValue = (value != null ? value.toString() : "");
+					String stringValue = value != null ? value.toString() : "";
 					return encode(stringValue, StandardCharsets.UTF_8);
 				})
 				.toArray();
@@ -405,7 +405,7 @@ public abstract class UriUtils {
 		}
 		int begin = path.lastIndexOf('/', end) + 1;
 		int paramIndex = path.indexOf(';', begin);
-		end = (paramIndex != -1 && paramIndex < end ? paramIndex : end);
+		end = paramIndex != -1 && paramIndex < end ? paramIndex : end;
 		int extIndex = path.lastIndexOf('.', end);
 		if (extIndex != -1 && extIndex >= begin) {
 			return path.substring(extIndex + 1, end);

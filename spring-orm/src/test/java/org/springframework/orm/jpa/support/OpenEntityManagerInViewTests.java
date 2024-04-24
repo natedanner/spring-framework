@@ -64,15 +64,15 @@ class OpenEntityManagerInViewTests {
 
 	private final TestTaskExecutor taskExecutor = new TestTaskExecutor();
 
-	private EntityManager manager = mock();
+	private final EntityManager manager = mock();
 
-	private EntityManagerFactory factory = mock();
+	private final EntityManagerFactory factory = mock();
 
-	private MockHttpServletRequest request = new MockHttpServletRequest();
+	private final MockHttpServletRequest request = new MockHttpServletRequest();
 
-	private MockHttpServletResponse response = new MockHttpServletResponse();
+	private final MockHttpServletResponse response = new MockHttpServletResponse();
 
-	private ServletWebRequest webRequest = new ServletWebRequest(this.request);
+	private final ServletWebRequest webRequest = new ServletWebRequest(this.request);
 
 
 	@BeforeEach

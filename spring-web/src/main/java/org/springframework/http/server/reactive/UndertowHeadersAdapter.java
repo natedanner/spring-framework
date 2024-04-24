@@ -96,26 +96,26 @@ class UndertowHeadersAdapter implements MultiValueMap<String, String> {
 
 	@Override
 	public boolean isEmpty() {
-		return (this.headers.size() == 0);
+		return this.headers.size() == 0;
 	}
 
 	@Override
 	public boolean containsKey(Object key) {
-		return (key instanceof String headerName && this.headers.contains(headerName));
+		return key instanceof String headerName && this.headers.contains(headerName);
 	}
 
 	@Override
 	public boolean containsValue(Object value) {
-		return (value instanceof String &&
+		return value instanceof String &&
 				this.headers.getHeaderNames().stream()
 						.map(this.headers::get)
-						.anyMatch(values -> values.contains(value)));
+						.anyMatch(values -> values.contains(value));
 	}
 
 	@Override
 	@Nullable
 	public List<String> get(Object key) {
-		return (key instanceof String headerName ? this.headers.get(headerName) : null);
+		return key instanceof String headerName ? this.headers.get(headerName) : null;
 	}
 
 	@Override

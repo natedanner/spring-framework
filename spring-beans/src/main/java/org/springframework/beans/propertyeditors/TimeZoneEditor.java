@@ -46,7 +46,7 @@ public class TimeZoneEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		TimeZone value = (TimeZone) getValue();
-		return (value != null ? value.getID() : "");
+		return value != null ? value.getID() : "";
 	}
 
 }

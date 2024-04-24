@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class EmbeddedDatabaseFactoryTests {
 
-	private EmbeddedDatabaseFactory factory = new EmbeddedDatabaseFactory();
+	private final EmbeddedDatabaseFactory factory = new EmbeddedDatabaseFactory();
 
 
 	@Test

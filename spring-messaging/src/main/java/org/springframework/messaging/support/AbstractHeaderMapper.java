@@ -47,7 +47,7 @@ public abstract class AbstractHeaderMapper<T> implements HeaderMapper<T> {
 	 * The default is an empty String (no prefix).
 	 */
 	public void setInboundPrefix(@Nullable String inboundPrefix) {
-		this.inboundPrefix = (inboundPrefix != null ? inboundPrefix : "");
+		this.inboundPrefix = inboundPrefix != null ? inboundPrefix : "";
 	}
 
 	/**
@@ -56,7 +56,7 @@ public abstract class AbstractHeaderMapper<T> implements HeaderMapper<T> {
 	 * Message. The default is an empty String (no prefix).
 	 */
 	public void setOutboundPrefix(@Nullable String outboundPrefix) {
-		this.outboundPrefix = (outboundPrefix != null ? outboundPrefix : "");
+		this.outboundPrefix = outboundPrefix != null ? outboundPrefix : "";
 	}
 
 

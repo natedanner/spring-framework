@@ -55,7 +55,7 @@ public class ClassEmitter extends ClassTransformer {
         staticHookSig = null;
     }
 
-    synchronized private static int getNextHook() {
+    private static synchronized int getNextHook() {
         return ++hookCounter;
     }
 
@@ -72,7 +72,7 @@ public class ClassEmitter extends ClassTransformer {
             }
             @Override
 			public Type getSuperType() {
-                return (superType != null) ? superType : Constants.TYPE_OBJECT;
+                return superType != null ? superType : Constants.TYPE_OBJECT;
             }
             @Override
 			public Type[] getInterfaces() {
@@ -244,15 +244,12 @@ public class ClassEmitter extends ClassTransformer {
             if ((value == null) ^ (other.value == null)) {
 				return false;
 			}
-            if (value != null && !value.equals(other.value)) {
-				return false;
-			}
-            return true;
+			return !(value != null && !value.equals(other.value));
         }
 
         @Override
 		public int hashCode() {
-            return access ^ name.hashCode() ^ type.hashCode() ^ ((value == null) ? 0 : value.hashCode());
+            return access ^ name.hashCode() ^ type.hashCode() ^ (value == null ? 0 : value.hashCode());
         }
     }
 

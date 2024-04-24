@@ -230,8 +230,8 @@ public abstract class AbstractMessageBrokerConfiguration implements ApplicationC
 
 		MessageBrokerRegistry registry = getBrokerRegistry(clientInboundChannel, clientOutboundChannel);
 		ChannelRegistration registration = registry.getBrokerChannelRegistration();
-		ExecutorSubscribableChannel channel = (registration.hasTaskExecutor() ?
-				new ExecutorSubscribableChannel(executor) : new ExecutorSubscribableChannel());
+		ExecutorSubscribableChannel channel = registration.hasTaskExecutor() ?
+				new ExecutorSubscribableChannel(executor) : new ExecutorSubscribableChannel();
 		registration.interceptors(new ImmutableMessageChannelInterceptor());
 		channel.setLogger(SimpLogging.forLog(channel.getLogger()));
 		channel.setInterceptors(registration.getInterceptors());
@@ -526,7 +526,7 @@ public abstract class AbstractMessageBrokerConfiguration implements ApplicationC
 		MessageBrokerRegistry brokerRegistry = getBrokerRegistry(clientInboundChannel, clientOutboundChannel);
 		SimpUserRegistry userRegistry = createLocalUserRegistry(brokerRegistry.getUserRegistryOrder());
 		boolean broadcast = brokerRegistry.getUserRegistryBroadcast() != null;
-		return (broadcast ? new MultiServerUserRegistry(userRegistry) : userRegistry);
+		return broadcast ? new MultiServerUserRegistry(userRegistry) : userRegistry;
 	}
 
 	/**

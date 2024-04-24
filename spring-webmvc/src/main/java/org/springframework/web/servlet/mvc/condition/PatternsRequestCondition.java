@@ -220,7 +220,7 @@ public class PatternsRequestCondition extends AbstractRequestCondition<PatternsR
 		Set<String> result = Collections.emptySet();
 		for (String pattern : this.patterns) {
 			if (!this.pathMatcher.isPattern(pattern)) {
-				result = (result.isEmpty() ? new HashSet<>(1) : result);
+				result = result.isEmpty() ? new HashSet<>(1) : result;
 				result.add(pattern);
 			}
 		}
@@ -279,7 +279,7 @@ public class PatternsRequestCondition extends AbstractRequestCondition<PatternsR
 	public PatternsRequestCondition getMatchingCondition(HttpServletRequest request) {
 		String lookupPath = UrlPathHelper.getResolvedLookupPath(request);
 		List<String> matches = getMatchingPatterns(lookupPath);
-		return !matches.isEmpty() ? new PatternsRequestCondition(new LinkedHashSet<>(matches), this) : null;
+		return matches.isEmpty() ? null : new PatternsRequestCondition(new LinkedHashSet<>(matches), this);
 	}
 
 	/**
@@ -295,7 +295,7 @@ public class PatternsRequestCondition extends AbstractRequestCondition<PatternsR
 		for (String pattern : this.patterns) {
 			String match = getMatchingPattern(pattern, lookupPath);
 			if (match != null) {
-				matches = (matches != null ? matches : new ArrayList<>());
+				matches = matches != null ? matches : new ArrayList<>();
 				matches.add(match);
 			}
 		}

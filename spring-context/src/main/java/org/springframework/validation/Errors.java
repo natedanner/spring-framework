@@ -235,7 +235,7 @@ public interface Errors {
 	 * @see #hasFieldErrors()
 	 */
 	default boolean hasErrors() {
-		return (!getGlobalErrors().isEmpty() || !getFieldErrors().isEmpty());
+		return !getGlobalErrors().isEmpty() || !getFieldErrors().isEmpty();
 	}
 
 	/**
@@ -244,7 +244,7 @@ public interface Errors {
 	 * @see #getFieldErrorCount()
 	 */
 	default int getErrorCount() {
-		return (getGlobalErrors().size() + getFieldErrors().size());
+		return getGlobalErrors().size() + getFieldErrors().size();
 	}
 
 	/**
@@ -329,7 +329,7 @@ public interface Errors {
 	 * @see #hasFieldErrors()
 	 */
 	default boolean hasFieldErrors(String field) {
-		return (getFieldError(field) != null);
+		return getFieldError(field) != null;
 	}
 
 	/**

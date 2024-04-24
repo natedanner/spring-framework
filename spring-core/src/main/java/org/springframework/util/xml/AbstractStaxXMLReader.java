@@ -55,7 +55,7 @@ abstract class AbstractStaxXMLReader extends AbstractXMLReader {
 
 	private boolean namespacesFeature = true;
 
-	private boolean namespacePrefixesFeature = false;
+	private boolean namespacePrefixesFeature;
 
 	@Nullable
 	private Boolean isStandalone;

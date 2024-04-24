@@ -107,8 +107,8 @@ final class MockMvcFilterDecorator implements Filter {
 			@Nullable String filterName, @Nullable Map<String, String> initParams) {
 
 		return servletContext -> {
-			MockFilterConfig filterConfig = (filterName != null ?
-					new MockFilterConfig(servletContext, filterName) : new MockFilterConfig(servletContext));
+			MockFilterConfig filterConfig = filterName != null ?
+					new MockFilterConfig(servletContext, filterName) : new MockFilterConfig(servletContext);
 			if (initParams != null) {
 				initParams.forEach(filterConfig::addInitParameter);
 			}
@@ -136,7 +136,7 @@ final class MockMvcFilterDecorator implements Filter {
 				this.exactMatches.add(urlPattern);
 			}
 		}
-		return (urlPatterns.length != 0);
+		return urlPatterns.length != 0;
 	}
 
 
@@ -156,8 +156,8 @@ final class MockMvcFilterDecorator implements Filter {
 	}
 
 	private boolean matchDispatcherType(DispatcherType dispatcherType) {
-		return (this.dispatcherTypes == null ||
-				this.dispatcherTypes.stream().anyMatch(type -> type == dispatcherType));
+		return this.dispatcherTypes == null ||
+				this.dispatcherTypes.stream().anyMatch(type -> type == dispatcherType);
 	}
 
 	private boolean matchRequestPath(String requestPath) {

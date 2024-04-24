@@ -52,7 +52,7 @@ public class StreamingResponseBodyReturnValueHandler implements HandlerMethodRet
 		}
 		else if (ResponseEntity.class.isAssignableFrom(returnType.getParameterType())) {
 			Class<?> bodyType = ResolvableType.forMethodParameter(returnType).getGeneric().resolve();
-			return (bodyType != null && StreamingResponseBody.class.isAssignableFrom(bodyType));
+			return bodyType != null && StreamingResponseBody.class.isAssignableFrom(bodyType);
 		}
 		return false;
 	}

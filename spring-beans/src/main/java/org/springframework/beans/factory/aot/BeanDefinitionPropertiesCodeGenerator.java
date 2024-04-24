@@ -222,7 +222,7 @@ class BeanDefinitionPropertiesCodeGenerator {
 		MutablePropertyValues propertyValues = beanDefinition.getPropertyValues();
 		if (!propertyValues.isEmpty()) {
 			Class<?> infrastructureType = getInfrastructureType(beanDefinition);
-			Map<String, Method> writeMethods = (infrastructureType != Object.class) ? getWriteMethods(infrastructureType) : Collections.emptyMap();
+			Map<String, Method> writeMethods = infrastructureType != Object.class ? getWriteMethods(infrastructureType) : Collections.emptyMap();
 			for (PropertyValue propertyValue : propertyValues) {
 				String name = propertyValue.getName();
 				CodeBlock valueCode = generateValue(name, propertyValue.getValue());
@@ -371,7 +371,7 @@ class BeanDefinitionPropertiesCodeGenerator {
 	 * cast is necessary
 	 */
 	private CodeBlock castIfNecessary(boolean castNecessary, Class<?> castType, CodeBlock valueCode) {
-		return (castNecessary ? CodeBlock.of("($T) $L", castType, valueCode) : valueCode);
+		return castNecessary ? CodeBlock.of("($T) $L", castType, valueCode) : valueCode;
 	}
 
 
@@ -380,7 +380,7 @@ class BeanDefinitionPropertiesCodeGenerator {
 		private static final ThreadLocal<ArrayDeque<String>> threadLocal = ThreadLocal.withInitial(ArrayDeque::new);
 
 		static void push(@Nullable String name) {
-			String valueToSet = (name != null ? name : "");
+			String valueToSet = name != null ? name : "";
 			threadLocal.get().push(valueToSet);
 		}
 
@@ -391,7 +391,7 @@ class BeanDefinitionPropertiesCodeGenerator {
 		@Nullable
 		static String peek() {
 			String value = threadLocal.get().peek();
-			return ("".equals(value) ? null : value);
+			return "".equals(value) ? null : value;
 		}
 	}
 

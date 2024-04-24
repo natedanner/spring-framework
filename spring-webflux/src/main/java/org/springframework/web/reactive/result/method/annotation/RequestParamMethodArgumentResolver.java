@@ -94,7 +94,7 @@ public class RequestParamMethodArgumentResolver extends AbstractNamedValueSyncAr
 	@Override
 	protected NamedValueInfo createNamedValueInfo(MethodParameter parameter) {
 		RequestParam ann = parameter.getParameterAnnotation(RequestParam.class);
-		return (ann != null ? new RequestParamNamedValueInfo(ann) : new RequestParamNamedValueInfo());
+		return ann != null ? new RequestParamNamedValueInfo(ann) : new RequestParamNamedValueInfo();
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class RequestParamMethodArgumentResolver extends AbstractNamedValueSyncAr
 		List<String> paramValues = exchange.getRequest().getQueryParams().get(name);
 		Object result = null;
 		if (paramValues != null) {
-			result = (paramValues.size() == 1 ? paramValues.get(0) : paramValues);
+			result = paramValues.size() == 1 ? paramValues.get(0) : paramValues;
 		}
 		return result;
 	}

@@ -181,8 +181,8 @@ public class ScheduledTaskRegistrar implements ScheduledTaskHolder, Initializing
 	 * @since 4.2
 	 */
 	public List<TriggerTask> getTriggerTaskList() {
-		return (this.triggerTasks != null? Collections.unmodifiableList(this.triggerTasks) :
-				Collections.emptyList());
+		return this.triggerTasks != null? Collections.unmodifiableList(this.triggerTasks) :
+				Collections.emptyList();
 	}
 
 	/**
@@ -210,8 +210,8 @@ public class ScheduledTaskRegistrar implements ScheduledTaskHolder, Initializing
 	 * @since 4.2
 	 */
 	public List<CronTask> getCronTaskList() {
-		return (this.cronTasks != null ? Collections.unmodifiableList(this.cronTasks) :
-				Collections.emptyList());
+		return this.cronTasks != null ? Collections.unmodifiableList(this.cronTasks) :
+				Collections.emptyList();
 	}
 
 	/**
@@ -239,8 +239,8 @@ public class ScheduledTaskRegistrar implements ScheduledTaskHolder, Initializing
 	 * @since 4.2
 	 */
 	public List<IntervalTask> getFixedRateTaskList() {
-		return (this.fixedRateTasks != null ? Collections.unmodifiableList(this.fixedRateTasks) :
-				Collections.emptyList());
+		return this.fixedRateTasks != null ? Collections.unmodifiableList(this.fixedRateTasks) :
+				Collections.emptyList();
 	}
 
 	/**
@@ -268,8 +268,8 @@ public class ScheduledTaskRegistrar implements ScheduledTaskHolder, Initializing
 	 * @since 4.2
 	 */
 	public List<IntervalTask> getFixedDelayTaskList() {
-		return (this.fixedDelayTasks != null ? Collections.unmodifiableList(this.fixedDelayTasks) :
-				Collections.emptyList());
+		return this.fixedDelayTasks != null ? Collections.unmodifiableList(this.fixedDelayTasks) :
+				Collections.emptyList();
 	}
 
 
@@ -405,11 +405,11 @@ public class ScheduledTaskRegistrar implements ScheduledTaskHolder, Initializing
 	 * @since 3.2
 	 */
 	public boolean hasTasks() {
-		return (!CollectionUtils.isEmpty(this.triggerTasks) ||
+		return !CollectionUtils.isEmpty(this.triggerTasks) ||
 				!CollectionUtils.isEmpty(this.cronTasks) ||
 				!CollectionUtils.isEmpty(this.fixedRateTasks) ||
 				!CollectionUtils.isEmpty(this.fixedDelayTasks) ||
-				!CollectionUtils.isEmpty(this.oneTimeTasks));
+				!CollectionUtils.isEmpty(this.oneTimeTasks);
 	}
 
 
@@ -500,7 +500,7 @@ public class ScheduledTaskRegistrar implements ScheduledTaskHolder, Initializing
 			addTriggerTask(task);
 			this.unresolvedTasks.put(task, scheduledTask);
 		}
-		return (newTask ? scheduledTask : null);
+		return newTask ? scheduledTask : null;
 	}
 
 	/**
@@ -525,7 +525,7 @@ public class ScheduledTaskRegistrar implements ScheduledTaskHolder, Initializing
 			addCronTask(task);
 			this.unresolvedTasks.put(task, scheduledTask);
 		}
-		return (newTask ? scheduledTask : null);
+		return newTask ? scheduledTask : null;
 	}
 
 	/**
@@ -559,7 +559,7 @@ public class ScheduledTaskRegistrar implements ScheduledTaskHolder, Initializing
 			addFixedRateTask(task);
 			this.unresolvedTasks.put(task, scheduledTask);
 		}
-		return (newTask ? scheduledTask : null);
+		return newTask ? scheduledTask : null;
 	}
 
 	/**
@@ -593,7 +593,7 @@ public class ScheduledTaskRegistrar implements ScheduledTaskHolder, Initializing
 			addFixedDelayTask(task);
 			this.unresolvedTasks.put(task, scheduledTask);
 		}
-		return (newTask ? scheduledTask : null);
+		return newTask ? scheduledTask : null;
 	}
 
 	/**
@@ -619,7 +619,7 @@ public class ScheduledTaskRegistrar implements ScheduledTaskHolder, Initializing
 			addOneTimeTask(task);
 			this.unresolvedTasks.put(task, scheduledTask);
 		}
-		return (newTask ? scheduledTask : null);
+		return newTask ? scheduledTask : null;
 	}
 
 

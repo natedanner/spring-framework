@@ -33,13 +33,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Chris Beams
  */
 class NestedBeansElementTests {
-	private final Resource XML =
+	private final Resource xml =
 		new ClassPathResource("NestedBeansElementTests-context.xml", this.getClass());
 
 	@Test
 	void getBean_withoutActiveProfile() {
 		DefaultListableBeanFactory bf = new DefaultListableBeanFactory();
-		new XmlBeanDefinitionReader(bf).loadBeanDefinitions(XML);
+		new XmlBeanDefinitionReader(bf).loadBeanDefinitions(xml);
 
 		Object foo = bf.getBean("foo");
 		assertThat(foo).isInstanceOf(String.class);
@@ -53,7 +53,7 @@ class NestedBeansElementTests {
 		DefaultListableBeanFactory bf = new DefaultListableBeanFactory();
 		XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(bf);
 		reader.setEnvironment(env);
-		reader.loadBeanDefinitions(XML);
+		reader.loadBeanDefinitions(xml);
 
 		bf.getBean("devOnlyBean"); // should not throw NSBDE
 

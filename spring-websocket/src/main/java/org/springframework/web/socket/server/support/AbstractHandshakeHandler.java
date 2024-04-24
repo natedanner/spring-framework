@@ -351,7 +351,7 @@ public abstract class AbstractHandshakeHandler implements HandshakeHandler, Life
 		if (handlerToCheck instanceof SubProtocolCapable subProtocolCapable) {
 			subProtocols = subProtocolCapable.getSubProtocols();
 		}
-		return (subProtocols != null ? subProtocols : Collections.emptyList());
+		return subProtocols != null ? subProtocols : Collections.emptyList();
 	}
 
 	/**

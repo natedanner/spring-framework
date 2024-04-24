@@ -396,7 +396,7 @@ public class SpelExpression implements Expression {
 		Assert.notNull(context, "EvaluationContext must not be null");
 		ExpressionState expressionState = new ExpressionState(context, this.configuration);
 		TypeDescriptor typeDescriptor = this.ast.getValueInternal(expressionState).getTypeDescriptor();
-		return (typeDescriptor != null ? typeDescriptor.getType() : null);
+		return typeDescriptor != null ? typeDescriptor.getType() : null;
 	}
 
 	@Override
@@ -404,7 +404,7 @@ public class SpelExpression implements Expression {
 	public Class<?> getValueType(EvaluationContext context, @Nullable Object rootObject) throws EvaluationException {
 		ExpressionState expressionState = new ExpressionState(context, toTypedValue(rootObject), this.configuration);
 		TypeDescriptor typeDescriptor = this.ast.getValueInternal(expressionState).getTypeDescriptor();
-		return (typeDescriptor != null ? typeDescriptor.getType() : null);
+		return typeDescriptor != null ? typeDescriptor.getType() : null;
 	}
 
 	@Override
@@ -584,7 +584,7 @@ public class SpelExpression implements Expression {
 	}
 
 	private TypedValue toTypedValue(@Nullable Object object) {
-		return (object != null ? new TypedValue(object) : TypedValue.NULL);
+		return object != null ? new TypedValue(object) : TypedValue.NULL;
 	}
 
 }

@@ -89,7 +89,7 @@ final class DefaultEntityResponseBuilder<T> implements EntityResponse.Builder<T>
 
 	private DefaultEntityResponseBuilder(T entity, @Nullable Type entityType) {
 		this.entity = entity;
-		this.entityType = (entityType != null) ? entityType : entity.getClass();
+		this.entityType = entityType != null ? entityType : entity.getClass();
 	}
 
 	@Override

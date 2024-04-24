@@ -210,10 +210,10 @@ abstract class AbstractPropertyAccessorTests {
 		target.setSpouse(kerry);
 		kerry.setSpouse(target);
 		AbstractPropertyAccessor accessor = createAccessor(target);
-		Integer KA = (Integer) accessor.getPropertyValue("spouse.age");
-		assertThat(KA).as("kerry is 35").isEqualTo(35);
-		Integer RA = (Integer) accessor.getPropertyValue("spouse.spouse.age");
-		assertThat(RA).as("rod is 31, not" + RA).isEqualTo(31);
+		Integer ka = (Integer) accessor.getPropertyValue("spouse.age");
+		assertThat(ka).as("kerry is 35").isEqualTo(35);
+		Integer ra = (Integer) accessor.getPropertyValue("spouse.spouse.age");
+		assertThat(ra).as("rod is 31, not" + ra).isEqualTo(31);
 		ITestBean spousesSpouse = (ITestBean) accessor.getPropertyValue("spouse.spouse");
 		assertThat(target).as("spousesSpouse = initial point").isSameAs(spousesSpouse);
 	}
@@ -1363,13 +1363,13 @@ abstract class AbstractPropertyAccessorTests {
 		AbstractPropertyAccessor accessor = createAccessor(target);
 		TestBean tb0 = target.getArray()[0];
 		TestBean tb1 = target.getArray()[1];
-		TestBean tb2 = ((TestBean) target.getList().get(0));
-		TestBean tb3 = ((TestBean) target.getList().get(1));
-		TestBean tb6 = ((TestBean) target.getSet().toArray()[0]);
-		TestBean tb7 = ((TestBean) target.getSet().toArray()[1]);
-		TestBean tb4 = ((TestBean) target.getMap().get("key1"));
-		TestBean tb5 = ((TestBean) target.getMap().get("key.3"));
-		TestBean tb8 = ((TestBean) target.getMap().get("key5[foo]"));
+		TestBean tb2 = (TestBean) target.getList().get(0);
+		TestBean tb3 = (TestBean) target.getList().get(1);
+		TestBean tb6 = (TestBean) target.getSet().toArray()[0];
+		TestBean tb7 = (TestBean) target.getSet().toArray()[1];
+		TestBean tb4 = (TestBean) target.getMap().get("key1");
+		TestBean tb5 = (TestBean) target.getMap().get("key.3");
+		TestBean tb8 = (TestBean) target.getMap().get("key5[foo]");
 		assertThat(tb0.getName()).isEqualTo("name0");
 		assertThat(tb1.getName()).isEqualTo("name1");
 		assertThat(tb2.getName()).isEqualTo("name2");
@@ -1436,12 +1436,12 @@ abstract class AbstractPropertyAccessorTests {
 		AbstractPropertyAccessor accessor = createAccessor(target);
 		TestBean tb0 = target.getArray()[0];
 		TestBean tb1 = target.getArray()[1];
-		TestBean tb2 = ((TestBean) target.getList().get(0));
-		TestBean tb3 = ((TestBean) target.getList().get(1));
-		TestBean tb6 = ((TestBean) target.getSet().toArray()[0]);
-		TestBean tb7 = ((TestBean) target.getSet().toArray()[1]);
-		TestBean tb4 = ((TestBean) target.getMap().get("key1"));
-		TestBean tb5 = ((TestBean) target.getMap().get("key2"));
+		TestBean tb2 = (TestBean) target.getList().get(0);
+		TestBean tb3 = (TestBean) target.getList().get(1);
+		TestBean tb6 = (TestBean) target.getSet().toArray()[0];
+		TestBean tb7 = (TestBean) target.getSet().toArray()[1];
+		TestBean tb4 = (TestBean) target.getMap().get("key1");
+		TestBean tb5 = (TestBean) target.getMap().get("key2");
 		assertThat(accessor.getPropertyValue("array[0]")).isEqualTo(tb0);
 		assertThat(accessor.getPropertyValue("array[1]")).isEqualTo(tb1);
 		assertThat(accessor.getPropertyValue("list[0]")).isEqualTo(tb2);
@@ -1559,7 +1559,7 @@ abstract class AbstractPropertyAccessorTests {
 
 
 	@SuppressWarnings("unused")
-	private static class Simple {
+	private static final class Simple {
 
 		private String name;
 
@@ -2023,9 +2023,9 @@ abstract class AbstractPropertyAccessorTests {
 	@SuppressWarnings("serial")
 	public static class ReadOnlyMap<K, V> extends HashMap<K, V> {
 
-		private boolean frozen = false;
+		private boolean frozen;
 
-		private boolean accessed = false;
+		private boolean accessed;
 
 		public ReadOnlyMap() {
 			this.frozen = true;

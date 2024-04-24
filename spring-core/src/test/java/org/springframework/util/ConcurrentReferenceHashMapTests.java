@@ -526,7 +526,7 @@ class ConcurrentReferenceHashMapTests {
 		protected int getHash(@Nullable Object o) {
 			// For testing we want more control of the hash
 			this.supplementalHash = super.getHash(o);
-			return (o != null ? o.hashCode() : 0);
+			return o != null ? o.hashCode() : 0;
 		}
 
 		public int getSupplementalHash() {

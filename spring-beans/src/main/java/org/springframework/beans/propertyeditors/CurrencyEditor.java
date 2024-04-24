@@ -43,7 +43,7 @@ public class CurrencyEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		Currency value = (Currency) getValue();
-		return (value != null ? value.getCurrencyCode() : "");
+		return value != null ? value.getCurrencyCode() : "";
 	}
 
 }

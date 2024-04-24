@@ -59,8 +59,8 @@ public class RequestHeaderArgumentResolver extends AbstractNamedValueArgumentRes
 	@Override
 	protected NamedValueInfo createNamedValueInfo(MethodParameter parameter) {
 		RequestHeader annot = parameter.getParameterAnnotation(RequestHeader.class);
-		return (annot == null ? null :
-				new NamedValueInfo(annot.name(), annot.required(), annot.defaultValue(), "request header", true));
+		return annot == null ? null :
+				new NamedValueInfo(annot.name(), annot.required(), annot.defaultValue(), "request header", true);
 	}
 
 	@Override

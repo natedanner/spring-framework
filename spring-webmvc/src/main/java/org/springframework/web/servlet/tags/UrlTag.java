@@ -163,7 +163,7 @@ public class UrlTag extends HtmlEscapingAwareTag implements ParamAware {
 
 	private int scope = PageContext.PAGE_SCOPE;
 
-	private boolean javaScriptEscape = false;
+	private boolean javaScriptEscape;
 
 
 	/**
@@ -300,7 +300,7 @@ public class UrlTag extends HtmlEscapingAwareTag implements ParamAware {
 
 		// HTML and/or JavaScript escape, if demanded.
 		urlStr = htmlEscape(urlStr);
-		urlStr = (this.javaScriptEscape ? JavaScriptUtils.javaScriptEscape(urlStr) : urlStr);
+		urlStr = this.javaScriptEscape ? JavaScriptUtils.javaScriptEscape(urlStr) : urlStr;
 
 		return urlStr;
 	}

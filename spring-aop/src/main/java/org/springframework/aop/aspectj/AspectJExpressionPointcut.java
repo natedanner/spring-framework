@@ -309,7 +309,7 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 			// we say this is not a match as in Spring there will never be a different
 			// runtime subtype.
 			RuntimeTestWalker walker = getRuntimeTestWalker(shadowMatch);
-			return (!walker.testsSubtypeSensitiveVars() || walker.testTargetInstanceOfResidue(targetClass));
+			return !walker.testsSubtypeSensitiveVars() || walker.testTargetInstanceOfResidue(targetClass);
 		}
 	}
 
@@ -524,11 +524,11 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof AspectJExpressionPointcut that &&
+		return this == other || (other instanceof AspectJExpressionPointcut that &&
 				ObjectUtils.nullSafeEquals(getExpression(), that.getExpression()) &&
 				ObjectUtils.nullSafeEquals(this.pointcutDeclarationScope, that.pointcutDeclarationScope) &&
 				ObjectUtils.nullSafeEquals(this.pointcutParameterNames, that.pointcutParameterNames) &&
-				ObjectUtils.nullSafeEquals(this.pointcutParameterTypes, that.pointcutParameterTypes)));
+				ObjectUtils.nullSafeEquals(this.pointcutParameterTypes, that.pointcutParameterTypes));
 	}
 
 	@Override
@@ -615,14 +615,14 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 		@SuppressWarnings("rawtypes")
 		@Deprecated
 		public boolean couldMatchJoinPointsInType(Class someClass) {
-			return (contextMatch(someClass) == FuzzyBoolean.YES);
+			return contextMatch(someClass) == FuzzyBoolean.YES;
 		}
 
 		@Override
 		@SuppressWarnings("rawtypes")
 		@Deprecated
 		public boolean couldMatchJoinPointsInType(Class someClass, MatchingContext context) {
-			return (contextMatch(someClass) == FuzzyBoolean.YES);
+			return contextMatch(someClass) == FuzzyBoolean.YES;
 		}
 
 		@Override

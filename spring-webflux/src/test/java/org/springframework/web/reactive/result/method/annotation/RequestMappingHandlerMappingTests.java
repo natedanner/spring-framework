@@ -123,7 +123,7 @@ class RequestMappingHandlerMappingTests {
 		this.wac.refresh();
 		this.handlerMapping.afterPropertiesSet();
 		RequestMappingInfo info = this.handlerMapping.getHandlerMethods().keySet().stream()
-				.filter(i -> i.getPatternsCondition().getPatterns().iterator().next().getPatternString().equals("/post"))
+				.filter(i -> "/post".equals(i.getPatternsCondition().getPatterns().iterator().next().getPatternString()))
 				.findFirst()
 				.orElseThrow(() -> new AssertionError("No /post"));
 

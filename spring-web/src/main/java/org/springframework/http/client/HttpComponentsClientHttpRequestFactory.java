@@ -326,7 +326,7 @@ public class HttpComponentsClientHttpRequestFactory implements ClientHttpRequest
 	 */
 	@Nullable
 	protected HttpContext createHttpContext(HttpMethod httpMethod, URI uri) {
-		return (this.httpContextFactory != null ? this.httpContextFactory.apply(httpMethod, uri) : null);
+		return this.httpContextFactory != null ? this.httpContextFactory.apply(httpMethod, uri) : null;
 	}
 
 

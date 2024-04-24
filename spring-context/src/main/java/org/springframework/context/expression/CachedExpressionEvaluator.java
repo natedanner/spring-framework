@@ -124,9 +124,9 @@ public abstract class CachedExpressionEvaluator {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof ExpressionKey that &&
+			return this == other || (other instanceof ExpressionKey that &&
 					this.element.equals(that.element) &&
-					ObjectUtils.nullSafeEquals(this.expression, that.expression)));
+					ObjectUtils.nullSafeEquals(this.expression, that.expression));
 		}
 
 		@Override

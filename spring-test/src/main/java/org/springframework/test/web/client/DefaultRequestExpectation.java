@@ -146,12 +146,12 @@ public class DefaultRequestExpectation implements RequestExpectation {
 		}
 
 		public boolean hasRemainingCount() {
-			return (getMatchedRequestCount() < getExpectedCount().getMaxCount());
+			return getMatchedRequestCount() < getExpectedCount().getMaxCount();
 		}
 
 		public boolean isSatisfied() {
 			// Only validate min count since max count is checked on every request...
-			return (getMatchedRequestCount() >= getExpectedCount().getMinCount());
+			return getMatchedRequestCount() >= getExpectedCount().getMinCount();
 		}
 	}
 

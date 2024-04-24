@@ -60,7 +60,7 @@ public class OpEQ extends Operator {
 		String rightDesc = right.exitTypeDescriptor;
 		DescriptorComparison dc = DescriptorComparison.checkNumericCompatibility(leftDesc,
 				rightDesc, this.leftActualDescriptor, this.rightActualDescriptor);
-		return (!dc.areNumbers || dc.areCompatible);
+		return !dc.areNumbers || dc.areCompatible;
 	}
 
 	@Override

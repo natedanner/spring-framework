@@ -47,13 +47,13 @@ import static org.mockito.Mockito.verify;
  */
 class CallMetaDataContextTests {
 
-	private DataSource dataSource = mock();
+	private final DataSource dataSource = mock();
 
-	private Connection connection = mock();
+	private final Connection connection = mock();
 
-	private DatabaseMetaData databaseMetaData = mock();
+	private final DatabaseMetaData databaseMetaData = mock();
 
-	private CallMetaDataContext context = new CallMetaDataContext();
+	private final CallMetaDataContext context = new CallMetaDataContext();
 
 
 	@BeforeEach
@@ -70,10 +70,10 @@ class CallMetaDataContextTests {
 
 	@Test
 	void testMatchParameterValuesAndSqlInOutParameters() throws Exception {
-		final String TABLE = "customers";
-		final String USER = "me";
+		final String table = "customers";
+		final String user = "me";
 		given(databaseMetaData.getDatabaseProductName()).willReturn("MyDB");
-		given(databaseMetaData.getUserName()).willReturn(USER);
+		given(databaseMetaData.getUserName()).willReturn(user);
 		given(databaseMetaData.storesLowerCaseIdentifiers()).willReturn(true);
 
 		List<SqlParameter> parameters = new ArrayList<>();
@@ -86,7 +86,7 @@ class CallMetaDataContextTests {
 		parameterSource.addValue("name", "Sven");
 		parameterSource.addValue("customer_no", "12345XYZ");
 
-		context.setProcedureName(TABLE);
+		context.setProcedureName(table);
 		context.initializeMetaData(dataSource);
 		context.processParameters(parameters);
 

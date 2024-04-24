@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Set;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class MethodWrapper {
+public final class MethodWrapper {
 
 	// SPRING PATCH BEGIN
     private record MethodWrapperKey(String name, List<String> parameterTypes, String returnType) {

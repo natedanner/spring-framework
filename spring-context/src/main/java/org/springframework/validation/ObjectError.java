@@ -125,8 +125,8 @@ public class ObjectError extends DefaultMessageSourceResolvable {
 	 * @since 5.0.4
 	 */
 	public boolean contains(Class<?> sourceType) {
-		return (sourceType.isInstance(this.source) ||
-				(this.source instanceof Throwable throwable && sourceType.isInstance(throwable.getCause())));
+		return sourceType.isInstance(this.source) ||
+				(this.source instanceof Throwable throwable && sourceType.isInstance(throwable.getCause()));
 	}
 
 
@@ -144,7 +144,7 @@ public class ObjectError extends DefaultMessageSourceResolvable {
 
 	@Override
 	public int hashCode() {
-		return (29 * super.hashCode() + getObjectName().hashCode());
+		return 29 * super.hashCode() + getObjectName().hashCode();
 	}
 
 	@Override

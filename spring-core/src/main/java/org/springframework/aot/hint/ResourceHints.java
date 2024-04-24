@@ -56,8 +56,8 @@ public class ResourceHints {
 	 */
 	public Stream<ResourcePatternHints> resourcePatternHints() {
 		Stream<ResourcePatternHints> patterns = this.resourcePatternHints.stream();
-		return (this.types.isEmpty() ? patterns
-				: Stream.concat(Stream.of(typesPatternResourceHint()), patterns));
+		return this.types.isEmpty() ? patterns
+				: Stream.concat(Stream.of(typesPatternResourceHint()), patterns);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class ResourceHints {
 	 */
 	public ResourceHints registerPatternIfPresent(@Nullable ClassLoader classLoader, String location,
 			Consumer<ResourcePatternHints.Builder> resourceHint) {
-		ClassLoader classLoaderToUse = (classLoader != null ? classLoader : getClass().getClassLoader());
+		ClassLoader classLoaderToUse = classLoader != null ? classLoader : getClass().getClassLoader();
 		if (classLoaderToUse.getResource(location) != null) {
 			registerPattern(resourceHint);
 		}

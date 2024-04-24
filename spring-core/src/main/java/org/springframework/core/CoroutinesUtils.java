@@ -58,7 +58,7 @@ import org.springframework.util.ReflectionUtils;
 public abstract class CoroutinesUtils {
 
 	private static final ReflectionUtils.MethodFilter boxImplFilter =
-			(method -> method.isSynthetic() && Modifier.isStatic(method.getModifiers()) && method.getName().equals("box-impl"));
+			method -> method.isSynthetic() && Modifier.isStatic(method.getModifiers()) && "box-impl".equals(method.getName());
 
 	/**
 	 * Convert a {@link Deferred} instance to a {@link Mono}.

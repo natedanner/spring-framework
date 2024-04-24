@@ -82,7 +82,7 @@ class BeanDefinitionDslTests {
 		val beans = beans {
 			bean<Foo>()
 			bean<Bar>("bar")
-			environment( { env["name"].equals("foofoo") } ) {
+			environment( { env["name"] == "foofoo" } ) {
 				bean { FooFoo(env["name"]!!) }
 			}
 			environment( { activeProfiles.contains("baz") } ) {

@@ -32,7 +32,7 @@ import org.springframework.cache.support.AbstractCacheManager;
  */
 public abstract class AbstractTransactionSupportingCacheManager extends AbstractCacheManager {
 
-	private boolean transactionAware = false;
+	private boolean transactionAware;
 
 
 	/**
@@ -55,7 +55,7 @@ public abstract class AbstractTransactionSupportingCacheManager extends Abstract
 
 	@Override
 	protected Cache decorateCache(Cache cache) {
-		return (isTransactionAware() ? new TransactionAwareCacheDecorator(cache) : cache);
+		return isTransactionAware() ? new TransactionAwareCacheDecorator(cache) : cache;
 	}
 
 }

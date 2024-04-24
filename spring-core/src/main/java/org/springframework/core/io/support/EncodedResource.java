@@ -125,7 +125,7 @@ public class EncodedResource implements InputStreamSource {
 	 * @see #getInputStream()
 	 */
 	public boolean requiresReader() {
-		return (this.encoding != null || this.charset != null);
+		return this.encoding != null || this.charset != null;
 	}
 
 	/**
@@ -184,10 +184,10 @@ public class EncodedResource implements InputStreamSource {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof EncodedResource that &&
+		return this == other || (other instanceof EncodedResource that &&
 				this.resource.equals(that.resource) &&
 				ObjectUtils.nullSafeEquals(this.charset, that.charset) &&
-				ObjectUtils.nullSafeEquals(this.encoding, that.encoding)));
+				ObjectUtils.nullSafeEquals(this.encoding, that.encoding));
 	}
 
 	@Override

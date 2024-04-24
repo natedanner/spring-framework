@@ -101,7 +101,7 @@ public abstract class Operator extends SpelNodeImpl {
 		String rightDesc = right.exitTypeDescriptor;
 		DescriptorComparison dc = DescriptorComparison.checkNumericCompatibility(
 				leftDesc, rightDesc, this.leftActualDescriptor, this.rightActualDescriptor);
-		return (dc.areNumbers && dc.areCompatible);
+		return dc.areNumbers && dc.areCompatible;
 	}
 
 	/**
@@ -265,34 +265,34 @@ public abstract class Operator extends SpelNodeImpl {
 			if (leftNumber instanceof BigDecimal || rightNumber instanceof BigDecimal) {
 				BigDecimal leftBigDecimal = NumberUtils.convertNumberToTargetClass(leftNumber, BigDecimal.class);
 				BigDecimal rightBigDecimal = NumberUtils.convertNumberToTargetClass(rightNumber, BigDecimal.class);
-				return (leftBigDecimal.compareTo(rightBigDecimal) == 0);
+				return leftBigDecimal.compareTo(rightBigDecimal) == 0;
 			}
 			else if (leftNumber instanceof Double || rightNumber instanceof Double) {
-				return (leftNumber.doubleValue() == rightNumber.doubleValue());
+				return leftNumber.doubleValue() == rightNumber.doubleValue();
 			}
 			else if (leftNumber instanceof Float || rightNumber instanceof Float) {
-				return (leftNumber.floatValue() == rightNumber.floatValue());
+				return leftNumber.floatValue() == rightNumber.floatValue();
 			}
 			else if (leftNumber instanceof BigInteger || rightNumber instanceof BigInteger) {
 				BigInteger leftBigInteger = NumberUtils.convertNumberToTargetClass(leftNumber, BigInteger.class);
 				BigInteger rightBigInteger = NumberUtils.convertNumberToTargetClass(rightNumber, BigInteger.class);
-				return (leftBigInteger.compareTo(rightBigInteger) == 0);
+				return leftBigInteger.compareTo(rightBigInteger) == 0;
 			}
 			else if (leftNumber instanceof Long || rightNumber instanceof Long) {
-				return (leftNumber.longValue() == rightNumber.longValue());
+				return leftNumber.longValue() == rightNumber.longValue();
 			}
 			else if (leftNumber instanceof Integer || rightNumber instanceof Integer) {
-				return (leftNumber.intValue() == rightNumber.intValue());
+				return leftNumber.intValue() == rightNumber.intValue();
 			}
 			else if (leftNumber instanceof Short || rightNumber instanceof Short) {
-				return (leftNumber.shortValue() == rightNumber.shortValue());
+				return leftNumber.shortValue() == rightNumber.shortValue();
 			}
 			else if (leftNumber instanceof Byte || rightNumber instanceof Byte) {
-				return (leftNumber.byteValue() == rightNumber.byteValue());
+				return leftNumber.byteValue() == rightNumber.byteValue();
 			}
 			else {
 				// Unknown Number subtypes -> best guess is double comparison
-				return (leftNumber.doubleValue() == rightNumber.doubleValue());
+				return leftNumber.doubleValue() == rightNumber.doubleValue();
 			}
 		}
 

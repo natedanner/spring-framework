@@ -127,8 +127,8 @@ public class ServletRequestDataBinder extends WebDataBinder {
 	@Override
 	protected boolean shouldConstructArgument(MethodParameter param) {
 		Class<?> type = param.nestedIfOptional().getNestedParameterType();
-		return (super.shouldConstructArgument(param) &&
-				!MultipartFile.class.isAssignableFrom(type) && !Part.class.isAssignableFrom(type));
+		return super.shouldConstructArgument(param) &&
+				!MultipartFile.class.isAssignableFrom(type) && !Part.class.isAssignableFrom(type);
 	}
 
 	/**
@@ -244,7 +244,7 @@ public class ServletRequestDataBinder extends WebDataBinder {
 		@Nullable
 		protected Object getRequestParameter(String name, Class<?> type) {
 			Object value = this.request.getParameterValues(name);
-			return (ObjectUtils.isArray(value) && Array.getLength(value) == 1 ? Array.get(value, 0) : value);
+			return ObjectUtils.isArray(value) && Array.getLength(value) == 1 ? Array.get(value, 0) : value;
 		}
 
 		@Nullable
@@ -253,7 +253,7 @@ public class ServletRequestDataBinder extends WebDataBinder {
 			if (multipartRequest != null) {
 				List<MultipartFile> files = multipartRequest.getFiles(name);
 				if (!files.isEmpty()) {
-					return (files.size() == 1 ? files.get(0) : files);
+					return files.size() == 1 ? files.get(0) : files;
 				}
 			}
 			else if (isFormDataPost(this.request)) {
@@ -261,7 +261,7 @@ public class ServletRequestDataBinder extends WebDataBinder {
 				if (httpRequest != null && HttpMethod.POST.matches(httpRequest.getMethod())) {
 					List<Part> parts = StandardServletPartUtils.getParts(httpRequest, name);
 					if (!parts.isEmpty()) {
-						return (parts.size() == 1 ? parts.get(0) : parts);
+						return parts.size() == 1 ? parts.get(0) : parts;
 					}
 				}
 			}

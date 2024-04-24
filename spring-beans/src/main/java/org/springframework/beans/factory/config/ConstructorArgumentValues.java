@@ -384,7 +384,7 @@ public class ConstructorArgumentValues {
 	 * counting both indexed and generic argument values.
 	 */
 	public int getArgumentCount() {
-		return (this.indexedArgumentValues.size() + this.genericArgumentValues.size());
+		return this.indexedArgumentValues.size() + this.genericArgumentValues.size();
 	}
 
 	/**
@@ -392,7 +392,7 @@ public class ConstructorArgumentValues {
 	 * neither indexed ones nor generic ones.
 	 */
 	public boolean isEmpty() {
-		return (this.indexedArgumentValues.isEmpty() && this.genericArgumentValues.isEmpty());
+		return this.indexedArgumentValues.isEmpty() && this.genericArgumentValues.isEmpty();
 	}
 
 	/**
@@ -467,7 +467,7 @@ public class ConstructorArgumentValues {
 		@Nullable
 		private Object source;
 
-		private boolean converted = false;
+		private boolean converted;
 
 		@Nullable
 		private Object convertedValue;
@@ -574,7 +574,7 @@ public class ConstructorArgumentValues {
 		 * after processed type conversion.
 		 */
 		public synchronized void setConvertedValue(@Nullable Object value) {
-			this.converted = (value != null);
+			this.converted = value != null;
 			this.convertedValue = value;
 		}
 
@@ -595,8 +595,8 @@ public class ConstructorArgumentValues {
 		 * same content to reside in the same Set.
 		 */
 		private boolean contentEquals(ValueHolder other) {
-			return (this == other ||
-					(ObjectUtils.nullSafeEquals(this.value, other.value) && ObjectUtils.nullSafeEquals(this.type, other.type)));
+			return this == other ||
+					(ObjectUtils.nullSafeEquals(this.value, other.value) && ObjectUtils.nullSafeEquals(this.type, other.type));
 		}
 
 		/**

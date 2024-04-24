@@ -61,9 +61,9 @@ public class MethodMapTransactionAttributeSource
 	@Nullable
 	private ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();
 
-	private boolean eagerlyInitialized = false;
+	private boolean eagerlyInitialized;
 
-	private boolean initialized = false;
+	private boolean initialized;
 
 	/** Map from Method to TransactionAttribute. */
 	private final Map<Method, TransactionAttribute> transactionAttributeMap = new HashMap<>();
@@ -239,8 +239,8 @@ public class MethodMapTransactionAttributeSource
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof MethodMapTransactionAttributeSource otherTas &&
-				ObjectUtils.nullSafeEquals(this.methodMap, otherTas.methodMap)));
+		return this == other || (other instanceof MethodMapTransactionAttributeSource otherTas &&
+				ObjectUtils.nullSafeEquals(this.methodMap, otherTas.methodMap));
 	}
 
 	@Override

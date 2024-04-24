@@ -411,8 +411,8 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 	protected boolean isProfileActive(String profile) {
 		validateProfile(profile);
 		Set<String> currentActiveProfiles = doGetActiveProfiles();
-		return (currentActiveProfiles.contains(profile) ||
-				(currentActiveProfiles.isEmpty() && doGetDefaultProfiles().contains(profile)));
+		return currentActiveProfiles.contains(profile) ||
+				(currentActiveProfiles.isEmpty() && doGetDefaultProfiles().contains(profile));
 	}
 
 	/**

@@ -60,7 +60,7 @@ class GroovySpringContextTests implements BeanNameAware, InitializingBean {
 
 	private String beanName;
 
-	private boolean beanInitialized = false;
+	private boolean beanInitialized;
 
 
 	@Autowired

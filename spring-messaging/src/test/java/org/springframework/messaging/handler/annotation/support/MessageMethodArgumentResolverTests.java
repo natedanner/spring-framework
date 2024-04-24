@@ -44,7 +44,7 @@ import static org.mockito.Mockito.mock;
  */
 class MessageMethodArgumentResolverTests {
 
-	private MessageConverter converter = mock();
+	private final MessageConverter converter = mock();
 
 	private MessageMethodArgumentResolver resolver = new MessageMethodArgumentResolver(this.converter);
 

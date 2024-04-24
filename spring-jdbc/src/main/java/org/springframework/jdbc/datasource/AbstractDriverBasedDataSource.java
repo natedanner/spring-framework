@@ -57,7 +57,7 @@ public abstract class AbstractDriverBasedDataSource extends AbstractDataSource {
 	 * @see java.sql.Driver#connect(String, java.util.Properties)
 	 */
 	public void setUrl(@Nullable String url) {
-		this.url = (url != null ? url.trim() : null);
+		this.url = url != null ? url.trim() : null;
 	}
 
 	/**

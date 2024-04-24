@@ -707,7 +707,7 @@ public abstract class DataBufferUtils {
 	 */
 	public static Matcher matcher(byte[]... delimiters) {
 		Assert.isTrue(delimiters.length > 0, "Delimiters must not be empty");
-		return (delimiters.length == 1 ? createMatcher(delimiters[0]) : new CompositeMatcher(delimiters));
+		return delimiters.length == 1 ? createMatcher(delimiters[0]) : new CompositeMatcher(delimiters);
 	}
 
 	private static NestedMatcher createMatcher(byte[] delimiter) {
@@ -872,7 +872,7 @@ public abstract class DataBufferUtils {
 
 		private final byte[] delimiter;
 
-		private int matches = 0;
+		private int matches;
 
 
 		protected AbstractNestedMatcher(byte[] delimiter) {
@@ -903,7 +903,7 @@ public abstract class DataBufferUtils {
 		public boolean match(byte b) {
 			if (b == this.delimiter[this.matches]) {
 				this.matches++;
-				return (this.matches == delimiter().length);
+				return this.matches == delimiter().length;
 			}
 			return false;
 		}

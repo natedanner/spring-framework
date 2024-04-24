@@ -90,12 +90,12 @@ public class SpringJUnit4ConcurrencyTests {
 
 	@Test
 	public void runAllTestsConcurrently() throws Exception {
-		final int FAILED = 0;
-		final int ABORTED = 0;
-		final int IGNORED = countAnnotatedMethods(Ignore.class);
-		final int TESTS = countAnnotatedMethods(Test.class) - IGNORED;
+		final int failed = 0;
+		final int aborted = 0;
+		final int ignored = countAnnotatedMethods(Ignore.class);
+		final int tests = countAnnotatedMethods(Test.class) - ignored;
 
-		runTestsAndAssertCounters(new ParallelComputer(true, true), TESTS, FAILED, TESTS, IGNORED, ABORTED,
+		runTestsAndAssertCounters(new ParallelComputer(true, true), tests, failed, tests, ignored, aborted,
 				this.testClasses);
 	}
 

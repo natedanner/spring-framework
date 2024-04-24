@@ -225,8 +225,8 @@ class NamedValueArgumentResolverTests {
 		@Override
 		protected NamedValueInfo createNamedValueInfo(MethodParameter parameter) {
 			TestValue annot = parameter.getParameterAnnotation(TestValue.class);
-			return (annot == null ? null :
-					new NamedValueInfo(annot.name(), annot.required(), annot.defaultValue(), "test value", true));
+			return annot == null ? null :
+					new NamedValueInfo(annot.name(), annot.required(), annot.defaultValue(), "test value", true);
 		}
 
 		@Override

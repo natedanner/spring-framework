@@ -50,7 +50,7 @@ public class InterceptorRegistration {
 	@Nullable
 	private PathMatcher pathMatcher;
 
-	private int order = 0;
+	private int order;
 
 
 	/**
@@ -78,8 +78,8 @@ public class InterceptorRegistration {
 	 * @since 5.0.3
 	 */
 	public InterceptorRegistration addPathPatterns(List<String> patterns) {
-		this.includePatterns = (this.includePatterns != null ?
-				this.includePatterns : new ArrayList<>(patterns.size()));
+		this.includePatterns = this.includePatterns != null ?
+				this.includePatterns : new ArrayList<>(patterns.size());
 		this.includePatterns.addAll(patterns);
 		return this;
 	}
@@ -100,8 +100,8 @@ public class InterceptorRegistration {
 	 * @since 5.0.3
 	 */
 	public InterceptorRegistration excludePathPatterns(List<String> patterns) {
-		this.excludePatterns = (this.excludePatterns != null ?
-				this.excludePatterns : new ArrayList<>(patterns.size()));
+		this.excludePatterns = this.excludePatterns != null ?
+				this.excludePatterns : new ArrayList<>(patterns.size());
 		this.excludePatterns.addAll(patterns);
 		return this;
 	}

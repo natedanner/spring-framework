@@ -239,7 +239,7 @@ import jakarta.servlet.jsp.JspException;
 @SuppressWarnings("serial")
 public class PasswordInputTag extends InputTag {
 
-	private boolean showPassword = false;
+	private boolean showPassword;
 
 
 	/**

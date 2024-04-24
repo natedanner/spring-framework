@@ -321,7 +321,7 @@ public class DefaultPersistenceUnitManager
 	 * @see #setDefaultDataSource
 	 */
 	public void setDataSourceLookup(@Nullable DataSourceLookup dataSourceLookup) {
-		this.dataSourceLookup = (dataSourceLookup != null ? dataSourceLookup : new JndiDataSourceLookup());
+		this.dataSourceLookup = dataSourceLookup != null ? dataSourceLookup : new JndiDataSourceLookup();
 	}
 
 	/**
@@ -508,7 +508,7 @@ public class DefaultPersistenceUnitManager
 	private List<SpringPersistenceUnitInfo> readPersistenceUnitInfos() {
 		List<SpringPersistenceUnitInfo> infos = new ArrayList<>(1);
 		String defaultName = this.defaultPersistenceUnitName;
-		boolean buildDefaultUnit = (this.managedTypes != null || this.packagesToScan != null || this.mappingResources != null);
+		boolean buildDefaultUnit = this.managedTypes != null || this.packagesToScan != null || this.mappingResources != null;
 		boolean foundDefaultUnit = false;
 
 		PersistenceUnitReader reader = new PersistenceUnitReader(this.resourcePatternResolver, this.dataSourceLookup);
@@ -600,7 +600,7 @@ public class DefaultPersistenceUnitManager
 		}
 		try {
 			URL url = this.resourcePatternResolver.getResource(this.defaultPersistenceUnitRootLocation).getURL();
-			return (ResourceUtils.isJarURL(url) ? ResourceUtils.extractJarFileURL(url) : url);
+			return ResourceUtils.isJarURL(url) ? ResourceUtils.extractJarFileURL(url) : url;
 		}
 		catch (IOException ex) {
 			if (ORIGINAL_DEFAULT_PERSISTENCE_UNIT_ROOT_LOCATION.equals(this.defaultPersistenceUnitRootLocation)) {

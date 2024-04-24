@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
  */
 class InMemoryWebSessionStoreTests {
 
-	private InMemoryWebSessionStore store = new InMemoryWebSessionStore();
+	private final InMemoryWebSessionStore store = new InMemoryWebSessionStore();
 
 
 	@Test

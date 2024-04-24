@@ -90,8 +90,8 @@ public class ErrorsMethodArgumentResolver extends HandlerMethodArgumentResolverS
 				"handle a WebExchangeBindException error signal through the async type.");
 
 		ModelAttribute ann = attributeParam.getParameterAnnotation(ModelAttribute.class);
-		String name = (ann != null && StringUtils.hasText(ann.name()) ? ann.name() :
-				Conventions.getVariableNameForParameter(attributeParam));
+		String name = ann != null && StringUtils.hasText(ann.name()) ? ann.name() :
+				Conventions.getVariableNameForParameter(attributeParam);
 		Object errors = context.getModel().asMap().get(BindingResult.MODEL_KEY_PREFIX + name);
 
 		Assert.state(errors != null, () -> "An Errors/BindingResult argument is expected " +

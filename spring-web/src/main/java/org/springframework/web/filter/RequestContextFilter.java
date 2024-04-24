@@ -50,7 +50,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 public class RequestContextFilter extends OncePerRequestFilter {
 
-	private boolean threadContextInheritable = false;
+	private boolean threadContextInheritable;
 
 
 	/**

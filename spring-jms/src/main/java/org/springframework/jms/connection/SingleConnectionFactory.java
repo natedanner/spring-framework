@@ -99,7 +99,7 @@ public class SingleConnectionFactory implements ConnectionFactory, QueueConnecti
 	@Nullable
 	private ExceptionListener exceptionListener;
 
-	private boolean reconnectOnException = false;
+	private boolean reconnectOnException;
 
 	/** The target Connection. */
 	@Nullable
@@ -114,7 +114,7 @@ public class SingleConnectionFactory implements ConnectionFactory, QueueConnecti
 	private AggregatedExceptionListener aggregatedExceptionListener;
 
 	/** Whether the shared Connection has been started. */
-	private int startedCount = 0;
+	private int startedCount;
 
 	/** Synchronization monitor for the shared Connection. */
 	private final Object connectionMonitor = new Object();
@@ -387,7 +387,7 @@ public class SingleConnectionFactory implements ConnectionFactory, QueueConnecti
 	@Override
 	public boolean isRunning() {
 		synchronized (this.connectionMonitor) {
-			return (this.connection != null);
+			return this.connection != null;
 		}
 	}
 
@@ -512,8 +512,8 @@ public class SingleConnectionFactory implements ConnectionFactory, QueueConnecti
 	 */
 	protected Session createSession(Connection con, Integer mode) throws JMSException {
 		// Determine JMS API arguments...
-		boolean transacted = (mode == Session.SESSION_TRANSACTED);
-		int ackMode = (transacted ? Session.AUTO_ACKNOWLEDGE : mode);
+		boolean transacted = mode == Session.SESSION_TRANSACTED;
+		int ackMode = transacted ? Session.AUTO_ACKNOWLEDGE : mode;
 		// Now actually call the appropriate JMS factory method...
 		if (Boolean.FALSE.equals(this.pubSubMode) && con instanceof QueueConnection queueConnection) {
 			return queueConnection.createQueueSession(transacted, ackMode);
@@ -595,7 +595,7 @@ public class SingleConnectionFactory implements ConnectionFactory, QueueConnecti
 		@Nullable
 		private ExceptionListener localExceptionListener;
 
-		private boolean locallyStarted = false;
+		private boolean locallyStarted;
 
 		@Override
 		@Nullable
@@ -610,8 +610,8 @@ public class SingleConnectionFactory implements ConnectionFactory, QueueConnecti
 						return false;
 					}
 					InvocationHandler otherHandler = Proxy.getInvocationHandler(other);
-					return (otherHandler instanceof SharedConnectionInvocationHandler sharedHandler &&
-							factory() == sharedHandler.factory());
+					return otherHandler instanceof SharedConnectionInvocationHandler sharedHandler &&
+							factory() == sharedHandler.factory();
 				}
 				case "hashCode" -> {
 					// Use hashCode of containing SingleConnectionFactory.
@@ -699,7 +699,7 @@ public class SingleConnectionFactory implements ConnectionFactory, QueueConnecti
 							// JMS 1.1 createSession(boolean, int) method
 							boolean transacted = (Boolean) args[0];
 							Integer ackMode = (Integer) args[1];
-							mode = (transacted ? Session.SESSION_TRANSACTED : ackMode);
+							mode = transacted ? Session.SESSION_TRANSACTED : ackMode;
 						}
 					}
 					Session session = getSession(getConnection(), mode);

@@ -46,8 +46,8 @@ public class ItemPet {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ItemPet that &&
-				ObjectUtils.nullSafeEquals(this.name, that.getName())));
+		return this == other || (other instanceof ItemPet that &&
+				ObjectUtils.nullSafeEquals(this.name, that.getName()));
 	}
 
 	@Override

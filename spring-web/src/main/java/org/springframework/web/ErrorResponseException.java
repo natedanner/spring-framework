@@ -92,8 +92,8 @@ public class ErrorResponseException extends NestedRuntimeException implements Er
 	}
 
 	private String initMessageDetailCode(@Nullable String messageDetailCode) {
-		return (messageDetailCode != null ?
-				messageDetailCode : ErrorResponse.getDefaultDetailMessageCode(getClass(), null));
+		return messageDetailCode != null ?
+				messageDetailCode : ErrorResponse.getDefaultDetailMessageCode(getClass(), null);
 	}
 
 
@@ -171,7 +171,7 @@ public class ErrorResponseException extends NestedRuntimeException implements Er
 
 	@Override
 	public String getMessage() {
-		return this.status + (!this.headers.isEmpty() ? ", headers=" + this.headers : "") + ", " + this.body;
+		return this.status + (this.headers.isEmpty() ? "" : ", headers=" + this.headers) + ", " + this.body;
 	}
 
 }

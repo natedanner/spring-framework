@@ -70,7 +70,7 @@ class CharBufferDecoderTests extends AbstractDecoderTests<CharBufferDecoder> {
 		CharBuffer u = charBuffer("ü");
 		CharBuffer e = charBuffer("é");
 		CharBuffer o = charBuffer("ø");
-		String s = String.format("%s\n%s\n%s", u, e, o);
+		String s = String.format("%s%n%s%n%s", u, e, o);
 		Flux<DataBuffer> input = toDataBuffers(s, 1, UTF_8);
 
 		testDecodeAll(input, TYPE, step -> step.expectNext(u, e, o).verifyComplete(), null, null);
@@ -81,7 +81,7 @@ class CharBufferDecoderTests extends AbstractDecoderTests<CharBufferDecoder> {
 		CharBuffer u = charBuffer("ü");
 		CharBuffer e = charBuffer("é");
 		CharBuffer o = charBuffer("ø");
-		String s = String.format("%s\n%s\n%s", u, e, o);
+		String s = String.format("%s%n%s%n%s", u, e, o);
 		Flux<DataBuffer> source = toDataBuffers(s, 2, UTF_16BE);
 		MimeType mimeType = MimeTypeUtils.parseMimeType("text/plain;charset=utf-16be");
 

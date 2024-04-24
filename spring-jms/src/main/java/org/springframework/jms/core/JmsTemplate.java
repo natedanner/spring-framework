@@ -110,14 +110,14 @@ public class JmsTemplate extends JmsDestinationAccessor implements JmsOperations
 
 	private boolean messageTimestampEnabled = true;
 
-	private boolean pubSubNoLocal = false;
+	private boolean pubSubNoLocal;
 
 	private long receiveTimeout = RECEIVE_TIMEOUT_INDEFINITE_WAIT;
 
 	private long deliveryDelay = -1;
 
 
-	private boolean explicitQosEnabled = false;
+	private boolean explicitQosEnabled;
 
 	private int deliveryMode = Message.DEFAULT_DELIVERY_MODE;
 
@@ -183,7 +183,7 @@ public class JmsTemplate extends JmsDestinationAccessor implements JmsOperations
 	 */
 	@Nullable
 	public Destination getDefaultDestination() {
-		return (this.defaultDestination instanceof Destination dest ? dest : null);
+		return this.defaultDestination instanceof Destination dest ? dest : null;
 	}
 
 	@Nullable
@@ -220,7 +220,7 @@ public class JmsTemplate extends JmsDestinationAccessor implements JmsOperations
 	 */
 	@Nullable
 	public String getDefaultDestinationName() {
-		return (this.defaultDestination instanceof String name ? name : null);
+		return this.defaultDestination instanceof String name ? name : null;
 	}
 
 	private String getRequiredDefaultDestinationName() throws IllegalStateException {
@@ -405,7 +405,7 @@ public class JmsTemplate extends JmsDestinationAccessor implements JmsOperations
 	 * @see jakarta.jms.DeliveryMode#NON_PERSISTENT
 	 */
 	public void setDeliveryPersistent(boolean deliveryPersistent) {
-		this.deliveryMode = (deliveryPersistent ? DeliveryMode.PERSISTENT : DeliveryMode.NON_PERSISTENT);
+		this.deliveryMode = deliveryPersistent ? DeliveryMode.PERSISTENT : DeliveryMode.NON_PERSISTENT;
 	}
 
 	/**

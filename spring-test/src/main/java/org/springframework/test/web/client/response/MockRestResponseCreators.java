@@ -54,7 +54,7 @@ public abstract class MockRestResponseCreators {
 	 */
 	public static DefaultResponseCreator withSuccess(String body, @Nullable MediaType contentType) {
 		DefaultResponseCreator creator = new DefaultResponseCreator(HttpStatus.OK).body(body);
-		return (contentType != null ? creator.contentType(contentType) : creator);
+		return contentType != null ? creator.contentType(contentType) : creator;
 	}
 
 	/**
@@ -64,7 +64,7 @@ public abstract class MockRestResponseCreators {
 	 */
 	public static DefaultResponseCreator withSuccess(byte[] body, @Nullable MediaType contentType) {
 		DefaultResponseCreator creator = new DefaultResponseCreator(HttpStatus.OK).body(body);
-		return (contentType != null ? creator.contentType(contentType) : creator);
+		return contentType != null ? creator.contentType(contentType) : creator;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public abstract class MockRestResponseCreators {
 	 */
 	public static DefaultResponseCreator withSuccess(Resource body, @Nullable MediaType contentType) {
 		DefaultResponseCreator creator = new DefaultResponseCreator(HttpStatus.OK).body(body);
-		return (contentType != null ? creator.contentType(contentType) : creator);
+		return contentType != null ? creator.contentType(contentType) : creator;
 	}
 
 	/**

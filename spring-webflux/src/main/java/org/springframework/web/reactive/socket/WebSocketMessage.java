@@ -157,9 +157,9 @@ public class WebSocketMessage {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof WebSocketMessage that &&
+		return this == other || (other instanceof WebSocketMessage that &&
 				this.type.equals(that.type) &&
-				ObjectUtils.nullSafeEquals(this.payload, that.payload)));
+				ObjectUtils.nullSafeEquals(this.payload, that.payload));
 	}
 
 	@Override

@@ -52,8 +52,8 @@ abstract class DatabasePopulatorConfigUtils {
 	private static BeanDefinition createDatabasePopulator(Element element, List<Element> scripts, String execution) {
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(CompositeDatabasePopulator.class);
 
-		boolean ignoreFailedDrops = element.getAttribute("ignore-failures").equals("DROPS");
-		boolean continueOnError = element.getAttribute("ignore-failures").equals("ALL");
+		boolean ignoreFailedDrops = "DROPS".equals(element.getAttribute("ignore-failures"));
+		boolean continueOnError = "ALL".equals(element.getAttribute("ignore-failures"));
 
 		ManagedList<BeanMetadataElement> delegates = new ManagedList<>();
 		for (Element scriptElement : scripts) {

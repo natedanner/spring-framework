@@ -109,7 +109,7 @@ public class ReactorNetty2ClientHttpConnector implements ClientHttpConnector {
 		HttpClient.RequestSender requestSender = this.httpClient
 				.request(io.netty5.handler.codec.http.HttpMethod.valueOf(method.name()));
 
-		requestSender = (uri.isAbsolute() ? requestSender.uri(uri) : requestSender.uri(uri.toString()));
+		requestSender = uri.isAbsolute() ? requestSender.uri(uri) : requestSender.uri(uri.toString());
 
 		return requestSender
 				.send((request, outbound) -> requestCallback.apply(adaptRequest(method, uri, request, outbound)))

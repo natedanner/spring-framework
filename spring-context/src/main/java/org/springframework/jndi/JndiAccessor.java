@@ -48,7 +48,7 @@ public class JndiAccessor {
 	 * @see #setJndiEnvironment
 	 */
 	public void setJndiTemplate(@Nullable JndiTemplate jndiTemplate) {
-		this.jndiTemplate = (jndiTemplate != null ? jndiTemplate : new JndiTemplate());
+		this.jndiTemplate = jndiTemplate != null ? jndiTemplate : new JndiTemplate();
 	}
 
 	/**

@@ -120,7 +120,7 @@ public class StandardEvaluationContext implements EvaluationContext {
 	}
 
 	public void setRootObject(@Nullable Object rootObject) {
-		this.rootObject = (rootObject != null ? new TypedValue(rootObject) : TypedValue.NULL);
+		this.rootObject = rootObject != null ? new TypedValue(rootObject) : TypedValue.NULL;
 	}
 
 	@Override

@@ -72,7 +72,7 @@ final class DefaultRSocketRequester implements RSocketRequester {
 		Assert.notNull(metadataMimeType, "'metadataMimeType' is required");
 		Assert.notNull(strategies, "RSocketStrategies is required");
 
-		this.rsocketClient = (rsocketClient != null ? rsocketClient : RSocketClient.from(rsocket));
+		this.rsocketClient = rsocketClient != null ? rsocketClient : RSocketClient.from(rsocket);
 		this.rsocket = rsocket;
 		this.dataMimeType = dataMimeType;
 		this.metadataMimeType = metadataMimeType;
@@ -119,7 +119,7 @@ final class DefaultRSocketRequester implements RSocketRequester {
 	}
 
 	private static boolean isVoid(ResolvableType elementType) {
-		return (Void.class.equals(elementType.resolve()) || void.class.equals(elementType.resolve()));
+		return Void.class.equals(elementType.resolve()) || void.class.equals(elementType.resolve());
 	}
 
 	private DataBufferFactory bufferFactory() {
@@ -311,9 +311,9 @@ final class DefaultRSocketRequester implements RSocketRequester {
 		@SuppressWarnings("unchecked")
 		private <T> Flux<T> retrieveFlux(ResolvableType elementType) {
 
-			Flux<Payload> payloadFlux = (this.payloadFlux != null ?
+			Flux<Payload> payloadFlux = this.payloadFlux != null ?
 					rsocketClient.requestChannel(this.payloadFlux) :
-					rsocketClient.requestStream(getPayloadMono()));
+					rsocketClient.requestStream(getPayloadMono());
 
 			if (isVoid(elementType)) {
 				return payloadFlux.thenMany(Flux.empty());

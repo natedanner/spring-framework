@@ -112,7 +112,7 @@ public class YamlPropertiesFactoryBean extends YamlProcessor implements FactoryB
 	@Override
 	@Nullable
 	public Properties getObject() {
-		return (this.properties != null ? this.properties : createProperties());
+		return this.properties != null ? this.properties : createProperties();
 	}
 
 	@Override

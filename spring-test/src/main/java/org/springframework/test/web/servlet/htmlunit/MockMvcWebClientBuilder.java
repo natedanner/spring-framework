@@ -125,7 +125,7 @@ public class MockMvcWebClientBuilder extends MockMvcWebConnectionBuilderSupport<
 	 * @see #withDelegate(WebClient)
 	 */
 	public WebClient build() {
-		return (this.webClient != null ? this.webClient : withDelegate(new WebClient()).build());
+		return this.webClient != null ? this.webClient : withDelegate(new WebClient()).build();
 	}
 
 }

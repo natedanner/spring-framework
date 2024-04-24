@@ -29,7 +29,7 @@ import static org.mockito.Mockito.mock;
  */
 class JmsTemplateTransactedTests extends JmsTemplateTests {
 
-	private Session localSession = mock();
+	private final Session localSession = mock();
 
 
 	@Override

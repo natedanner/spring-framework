@@ -182,11 +182,11 @@ class BasicJsonWriter {
 
 		private final String singleIndent;
 
-		private int level = 0;
+		private int level;
 
 		private String currentIndent = "";
 
-		private boolean prependIndent = false;
+		private boolean prependIndent;
 
 		IndentingWriter(Writer out, String singleIndent) {
 			this.out = out;

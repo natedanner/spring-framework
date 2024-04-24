@@ -29,7 +29,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * @author Rod Johnson
  * @since 05.06.2003
  */
-public class HasMap {
+public final class HasMap {
 
 	private Map<?, ?> map;
 

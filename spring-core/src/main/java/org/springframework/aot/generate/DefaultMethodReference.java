@@ -128,7 +128,7 @@ public class DefaultMethodReference implements MethodReference {
 			return this.declaringClass + "::" + methodName;
 		}
 		else {
-			return ((this.declaringClass != null) ?
+			return (this.declaringClass != null ?
 					"<" + this.declaringClass + ">" : "<instance>") + "::" + methodName;
 		}
 	}

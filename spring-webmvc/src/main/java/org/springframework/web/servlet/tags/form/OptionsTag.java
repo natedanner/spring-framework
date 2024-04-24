@@ -296,7 +296,7 @@ public class OptionsTag extends AbstractHtmlElementTag {
 		Object items = getItems();
 		Object itemsObject = null;
 		if (items != null) {
-			itemsObject = (items instanceof String ? evaluate("items", items) : items);
+			itemsObject = items instanceof String ? evaluate("items", items) : items;
 		}
 		else {
 			Class<?> selectTagBoundType = selectTag.getBindStatus().getValueType();
@@ -309,9 +309,9 @@ public class OptionsTag extends AbstractHtmlElementTag {
 			String itemValue = getItemValue();
 			String itemLabel = getItemLabel();
 			String valueProperty =
-					(itemValue != null ? ObjectUtils.getDisplayString(evaluate("itemValue", itemValue)) : null);
+					itemValue != null ? ObjectUtils.getDisplayString(evaluate("itemValue", itemValue)) : null;
 			String labelProperty =
-					(itemLabel != null ? ObjectUtils.getDisplayString(evaluate("itemLabel", itemLabel)) : null);
+					itemLabel != null ? ObjectUtils.getDisplayString(evaluate("itemLabel", itemLabel)) : null;
 			OptionsWriter optionWriter = new OptionsWriter(selectName, itemsObject, valueProperty, labelProperty);
 			optionWriter.writeOptions(tagWriter);
 		}
@@ -327,7 +327,7 @@ public class OptionsTag extends AbstractHtmlElementTag {
 		Object id = evaluate("id", getId());
 		if (id != null) {
 			String idString = id.toString();
-			return (StringUtils.hasText(idString) ? TagIdGenerator.nextId(idString, this.pageContext) : null);
+			return StringUtils.hasText(idString) ? TagIdGenerator.nextId(idString, this.pageContext) : null;
 		}
 		return null;
 	}

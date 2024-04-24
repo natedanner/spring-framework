@@ -90,7 +90,7 @@ public class ClassPathResource extends AbstractFileResolvingResource {
 		}
 		this.path = pathToUse;
 		this.absolutePath = pathToUse;
-		this.classLoader = (classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader());
+		this.classLoader = classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader();
 		this.clazz = null;
 	}
 
@@ -142,7 +142,7 @@ public class ClassPathResource extends AbstractFileResolvingResource {
 	 */
 	@Nullable
 	public final ClassLoader getClassLoader() {
-		return (this.clazz != null ? this.clazz.getClassLoader() : this.classLoader);
+		return this.clazz != null ? this.clazz.getClassLoader() : this.classLoader;
 	}
 
 
@@ -153,7 +153,7 @@ public class ClassPathResource extends AbstractFileResolvingResource {
 	 */
 	@Override
 	public boolean exists() {
-		return (resolveURL() != null);
+		return resolveURL() != null;
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class ClassPathResource extends AbstractFileResolvingResource {
 	@Override
 	public boolean isReadable() {
 		URL url = resolveURL();
-		return (url != null && checkReadable(url));
+		return url != null && checkReadable(url);
 	}
 
 	/**
@@ -240,8 +240,8 @@ public class ClassPathResource extends AbstractFileResolvingResource {
 	@Override
 	public Resource createRelative(String relativePath) {
 		String pathToUse = StringUtils.applyRelativePath(this.path, relativePath);
-		return (this.clazz != null ? new ClassPathResource(pathToUse, this.clazz) :
-				new ClassPathResource(pathToUse, this.classLoader));
+		return this.clazz != null ? new ClassPathResource(pathToUse, this.clazz) :
+				new ClassPathResource(pathToUse, this.classLoader);
 	}
 
 	/**
@@ -273,9 +273,9 @@ public class ClassPathResource extends AbstractFileResolvingResource {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ClassPathResource that &&
+		return this == other || (other instanceof ClassPathResource that &&
 				this.absolutePath.equals(that.absolutePath) &&
-				ObjectUtils.nullSafeEquals(getClassLoader(), that.getClassLoader())));
+				ObjectUtils.nullSafeEquals(getClassLoader(), that.getClassLoader()));
 	}
 
 	/**

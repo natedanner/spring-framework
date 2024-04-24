@@ -51,13 +51,13 @@ public abstract class ReflectionUtils {
 	 * @since 3.0.5
 	 */
 	public static final MethodFilter USER_DECLARED_METHODS =
-			(method -> !method.isBridge() && !method.isSynthetic() && (method.getDeclaringClass() != Object.class));
+			method -> !method.isBridge() && !method.isSynthetic() && (method.getDeclaringClass() != Object.class);
 
 	/**
 	 * Pre-built FieldFilter that matches all non-static, non-final fields.
 	 */
 	public static final FieldFilter COPYABLE_FIELDS =
-			(field -> !(Modifier.isStatic(field.getModifiers()) || Modifier.isFinal(field.getModifiers())));
+			field -> !(Modifier.isStatic(field.getModifiers()) || Modifier.isFinal(field.getModifiers()));
 
 
 	/**
@@ -234,8 +234,8 @@ public abstract class ReflectionUtils {
 		Assert.notNull(name, "Method name must not be null");
 		Class<?> searchType = clazz;
 		while (searchType != null) {
-			Method[] methods = (searchType.isInterface() ? searchType.getMethods() :
-					getDeclaredMethods(searchType, false));
+			Method[] methods = searchType.isInterface() ? searchType.getMethods() :
+					getDeclaredMethods(searchType, false);
 			for (Method method : methods) {
 				if (name.equals(method.getName()) && (paramTypes == null || hasSameParams(method, paramTypes))) {
 					return method;
@@ -247,8 +247,8 @@ public abstract class ReflectionUtils {
 	}
 
 	private static boolean hasSameParams(Method method, Class<?>[] paramTypes) {
-		return (paramTypes.length == method.getParameterCount() &&
-				Arrays.equals(paramTypes, method.getParameterTypes()));
+		return paramTypes.length == method.getParameterCount() &&
+				Arrays.equals(paramTypes, method.getParameterTypes());
 	}
 
 	/**
@@ -483,7 +483,7 @@ public abstract class ReflectionUtils {
 						"] from ClassLoader [" + clazz.getClassLoader() + "]", ex);
 			}
 		}
-		return (result.length == 0 || !defensive) ? result : result.clone();
+		return result.length == 0 || !defensive ? result : result.clone();
 	}
 
 	@Nullable
@@ -507,8 +507,8 @@ public abstract class ReflectionUtils {
 	 * @see java.lang.Object#equals(Object)
 	 */
 	public static boolean isEqualsMethod(@Nullable Method method) {
-		return (method != null && method.getParameterCount() == 1 && method.getName().equals("equals") &&
-				method.getParameterTypes()[0] == Object.class);
+		return method != null && method.getParameterCount() == 1 && "equals".equals(method.getName()) &&
+				method.getParameterTypes()[0] == Object.class;
 	}
 
 	/**
@@ -516,7 +516,7 @@ public abstract class ReflectionUtils {
 	 * @see java.lang.Object#hashCode()
 	 */
 	public static boolean isHashCodeMethod(@Nullable Method method) {
-		return (method != null && method.getParameterCount() == 0 && method.getName().equals("hashCode"));
+		return method != null && method.getParameterCount() == 0 && "hashCode".equals(method.getName());
 	}
 
 	/**
@@ -524,15 +524,15 @@ public abstract class ReflectionUtils {
 	 * @see java.lang.Object#toString()
 	 */
 	public static boolean isToStringMethod(@Nullable Method method) {
-		return (method != null && method.getParameterCount() == 0 && method.getName().equals("toString"));
+		return method != null && method.getParameterCount() == 0 && "toString".equals(method.getName());
 	}
 
 	/**
 	 * Determine whether the given method is originally declared by {@link java.lang.Object}.
 	 */
 	public static boolean isObjectMethod(@Nullable Method method) {
-		return (method != null && (method.getDeclaringClass() == Object.class ||
-				isEqualsMethod(method) || isHashCodeMethod(method) || isToStringMethod(method)));
+		return method != null && (method.getDeclaringClass() == Object.class ||
+				isEqualsMethod(method) || isHashCodeMethod(method) || isToStringMethod(method));
 	}
 
 	/**
@@ -547,7 +547,7 @@ public abstract class ReflectionUtils {
 			while (i >= 0 && Character.isDigit(name.charAt(i))) {
 				i--;
 			}
-			return (i > CGLIB_RENAMED_METHOD_PREFIX.length() && (i < name.length() - 1) && name.charAt(i) == '$');
+			return i > CGLIB_RENAMED_METHOD_PREFIX.length() && (i < name.length() - 1) && name.charAt(i) == '$';
 		}
 		return false;
 	}
@@ -786,7 +786,7 @@ public abstract class ReflectionUtils {
 	 */
 	public static boolean isPublicStaticFinal(Field field) {
 		int modifiers = field.getModifiers();
-		return (Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers));
+		return Modifier.isPublic(modifiers) && Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers);
 	}
 
 	/**

@@ -202,7 +202,7 @@ class RequestMappingIntegrationTests extends AbstractRequestMappingIntegrationTe
 		public boolean test(HandlerMethod handlerMethod) {
 			this.invocationCount.incrementAndGet();
 			Class<?> returnType = handlerMethod.getReturnType().getParameterType();
-			return (ReactiveAdapterRegistry.getSharedInstance().getAdapter(returnType) == null);
+			return ReactiveAdapterRegistry.getSharedInstance().getAdapter(returnType) == null;
 		}
 	}
 

@@ -44,7 +44,7 @@ class DefaultResourceResolverChain implements ResourceResolverChain {
 
 
 	public DefaultResourceResolverChain(@Nullable List<? extends ResourceResolver> resolvers) {
-		resolvers = (resolvers != null ? resolvers : Collections.emptyList());
+		resolvers = resolvers != null ? resolvers : Collections.emptyList();
 		DefaultResourceResolverChain chain = initChain(new ArrayList<>(resolvers));
 		this.resolver = chain.resolver;
 		this.nextChain = chain.nextChain;
@@ -71,16 +71,16 @@ class DefaultResourceResolverChain implements ResourceResolverChain {
 	public Mono<Resource> resolveResource(@Nullable ServerWebExchange exchange, String requestPath,
 			List<? extends Resource> locations) {
 
-		return (this.resolver != null && this.nextChain != null ?
+		return this.resolver != null && this.nextChain != null ?
 				this.resolver.resolveResource(exchange, requestPath, locations, this.nextChain) :
-				Mono.empty());
+				Mono.empty();
 	}
 
 	@Override
 	public Mono<String> resolveUrlPath(String resourcePath, List<? extends Resource> locations) {
-		return (this.resolver != null && this.nextChain != null ?
+		return this.resolver != null && this.nextChain != null ?
 				this.resolver.resolveUrlPath(resourcePath, locations, this.nextChain) :
-				Mono.empty());
+				Mono.empty();
 	}
 
 }

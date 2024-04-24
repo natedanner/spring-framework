@@ -42,7 +42,7 @@ public class ConfigurableWebBindingInitializer implements WebBindingInitializer 
 
 	private boolean autoGrowNestedPaths = true;
 
-	private boolean directFieldAccess = false;
+	private boolean directFieldAccess;
 
 	@Nullable
 	private Boolean declarativeBinding;
@@ -116,7 +116,7 @@ public class ConfigurableWebBindingInitializer implements WebBindingInitializer 
 	 * @since 6.1
 	 */
 	public boolean isDeclarativeBinding() {
-		return (this.declarativeBinding != null ? this.declarativeBinding : false);
+		return this.declarativeBinding != null ? this.declarativeBinding : false;
 	}
 
 	/**

@@ -45,9 +45,9 @@ class ProtobufHttpMessageConverterTests {
 
 	private ProtobufHttpMessageConverter converter = new ProtobufHttpMessageConverter();
 
-	private ExtensionRegistry extensionRegistry = mock();
+	private final ExtensionRegistry extensionRegistry = mock();
 
-	private Msg testMsg = Msg.newBuilder().setFoo("Foo").setBlah(SecondMsg.newBuilder().setBlah(123).build()).build();
+	private final Msg testMsg = Msg.newBuilder().setFoo("Foo").setBlah(SecondMsg.newBuilder().setBlah(123).build()).build();
 
 
 	@Test

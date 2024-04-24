@@ -54,17 +54,17 @@ import static org.mockito.Mockito.mock;
  */
 class RequestResponseBodyAdviceChainTests {
 
-	private String body = "body";
+	private final String body = "body";
 
-	private MediaType contentType = MediaType.TEXT_PLAIN;
+	private final MediaType contentType = MediaType.TEXT_PLAIN;
 
-	private Class<? extends HttpMessageConverter<?>> converterType = StringHttpMessageConverter.class;
+	private final Class<? extends HttpMessageConverter<?>> converterType = StringHttpMessageConverter.class;
 
-	private MethodParameter paramType = new MethodParameter(ClassUtils.getMethod(this.getClass(), "handle", String.class), 0);
-	private MethodParameter returnType = new MethodParameter(ClassUtils.getMethod(this.getClass(), "handle", String.class), -1);
+	private final MethodParameter paramType = new MethodParameter(ClassUtils.getMethod(this.getClass(), "handle", String.class), 0);
+	private final MethodParameter returnType = new MethodParameter(ClassUtils.getMethod(this.getClass(), "handle", String.class), -1);
 
-	private ServerHttpRequest request = new ServletServerHttpRequest(new MockHttpServletRequest());
-	private ServerHttpResponse response = new ServletServerHttpResponse(new MockHttpServletResponse());
+	private final ServerHttpRequest request = new ServletServerHttpRequest(new MockHttpServletRequest());
+	private final ServerHttpResponse response = new ServletServerHttpResponse(new MockHttpServletResponse());
 
 
 	@Test

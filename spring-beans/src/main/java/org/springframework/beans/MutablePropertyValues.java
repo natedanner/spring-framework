@@ -110,7 +110,7 @@ public class MutablePropertyValues implements PropertyValues, Serializable {
 	 */
 	public MutablePropertyValues(@Nullable List<PropertyValue> propertyValueList) {
 		this.propertyValueList =
-				(propertyValueList != null ? propertyValueList : new ArrayList<>());
+				propertyValueList != null ? propertyValueList : new ArrayList<>();
 	}
 
 
@@ -290,7 +290,7 @@ public class MutablePropertyValues implements PropertyValues, Serializable {
 	@Nullable
 	public Object get(String propertyName) {
 		PropertyValue pv = getPropertyValue(propertyName);
-		return (pv != null ? pv.getValue() : null);
+		return pv != null ? pv.getValue() : null;
 	}
 
 	@Override
@@ -313,8 +313,8 @@ public class MutablePropertyValues implements PropertyValues, Serializable {
 
 	@Override
 	public boolean contains(String propertyName) {
-		return (getPropertyValue(propertyName) != null ||
-				(this.processedProperties != null && this.processedProperties.contains(propertyName)));
+		return getPropertyValue(propertyName) != null ||
+				(this.processedProperties != null && this.processedProperties.contains(propertyName));
 	}
 
 	@Override
@@ -367,8 +367,8 @@ public class MutablePropertyValues implements PropertyValues, Serializable {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof MutablePropertyValues that &&
-				this.propertyValueList.equals(that.propertyValueList)));
+		return this == other || (other instanceof MutablePropertyValues that &&
+				this.propertyValueList.equals(that.propertyValueList));
 	}
 
 	@Override

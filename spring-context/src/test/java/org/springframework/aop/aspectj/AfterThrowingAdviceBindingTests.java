@@ -42,7 +42,7 @@ class AfterThrowingAdviceBindingTests {
 
 	private AfterThrowingAdviceBindingTestAspect afterThrowingAdviceAspect;
 
-	private AfterThrowingAdviceBindingCollaborator mockCollaborator = mock();
+	private final AfterThrowingAdviceBindingCollaborator mockCollaborator = mock();
 
 
 	@BeforeEach
@@ -123,7 +123,7 @@ final class AfterThrowingAdviceBindingTestAspect {
 		void noArgsOnRuntimeExceptionMatch();
 	}
 
-	AfterThrowingAdviceBindingCollaborator collaborator = null;
+	AfterThrowingAdviceBindingCollaborator collaborator;
 
 	public void setCollaborator(AfterThrowingAdviceBindingCollaborator aCollaborator) {
 		this.collaborator = aCollaborator;

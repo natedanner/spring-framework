@@ -29,7 +29,7 @@ import java.util.Map;
  * @version $Id: CollectionUtils.java,v 1.7 2004/06/24 21:15:21 herbyderby Exp $
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class CollectionUtils {
+public final class CollectionUtils {
     private CollectionUtils() { }
 
     public static Map bucket(Collection c, Transformer t) {

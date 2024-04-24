@@ -92,25 +92,25 @@ public abstract class AbstractReactorHttpExchangeAdapter
 
 	@Override
 	public HttpHeaders exchangeForHeaders(HttpRequestValues requestValues) {
-		HttpHeaders headers = (this.blockTimeout != null ?
+		HttpHeaders headers = this.blockTimeout != null ?
 				exchangeForHeadersMono(requestValues).block(this.blockTimeout) :
-				exchangeForHeadersMono(requestValues).block());
+				exchangeForHeadersMono(requestValues).block();
 		Assert.state(headers != null, "Expected HttpHeaders");
 		return headers;
 	}
 
 	@Override
 	public <T> T exchangeForBody(HttpRequestValues requestValues, ParameterizedTypeReference<T> bodyType) {
-		return (this.blockTimeout != null ?
+		return this.blockTimeout != null ?
 				exchangeForBodyMono(requestValues, bodyType).block(this.blockTimeout) :
-				exchangeForBodyMono(requestValues, bodyType).block());
+				exchangeForBodyMono(requestValues, bodyType).block();
 	}
 
 	@Override
 	public ResponseEntity<Void> exchangeForBodilessEntity(HttpRequestValues requestValues) {
-		ResponseEntity<Void> entity = (this.blockTimeout != null ?
+		ResponseEntity<Void> entity = this.blockTimeout != null ?
 				exchangeForBodilessEntityMono(requestValues).block(this.blockTimeout) :
-				exchangeForBodilessEntityMono(requestValues).block());
+				exchangeForBodilessEntityMono(requestValues).block();
 		Assert.state(entity != null, "Expected ResponseEntity");
 		return entity;
 	}
@@ -119,9 +119,9 @@ public abstract class AbstractReactorHttpExchangeAdapter
 	public <T> ResponseEntity<T> exchangeForEntity(
 			HttpRequestValues requestValues, ParameterizedTypeReference<T> bodyType) {
 
-		ResponseEntity<T> entity = (this.blockTimeout != null ?
+		ResponseEntity<T> entity = this.blockTimeout != null ?
 				exchangeForEntityMono(requestValues, bodyType).block(this.blockTimeout) :
-				exchangeForEntityMono(requestValues, bodyType).block());
+				exchangeForEntityMono(requestValues, bodyType).block();
 		Assert.state(entity != null, "Expected ResponseEntity");
 		return entity;
 	}

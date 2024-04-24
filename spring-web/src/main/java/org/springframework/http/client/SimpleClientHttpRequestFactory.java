@@ -167,7 +167,7 @@ public class SimpleClientHttpRequestFactory implements ClientHttpRequestFactory 
 	 * @throws IOException in case of I/O errors
 	 */
 	protected HttpURLConnection openConnection(URL url, @Nullable Proxy proxy) throws IOException {
-		URLConnection urlConnection = (proxy != null ? url.openConnection(proxy) : url.openConnection());
+		URLConnection urlConnection = proxy != null ? url.openConnection(proxy) : url.openConnection();
 		if (!(urlConnection instanceof HttpURLConnection httpUrlConnection)) {
 			throw new IllegalStateException(
 					"HttpURLConnection required for [" + url + "] but got: " + urlConnection);
@@ -191,8 +191,8 @@ public class SimpleClientHttpRequestFactory implements ClientHttpRequestFactory 
 		}
 
 		boolean mayWrite =
-				("POST".equals(httpMethod) || "PUT".equals(httpMethod) ||
-						"PATCH".equals(httpMethod) || "DELETE".equals(httpMethod));
+				"POST".equals(httpMethod) || "PUT".equals(httpMethod) ||
+						"PATCH".equals(httpMethod) || "DELETE".equals(httpMethod);
 
 		connection.setDoInput(true);
 		connection.setInstanceFollowRedirects("GET".equals(httpMethod));

@@ -63,7 +63,7 @@ public class DefaultAdvisorChainFactory implements AdvisorChainFactory, Serializ
 		AdvisorAdapterRegistry registry = GlobalAdvisorAdapterRegistry.getInstance();
 		Advisor[] advisors = config.getAdvisors();
 		List<Object> interceptorList = new ArrayList<>(advisors.length);
-		Class<?> actualClass = (targetClass != null ? targetClass : method.getDeclaringClass());
+		Class<?> actualClass = targetClass != null ? targetClass : method.getDeclaringClass();
 		Boolean hasIntroductions = null;
 
 		for (Advisor advisor : advisors) {

@@ -86,9 +86,9 @@ public class Ternary extends SpelNodeImpl {
 		SpelNodeImpl condition = this.children[0];
 		SpelNodeImpl left = this.children[1];
 		SpelNodeImpl right = this.children[2];
-		return (condition.isCompilable() && left.isCompilable() && right.isCompilable() &&
+		return condition.isCompilable() && left.isCompilable() && right.isCompilable() &&
 				CodeFlow.isBooleanCompatible(condition.exitTypeDescriptor) &&
-				left.exitTypeDescriptor != null && right.exitTypeDescriptor != null);
+				left.exitTypeDescriptor != null && right.exitTypeDescriptor != null;
 	}
 
 	@Override

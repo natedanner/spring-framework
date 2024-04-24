@@ -63,7 +63,7 @@ public class ShallowEtagHeaderFilter extends OncePerRequestFilter {
 	private static final String STREAMING_ATTRIBUTE = ShallowEtagHeaderFilter.class.getName() + ".STREAMING";
 
 
-	private boolean writeWeakETag = false;
+	private boolean writeWeakETag;
 
 
 	/**
@@ -154,7 +154,7 @@ public class ShallowEtagHeaderFilter extends OncePerRequestFilter {
 				HttpMethod.GET.matches(request.getMethod())) {
 
 			String cacheControl = response.getHeader(HttpHeaders.CACHE_CONTROL);
-			return (cacheControl == null || !cacheControl.contains(DIRECTIVE_NO_STORE));
+			return cacheControl == null || !cacheControl.contains(DIRECTIVE_NO_STORE);
 		}
 
 		return false;
@@ -196,7 +196,7 @@ public class ShallowEtagHeaderFilter extends OncePerRequestFilter {
 	}
 
 	private static boolean isContentCachingDisabled(HttpServletRequest request) {
-		return (request.getAttribute(STREAMING_ATTRIBUTE) != null);
+		return request.getAttribute(STREAMING_ATTRIBUTE) != null;
 	}
 
 
@@ -215,14 +215,14 @@ public class ShallowEtagHeaderFilter extends OncePerRequestFilter {
 
 		@Override
 		public ServletOutputStream getOutputStream() throws IOException {
-			return (isContentCachingDisabled(this.request) || hasETag() ?
-					getResponse().getOutputStream() : super.getOutputStream());
+			return isContentCachingDisabled(this.request) || hasETag() ?
+					getResponse().getOutputStream() : super.getOutputStream();
 		}
 
 		@Override
 		public PrintWriter getWriter() throws IOException {
-			return (isContentCachingDisabled(this.request) || hasETag()?
-					getResponse().getWriter() : super.getWriter());
+			return isContentCachingDisabled(this.request) || hasETag()?
+					getResponse().getWriter() : super.getWriter();
 		}
 
 		private boolean hasETag() {

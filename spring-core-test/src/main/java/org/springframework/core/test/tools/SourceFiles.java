@@ -161,7 +161,7 @@ public final class SourceFiles implements Iterable<SourceFile> {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof SourceFiles that && this.files.equals(that.files)));
+		return this == other || (other instanceof SourceFiles that && this.files.equals(that.files));
 	}
 
 	@Override

@@ -75,7 +75,7 @@ public class HandlerResult {
 		this.handler = handler;
 		this.returnValue = returnValue;
 		this.returnType = ResolvableType.forMethodParameter(returnType);
-		this.bindingContext = (context != null ? context : new BindingContext());
+		this.bindingContext = context != null ? context : new BindingContext();
 	}
 
 
@@ -170,7 +170,7 @@ public class HandlerResult {
 	 */
 	@Deprecated(since = "6.0", forRemoval = true)
 	public boolean hasExceptionHandler() {
-		return (this.exceptionHandler != null);
+		return this.exceptionHandler != null;
 	}
 
 	/**
@@ -181,8 +181,8 @@ public class HandlerResult {
 	 */
 	@Deprecated(since = "6.0", forRemoval = true)
 	public Mono<HandlerResult> applyExceptionHandler(Throwable failure) {
-		return (this.exceptionHandlerFunction != null ?
-				this.exceptionHandlerFunction.apply(failure) : Mono.error(failure));
+		return this.exceptionHandlerFunction != null ?
+				this.exceptionHandlerFunction.apply(failure) : Mono.error(failure);
 	}
 
 }

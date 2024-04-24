@@ -297,7 +297,7 @@ class SimpleJmsHeaderMapperTests {
 		jakarta.jms.Message jmsMessage = new StubTextMessage() {
 			@Override
 			public Object getObjectProperty(String name) throws JMSException {
-				if (name.equals("fail")) {
+				if ("fail".equals(name)) {
 					throw new JMSException("illegal property");
 				}
 				else {
@@ -416,7 +416,7 @@ class SimpleJmsHeaderMapperTests {
 		jakarta.jms.Message jmsMessage = new StubTextMessage() {
 			@Override
 			public void setObjectProperty(String name, Object value) throws JMSException {
-				if (name.equals("bad")) {
+				if ("bad".equals(name)) {
 					throw new JMSException("illegal property");
 				}
 				super.setObjectProperty(name, value);
@@ -441,7 +441,7 @@ class SimpleJmsHeaderMapperTests {
 		jakarta.jms.Message jmsMessage = new StubTextMessage() {
 			@Override
 			public void setObjectProperty(String name, Object value) throws JMSException {
-				if (name.equals("bad")) {
+				if ("bad".equals(name)) {
 					throw new IllegalArgumentException("illegal property");
 				}
 				super.setObjectProperty(name, value);

@@ -93,7 +93,7 @@ public abstract class AbstractVersionStrategy implements VersionStrategy {
 		@Override
 		@Nullable
 		public String extractVersion(String requestPath) {
-			return (requestPath.startsWith(this.prefix) ? this.prefix : null);
+			return requestPath.startsWith(this.prefix) ? this.prefix : null;
 		}
 
 		@Override
@@ -107,8 +107,8 @@ public abstract class AbstractVersionStrategy implements VersionStrategy {
 				return path;
 			}
 			else {
-				return (this.prefix.endsWith("/") || path.startsWith("/") ?
-						this.prefix + path : this.prefix + '/' + path);
+				return this.prefix.endsWith("/") || path.startsWith("/") ?
+						this.prefix + path : this.prefix + '/' + path;
 			}
 		}
 	}
@@ -128,7 +128,7 @@ public abstract class AbstractVersionStrategy implements VersionStrategy {
 			Matcher matcher = pattern.matcher(requestPath);
 			if (matcher.find()) {
 				String match = matcher.group(1);
-				return (match.contains("-") ? match.substring(match.lastIndexOf('-') + 1) : match);
+				return match.contains("-") ? match.substring(match.lastIndexOf('-') + 1) : match;
 			}
 			else {
 				return null;
@@ -144,7 +144,7 @@ public abstract class AbstractVersionStrategy implements VersionStrategy {
 		public String addVersion(String requestPath, String version) {
 			String baseFilename = StringUtils.stripFilenameExtension(requestPath);
 			String extension = StringUtils.getFilenameExtension(requestPath);
-			return (baseFilename + '-' + version + '.' + extension);
+			return baseFilename + '-' + version + '.' + extension;
 		}
 	}
 

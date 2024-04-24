@@ -131,15 +131,15 @@ public abstract class AbstractPlatformTransactionManager
 
 	private int defaultTimeout = TransactionDefinition.TIMEOUT_DEFAULT;
 
-	private boolean nestedTransactionAllowed = false;
+	private boolean nestedTransactionAllowed;
 
-	private boolean validateExistingTransaction = false;
+	private boolean validateExistingTransaction;
 
 	private boolean globalRollbackOnParticipationFailure = true;
 
-	private boolean failEarlyOnGlobalRollbackOnly = false;
+	private boolean failEarlyOnGlobalRollbackOnly;
 
-	private boolean rollbackOnCommitFailure = false;
+	private boolean rollbackOnCommitFailure;
 
 	private Collection<TransactionExecutionListener> transactionExecutionListeners = new ArrayList<>();
 
@@ -374,7 +374,7 @@ public abstract class AbstractPlatformTransactionManager
 			throws TransactionException {
 
 		// Use defaults if no transaction definition given.
-		TransactionDefinition def = (definition != null ? definition : TransactionDefinition.withDefaults());
+		TransactionDefinition def = definition != null ? definition : TransactionDefinition.withDefaults();
 
 		Object transaction = doGetTransaction();
 		boolean debugEnabled = logger.isDebugEnabled();
@@ -415,7 +415,7 @@ public abstract class AbstractPlatformTransactionManager
 				logger.warn("Custom isolation level specified but no actual transaction initiated; " +
 						"isolation level will effectively be ignored: " + def);
 			}
-			boolean newSynchronization = (getTransactionSynchronization() == SYNCHRONIZATION_ALWAYS);
+			boolean newSynchronization = getTransactionSynchronization() == SYNCHRONIZATION_ALWAYS;
 			return prepareTransactionStatus(def, null, true, newSynchronization, debugEnabled, null);
 		}
 	}
@@ -437,7 +437,7 @@ public abstract class AbstractPlatformTransactionManager
 				logger.debug("Suspending current transaction");
 			}
 			Object suspendedResources = suspend(transaction);
-			boolean newSynchronization = (getTransactionSynchronization() == SYNCHRONIZATION_ALWAYS);
+			boolean newSynchronization = getTransactionSynchronization() == SYNCHRONIZATION_ALWAYS;
 			return prepareTransactionStatus(
 					definition, null, false, newSynchronization, debugEnabled, suspendedResources);
 		}
@@ -513,7 +513,7 @@ public abstract class AbstractPlatformTransactionManager
 				}
 			}
 		}
-		boolean newSynchronization = (getTransactionSynchronization() != SYNCHRONIZATION_NEVER);
+		boolean newSynchronization = getTransactionSynchronization() != SYNCHRONIZATION_NEVER;
 		return prepareTransactionStatus(definition, transaction, false, newSynchronization, debugEnabled, null);
 	}
 
@@ -523,7 +523,7 @@ public abstract class AbstractPlatformTransactionManager
 	private TransactionStatus startTransaction(TransactionDefinition definition, Object transaction,
 			boolean nested, boolean debugEnabled, @Nullable SuspendedResourcesHolder suspendedResources) {
 
-		boolean newSynchronization = (getTransactionSynchronization() != SYNCHRONIZATION_NEVER);
+		boolean newSynchronization = getTransactionSynchronization() != SYNCHRONIZATION_NEVER;
 		DefaultTransactionStatus status = newTransactionStatus(
 				definition, transaction, true, newSynchronization, nested, debugEnabled, suspendedResources);
 		this.transactionExecutionListeners.forEach(listener -> listener.beforeBegin(status));
@@ -1064,7 +1064,7 @@ public abstract class AbstractPlatformTransactionManager
 			if (status.isDebug()) {
 				logger.debug("Resuming suspended transaction after completion of inner transaction");
 			}
-			Object transaction = (status.hasTransaction() ? status.getTransaction() : null);
+			Object transaction = status.hasTransaction() ? status.getTransaction() : null;
 			resume(transaction, (SuspendedResourcesHolder) status.getSuspendedResources());
 		}
 	}

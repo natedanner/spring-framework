@@ -102,15 +102,15 @@ public class WebSocketHandlerMapping extends SimpleUrlHandlerMapping implements 
 	@Nullable
 	protected Object getHandlerInternal(HttpServletRequest request) throws Exception {
 		Object handler = super.getHandlerInternal(request);
-		return (matchWebSocketUpgrade(handler, request) ? handler : null);
+		return matchWebSocketUpgrade(handler, request) ? handler : null;
 	}
 
 	private boolean matchWebSocketUpgrade(@Nullable Object handler, HttpServletRequest request) {
-		handler = (handler instanceof HandlerExecutionChain chain ? chain.getHandler() : handler);
+		handler = handler instanceof HandlerExecutionChain chain ? chain.getHandler() : handler;
 		if (this.webSocketUpgradeMatch && handler instanceof WebSocketHttpRequestHandler) {
 			String header = request.getHeader(HttpHeaders.UPGRADE);
-			return (request.getMethod().equals("GET") &&
-					header != null && header.equalsIgnoreCase("websocket"));
+			return "GET".equals(request.getMethod()) &&
+					header != null && "websocket".equalsIgnoreCase(header);
 		}
 		return true;
 	}

@@ -119,7 +119,7 @@ public class DefaultServerRequestObservationConvention implements ServerRequestO
 	}
 
 	protected KeyValue status(ServerRequestObservationContext context) {
-		return (context.getResponse() != null) ?
+		return context.getResponse() != null ?
 				KeyValue.of(LowCardinalityKeyNames.STATUS, Integer.toString(context.getResponse().getStatus())) :
 				STATUS_UNKNOWN;
 	}

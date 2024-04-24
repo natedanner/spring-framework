@@ -67,15 +67,15 @@ public class SockJsFrame {
 		}
 		else if (content.charAt(0) == 'a') {
 			this.type = SockJsFrameType.MESSAGE;
-			this.content = (content.length() > 1 ? content : "a[]");
+			this.content = content.length() > 1 ? content : "a[]";
 		}
 		else if (content.charAt(0) == 'm') {
 			this.type = SockJsFrameType.MESSAGE;
-			this.content = (content.length() > 1 ? content : "null");
+			this.content = content.length() > 1 ? content : "null";
 		}
 		else if (content.charAt(0) == 'c') {
 			this.type = SockJsFrameType.CLOSE;
-			this.content = (content.length() > 1 ? content : "c[]");
+			this.content = content.length() > 1 ? content : "c[]";
 		}
 		else {
 			throw new IllegalArgumentException("Unexpected SockJS frame type in content \"" + content + "\"");
@@ -122,8 +122,8 @@ public class SockJsFrame {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof SockJsFrame that &&
-				this.type.equals(that.type) && this.content.equals(that.content)));
+		return this == other || (other instanceof SockJsFrame that &&
+				this.type.equals(that.type) && this.content.equals(that.content));
 	}
 
 	@Override

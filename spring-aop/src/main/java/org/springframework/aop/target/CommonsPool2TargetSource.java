@@ -247,12 +247,12 @@ public class CommonsPool2TargetSource extends AbstractPoolingTargetSource implem
 
 	@Override
 	public int getActiveCount() throws UnsupportedOperationException {
-		return (this.pool != null ? this.pool.getNumActive() : 0);
+		return this.pool != null ? this.pool.getNumActive() : 0;
 	}
 
 	@Override
 	public int getIdleCount() throws UnsupportedOperationException {
-		return (this.pool != null ? this.pool.getNumIdle() : 0);
+		return this.pool != null ? this.pool.getNumIdle() : 0;
 	}
 
 

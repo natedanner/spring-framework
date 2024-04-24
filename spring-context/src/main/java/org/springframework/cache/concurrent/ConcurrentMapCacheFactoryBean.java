@@ -86,8 +86,8 @@ public class ConcurrentMapCacheFactoryBean
 
 	@Override
 	public void afterPropertiesSet() {
-		this.cache = (this.store != null ? new ConcurrentMapCache(this.name, this.store, this.allowNullValues) :
-				new ConcurrentMapCache(this.name, this.allowNullValues));
+		this.cache = this.store != null ? new ConcurrentMapCache(this.name, this.store, this.allowNullValues) :
+				new ConcurrentMapCache(this.name, this.allowNullValues);
 	}
 
 

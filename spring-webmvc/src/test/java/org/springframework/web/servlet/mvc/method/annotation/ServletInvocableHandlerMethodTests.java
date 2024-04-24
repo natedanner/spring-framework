@@ -310,7 +310,7 @@ class ServletInvocableHandlerMethodTests {
 
 		handlerMethod = handlerMethod.wrapConcurrentResult(result);
 		handlerMethod.invokeAndHandle(this.webRequest, this.mavContainer);
-		Object expected = (result != null ? result.toString() : "");
+		Object expected = result != null ? result.toString() : "";
 		assertThat(this.response.getContentAsString()).isEqualTo(expected);
 		assertThat(handlerMethod.getReturnValueType(result).getParameterType()).isEqualTo(expectedReturnType);
 	}
@@ -470,7 +470,7 @@ class ServletInvocableHandlerMethodTests {
 		}
 
 		public Object dynamicReturnValue(@RequestParam(required=false) String param) {
-			return (param != null) ? "view" : new RedirectView("redirectView");
+			return param != null ? "view" : new RedirectView("redirectView");
 		}
 	}
 

@@ -145,7 +145,7 @@ public class WebMvcStompWebSocketEndpointRegistration implements StompWebSocketE
 		if (this.registration != null) {
 			SockJsService sockJsService = this.registration.getSockJsService();
 			for (String path : this.paths) {
-				String pattern = (path.endsWith("/") ? path + "**" : path + "/**");
+				String pattern = path.endsWith("/") ? path + "**" : path + "/**";
 				SockJsHttpRequestHandler handler = new SockJsHttpRequestHandler(sockJsService, this.webSocketHandler);
 				mappings.add(handler, pattern);
 			}

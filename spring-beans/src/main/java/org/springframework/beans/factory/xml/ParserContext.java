@@ -82,7 +82,7 @@ public final class ParserContext {
 	}
 
 	public boolean isNested() {
-		return (this.containingBeanDefinition != null);
+		return this.containingBeanDefinition != null;
 	}
 
 	public boolean isDefaultLazyInit() {

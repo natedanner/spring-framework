@@ -119,8 +119,8 @@ final class LogAdapter {
 
 		public static Log createLocationAwareLog(String name) {
 			Logger logger = LoggerFactory.getLogger(name);
-			return (logger instanceof LocationAwareLogger locationAwareLogger ?
-					new Slf4jLocationAwareLog(locationAwareLogger) : new Slf4jLog<>(logger));
+			return logger instanceof LocationAwareLogger locationAwareLogger ?
+					new Slf4jLocationAwareLog(locationAwareLogger) : new Slf4jLog<>(logger);
 		}
 
 		public static Log createLog(String name) {

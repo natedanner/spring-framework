@@ -293,7 +293,7 @@ public final class GenericTypeResolver {
 		@Nullable
 		public ResolvableType resolveVariable(TypeVariable<?> variable) {
 			Type type = this.typeVariableMap.get(variable);
-			return (type != null ? ResolvableType.forType(type) : null);
+			return type != null ? ResolvableType.forType(type) : null;
 		}
 
 		@Override

@@ -57,7 +57,7 @@ public class EnabledAndIgnoredSpringRunnerTests {
 
 	protected static final String VALUE = "enigma";
 
-	protected static int numTestsExecuted = 0;
+	protected static int numTestsExecuted;
 
 
 	@BeforeClass

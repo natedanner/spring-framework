@@ -77,7 +77,7 @@ class OkHttp3ClientHttpRequest extends AbstractStreamingClientHttpRequest {
 		}
 		else if (okhttp3.internal.http.HttpMethod.requiresRequestBody(getMethod().name())) {
 			String header = headers.getFirst(HttpHeaders.CONTENT_TYPE);
-			MediaType contentType = (header != null) ? MediaType.parse(header) : null;
+			MediaType contentType = header != null ? MediaType.parse(header) : null;
 			requestBody = RequestBody.create(contentType, new byte[0]);
 		}
 		else {

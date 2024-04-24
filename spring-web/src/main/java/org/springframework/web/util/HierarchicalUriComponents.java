@@ -89,7 +89,7 @@ final class HierarchicalUriComponents extends UriComponents {
 		}
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other);
+			return this == other;
 		}
 		@Override
 		public int hashCode() {
@@ -268,10 +268,10 @@ final class HierarchicalUriComponents extends UriComponents {
 		this.variableEncoder = value -> encodeUriComponent(value, charset, Type.URI);
 
 		UriTemplateEncoder encoder = new UriTemplateEncoder(charset);
-		String schemeTo = (getScheme() != null ? encoder.apply(getScheme(), Type.SCHEME) : null);
-		String fragmentTo = (getFragment() != null ? encoder.apply(getFragment(), Type.FRAGMENT) : null);
-		String userInfoTo = (getUserInfo() != null ? encoder.apply(getUserInfo(), Type.USER_INFO) : null);
-		String hostTo = (getHost() != null ? encoder.apply(getHost(), getHostType()) : null);
+		String schemeTo = getScheme() != null ? encoder.apply(getScheme(), Type.SCHEME) : null;
+		String fragmentTo = getFragment() != null ? encoder.apply(getFragment(), Type.FRAGMENT) : null;
+		String userInfoTo = getUserInfo() != null ? encoder.apply(getUserInfo(), Type.USER_INFO) : null;
+		String hostTo = getHost() != null ? encoder.apply(getHost(), getHostType()) : null;
 		PathComponent pathTo = this.path.encode(encoder);
 		MultiValueMap<String, String> queryParamsTo = encodeQueryParams(encoder);
 
@@ -286,10 +286,10 @@ final class HierarchicalUriComponents extends UriComponents {
 		}
 		String scheme = getScheme();
 		String fragment = getFragment();
-		String schemeTo = (scheme != null ? encodeUriComponent(scheme, charset, Type.SCHEME) : null);
-		String fragmentTo = (fragment != null ? encodeUriComponent(fragment, charset, Type.FRAGMENT) : null);
-		String userInfoTo = (this.userInfo != null ? encodeUriComponent(this.userInfo, charset, Type.USER_INFO) : null);
-		String hostTo = (this.host != null ? encodeUriComponent(this.host, charset, getHostType()) : null);
+		String schemeTo = scheme != null ? encodeUriComponent(scheme, charset, Type.SCHEME) : null;
+		String fragmentTo = fragment != null ? encodeUriComponent(fragment, charset, Type.FRAGMENT) : null;
+		String userInfoTo = this.userInfo != null ? encodeUriComponent(this.userInfo, charset, Type.USER_INFO) : null;
+		String hostTo = this.host != null ? encodeUriComponent(this.host, charset, getHostType()) : null;
 		BiFunction<String, Type, String> encoder = (s, type) -> encodeUriComponent(s, charset, type);
 		PathComponent pathTo = this.path.encode(encoder);
 		MultiValueMap<String, String> queryParamsTo = encodeQueryParams(encoder);
@@ -370,7 +370,7 @@ final class HierarchicalUriComponents extends UriComponents {
 	}
 
 	private Type getHostType() {
-		return (this.host != null && this.host.startsWith("[") ? Type.HOST_IPV6 : Type.HOST_IPV4);
+		return this.host != null && this.host.startsWith("[") ? Type.HOST_IPV6 : Type.HOST_IPV4;
 	}
 
 	// Verifying
@@ -485,7 +485,7 @@ final class HierarchicalUriComponents extends UriComponents {
 			if (this.host != null) {
 				uriBuilder.append(this.host);
 			}
-			if (StringUtils.hasText(this.port) && !this.port.equals("-1")) {
+			if (StringUtils.hasText(this.port) && !"-1".equals(this.port)) {
 				uriBuilder.append(':').append(this.port);
 			}
 		}
@@ -555,14 +555,14 @@ final class HierarchicalUriComponents extends UriComponents {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof HierarchicalUriComponents that &&
+		return this == other || (other instanceof HierarchicalUriComponents that &&
 				ObjectUtils.nullSafeEquals(getScheme(), that.getScheme()) &&
 				ObjectUtils.nullSafeEquals(getUserInfo(), that.getUserInfo()) &&
 				ObjectUtils.nullSafeEquals(getHost(), that.getHost()) &&
 				getPort() == that.getPort() &&
 				this.path.equals(that.path) &&
 				this.queryParams.equals(that.queryParams) &&
-				ObjectUtils.nullSafeEquals(getFragment(), that.getFragment())));
+				ObjectUtils.nullSafeEquals(getFragment(), that.getFragment()));
 	}
 
 	@Override
@@ -670,7 +670,7 @@ final class HierarchicalUriComponents extends UriComponents {
 		 * @see <a href="https://www.ietf.org/rfc/rfc3986.txt">RFC 3986, appendix A</a>
 		 */
 		protected boolean isAlpha(int c) {
-			return (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z');
+			return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';
 		}
 
 		/**
@@ -678,7 +678,7 @@ final class HierarchicalUriComponents extends UriComponents {
 		 * @see <a href="https://www.ietf.org/rfc/rfc3986.txt">RFC 3986, appendix A</a>
 		 */
 		protected boolean isDigit(int c) {
-			return (c >= '0' && c <= '9');
+			return c >= '0' && c <= '9';
 		}
 
 		/**
@@ -686,7 +686,7 @@ final class HierarchicalUriComponents extends UriComponents {
 		 * @see <a href="https://www.ietf.org/rfc/rfc3986.txt">RFC 3986, appendix A</a>
 		 */
 		protected boolean isGenericDelimiter(int c) {
-			return (':' == c || '/' == c || '?' == c || '#' == c || '[' == c || ']' == c || '@' == c);
+			return ':' == c || '/' == c || '?' == c || '#' == c || '[' == c || ']' == c || '@' == c;
 		}
 
 		/**
@@ -694,8 +694,8 @@ final class HierarchicalUriComponents extends UriComponents {
 		 * @see <a href="https://www.ietf.org/rfc/rfc3986.txt">RFC 3986, appendix A</a>
 		 */
 		protected boolean isSubDelimiter(int c) {
-			return ('!' == c || '$' == c || '&' == c || '\'' == c || '(' == c || ')' == c || '*' == c || '+' == c ||
-					',' == c || ';' == c || '=' == c);
+			return '!' == c || '$' == c || '&' == c || '\'' == c || '(' == c || ')' == c || '*' == c || '+' == c ||
+					',' == c || ';' == c || '=' == c;
 		}
 
 		/**
@@ -703,7 +703,7 @@ final class HierarchicalUriComponents extends UriComponents {
 		 * @see <a href="https://www.ietf.org/rfc/rfc3986.txt">RFC 3986, appendix A</a>
 		 */
 		protected boolean isReserved(int c) {
-			return (isGenericDelimiter(c) || isSubDelimiter(c));
+			return isGenericDelimiter(c) || isSubDelimiter(c);
 		}
 
 		/**
@@ -711,7 +711,7 @@ final class HierarchicalUriComponents extends UriComponents {
 		 * @see <a href="https://www.ietf.org/rfc/rfc3986.txt">RFC 3986, appendix A</a>
 		 */
 		protected boolean isUnreserved(int c) {
-			return (isAlpha(c) || isDigit(c) || '-' == c || '.' == c || '_' == c || '~' == c);
+			return isAlpha(c) || isDigit(c) || '-' == c || '.' == c || '_' == c || '~' == c;
 		}
 
 		/**
@@ -719,7 +719,7 @@ final class HierarchicalUriComponents extends UriComponents {
 		 * @see <a href="https://www.ietf.org/rfc/rfc3986.txt">RFC 3986, appendix A</a>
 		 */
 		protected boolean isPchar(int c) {
-			return (isUnreserved(c) || isSubDelimiter(c) || ':' == c || '@' == c);
+			return isUnreserved(c) || isSubDelimiter(c) || ':' == c || '@' == c;
 		}
 	}
 
@@ -837,7 +837,7 @@ final class HierarchicalUriComponents extends UriComponents {
 				if (c == '{' || c == '}') {
 					return false;
 				}
-				hasText = (hasText || !Character.isWhitespace(c));
+				hasText = hasText || !Character.isWhitespace(c);
 			}
 			return hasText;
 		}
@@ -881,7 +881,7 @@ final class HierarchicalUriComponents extends UriComponents {
 		private final String path;
 
 		public FullPathComponent(@Nullable String path) {
-			this.path = (path != null ? path : "");
+			this.path = path != null ? path : "";
 		}
 
 		@Override
@@ -919,8 +919,8 @@ final class HierarchicalUriComponents extends UriComponents {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof FullPathComponent fullPathComponent &&
-					getPath().equals(fullPathComponent.getPath())));
+			return this == other || (other instanceof FullPathComponent fullPathComponent &&
+					getPath().equals(fullPathComponent.getPath()));
 		}
 
 		@Override
@@ -993,8 +993,8 @@ final class HierarchicalUriComponents extends UriComponents {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof PathSegmentComponent pathSegmentComponent &&
-					getPathSegments().equals(pathSegmentComponent.getPathSegments())));
+			return this == other || (other instanceof PathSegmentComponent pathSegmentComponent &&
+					getPathSegments().equals(pathSegmentComponent.getPathSegments()));
 		}
 
 		@Override

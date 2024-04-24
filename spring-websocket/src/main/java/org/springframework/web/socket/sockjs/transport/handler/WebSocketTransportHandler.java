@@ -107,7 +107,7 @@ public class WebSocketTransportHandler extends AbstractTransportHandler
 
 	@Override
 	public boolean checkSessionType(SockJsSession session) {
-		return (session instanceof WebSocketServerSockJsSession);
+		return session instanceof WebSocketServerSockJsSession;
 	}
 
 	@Override

@@ -58,7 +58,7 @@ public class DefaultUserDestinationResolver implements UserDestinationResolver {
 
 	private String prefix = "/user/";
 
-	private boolean removeLeadingSlash = false;
+	private boolean removeLeadingSlash;
 
 
 	/**
@@ -87,7 +87,7 @@ public class DefaultUserDestinationResolver implements UserDestinationResolver {
 	 */
 	public void setUserDestinationPrefix(String prefix) {
 		Assert.hasText(prefix, "Prefix must not be empty");
-		this.prefix = (prefix.endsWith("/") ? prefix : prefix + "/");
+		this.prefix = prefix.endsWith("/") ? prefix : prefix + "/";
 	}
 
 	/**
@@ -176,7 +176,7 @@ public class DefaultUserDestinationResolver implements UserDestinationResolver {
 			actualDestination = actualDestination.substring(1);
 		}
 		Principal principal = SimpMessageHeaderAccessor.getUser(headers);
-		String user = (principal != null ? principal.getName() : null);
+		String user = principal != null ? principal.getName() : null;
 		Assert.isTrue(user == null || !user.contains("%2F"), () -> "Invalid sequence \"%2F\" in user name: " + user);
 		Set<String> sessionIds = Collections.singleton(sessionId);
 		return new ParseResult(sourceDestination, actualDestination, sourceDestination, sessionIds, user);

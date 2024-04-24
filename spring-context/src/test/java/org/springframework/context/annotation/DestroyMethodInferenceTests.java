@@ -194,7 +194,7 @@ class DestroyMethodInferenceTests {
 
 	static class WithExplicitDestroyMethod {
 
-		boolean closed = false;
+		boolean closed;
 
 		public void explicitClose() {
 			closed = true;
@@ -204,7 +204,7 @@ class DestroyMethodInferenceTests {
 
 	static class WithLocalCloseMethod {
 
-		boolean closed = false;
+		boolean closed;
 
 		public void close() {
 			closed = true;
@@ -214,7 +214,7 @@ class DestroyMethodInferenceTests {
 
 	static class WithInheritedCloseMethod implements Closeable {
 
-		boolean closed = false;
+		boolean closed;
 
 		@Override
 		public void close() {
@@ -225,13 +225,13 @@ class DestroyMethodInferenceTests {
 
 	static class WithNoCloseMethod {
 
-		boolean closed = false;
+		boolean closed;
 	}
 
 
 	static class WithLocalShutdownMethod {
 
-		boolean closed = false;
+		boolean closed;
 
 		public void shutdown() {
 			closed = true;
@@ -241,7 +241,7 @@ class DestroyMethodInferenceTests {
 
 	static class WithDisposableBean implements DisposableBean {
 
-		boolean closed = false;
+		boolean closed;
 
 		@Override
 		public void destroy() {
@@ -252,7 +252,7 @@ class DestroyMethodInferenceTests {
 
 	static class WithAutoCloseable implements AutoCloseable {
 
-		boolean closed = false;
+		boolean closed;
 
 		@Override
 		public void close() {
@@ -263,7 +263,7 @@ class DestroyMethodInferenceTests {
 
 	static class WithCompletableFutureMethod {
 
-		boolean closed = false;
+		boolean closed;
 
 		public CompletableFuture<Void> close() {
 			return CompletableFuture.runAsync(() -> {
@@ -281,7 +281,7 @@ class DestroyMethodInferenceTests {
 
 	static class WithReactorMonoMethod {
 
-		boolean closed = false;
+		boolean closed;
 
 		public Mono<Void> close() {
 			try {

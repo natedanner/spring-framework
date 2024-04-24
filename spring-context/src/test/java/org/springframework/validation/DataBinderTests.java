@@ -2230,7 +2230,7 @@ class DataBinderTests {
 			if (tb.getAge() % 2 == 0) {
 				errors.rejectValue("age", "AGE_NOT_ODD", "your age isn't odd");
 			}
-			if (tb.getName() == null || !tb.getName().equals("Rod")) {
+			if (tb.getName() == null || !"Rod".equals(tb.getName())) {
 				errors.rejectValue("name", "NOT_ROD", "are you sure you're not Rod?");
 			}
 			if (tb.getTouchy() == null || !tb.getTouchy().equals(tb.getName())) {

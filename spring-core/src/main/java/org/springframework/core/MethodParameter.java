@@ -199,7 +199,7 @@ public class MethodParameter {
 	 */
 	@Nullable
 	public Method getMethod() {
-		return (this.executable instanceof Method method ? method : null);
+		return this.executable instanceof Method method ? method : null;
 	}
 
 	/**
@@ -209,7 +209,7 @@ public class MethodParameter {
 	 */
 	@Nullable
 	public Constructor<?> getConstructor() {
-		return (this.executable instanceof Constructor<?> constructor ? constructor : null);
+		return this.executable instanceof Constructor<?> constructor ? constructor : null;
 	}
 
 	/**
@@ -407,10 +407,10 @@ public class MethodParameter {
 	 * @since 4.3
 	 */
 	public boolean isOptional() {
-		return (getParameterType() == Optional.class || hasNullableAnnotation() ||
+		return getParameterType() == Optional.class || hasNullableAnnotation() ||
 				(KotlinDetector.isKotlinReflectPresent() &&
 						KotlinDetector.isKotlinType(getContainingClass()) &&
-						KotlinDelegate.isOptional(this)));
+						KotlinDelegate.isOptional(this));
 	}
 
 	/**
@@ -436,7 +436,7 @@ public class MethodParameter {
 	 * @see #nested()
 	 */
 	public MethodParameter nestedIfOptional() {
-		return (getParameterType() == Optional.class ? nested() : this);
+		return getParameterType() == Optional.class ? nested() : this;
 	}
 
 	/**
@@ -471,7 +471,7 @@ public class MethodParameter {
 	 */
 	public Class<?> getContainingClass() {
 		Class<?> containingClass = this.containingClass;
-		return (containingClass != null ? containingClass : getDeclaringClass());
+		return containingClass != null ? containingClass : getDeclaringClass();
 	}
 
 	/**
@@ -511,9 +511,9 @@ public class MethodParameter {
 		if (paramType == null) {
 			if (this.parameterIndex < 0) {
 				Method method = getMethod();
-				paramType = (method != null ?
+				paramType = method != null ?
 						(KotlinDetector.isKotlinReflectPresent() && KotlinDetector.isKotlinType(getContainingClass()) ?
-						KotlinDelegate.getGenericReturnType(method) : method.getGenericReturnType()) : void.class);
+						KotlinDelegate.getGenericReturnType(method) : method.getGenericReturnType()) : void.class;
 			}
 			else {
 				Type[] genericParameterTypes = this.executable.getGenericParameterTypes();
@@ -526,8 +526,8 @@ public class MethodParameter {
 					// so access it with the actual parameter index lowered by 1
 					index = this.parameterIndex - 1;
 				}
-				paramType = (index >= 0 && index < genericParameterTypes.length ?
-						genericParameterTypes[index] : computeParameterType());
+				paramType = index >= 0 && index < genericParameterTypes.length ?
+						genericParameterTypes[index] : computeParameterType();
 			}
 			this.genericParameterType = paramType;
 		}
@@ -619,7 +619,7 @@ public class MethodParameter {
 	@Nullable
 	public <A extends Annotation> A getMethodAnnotation(Class<A> annotationType) {
 		A annotation = getAnnotatedElement().getAnnotation(annotationType);
-		return (annotation != null ? adaptAnnotation(annotation) : null);
+		return annotation != null ? adaptAnnotation(annotation) : null;
 	}
 
 	/**
@@ -647,8 +647,8 @@ public class MethodParameter {
 				// for inner classes, so access it with the actual parameter index lowered by 1
 				index = this.parameterIndex - 1;
 			}
-			paramAnns = (index >= 0 && index < annotationArray.length ?
-					adaptAnnotationArray(annotationArray[index]) : EMPTY_ANNOTATION_ARRAY);
+			paramAnns = index >= 0 && index < annotationArray.length ?
+					adaptAnnotationArray(annotationArray[index]) : EMPTY_ANNOTATION_ARRAY;
 			this.parameterAnnotations = paramAnns;
 		}
 		return paramAnns;
@@ -660,7 +660,7 @@ public class MethodParameter {
 	 * @see #getParameterAnnotations()
 	 */
 	public boolean hasParameterAnnotations() {
-		return (getParameterAnnotations().length != 0);
+		return getParameterAnnotations().length != 0;
 	}
 
 	/**
@@ -686,7 +686,7 @@ public class MethodParameter {
 	 * @see #getParameterAnnotation(Class)
 	 */
 	public <A extends Annotation> boolean hasParameterAnnotation(Class<A> annotationType) {
-		return (getParameterAnnotation(annotationType) != null);
+		return getParameterAnnotation(annotationType) != null;
 	}
 
 	/**
@@ -756,17 +756,17 @@ public class MethodParameter {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof MethodParameter that &&
+		return this == other || (other instanceof MethodParameter that &&
 				getContainingClass() == that.getContainingClass() &&
 				ObjectUtils.nullSafeEquals(this.typeIndexesPerLevel, that.typeIndexesPerLevel) &&
 				this.nestingLevel == that.nestingLevel &&
 				this.parameterIndex == that.parameterIndex &&
-				this.executable.equals(that.executable)));
+				this.executable.equals(that.executable));
 	}
 
 	@Override
 	public int hashCode() {
-		return (31 * this.executable.hashCode() + this.parameterIndex);
+		return 31 * this.executable.hashCode() + this.parameterIndex;
 	}
 
 	@Override
@@ -944,12 +944,12 @@ public class MethodParameter {
 			int index = param.getParameterIndex();
 			if (method != null && index == -1) {
 				KFunction<?> function = ReflectJvmMapping.getKotlinFunction(method);
-				return (function != null && function.getReturnType().isMarkedNullable());
+				return function != null && function.getReturnType().isMarkedNullable();
 			}
 			KFunction<?> function;
 			Predicate<KParameter> predicate;
 			if (method != null) {
-				if (param.getParameterType().getName().equals("kotlin.coroutines.Continuation")) {
+				if ("kotlin.coroutines.Continuation".equals(param.getParameterType().getName())) {
 					return true;
 				}
 				function = ReflectJvmMapping.getKotlinFunction(method);
@@ -967,7 +967,7 @@ public class MethodParameter {
 				for (KParameter kParameter : function.getParameters()) {
 					if (predicate.test(kParameter)) {
 						if (index == i++) {
-							return (kParameter.getType().isMarkedNullable() || kParameter.isOptional());
+							return kParameter.getType().isMarkedNullable() || kParameter.isOptional();
 						}
 					}
 				}

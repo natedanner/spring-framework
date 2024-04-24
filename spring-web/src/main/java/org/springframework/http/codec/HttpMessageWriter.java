@@ -64,7 +64,7 @@ public interface HttpMessageWriter<T> {
 	 * @since 5.3.4
 	 */
 	default List<MediaType> getWritableMediaTypes(ResolvableType elementType) {
-		return (canWrite(elementType, null) ? getWritableMediaTypes() : Collections.emptyList());
+		return canWrite(elementType, null) ? getWritableMediaTypes() : Collections.emptyList();
 	}
 
 	/**

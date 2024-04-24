@@ -149,7 +149,7 @@ public abstract class RequestContextHolder {
 		public static RequestAttributes getFacesRequestAttributes() {
 			try {
 				FacesContext facesContext = FacesContext.getCurrentInstance();
-				return (facesContext != null ? new FacesRequestAttributes(facesContext) : null);
+				return facesContext != null ? new FacesRequestAttributes(facesContext) : null;
 			}
 			catch (NoClassDefFoundError err) {
 				// typically for com/sun/faces/util/Util if only the JSF API jar is present

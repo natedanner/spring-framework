@@ -114,7 +114,7 @@ class JCacheInterceptorTests extends AbstractJCacheTests {
 	}
 
 
-	private static class DummyInvoker implements CacheOperationInvoker {
+	private static final class DummyInvoker implements CacheOperationInvoker {
 
 		private final Object result;
 

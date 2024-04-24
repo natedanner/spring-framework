@@ -209,7 +209,7 @@ public class SQLErrorCodesFactory {
 	 */
 	public SQLErrorCodes getErrorCodes(DataSource dataSource) {
 		SQLErrorCodes sec = resolveErrorCodes(dataSource);
-		return (sec != null ? sec : new SQLErrorCodes());
+		return sec != null ? sec : new SQLErrorCodes();
 	}
 
 	/**

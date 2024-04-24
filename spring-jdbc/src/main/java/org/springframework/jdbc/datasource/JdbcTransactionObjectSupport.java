@@ -57,9 +57,9 @@ public abstract class JdbcTransactionObjectSupport implements SavepointManager, 
 	@Nullable
 	private Integer previousIsolationLevel;
 
-	private boolean readOnly = false;
+	private boolean readOnly;
 
-	private boolean savepointAllowed = false;
+	private boolean savepointAllowed;
 
 
 	/**
@@ -81,7 +81,7 @@ public abstract class JdbcTransactionObjectSupport implements SavepointManager, 
 	 * Check whether this transaction object has a ConnectionHolder.
 	 */
 	public boolean hasConnectionHolder() {
-		return (this.connectionHolder != null);
+		return this.connectionHolder != null;
 	}
 
 	/**

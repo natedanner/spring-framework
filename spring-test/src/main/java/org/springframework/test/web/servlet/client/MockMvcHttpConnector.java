@@ -178,9 +178,9 @@ public class MockMvcHttpConnector implements ClientHttpConnector {
 									DataBufferUtils.release(buffer);
 
 									// Adapt to jakarta.servlet.http.Part...
-									MockPart mockPart = (part instanceof FilePart filePart ?
+									MockPart mockPart = part instanceof FilePart filePart ?
 											new MockPart(part.name(), filePart.filename(), partBytes) :
-											new MockPart(part.name(), partBytes));
+											new MockPart(part.name(), partBytes);
 									mockPart.getHeaders().putAll(part.headers());
 									requestBuilder.part(mockPart);
 								}))

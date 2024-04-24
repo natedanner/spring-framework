@@ -134,14 +134,14 @@ public final class RequestMappingInfo implements RequestCondition<RequestMapping
 			@Nullable ProducesRequestCondition produces, @Nullable RequestCondition<?> custom,
 			BuilderConfiguration options) {
 
-		this.name = (StringUtils.hasText(name) ? name : null);
-		this.patternsCondition = (patterns != null ? patterns : EMPTY_PATTERNS);
-		this.methodsCondition = (methods != null ? methods : EMPTY_REQUEST_METHODS);
-		this.paramsCondition = (params != null ? params : EMPTY_PARAMS);
-		this.headersCondition = (headers != null ? headers : EMPTY_HEADERS);
-		this.consumesCondition = (consumes != null ? consumes : EMPTY_CONSUMES);
-		this.producesCondition = (produces != null ? produces : EMPTY_PRODUCES);
-		this.customConditionHolder = (custom != null ? new RequestConditionHolder(custom) : EMPTY_CUSTOM);
+		this.name = StringUtils.hasText(name) ? name : null;
+		this.patternsCondition = patterns != null ? patterns : EMPTY_PATTERNS;
+		this.methodsCondition = methods != null ? methods : EMPTY_REQUEST_METHODS;
+		this.paramsCondition = params != null ? params : EMPTY_PARAMS;
+		this.headersCondition = headers != null ? headers : EMPTY_HEADERS;
+		this.consumesCondition = consumes != null ? consumes : EMPTY_CONSUMES;
+		this.producesCondition = produces != null ? produces : EMPTY_PRODUCES;
+		this.customConditionHolder = custom != null ? new RequestConditionHolder(custom) : EMPTY_CUSTOM;
 		this.options = options;
 
 		this.hashCode = calculateHashCode(
@@ -340,14 +340,14 @@ public final class RequestMappingInfo implements RequestCondition<RequestMapping
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof RequestMappingInfo that &&
+		return this == other || (other instanceof RequestMappingInfo that &&
 				this.patternsCondition.equals(that.patternsCondition) &&
 				this.methodsCondition.equals(that.methodsCondition) &&
 				this.paramsCondition.equals(that.paramsCondition) &&
 				this.headersCondition.equals(that.headersCondition) &&
 				this.consumesCondition.equals(that.consumesCondition) &&
 				this.producesCondition.equals(that.producesCondition) &&
-				this.customConditionHolder.equals(that.customConditionHolder)));
+				this.customConditionHolder.equals(that.customConditionHolder));
 	}
 
 	@Override
@@ -570,8 +570,8 @@ public final class RequestMappingInfo implements RequestCondition<RequestMapping
 
 		@Override
 		public RequestMappingInfo build() {
-			PathPatternParser parser = (this.options.getPatternParser() != null ?
-					this.options.getPatternParser() : PathPatternParser.defaultInstance);
+			PathPatternParser parser = this.options.getPatternParser() != null ?
+					this.options.getPatternParser() : PathPatternParser.defaultInstance;
 
 			RequestedContentTypeResolver contentTypeResolver = this.options.getContentTypeResolver();
 
@@ -652,46 +652,46 @@ public final class RequestMappingInfo implements RequestCondition<RequestMapping
 
 		@Override
 		public Builder paths(String... paths) {
-			PathPatternParser parser = (this.options.getPatternParser() != null ?
-					this.options.getPatternParser() : PathPatternParser.defaultInstance);
-			this.patternsCondition = (DefaultBuilder.isEmpty(paths) ?
-					null : new PatternsRequestCondition(DefaultBuilder.parse(paths, parser)));
+			PathPatternParser parser = this.options.getPatternParser() != null ?
+					this.options.getPatternParser() : PathPatternParser.defaultInstance;
+			this.patternsCondition = DefaultBuilder.isEmpty(paths) ?
+					null : new PatternsRequestCondition(DefaultBuilder.parse(paths, parser));
 			return this;
 		}
 
 		@Override
 		public Builder methods(RequestMethod... methods) {
-			this.methodsCondition = (ObjectUtils.isEmpty(methods) ?
-					EMPTY_REQUEST_METHODS : new RequestMethodsRequestCondition(methods));
+			this.methodsCondition = ObjectUtils.isEmpty(methods) ?
+					EMPTY_REQUEST_METHODS : new RequestMethodsRequestCondition(methods);
 			return this;
 		}
 
 		@Override
 		public Builder params(String... params) {
-			this.paramsCondition = (ObjectUtils.isEmpty(params) ?
-					EMPTY_PARAMS : new ParamsRequestCondition(params));
+			this.paramsCondition = ObjectUtils.isEmpty(params) ?
+					EMPTY_PARAMS : new ParamsRequestCondition(params);
 			return this;
 		}
 
 		@Override
 		public Builder headers(String... headers) {
-			this.headersCondition = (ObjectUtils.isEmpty(headers) ?
-					EMPTY_HEADERS : new HeadersRequestCondition(headers));
+			this.headersCondition = ObjectUtils.isEmpty(headers) ?
+					EMPTY_HEADERS : new HeadersRequestCondition(headers);
 			return this;
 		}
 
 		@Override
 		public Builder consumes(String... consumes) {
-			this.consumesCondition = (ObjectUtils.isEmpty(consumes) ?
-					EMPTY_CONSUMES : new ConsumesRequestCondition(consumes));
+			this.consumesCondition = ObjectUtils.isEmpty(consumes) ?
+					EMPTY_CONSUMES : new ConsumesRequestCondition(consumes);
 			return this;
 		}
 
 		@Override
 		public Builder produces(String... produces) {
-			this.producesCondition = (ObjectUtils.isEmpty(produces) ?
+			this.producesCondition = ObjectUtils.isEmpty(produces) ?
 					EMPTY_PRODUCES :
-					new ProducesRequestCondition(produces, null, this.options.getContentTypeResolver()));
+					new ProducesRequestCondition(produces, null, this.options.getContentTypeResolver());
 			return this;
 		}
 

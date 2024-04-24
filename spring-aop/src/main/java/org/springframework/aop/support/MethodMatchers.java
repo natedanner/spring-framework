@@ -51,8 +51,8 @@ public abstract class MethodMatchers {
 	 * of the given MethodMatchers matches
 	 */
 	public static MethodMatcher union(MethodMatcher mm1, MethodMatcher mm2) {
-		return (mm1 instanceof IntroductionAwareMethodMatcher || mm2 instanceof IntroductionAwareMethodMatcher ?
-				new UnionIntroductionAwareMethodMatcher(mm1, mm2) : new UnionMethodMatcher(mm1, mm2));
+		return mm1 instanceof IntroductionAwareMethodMatcher || mm2 instanceof IntroductionAwareMethodMatcher ?
+				new UnionIntroductionAwareMethodMatcher(mm1, mm2) : new UnionMethodMatcher(mm1, mm2);
 	}
 
 	/**
@@ -65,9 +65,9 @@ public abstract class MethodMatchers {
 	 * of the given MethodMatchers matches
 	 */
 	static MethodMatcher union(MethodMatcher mm1, ClassFilter cf1, MethodMatcher mm2, ClassFilter cf2) {
-		return (mm1 instanceof IntroductionAwareMethodMatcher || mm2 instanceof IntroductionAwareMethodMatcher ?
+		return mm1 instanceof IntroductionAwareMethodMatcher || mm2 instanceof IntroductionAwareMethodMatcher ?
 				new ClassFilterAwareUnionIntroductionAwareMethodMatcher(mm1, cf1, mm2, cf2) :
-				new ClassFilterAwareUnionMethodMatcher(mm1, cf1, mm2, cf2));
+				new ClassFilterAwareUnionMethodMatcher(mm1, cf1, mm2, cf2);
 	}
 
 	/**
@@ -78,8 +78,8 @@ public abstract class MethodMatchers {
 	 * of the given MethodMatchers match
 	 */
 	public static MethodMatcher intersection(MethodMatcher mm1, MethodMatcher mm2) {
-		return (mm1 instanceof IntroductionAwareMethodMatcher || mm2 instanceof IntroductionAwareMethodMatcher ?
-				new IntersectionIntroductionAwareMethodMatcher(mm1, mm2) : new IntersectionMethodMatcher(mm1, mm2));
+		return mm1 instanceof IntroductionAwareMethodMatcher || mm2 instanceof IntroductionAwareMethodMatcher ?
+				new IntersectionIntroductionAwareMethodMatcher(mm1, mm2) : new IntersectionMethodMatcher(mm1, mm2);
 	}
 
 	/**
@@ -107,9 +107,9 @@ public abstract class MethodMatchers {
 	 */
 	public static boolean matches(MethodMatcher mm, Method method, Class<?> targetClass, boolean hasIntroductions) {
 		Assert.notNull(mm, "MethodMatcher must not be null");
-		return (mm instanceof IntroductionAwareMethodMatcher iamm ?
+		return mm instanceof IntroductionAwareMethodMatcher iamm ?
 				iamm.matches(method, targetClass, hasIntroductions) :
-				mm.matches(method, targetClass));
+				mm.matches(method, targetClass);
 	}
 
 
@@ -156,8 +156,8 @@ public abstract class MethodMatchers {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof UnionMethodMatcher that &&
-					this.mm1.equals(that.mm1) && this.mm2.equals(that.mm2)));
+			return this == other || (other instanceof UnionMethodMatcher that &&
+					this.mm1.equals(that.mm1) && this.mm2.equals(that.mm2));
 		}
 
 		@Override
@@ -234,7 +234,7 @@ public abstract class MethodMatchers {
 				otherCf1 = cfa.cf1;
 				otherCf2 = cfa.cf2;
 			}
-			return (this.cf1.equals(otherCf1) && this.cf2.equals(otherCf2));
+			return this.cf1.equals(otherCf1) && this.cf2.equals(otherCf2);
 		}
 
 		@Override
@@ -293,12 +293,12 @@ public abstract class MethodMatchers {
 
 		@Override
 		public boolean matches(Method method, Class<?> targetClass) {
-			return (this.mm1.matches(method, targetClass) && this.mm2.matches(method, targetClass));
+			return this.mm1.matches(method, targetClass) && this.mm2.matches(method, targetClass);
 		}
 
 		@Override
 		public boolean isRuntime() {
-			return (this.mm1.isRuntime() || this.mm2.isRuntime());
+			return this.mm1.isRuntime() || this.mm2.isRuntime();
 		}
 
 		@Override
@@ -306,17 +306,17 @@ public abstract class MethodMatchers {
 			// Because a dynamic intersection may be composed of a static and dynamic part,
 			// we must avoid calling the 3-arg matches method on a dynamic matcher, as
 			// it will probably be an unsupported operation.
-			boolean aMatches = (this.mm1.isRuntime() ?
-					this.mm1.matches(method, targetClass, args) : this.mm1.matches(method, targetClass));
-			boolean bMatches = (this.mm2.isRuntime() ?
-					this.mm2.matches(method, targetClass, args) : this.mm2.matches(method, targetClass));
+			boolean aMatches = this.mm1.isRuntime() ?
+					this.mm1.matches(method, targetClass, args) : this.mm1.matches(method, targetClass);
+			boolean bMatches = this.mm2.isRuntime() ?
+					this.mm2.matches(method, targetClass, args) : this.mm2.matches(method, targetClass);
 			return aMatches && bMatches;
 		}
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof IntersectionMethodMatcher that &&
-					this.mm1.equals(that.mm1) && this.mm2.equals(that.mm2)));
+			return this == other || (other instanceof IntersectionMethodMatcher that &&
+					this.mm1.equals(that.mm1) && this.mm2.equals(that.mm2));
 		}
 
 		@Override
@@ -346,8 +346,8 @@ public abstract class MethodMatchers {
 
 		@Override
 		public boolean matches(Method method, Class<?> targetClass, boolean hasIntroductions) {
-			return (MethodMatchers.matches(this.mm1, method, targetClass, hasIntroductions) &&
-					MethodMatchers.matches(this.mm2, method, targetClass, hasIntroductions));
+			return MethodMatchers.matches(this.mm1, method, targetClass, hasIntroductions) &&
+					MethodMatchers.matches(this.mm2, method, targetClass, hasIntroductions);
 		}
 	}
 
@@ -378,8 +378,8 @@ public abstract class MethodMatchers {
 
 		@Override
 		public boolean equals(Object other) {
-			return (this == other || (other instanceof NegateMethodMatcher that
-					&& this.original.equals(that.original)));
+			return this == other || (other instanceof NegateMethodMatcher that
+					&& this.original.equals(that.original));
 		}
 
 		@Override

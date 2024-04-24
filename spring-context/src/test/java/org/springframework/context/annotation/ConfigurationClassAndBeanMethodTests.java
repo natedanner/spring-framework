@@ -58,32 +58,32 @@ class ConfigurationClassAndBeanMethodTests {
 		// ---------------------------------------------------------------------
 
 		List<BeanMethod> beanMethods1 = getBeanMethods(configurationClass1);
-		BeanMethod beanMethod_1_0 = beanMethods1.get(0);
-		BeanMethod beanMethod_1_1 = beanMethods1.get(1);
-		BeanMethod beanMethod_1_2 = beanMethods1.get(2);
+		BeanMethod beanMethod10 = beanMethods1.get(0);
+		BeanMethod beanMethod11 = beanMethods1.get(1);
+		BeanMethod beanMethod12 = beanMethods1.get(2);
 
 		List<BeanMethod> beanMethods2 = getBeanMethods(configurationClass2);
-		BeanMethod beanMethod_2_0 = beanMethods2.get(0);
-		BeanMethod beanMethod_2_1 = beanMethods2.get(1);
-		BeanMethod beanMethod_2_2 = beanMethods2.get(2);
+		BeanMethod beanMethod20 = beanMethods2.get(0);
+		BeanMethod beanMethod21 = beanMethods2.get(1);
+		BeanMethod beanMethod22 = beanMethods2.get(2);
 
 		List<BeanMethod> beanMethods3 = getBeanMethods(configurationClass3);
-		BeanMethod beanMethod_3_0 = beanMethods3.get(0);
-		BeanMethod beanMethod_3_1 = beanMethods3.get(1);
-		BeanMethod beanMethod_3_2 = beanMethods3.get(2);
+		BeanMethod beanMethod30 = beanMethods3.get(0);
+		BeanMethod beanMethod31 = beanMethods3.get(1);
+		BeanMethod beanMethod32 = beanMethods3.get(2);
 
-		assertThat(beanMethod_1_0).isNotEqualTo(null);
-		assertThat(beanMethod_1_0).isNotSameAs(beanMethod_2_0);
+		assertThat(beanMethod10).isNotEqualTo(null);
+		assertThat(beanMethod10).isNotSameAs(beanMethod20);
 
-		assertThat(beanMethod_1_0).isEqualTo(beanMethod_1_0);
-		assertThat(beanMethod_1_0).isEqualTo(beanMethod_2_0);
-		assertThat(beanMethod_1_1).isEqualTo(beanMethod_2_1);
-		assertThat(beanMethod_1_2).isEqualTo(beanMethod_2_2);
+		assertThat(beanMethod10).isEqualTo(beanMethod10);
+		assertThat(beanMethod10).isEqualTo(beanMethod20);
+		assertThat(beanMethod11).isEqualTo(beanMethod21);
+		assertThat(beanMethod12).isEqualTo(beanMethod22);
 
-		assertThat(beanMethod_1_0.getMetadata().getMethodName()).isEqualTo(beanMethod_3_0.getMetadata().getMethodName());
-		assertThat(beanMethod_1_0).isNotEqualTo(beanMethod_3_0);
-		assertThat(beanMethod_1_1).isNotEqualTo(beanMethod_3_1);
-		assertThat(beanMethod_1_2).isNotEqualTo(beanMethod_3_2);
+		assertThat(beanMethod10.getMetadata().getMethodName()).isEqualTo(beanMethod30.getMetadata().getMethodName());
+		assertThat(beanMethod10).isNotEqualTo(beanMethod30);
+		assertThat(beanMethod11).isNotEqualTo(beanMethod31);
+		assertThat(beanMethod12).isNotEqualTo(beanMethod32);
 	}
 
 	@Test
@@ -98,27 +98,27 @@ class ConfigurationClassAndBeanMethodTests {
 		// ---------------------------------------------------------------------
 
 		List<BeanMethod> beanMethods1 = getBeanMethods(configurationClass1);
-		BeanMethod beanMethod_1_0 = beanMethods1.get(0);
-		BeanMethod beanMethod_1_1 = beanMethods1.get(1);
-		BeanMethod beanMethod_1_2 = beanMethods1.get(2);
+		BeanMethod beanMethod10 = beanMethods1.get(0);
+		BeanMethod beanMethod11 = beanMethods1.get(1);
+		BeanMethod beanMethod12 = beanMethods1.get(2);
 
 		List<BeanMethod> beanMethods2 = getBeanMethods(configurationClass2);
-		BeanMethod beanMethod_2_0 = beanMethods2.get(0);
-		BeanMethod beanMethod_2_1 = beanMethods2.get(1);
-		BeanMethod beanMethod_2_2 = beanMethods2.get(2);
+		BeanMethod beanMethod20 = beanMethods2.get(0);
+		BeanMethod beanMethod21 = beanMethods2.get(1);
+		BeanMethod beanMethod22 = beanMethods2.get(2);
 
 		List<BeanMethod> beanMethods3 = getBeanMethods(configurationClass3);
-		BeanMethod beanMethod_3_0 = beanMethods3.get(0);
-		BeanMethod beanMethod_3_1 = beanMethods3.get(1);
-		BeanMethod beanMethod_3_2 = beanMethods3.get(2);
+		BeanMethod beanMethod30 = beanMethods3.get(0);
+		BeanMethod beanMethod31 = beanMethods3.get(1);
+		BeanMethod beanMethod32 = beanMethods3.get(2);
 
-		assertThat(beanMethod_1_0).hasSameHashCodeAs(beanMethod_2_0);
-		assertThat(beanMethod_1_1).hasSameHashCodeAs(beanMethod_2_1);
-		assertThat(beanMethod_1_2).hasSameHashCodeAs(beanMethod_2_2);
+		assertThat(beanMethod10).hasSameHashCodeAs(beanMethod20);
+		assertThat(beanMethod11).hasSameHashCodeAs(beanMethod21);
+		assertThat(beanMethod12).hasSameHashCodeAs(beanMethod22);
 
-		assertThat(beanMethod_1_0).doesNotHaveSameHashCodeAs(beanMethod_3_0);
-		assertThat(beanMethod_1_1).doesNotHaveSameHashCodeAs(beanMethod_3_1);
-		assertThat(beanMethod_1_2).doesNotHaveSameHashCodeAs(beanMethod_3_2);
+		assertThat(beanMethod10).doesNotHaveSameHashCodeAs(beanMethod30);
+		assertThat(beanMethod11).doesNotHaveSameHashCodeAs(beanMethod31);
+		assertThat(beanMethod12).doesNotHaveSameHashCodeAs(beanMethod32);
 	}
 
 	@Test

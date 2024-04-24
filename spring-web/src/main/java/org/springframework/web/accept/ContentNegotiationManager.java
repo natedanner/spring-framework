@@ -162,14 +162,14 @@ public class ContentNegotiationManager implements ContentNegotiationStrategy, Me
 			if (CollectionUtils.isEmpty(extensions)) {
 				continue;
 			}
-			result = (result != null ? result : new ArrayList<>(4));
+			result = result != null ? result : new ArrayList<>(4);
 			for (String extension : extensions) {
 				if (!result.contains(extension)) {
 					result.add(extension);
 				}
 			}
 		}
-		return (result != null ? result : Collections.emptyList());
+		return result != null ? result : Collections.emptyList();
 	}
 
 	/**
@@ -185,11 +185,11 @@ public class ContentNegotiationManager implements ContentNegotiationStrategy, Me
 				if (CollectionUtils.isEmpty(map)) {
 					continue;
 				}
-				result = (result != null ? result : new HashMap<>(4));
+				result = result != null ? result : new HashMap<>(4);
 				result.putAll(map);
 			}
 		}
-		return (result != null ? result : Collections.emptyMap());
+		return result != null ? result : Collections.emptyMap();
 	}
 
 }

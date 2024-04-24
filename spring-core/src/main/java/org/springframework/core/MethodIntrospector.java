@@ -67,7 +67,7 @@ public final class MethodIntrospector {
 		handlerTypes.addAll(ClassUtils.getAllInterfacesForClassAsSet(targetType));
 
 		for (Class<?> currentHandlerType : handlerTypes) {
-			final Class<?> targetClass = (specificHandlerType != null ? specificHandlerType : currentHandlerType);
+			final Class<?> targetClass = specificHandlerType != null ? specificHandlerType : currentHandlerType;
 
 			ReflectionUtils.doWithMethods(currentHandlerType, method -> {
 				Method specificMethod = ClassUtils.getMostSpecificMethod(method, targetClass);

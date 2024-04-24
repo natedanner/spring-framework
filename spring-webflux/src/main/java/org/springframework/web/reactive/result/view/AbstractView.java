@@ -343,8 +343,8 @@ public abstract class AbstractView implements View, BeanNameAware, ApplicationCo
 	}
 
 	protected String formatViewName() {
-		return (getBeanName() != null ?
-				"name '" + getBeanName() + "'" : "[" + getClass().getSimpleName() + "]");
+		return getBeanName() != null ?
+				"name '" + getBeanName() + "'" : "[" + getClass().getSimpleName() + "]";
 	}
 
 }

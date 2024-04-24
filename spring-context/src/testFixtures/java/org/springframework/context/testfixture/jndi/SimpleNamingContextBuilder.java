@@ -91,7 +91,7 @@ public class SimpleNamingContextBuilder implements InitialContextFactoryBuilder 
 	@Nullable
 	private static volatile SimpleNamingContextBuilder activated;
 
-	private static boolean initialized = false;
+	private static boolean initialized;
 
 	private static final Object initializationLock = new Object();
 

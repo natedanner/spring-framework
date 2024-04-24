@@ -536,9 +536,9 @@ class CommonAnnotationBeanPostProcessorTests {
 
 	public static class AnnotatedInitDestroyBean {
 
-		public boolean initCalled = false;
+		public boolean initCalled;
 
-		public boolean destroyCalled = false;
+		public boolean destroyCalled;
 
 		@PostConstruct
 		private void init() {
@@ -560,9 +560,9 @@ class CommonAnnotationBeanPostProcessorTests {
 
 	public static class LegacyAnnotatedInitDestroyBean {
 
-		public boolean initCalled = false;
+		public boolean initCalled;
 
-		public boolean destroyCalled = false;
+		public boolean destroyCalled;
 
 		@javax.annotation.PostConstruct
 		private void init() {
@@ -616,13 +616,13 @@ class CommonAnnotationBeanPostProcessorTests {
 
 	public static class ResourceInjectionBean extends AnnotatedInitDestroyBean {
 
-		public boolean init2Called = false;
+		public boolean init2Called;
 
-		public boolean init3Called = false;
+		public boolean init3Called;
 
-		public boolean destroy2Called = false;
+		public boolean destroy2Called;
 
-		public boolean destroy3Called = false;
+		public boolean destroy3Called;
 
 		@Resource
 		private TestBean testBean;
@@ -693,13 +693,13 @@ class CommonAnnotationBeanPostProcessorTests {
 
 	public static class LegacyResourceInjectionBean extends LegacyAnnotatedInitDestroyBean {
 
-		public boolean init2Called = false;
+		public boolean init2Called;
 
-		public boolean init3Called = false;
+		public boolean init3Called;
 
-		public boolean destroy2Called = false;
+		public boolean destroy2Called;
 
-		public boolean destroy3Called = false;
+		public boolean destroy3Called;
 
 		@javax.annotation.Resource
 		private TestBean testBean;
@@ -869,7 +869,7 @@ class CommonAnnotationBeanPostProcessorTests {
 	public static class DefaultMethodResourceInjectionBean extends ResourceInjectionBean
 			implements InterfaceWithDefaultMethod {
 
-		public int counter = 0;
+		public int counter;
 
 		@Override
 		public void increaseCounter() {

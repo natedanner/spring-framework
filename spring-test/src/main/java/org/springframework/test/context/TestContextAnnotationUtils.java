@@ -403,8 +403,8 @@ public abstract class TestContextAnnotationUtils {
 	 * @see NestedTestConfiguration @NestedTestConfiguration
 	 */
 	public static boolean searchEnclosingClass(Class<?> clazz) {
-		return (ClassUtils.isInnerClass(clazz) &&
-				getEnclosingConfiguration(clazz) == EnclosingConfiguration.INHERIT);
+		return ClassUtils.isInnerClass(clazz) &&
+				getEnclosingConfiguration(clazz) == EnclosingConfiguration.INHERIT;
 	}
 
 	static void clearCaches() {
@@ -429,7 +429,7 @@ public abstract class TestContextAnnotationUtils {
 		Predicate<Class<?>> searchEnclosingClass = ClassUtils::isInnerClass;
 		NestedTestConfiguration nestedTestConfiguration =
 				findMergedAnnotation(clazz, NestedTestConfiguration.class, searchEnclosingClass);
-		return (nestedTestConfiguration != null ? nestedTestConfiguration.value() : getDefaultEnclosingConfigurationMode());
+		return nestedTestConfiguration != null ? nestedTestConfiguration.value() : getDefaultEnclosingConfigurationMode();
 	}
 
 	private static EnclosingConfiguration getDefaultEnclosingConfigurationMode() {
@@ -438,7 +438,7 @@ public abstract class TestContextAnnotationUtils {
 			String value = SpringProperties.getProperty(NestedTestConfiguration.ENCLOSING_CONFIGURATION_PROPERTY_NAME);
 			EnclosingConfiguration enclosingConfigurationMode = EnclosingConfiguration.from(value);
 			defaultConfigurationMode =
-					(enclosingConfigurationMode != null ? enclosingConfigurationMode : EnclosingConfiguration.INHERIT);
+					enclosingConfigurationMode != null ? enclosingConfigurationMode : EnclosingConfiguration.INHERIT;
 			defaultEnclosingConfigurationMode = defaultConfigurationMode;
 		}
 		return defaultConfigurationMode;

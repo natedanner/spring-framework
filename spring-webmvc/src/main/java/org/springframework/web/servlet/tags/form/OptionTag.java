@@ -376,7 +376,7 @@ public class OptionTag extends AbstractHtmlElementBodyTag implements BodyTag {
 	 */
 	private String getLabelValue(Object resolvedValue) throws JspException {
 		String label = getLabel();
-		Object labelObj = (label == null ? resolvedValue : evaluate("label", label));
+		Object labelObj = label == null ? resolvedValue : evaluate("label", label);
 		return getDisplayString(labelObj, getBindStatus().getEditor());
 	}
 

@@ -111,7 +111,7 @@ public class DefaultClientRequestObservationConvention implements ClientRequestO
 
 	private static String extractPath(String uriTemplate) {
 		String path = PATTERN_BEFORE_PATH.matcher(uriTemplate).replaceFirst("");
-		return (path.startsWith("/") ? path : "/" + path);
+		return path.startsWith("/") ? path : "/" + path;
 	}
 
 	protected KeyValue method(ClientRequestObservationContext context) {

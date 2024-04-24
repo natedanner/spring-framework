@@ -42,7 +42,7 @@ public class DescriptiveResource extends AbstractResource {
 	 * @param description the resource description
 	 */
 	public DescriptiveResource(@Nullable String description) {
-		this.description = (description != null ? description : "");
+		this.description = description != null ? description : "";
 	}
 
 
@@ -73,8 +73,8 @@ public class DescriptiveResource extends AbstractResource {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof DescriptiveResource that &&
-				this.description.equals(that.description)));
+		return this == other || (other instanceof DescriptiveResource that &&
+				this.description.equals(that.description));
 	}
 
 	/**

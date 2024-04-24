@@ -36,7 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class ContentBasedVersionStrategyTests {
 
-	private ContentVersionStrategy strategy = new ContentVersionStrategy();
+	private final ContentVersionStrategy strategy = new ContentVersionStrategy();
 
 
 	@BeforeEach

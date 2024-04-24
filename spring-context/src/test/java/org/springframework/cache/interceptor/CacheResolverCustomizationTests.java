@@ -253,7 +253,7 @@ class CacheResolverCustomizationTests {
 	 * runtime (i.e. based on method invocation parameters).
 	 * <p>Expects the second argument to hold the name of the cache to use
 	 */
-	private static class RuntimeCacheResolver extends AbstractCacheResolver {
+	private static final class RuntimeCacheResolver extends AbstractCacheResolver {
 
 		private RuntimeCacheResolver(CacheManager cacheManager) {
 			super(cacheManager);
@@ -268,7 +268,7 @@ class CacheResolverCustomizationTests {
 	}
 
 
-	private static class NullCacheResolver extends AbstractCacheResolver {
+	private static final class NullCacheResolver extends AbstractCacheResolver {
 
 		private NullCacheResolver(CacheManager cacheManager) {
 			super(cacheManager);

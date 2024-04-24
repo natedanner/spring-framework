@@ -54,19 +54,19 @@ public class CacheControl {
 	@Nullable
 	private Duration maxAge;
 
-	private boolean noCache = false;
+	private boolean noCache;
 
-	private boolean noStore = false;
+	private boolean noStore;
 
-	private boolean mustRevalidate = false;
+	private boolean mustRevalidate;
 
-	private boolean noTransform = false;
+	private boolean noTransform;
 
-	private boolean cachePublic = false;
+	private boolean cachePublic;
 
-	private boolean cachePrivate = false;
+	private boolean cachePrivate;
 
-	private boolean proxyRevalidate = false;
+	private boolean proxyRevalidate;
 
 	@Nullable
 	private Duration staleWhileRevalidate;
@@ -77,7 +77,7 @@ public class CacheControl {
 	@Nullable
 	private Duration sMaxAge;
 
-	private boolean immutable = false;
+	private boolean immutable;
 
 
 	/**
@@ -344,7 +344,7 @@ public class CacheControl {
 	@Nullable
 	public String getHeaderValue() {
 		String headerValue = toHeaderValue();
-		return (StringUtils.hasText(headerValue) ? headerValue : null);
+		return StringUtils.hasText(headerValue) ? headerValue : null;
 	}
 
 	/**

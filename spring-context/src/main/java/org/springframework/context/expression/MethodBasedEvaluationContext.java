@@ -49,7 +49,7 @@ public class MethodBasedEvaluationContext extends StandardEvaluationContext {
 
 	private final ParameterNameDiscoverer parameterNameDiscoverer;
 
-	private boolean argumentsLoaded = false;
+	private boolean argumentsLoaded;
 
 
 	public MethodBasedEvaluationContext(Object rootObject, Method method, Object[] arguments,
@@ -57,8 +57,8 @@ public class MethodBasedEvaluationContext extends StandardEvaluationContext {
 
 		super(rootObject);
 		this.method = method;
-		this.arguments = (KotlinDetector.isSuspendingFunction(method) ?
-				Arrays.copyOf(arguments, arguments.length - 1) : arguments);
+		this.arguments = KotlinDetector.isSuspendingFunction(method) ?
+				Arrays.copyOf(arguments, arguments.length - 1) : arguments;
 		this.parameterNameDiscoverer = parameterNameDiscoverer;
 	}
 
@@ -89,7 +89,7 @@ public class MethodBasedEvaluationContext extends StandardEvaluationContext {
 
 		// Expose indexed variables as well as parameter names (if discoverable)
 		String[] paramNames = this.parameterNameDiscoverer.getParameterNames(this.method);
-		int paramCount = (paramNames != null ? paramNames.length : this.method.getParameterCount());
+		int paramCount = paramNames != null ? paramNames.length : this.method.getParameterCount();
 		int argsCount = this.arguments.length;
 
 		for (int i = 0; i < paramCount; i++) {

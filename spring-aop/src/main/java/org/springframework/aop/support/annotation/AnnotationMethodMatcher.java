@@ -79,19 +79,19 @@ public class AnnotationMethodMatcher extends StaticMethodMatcher {
 		}
 		// The method may be on an interface, so let's check on the target class as well.
 		Method specificMethod = AopUtils.getMostSpecificMethod(method, targetClass);
-		return (specificMethod != method && matchesMethod(specificMethod));
+		return specificMethod != method && matchesMethod(specificMethod);
 	}
 
 	private boolean matchesMethod(Method method) {
-		return (this.checkInherited ? AnnotatedElementUtils.hasAnnotation(method, this.annotationType) :
-				method.isAnnotationPresent(this.annotationType));
+		return this.checkInherited ? AnnotatedElementUtils.hasAnnotation(method, this.annotationType) :
+				method.isAnnotationPresent(this.annotationType);
 	}
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof AnnotationMethodMatcher otherMm &&
+		return this == other || (other instanceof AnnotationMethodMatcher otherMm &&
 				this.annotationType.equals(otherMm.annotationType) &&
-				this.checkInherited == otherMm.checkInherited));
+				this.checkInherited == otherMm.checkInherited);
 	}
 
 	@Override

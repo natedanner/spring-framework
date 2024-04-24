@@ -18,13 +18,13 @@ package org.springframework.cglib.core;
 @Deprecated
 public class TinyBitSet {
     private static final int[] T = new int[256];
-    private int value = 0;
+    private int value;
 
     private static int gcount(int x) {
         int c = 0;
         while (x != 0) {
             c++;
-            x &= (x - 1);
+            x &= x - 1;
         }
         return c;
     }
@@ -75,7 +75,7 @@ public class TinyBitSet {
     }
 
     public void set(int index) {
-        value |= (1 << index);
+        value |= 1 << index;
     }
 
     public void clear(int index) {

@@ -164,7 +164,7 @@ class ContextPathCompositeHandlerTests {
 		private ServerHttpRequest request;
 
 		public boolean wasInvoked() {
-			return (this.request != null);
+			return this.request != null;
 		}
 
 		public ServerHttpRequest getRequest() {

@@ -100,7 +100,7 @@ class IndexedStereotypesProvider implements StereotypesProvider {
 		if (!isIndexedAnnotation(annotation)) {
 			seen.add(element);
 		}
-		return (!element.toString().startsWith("java.lang") ? element : null);
+		return element.toString().startsWith("java.lang") ? null : element;
 	}
 
 	private boolean isAnnotatedWithIndexed(Element type) {

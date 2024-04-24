@@ -79,7 +79,7 @@ public class FormatterPropertyEditorAdapter extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		Object value = getValue();
-		return (value != null ? this.formatter.print(value, LocaleContextHolder.getLocale()) : "");
+		return value != null ? this.formatter.print(value, LocaleContextHolder.getLocale()) : "";
 	}
 
 }

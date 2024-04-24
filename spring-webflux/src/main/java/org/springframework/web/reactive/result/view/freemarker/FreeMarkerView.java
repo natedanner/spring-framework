@@ -249,7 +249,7 @@ public class FreeMarkerView extends AbstractUrlBasedView {
 						"' because of an existing model object of the same name");
 			}
 			// Make a defensive copy of the model.
-			Map<String, Object> attributes = (model != null ? new HashMap<>(model) : new HashMap<>());
+			Map<String, Object> attributes = model != null ? new HashMap<>(model) : new HashMap<>();
 			// Expose RequestContext instance for Spring macros.
 			attributes.put(SPRING_MACRO_REQUEST_CONTEXT_ATTRIBUTE, new RequestContext(
 					exchange, attributes, obtainApplicationContext(), getRequestDataValueProcessor()));
@@ -317,7 +317,7 @@ public class FreeMarkerView extends AbstractUrlBasedView {
 	protected ObjectWrapper getObjectWrapper() {
 		ObjectWrapper ow = obtainConfiguration().getObjectWrapper();
 		Version version = Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS;
-		return (ow != null ? ow : new DefaultObjectWrapperBuilder(version).build());
+		return ow != null ? ow : new DefaultObjectWrapperBuilder(version).build();
 	}
 
 	/**
@@ -330,9 +330,9 @@ public class FreeMarkerView extends AbstractUrlBasedView {
 	 */
 	@Deprecated(since = "6.1", forRemoval = true)
 	protected Template getTemplate(Locale locale) throws IOException {
-		return (getEncoding() != null ?
+		return getEncoding() != null ?
 				obtainConfiguration().getTemplate(getUrl(), locale, getEncoding()) :
-				obtainConfiguration().getTemplate(getUrl(), locale));
+				obtainConfiguration().getTemplate(getUrl(), locale);
 	}
 
 	/**

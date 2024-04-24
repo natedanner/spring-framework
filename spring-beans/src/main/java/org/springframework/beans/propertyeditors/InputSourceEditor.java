@@ -80,7 +80,7 @@ public class InputSourceEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		InputSource value = (InputSource) getValue();
-		return (value != null ? value.getSystemId() : "");
+		return value != null ? value.getSystemId() : "";
 	}
 
 }

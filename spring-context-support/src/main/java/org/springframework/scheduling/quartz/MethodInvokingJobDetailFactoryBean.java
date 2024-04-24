@@ -169,10 +169,10 @@ public class MethodInvokingJobDetailFactoryBean extends ArgumentConvertingMethod
 		prepare();
 
 		// Use specific name if given, else fall back to bean name.
-		String name = (this.name != null ? this.name : this.beanName);
+		String name = this.name != null ? this.name : this.beanName;
 
 		// Consider the concurrent flag to choose between stateful and stateless job.
-		Class<? extends Job> jobClass = (this.concurrent ? MethodInvokingJob.class : StatefulMethodInvokingJob.class);
+		Class<? extends Job> jobClass = this.concurrent ? MethodInvokingJob.class : StatefulMethodInvokingJob.class;
 
 		// Build JobDetail instance.
 		JobDetailImpl jdi = new JobDetailImpl();
@@ -230,7 +230,7 @@ public class MethodInvokingJobDetailFactoryBean extends ArgumentConvertingMethod
 
 	@Override
 	public Class<? extends JobDetail> getObjectType() {
-		return (this.jobDetail != null ? this.jobDetail.getClass() : JobDetail.class);
+		return this.jobDetail != null ? this.jobDetail.getClass() : JobDetail.class;
 	}
 
 	@Override

@@ -108,7 +108,7 @@ public class ResultSetSupportingSqlParameter extends SqlParameter {
 	 * ResultSetExtractor, RowCallbackHandler or RowMapper?
 	 */
 	public boolean isResultSetSupported() {
-		return (this.resultSetExtractor != null || this.rowCallbackHandler != null || this.rowMapper != null);
+		return this.resultSetExtractor != null || this.rowCallbackHandler != null || this.rowMapper != null;
 	}
 
 	/**

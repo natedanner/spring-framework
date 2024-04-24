@@ -90,14 +90,14 @@ class ResourceEntityResolverTests {
 	}
 
 
-	private static class ConfigurableFallbackEntityResolver extends ResourceEntityResolver {
+	private static final class ConfigurableFallbackEntityResolver extends ResourceEntityResolver {
 
 		private final boolean shouldThrow;
 
 		@Nullable
 		private final InputSource returnValue;
 
-		boolean fallbackInvoked = false;
+		boolean fallbackInvoked;
 
 		private ConfigurableFallbackEntityResolver(boolean shouldThrow) {
 			super(new NoOpResourceLoader());

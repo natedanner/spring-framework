@@ -36,17 +36,17 @@ import static org.mockito.Mockito.verifyNoInteractions;
  */
 class HandlerExecutionChainTests {
 
-	private Object handler = new Object();
+	private final Object handler = new Object();
 
-	private AsyncHandlerInterceptor interceptor1 = mock();
-	private AsyncHandlerInterceptor interceptor2 = mock();
-	private AsyncHandlerInterceptor interceptor3 = mock();
+	private final AsyncHandlerInterceptor interceptor1 = mock();
+	private final AsyncHandlerInterceptor interceptor2 = mock();
+	private final AsyncHandlerInterceptor interceptor3 = mock();
 
-	private HandlerExecutionChain chain = new HandlerExecutionChain(handler, interceptor1, interceptor2, interceptor3);
+	private final HandlerExecutionChain chain = new HandlerExecutionChain(handler, interceptor1, interceptor2, interceptor3);
 
-	private MockHttpServletRequest request = new MockHttpServletRequest();
+	private final MockHttpServletRequest request = new MockHttpServletRequest();
 
-	private MockHttpServletResponse response = new MockHttpServletResponse() ;
+	private final MockHttpServletResponse response = new MockHttpServletResponse() ;
 
 
 	@Test

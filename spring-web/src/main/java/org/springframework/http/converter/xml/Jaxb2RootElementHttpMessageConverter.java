@@ -66,9 +66,9 @@ import org.springframework.util.ClassUtils;
  */
 public class Jaxb2RootElementHttpMessageConverter extends AbstractJaxb2HttpMessageConverter<Object> {
 
-	private boolean supportDtd = false;
+	private boolean supportDtd;
 
-	private boolean processExternalEntities = false;
+	private boolean processExternalEntities;
 
 
 	/**
@@ -115,7 +115,7 @@ public class Jaxb2RootElementHttpMessageConverter extends AbstractJaxb2HttpMessa
 
 	@Override
 	public boolean canWrite(Class<?> clazz, @Nullable MediaType mediaType) {
-		return (AnnotationUtils.findAnnotation(clazz, XmlRootElement.class) != null && canWrite(mediaType));
+		return AnnotationUtils.findAnnotation(clazz, XmlRootElement.class) != null && canWrite(mediaType);
 	}
 
 	@Override

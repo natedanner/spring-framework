@@ -185,8 +185,8 @@ public abstract class AsyncExecutionAspectSupport implements BeanFactoryAware {
 			if (targetExecutor == null) {
 				return null;
 			}
-			executor = (targetExecutor instanceof AsyncTaskExecutor asyncTaskExecutor ?
-					asyncTaskExecutor : new TaskExecutorAdapter(targetExecutor));
+			executor = targetExecutor instanceof AsyncTaskExecutor asyncTaskExecutor ?
+					asyncTaskExecutor : new TaskExecutorAdapter(targetExecutor);
 			this.executors.put(method, executor);
 		}
 		return executor;

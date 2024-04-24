@@ -86,7 +86,7 @@ final class DefaultHttpStatusCode implements HttpStatusCode, Comparable<HttpStat
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof HttpStatusCode that && this.value == that.value()));
+		return this == other || (other instanceof HttpStatusCode that && this.value == that.value());
 	}
 
 	@Override

@@ -72,7 +72,7 @@ public class MockServletConfig implements ServletConfig {
 	 * @param servletName the name of the servlet
 	 */
 	public MockServletConfig(@Nullable ServletContext servletContext, String servletName) {
-		this.servletContext = (servletContext != null ? servletContext : new MockServletContext());
+		this.servletContext = servletContext != null ? servletContext : new MockServletContext();
 		this.servletName = servletName;
 	}
 

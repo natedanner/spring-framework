@@ -92,7 +92,7 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 	@Nullable
 	private ScheduledExecutorService scheduledExecutor;
 
-	private boolean enterpriseConcurrentScheduler = false;
+	private boolean enterpriseConcurrentScheduler;
 
 	@Nullable
 	private ErrorHandler errorHandler;
@@ -150,8 +150,8 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 
 	private void initScheduledExecutor(ScheduledExecutorService scheduledExecutor) {
 		this.scheduledExecutor = scheduledExecutor;
-		this.enterpriseConcurrentScheduler = (managedScheduledExecutorServiceClass != null &&
-				managedScheduledExecutorServiceClass.isInstance(scheduledExecutor));
+		this.enterpriseConcurrentScheduler = managedScheduledExecutorServiceClass != null &&
+				managedScheduledExecutorServiceClass.isInstance(scheduledExecutor);
 	}
 
 	/**
@@ -210,7 +210,7 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 			}
 			else {
 				ErrorHandler errorHandler =
-						(this.errorHandler != null ? this.errorHandler : TaskUtils.getDefaultErrorHandler(true));
+						this.errorHandler != null ? this.errorHandler : TaskUtils.getDefaultErrorHandler(true);
 				return new ReschedulingRunnable(task, trigger, this.clock, scheduleExecutorToUse, errorHandler).schedule();
 			}
 		}
@@ -314,7 +314,7 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 			@Nullable
 			public Date getNextRunTime(@Nullable LastExecution le, Date taskScheduledTime) {
 				Instant instant = this.adaptee.nextExecution(new LastExecutionAdapter(le));
-				return (instant != null ? Date.from(instant) : null);
+				return instant != null ? Date.from(instant) : null;
 			}
 
 			@Override
@@ -334,22 +334,22 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 
 				@Override
 				public Instant lastScheduledExecution() {
-					return (this.le != null ? toInstant(this.le.getScheduledStart()) : null);
+					return this.le != null ? toInstant(this.le.getScheduledStart()) : null;
 				}
 
 				@Override
 				public Instant lastActualExecution() {
-					return (this.le != null ? toInstant(this.le.getRunStart()) : null);
+					return this.le != null ? toInstant(this.le.getRunStart()) : null;
 				}
 
 				@Override
 				public Instant lastCompletion() {
-					return (this.le != null ? toInstant(this.le.getRunEnd()) : null);
+					return this.le != null ? toInstant(this.le.getRunEnd()) : null;
 				}
 
 				@Nullable
 				private static Instant toInstant(@Nullable Date date) {
-					return (date != null ? date.toInstant() : null);
+					return date != null ? date.toInstant() : null;
 				}
 			}
 		}

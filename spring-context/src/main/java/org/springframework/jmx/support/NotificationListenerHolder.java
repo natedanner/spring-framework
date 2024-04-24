@@ -120,8 +120,8 @@ public class NotificationListenerHolder {
 	 * @see #setMappedObjectNames
 	 */
 	public void setMappedObjectName(@Nullable Object mappedObjectName) {
-		this.mappedObjectNames = (mappedObjectName != null ?
-				new LinkedHashSet<>(Collections.singleton(mappedObjectName)) : null);
+		this.mappedObjectNames = mappedObjectName != null ?
+				new LinkedHashSet<>(Collections.singleton(mappedObjectName)) : null;
 	}
 
 	/**
@@ -158,11 +158,11 @@ public class NotificationListenerHolder {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof NotificationListenerHolder that &&
+		return this == other || (other instanceof NotificationListenerHolder that &&
 				ObjectUtils.nullSafeEquals(this.notificationListener, that.notificationListener) &&
 				ObjectUtils.nullSafeEquals(this.notificationFilter, that.notificationFilter) &&
 				ObjectUtils.nullSafeEquals(this.handback, that.handback) &&
-				ObjectUtils.nullSafeEquals(this.mappedObjectNames, that.mappedObjectNames)));
+				ObjectUtils.nullSafeEquals(this.mappedObjectNames, that.mappedObjectNames));
 	}
 
 	@Override

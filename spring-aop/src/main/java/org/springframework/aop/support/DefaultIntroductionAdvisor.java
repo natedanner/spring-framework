@@ -147,9 +147,9 @@ public class DefaultIntroductionAdvisor implements IntroductionAdvisor, ClassFil
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof DefaultIntroductionAdvisor otherAdvisor &&
+		return this == other || (other instanceof DefaultIntroductionAdvisor otherAdvisor &&
 				this.advice.equals(otherAdvisor.advice) &&
-				this.interfaces.equals(otherAdvisor.interfaces)));
+				this.interfaces.equals(otherAdvisor.interfaces));
 	}
 
 	@Override

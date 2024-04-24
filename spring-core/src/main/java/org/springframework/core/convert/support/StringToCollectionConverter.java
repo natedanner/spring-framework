@@ -53,8 +53,8 @@ final class StringToCollectionConverter implements ConditionalGenericConverter {
 
 	@Override
 	public boolean matches(TypeDescriptor sourceType, TypeDescriptor targetType) {
-		return (targetType.getElementTypeDescriptor() == null ||
-				this.conversionService.canConvert(sourceType, targetType.getElementTypeDescriptor()));
+		return targetType.getElementTypeDescriptor() == null ||
+				this.conversionService.canConvert(sourceType, targetType.getElementTypeDescriptor());
 	}
 
 	@Override

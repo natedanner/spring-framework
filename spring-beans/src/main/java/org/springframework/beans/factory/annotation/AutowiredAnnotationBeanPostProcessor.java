@@ -463,7 +463,7 @@ public class AutowiredAnnotationBeanPostProcessor implements SmartInstantiationA
 				}
 			}
 		}
-		return (candidateConstructors.length > 0 ? candidateConstructors : null);
+		return candidateConstructors.length > 0 ? candidateConstructors : null;
 	}
 
 	private void checkLookupMethods(Class<?> beanClass, final String beanName) throws BeanCreationException {
@@ -541,7 +541,7 @@ public class AutowiredAnnotationBeanPostProcessor implements SmartInstantiationA
 
 	private InjectionMetadata findAutowiringMetadata(String beanName, Class<?> clazz, @Nullable PropertyValues pvs) {
 		// Fall back to class name as cache key, for backwards compatibility with custom callers.
-		String cacheKey = (StringUtils.hasLength(beanName) ? beanName : clazz.getName());
+		String cacheKey = StringUtils.hasLength(beanName) ? beanName : clazz.getName();
 		// Quick check on the concurrent map first, with minimal locking.
 		InjectionMetadata metadata = this.injectionMetadataCache.get(cacheKey);
 		if (InjectionMetadata.needsRefresh(metadata, clazz)) {
@@ -643,8 +643,8 @@ public class AutowiredAnnotationBeanPostProcessor implements SmartInstantiationA
 	 * @return whether the annotation indicates that a dependency is required
 	 */
 	protected boolean determineRequiredStatus(MergedAnnotation<?> ann) {
-		return (ann.getValue(this.requiredParameterName).isEmpty() ||
-				this.requiredParameterValue == ann.getBoolean(this.requiredParameterName));
+		return ann.getValue(this.requiredParameterName).isEmpty() ||
+				this.requiredParameterValue == ann.getBoolean(this.requiredParameterName);
 	}
 
 	/**
@@ -1027,7 +1027,7 @@ public class AutowiredAnnotationBeanPostProcessor implements SmartInstantiationA
 			hints.reflection().registerField(field);
 			CodeBlock resolver = CodeBlock.of("$T.$L($S)",
 					AutowiredFieldValueResolver.class,
-					(!required ? "forField" : "forRequiredField"), field.getName());
+					(required ? "forRequiredField" : "forField"), field.getName());
 			AccessControl accessControl = AccessControl.forMember(field);
 			if (!accessControl.isAccessibleFrom(targetClassName)) {
 				return CodeBlock.of("$L.resolveAndSet($L, $L)", resolver,
@@ -1042,7 +1042,7 @@ public class AutowiredAnnotationBeanPostProcessor implements SmartInstantiationA
 
 			CodeBlock.Builder code = CodeBlock.builder();
 			code.add("$T.$L", AutowiredMethodArgumentsResolver.class,
-					(!required ? "forMethod" : "forRequiredMethod"));
+					(required ? "forRequiredMethod" : "forMethod"));
 			code.add("($S", method.getName());
 			if (method.getParameterCount() > 0) {
 				code.add(", $L", generateParameterTypesCode(method.getParameterTypes()));

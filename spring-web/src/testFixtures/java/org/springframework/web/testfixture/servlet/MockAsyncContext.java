@@ -89,7 +89,7 @@ public class MockAsyncContext implements AsyncContext {
 
 	@Override
 	public boolean hasOriginalRequestAndResponse() {
-		return (this.request instanceof MockHttpServletRequest && this.response instanceof MockHttpServletResponse);
+		return this.request instanceof MockHttpServletRequest && this.response instanceof MockHttpServletResponse;
 	}
 
 	@Override

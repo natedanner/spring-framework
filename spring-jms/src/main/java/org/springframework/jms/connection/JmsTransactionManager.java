@@ -96,7 +96,7 @@ public class JmsTransactionManager extends AbstractPlatformTransactionManager
 	@Nullable
 	private ConnectionFactory connectionFactory;
 
-	private boolean lazyResourceRetrieval = false;
+	private boolean lazyResourceRetrieval;
 
 
 	/**
@@ -348,9 +348,9 @@ public class JmsTransactionManager extends AbstractPlatformTransactionManager
 	 */
 	private class LazyJmsResourceHolder extends JmsResourceHolder {
 
-		private boolean connectionInitialized = false;
+		private boolean connectionInitialized;
 
-		private boolean sessionInitialized = false;
+		private boolean sessionInitialized;
 
 		public LazyJmsResourceHolder(@Nullable ConnectionFactory connectionFactory) {
 			super(connectionFactory);
@@ -441,12 +441,12 @@ public class JmsTransactionManager extends AbstractPlatformTransactionManager
 		}
 
 		public boolean hasResourceHolder() {
-			return (this.resourceHolder != null);
+			return this.resourceHolder != null;
 		}
 
 		@Override
 		public boolean isRollbackOnly() {
-			return (this.resourceHolder != null && this.resourceHolder.isRollbackOnly());
+			return this.resourceHolder != null && this.resourceHolder.isRollbackOnly();
 		}
 	}
 

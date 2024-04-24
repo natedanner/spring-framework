@@ -364,7 +364,7 @@ public class MergedContextConfiguration implements Serializable {
 	 * @see #hasClasses()
 	 */
 	public boolean hasResources() {
-		return (hasLocations() || hasClasses());
+		return hasLocations() || hasClasses();
 	}
 
 	/**
@@ -521,11 +521,7 @@ public class MergedContextConfiguration implements Serializable {
 			return false;
 		}
 
-		if (!nullSafeClassName(this.contextLoader).equals(nullSafeClassName(otherConfig.contextLoader))) {
-			return false;
-		}
-
-		return true;
+		return !!nullSafeClassName(this.contextLoader).equals(nullSafeClassName(otherConfig.contextLoader));
 	}
 
 	/**
@@ -576,25 +572,25 @@ public class MergedContextConfiguration implements Serializable {
 
 
 	protected static String[] processStrings(@Nullable String[] array) {
-		return (array != null ? array : EMPTY_STRING_ARRAY);
+		return array != null ? array : EMPTY_STRING_ARRAY;
 	}
 
 	private static Class<?>[] processClasses(@Nullable Class<?>[] classes) {
-		return (classes != null ? classes : EMPTY_CLASS_ARRAY);
+		return classes != null ? classes : EMPTY_CLASS_ARRAY;
 	}
 
 	private static Set<Class<? extends ApplicationContextInitializer<?>>> processContextInitializerClasses(
 			@Nullable Set<Class<? extends ApplicationContextInitializer<?>>> contextInitializerClasses) {
 
-		return (contextInitializerClasses != null ?
-				Collections.unmodifiableSet(contextInitializerClasses) : EMPTY_INITIALIZER_CLASSES);
+		return contextInitializerClasses != null ?
+				Collections.unmodifiableSet(contextInitializerClasses) : EMPTY_INITIALIZER_CLASSES;
 	}
 
 	private static Set<ContextCustomizer> processContextCustomizers(
 			@Nullable Set<ContextCustomizer> contextCustomizers) {
 
-		return (contextCustomizers != null ?
-				Collections.unmodifiableSet(contextCustomizers) : EMPTY_CONTEXT_CUSTOMIZERS);
+		return contextCustomizers != null ?
+				Collections.unmodifiableSet(contextCustomizers) : EMPTY_CONTEXT_CUSTOMIZERS;
 	}
 
 	private static String[] processActiveProfiles(@Nullable String[] activeProfiles) {
@@ -613,7 +609,7 @@ public class MergedContextConfiguration implements Serializable {
 	 * loader or &quot;null&quot; if the supplied loader is {@code null}.
 	 */
 	protected static String nullSafeClassName(@Nullable ContextLoader contextLoader) {
-		return (contextLoader != null ? contextLoader.getClass().getName() : "null");
+		return contextLoader != null ? contextLoader.getClass().getName() : "null";
 	}
 
 }

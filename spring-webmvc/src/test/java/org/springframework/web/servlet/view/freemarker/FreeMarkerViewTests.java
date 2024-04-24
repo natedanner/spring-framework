@@ -206,7 +206,7 @@ class FreeMarkerViewTests {
 
 		@Override
 		public Template getTemplate(String name, final Locale locale) throws IOException {
-			if (name.equals(TEMPLATE_NAME) || name.equals("templates/test.ftl")) {
+			if (name.equals(TEMPLATE_NAME) || "templates/test.ftl".equals(name)) {
 				return new Template(name, new StringReader("test"), this) {
 					@Override
 					public void process(Object model, Writer writer) {

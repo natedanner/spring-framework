@@ -59,14 +59,14 @@ public class MatchAlwaysTransactionAttributeSource implements TransactionAttribu
 	@Override
 	@Nullable
 	public TransactionAttribute getTransactionAttribute(Method method, @Nullable Class<?> targetClass) {
-		return (ClassUtils.isUserLevelMethod(method) ? this.transactionAttribute : null);
+		return ClassUtils.isUserLevelMethod(method) ? this.transactionAttribute : null;
 	}
 
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof MatchAlwaysTransactionAttributeSource that &&
-				ObjectUtils.nullSafeEquals(this.transactionAttribute, that.transactionAttribute)));
+		return this == other || (other instanceof MatchAlwaysTransactionAttributeSource that &&
+				ObjectUtils.nullSafeEquals(this.transactionAttribute, that.transactionAttribute));
 	}
 
 	@Override

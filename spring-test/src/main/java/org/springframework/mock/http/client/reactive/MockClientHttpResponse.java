@@ -129,7 +129,7 @@ public class MockClientHttpResponse implements ClientHttpResponse {
 		if (contentType != null) {
 			charset = contentType.getCharset();
 		}
-		return (charset != null ? charset : StandardCharsets.UTF_8);
+		return charset != null ? charset : StandardCharsets.UTF_8;
 	}
 
 

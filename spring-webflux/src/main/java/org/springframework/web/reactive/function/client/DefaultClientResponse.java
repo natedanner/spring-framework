@@ -285,7 +285,7 @@ class DefaultClientResponse implements ClientResponse {
 		@Override
 		public List<String> header(String headerName) {
 			List<String> headerValues = this.httpHeaders.get(headerName);
-			return (headerValues != null ? headerValues : Collections.emptyList());
+			return headerValues != null ? headerValues : Collections.emptyList();
 		}
 
 		@Override
@@ -294,7 +294,7 @@ class DefaultClientResponse implements ClientResponse {
 		}
 
 		private OptionalLong toOptionalLong(long value) {
-			return (value != -1 ? OptionalLong.of(value) : OptionalLong.empty());
+			return value != -1 ? OptionalLong.of(value) : OptionalLong.empty();
 		}
 	}
 

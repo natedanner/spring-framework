@@ -115,7 +115,7 @@ public class IsolationLevelDataSourceAdapter extends UserCredentialsDataSourceAd
 	 */
 	public void setIsolationLevel(int isolationLevel) {
 		Assert.isTrue(constants.containsValue(isolationLevel), "Only values of isolation constants allowed");
-		this.isolationLevel = (isolationLevel != TransactionDefinition.ISOLATION_DEFAULT ? isolationLevel : null);
+		this.isolationLevel = isolationLevel != TransactionDefinition.ISOLATION_DEFAULT ? isolationLevel : null;
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class IsolationLevelDataSourceAdapter extends UserCredentialsDataSourceAd
 	@Nullable
 	protected Boolean getCurrentReadOnlyFlag() {
 		boolean txReadOnly = TransactionSynchronizationManager.isCurrentTransactionReadOnly();
-		return (txReadOnly ? Boolean.TRUE : null);
+		return txReadOnly ? Boolean.TRUE : null;
 	}
 
 }

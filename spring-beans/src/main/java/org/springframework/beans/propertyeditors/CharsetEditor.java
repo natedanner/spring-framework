@@ -48,7 +48,7 @@ public class CharsetEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		Charset value = (Charset) getValue();
-		return (value != null ? value.name() : "");
+		return value != null ? value.name() : "";
 	}
 
 }

@@ -62,7 +62,7 @@ public abstract class AbstractBrokerMessageHandler
 	@Nullable
 	private Predicate<String> userDestinationPredicate;
 
-	private boolean preservePublishOrder = false;
+	private boolean preservePublishOrder;
 
 	@Nullable
 	private ApplicationEventPublisher eventPublisher;
@@ -112,7 +112,7 @@ public abstract class AbstractBrokerMessageHandler
 		this.clientOutboundChannel = outboundChannel;
 		this.brokerChannel = brokerChannel;
 
-		destinationPrefixes = (destinationPrefixes != null ? destinationPrefixes : Collections.emptyList());
+		destinationPrefixes = destinationPrefixes != null ? destinationPrefixes : Collections.emptyList();
 		this.destinationPrefixes = Collections.unmodifiableCollection(destinationPrefixes);
 	}
 
@@ -313,7 +313,7 @@ public abstract class AbstractBrokerMessageHandler
 	}
 
 	private boolean isUserDestination(String destination) {
-		return (this.userDestinationPredicate != null && this.userDestinationPredicate.test(destination));
+		return this.userDestinationPredicate != null && this.userDestinationPredicate.test(destination);
 	}
 
 	protected void publishBrokerAvailableEvent() {

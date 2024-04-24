@@ -57,7 +57,7 @@ class CaffeineCacheTests extends AbstractValueAdaptingCacheTests<CaffeineCache> 
 
 	@Override
 	protected CaffeineCache getCache(boolean allowNull) {
-		return (allowNull ? this.cache : this.cacheNoNull);
+		return allowNull ? this.cache : this.cacheNoNull;
 	}
 
 	@Override

@@ -66,7 +66,7 @@ public abstract class TaskUtils {
 		if (task instanceof DelegatingErrorHandlingRunnable dehRunnable) {
 			return dehRunnable;
 		}
-		ErrorHandler eh = (errorHandler != null ? errorHandler : getDefaultErrorHandler(isRepeatingTask));
+		ErrorHandler eh = errorHandler != null ? errorHandler : getDefaultErrorHandler(isRepeatingTask);
 		return new DelegatingErrorHandlingRunnable(task, eh);
 	}
 
@@ -77,7 +77,7 @@ public abstract class TaskUtils {
 	 * cases, the error will be logged.
 	 */
 	public static ErrorHandler getDefaultErrorHandler(boolean isRepeatingTask) {
-		return (isRepeatingTask ? LOG_AND_SUPPRESS_ERROR_HANDLER : LOG_AND_PROPAGATE_ERROR_HANDLER);
+		return isRepeatingTask ? LOG_AND_SUPPRESS_ERROR_HANDLER : LOG_AND_PROPAGATE_ERROR_HANDLER;
 	}
 
 

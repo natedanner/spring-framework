@@ -60,7 +60,7 @@ public class OrderedMessageChannelDecorator implements MessageChannel {
 
 	public OrderedMessageChannelDecorator(MessageChannel channel, Log logger) {
 		this.channel = channel;
-		this.subscriberCount = (channel instanceof ExecutorSubscribableChannel ch ? ch.getSubscribers().size() : 0);
+		this.subscriberCount = channel instanceof ExecutorSubscribableChannel ch ? ch.getSubscribers().size() : 0;
 		this.logger = logger;
 	}
 
@@ -165,8 +165,8 @@ public class OrderedMessageChannelDecorator implements MessageChannel {
 	 * @since 6.1
 	 */
 	public static boolean supportsOrderedMessages(MessageChannel channel) {
-		return (channel instanceof ExecutorSubscribableChannel ch &&
-				ch.getInterceptors().stream().anyMatch(CallbackTaskInterceptor.class::isInstance));
+		return channel instanceof ExecutorSubscribableChannel ch &&
+				ch.getInterceptors().stream().anyMatch(CallbackTaskInterceptor.class::isInstance);
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class OrderedMessageChannelDecorator implements MessageChannel {
 
 		private PostHandleTask(Message<?> message) {
 			this.message = message;
-			this.handledCount = (subscriberCount > 1 ? new AtomicInteger(0) : null);
+			this.handledCount = subscriberCount > 1 ? new AtomicInteger(0) : null;
 		}
 
 		@Override

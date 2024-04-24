@@ -71,9 +71,9 @@ public class ConnectorServerFactoryBean extends MBeanRegistrationSupport
 	@Nullable
 	private ObjectName objectName;
 
-	private boolean threaded = false;
+	private boolean threaded;
 
-	private boolean daemon = false;
+	private boolean daemon;
 
 	@Nullable
 	private JMXConnectorServer connectorServer;
@@ -214,7 +214,7 @@ public class ConnectorServerFactoryBean extends MBeanRegistrationSupport
 
 	@Override
 	public Class<? extends JMXConnectorServer> getObjectType() {
-		return (this.connectorServer != null ? this.connectorServer.getClass() : JMXConnectorServer.class);
+		return this.connectorServer != null ? this.connectorServer.getClass() : JMXConnectorServer.class;
 	}
 
 	@Override

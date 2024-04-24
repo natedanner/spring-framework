@@ -76,7 +76,7 @@ public abstract class AbstractNamedValueMethodArgumentResolver implements SyncHa
 
 		this.conversionService = conversionService;
 		this.configurableBeanFactory = beanFactory;
-		this.expressionContext = (beanFactory != null ? new BeanExpressionContext(beanFactory, null) : null);
+		this.expressionContext = beanFactory != null ? new BeanExpressionContext(beanFactory, null) : null;
 	}
 
 

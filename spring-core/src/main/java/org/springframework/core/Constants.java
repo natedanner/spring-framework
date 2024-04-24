@@ -162,7 +162,7 @@ public class Constants {
 	 * @return the set of constant names
 	 */
 	public Set<String> getNames(@Nullable String namePrefix) {
-		String prefixToUse = (namePrefix != null ? namePrefix.trim().toUpperCase(Locale.ENGLISH) : "");
+		String prefixToUse = namePrefix != null ? namePrefix.trim().toUpperCase(Locale.ENGLISH) : "";
 		Set<String> names = new HashSet<>();
 		for (String code : this.fieldCache.keySet()) {
 			if (code.startsWith(prefixToUse)) {
@@ -194,7 +194,7 @@ public class Constants {
 	 * @return the set of constant names
 	 */
 	public Set<String> getNamesForSuffix(@Nullable String nameSuffix) {
-		String suffixToUse = (nameSuffix != null ? nameSuffix.trim().toUpperCase(Locale.ENGLISH) : "");
+		String suffixToUse = nameSuffix != null ? nameSuffix.trim().toUpperCase(Locale.ENGLISH) : "";
 		Set<String> names = new HashSet<>();
 		for (String code : this.fieldCache.keySet()) {
 			if (code.endsWith(suffixToUse)) {
@@ -216,7 +216,7 @@ public class Constants {
 	 * @return the set of values
 	 */
 	public Set<Object> getValues(@Nullable String namePrefix) {
-		String prefixToUse = (namePrefix != null ? namePrefix.trim().toUpperCase(Locale.ENGLISH) : "");
+		String prefixToUse = namePrefix != null ? namePrefix.trim().toUpperCase(Locale.ENGLISH) : "";
 		Set<Object> values = new HashSet<>();
 		this.fieldCache.forEach((code, value) -> {
 			if (code.startsWith(prefixToUse)) {
@@ -248,7 +248,7 @@ public class Constants {
 	 * @return the set of values
 	 */
 	public Set<Object> getValuesForSuffix(@Nullable String nameSuffix) {
-		String suffixToUse = (nameSuffix != null ? nameSuffix.trim().toUpperCase(Locale.ENGLISH) : "");
+		String suffixToUse = nameSuffix != null ? nameSuffix.trim().toUpperCase(Locale.ENGLISH) : "";
 		Set<Object> values = new HashSet<>();
 		this.fieldCache.forEach((code, value) -> {
 			if (code.endsWith(suffixToUse)) {
@@ -268,7 +268,7 @@ public class Constants {
 	 * @throws ConstantException if the value wasn't found
 	 */
 	public String toCode(Object value, @Nullable String namePrefix) throws ConstantException {
-		String prefixToUse = (namePrefix != null ? namePrefix.trim().toUpperCase(Locale.ENGLISH) : "");
+		String prefixToUse = namePrefix != null ? namePrefix.trim().toUpperCase(Locale.ENGLISH) : "";
 		for (Map.Entry<String, Object> entry : this.fieldCache.entrySet()) {
 			if (entry.getKey().startsWith(prefixToUse) && entry.getValue().equals(value)) {
 				return entry.getKey();
@@ -299,7 +299,7 @@ public class Constants {
 	 * @throws ConstantException if the value wasn't found
 	 */
 	public String toCodeForSuffix(Object value, @Nullable String nameSuffix) throws ConstantException {
-		String suffixToUse = (nameSuffix != null ? nameSuffix.trim().toUpperCase(Locale.ENGLISH) : "");
+		String suffixToUse = nameSuffix != null ? nameSuffix.trim().toUpperCase(Locale.ENGLISH) : "";
 		for (Map.Entry<String, Object> entry : this.fieldCache.entrySet()) {
 			if (entry.getKey().endsWith(suffixToUse) && entry.getValue().equals(value)) {
 				return entry.getKey();

@@ -53,14 +53,14 @@ class CacheOperationSourcePointcut extends StaticMethodMatcherPointcut implement
 
 	@Override
 	public boolean matches(Method method, Class<?> targetClass) {
-		return (this.cacheOperationSource == null ||
-				!CollectionUtils.isEmpty(this.cacheOperationSource.getCacheOperations(method, targetClass)));
+		return this.cacheOperationSource == null ||
+				!CollectionUtils.isEmpty(this.cacheOperationSource.getCacheOperations(method, targetClass));
 	}
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof CacheOperationSourcePointcut that &&
-				ObjectUtils.nullSafeEquals(this.cacheOperationSource, that.cacheOperationSource)));
+		return this == other || (other instanceof CacheOperationSourcePointcut that &&
+				ObjectUtils.nullSafeEquals(this.cacheOperationSource, that.cacheOperationSource));
 	}
 
 	@Override
@@ -85,7 +85,7 @@ class CacheOperationSourcePointcut extends StaticMethodMatcherPointcut implement
 			if (CacheManager.class.isAssignableFrom(clazz)) {
 				return false;
 			}
-			return (cacheOperationSource == null || cacheOperationSource.isCandidateClass(clazz));
+			return cacheOperationSource == null || cacheOperationSource.isCandidateClass(clazz);
 		}
 
 		private CacheOperationSource getCacheOperationSource() {
@@ -94,8 +94,8 @@ class CacheOperationSourcePointcut extends StaticMethodMatcherPointcut implement
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof CacheOperationSourceClassFilter that &&
-					ObjectUtils.nullSafeEquals(cacheOperationSource, that.getCacheOperationSource())));
+			return this == other || (other instanceof CacheOperationSourceClassFilter that &&
+					ObjectUtils.nullSafeEquals(cacheOperationSource, that.getCacheOperationSource()));
 		}
 
 		@Override

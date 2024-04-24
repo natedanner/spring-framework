@@ -148,7 +148,7 @@ public class TypedStringValue implements BeanMetadataElement, Comparable<TypedSt
 	 * Return whether this typed String value carries a target type.
 	 */
 	public boolean hasTargetType() {
-		return (this.targetType instanceof Class);
+		return this.targetType instanceof Class;
 	}
 
 	/**
@@ -222,9 +222,9 @@ public class TypedStringValue implements BeanMetadataElement, Comparable<TypedSt
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof TypedStringValue that &&
+		return this == other || (other instanceof TypedStringValue that &&
 				ObjectUtils.nullSafeEquals(this.value, that.value) &&
-				ObjectUtils.nullSafeEquals(this.targetType, that.targetType)));
+				ObjectUtils.nullSafeEquals(this.targetType, that.targetType));
 	}
 
 	@Override

@@ -109,7 +109,7 @@ final class DefaultPathContainer implements PathContainer {
 		}
 		while (begin < path.length()) {
 			int end = path.indexOf(separator, begin);
-			String segment = (end != -1 ? path.substring(begin, end) : path.substring(begin));
+			String segment = end != -1 ? path.substring(begin, end) : path.substring(begin);
 			if (!segment.isEmpty()) {
 				elements.add(options.shouldDecodeAndParseSegments() ?
 						decodeAndParsePathSegment(segment) :
@@ -144,7 +144,7 @@ final class DefaultPathContainer implements PathContainer {
 		int begin = 1;
 		while (begin < input.length()) {
 			int end = input.indexOf(';', begin);
-			String param = (end != -1 ? input.substring(begin, end) : input.substring(begin));
+			String param = end != -1 ? input.substring(begin, end) : input.substring(begin);
 			parsePathParamValues(param, charset, result);
 			if (end == -1) {
 				break;
@@ -282,7 +282,7 @@ final class DefaultPathContainer implements PathContainer {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof PathSegment that && this.value.equals(that.value())));
+			return this == other || (other instanceof PathSegment that && this.value.equals(that.value()));
 		}
 
 		@Override

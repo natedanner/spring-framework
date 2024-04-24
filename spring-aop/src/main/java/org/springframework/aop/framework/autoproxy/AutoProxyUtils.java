@@ -130,8 +130,8 @@ public abstract class AutoProxyUtils {
 				beanClass.getName().length() + AutowireCapableBeanFactory.ORIGINAL_INSTANCE_SUFFIX.length()) {
 			return false;
 		}
-		return (beanName.startsWith(beanClass.getName()) &&
-				beanName.endsWith(AutowireCapableBeanFactory.ORIGINAL_INSTANCE_SUFFIX));
+		return beanName.startsWith(beanClass.getName()) &&
+				beanName.endsWith(AutowireCapableBeanFactory.ORIGINAL_INSTANCE_SUFFIX);
 	}
 
 }

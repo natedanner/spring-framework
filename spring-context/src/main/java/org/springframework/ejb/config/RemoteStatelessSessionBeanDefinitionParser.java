@@ -39,8 +39,8 @@ class RemoteStatelessSessionBeanDefinitionParser extends AbstractJndiLocatingBea
 
 	@Override
 	protected boolean isEligibleAttribute(String attributeName) {
-		return (super.isEligibleAttribute(attributeName) &&
-				BeanUtils.getPropertyDescriptor(JndiObjectFactoryBean.class, extractPropertyName(attributeName)) != null);
+		return super.isEligibleAttribute(attributeName) &&
+				BeanUtils.getPropertyDescriptor(JndiObjectFactoryBean.class, extractPropertyName(attributeName)) != null;
 	}
 
 }

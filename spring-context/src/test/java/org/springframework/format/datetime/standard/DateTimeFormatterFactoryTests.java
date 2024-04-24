@@ -41,12 +41,12 @@ class DateTimeFormatterFactoryTests {
 	private static final TimeZone NEW_YORK = TimeZone.getTimeZone("America/New_York");
 
 	// Ensure that we are testing against a timezone other than the default.
-	private static final TimeZone TEST_TIMEZONE = (ZURICH.equals(TimeZone.getDefault()) ? NEW_YORK : ZURICH);
+	private static final TimeZone TEST_TIMEZONE = ZURICH.equals(TimeZone.getDefault()) ? NEW_YORK : ZURICH;
 
 
 	private DateTimeFormatterFactory factory = new DateTimeFormatterFactory();
 
-	private LocalDateTime dateTime = LocalDateTime.of(2009, 10, 21, 12, 10, 00, 00);
+	private final LocalDateTime dateTime = LocalDateTime.of(2009, 10, 21, 12, 10, 0, 0);
 
 
 	@Test
@@ -93,8 +93,8 @@ class DateTimeFormatterFactoryTests {
 		factory.setPattern("yyyyMMddHHmmss Z");
 		factory.setTimeZone(TEST_TIMEZONE);
 		ZoneId dateTimeZone = TEST_TIMEZONE.toZoneId();
-		ZonedDateTime dateTime = ZonedDateTime.of(2009, 10, 21, 12, 10, 00, 00, dateTimeZone);
-		String offset = (TEST_TIMEZONE.equals(NEW_YORK) ? "-0400" : "+0200");
+		ZonedDateTime dateTime = ZonedDateTime.of(2009, 10, 21, 12, 10, 0, 0, dateTimeZone);
+		String offset = TEST_TIMEZONE.equals(NEW_YORK) ? "-0400" : "+0200";
 		assertThat(factory.createDateTimeFormatter().format(dateTime)).isEqualTo("20091021121000 " + offset);
 	}
 

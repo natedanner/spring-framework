@@ -33,7 +33,7 @@ import org.springframework.asm.Type;
 import org.springframework.cglib.core.internal.CustomizerRegistry;
 
 @SuppressWarnings({"rawtypes", "unchecked", "static", "fallthrough", "deprecation"})
-public class EmitUtils {
+public final class EmitUtils {
     private static final Signature CSTRUCT_NULL =
       TypeUtils.parseConstructor("");
     private static final Signature CSTRUCT_THROWABLE =
@@ -252,7 +252,7 @@ public class EmitUtils {
         int[] keys = new int[buckets.size()];
         int index = 0;
         for (Iterator it = buckets.keySet().iterator(); it.hasNext();) {
-            keys[index++] = ((Integer)it.next());
+            keys[index++] = (Integer)it.next();
         }
         Arrays.sort(keys);
         return keys;
@@ -262,7 +262,7 @@ public class EmitUtils {
                                            final String[] strings,
                                            final ObjectSwitchCallback callback,
                                            final boolean skipEquals) throws Exception {
-        final Map buckets = CollectionUtils.bucket(Arrays.asList(strings), value -> value.hashCode());
+        final Map buckets = CollectionUtils.bucket(Arrays.asList(strings), Object::hashCode);
         final Label def = e.make_label();
         final Label end = e.make_label();
         e.dup();
@@ -607,7 +607,7 @@ public class EmitUtils {
                                      Type type,
                                      final ArrayDelimiters delims,
                                      final CustomizerRegistry registry) {
-        final ArrayDelimiters d = (delims != null) ? delims : DEFAULT_DELIMITERS;
+        final ArrayDelimiters d = delims != null ? delims : DEFAULT_DELIMITERS;
         ProcessArrayCallback callback = new ProcessArrayCallback() {
             @Override
             public void processElement(Type type) {
@@ -909,7 +909,7 @@ public class EmitUtils {
        }
     */
     public static void wrap_undeclared_throwable(CodeEmitter e, Block handler, Type[] exceptions, Type wrapper) {
-        Set set = (exceptions == null) ? Collections.EMPTY_SET : new HashSet(Arrays.asList(exceptions));
+        Set set = exceptions == null ? Collections.emptySet() : new HashSet(Arrays.asList(exceptions));
 
         if (set.contains(Constants.TYPE_THROWABLE)) {
 			return;

@@ -72,14 +72,14 @@ class ReactorServerHttpResponse extends AbstractServerHttpResponse implements Ze
 	@Override
 	public HttpStatusCode getStatusCode() {
 		HttpStatusCode status = super.getStatusCode();
-		return (status != null ? status : HttpStatusCode.valueOf(this.response.status().code()));
+		return status != null ? status : HttpStatusCode.valueOf(this.response.status().code());
 	}
 
 	@Override
 	@Deprecated
 	public Integer getRawStatusCode() {
 		Integer status = super.getRawStatusCode();
-		return (status != null ? status : this.response.status().code());
+		return status != null ? status : this.response.status().code();
 	}
 
 	@Override

@@ -111,8 +111,8 @@ public class SimplePropertyRowMapper<T> implements RowMapper<T> {
 
 		this.mappedConstructor = BeanUtils.getResolvableConstructor(mappedClass);
 		int paramCount = this.mappedConstructor.getParameterCount();
-		this.constructorParameterNames = (paramCount > 0 ?
-				BeanUtils.getParameterNames(this.mappedConstructor) : new String[0]);
+		this.constructorParameterNames = paramCount > 0 ?
+				BeanUtils.getParameterNames(this.mappedConstructor) : new String[0];
 		this.constructorParameterTypes = new TypeDescriptor[paramCount];
 		for (int i = 0; i < paramCount; i++) {
 			this.constructorParameterTypes[i] = new TypeDescriptor(new MethodParameter(this.mappedConstructor, i));

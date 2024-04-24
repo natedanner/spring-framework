@@ -90,7 +90,7 @@ class HtmlCharacterEntityReferences {
 			int referredChar = Integer.parseInt(key);
 			Assert.isTrue((referredChar < 1000 || (referredChar >= 8000 && referredChar < 10000)),
 					() -> "Invalid reference to special HTML entity: " + referredChar);
-			int index = (referredChar < 1000 ? referredChar : referredChar - 7000);
+			int index = referredChar < 1000 ? referredChar : referredChar - 7000;
 			String reference = entityReferences.getProperty(key);
 			this.characterToEntityReferenceMap[index] = REFERENCE_START + reference + REFERENCE_END;
 			this.entityReferenceToCharacterMap.put(reference, (char) referredChar);
@@ -116,7 +116,7 @@ class HtmlCharacterEntityReferences {
 	 * Return true if the given character is mapped to a supported entity reference.
 	 */
 	public boolean isMappedToReference(char character, String encoding) {
-		return (convertToReference(character, encoding) != null);
+		return convertToReference(character, encoding) != null;
 	}
 
 	/**
@@ -144,7 +144,7 @@ class HtmlCharacterEntityReferences {
 			};
 		}
 		else if (character < 1000 || (character >= 8000 && character < 10000)) {
-			int index = (character < 1000 ? character : character - 7000);
+			int index = character < 1000 ? character : character - 7000;
 			String entityReference = this.characterToEntityReferenceMap[index];
 			if (entityReference != null) {
 				return entityReference;

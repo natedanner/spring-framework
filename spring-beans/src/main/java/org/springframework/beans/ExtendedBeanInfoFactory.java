@@ -46,7 +46,7 @@ public class ExtendedBeanInfoFactory extends StandardBeanInfoFactory {
 	@NonNull
 	public BeanInfo getBeanInfo(Class<?> beanClass) throws IntrospectionException {
 		BeanInfo beanInfo = super.getBeanInfo(beanClass);
-		return (supports(beanClass) ? new ExtendedBeanInfo(beanInfo) : beanInfo);
+		return supports(beanClass) ? new ExtendedBeanInfo(beanInfo) : beanInfo;
 	}
 
 	/**

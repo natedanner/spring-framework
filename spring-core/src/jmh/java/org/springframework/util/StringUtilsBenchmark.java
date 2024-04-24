@@ -100,7 +100,7 @@ public class StringUtilsBenchmark {
 		}
 
 		private String createSamplePath(Random random) {
-			String separator = (random.nextBoolean() ? "/" : "\\");
+			String separator = random.nextBoolean() ? "/" : "\\";
 			StringBuilder sb = new StringBuilder();
 			sb.append("jar:file:///c:");
 			for (int i = 0; i < this.segmentCount; i++) {

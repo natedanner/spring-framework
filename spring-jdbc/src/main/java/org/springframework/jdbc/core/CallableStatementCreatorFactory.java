@@ -47,7 +47,7 @@ public class CallableStatementCreatorFactory {
 
 	private int resultSetType = ResultSet.TYPE_FORWARD_ONLY;
 
-	private boolean updatableResults = false;
+	private boolean updatableResults;
 
 
 	/**

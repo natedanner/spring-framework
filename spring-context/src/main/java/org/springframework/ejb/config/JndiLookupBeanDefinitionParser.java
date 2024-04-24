@@ -49,8 +49,8 @@ class JndiLookupBeanDefinitionParser extends AbstractJndiLocatingBeanDefinitionP
 
 	@Override
 	protected boolean isEligibleAttribute(String attributeName) {
-		return (super.isEligibleAttribute(attributeName) &&
-				!DEFAULT_VALUE.equals(attributeName) && !DEFAULT_REF.equals(attributeName));
+		return super.isEligibleAttribute(attributeName) &&
+				!DEFAULT_VALUE.equals(attributeName) && !DEFAULT_REF.equals(attributeName);
 	}
 
 	@Override

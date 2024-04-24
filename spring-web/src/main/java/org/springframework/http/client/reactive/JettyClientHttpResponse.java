@@ -80,7 +80,7 @@ class JettyClientHttpResponse extends AbstractClientHttpResponse {
 	@Nullable
 	private static String parseSameSite(String headerValue) {
 		Matcher matcher = SAME_SITE_PATTERN.matcher(headerValue);
-		return (matcher.matches() ? matcher.group(1) : null);
+		return matcher.matches() ? matcher.group(1) : null;
 	}
 
 }

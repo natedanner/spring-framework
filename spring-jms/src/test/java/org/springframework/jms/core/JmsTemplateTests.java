@@ -77,17 +77,17 @@ import static org.mockito.Mockito.verify;
  */
 class JmsTemplateTests {
 
-	private Context jndiContext = mock();
+	private final Context jndiContext = mock();
 
-	private ConnectionFactory connectionFactory = mock();
+	private final ConnectionFactory connectionFactory = mock();
 
 	protected Connection connection = mock();
 
-	private Session session = mock();
+	private final Session session = mock();
 
-	private Queue queue = mock();
+	private final Queue queue = mock();
 
-	private QosSettings qosSettings = new QosSettings(DeliveryMode.PERSISTENT, 9, 10000);
+	private final QosSettings qosSettings = new QosSettings(DeliveryMode.PERSISTENT, 9, 10000);
 
 
 	/**
@@ -560,7 +560,7 @@ class JmsTemplateTests {
 						template.receiveAndConvert());
 			}
 			else {
-				message = (messageSelector ? template.receiveSelected(selectorString) : template.receive());
+				message = messageSelector ? template.receiveSelected(selectorString) : template.receive();
 			}
 		}
 		else if (explicitDestination) {
@@ -570,8 +570,8 @@ class JmsTemplateTests {
 						template.receiveAndConvert(this.queue));
 			}
 			else {
-				message = (messageSelector ? template.receiveSelected(this.queue, selectorString) :
-						template.receive(this.queue));
+				message = messageSelector ? template.receiveSelected(this.queue, selectorString) :
+						template.receive(this.queue);
 			}
 		}
 		else {
@@ -581,8 +581,8 @@ class JmsTemplateTests {
 						template.receiveAndConvert(destinationName));
 			}
 			else {
-				message = (messageSelector ? template.receiveSelected(destinationName, selectorString) :
-						template.receive(destinationName));
+				message = messageSelector ? template.receiveSelected(destinationName, selectorString) :
+						template.receive(destinationName);
 			}
 		}
 

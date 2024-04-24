@@ -594,7 +594,7 @@ class ConfigurationClassProcessingTests {
 
 	private static class SpousyTestBean extends TestBean implements ApplicationListener<ContextRefreshedEvent> {
 
-		public boolean refreshed = false;
+		public boolean refreshed;
 
 		public SpousyTestBean(String name) {
 			super(name);
@@ -635,11 +635,11 @@ class ConfigurationClassProcessingTests {
 	@Configuration
 	static class ConfigWithApplicationListener {
 
-		boolean closed = false;
+		boolean closed;
 
 		@Bean
 		public ApplicationListener<ContextClosedEvent> listener() {
-			return (event -> this.closed = true);
+			return event -> this.closed = true;
 		}
 	}
 

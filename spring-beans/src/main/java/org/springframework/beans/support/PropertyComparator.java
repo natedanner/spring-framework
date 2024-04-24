@@ -86,10 +86,10 @@ public class PropertyComparator<T> implements Comparator<T> {
 		// Put an object with null property at the end of the sort result.
 		try {
 			if (v1 != null) {
-				result = (v2 != null ? ((Comparable<Object>) v1).compareTo(v2) : -1);
+				result = v2 != null ? ((Comparable<Object>) v1).compareTo(v2) : -1;
 			}
 			else {
-				result = (v2 != null ? 1 : 0);
+				result = v2 != null ? 1 : 0;
 			}
 		}
 		catch (RuntimeException ex) {
@@ -99,7 +99,7 @@ public class PropertyComparator<T> implements Comparator<T> {
 			return 0;
 		}
 
-		return (this.sortDefinition.isAscending() ? result : -result);
+		return this.sortDefinition.isAscending() ? result : -result;
 	}
 
 	/**

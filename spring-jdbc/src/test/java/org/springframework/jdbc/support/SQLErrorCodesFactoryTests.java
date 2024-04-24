@@ -143,7 +143,7 @@ class SQLErrorCodesFactoryTests {
 	@Test
 	void lookupOrder() {
 		class TestSQLErrorCodesFactory extends SQLErrorCodesFactory {
-			private int lookups = 0;
+			private int lookups;
 			@Override
 			protected Resource loadResource(String path) {
 				++lookups;
@@ -269,7 +269,7 @@ class SQLErrorCodesFactoryTests {
 		DataSource dataSource = mock();
 		given(dataSource.getConnection()).willReturn(connection);
 
-		SQLErrorCodesFactory secf = (factory != null ? factory : SQLErrorCodesFactory.getInstance());
+		SQLErrorCodesFactory secf = factory != null ? factory : SQLErrorCodesFactory.getInstance();
 		SQLErrorCodes sec = secf.getErrorCodes(dataSource);
 
 		SQLErrorCodes sec2 = secf.getErrorCodes(dataSource);

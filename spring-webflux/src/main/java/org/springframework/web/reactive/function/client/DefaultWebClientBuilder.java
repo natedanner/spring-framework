@@ -123,8 +123,8 @@ final class DefaultWebClientBuilder implements WebClient.Builder {
 		Assert.notNull(other, "DefaultWebClientBuilder must not be null");
 
 		this.baseUrl = other.baseUrl;
-		this.defaultUriVariables = (other.defaultUriVariables != null ?
-				new LinkedHashMap<>(other.defaultUriVariables) : null);
+		this.defaultUriVariables = other.defaultUriVariables != null ?
+				new LinkedHashMap<>(other.defaultUriVariables) : null;
 		this.uriBuilderFactory = other.uriBuilderFactory;
 
 		if (other.defaultHeaders != null) {
@@ -135,16 +135,16 @@ final class DefaultWebClientBuilder implements WebClient.Builder {
 			this.defaultHeaders = null;
 		}
 
-		this.defaultCookies = (other.defaultCookies != null ?
-				new LinkedMultiValueMap<>(other.defaultCookies) : null);
+		this.defaultCookies = other.defaultCookies != null ?
+				new LinkedMultiValueMap<>(other.defaultCookies) : null;
 		this.defaultRequest = other.defaultRequest;
-		this.statusHandlers = (other.statusHandlers != null ? new LinkedHashMap<>(other.statusHandlers) : null);
-		this.filters = (other.filters != null ? new ArrayList<>(other.filters) : null);
+		this.statusHandlers = other.statusHandlers != null ? new LinkedHashMap<>(other.statusHandlers) : null;
+		this.filters = other.filters != null ? new ArrayList<>(other.filters) : null;
 
 		this.connector = other.connector;
 		this.strategies = other.strategies;
-		this.strategiesConfigurers = (other.strategiesConfigurers != null ?
-				new ArrayList<>(other.strategiesConfigurers) : null);
+		this.strategiesConfigurers = other.strategiesConfigurers != null ?
+				new ArrayList<>(other.strategiesConfigurers) : null;
 		this.exchangeFunction = other.exchangeFunction;
 		this.observationRegistry = other.observationRegistry;
 		this.observationConvention = other.observationConvention;
@@ -218,7 +218,7 @@ final class DefaultWebClientBuilder implements WebClient.Builder {
 	public WebClient.Builder defaultStatusHandler(Predicate<HttpStatusCode> statusPredicate,
 			Function<ClientResponse, Mono<? extends Throwable>> exceptionFunction) {
 
-		this.statusHandlers = (this.statusHandlers != null ? this.statusHandlers : new LinkedHashMap<>());
+		this.statusHandlers = this.statusHandlers != null ? this.statusHandlers : new LinkedHashMap<>();
 		this.statusHandlers.put(statusPredicate, exceptionFunction);
 		return this;
 	}
@@ -308,15 +308,15 @@ final class DefaultWebClientBuilder implements WebClient.Builder {
 	@Override
 	public WebClient build() {
 		ClientHttpConnector connectorToUse =
-				(this.connector != null ? this.connector : initConnector());
+				this.connector != null ? this.connector : initConnector();
 
-		ExchangeFunction exchange = (this.exchangeFunction == null ?
+		ExchangeFunction exchange = this.exchangeFunction == null ?
 				ExchangeFunctions.create(connectorToUse, initExchangeStrategies()) :
-				this.exchangeFunction);
+				this.exchangeFunction;
 
-		ExchangeFilterFunction filterFunctions = (this.filters != null ? this.filters.stream()
+		ExchangeFilterFunction filterFunctions = this.filters != null ? this.filters.stream()
 				.reduce(ExchangeFilterFunction::andThen)
-				.orElse(null) : null);
+				.orElse(null) : null;
 
 		HttpHeaders defaultHeaders = copyDefaultHeaders();
 
@@ -354,10 +354,10 @@ final class DefaultWebClientBuilder implements WebClient.Builder {
 
 	private ExchangeStrategies initExchangeStrategies() {
 		if (CollectionUtils.isEmpty(this.strategiesConfigurers)) {
-			return (this.strategies != null ? this.strategies : ExchangeStrategies.withDefaults());
+			return this.strategies != null ? this.strategies : ExchangeStrategies.withDefaults();
 		}
 		ExchangeStrategies.Builder builder =
-				(this.strategies != null ? this.strategies.mutate() : ExchangeStrategies.builder());
+				this.strategies != null ? this.strategies.mutate() : ExchangeStrategies.builder();
 		this.strategiesConfigurers.forEach(configurer -> configurer.accept(builder));
 		return builder.build();
 	}
@@ -366,8 +366,8 @@ final class DefaultWebClientBuilder implements WebClient.Builder {
 		if (this.uriBuilderFactory != null) {
 			return this.uriBuilderFactory;
 		}
-		DefaultUriBuilderFactory factory = (this.baseUrl != null ?
-				new DefaultUriBuilderFactory(this.baseUrl) : new DefaultUriBuilderFactory());
+		DefaultUriBuilderFactory factory = this.baseUrl != null ?
+				new DefaultUriBuilderFactory(this.baseUrl) : new DefaultUriBuilderFactory();
 		factory.setDefaultUriVariables(this.defaultUriVariables);
 		return factory;
 	}

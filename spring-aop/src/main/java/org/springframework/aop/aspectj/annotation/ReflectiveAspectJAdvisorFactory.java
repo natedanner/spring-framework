@@ -88,7 +88,7 @@ public class ReflectiveAspectJAdvisorFactory extends AbstractAspectJAdvisorFacto
 						Around.class, Before.class, After.class, AfterReturning.class, AfterThrowing.class),
 				(Converter<Method, Annotation>) method -> {
 					AspectJAnnotation ann = AbstractAspectJAdvisorFactory.findAspectJAnnotationOnMethod(method);
-					return (ann != null ? ann.getAnnotation() : null);
+					return ann != null ? ann.getAnnotation() : null;
 				});
 		Comparator<Method> methodNameComparator = new ConvertingComparator<>(Method::getName);
 		adviceMethodComparator = adviceKindComparator.thenComparing(methodNameComparator);

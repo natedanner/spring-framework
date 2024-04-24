@@ -44,7 +44,7 @@ public class MediaTypeEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		MediaType mediaType = (MediaType) getValue();
-		return (mediaType != null ? mediaType.toString() : "");
+		return mediaType != null ? mediaType.toString() : "";
 	}
 
 }

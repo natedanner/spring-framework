@@ -165,7 +165,7 @@ class RequestLoggingFilterTests {
 		request.setContentType("application/json");
 		request.addHeader("token", "123");
 		filter.setIncludeHeaders(true);
-		filter.setHeaderPredicate(name -> !name.equalsIgnoreCase("token"));
+		filter.setHeaderPredicate(name -> !"token".equalsIgnoreCase(name));
 
 		applyFilter();
 

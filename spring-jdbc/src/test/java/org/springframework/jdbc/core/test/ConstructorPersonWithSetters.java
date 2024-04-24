@@ -24,13 +24,13 @@ import java.util.Date;
  */
 public class ConstructorPersonWithSetters {
 
-	private String name;
+	private final String name;
 
-	private long age;
+	private final long age;
 
 	private Date birthDate;
 
-	private BigDecimal balance;
+	private final BigDecimal balance;
 
 
 	public ConstructorPersonWithSetters(String name, long age, BigDecimal balance) {

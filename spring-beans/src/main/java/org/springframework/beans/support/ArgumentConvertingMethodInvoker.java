@@ -57,7 +57,7 @@ public class ArgumentConvertingMethodInvoker extends MethodInvoker {
 	 */
 	public void setTypeConverter(@Nullable TypeConverter typeConverter) {
 		this.typeConverter = typeConverter;
-		this.useDefaultConverter = (typeConverter == null);
+		this.useDefaultConverter = typeConverter == null;
 	}
 
 	/**

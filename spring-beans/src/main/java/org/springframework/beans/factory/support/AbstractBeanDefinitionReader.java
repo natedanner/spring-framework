@@ -167,7 +167,7 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 	 * <p>Default is a {@link DefaultBeanNameGenerator}.
 	 */
 	public void setBeanNameGenerator(@Nullable BeanNameGenerator beanNameGenerator) {
-		this.beanNameGenerator = (beanNameGenerator != null ? beanNameGenerator : DefaultBeanNameGenerator.INSTANCE);
+		this.beanNameGenerator = beanNameGenerator != null ? beanNameGenerator : DefaultBeanNameGenerator.INSTANCE;
 	}
 
 	@Override

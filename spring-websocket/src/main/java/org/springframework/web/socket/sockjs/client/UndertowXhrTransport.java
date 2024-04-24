@@ -289,9 +289,9 @@ public class UndertowXhrTransport extends AbstractXhrTransport {
 				HttpStatusCode status = HttpStatusCode.valueOf(response.getResponseCode());
 				HttpHeaders responseHeaders = toHttpHeaders(response.getResponseHeaders());
 				String responseBody = response.getAttachment(RESPONSE_BODY);
-				return (responseBody != null ?
+				return responseBody != null ?
 						new ResponseEntity<>(responseBody, responseHeaders, status) :
-						new ResponseEntity<>(responseHeaders, status));
+						new ResponseEntity<>(responseHeaders, status);
 			}
 			finally {
 				IoUtils.safeClose(connection);

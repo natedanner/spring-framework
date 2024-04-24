@@ -39,15 +39,15 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
  */
 class HandshakeInterceptorChainTests extends AbstractHttpRequestTests {
 
-	private Map<String, Object> attributes = new HashMap<>();
+	private final Map<String, Object> attributes = new HashMap<>();
 
-	private HandshakeInterceptor i1 = mock();
-	private HandshakeInterceptor i2 = mock();
-	private HandshakeInterceptor i3 = mock();
+	private final HandshakeInterceptor i1 = mock();
+	private final HandshakeInterceptor i2 = mock();
+	private final HandshakeInterceptor i3 = mock();
 
-	private WebSocketHandler wsHandler = mock();
+	private final WebSocketHandler wsHandler = mock();
 
-	private HandshakeInterceptorChain chain = new HandshakeInterceptorChain(List.of(i1, i2, i3), wsHandler);
+	private final HandshakeInterceptorChain chain = new HandshakeInterceptorChain(List.of(i1, i2, i3), wsHandler);
 
 
 	@Test

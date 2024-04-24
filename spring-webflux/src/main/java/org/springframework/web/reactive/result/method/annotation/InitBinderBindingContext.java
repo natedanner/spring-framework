@@ -78,8 +78,8 @@ class InitBinderBindingContext extends BindingContext {
 					InitBinder ann = binderMethod.getMethodAnnotation(InitBinder.class);
 					Assert.state(ann != null, "No InitBinder annotation");
 					String[] names = ann.value();
-					return (ObjectUtils.isEmpty(names) ||
-							ObjectUtils.containsElement(names, dataBinder.getObjectName()));
+					return ObjectUtils.isEmpty(names) ||
+							ObjectUtils.containsElement(names, dataBinder.getObjectName());
 				})
 				.forEach(method -> invokeBinderMethod(dataBinder, exchange, method));
 

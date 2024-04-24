@@ -65,7 +65,7 @@ import org.springframework.util.Assert;
  */
 public class SimpleMessageListenerContainer extends AbstractMessageListenerContainer implements ExceptionListener {
 
-	private boolean connectLazily = false;
+	private boolean connectLazily;
 
 	private boolean recoverOnException = true;
 
@@ -335,7 +335,7 @@ public class SimpleMessageListenerContainer extends AbstractMessageListenerConta
 	 */
 	protected void processMessage(Message message, Session session) {
 		ConnectionFactory connectionFactory = getConnectionFactory();
-		boolean exposeResource = (connectionFactory != null && isExposeListenerSession());
+		boolean exposeResource = connectionFactory != null && isExposeListenerSession();
 		if (exposeResource) {
 			TransactionSynchronizationManager.bindResource(
 					connectionFactory, new LocallyExposedJmsResourceHolder(session));

@@ -59,7 +59,7 @@ public class MultiValueMapAdapter<K, V> implements MultiValueMap<K, V>, Serializ
 	@Nullable
 	public V getFirst(K key) {
 		List<V> values = this.targetMap.get(key);
-		return (values != null && !values.isEmpty() ? values.get(0) : null);
+		return values != null && !values.isEmpty() ? values.get(0) : null;
 	}
 
 	@Override
@@ -181,7 +181,7 @@ public class MultiValueMapAdapter<K, V> implements MultiValueMap<K, V>, Serializ
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || this.targetMap.equals(other));
+		return this == other || this.targetMap.equals(other);
 	}
 
 	@Override

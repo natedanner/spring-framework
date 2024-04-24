@@ -76,11 +76,11 @@ public abstract class AbstractAspectJAdvisorFactory implements AspectJAdvisorFac
 	 */
 	@Override
 	public boolean isAspect(Class<?> clazz) {
-		return (hasAspectAnnotation(clazz) && !compiledByAjc(clazz));
+		return hasAspectAnnotation(clazz) && !compiledByAjc(clazz);
 	}
 
 	private boolean hasAspectAnnotation(Class<?> clazz) {
-		return (AnnotationUtils.findAnnotation(clazz, Aspect.class) != null);
+		return AnnotationUtils.findAnnotation(clazz, Aspect.class) != null;
 	}
 
 	/**
@@ -184,7 +184,7 @@ public abstract class AbstractAspectJAdvisorFactory implements AspectJAdvisorFac
 			try {
 				this.pointcutExpression = resolvePointcutExpression(annotation);
 				Object argNames = AnnotationUtils.getValue(annotation, "argNames");
-				this.argumentNames = (argNames instanceof String names ? names : "");
+				this.argumentNames = argNames instanceof String names ? names : "";
 			}
 			catch (Exception ex) {
 				throw new IllegalArgumentException(annotation + " is not a valid AspectJ annotation", ex);

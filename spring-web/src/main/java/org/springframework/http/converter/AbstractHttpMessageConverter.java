@@ -253,7 +253,7 @@ public abstract class AbstractHttpMessageConverter<T> implements HttpMessageConv
 			}
 			else if (MediaType.APPLICATION_OCTET_STREAM.equals(contentType)) {
 				MediaType mediaType = getDefaultContentType(t);
-				contentTypeToUse = (mediaType != null ? mediaType : contentTypeToUse);
+				contentTypeToUse = mediaType != null ? mediaType : contentTypeToUse;
 			}
 			if (contentTypeToUse != null) {
 				if (contentTypeToUse.getCharset() == null) {
@@ -285,7 +285,7 @@ public abstract class AbstractHttpMessageConverter<T> implements HttpMessageConv
 	@Nullable
 	protected MediaType getDefaultContentType(T t) throws IOException {
 		List<MediaType> mediaTypes = getSupportedMediaTypes();
-		return (!mediaTypes.isEmpty() ? mediaTypes.get(0) : null);
+		return mediaTypes.isEmpty() ? null : mediaTypes.get(0);
 	}
 
 	/**

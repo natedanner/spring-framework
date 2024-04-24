@@ -69,7 +69,7 @@ class PropertySourceRegistry {
 
 		Class<? extends PropertySourceFactory> factoryClass = propertySource.getClass("factory");
 		Class<? extends PropertySourceFactory> factoryClassToUse =
-				(factoryClass != PropertySourceFactory.class ? factoryClass : null);
+				factoryClass != PropertySourceFactory.class ? factoryClass : null;
 		PropertySourceDescriptor descriptor = new PropertySourceDescriptor(Arrays.asList(locations),
 				ignoreResourceNotFound, name, factoryClassToUse, encoding);
 		this.propertySourceProcessor.processPropertySource(descriptor);

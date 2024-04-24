@@ -121,7 +121,7 @@ public class OpenSessionInViewInterceptor implements AsyncWebRequestInterceptor 
 		if (TransactionSynchronizationManager.hasResource(obtainSessionFactory())) {
 			// Do not modify the Session: just mark the request accordingly.
 			Integer count = (Integer) request.getAttribute(key, WebRequest.SCOPE_REQUEST);
-			int newCount = (count != null ? count + 1 : 1);
+			int newCount = count != null ? count + 1 : 1;
 			request.setAttribute(getParticipateAttributeName(), newCount, WebRequest.SCOPE_REQUEST);
 		}
 		else {

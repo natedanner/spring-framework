@@ -52,7 +52,7 @@ class DefaultRequestPathTests {
 
 	private void testParse(String fullPath, String contextPath, String pathWithinApplication) {
 		RequestPath requestPath = RequestPath.parse(fullPath, contextPath);
-		Object expected = contextPath.equals("/") ? "" : contextPath;
+		Object expected = "/".equals(contextPath) ? "" : contextPath;
 		assertThat(requestPath.contextPath().value()).isEqualTo(expected);
 		assertThat(requestPath.pathWithinApplication().value()).isEqualTo(pathWithinApplication);
 	}

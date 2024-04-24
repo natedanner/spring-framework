@@ -37,9 +37,9 @@ final class ReflectionTypeReference extends AbstractTypeReference {
 
 	@Nullable
 	private static TypeReference getEnclosingClass(Class<?> type) {
-		Class<?> candidate = (type.isArray() ? type.componentType().getEnclosingClass() :
-				type.getEnclosingClass());
-		return (candidate != null ? new ReflectionTypeReference(candidate) : null);
+		Class<?> candidate = type.isArray() ? type.componentType().getEnclosingClass() :
+				type.getEnclosingClass();
+		return candidate != null ? new ReflectionTypeReference(candidate) : null;
 	}
 
 	static ReflectionTypeReference of(Class<?> type) {

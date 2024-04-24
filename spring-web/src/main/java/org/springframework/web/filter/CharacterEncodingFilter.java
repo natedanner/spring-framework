@@ -49,9 +49,9 @@ public class CharacterEncodingFilter extends OncePerRequestFilter {
 	@Nullable
 	private String encoding;
 
-	private boolean forceRequestEncoding = false;
+	private boolean forceRequestEncoding;
 
-	private boolean forceResponseEncoding = false;
+	private boolean forceResponseEncoding;
 
 
 	/**

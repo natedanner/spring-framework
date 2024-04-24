@@ -74,7 +74,7 @@ class JdkDynamicProxyTests extends AbstractAopProxyTests {
 	void testInterceptorIsInvokedWithNoTarget() {
 		// Test return value
 		final int age = 25;
-		MethodInterceptor mi = (invocation -> age);
+		MethodInterceptor mi = invocation -> age;
 
 		AdvisedSupport pc = new AdvisedSupport(ITestBean.class);
 		pc.addAdvice(mi);
@@ -203,10 +203,7 @@ class JdkDynamicProxyTests extends AbstractAopProxyTests {
 				return false;
 			}
 			Person person = (Person) o;
-			if (!name.equals(person.name)) {
-				return false;
-			}
-			return true;
+			return !!name.equals(person.name);
 		}
 
 		@Override

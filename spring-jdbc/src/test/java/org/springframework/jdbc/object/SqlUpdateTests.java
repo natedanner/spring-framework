@@ -71,15 +71,15 @@ class SqlUpdateTests {
 			"insert into show (name) values(?)";
 
 
-	private Connection connection = mock();
+	private final Connection connection = mock();
 
-	private DataSource dataSource = mock();
+	private final DataSource dataSource = mock();
 
-	private PreparedStatement preparedStatement = mock();
+	private final PreparedStatement preparedStatement = mock();
 
-	private ResultSet resultSet = mock();
+	private final ResultSet resultSet = mock();
 
-	private ResultSetMetaData resultSetMetaData = mock();
+	private final ResultSetMetaData resultSetMetaData = mock();
 
 
 	@BeforeEach

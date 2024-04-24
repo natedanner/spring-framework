@@ -37,7 +37,7 @@ public abstract class TestAnnotationUtils {
 	 */
 	public static long getTimeout(Method method) {
 		Timed timed = AnnotatedElementUtils.findMergedAnnotation(method, Timed.class);
-		return (timed == null ? 0 : Math.max(0, timed.millis()));
+		return timed == null ? 0 : Math.max(0, timed.millis());
 	}
 
 	/**

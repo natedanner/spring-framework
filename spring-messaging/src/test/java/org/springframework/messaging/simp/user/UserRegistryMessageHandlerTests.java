@@ -51,15 +51,15 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
  */
 class UserRegistryMessageHandlerTests {
 
-	private SimpUserRegistry localRegistry = mock();
+	private final SimpUserRegistry localRegistry = mock();
 
-	private MessageChannel brokerChannel = mock();
+	private final MessageChannel brokerChannel = mock();
 
-	private TaskScheduler taskScheduler = mock();
+	private final TaskScheduler taskScheduler = mock();
 
-	private MultiServerUserRegistry multiServerRegistry = new MultiServerUserRegistry(this.localRegistry);
+	private final MultiServerUserRegistry multiServerRegistry = new MultiServerUserRegistry(this.localRegistry);
 
-	private MessageConverter converter = new MappingJackson2MessageConverter();
+	private final MessageConverter converter = new MappingJackson2MessageConverter();
 
 	private UserRegistryMessageHandler handler;
 

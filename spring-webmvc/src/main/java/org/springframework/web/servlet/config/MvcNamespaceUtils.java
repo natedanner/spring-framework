@@ -303,8 +303,8 @@ public abstract class MvcNamespaceUtils {
 	 */
 	private static boolean containsBeanInHierarchy(ParserContext context, String beanName) {
 		BeanDefinitionRegistry registry = context.getRegistry();
-		return (registry instanceof BeanFactory beanFactory ? beanFactory.containsBean(beanName) :
-				registry.containsBeanDefinition(beanName));
+		return registry instanceof BeanFactory beanFactory ? beanFactory.containsBean(beanName) :
+				registry.containsBeanDefinition(beanName);
 	}
 
 }

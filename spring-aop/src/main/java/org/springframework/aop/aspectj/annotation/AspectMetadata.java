@@ -165,7 +165,7 @@ public class AspectMetadata implements Serializable {
 	 */
 	public boolean isPerThisOrPerTarget() {
 		PerClauseKind kind = getAjType().getPerClause().getKind();
-		return (kind == PerClauseKind.PERTARGET || kind == PerClauseKind.PERTHIS);
+		return kind == PerClauseKind.PERTARGET || kind == PerClauseKind.PERTHIS;
 	}
 
 	/**
@@ -173,14 +173,14 @@ public class AspectMetadata implements Serializable {
 	 */
 	public boolean isPerTypeWithin() {
 		PerClauseKind kind = getAjType().getPerClause().getKind();
-		return (kind == PerClauseKind.PERTYPEWITHIN);
+		return kind == PerClauseKind.PERTYPEWITHIN;
 	}
 
 	/**
 	 * Return whether the aspect needs to be lazily instantiated.
 	 */
 	public boolean isLazilyInstantiated() {
-		return (isPerThisOrPerTarget() || isPerTypeWithin());
+		return isPerThisOrPerTarget() || isPerTypeWithin();
 	}
 
 

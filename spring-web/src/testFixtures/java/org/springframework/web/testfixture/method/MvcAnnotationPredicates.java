@@ -293,7 +293,7 @@ public class MvcAnnotationPredicates {
 		}
 	}
 
-	public static class ResponseStatusPredicate implements Predicate<Method> {
+	public static final class ResponseStatusPredicate implements Predicate<Method> {
 
 		private HttpStatus code = HttpStatus.INTERNAL_SERVER_ERROR;
 
@@ -312,7 +312,7 @@ public class MvcAnnotationPredicates {
 		}
 	}
 
-	public static class RequestMappingPredicate implements Predicate<Method> {
+	public static final class RequestMappingPredicate implements Predicate<Method> {
 
 		private String[] path;
 

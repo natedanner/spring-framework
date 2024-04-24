@@ -228,7 +228,7 @@ public final class SpelCompiler implements Opcodes {
 	 * @return a corresponding SpelCompiler instance
 	 */
 	public static SpelCompiler getCompiler(@Nullable ClassLoader classLoader) {
-		ClassLoader clToUse = (classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader());
+		ClassLoader clToUse = classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader();
 		// Quick check for existing compiler without lock contention
 		SpelCompiler compiler = compilers.get(clToUse);
 		if (compiler == null) {
@@ -249,7 +249,7 @@ public final class SpelCompiler implements Opcodes {
 	 * {@code false} otherwise
 	 */
 	public static boolean compile(Expression expression) {
-		return (expression instanceof SpelExpression spelExpression && spelExpression.compileExpression());
+		return expression instanceof SpelExpression spelExpression && spelExpression.compileExpression();
 	}
 
 	/**

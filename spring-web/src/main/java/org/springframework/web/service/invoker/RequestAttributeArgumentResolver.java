@@ -42,8 +42,8 @@ public class RequestAttributeArgumentResolver extends AbstractNamedValueArgument
 	@Override
 	protected NamedValueInfo createNamedValueInfo(MethodParameter parameter) {
 		RequestAttribute annot = parameter.getParameterAnnotation(RequestAttribute.class);
-		return (annot == null ? null :
-				new NamedValueInfo(annot.name(), annot.required(), null, "request attribute", false));
+		return annot == null ? null :
+				new NamedValueInfo(annot.name(), annot.required(), null, "request attribute", false);
 	}
 
 	@Override

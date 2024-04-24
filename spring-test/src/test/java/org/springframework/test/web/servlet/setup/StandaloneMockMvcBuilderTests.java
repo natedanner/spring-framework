@@ -160,7 +160,7 @@ class StandaloneMockMvcBuilderTests {
 	}
 
 
-	private static class TestStandaloneMockMvcBuilder extends StandaloneMockMvcBuilder {
+	private static final class TestStandaloneMockMvcBuilder extends StandaloneMockMvcBuilder {
 
 		private WebApplicationContext wac;
 

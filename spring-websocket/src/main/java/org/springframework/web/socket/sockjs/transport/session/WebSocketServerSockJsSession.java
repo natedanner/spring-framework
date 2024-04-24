@@ -139,15 +139,15 @@ public class WebSocketServerSockJsSession extends AbstractSockJsSession implemen
 	@Override
 	public Object getNativeSession() {
 		Assert.state(this.webSocketSession != null, "WebSocketSession not yet initialized");
-		return (this.webSocketSession instanceof NativeWebSocketSession nativeWsSession ?
-				nativeWsSession.getNativeSession() : this.webSocketSession);
+		return this.webSocketSession instanceof NativeWebSocketSession nativeWsSession ?
+				nativeWsSession.getNativeSession() : this.webSocketSession;
 	}
 
 	@Override
 	@Nullable
 	public <T> T getNativeSession(@Nullable Class<T> requiredType) {
-		return (this.webSocketSession instanceof NativeWebSocketSession nativeWsSession ?
-				nativeWsSession.getNativeSession(requiredType) : null);
+		return this.webSocketSession instanceof NativeWebSocketSession nativeWsSession ?
+				nativeWsSession.getNativeSession(requiredType) : null;
 	}
 
 
@@ -174,7 +174,7 @@ public class WebSocketServerSockJsSession extends AbstractSockJsSession implemen
 
 	@Override
 	public boolean isActive() {
-		return (this.webSocketSession != null && this.webSocketSession.isOpen() && !this.disconnected);
+		return this.webSocketSession != null && this.webSocketSession.isOpen() && !this.disconnected;
 	}
 
 	public void handleMessage(TextMessage message, WebSocketSession wsSession) throws Exception {

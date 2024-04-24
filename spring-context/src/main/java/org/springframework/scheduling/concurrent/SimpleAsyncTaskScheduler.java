@@ -151,7 +151,7 @@ public class SimpleAsyncTaskScheduler extends SimpleAsyncTaskExecutor implements
 	 * arrangements kicks in with a new thread per task.
 	 */
 	public void setTargetTaskExecutor(Executor targetTaskExecutor) {
-		this.targetTaskExecutor = (targetTaskExecutor == this ? null : targetTaskExecutor);
+		this.targetTaskExecutor = targetTaskExecutor == this ? null : targetTaskExecutor;
 	}
 
 	@Override

@@ -84,7 +84,7 @@ public abstract class AbstractTyrusRequestUpgradeStrategy extends AbstractStanda
 		try {
 			constructor = getEndpointConstructor();
 			int parameterCount = constructor.getParameterCount();
-			constructorWithBooleanArgument = (parameterCount == 10);
+			constructorWithBooleanArgument = parameterCount == 10;
 			if (!constructorWithBooleanArgument && parameterCount != 9) {
 				throw new IllegalStateException("Expected TyrusEndpointWrapper constructor with 9 or 10 arguments");
 			}

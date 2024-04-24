@@ -54,7 +54,7 @@ final class AnnotationTypeMapping {
 	private static final Log logger = LogFactory.getLog(AnnotationTypeMapping.class);
 
 	private static final Predicate<? super Annotation> isBeanValidationConstraint = annotation ->
-			annotation.annotationType().getName().equals("jakarta.validation.Constraint");
+			"jakarta.validation.Constraint".equals(annotation.annotationType().getName());
 
 	/**
 	 * Set used to track which convention-based annotation attribute overrides
@@ -107,8 +107,8 @@ final class AnnotationTypeMapping {
 			@Nullable Annotation annotation, Set<Class<? extends Annotation>> visitedAnnotationTypes) {
 
 		this.source = source;
-		this.root = (source != null ? source.getRoot() : this);
-		this.distance = (source == null ? 0 : source.getDistance() + 1);
+		this.root = source != null ? source.getRoot() : this;
+		this.distance = source == null ? 0 : source.getDistance() + 1;
 		this.annotationType = annotationType;
 		this.metaTypes = merge(
 				source != null ? source.getMetaTypes() : null,
@@ -214,11 +214,11 @@ final class AnnotationTypeMapping {
 	}
 
 	private boolean isAliasPair(Method target) {
-		return (this.annotationType == target.getDeclaringClass());
+		return this.annotationType == target.getDeclaringClass();
 	}
 
 	private boolean isCompatibleReturnType(Class<?> attributeType, Class<?> targetType) {
-		return (attributeType == targetType || attributeType == targetType.componentType());
+		return attributeType == targetType || attributeType == targetType.componentType();
 	}
 
 	private void processAliases() {
@@ -340,9 +340,9 @@ final class AnnotationTypeMapping {
 		Method attribute = this.root.getAttributes().get(name);
 		if (attribute != null) {
 			AliasFor aliasFor = AnnotationsScanner.getDeclaredAnnotation(attribute, AliasFor.class);
-			return ((aliasFor != null) &&
+			return (aliasFor != null) &&
 					(aliasFor.annotation() != Annotation.class) &&
-					(aliasFor.annotation() != this.root.annotationType));
+					(aliasFor.annotation() != this.root.annotationType);
 		}
 		return false;
 	}
@@ -769,8 +769,8 @@ final class AnnotationTypeMapping {
 				for (int i = 0; i < this.size; i++) {
 					Method attribute = attributes.get(this.indexes[i]);
 					Object value = valueExtractor.extract(attribute, annotation);
-					boolean isDefaultValue = (value == null ||
-							isEquivalentToDefaultValue(attribute, value, valueExtractor));
+					boolean isDefaultValue = value == null ||
+							isEquivalentToDefaultValue(attribute, value, valueExtractor);
 					if (isDefaultValue || ObjectUtils.nullSafeEquals(lastValue, value)) {
 						if (result == -1) {
 							result = this.indexes[i];
@@ -778,7 +778,7 @@ final class AnnotationTypeMapping {
 						continue;
 					}
 					if (lastValue != null && !ObjectUtils.nullSafeEquals(lastValue, value)) {
-						String on = (source != null) ? " declared on " + source : "";
+						String on = source != null ? " declared on " + source : "";
 						throw new AnnotationConfigurationException(String.format(
 								"Different @AliasFor mirror values for annotation [%s]%s; attribute '%s' " +
 								"and its alias '%s' are declared with values of [%s] and [%s].",

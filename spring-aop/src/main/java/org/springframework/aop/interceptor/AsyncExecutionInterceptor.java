@@ -99,7 +99,7 @@ public class AsyncExecutionInterceptor extends AsyncExecutionAspectSupport imple
 	@Override
 	@Nullable
 	public Object invoke(final MethodInvocation invocation) throws Throwable {
-		Class<?> targetClass = (invocation.getThis() != null ? AopUtils.getTargetClass(invocation.getThis()) : null);
+		Class<?> targetClass = invocation.getThis() != null ? AopUtils.getTargetClass(invocation.getThis()) : null;
 		final Method userMethod = BridgeMethodResolver.getMostSpecificMethod(invocation.getMethod(), targetClass);
 
 		AsyncTaskExecutor executor = determineAsyncExecutor(userMethod);
@@ -156,7 +156,7 @@ public class AsyncExecutionInterceptor extends AsyncExecutionAspectSupport imple
 	@Nullable
 	protected Executor getDefaultExecutor(@Nullable BeanFactory beanFactory) {
 		Executor defaultExecutor = super.getDefaultExecutor(beanFactory);
-		return (defaultExecutor != null ? defaultExecutor : new SimpleAsyncTaskExecutor());
+		return defaultExecutor != null ? defaultExecutor : new SimpleAsyncTaskExecutor();
 	}
 
 	@Override

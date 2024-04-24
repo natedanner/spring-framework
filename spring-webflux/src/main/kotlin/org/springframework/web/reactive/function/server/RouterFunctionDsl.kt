@@ -193,7 +193,7 @@ class RouterFunctionDsl internal constructor (private val init: RouterFunctionDs
 	 * and the given `pattern` matches against the request path.
 	 * @see RequestPredicates.GET
 	 */
-	fun GET(pattern: String): RequestPredicate = RequestPredicates.GET(pattern)
+	fun gET(pattern: String): RequestPredicate = RequestPredicates.GET(pattern)
 
 	/**
 	 * Adds a route to the given handler function that handles all HTTP `HEAD` requests.
@@ -238,7 +238,7 @@ class RouterFunctionDsl internal constructor (private val init: RouterFunctionDs
 	 * and the given `pattern` matches against the request path.
 	 * @see RequestPredicates.HEAD
 	 */
-	fun HEAD(pattern: String): RequestPredicate = RequestPredicates.HEAD(pattern)
+	fun hEAD(pattern: String): RequestPredicate = RequestPredicates.HEAD(pattern)
 
 	/**
 	 * Adds a route to the given handler function that handles all HTTP `POST` requests.
@@ -283,7 +283,7 @@ class RouterFunctionDsl internal constructor (private val init: RouterFunctionDs
 	 * and the given `pattern` matches against the request path.
 	 * @see RequestPredicates.POST
 	 */
-	fun POST(pattern: String): RequestPredicate = RequestPredicates.POST(pattern)
+	fun pOST(pattern: String): RequestPredicate = RequestPredicates.POST(pattern)
 
 	/**
 	 * Adds a route to the given handler function that handles all HTTP `PUT` requests.
@@ -328,7 +328,7 @@ class RouterFunctionDsl internal constructor (private val init: RouterFunctionDs
 	 * and the given `pattern` matches against the request path.
 	 * @see RequestPredicates.PUT
 	 */
-	fun PUT(pattern: String): RequestPredicate = RequestPredicates.PUT(pattern)
+	fun pUT(pattern: String): RequestPredicate = RequestPredicates.PUT(pattern)
 
 	/**
 	 * Adds a route to the given handler function that handles all HTTP `PATCH` requests.
@@ -375,7 +375,7 @@ class RouterFunctionDsl internal constructor (private val init: RouterFunctionDs
 	 * @return a predicate that matches if the request method is `PATCH` and if the given pattern
 	 * matches against the request path
 	 */
-	fun PATCH(pattern: String): RequestPredicate = RequestPredicates.PATCH(pattern)
+	fun pATCH(pattern: String): RequestPredicate = RequestPredicates.PATCH(pattern)
 
 	/**
 	 * Adds a route to the given handler function that handles all HTTP `DELETE` requests.
@@ -422,7 +422,7 @@ class RouterFunctionDsl internal constructor (private val init: RouterFunctionDs
 	 * @return a predicate that matches if the request method is `DELETE` and if the given pattern
 	 * matches against the request path
 	 */
-	fun DELETE(pattern: String): RequestPredicate = RequestPredicates.DELETE(pattern)
+	fun dELETE(pattern: String): RequestPredicate = RequestPredicates.DELETE(pattern)
 
 	/**
 	 * Adds a route to the given handler function that handles all HTTP `OPTIONS` requests.
@@ -469,7 +469,7 @@ class RouterFunctionDsl internal constructor (private val init: RouterFunctionDs
 	 * @return a predicate that matches if the request method is `OPTIONS` and if the given pattern
 	 * matches against the request path
 	 */
-	fun OPTIONS(pattern: String): RequestPredicate = RequestPredicates.OPTIONS(pattern)
+	fun oPTIONS(pattern: String): RequestPredicate = RequestPredicates.OPTIONS(pattern)
 
 	/**
 	 * Route to the given handler function if the given accept predicate applies.

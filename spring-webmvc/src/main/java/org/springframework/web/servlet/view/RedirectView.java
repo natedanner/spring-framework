@@ -89,7 +89,7 @@ public class RedirectView extends AbstractUrlBasedView implements SmartView {
 	private static final Pattern URI_TEMPLATE_VARIABLE_PATTERN = Pattern.compile("\\{([^/]+?)\\}");
 
 
-	private boolean contextRelative = false;
+	private boolean contextRelative;
 
 	private boolean http10Compatible = true;
 
@@ -103,7 +103,7 @@ public class RedirectView extends AbstractUrlBasedView implements SmartView {
 
 	private boolean expandUriTemplateVariables = true;
 
-	private boolean propagateQueryParams = false;
+	private boolean propagateQueryParams;
 
 	@Nullable
 	private String[] hosts;
@@ -383,7 +383,7 @@ public class RedirectView extends AbstractUrlBasedView implements SmartView {
 		int endLastMatch = 0;
 		while (matcher.find()) {
 			String name = matcher.group(1);
-			Object value = (model.containsKey(name) ? model.remove(name) : currentUriVariables.get(name));
+			Object value = model.containsKey(name) ? model.remove(name) : currentUriVariables.get(name);
 			if (value == null) {
 				throw new IllegalArgumentException("Model has no value for key '" + name + "'");
 			}
@@ -399,7 +399,7 @@ public class RedirectView extends AbstractUrlBasedView implements SmartView {
 	private Map<String, String> getCurrentRequestUriVariables(HttpServletRequest request) {
 		String name = HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE;
 		Map<String, String> uriVars = (Map<String, String>) request.getAttribute(name);
-		return (uriVars != null) ? uriVars : Collections.emptyMap();
+		return uriVars != null ? uriVars : Collections.emptyMap();
 	}
 
 	/**
@@ -454,7 +454,7 @@ public class RedirectView extends AbstractUrlBasedView implements SmartView {
 		}
 
 		// If there aren't already some parameters, we need a "?".
-		boolean first = (targetUrl.toString().indexOf('?') < 0);
+		boolean first = targetUrl.toString().indexOf('?') < 0;
 		for (Map.Entry<String, Object> entry : queryProperties(model).entrySet()) {
 			Object rawValue = entry.getValue();
 			Collection<?> values;
@@ -476,7 +476,7 @@ public class RedirectView extends AbstractUrlBasedView implements SmartView {
 					targetUrl.append('&');
 				}
 				String encodedKey = urlEncode(entry.getKey(), encodingScheme);
-				String encodedValue = (value != null ? urlEncode(value.toString(), encodingScheme) : "");
+				String encodedValue = value != null ? urlEncode(value.toString(), encodingScheme) : "";
 				targetUrl.append(encodedKey).append('=').append(encodedValue);
 			}
 		}
@@ -561,7 +561,7 @@ public class RedirectView extends AbstractUrlBasedView implements SmartView {
 	 * @see BeanUtils#isSimpleValueType
 	 */
 	protected boolean isEligibleValue(@Nullable Object value) {
-		return (value != null && BeanUtils.isSimpleValueType(value.getClass()));
+		return value != null && BeanUtils.isSimpleValueType(value.getClass());
 	}
 
 	/**
@@ -611,7 +611,7 @@ public class RedirectView extends AbstractUrlBasedView implements SmartView {
 	protected void sendRedirect(HttpServletRequest request, HttpServletResponse response,
 			String targetUrl, boolean http10Compatible) throws IOException {
 
-		String encodedURL = (isRemoteHost(targetUrl) ? targetUrl : response.encodeRedirectURL(targetUrl));
+		String encodedURL = isRemoteHost(targetUrl) ? targetUrl : response.encodeRedirectURL(targetUrl);
 		if (http10Compatible) {
 			HttpStatusCode attributeStatusCode = (HttpStatusCode) request.getAttribute(View.RESPONSE_STATUS_ATTRIBUTE);
 			if (this.statusCode != null) {

@@ -243,7 +243,7 @@ public abstract class WebUtils {
 					"Cannot set web app root system property when WAR file is not expanded");
 		}
 		String param = servletContext.getInitParameter(WEB_APP_ROOT_KEY_PARAM);
-		String key = (param != null ? param : DEFAULT_WEB_APP_ROOT_KEY);
+		String key = param != null ? param : DEFAULT_WEB_APP_ROOT_KEY;
 		String oldValue = System.getProperty(key);
 		if (oldValue != null && !StringUtils.pathEquals(oldValue, root)) {
 			throw new IllegalStateException("Web app root system property already set to different value: '" +
@@ -263,7 +263,7 @@ public abstract class WebUtils {
 	public static void removeWebAppRootSystemProperty(ServletContext servletContext) {
 		Assert.notNull(servletContext, "ServletContext must not be null");
 		String param = servletContext.getInitParameter(WEB_APP_ROOT_KEY_PARAM);
-		String key = (param != null ? param : DEFAULT_WEB_APP_ROOT_KEY);
+		String key = param != null ? param : DEFAULT_WEB_APP_ROOT_KEY;
 		System.clearProperty(key);
 	}
 
@@ -284,7 +284,7 @@ public abstract class WebUtils {
 			return null;
 		}
 		String param = servletContext.getInitParameter(HTML_ESCAPE_CONTEXT_PARAM);
-		return (StringUtils.hasText(param) ? Boolean.valueOf(param) : null);
+		return StringUtils.hasText(param) ? Boolean.valueOf(param) : null;
 	}
 
 	/**
@@ -307,7 +307,7 @@ public abstract class WebUtils {
 			return null;
 		}
 		String param = servletContext.getInitParameter(RESPONSE_ENCODED_HTML_ESCAPE_CONTEXT_PARAM);
-		return (StringUtils.hasText(param) ? Boolean.valueOf(param) : null);
+		return StringUtils.hasText(param) ? Boolean.valueOf(param) : null;
 	}
 
 	/**
@@ -358,7 +358,7 @@ public abstract class WebUtils {
 	public static String getSessionId(HttpServletRequest request) {
 		Assert.notNull(request, "Request must not be null");
 		HttpSession session = request.getSession(false);
-		return (session != null ? session.getId() : null);
+		return session != null ? session.getId() : null;
 	}
 
 	/**
@@ -373,7 +373,7 @@ public abstract class WebUtils {
 	public static Object getSessionAttribute(HttpServletRequest request, String name) {
 		Assert.notNull(request, "Request must not be null");
 		HttpSession session = request.getSession(false);
-		return (session != null ? session.getAttribute(name) : null);
+		return session != null ? session.getAttribute(name) : null;
 	}
 
 	/**
@@ -500,7 +500,7 @@ public abstract class WebUtils {
 	 * @return whether the given request is an include request
 	 */
 	public static boolean isIncludeRequest(ServletRequest request) {
-		return (request.getAttribute(INCLUDE_REQUEST_URI_ATTRIBUTE) != null);
+		return request.getAttribute(INCLUDE_REQUEST_URI_ATTRIBUTE) != null;
 	}
 
 	/**
@@ -651,7 +651,7 @@ public abstract class WebUtils {
 		// First try to get it as a normal name=value parameter
 		Object value = parameters.get(name);
 		if (value instanceof String[] values) {
-			return (values.length > 0 ? values[0] : null);
+			return values.length > 0 ? values[0] : null;
 		}
 		else if (value != null) {
 			return value.toString();
@@ -733,7 +733,7 @@ public abstract class WebUtils {
 			int index = pair.indexOf('=');
 			if (index != -1) {
 				String name = pair.substring(0, index);
-				if (name.equalsIgnoreCase("jsessionid")) {
+				if ("jsessionid".equalsIgnoreCase(name)) {
 					continue;
 				}
 				String rawValue = pair.substring(index + 1);
@@ -816,9 +816,9 @@ public abstract class WebUtils {
 		}
 
 		UriComponents originUrl = UriComponentsBuilder.fromOriginHeader(origin).build();
-		return (ObjectUtils.nullSafeEquals(scheme, originUrl.getScheme()) &&
+		return ObjectUtils.nullSafeEquals(scheme, originUrl.getScheme()) &&
 				ObjectUtils.nullSafeEquals(host, originUrl.getHost()) &&
-				getPort(scheme, port) == getPort(originUrl.getScheme(), originUrl.getPort()));
+				getPort(scheme, port) == getPort(originUrl.getScheme(), originUrl.getPort());
 	}
 
 	private static int getPort(@Nullable String scheme, int port) {

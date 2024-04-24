@@ -44,7 +44,7 @@ public class ZoneIdEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		ZoneId value = (ZoneId) getValue();
-		return (value != null ? value.getId() : "");
+		return value != null ? value.getId() : "";
 	}
 
 }

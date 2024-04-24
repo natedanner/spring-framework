@@ -132,7 +132,7 @@ public class GroovyMarkupView extends AbstractTemplateView {
 			return this.engine.createTemplateByPath(viewUrl);
 		}
 		catch (ClassNotFoundException ex) {
-			Throwable cause = (ex.getCause() != null ? ex.getCause() : ex);
+			Throwable cause = ex.getCause() != null ? ex.getCause() : ex;
 			throw new ServletException(
 					"Could not find class while rendering Groovy Markup view with name '" +
 					getUrl() + "': " + ex.getMessage() + "'", cause);

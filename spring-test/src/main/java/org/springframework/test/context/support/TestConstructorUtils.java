@@ -123,8 +123,8 @@ public abstract class TestConstructorUtils {
 	public static boolean isAutowirableConstructor(Executable executable, Class<?> testClass,
 			@Nullable PropertyProvider fallbackPropertyProvider) {
 
-		return (executable instanceof Constructor<?> constructor &&
-				isAutowirableConstructor(constructor, testClass, fallbackPropertyProvider));
+		return executable instanceof Constructor<?> constructor &&
+				isAutowirableConstructor(constructor, testClass, fallbackPropertyProvider);
 	}
 
 	/**
@@ -182,7 +182,7 @@ public abstract class TestConstructorUtils {
 			}
 		}
 
-		return (autowireMode == AutowireMode.ALL);
+		return autowireMode == AutowireMode.ALL;
 	}
 
 	private static boolean isAnnotatedWithAutowiredOrInject(Constructor<?> constructor) {

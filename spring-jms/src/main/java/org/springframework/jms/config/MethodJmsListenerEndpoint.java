@@ -217,7 +217,7 @@ public class MethodJmsListenerEndpoint extends AbstractJmsListenerEndpoint imple
 
 	@Nullable
 	private String resolve(String value) {
-		return (this.embeddedValueResolver != null ? this.embeddedValueResolver.resolveStringValue(value) : value);
+		return this.embeddedValueResolver != null ? this.embeddedValueResolver.resolveStringValue(value) : value;
 	}
 
 

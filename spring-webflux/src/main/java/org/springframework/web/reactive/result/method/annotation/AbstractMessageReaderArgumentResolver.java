@@ -139,10 +139,10 @@ public abstract class AbstractMessageReaderArgumentResolver extends HandlerMetho
 			boolean isBodyRequired, BindingContext bindingContext, ServerWebExchange exchange) {
 
 		ResolvableType bodyType = ResolvableType.forMethodParameter(bodyParam);
-		ResolvableType actualType = (actualParam != null ? ResolvableType.forMethodParameter(actualParam) : bodyType);
+		ResolvableType actualType = actualParam != null ? ResolvableType.forMethodParameter(actualParam) : bodyType;
 		Class<?> resolvedType = bodyType.resolve();
-		ReactiveAdapter adapter = (resolvedType != null ? getAdapterRegistry().getAdapter(resolvedType) : null);
-		ResolvableType elementType = (adapter != null ? bodyType.getGeneric() : bodyType);
+		ReactiveAdapter adapter = resolvedType != null ? getAdapterRegistry().getAdapter(resolvedType) : null;
+		ResolvableType elementType = adapter != null ? bodyType.getGeneric() : bodyType;
 		isBodyRequired = isBodyRequired || (adapter != null && !adapter.supportsEmpty());
 
 		ServerHttpRequest request = exchange.getRequest();
@@ -159,7 +159,7 @@ public abstract class AbstractMessageReaderArgumentResolver extends HandlerMetho
 					getSupportedMediaTypes(elementType));
 		}
 
-		MediaType mediaType = (contentType != null ? contentType : MediaType.APPLICATION_OCTET_STREAM);
+		MediaType mediaType = contentType != null ? contentType : MediaType.APPLICATION_OCTET_STREAM;
 		Object[] hints = extractValidationHints(bodyParam);
 
 		if (mediaType.isCompatibleWith(MediaType.APPLICATION_FORM_URLENCODED)) {
@@ -207,7 +207,7 @@ public abstract class AbstractMessageReaderArgumentResolver extends HandlerMetho
 						mono = mono.doOnNext(target ->
 								validate(target, hints, bodyParam, bindingContext, exchange));
 					}
-					return (adapter != null ? Mono.just(adapter.fromPublisher(mono)) : Mono.from(mono));
+					return adapter != null ? Mono.just(adapter.fromPublisher(mono)) : Mono.from(mono);
 				}
 			}
 		}
@@ -225,7 +225,7 @@ public abstract class AbstractMessageReaderArgumentResolver extends HandlerMetho
 			if (isBodyRequired) {
 				body = body.switchIfEmpty(Mono.error(() -> handleMissingBody(bodyParam)));
 			}
-			return (adapter != null ? Mono.just(adapter.fromPublisher(body)) : Mono.from(body));
+			return adapter != null ? Mono.just(adapter.fromPublisher(body)) : Mono.from(body);
 		}
 
 		return Mono.error(new UnsupportedMediaTypeStatusException(
@@ -233,8 +233,8 @@ public abstract class AbstractMessageReaderArgumentResolver extends HandlerMetho
 	}
 
 	private Throwable handleReadError(MethodParameter parameter, Throwable ex) {
-		return (ex instanceof DecodingException ?
-				new ServerWebInputException("Failed to read HTTP message", parameter, ex) : ex);
+		return ex instanceof DecodingException ?
+				new ServerWebInputException("Failed to read HTTP message", parameter, ex) : ex;
 	}
 
 	private ServerWebInputException handleMissingBody(MethodParameter parameter) {

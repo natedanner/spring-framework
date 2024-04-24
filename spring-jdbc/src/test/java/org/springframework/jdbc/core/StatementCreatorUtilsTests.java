@@ -50,7 +50,7 @@ import static org.mockito.Mockito.verify;
  */
 class StatementCreatorUtilsTests {
 
-	private PreparedStatement preparedStatement = mock();
+	private final PreparedStatement preparedStatement = mock();
 
 
 	@Test
@@ -231,15 +231,15 @@ class StatementCreatorUtilsTests {
 	}
 
 	static Stream<Arguments> javaTimeTypes() {
-		ZoneOffset PLUS_NINE = ZoneOffset.ofHours(9);
+		ZoneOffset plusNine = ZoneOffset.ofHours(9);
 		final LocalDateTime now = LocalDateTime.now();
 		return Stream.of(
 				Arguments.of(named("LocalTime", LocalTime.NOON), named("TIME", Types.TIME)),
 				Arguments.of(named("LocalDate", LocalDate.EPOCH), named("DATE", Types.DATE)),
 				Arguments.of(named("LocalDateTime", now), named("TIMESTAMP", Types.TIMESTAMP)),
-				Arguments.of(named("OffsetTime", LocalTime.NOON.atOffset(PLUS_NINE)),
+				Arguments.of(named("OffsetTime", LocalTime.NOON.atOffset(plusNine)),
 						named("TIME_WITH_TIMEZONE", Types.TIME_WITH_TIMEZONE)),
-				Arguments.of(named("OffsetDateTime", now.atOffset(PLUS_NINE)),
+				Arguments.of(named("OffsetDateTime", now.atOffset(plusNine)),
 						named("TIMESTAMP_WITH_TIMEZONE", Types.TIMESTAMP_WITH_TIMEZONE))
 		);
 	}

@@ -45,7 +45,7 @@ public final class SpringVersion {
 	@Nullable
 	public static String getVersion() {
 		Package pkg = SpringVersion.class.getPackage();
-		return (pkg != null ? pkg.getImplementationVersion() : null);
+		return pkg != null ? pkg.getImplementationVersion() : null;
 	}
 
 }

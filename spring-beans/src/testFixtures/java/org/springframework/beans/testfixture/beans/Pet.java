@@ -26,7 +26,7 @@ import org.springframework.lang.Nullable;
  */
 public class Pet {
 
-	private String name;
+	private final String name;
 
 	public Pet(String name) {
 		this.name = name;
@@ -55,7 +55,7 @@ public class Pet {
 
 	@Override
 	public int hashCode() {
-		return (name != null ? name.hashCode() : 0);
+		return name != null ? name.hashCode() : 0;
 	}
 
 }

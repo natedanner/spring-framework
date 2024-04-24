@@ -162,9 +162,9 @@ public abstract class AbstractMessageListenerContainer extends AbstractJmsListen
 	@Nullable
 	private volatile Object messageListener;
 
-	private boolean subscriptionDurable = false;
+	private boolean subscriptionDurable;
 
-	private boolean subscriptionShared = false;
+	private boolean subscriptionShared;
 
 	@Nullable
 	private String subscriptionName;
@@ -175,7 +175,7 @@ public abstract class AbstractMessageListenerContainer extends AbstractJmsListen
 	@Nullable
 	private QosSettings replyQosSettings;
 
-	private boolean pubSubNoLocal = false;
+	private boolean pubSubNoLocal;
 
 	@Nullable
 	private MessageConverter messageConverter;
@@ -191,7 +191,7 @@ public abstract class AbstractMessageListenerContainer extends AbstractJmsListen
 
 	private boolean exposeListenerSession = true;
 
-	private boolean acceptMessagesWhileStopping = false;
+	private boolean acceptMessagesWhileStopping;
 
 
 	/**
@@ -224,7 +224,7 @@ public abstract class AbstractMessageListenerContainer extends AbstractJmsListen
 	 */
 	@Nullable
 	public Destination getDestination() {
-		return (this.destination instanceof Destination _destination ? _destination : null);
+		return this.destination instanceof Destination _destination ? _destination : null;
 	}
 
 	/**
@@ -250,7 +250,7 @@ public abstract class AbstractMessageListenerContainer extends AbstractJmsListen
 	 */
 	@Nullable
 	public String getDestinationName() {
-		return (this.destination instanceof String name ? name : null);
+		return this.destination instanceof String name ? name : null;
 	}
 
 	/**
@@ -259,7 +259,7 @@ public abstract class AbstractMessageListenerContainer extends AbstractJmsListen
 	 */
 	protected String getDestinationDescription() {
 		Object destination = this.destination;
-		return (destination != null ? destination.toString() : "");
+		return destination != null ? destination.toString() : "";
 	}
 
 	/**
@@ -448,7 +448,7 @@ public abstract class AbstractMessageListenerContainer extends AbstractJmsListen
 	 */
 	public void setDurableSubscriptionName(@Nullable String durableSubscriptionName) {
 		this.subscriptionName = durableSubscriptionName;
-		this.subscriptionDurable = (durableSubscriptionName != null);
+		this.subscriptionDurable = durableSubscriptionName != null;
 	}
 
 	/**
@@ -456,7 +456,7 @@ public abstract class AbstractMessageListenerContainer extends AbstractJmsListen
 	 */
 	@Nullable
 	public String getDurableSubscriptionName() {
-		return (this.subscriptionDurable ? this.subscriptionName : null);
+		return this.subscriptionDurable ? this.subscriptionName : null;
 	}
 
 	/**
@@ -907,9 +907,9 @@ public abstract class AbstractMessageListenerContainer extends AbstractJmsListen
 	protected MessageConsumer createConsumer(Session session, Destination destination) throws JMSException {
 		if (isPubSubDomain() && destination instanceof Topic topic) {
 			if (isSubscriptionShared()) {
-				return (isSubscriptionDurable() ?
+				return isSubscriptionDurable() ?
 						session.createSharedDurableConsumer(topic, getSubscriptionName(), getMessageSelector()) :
-						session.createSharedConsumer(topic, getSubscriptionName(), getMessageSelector()));
+						session.createSharedConsumer(topic, getSubscriptionName(), getMessageSelector());
 			}
 			else if (isSubscriptionDurable()) {
 				return session.createDurableSubscriber(

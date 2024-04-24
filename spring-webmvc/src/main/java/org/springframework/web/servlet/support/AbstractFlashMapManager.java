@@ -205,14 +205,14 @@ public abstract class AbstractFlashMapManager implements FlashMapManager {
 		if (mutex != null) {
 			synchronized (mutex) {
 				List<FlashMap> allFlashMaps = retrieveFlashMaps(request);
-				allFlashMaps = (allFlashMaps != null ? allFlashMaps : new CopyOnWriteArrayList<>());
+				allFlashMaps = allFlashMaps != null ? allFlashMaps : new CopyOnWriteArrayList<>();
 				allFlashMaps.add(flashMap);
 				updateFlashMaps(allFlashMaps, request, response);
 			}
 		}
 		else {
 			List<FlashMap> allFlashMaps = retrieveFlashMaps(request);
-			allFlashMaps = (allFlashMaps != null ? allFlashMaps : new ArrayList<>(1));
+			allFlashMaps = allFlashMaps != null ? allFlashMaps : new ArrayList<>(1);
 			allFlashMaps.add(flashMap);
 			updateFlashMaps(allFlashMaps, request, response);
 		}

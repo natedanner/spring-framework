@@ -50,8 +50,8 @@ class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 	private static final String DEFAULT_NAME = "default";
 	private static final String MODIFIED_NAME = "modified";
 
-	private ServletRequestAttributes oldRequestAttributes = new ServletRequestAttributes(new MockHttpServletRequest());
-	private ServletRequestAttributes newRequestAttributes = new ServletRequestAttributes(new MockHttpServletRequest());
+	private final ServletRequestAttributes oldRequestAttributes = new ServletRequestAttributes(new MockHttpServletRequest());
+	private final ServletRequestAttributes newRequestAttributes = new ServletRequestAttributes(new MockHttpServletRequest());
 
 	private ServletRequestAttributes oldRequestAttributesWithSession;
 	private ServletRequestAttributes newRequestAttributesWithSession;

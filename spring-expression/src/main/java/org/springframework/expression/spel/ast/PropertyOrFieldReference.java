@@ -311,7 +311,7 @@ public class PropertyOrFieldReference extends SpelNodeImpl {
 	private List<PropertyAccessor> getPropertyAccessorsToTry(
 			@Nullable Object contextObject, List<PropertyAccessor> propertyAccessors) {
 
-		Class<?> targetType = (contextObject != null ? contextObject.getClass() : null);
+		Class<?> targetType = contextObject != null ? contextObject.getClass() : null;
 
 		List<PropertyAccessor> specificAccessors = new ArrayList<>();
 		List<PropertyAccessor> generalAccessors = new ArrayList<>();
@@ -341,8 +341,8 @@ public class PropertyOrFieldReference extends SpelNodeImpl {
 
 	@Override
 	public boolean isCompilable() {
-		return (this.cachedReadAccessor instanceof CompilablePropertyAccessor compilablePropertyAccessor &&
-				compilablePropertyAccessor.isCompilable());
+		return this.cachedReadAccessor instanceof CompilablePropertyAccessor compilablePropertyAccessor &&
+				compilablePropertyAccessor.isCompilable();
 	}
 
 	@Override

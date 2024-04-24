@@ -123,7 +123,7 @@ final class DefaultRSocketRequesterBuilder implements RSocketRequester.Builder {
 
 	@Override
 	public RSocketRequester.Builder setupMetadata(Object metadata, @Nullable MimeType mimeType) {
-		this.setupMetadata = (this.setupMetadata == null ? new LinkedHashMap<>(4) : this.setupMetadata);
+		this.setupMetadata = this.setupMetadata == null ? new LinkedHashMap<>(4) : this.setupMetadata;
 		this.setupMetadata.put(metadata, mimeType);
 		return this;
 	}
@@ -273,7 +273,7 @@ final class DefaultRSocketRequesterBuilder implements RSocketRequester.Builder {
 			MimeType dataMimeType, MimeType metaMimeType, RSocketStrategies strategies) {
 
 		Object data = this.setupData;
-		boolean hasMetadata = (this.setupRoute != null || !CollectionUtils.isEmpty(this.setupMetadata));
+		boolean hasMetadata = this.setupRoute != null || !CollectionUtils.isEmpty(this.setupMetadata);
 		if (!hasMetadata && data == null) {
 			return Mono.just(EMPTY_SETUP_PAYLOAD);
 		}
@@ -282,7 +282,7 @@ final class DefaultRSocketRequesterBuilder implements RSocketRequester.Builder {
 		if (data != null) {
 			ReactiveAdapter adapter = strategies.reactiveAdapterRegistry().getAdapter(data.getClass());
 			Assert.isTrue(adapter == null || !adapter.isMultiValue(), () -> "Expected single value: " + data);
-			Mono<?> mono = (adapter != null ? Mono.from(adapter.toPublisher(data)) : Mono.just(data));
+			Mono<?> mono = adapter != null ? Mono.from(adapter.toPublisher(data)) : Mono.just(data);
 			dataMono = mono.map(value -> {
 				ResolvableType type = ResolvableType.forClass(value.getClass());
 				Encoder<Object> encoder = strategies.encoder(type, dataMimeType);

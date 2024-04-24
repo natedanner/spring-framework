@@ -38,28 +38,28 @@ class MethodMatchersTests {
 
 	private static final Method TEST_METHOD = mock(Method.class);
 
-	private final Method EXCEPTION_GETMESSAGE;
+	private final Method exceptionGetmessage;
 
-	private final Method ITESTBEAN_SETAGE;
+	private final Method itestbeanSetage;
 
-	private final Method ITESTBEAN_GETAGE;
+	private final Method itestbeanGetage;
 
-	private final Method IOTHER_ABSQUATULATE;
+	private final Method iotherAbsquatulate;
 
 
 	public MethodMatchersTests() throws Exception {
-		EXCEPTION_GETMESSAGE = Exception.class.getMethod("getMessage");
-		ITESTBEAN_GETAGE = ITestBean.class.getMethod("getAge");
-		ITESTBEAN_SETAGE = ITestBean.class.getMethod("setAge", int.class);
-		IOTHER_ABSQUATULATE = IOther.class.getMethod("absquatulate");
+		exceptionGetmessage = Exception.class.getMethod("getMessage");
+		itestbeanGetage = ITestBean.class.getMethod("getAge");
+		itestbeanSetage = ITestBean.class.getMethod("setAge", int.class);
+		iotherAbsquatulate = IOther.class.getMethod("absquatulate");
 	}
 
 
 	@Test
 	void testDefaultMatchesAll() {
 		MethodMatcher defaultMm = MethodMatcher.TRUE;
-		assertThat(defaultMm.matches(EXCEPTION_GETMESSAGE, Exception.class)).isTrue();
-		assertThat(defaultMm.matches(ITESTBEAN_SETAGE, TestBean.class)).isTrue();
+		assertThat(defaultMm.matches(exceptionGetmessage, Exception.class)).isTrue();
+		assertThat(defaultMm.matches(itestbeanSetage, TestBean.class)).isTrue();
 	}
 
 	@Test
@@ -70,12 +70,12 @@ class MethodMatchersTests {
 	@Test
 	void testSingle() {
 		MethodMatcher defaultMm = MethodMatcher.TRUE;
-		assertThat(defaultMm.matches(EXCEPTION_GETMESSAGE, Exception.class)).isTrue();
-		assertThat(defaultMm.matches(ITESTBEAN_SETAGE, TestBean.class)).isTrue();
+		assertThat(defaultMm.matches(exceptionGetmessage, Exception.class)).isTrue();
+		assertThat(defaultMm.matches(itestbeanSetage, TestBean.class)).isTrue();
 		defaultMm = MethodMatchers.intersection(defaultMm, new StartsWithMatcher("get"));
 
-		assertThat(defaultMm.matches(EXCEPTION_GETMESSAGE, Exception.class)).isTrue();
-		assertThat(defaultMm.matches(ITESTBEAN_SETAGE, TestBean.class)).isFalse();
+		assertThat(defaultMm.matches(exceptionGetmessage, Exception.class)).isTrue();
+		assertThat(defaultMm.matches(itestbeanSetage, TestBean.class)).isFalse();
 	}
 
 
@@ -85,13 +85,13 @@ class MethodMatchersTests {
 		MethodMatcher mm2 = new TestDynamicMethodMatcherWhichMatches();
 		MethodMatcher intersection = MethodMatchers.intersection(mm1, mm2);
 		assertThat(intersection.isRuntime()).as("Intersection is a dynamic matcher").isTrue();
-		assertThat(intersection.matches(ITESTBEAN_SETAGE, TestBean.class)).as("2Matched setAge method").isTrue();
-		assertThat(intersection.matches(ITESTBEAN_SETAGE, TestBean.class, 5)).as("3Matched setAge method").isTrue();
+		assertThat(intersection.matches(itestbeanSetage, TestBean.class)).as("2Matched setAge method").isTrue();
+		assertThat(intersection.matches(itestbeanSetage, TestBean.class, 5)).as("3Matched setAge method").isTrue();
 		// Knock out dynamic part
 		intersection = MethodMatchers.intersection(intersection, new TestDynamicMethodMatcherWhichDoesNotMatch());
 		assertThat(intersection.isRuntime()).as("Intersection is a dynamic matcher").isTrue();
-		assertThat(intersection.matches(ITESTBEAN_SETAGE, TestBean.class)).as("2Matched setAge method").isTrue();
-		assertThat(intersection.matches(ITESTBEAN_SETAGE, TestBean.class, 5)).as("3 - not Matched setAge method").isFalse();
+		assertThat(intersection.matches(itestbeanSetage, TestBean.class)).as("2Matched setAge method").isTrue();
+		assertThat(intersection.matches(itestbeanSetage, TestBean.class, 5)).as("3 - not Matched setAge method").isFalse();
 	}
 
 	@Test
@@ -101,9 +101,9 @@ class MethodMatchersTests {
 		MethodMatcher union = MethodMatchers.union(getterMatcher, setterMatcher);
 
 		assertThat(union.isRuntime()).as("Union is a static matcher").isFalse();
-		assertThat(union.matches(ITESTBEAN_SETAGE, TestBean.class)).as("Matched setAge method").isTrue();
-		assertThat(union.matches(ITESTBEAN_GETAGE, TestBean.class)).as("Matched getAge method").isTrue();
-		assertThat(union.matches(IOTHER_ABSQUATULATE, TestBean.class)).as("Didn't matched absquatulate method").isFalse();
+		assertThat(union.matches(itestbeanSetage, TestBean.class)).as("Matched setAge method").isTrue();
+		assertThat(union.matches(itestbeanGetage, TestBean.class)).as("Matched getAge method").isTrue();
+		assertThat(union.matches(iotherAbsquatulate, TestBean.class)).as("Didn't matched absquatulate method").isFalse();
 	}
 
 	@Test
@@ -118,7 +118,7 @@ class MethodMatchersTests {
 	void negateMethodMatcher() {
 		MethodMatcher getterMatcher = new StartsWithMatcher("get");
 		MethodMatcher negate = MethodMatchers.negate(getterMatcher);
-		assertThat(negate.matches(ITESTBEAN_SETAGE, int.class)).isTrue();
+		assertThat(negate.matches(itestbeanSetage, int.class)).isTrue();
 	}
 
 	@Test

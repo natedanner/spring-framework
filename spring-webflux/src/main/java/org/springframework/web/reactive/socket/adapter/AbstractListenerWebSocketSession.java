@@ -112,9 +112,9 @@ public abstract class AbstractListenerWebSocketSession<T> extends AbstractWebSoc
 
 	@Override
 	public Flux<WebSocketMessage> receive() {
-		return (canSuspendReceiving() ?
+		return canSuspendReceiving() ?
 				Flux.from(this.receivePublisher) :
-				Flux.from(this.receivePublisher).onBackpressureBuffer(RECEIVE_BUFFER_SIZE));
+				Flux.from(this.receivePublisher).onBackpressureBuffer(RECEIVE_BUFFER_SIZE);
 	}
 
 	@Override
@@ -334,12 +334,12 @@ public abstract class AbstractListenerWebSocketSession<T> extends AbstractWebSoc
 
 		@Override
 		protected boolean isDataEmpty(WebSocketMessage message) {
-			return (message.getPayload().readableByteCount() == 0);
+			return message.getPayload().readableByteCount() == 0;
 		}
 
 		@Override
 		protected boolean isWritePossible() {
-			return (this.isReady);
+			return this.isReady;
 		}
 
 		/**

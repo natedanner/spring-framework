@@ -389,7 +389,7 @@ class BeanWrapperTests extends AbstractPropertyAccessorTests {
 		}
 
 		public Integer getObject() {
-			return (this.value != null ? this.value.length() : null);
+			return this.value != null ? this.value.length() : null;
 		}
 	}
 

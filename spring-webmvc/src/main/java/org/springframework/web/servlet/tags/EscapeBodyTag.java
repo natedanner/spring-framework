@@ -74,7 +74,7 @@ import org.springframework.web.util.JavaScriptUtils;
 @SuppressWarnings("serial")
 public class EscapeBodyTag extends HtmlEscapingAwareTag implements BodyTag {
 
-	private boolean javaScriptEscape = false;
+	private boolean javaScriptEscape;
 
 	@Nullable
 	private BodyContent bodyContent;
@@ -111,13 +111,13 @@ public class EscapeBodyTag extends HtmlEscapingAwareTag implements BodyTag {
 			String content = readBodyContent();
 			// HTML and/or JavaScript escape, if demanded
 			content = htmlEscape(content);
-			content = (this.javaScriptEscape ? JavaScriptUtils.javaScriptEscape(content) : content);
+			content = this.javaScriptEscape ? JavaScriptUtils.javaScriptEscape(content) : content;
 			writeBodyContent(content);
 		}
 		catch (IOException ex) {
 			throw new JspException("Could not write escaped body", ex);
 		}
-		return (SKIP_BODY);
+		return SKIP_BODY;
 	}
 
 	/**

@@ -57,7 +57,7 @@ public class PlaceOfBirth {
 		if (!(o instanceof PlaceOfBirth otherPOB)) {
 			return false;
 		}
-		return (city.equals(otherPOB.city));
+		return city.equals(otherPOB.city);
 	}
 
 	@Override

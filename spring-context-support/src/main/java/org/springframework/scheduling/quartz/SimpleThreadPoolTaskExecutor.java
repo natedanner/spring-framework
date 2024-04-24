@@ -51,7 +51,7 @@ import org.springframework.util.concurrent.ListenableFutureTask;
 public class SimpleThreadPoolTaskExecutor extends SimpleThreadPool
 		implements AsyncListenableTaskExecutor, SchedulingTaskExecutor, InitializingBean, DisposableBean {
 
-	private boolean waitForJobsToCompleteOnShutdown = false;
+	private boolean waitForJobsToCompleteOnShutdown;
 
 
 	/**

@@ -112,7 +112,7 @@ public class ProtobufMessageConverter extends AbstractMessageConverter {
 			addSupportedMimeTypes(this.protobufFormatSupport.supportedMediaTypes());
 		}
 
-		this.extensionRegistry = (extensionRegistry == null ? ExtensionRegistry.newInstance() : extensionRegistry);
+		this.extensionRegistry = extensionRegistry == null ? ExtensionRegistry.newInstance() : extensionRegistry;
 	}
 
 
@@ -124,8 +124,8 @@ public class ProtobufMessageConverter extends AbstractMessageConverter {
 	@Override
 	protected boolean canConvertTo(Object payload, @Nullable MessageHeaders headers) {
 		MimeType contentType = getMimeType(headers);
-		return (super.canConvertTo(payload, headers) ||
-				this.protobufFormatSupport != null && this.protobufFormatSupport.supportsWriteOnly(contentType));
+		return super.canConvertTo(payload, headers) ||
+				this.protobufFormatSupport != null && this.protobufFormatSupport.supportsWriteOnly(contentType);
 	}
 
 	@Override
@@ -245,8 +245,8 @@ public class ProtobufMessageConverter extends AbstractMessageConverter {
 		private final JsonFormat.Printer printer;
 
 		public ProtobufJavaUtilSupport(@Nullable JsonFormat.Parser parser, @Nullable JsonFormat.Printer printer) {
-			this.parser = (parser != null ? parser : JsonFormat.parser());
-			this.printer = (printer != null ? printer : JsonFormat.printer());
+			this.parser = parser != null ? parser : JsonFormat.parser();
+			this.printer = printer != null ? printer : JsonFormat.printer();
 		}
 
 		@Override

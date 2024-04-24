@@ -44,8 +44,8 @@ public class Netty5BufferDecoder extends AbstractDataBufferDecoder<Buffer> {
 
 	@Override
 	public boolean canDecode(ResolvableType elementType, @Nullable MimeType mimeType) {
-		return (Buffer.class.isAssignableFrom(elementType.toClass()) &&
-				super.canDecode(elementType, mimeType));
+		return Buffer.class.isAssignableFrom(elementType.toClass()) &&
+				super.canDecode(elementType, mimeType);
 	}
 
 	@Override

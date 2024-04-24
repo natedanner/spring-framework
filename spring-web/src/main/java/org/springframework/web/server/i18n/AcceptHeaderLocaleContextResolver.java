@@ -146,7 +146,7 @@ public class AcceptHeaderLocaleContextResolver implements LocaleContextResolver 
 		}
 
 		Locale defaultLocale = getDefaultLocale();
-		return (defaultLocale != null ? defaultLocale : requestLocales.get(0));
+		return defaultLocale != null ? defaultLocale : requestLocales.get(0);
 	}
 
 	@Override

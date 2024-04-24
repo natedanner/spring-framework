@@ -193,9 +193,9 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 										value, bufferFactory, hintsToUse, sequenceWriter, byteBuilder,
 										delimiter, EMPTY_BYTES);
 
-								return (prefix.length > 0 ?
+								return prefix.length > 0 ?
 										bufferFactory.join(List.of(bufferFactory.wrap(prefix), dataBuffer)) :
-										dataBuffer);
+										dataBuffer;
 							})
 							.switchIfEmpty(Mono.fromCallable(() -> bufferFactory.wrap(helper.getPrefix())))
 							.concatWith(Mono.fromCallable(() -> bufferFactory.wrap(helper.getSuffix())));
@@ -339,7 +339,7 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 		if (jsonView == null && hints != null) {
 			jsonView = (Class<?>) hints.get(Jackson2CodecSupport.JSON_VIEW_HINT);
 		}
-		ObjectWriter writer = (jsonView != null ? mapper.writerWithView(jsonView) : mapper.writer());
+		ObjectWriter writer = jsonView != null ? mapper.writerWithView(jsonView) : mapper.writer();
 		if (javaType.isContainerType()) {
 			writer = writer.forType(javaType);
 		}
@@ -419,7 +419,7 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 	public Map<String, Object> getEncodeHints(@Nullable ResolvableType actualType, ResolvableType elementType,
 			@Nullable MediaType mediaType, ServerHttpRequest request, ServerHttpResponse response) {
 
-		return (actualType != null ? getHints(actualType) : Hints.none());
+		return actualType != null ? getHints(actualType) : Hints.none();
 	}
 
 
@@ -450,7 +450,7 @@ public abstract class AbstractJackson2Encoder extends Jackson2CodecSupport imple
 		}
 
 		public byte[] getPrefix() {
-			return (this.firstItemEmitted ? EMPTY_BYTES : OPEN_BRACKET);
+			return this.firstItemEmitted ? EMPTY_BYTES : OPEN_BRACKET;
 		}
 
 		public byte[] getSuffix() {

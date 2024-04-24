@@ -48,8 +48,8 @@ import static org.springframework.test.transaction.TransactionAssert.assertThatT
 @SpringJUnitConfig
 class TransactionLifecycleMethodParameterInjectionTests {
 
-	static boolean beforeTransactionInvoked = false;
-	static boolean afterTransactionInvoked = false;
+	static boolean beforeTransactionInvoked;
+	static boolean afterTransactionInvoked;
 
 
 	@BeforeAll

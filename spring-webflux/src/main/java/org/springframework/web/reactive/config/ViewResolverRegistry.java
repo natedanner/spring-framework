@@ -133,7 +133,7 @@ public class ViewResolverRegistry {
 	 * Whether any view resolvers have been registered.
 	 */
 	public boolean hasRegistrations() {
-		return (!this.viewResolvers.isEmpty());
+		return !this.viewResolvers.isEmpty();
 	}
 
 	/**
@@ -149,13 +149,13 @@ public class ViewResolverRegistry {
 
 
 	private boolean checkBeanOfType(Class<?> beanType) {
-		return (this.applicationContext == null ||
+		return this.applicationContext == null ||
 				!ObjectUtils.isEmpty(BeanFactoryUtils.beanNamesForTypeIncludingAncestors(
-						this.applicationContext, beanType, false, false)));
+						this.applicationContext, beanType, false, false));
 	}
 
 	protected int getOrder() {
-		return (this.order != null ? this.order : Ordered.LOWEST_PRECEDENCE);
+		return this.order != null ? this.order : Ordered.LOWEST_PRECEDENCE;
 	}
 
 	protected List<ViewResolver> getViewResolvers() {

@@ -136,7 +136,7 @@ public class DataSourceTransactionManagerTests {
 			given(con.getWarnings()).willThrow(new SQLException());
 		}
 
-		final DataSource dsToUse = (lazyConnection ? new LazyConnectionDataSourceProxy(ds) : ds);
+		final DataSource dsToUse = lazyConnection ? new LazyConnectionDataSourceProxy(ds) : ds;
 		tm = createTransactionManager(dsToUse);
 		TransactionTemplate tt = new TransactionTemplate(tm);
 		assertThat(TransactionSynchronizationManager.hasResource(dsToUse)).isFalse();
@@ -222,7 +222,7 @@ public class DataSourceTransactionManagerTests {
 			given(con.getTransactionIsolation()).willReturn(Connection.TRANSACTION_READ_COMMITTED);
 		}
 
-		final DataSource dsToUse = (lazyConnection ? new LazyConnectionDataSourceProxy(ds) : ds);
+		final DataSource dsToUse = lazyConnection ? new LazyConnectionDataSourceProxy(ds) : ds;
 		tm = createTransactionManager(dsToUse);
 		TransactionTemplate tt = new TransactionTemplate(tm);
 		assertThat(TransactionSynchronizationManager.hasResource(dsToUse)).isFalse();

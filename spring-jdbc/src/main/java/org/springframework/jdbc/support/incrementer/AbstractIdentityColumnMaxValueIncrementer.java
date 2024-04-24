@@ -38,7 +38,7 @@ import org.springframework.jdbc.support.JdbcUtils;
  */
 public abstract class AbstractIdentityColumnMaxValueIncrementer extends AbstractColumnMaxValueIncrementer {
 
-	private boolean deleteSpecificValues = false;
+	private boolean deleteSpecificValues;
 
 	/** The current cache of values. */
 	private long[] valueCache;

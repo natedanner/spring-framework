@@ -52,9 +52,9 @@ class GroovyMarkupViewTests {
 
 	private static final String RESOURCE_LOADER_PATH = "classpath*:org/springframework/web/servlet/view/groovy/";
 
-	private WebApplicationContext webAppContext = mock();
+	private final WebApplicationContext webAppContext = mock();
 
-	private ServletContext servletContext = new MockServletContext();
+	private final ServletContext servletContext = new MockServletContext();
 
 
 	@BeforeEach

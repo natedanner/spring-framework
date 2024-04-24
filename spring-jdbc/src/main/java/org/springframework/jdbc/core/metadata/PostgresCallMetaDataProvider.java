@@ -45,7 +45,7 @@ public class PostgresCallMetaDataProvider extends GenericCallMetaDataProvider {
 
 		// Use current schema (or public schema) if no schema specified
 		String schema = databaseMetaData.getConnection().getSchema();
-		this.schemaName = (schema != null ? schema : "public");
+		this.schemaName = schema != null ? schema : "public";
 	}
 
 
@@ -67,7 +67,7 @@ public class PostgresCallMetaDataProvider extends GenericCallMetaDataProvider {
 	@Override
 	@Nullable
 	public String metaDataSchemaNameToUse(@Nullable String schemaName) {
-		return (schemaName == null ? this.schemaName : super.metaDataSchemaNameToUse(schemaName));
+		return schemaName == null ? this.schemaName : super.metaDataSchemaNameToUse(schemaName);
 	}
 
 	@Override

@@ -41,7 +41,7 @@ import static org.mockito.Mockito.never;
  */
 class StreamUtilsTests {
 
-	private byte[] bytes = new byte[StreamUtils.BUFFER_SIZE + 10];
+	private final byte[] bytes = new byte[StreamUtils.BUFFER_SIZE + 10];
 
 	private String string = "";
 

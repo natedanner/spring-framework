@@ -34,7 +34,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  */
 public class LifecycleBean implements BeanNameAware, BeanFactoryAware, InitializingBean, DisposableBean {
 
-	protected boolean initMethodDeclared = false;
+	protected boolean initMethodDeclared;
 
 	protected String beanName;
 

@@ -64,7 +64,7 @@ public class ByteArrayResource extends AbstractResource {
 	public ByteArrayResource(byte[] byteArray, @Nullable String description) {
 		Assert.notNull(byteArray, "Byte array must not be null");
 		this.byteArray = byteArray;
-		this.description = (description != null ? description : "");
+		this.description = description != null ? description : "";
 	}
 
 
@@ -130,8 +130,8 @@ public class ByteArrayResource extends AbstractResource {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ByteArrayResource that &&
-				Arrays.equals(this.byteArray, that.byteArray)));
+		return this == other || (other instanceof ByteArrayResource that &&
+				Arrays.equals(this.byteArray, that.byteArray));
 	}
 
 	/**

@@ -182,7 +182,9 @@ fun ServerRequest.queryParamOrNull(name: String): String? {
  * @since 5.2.2
  */
 fun ServerRequest.Headers.contentLengthOrNull(): Long? =
-		contentLength().run { if (isPresent) asLong else null }
+		contentLength().run { if (isPresent) { asLong
+        } else { null
+        } }
 
 /**
  * Nullable variant of [ServerRequest.Headers.contentType]

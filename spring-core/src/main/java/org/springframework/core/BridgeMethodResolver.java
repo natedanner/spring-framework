@@ -96,21 +96,21 @@ public final class BridgeMethodResolver {
 	}
 
 	private static Method resolveBridgeMethod(Method bridgeMethod, Class<?> targetClass) {
-		boolean localBridge = (targetClass == bridgeMethod.getDeclaringClass());
+		boolean localBridge = targetClass == bridgeMethod.getDeclaringClass();
 		if (!bridgeMethod.isBridge() && localBridge) {
 			return bridgeMethod;
 		}
 
-		Object cacheKey = (localBridge ? bridgeMethod : new MethodClassKey(bridgeMethod, targetClass));
+		Object cacheKey = localBridge ? bridgeMethod : new MethodClassKey(bridgeMethod, targetClass);
 		Method bridgedMethod = cache.get(cacheKey);
 		if (bridgedMethod == null) {
 			// Gather all methods with matching name and parameter size.
 			List<Method> candidateMethods = new ArrayList<>();
-			MethodFilter filter = (candidateMethod -> isBridgedCandidateFor(candidateMethod, bridgeMethod));
+			MethodFilter filter = candidateMethod -> isBridgedCandidateFor(candidateMethod, bridgeMethod);
 			ReflectionUtils.doWithMethods(targetClass, candidateMethods::add, filter);
 			if (!candidateMethods.isEmpty()) {
-				bridgedMethod = (candidateMethods.size() == 1 ? candidateMethods.get(0) :
-						searchCandidates(candidateMethods, bridgeMethod, targetClass));
+				bridgedMethod = candidateMethods.size() == 1 ? candidateMethods.get(0) :
+						searchCandidates(candidateMethods, bridgeMethod, targetClass);
 			}
 			if (bridgedMethod == null) {
 				// A bridge method was passed in but we couldn't find the bridged method.
@@ -129,9 +129,9 @@ public final class BridgeMethodResolver {
 	 * checks and can be used to quickly filter for a set of possible matches.
 	 */
 	private static boolean isBridgedCandidateFor(Method candidateMethod, Method bridgeMethod) {
-		return (!candidateMethod.isBridge() &&
+		return !candidateMethod.isBridge() &&
 				candidateMethod.getName().equals(bridgeMethod.getName()) &&
-				candidateMethod.getParameterCount() == bridgeMethod.getParameterCount());
+				candidateMethod.getParameterCount() == bridgeMethod.getParameterCount();
 	}
 
 	/**
@@ -157,7 +157,7 @@ public final class BridgeMethodResolver {
 			}
 			previousMethod = candidateMethod;
 		}
-		return (sameSig ? candidateMethods.get(0) : null);
+		return sameSig ? candidateMethods.get(0) : null;
 	}
 
 	/**
@@ -169,7 +169,7 @@ public final class BridgeMethodResolver {
 			return true;
 		}
 		Method method = findGenericDeclaration(bridgeMethod);
-		return (method != null && isResolvedTypeMatch(method, candidateMethod, targetClass));
+		return method != null && isResolvedTypeMatch(method, candidateMethod, targetClass);
 	}
 
 	/**
@@ -270,9 +270,9 @@ public final class BridgeMethodResolver {
 		if (bridgeMethod == bridgedMethod) {
 			return true;
 		}
-		return (bridgeMethod.getReturnType().equals(bridgedMethod.getReturnType()) &&
+		return bridgeMethod.getReturnType().equals(bridgedMethod.getReturnType()) &&
 				bridgeMethod.getParameterCount() == bridgedMethod.getParameterCount() &&
-				Arrays.equals(bridgeMethod.getParameterTypes(), bridgedMethod.getParameterTypes()));
+				Arrays.equals(bridgeMethod.getParameterTypes(), bridgedMethod.getParameterTypes());
 	}
 
 }

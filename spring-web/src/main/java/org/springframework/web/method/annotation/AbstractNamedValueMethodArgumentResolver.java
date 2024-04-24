@@ -94,7 +94,7 @@ public abstract class AbstractNamedValueMethodArgumentResolver implements Handle
 	public AbstractNamedValueMethodArgumentResolver(@Nullable ConfigurableBeanFactory beanFactory) {
 		this.configurableBeanFactory = beanFactory;
 		this.expressionContext =
-				(beanFactory != null ? new BeanExpressionContext(beanFactory, new RequestScope()) : null);
+				beanFactory != null ? new BeanExpressionContext(beanFactory, new RequestScope()) : null;
 	}
 
 
@@ -185,7 +185,7 @@ public abstract class AbstractNamedValueMethodArgumentResolver implements Handle
 							.formatted(parameter.getNestedParameterType().getName()));
 			}
 		}
-		String defaultValue = (ValueConstants.DEFAULT_NONE.equals(info.defaultValue) ? null : info.defaultValue);
+		String defaultValue = ValueConstants.DEFAULT_NONE.equals(info.defaultValue) ? null : info.defaultValue;
 		return new NamedValueInfo(name, info.required, defaultValue);
 	}
 

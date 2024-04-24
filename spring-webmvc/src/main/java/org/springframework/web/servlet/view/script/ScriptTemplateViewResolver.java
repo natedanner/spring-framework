@@ -65,7 +65,7 @@ public class ScriptTemplateViewResolver extends UrlBasedViewResolver {
 
 	@Override
 	protected AbstractUrlBasedView instantiateView() {
-		return (getViewClass() == ScriptTemplateView.class ? new ScriptTemplateView() : super.instantiateView());
+		return getViewClass() == ScriptTemplateView.class ? new ScriptTemplateView() : super.instantiateView();
 	}
 
 }

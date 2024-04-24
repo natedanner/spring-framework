@@ -70,7 +70,7 @@ public class LazySingletonAspectInstanceFactoryDecorator implements MetadataAwar
 	}
 
 	public boolean isMaterialized() {
-		return (this.materialized != null);
+		return this.materialized != null;
 	}
 
 	@Override

@@ -133,7 +133,7 @@ public final class ResourceFiles implements Iterable<ResourceFile> {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ResourceFiles that && this.files.equals(that.files)));
+		return this == other || (other instanceof ResourceFiles that && this.files.equals(that.files));
 	}
 
 	@Override

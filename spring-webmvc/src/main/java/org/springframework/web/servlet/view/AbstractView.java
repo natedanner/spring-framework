@@ -78,7 +78,7 @@ public abstract class AbstractView extends WebApplicationObjectSupport implement
 
 	private boolean exposePathVariables = true;
 
-	private boolean exposeContextBeansAsAttributes = false;
+	private boolean exposeContextBeansAsAttributes;
 
 	@Nullable
 	private Set<String> exposedContextBeanNames;
@@ -322,13 +322,13 @@ public abstract class AbstractView extends WebApplicationObjectSupport implement
 			HttpServletRequest request, HttpServletResponse response) {
 
 		@SuppressWarnings("unchecked")
-		Map<String, Object> pathVars = (this.exposePathVariables ?
-				(Map<String, Object>) request.getAttribute(View.PATH_VARIABLES) : null);
+		Map<String, Object> pathVars = this.exposePathVariables ?
+				(Map<String, Object>) request.getAttribute(View.PATH_VARIABLES) : null;
 
 		// Consolidate static and dynamic model attributes.
 		int size = this.staticAttributes.size();
-		size += (model != null ? model.size() : 0);
-		size += (pathVars != null ? pathVars.size() : 0);
+		size += model != null ? model.size() : 0;
+		size += pathVars != null ? pathVars.size() : 0;
 
 		Map<String, Object> mergedModel = CollectionUtils.newLinkedHashMap(size);
 		mergedModel.putAll(this.staticAttributes);
@@ -495,7 +495,7 @@ public abstract class AbstractView extends WebApplicationObjectSupport implement
 	}
 
 	protected String formatViewName() {
-		return (getBeanName() != null ? "name '" + getBeanName() + "'" : "[" + getClass().getSimpleName() + "]");
+		return getBeanName() != null ? "name '" + getBeanName() + "'" : "[" + getClass().getSimpleName() + "]";
 	}
 
 }

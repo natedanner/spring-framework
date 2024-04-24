@@ -77,7 +77,7 @@ class CachedIntrospectionResultsTests {
 		BeanInfo info = results.getBeanInfo();
 		PropertyDescriptor pd = null;
 		for (PropertyDescriptor candidate : info.getPropertyDescriptors()) {
-			if (candidate.getName().equals("foo")) {
+			if ("foo".equals(candidate.getName())) {
 				pd = candidate;
 			}
 		}

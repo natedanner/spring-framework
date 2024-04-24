@@ -145,8 +145,8 @@ public class PathResourceResolver extends AbstractResourceResolver {
 	protected String resolveUrlPathInternal(String resourcePath, List<? extends Resource> locations,
 			ResourceResolverChain chain) {
 
-		return (StringUtils.hasText(resourcePath) &&
-				getResource(resourcePath, null, locations) != null ? resourcePath : null);
+		return StringUtils.hasText(resourcePath) &&
+				getResource(resourcePath, null, locations) != null ? resourcePath : null;
 	}
 
 	@Nullable
@@ -256,15 +256,14 @@ public class PathResourceResolver extends AbstractResourceResolver {
 		if (locationPath.equals(resourcePath)) {
 			return true;
 		}
-		locationPath = (locationPath.endsWith("/") || locationPath.isEmpty() ? locationPath : locationPath + "/");
-		return (resourcePath.startsWith(locationPath) && !isInvalidEncodedPath(resourcePath));
+		locationPath = locationPath.endsWith("/") || locationPath.isEmpty() ? locationPath : locationPath + "/";
+		return resourcePath.startsWith(locationPath) && !isInvalidEncodedPath(resourcePath);
 	}
 
 	private String encodeOrDecodeIfNecessary(String path, @Nullable HttpServletRequest request, Resource location) {
 		if (request != null) {
-			boolean usesPathPattern = (
-					ServletRequestPathUtils.hasCachedPath(request) &&
-					ServletRequestPathUtils.getCachedPath(request) instanceof PathContainer);
+			boolean usesPathPattern = ServletRequestPathUtils.hasCachedPath(request) &&
+					ServletRequestPathUtils.getCachedPath(request) instanceof PathContainer;
 
 			if (shouldDecodeRelativePath(location, usesPathPattern)) {
 				return UriUtils.decode(path, StandardCharsets.UTF_8);
@@ -292,8 +291,8 @@ public class PathResourceResolver extends AbstractResourceResolver {
 	 * path needs to be decoded for non-{@code UrlResource} locations.
 	 */
 	private boolean shouldDecodeRelativePath(Resource location, boolean usesPathPattern) {
-		return (!(location instanceof UrlResource) &&
-				(usesPathPattern || (this.urlPathHelper != null && !this.urlPathHelper.isUrlDecode())));
+		return !(location instanceof UrlResource) &&
+				(usesPathPattern || (this.urlPathHelper != null && !this.urlPathHelper.isUrlDecode()));
 	}
 
 	/**
@@ -301,8 +300,8 @@ public class PathResourceResolver extends AbstractResourceResolver {
 	 * needs to be encoded for {@code UrlResource} locations.
 	 */
 	private boolean shouldEncodeRelativePath(Resource location, boolean usesPathPattern) {
-		return (location instanceof UrlResource && !usesPathPattern &&
-				this.urlPathHelper != null && this.urlPathHelper.isUrlDecode());
+		return location instanceof UrlResource && !usesPathPattern &&
+				this.urlPathHelper != null && this.urlPathHelper.isUrlDecode();
 	}
 
 	private boolean isInvalidEncodedPath(String resourcePath) {

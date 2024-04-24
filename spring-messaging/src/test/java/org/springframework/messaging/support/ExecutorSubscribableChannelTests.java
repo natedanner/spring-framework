@@ -235,7 +235,7 @@ public class ExecutorSubscribableChannelTests {
 			if (this.exceptionToRaise != null) {
 				throw this.exceptionToRaise;
 			}
-			return (this.messageToReturn != null ? this.messageToReturn : message);
+			return this.messageToReturn != null ? this.messageToReturn : message;
 		}
 	}
 

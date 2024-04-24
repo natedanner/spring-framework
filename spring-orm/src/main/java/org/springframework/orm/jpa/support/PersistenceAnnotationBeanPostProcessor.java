@@ -328,7 +328,7 @@ public class PersistenceAnnotationBeanPostProcessor implements InstantiationAwar
 	 * or explicitly refer to named persistence units in your annotations.
 	 */
 	public void setDefaultPersistenceUnitName(@Nullable String unitName) {
-		this.defaultPersistenceUnitName = (unitName != null ? unitName : "");
+		this.defaultPersistenceUnitName = unitName != null ? unitName : "";
 	}
 
 	public void setOrder(int order) {
@@ -404,7 +404,7 @@ public class PersistenceAnnotationBeanPostProcessor implements InstantiationAwar
 
 	private InjectionMetadata findPersistenceMetadata(String beanName, Class<?> clazz, @Nullable PropertyValues pvs) {
 		// Fall back to class name as cache key, for backwards compatibility with custom callers.
-		String cacheKey = (StringUtils.hasLength(beanName) ? beanName : clazz.getName());
+		String cacheKey = StringUtils.hasLength(beanName) ? beanName : clazz.getName();
 		// Quick check on the concurrent map first, with minimal locking.
 		InjectionMetadata metadata = this.injectionMetadataCache.get(cacheKey);
 		if (InjectionMetadata.needsRefresh(metadata, clazz)) {
@@ -481,7 +481,7 @@ public class PersistenceAnnotationBeanPostProcessor implements InstantiationAwar
 	@Nullable
 	protected EntityManagerFactory getPersistenceUnit(@Nullable String unitName) {
 		if (this.persistenceUnits != null) {
-			String unitNameForLookup = (unitName != null ? unitName : "");
+			String unitNameForLookup = unitName != null ? unitName : "";
 			if (unitNameForLookup.isEmpty()) {
 				unitNameForLookup = this.defaultPersistenceUnitName;
 			}
@@ -512,9 +512,9 @@ public class PersistenceAnnotationBeanPostProcessor implements InstantiationAwar
 	 */
 	@Nullable
 	protected EntityManager getPersistenceContext(@Nullable String unitName, boolean extended) {
-		Map<String, String> contexts = (extended ? this.extendedPersistenceContexts : this.persistenceContexts);
+		Map<String, String> contexts = extended ? this.extendedPersistenceContexts : this.persistenceContexts;
 		if (contexts != null) {
-			String unitNameForLookup = (unitName != null ? unitName : "");
+			String unitNameForLookup = unitName != null ? unitName : "";
 			if (unitNameForLookup.isEmpty()) {
 				unitNameForLookup = this.defaultPersistenceUnitName;
 			}
@@ -546,7 +546,7 @@ public class PersistenceAnnotationBeanPostProcessor implements InstantiationAwar
 	protected EntityManagerFactory findEntityManagerFactory(@Nullable String unitName, @Nullable String requestingBeanName)
 			throws NoSuchBeanDefinitionException {
 
-		String unitNameForLookup = (unitName != null ? unitName : "");
+		String unitNameForLookup = unitName != null ? unitName : "";
 		if (unitNameForLookup.isEmpty()) {
 			unitNameForLookup = this.defaultPersistenceUnitName;
 		}
@@ -650,7 +650,7 @@ public class PersistenceAnnotationBeanPostProcessor implements InstantiationAwar
 		@Nullable
 		private PersistenceContextType type;
 
-		private boolean synchronizedWithTransaction = false;
+		private boolean synchronizedWithTransaction;
 
 		@Nullable
 		private Properties properties;
@@ -692,9 +692,9 @@ public class PersistenceAnnotationBeanPostProcessor implements InstantiationAwar
 		protected Object getResourceToInject(Object target, @Nullable String requestingBeanName) {
 			// Resolves to EntityManagerFactory or EntityManager.
 			if (this.type != null) {
-				return (this.type == PersistenceContextType.EXTENDED ?
+				return this.type == PersistenceContextType.EXTENDED ?
 						resolveExtendedEntityManager(target, requestingBeanName) :
-						resolveEntityManager(requestingBeanName));
+						resolveEntityManager(requestingBeanName);
 			}
 			else {
 				// OK, so we need an EntityManagerFactory...
@@ -844,7 +844,7 @@ public class PersistenceAnnotationBeanPostProcessor implements InstantiationAwar
 				GeneratedMethods generatedMethods, PersistenceElement injectedElement) {
 
 			String unitName = injectedElement.unitName;
-			boolean requireEntityManager = (injectedElement.type != null);
+			boolean requireEntityManager = injectedElement.type != null;
 			if (!requireEntityManager) {
 				return CodeBlock.of(
 						"$T.findEntityManagerFactory(($T) $L.getBeanFactory(), $S)",
@@ -861,7 +861,7 @@ public class PersistenceAnnotationBeanPostProcessor implements InstantiationAwar
 			String unitName = injectedElement.unitName;
 			Properties properties = injectedElement.properties;
 			method.addJavadoc("Get the '$L' {@link $T}.",
-					(StringUtils.hasLength(unitName)) ? unitName : "default",
+					StringUtils.hasLength(unitName) ? unitName : "default",
 					EntityManager.class);
 			method.addModifiers(javax.lang.model.element.Modifier.PUBLIC,
 					javax.lang.model.element.Modifier.STATIC);
@@ -882,7 +882,7 @@ public class PersistenceAnnotationBeanPostProcessor implements InstantiationAwar
 			method.addStatement(
 					"return $T.createSharedEntityManager(entityManagerFactory, $L, $L)",
 					SharedEntityManagerCreator.class,
-					(hasProperties) ? "properties" : null,
+					hasProperties ? "properties" : null,
 					injectedElement.synchronizedWithTransaction);
 		}
 	}

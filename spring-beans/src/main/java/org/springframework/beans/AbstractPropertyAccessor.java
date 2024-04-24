@@ -36,11 +36,11 @@ import org.springframework.lang.Nullable;
  */
 public abstract class AbstractPropertyAccessor extends TypeConverterSupport implements ConfigurablePropertyAccessor {
 
-	private boolean extractOldValueForEditor = false;
+	private boolean extractOldValueForEditor;
 
-	private boolean autoGrowNestedPaths = false;
+	private boolean autoGrowNestedPaths;
 
-	boolean suppressNotWritablePropertyException = false;
+	boolean suppressNotWritablePropertyException;
 
 
 	@Override
@@ -89,8 +89,8 @@ public abstract class AbstractPropertyAccessor extends TypeConverterSupport impl
 			throws BeansException {
 
 		List<PropertyAccessException> propertyAccessExceptions = null;
-		List<PropertyValue> propertyValues = (pvs instanceof MutablePropertyValues mpvs ?
-				mpvs.getPropertyValueList() : Arrays.asList(pvs.getPropertyValues()));
+		List<PropertyValue> propertyValues = pvs instanceof MutablePropertyValues mpvs ?
+				mpvs.getPropertyValueList() : Arrays.asList(pvs.getPropertyValues());
 
 		if (ignoreUnknown) {
 			this.suppressNotWritablePropertyException = true;

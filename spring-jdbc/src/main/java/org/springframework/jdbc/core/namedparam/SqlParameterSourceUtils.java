@@ -64,8 +64,8 @@ public abstract class SqlParameterSourceUtils {
 		SqlParameterSource[] batch = new SqlParameterSource[candidates.size()];
 		int i = 0;
 		for (Object candidate : candidates) {
-			batch[i] = (candidate instanceof Map map ? new MapSqlParameterSource(map) :
-					new BeanPropertySqlParameterSource(candidate));
+			batch[i] = candidate instanceof Map map ? new MapSqlParameterSource(map) :
+					new BeanPropertySqlParameterSource(candidate);
 			i++;
 		}
 		return batch;

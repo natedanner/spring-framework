@@ -307,7 +307,7 @@ public class SelectTag extends AbstractHtmlInputElementTag {
 	 * @param items the items that comprise the options of this selection
 	 */
 	public void setItems(@Nullable Object items) {
-		this.items = (items != null ? items : EMPTY);
+		this.items = items != null ? items : EMPTY;
 	}
 
 	/**
@@ -414,10 +414,10 @@ public class SelectTag extends AbstractHtmlInputElementTag {
 				Object itemsObject = evaluate("items", items);
 				if (itemsObject != null) {
 					final String selectName = getName();
-					String valueProperty = (getItemValue() != null ?
-							ObjectUtils.getDisplayString(evaluate("itemValue", getItemValue())) : null);
-					String labelProperty = (getItemLabel() != null ?
-							ObjectUtils.getDisplayString(evaluate("itemLabel", getItemLabel())) : null);
+					String valueProperty = getItemValue() != null ?
+							ObjectUtils.getDisplayString(evaluate("itemValue", getItemValue())) : null;
+					String labelProperty = getItemLabel() != null ?
+							ObjectUtils.getDisplayString(evaluate("itemLabel", getItemLabel())) : null;
 					OptionWriter optionWriter =
 							new OptionWriter(itemsObject, getBindStatus(), valueProperty, labelProperty, isHtmlEscape()) {
 								@Override
@@ -461,7 +461,7 @@ public class SelectTag extends AbstractHtmlInputElementTag {
 		Object multiple = getMultiple();
 		if (multiple != null) {
 			String stringValue = multiple.toString();
-			return ("multiple".equalsIgnoreCase(stringValue) || Boolean.parseBoolean(stringValue));
+			return "multiple".equalsIgnoreCase(stringValue) || Boolean.parseBoolean(stringValue);
 		}
 		return forceMultiple();
 	}
@@ -490,7 +490,7 @@ public class SelectTag extends AbstractHtmlInputElementTag {
 	 * and {@link Map Maps}.
 	 */
 	private static boolean typeRequiresMultiple(Class<?> type) {
-		return (type.isArray() || Collection.class.isAssignableFrom(type) || Map.class.isAssignableFrom(type));
+		return type.isArray() || Collection.class.isAssignableFrom(type) || Map.class.isAssignableFrom(type);
 	}
 
 	/**

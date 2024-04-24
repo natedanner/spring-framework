@@ -68,10 +68,10 @@ public class MySQLMaxValueIncrementer extends AbstractColumnMaxValueIncrementer 
 	private static final String VALUE_SQL = "select last_insert_id()";
 
 	/** The next id to serve. */
-	private long nextId = 0;
+	private long nextId;
 
 	/** The max id to serve. */
-	private long maxId = 0;
+	private long maxId;
 
 	/** Whether to use a new connection for the incrementer. */
 	private boolean useNewConnection = true;

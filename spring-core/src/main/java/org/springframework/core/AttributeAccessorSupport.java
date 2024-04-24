@@ -106,8 +106,8 @@ public abstract class AttributeAccessorSupport implements AttributeAccessor, Ser
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof AttributeAccessorSupport that &&
-				this.attributes.equals(that.attributes)));
+		return this == other || (other instanceof AttributeAccessorSupport that &&
+				this.attributes.equals(that.attributes));
 	}
 
 	@Override

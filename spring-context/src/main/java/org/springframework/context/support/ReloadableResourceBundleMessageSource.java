@@ -167,7 +167,7 @@ public class ReloadableResourceBundleMessageSource extends AbstractResourceBased
 	 */
 	public void setPropertiesPersister(@Nullable PropertiesPersister propertiesPersister) {
 		this.propertiesPersister =
-				(propertiesPersister != null ? propertiesPersister : DefaultPropertiesPersister.INSTANCE);
+				propertiesPersister != null ? propertiesPersister : DefaultPropertiesPersister.INSTANCE;
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class ReloadableResourceBundleMessageSource extends AbstractResourceBased
 	 */
 	@Override
 	public void setResourceLoader(@Nullable ResourceLoader resourceLoader) {
-		this.resourceLoader = (resourceLoader != null ? resourceLoader : new DefaultResourceLoader());
+		this.resourceLoader = resourceLoader != null ? resourceLoader : new DefaultResourceLoader();
 	}
 
 
@@ -427,7 +427,7 @@ public class ReloadableResourceBundleMessageSource extends AbstractResourceBased
 	 * @see #resolveResource(String)
 	 */
 	protected PropertiesHolder refreshProperties(String filename, @Nullable PropertiesHolder propHolder) {
-		long refreshTimestamp = (getCacheMillis() < 0 ? -1 : System.currentTimeMillis());
+		long refreshTimestamp = getCacheMillis() < 0 ? -1 : System.currentTimeMillis();
 
 		Resource resource = resolveResource(filename);
 		if (resource != null) {

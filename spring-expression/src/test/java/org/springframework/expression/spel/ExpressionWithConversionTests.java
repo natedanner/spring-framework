@@ -44,10 +44,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class ExpressionWithConversionTests extends AbstractExpressionTests {
 
-	private static List<String> listOfString = new ArrayList<>();
-	private static TypeDescriptor typeDescriptorForListOfString = null;
-	private static List<Integer> listOfInteger = new ArrayList<>();
-	private static TypeDescriptor typeDescriptorForListOfInteger = null;
+	private static final List<String> listOfString = new ArrayList<>();
+	private static TypeDescriptor typeDescriptorForListOfString;
+	private static final List<Integer> listOfInteger = new ArrayList<>();
+	private static TypeDescriptor typeDescriptorForListOfInteger;
 
 	static {
 		listOfString.add("1");

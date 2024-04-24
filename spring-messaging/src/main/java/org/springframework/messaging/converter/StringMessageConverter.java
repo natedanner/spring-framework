@@ -50,14 +50,14 @@ public class StringMessageConverter extends AbstractMessageConverter {
 
 	@Override
 	protected boolean supports(Class<?> clazz) {
-		return (String.class == clazz);
+		return String.class == clazz;
 	}
 
 	@Override
 	protected Object convertFromInternal(Message<?> message, Class<?> targetClass, @Nullable Object conversionHint) {
 		Charset charset = getContentTypeCharset(getMimeType(message.getHeaders()));
 		Object payload = message.getPayload();
-		return (payload instanceof String ? payload : new String((byte[]) payload, charset));
+		return payload instanceof String ? payload : new String((byte[]) payload, charset);
 	}
 
 	@Override

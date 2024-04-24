@@ -336,9 +336,9 @@ class MethodInvocationTests extends AbstractExpressionTests {
 	// Simple filter
 	static class LocalFilter implements MethodFilter {
 
-		public boolean removeIfNotAnnotated = false;
+		public boolean removeIfNotAnnotated;
 
-		public boolean filterCalled = false;
+		public boolean filterCalled;
 
 		private boolean isAnnotated(Method method) {
 			Annotation[] anns = method.getAnnotations();

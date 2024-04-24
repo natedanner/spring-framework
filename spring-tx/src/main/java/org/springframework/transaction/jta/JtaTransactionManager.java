@@ -151,7 +151,7 @@ public class JtaTransactionManager extends AbstractPlatformTransactionManager
 
 	private boolean cacheUserTransaction = true;
 
-	private boolean userTransactionObtainedFromJndi = false;
+	private boolean userTransactionObtainedFromJndi;
 
 	@Nullable
 	private transient TransactionManager transactionManager;
@@ -169,7 +169,7 @@ public class JtaTransactionManager extends AbstractPlatformTransactionManager
 
 	private boolean autodetectTransactionSynchronizationRegistry = true;
 
-	private boolean allowCustomIsolationLevels = false;
+	private boolean allowCustomIsolationLevels;
 
 
 	/**
@@ -812,7 +812,7 @@ public class JtaTransactionManager extends AbstractPlatformTransactionManager
 	protected boolean isExistingTransaction(Object transaction) {
 		JtaTransactionObject txObject = (JtaTransactionObject) transaction;
 		try {
-			return (txObject.getUserTransaction().getStatus() != Status.STATUS_NO_TRANSACTION);
+			return txObject.getUserTransaction().getStatus() != Status.STATUS_NO_TRANSACTION;
 		}
 		catch (SystemException ex) {
 			throw new TransactionSystemException("JTA failure on getStatus", ex);

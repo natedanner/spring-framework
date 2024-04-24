@@ -54,7 +54,7 @@ public  final class Msg extends
       throws com.google.protobuf.InvalidProtocolBufferException {
     initFields();
     @SuppressWarnings("unused")
-	int mutable_bitField0_ = 0;
+	int mutableBitField0 = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -65,29 +65,30 @@ public  final class Msg extends
           case 0:
             done = true;
             break;
-          default: {
-            if (!parseUnknownField(input, unknownFields,
-                                   extensionRegistry, tag)) {
-              done = true;
-            }
-            break;
-          }
           case 10: {
             bitField0_ |= 0x00000001;
             foo_ = input.readBytes();
             break;
           }
           case 18: {
-            SecondMsg.Builder subBuilder = null;
-            if (((bitField0_ & 0x00000002) == 0x00000002)) {
-              subBuilder = blah_.toBuilder();
+			SecondMsg.Builder subBuilder = null;
+			if ((bitField0_ & 0x00000002) == 0x00000002) {
+				subBuilder = blah_.toBuilder();
+			}
+			blah_ = input.readMessage(SecondMsg.PARSER, extensionRegistry);
+			if (subBuilder != null) {
+				subBuilder.mergeFrom(blah_);
+				blah_ = subBuilder.buildPartial();
+			}
+			bitField0_ |= 0x00000002;
+			break;
+		}
+				break;
+          default: {
+            if (!parseUnknownField(input, unknownFields,
+                                   extensionRegistry, tag)) {
+              done = true;
             }
-            blah_ = input.readMessage(SecondMsg.PARSER, extensionRegistry);
-            if (subBuilder != null) {
-              subBuilder.mergeFrom(blah_);
-              blah_ = subBuilder.buildPartial();
-            }
-            bitField0_ |= 0x00000002;
             break;
           }
         }
@@ -102,7 +103,7 @@ public  final class Msg extends
       makeExtensionsImmutable();
     }
   }
-  public static final com.google.protobuf.Descriptors.Descriptor
+  public static com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return OuterSample.internal_static_Msg_descriptor;
   }
@@ -115,7 +116,7 @@ public  final class Msg extends
   }
 
   public static com.google.protobuf.Parser<Msg> PARSER =
-      new com.google.protobuf.AbstractParser<Msg>() {
+      new com.google.protobuf.AbstractParser<>() {
     public Msg parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -137,7 +138,7 @@ public  final class Msg extends
    * <code>optional string foo = 1;</code>
    */
   public boolean hasFoo() {
-    return ((bitField0_ & 0x00000001) == 0x00000001);
+    return (bitField0_ & 0x00000001) == 0x00000001;
   }
   /**
    * <code>optional string foo = 1;</code>
@@ -180,7 +181,7 @@ public  final class Msg extends
    * <code>optional .SecondMsg blah = 2;</code>
    */
   public boolean hasBlah() {
-    return ((bitField0_ & 0x00000002) == 0x00000002);
+    return (bitField0_ & 0x00000002) == 0x00000002;
   }
   /**
    * <code>optional .SecondMsg blah = 2;</code>
@@ -202,7 +203,9 @@ public  final class Msg extends
   private byte memoizedIsInitialized = -1;
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
-    if (isInitialized != -1) return isInitialized == 1;
+	  if (isInitialized != -1) {
+		  return isInitialized == 1;
+	  }
 
     memoizedIsInitialized = 1;
     return true;
@@ -211,10 +214,10 @@ public  final class Msg extends
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     getSerializedSize();
-    if (((bitField0_ & 0x00000001) == 0x00000001)) {
+    if ((bitField0_ & 0x00000001) == 0x00000001) {
       output.writeBytes(1, getFooBytes());
     }
-    if (((bitField0_ & 0x00000002) == 0x00000002)) {
+    if ((bitField0_ & 0x00000002) == 0x00000002) {
       output.writeMessage(2, blah_);
     }
     getUnknownFields().writeTo(output);
@@ -223,14 +226,16 @@ public  final class Msg extends
   private int memoizedSerializedSize = -1;
   public int getSerializedSize() {
     int size = memoizedSerializedSize;
-    if (size != -1) return size;
+	  if (size != -1) {
+		  return size;
+	  }
 
     size = 0;
-    if (((bitField0_ & 0x00000001) == 0x00000001)) {
+    if ((bitField0_ & 0x00000001) == 0x00000001) {
       size += com.google.protobuf.CodedOutputStream
         .computeBytesSize(1, getFooBytes());
     }
-    if (((bitField0_ & 0x00000002) == 0x00000002)) {
+    if ((bitField0_ & 0x00000002) == 0x00000002) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(2, blah_);
     }
@@ -309,8 +314,7 @@ public  final class Msg extends
   @java.lang.Override
   protected Builder newBuilderForType(
       com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-    Builder builder = new Builder(parent);
-    return builder;
+    return new Builder(parent);
   }
   /**
    * Protobuf type {@code Msg}
@@ -318,7 +322,7 @@ public  final class Msg extends
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder>
      implements MsgOrBuilder {
-    public static final com.google.protobuf.Descriptors.Descriptor
+    public static com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return OuterSample.internal_static_Msg_descriptor;
     }
@@ -352,13 +356,13 @@ public  final class Msg extends
     public Builder clear() {
       super.clear();
       foo_ = "";
-      bitField0_ = (bitField0_ & ~0x00000001);
+      bitField0_ = bitField0_ & ~0x00000001;
       if (blahBuilder_ == null) {
         blah_ = SecondMsg.getDefaultInstance();
       } else {
         blahBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = bitField0_ & ~0x00000002;
       return this;
     }
 
@@ -385,21 +389,21 @@ public  final class Msg extends
 
     public Msg buildPartial() {
       Msg result = new Msg(this);
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-        to_bitField0_ |= 0x00000001;
+      int fromBitField0 = bitField0_;
+      int toBitField0 = 0;
+      if ((fromBitField0 & 0x00000001) == 0x00000001) {
+        toBitField0 |= 0x00000001;
       }
       result.foo_ = foo_;
-      if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-        to_bitField0_ |= 0x00000002;
+      if ((fromBitField0 & 0x00000002) == 0x00000002) {
+        toBitField0 |= 0x00000002;
       }
       if (blahBuilder_ == null) {
         result.blah_ = blah_;
       } else {
         result.blah_ = blahBuilder_.build();
       }
-      result.bitField0_ = to_bitField0_;
+      result.bitField0_ = toBitField0;
       onBuilt();
       return result;
     }
@@ -414,7 +418,9 @@ public  final class Msg extends
     }
 
     public Builder mergeFrom(Msg other) {
-      if (other == Msg.getDefaultInstance()) return this;
+		if (other == Msg.getDefaultInstance()) {
+			return this;
+		}
       if (other.hasFoo()) {
         bitField0_ |= 0x00000001;
         foo_ = other.foo_;
@@ -456,7 +462,7 @@ public  final class Msg extends
      * <code>optional string foo = 1;</code>
      */
     public boolean hasFoo() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return (bitField0_ & 0x00000001) == 0x00000001;
     }
     /**
      * <code>optional string foo = 1;</code>
@@ -505,7 +511,7 @@ public  final class Msg extends
      * <code>optional string foo = 1;</code>
      */
     public Builder clearFoo() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      bitField0_ = bitField0_ & ~0x00000001;
       foo_ = getDefaultInstance().getFoo();
       onChanged();
       return this;
@@ -533,7 +539,7 @@ public  final class Msg extends
      * <code>optional .SecondMsg blah = 2;</code>
      */
     public boolean hasBlah() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return (bitField0_ & 0x00000002) == 0x00000002;
     }
     /**
      * <code>optional .SecondMsg blah = 2;</code>
@@ -604,7 +610,7 @@ public  final class Msg extends
       } else {
         blahBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = bitField0_ & ~0x00000002;
       return this;
     }
     /**

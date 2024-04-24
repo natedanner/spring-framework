@@ -64,7 +64,7 @@ public class PayloadApplicationEvent<T> extends ApplicationEvent implements Reso
 		super(source);
 		Assert.notNull(payload, "Payload must not be null");
 		this.payload = payload;
-		this.payloadType = (payloadType != null ? payloadType : ResolvableType.forInstance(payload));
+		this.payloadType = payloadType != null ? payloadType : ResolvableType.forInstance(payload);
 	}
 
 

@@ -489,12 +489,12 @@ class DefaultListableBeanFactoryTests {
 
 	@Test
 	void propertiesPopulationWithPrefix() {
-		String PREFIX = "beans.";
+		String prefix = "beans.";
 		Properties p = new Properties();
-		p.setProperty(PREFIX + "test.(class)", TestBean.class.getName());
-		p.setProperty(PREFIX + "test.name", "Tony");
-		p.setProperty(PREFIX + "test.age", "0x30");
-		int count = registerBeanDefinitions(p, PREFIX);
+		p.setProperty(prefix + "test.(class)", TestBean.class.getName());
+		p.setProperty(prefix + "test.name", "Tony");
+		p.setProperty(prefix + "test.age", "0x30");
+		int count = registerBeanDefinitions(p, prefix);
 
 		assertThat(count).as("1 beans registered, not " + count).isEqualTo(1);
 		testPropertiesPopulation(lbf);
@@ -505,7 +505,7 @@ class DefaultListableBeanFactoryTests {
 		String[] names = lbf.getBeanDefinitionNames();
 		assertThat(names != lbf.getBeanDefinitionNames()).isTrue();
 		assertThat(names.length == 1).as("Array length == 1").isTrue();
-		assertThat(names[0].equals("test")).as("0th element == test").isTrue();
+		assertThat("test".equals(names[0])).as("0th element == test").isTrue();
 
 		TestBean tb = (TestBean) lbf.getBean("test");
 		assertThat(tb != null).as("Test is non null").isTrue();
@@ -515,18 +515,18 @@ class DefaultListableBeanFactoryTests {
 
 	@Test
 	void simpleReference() {
-		String PREFIX = "beans.";
+		String prefix = "beans.";
 		Properties p = new Properties();
 
-		p.setProperty(PREFIX + "rod.(class)", TestBean.class.getName());
-		p.setProperty(PREFIX + "rod.name", "Rod");
+		p.setProperty(prefix + "rod.(class)", TestBean.class.getName());
+		p.setProperty(prefix + "rod.name", "Rod");
 
-		p.setProperty(PREFIX + "kerry.(class)", TestBean.class.getName());
-		p.setProperty(PREFIX + "kerry.name", "Kerry");
-		p.setProperty(PREFIX + "kerry.age", "35");
-		p.setProperty(PREFIX + "kerry.spouse(ref)", "rod");
+		p.setProperty(prefix + "kerry.(class)", TestBean.class.getName());
+		p.setProperty(prefix + "kerry.name", "Kerry");
+		p.setProperty(prefix + "kerry.age", "35");
+		p.setProperty(prefix + "kerry.spouse(ref)", "rod");
 
-		int count = registerBeanDefinitions(p, PREFIX);
+		int count = registerBeanDefinitions(p, prefix);
 		assertThat(count).as("2 beans registered, not " + count).isEqualTo(2);
 
 		TestBean kerry = lbf.getBean("kerry", TestBean.class);
@@ -553,15 +553,15 @@ class DefaultListableBeanFactoryTests {
 
 	@Test
 	void unresolvedReference() {
-		String PREFIX = "beans.";
+		String prefix = "beans.";
 		Properties p = new Properties();
 
-		p.setProperty(PREFIX + "kerry.(class)", TestBean.class.getName());
-		p.setProperty(PREFIX + "kerry.name", "Kerry");
-		p.setProperty(PREFIX + "kerry.age", "35");
-		p.setProperty(PREFIX + "kerry.spouse(ref)", "rod");
+		p.setProperty(prefix + "kerry.(class)", TestBean.class.getName());
+		p.setProperty(prefix + "kerry.name", "Kerry");
+		p.setProperty(prefix + "kerry.age", "35");
+		p.setProperty(prefix + "kerry.spouse(ref)", "rod");
 
-		registerBeanDefinitions(p, PREFIX);
+		registerBeanDefinitions(p, prefix);
 
 		assertThatExceptionOfType(BeansException.class).as("unresolved reference").isThrownBy(() ->
 				lbf.getBean("kerry"));
@@ -767,13 +767,13 @@ class DefaultListableBeanFactoryTests {
 
 	@Test
 	void canReferenceParentBeanFromChildViaAlias() {
-		final String EXPECTED_NAME = "Juergen";
-		final int EXPECTED_AGE = 41;
+		final String expectedName = "Juergen";
+		final int expectedAge = 41;
 
 		RootBeanDefinition parentDefinition = new RootBeanDefinition(TestBean.class);
 		parentDefinition.setAbstract(true);
-		parentDefinition.getPropertyValues().add("name", EXPECTED_NAME);
-		parentDefinition.getPropertyValues().add("age", EXPECTED_AGE);
+		parentDefinition.getPropertyValues().add("name", expectedName);
+		parentDefinition.getPropertyValues().add("age", expectedAge);
 
 		ChildBeanDefinition childDefinition = new ChildBeanDefinition("alias");
 
@@ -783,8 +783,8 @@ class DefaultListableBeanFactoryTests {
 		factory.registerAlias("parent", "alias");
 
 		TestBean child = factory.getBean("child", TestBean.class);
-		assertThat(child.getName()).isEqualTo(EXPECTED_NAME);
-		assertThat(child.getAge()).isEqualTo(EXPECTED_AGE);
+		assertThat(child.getName()).isEqualTo(expectedName);
+		assertThat(child.getAge()).isEqualTo(expectedAge);
 		BeanDefinition mergedBeanDefinition1 = factory.getMergedBeanDefinition("child");
 		BeanDefinition mergedBeanDefinition2 = factory.getMergedBeanDefinition("child");
 
@@ -793,16 +793,16 @@ class DefaultListableBeanFactoryTests {
 
 	@Test
 	void hintAtPossibleDuplicateArgumentsInParentAndChildWhenMixingIndexAndNamed() {
-		final String EXPECTED_NAME = "Juergen";
-		final int EXPECTED_AGE = 41;
+		final String expectedName = "Juergen";
+		final int expectedAge = 41;
 
 		RootBeanDefinition parentDefinition = new RootBeanDefinition(TestBean.class);
 		parentDefinition.setAbstract(true);
-		parentDefinition.getConstructorArgumentValues().addIndexedArgumentValue(0, EXPECTED_NAME);
+		parentDefinition.getConstructorArgumentValues().addIndexedArgumentValue(0, expectedName);
 
 		ChildBeanDefinition childDefinition = new ChildBeanDefinition("parent");
-		childDefinition.getConstructorArgumentValues().addGenericArgumentValue(new ConstructorArgumentValues.ValueHolder(EXPECTED_NAME, null, "name"));
-		childDefinition.getConstructorArgumentValues().addGenericArgumentValue(new ConstructorArgumentValues.ValueHolder(EXPECTED_AGE, null, "age"));
+		childDefinition.getConstructorArgumentValues().addGenericArgumentValue(new ConstructorArgumentValues.ValueHolder(expectedName, null, "name"));
+		childDefinition.getConstructorArgumentValues().addGenericArgumentValue(new ConstructorArgumentValues.ValueHolder(expectedAge, null, "age"));
 
 		DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
 		factory.registerBeanDefinition("parent", parentDefinition);
@@ -963,18 +963,18 @@ class DefaultListableBeanFactoryTests {
 
 	@Test // gh-23542
 	void concurrentBeanDefinitionRemoval() {
-		final int MAX = 200;
+		final int max = 200;
 		lbf.setAllowBeanDefinitionOverriding(false);
 
 		// Register the bean definitions before invoking preInstantiateSingletons()
 		// to simulate realistic usage of an ApplicationContext; otherwise, the bean
 		// factory thinks it's an "empty" factory which causes this test to fail in
 		// an unrealistic manner.
-		IntStream.range(0, MAX).forEach(this::registerTestBean);
+		IntStream.range(0, max).forEach(this::registerTestBean);
 		lbf.preInstantiateSingletons();
 
 		// This test is considered successful if the following does not result in an exception.
-		IntStream.range(0, MAX).parallel().forEach(this::removeTestBean);
+		IntStream.range(0, max).parallel().forEach(this::removeTestBean);
 	}
 
 	private void registerTestBean(int i) {
@@ -1543,7 +1543,7 @@ class DefaultListableBeanFactoryTests {
 		lbf.registerBeanDefinition("tb2", bd2);
 
 		assertThatExceptionOfType(BeanCreationException.class)
-				.isThrownBy(() -> lbf.preInstantiateSingletons())
+				.isThrownBy(lbf::preInstantiateSingletons)
 				.withMessageContaining("Circular")
 				.withMessageContaining("'tb2'")
 				.withMessageContaining("'tb1'");
@@ -2950,7 +2950,7 @@ class DefaultListableBeanFactoryTests {
 	}
 
 
-	public static class NoDependencies {
+	public static final class NoDependencies {
 
 		private NoDependencies() {
 		}
@@ -3113,7 +3113,7 @@ class DefaultListableBeanFactoryTests {
 
 	public static class BeanWithDestroyMethod extends BaseClassWithDestroyMethod {
 
-		static int closeCount = 0;
+		static int closeCount;
 
 		@SuppressWarnings("unused")
 		private BeanWithDestroyMethod inner;
@@ -3172,7 +3172,7 @@ class DefaultListableBeanFactoryTests {
 	public static class FactoryBeanThatShouldntBeCalled<T extends Repository<S, ID>, S, ID extends Serializable>
 			extends RepositoryFactoryBeanSupport<T, S, ID> implements Runnable, Callable<T> {
 
-		static boolean instantiated = false;
+		static boolean instantiated;
 
 		{
 			instantiated = true;
@@ -3226,7 +3226,7 @@ class DefaultListableBeanFactoryTests {
 
 	public static class LazyInitFactory implements FactoryBean<Object> {
 
-		public boolean initialized = false;
+		public boolean initialized;
 
 		@Override
 		public Object getObject() {
@@ -3248,7 +3248,7 @@ class DefaultListableBeanFactoryTests {
 
 	public static class EagerInitFactory implements SmartFactoryBean<Object> {
 
-		public boolean initialized = false;
+		public boolean initialized;
 
 		@Override
 		public Object getObject() {
@@ -3280,7 +3280,7 @@ class DefaultListableBeanFactoryTests {
 
 	public static class TestBeanFactory {
 
-		public static boolean initialized = false;
+		public static boolean initialized;
 
 		public TestBeanFactory() {
 			initialized = true;

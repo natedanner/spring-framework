@@ -105,7 +105,7 @@ class ConfigurationWithFactoryBeanAndAutowiringTests {
 
 	static class MyFactoryBean implements FactoryBean<String>, InitializingBean {
 
-		private boolean initialized = false;
+		private boolean initialized;
 
 		@Override
 		public void afterPropertiesSet() {

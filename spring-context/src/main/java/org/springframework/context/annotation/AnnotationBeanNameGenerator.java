@@ -174,7 +174,7 @@ public class AnnotationBeanNameGenerator implements BeanNameGenerator {
 		Set<String> result = MergedAnnotations.from(mergedAnnotation.getType()).stream()
 				.map(metaAnnotation -> metaAnnotation.getType().getName())
 				.collect(Collectors.toCollection(LinkedHashSet::new));
-		return (result.isEmpty() ? Collections.emptySet() : result);
+		return result.isEmpty() ? Collections.emptySet() : result;
 	}
 
 	/**
@@ -219,12 +219,12 @@ public class AnnotationBeanNameGenerator implements BeanNameGenerator {
 			Set<String> metaAnnotationTypes, Map<String, Object> attributes) {
 
 		boolean isStereotype = metaAnnotationTypes.contains(COMPONENT_ANNOTATION_CLASSNAME) ||
-				annotationType.equals("jakarta.annotation.ManagedBean") ||
-				annotationType.equals("javax.annotation.ManagedBean") ||
-				annotationType.equals("jakarta.inject.Named") ||
-				annotationType.equals("javax.inject.Named");
+				"jakarta.annotation.ManagedBean".equals(annotationType) ||
+				"javax.annotation.ManagedBean".equals(annotationType) ||
+				"jakarta.inject.Named".equals(annotationType) ||
+				"javax.inject.Named".equals(annotationType);
 
-		return (isStereotype && attributes.containsKey("value"));
+		return isStereotype && attributes.containsKey("value");
 	}
 
 	/**

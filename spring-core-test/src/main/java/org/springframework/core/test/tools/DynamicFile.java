@@ -83,8 +83,8 @@ public abstract sealed class DynamicFile permits SourceFile, ResourceFile {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof DynamicFile that &&
-				this.path.equals(that.path) && this.content.equals(that.content)));
+		return this == other || (other instanceof DynamicFile that &&
+				this.path.equals(that.path) && this.content.equals(that.content));
 	}
 
 	@Override

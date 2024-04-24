@@ -127,7 +127,7 @@ public abstract class AbstractMessageWriterResultHandler extends HandlerResultHa
 			@Nullable MethodParameter actualParam, ServerWebExchange exchange) {
 
 		ResolvableType bodyType = ResolvableType.forMethodParameter(bodyParameter);
-		ResolvableType actualType = (actualParam != null ? ResolvableType.forMethodParameter(actualParam) : bodyType);
+		ResolvableType actualType = actualParam != null ? ResolvableType.forMethodParameter(actualParam) : bodyType;
 		ReactiveAdapter adapter = getAdapterRegistry().getAdapter(bodyType.resolve(), body);
 
 		Publisher<?> publisher;
@@ -150,7 +150,7 @@ public abstract class AbstractMessageWriterResultHandler extends HandlerResultHa
 				elementType = bodyInstanceType;
 			}
 			else {
-				actualElementType = (body == null || bodyInstanceType.hasUnresolvableGenerics()) ? bodyType : bodyInstanceType;
+				actualElementType = body == null || bodyInstanceType.hasUnresolvableGenerics() ? bodyType : bodyInstanceType;
 				elementType = bodyType;
 			}
 		}
@@ -195,7 +195,7 @@ public abstract class AbstractMessageWriterResultHandler extends HandlerResultHa
 		}
 
 		MediaType contentType = exchange.getResponse().getHeaders().getContentType();
-		boolean isPresentMediaType = (contentType != null && contentType.equals(bestMediaType));
+		boolean isPresentMediaType = contentType != null && contentType.equals(bestMediaType);
 		Set<MediaType> producibleTypes = exchange.getAttribute(HandlerMapping.PRODUCIBLE_MEDIA_TYPES_ATTRIBUTE);
 		if (isPresentMediaType || !CollectionUtils.isEmpty(producibleTypes)) {
 			return Mono.error(new HttpMessageNotWritableException(

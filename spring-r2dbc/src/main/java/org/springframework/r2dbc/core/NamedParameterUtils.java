@@ -408,9 +408,9 @@ abstract class NamedParameterUtils {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof ParameterHolder that &&
+			return this == other || (other instanceof ParameterHolder that &&
 					this.startIndex == that.startIndex && this.endIndex == that.endIndex &&
-					this.parameterName.equals(that.parameterName)));
+					this.parameterName.equals(that.parameterName));
 		}
 
 		@Override

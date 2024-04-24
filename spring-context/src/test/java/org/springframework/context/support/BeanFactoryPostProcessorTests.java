@@ -173,7 +173,7 @@ class BeanFactoryPostProcessorTests {
 			this.initValue = initValue;
 		}
 
-		public boolean wasCalled = false;
+		public boolean wasCalled;
 
 		@Override
 		public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {

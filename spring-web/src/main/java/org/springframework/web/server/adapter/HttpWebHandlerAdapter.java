@@ -102,7 +102,7 @@ public class HttpWebHandlerAdapter extends WebHandlerDecorator implements HttpHa
 	private ApplicationContext applicationContext;
 
 	/** Whether to log potentially sensitive info (form data at DEBUG, headers at TRACE). */
-	private boolean enableLoggingRequestDetails = false;
+	private boolean enableLoggingRequestDetails;
 
 
 	public HttpWebHandlerAdapter(WebHandler delegate) {

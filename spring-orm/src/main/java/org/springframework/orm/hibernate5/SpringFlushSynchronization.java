@@ -45,7 +45,7 @@ public class SpringFlushSynchronization implements TransactionSynchronization {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof SpringFlushSynchronization that && this.session == that.session));
+		return this == other || (other instanceof SpringFlushSynchronization that && this.session == that.session);
 	}
 
 	@Override

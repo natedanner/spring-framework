@@ -47,7 +47,7 @@ final class ResultFunction implements ConnectionFunction<Flux<Result>> {
 	final ExecuteFunction executeFunction;
 
 	@Nullable
-	String resolvedSql = null;
+	String resolvedSql;
 
 	ResultFunction(Supplier<String> sqlSupplier, BiFunction<Connection, String, Statement> statementFunction, StatementFilterFunction filterFunction, ExecuteFunction executeFunction) {
 		this.sqlSupplier = sqlSupplier;

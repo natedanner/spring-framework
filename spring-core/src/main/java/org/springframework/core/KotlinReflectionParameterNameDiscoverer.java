@@ -49,7 +49,7 @@ public class KotlinReflectionParameterNameDiscoverer implements ParameterNameDis
 
 		try {
 			KFunction<?> function = ReflectJvmMapping.getKotlinFunction(method);
-			return (function != null ? getParameterNames(function.getParameters()) : null);
+			return function != null ? getParameterNames(function.getParameters()) : null;
 		}
 		catch (UnsupportedOperationException ex) {
 			return null;
@@ -65,7 +65,7 @@ public class KotlinReflectionParameterNameDiscoverer implements ParameterNameDis
 
 		try {
 			KFunction<?> function = ReflectJvmMapping.getKotlinFunction(ctor);
-			return (function != null ? getParameterNames(function.getParameters()) : null);
+			return function != null ? getParameterNames(function.getParameters()) : null;
 		}
 		catch (UnsupportedOperationException ex) {
 			return null;

@@ -98,9 +98,9 @@ public class SubscriptionMethodReturnValueHandler implements HandlerMethodReturn
 
 	@Override
 	public boolean supportsReturnType(MethodParameter returnType) {
-		return (returnType.hasMethodAnnotation(SubscribeMapping.class) &&
+		return returnType.hasMethodAnnotation(SubscribeMapping.class) &&
 				!returnType.hasMethodAnnotation(SendTo.class) &&
-				!returnType.hasMethodAnnotation(SendToUser.class));
+				!returnType.hasMethodAnnotation(SendToUser.class);
 	}
 
 	@Override

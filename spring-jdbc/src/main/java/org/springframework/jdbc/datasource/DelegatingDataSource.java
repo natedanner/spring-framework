@@ -152,7 +152,7 @@ public class DelegatingDataSource implements DataSource, InitializingBean {
 
 	@Override
 	public boolean isWrapperFor(Class<?> iface) throws SQLException {
-		return (iface.isInstance(this) || obtainTargetDataSource().isWrapperFor(iface));
+		return iface.isInstance(this) || obtainTargetDataSource().isWrapperFor(iface);
 	}
 
 }

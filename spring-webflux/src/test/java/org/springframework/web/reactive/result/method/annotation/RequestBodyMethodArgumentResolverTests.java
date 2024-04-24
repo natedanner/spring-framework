@@ -62,7 +62,7 @@ class RequestBodyMethodArgumentResolverTests {
 
 	private RequestBodyMethodArgumentResolver resolver;
 
-	private ResolvableMethod testMethod = ResolvableMethod.on(getClass()).named("handle").build();
+	private final ResolvableMethod testMethod = ResolvableMethod.on(getClass()).named("handle").build();
 
 
 	@BeforeEach

@@ -96,7 +96,7 @@ class StaticApplicationContextMulticasterTests extends AbstractApplicationContex
 
 	public static class TestApplicationEventMulticaster extends SimpleApplicationEventMulticaster {
 
-		private static int counter = 0;
+		private static int counter;
 
 		@Override
 		public void multicastEvent(ApplicationEvent event, @Nullable ResolvableType eventType) {

@@ -109,18 +109,18 @@ class DefaultServerWebExchangeBuilder implements ServerWebExchange.Builder {
 
 		@Override
 		public ServerHttpRequest getRequest() {
-			return (this.request != null ? this.request : getDelegate().getRequest());
+			return this.request != null ? this.request : getDelegate().getRequest();
 		}
 
 		@Override
 		public ServerHttpResponse getResponse() {
-			return (this.response != null ? this.response : getDelegate().getResponse());
+			return this.response != null ? this.response : getDelegate().getResponse();
 		}
 
 		@SuppressWarnings("unchecked")
 		@Override
 		public <T extends Principal> Mono<T> getPrincipal() {
-			return (this.principalMono != null ? (Mono<T>) this.principalMono : getDelegate().getPrincipal());
+			return this.principalMono != null ? (Mono<T>) this.principalMono : getDelegate().getPrincipal();
 		}
 	}
 

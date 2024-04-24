@@ -180,7 +180,7 @@ public class SettableListenableFuture<T> implements ListenableFuture<T> {
 		}
 
 		private boolean checkCompletingThread() {
-			boolean check = (this.completingThread == Thread.currentThread());
+			boolean check = this.completingThread == Thread.currentThread();
 			if (check) {
 				this.completingThread = null;  // only first match actually counts
 			}

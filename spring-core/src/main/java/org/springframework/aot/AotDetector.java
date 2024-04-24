@@ -49,7 +49,7 @@ public abstract class AotDetector {
 	 * @return whether AOT optimizations must be considered
 	 */
 	public static boolean useGeneratedArtifacts() {
-		return (inNativeImage || SpringProperties.getFlag(AOT_ENABLED));
+		return inNativeImage || SpringProperties.getFlag(AOT_ENABLED);
 	}
 
 }

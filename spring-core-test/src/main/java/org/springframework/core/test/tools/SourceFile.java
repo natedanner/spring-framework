@@ -181,7 +181,7 @@ public final class SourceFile extends DynamicFile implements AssertProvider<Sour
 			}
 			Assert.state(javaSource.getClasses().size() == 1, "Source must define a single class");
 			JavaClass javaClass = javaSource.getClasses().get(0);
-			return (javaSource.getPackage() != null) ?
+			return javaSource.getPackage() != null ?
 					(javaSource.getPackageName() + "." + javaClass.getName()) : javaClass.getName();
 		}
 		catch (Exception ex) {

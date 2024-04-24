@@ -28,7 +28,7 @@ import org.springframework.cglib.core.ReflectUtils;
 import org.springframework.cglib.core.Signature;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class FastClass
+public abstract class FastClass
 {
     private Class type;
 
@@ -170,7 +170,7 @@ abstract public class FastClass
      * @param parameterTypes the parameter array
      * @return the index, or <code>-1</code> if none is found.
      */
-    abstract public int getIndex(String name, Class[] parameterTypes);
+    public abstract int getIndex(String name, Class[] parameterTypes);
 
     /**
      * Return the index of the matching constructor. The index may be used
@@ -179,7 +179,7 @@ abstract public class FastClass
      * @param parameterTypes the parameter array
      * @return the constructor index, or <code>-1</code> if none is found.
      */
-    abstract public int getIndex(Class[] parameterTypes);
+    public abstract int getIndex(Class[] parameterTypes);
 
     /**
      * Invoke the method with the specified index.
@@ -189,7 +189,7 @@ abstract public class FastClass
      * @param args the arguments used for the method call
      * @throws java.lang.reflect.InvocationTargetException if the underlying method throws an exception
      */
-    abstract public Object invoke(int index, Object obj, Object[] args) throws InvocationTargetException;
+    public abstract Object invoke(int index, Object obj, Object[] args) throws InvocationTargetException;
 
     /**
      * Create a new instance using the specified constructor index and arguments.
@@ -198,14 +198,14 @@ abstract public class FastClass
      * @param args the arguments passed to the constructor
      * @throws java.lang.reflect.InvocationTargetException if the constructor throws an exception
      */
-    abstract public Object newInstance(int index, Object[] args) throws InvocationTargetException;
+    public abstract Object newInstance(int index, Object[] args) throws InvocationTargetException;
 
-    abstract public int getIndex(Signature sig);
+    public abstract int getIndex(Signature sig);
 
     /**
      * Returns the maximum method index for this class.
      */
-    abstract public int getMaxIndex();
+    public abstract int getMaxIndex();
 
     protected static String getSignatureWithoutReturnType(String name, Class[] parameterTypes) {
 		StringBuilder sb = new StringBuilder();

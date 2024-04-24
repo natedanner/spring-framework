@@ -94,9 +94,9 @@ public class ThreadPoolTaskExecutor extends ExecutorConfigurationSupport
 
 	private int queueCapacity = Integer.MAX_VALUE;
 
-	private boolean allowCoreThreadTimeOut = false;
+	private boolean allowCoreThreadTimeOut;
 
-	private boolean prestartAllCoreThreads = false;
+	private boolean prestartAllCoreThreads;
 
 	@Nullable
 	private TaskDecorator taskDecorator;

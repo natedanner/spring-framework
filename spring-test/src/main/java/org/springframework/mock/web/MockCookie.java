@@ -112,7 +112,7 @@ public class MockCookie extends Cookie {
 		String[] valueAndAttributes = cookieParts[1].split("\\s*;\\s*", 2);
 		String value = valueAndAttributes[0];
 		String[] attributes =
-				(valueAndAttributes.length > 1 ? valueAndAttributes[1].split("\\s*;\\s*") : new String[0]);
+				valueAndAttributes.length > 1 ? valueAndAttributes[1].split("\\s*;\\s*") : new String[0];
 
 		MockCookie cookie = new MockCookie(name, value);
 		for (String attribute : attributes) {
@@ -160,7 +160,7 @@ public class MockCookie extends Cookie {
 	@Override
 	public void setAttribute(String name, @Nullable String value) {
 		if (EXPIRES.equalsIgnoreCase(name)) {
-			this.expires = (value != null ? ZonedDateTime.parse(value, DateTimeFormatter.RFC_1123_DATE_TIME) : null);
+			this.expires = value != null ? ZonedDateTime.parse(value, DateTimeFormatter.RFC_1123_DATE_TIME) : null;
 		}
 		super.setAttribute(name, value);
 	}

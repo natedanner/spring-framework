@@ -244,7 +244,7 @@ public class UriTemplate implements Serializable {
 		}
 
 		private static String quote(StringBuilder builder) {
-			return (builder.length() > 0 ? Pattern.quote(builder.toString()) : "");
+			return builder.length() > 0 ? Pattern.quote(builder.toString()) : "";
 		}
 	}
 

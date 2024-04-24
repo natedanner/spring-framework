@@ -332,7 +332,7 @@ class ViewResolverTests {
 
 	@Test
 	void internalResourceViewResolverWithJstl() throws Exception {
-		Locale locale = !Locale.GERMAN.equals(Locale.getDefault()) ? Locale.GERMAN : Locale.FRENCH;
+		Locale locale = Locale.GERMAN.equals(Locale.getDefault()) ? Locale.FRENCH : Locale.GERMAN;
 
 		this.wac.addMessage("code1", locale, "messageX");
 		this.wac.refresh();
@@ -365,7 +365,7 @@ class ViewResolverTests {
 
 	@Test
 	void internalResourceViewResolverWithJstlAndContextParam() throws Exception {
-		Locale locale = !Locale.GERMAN.equals(Locale.getDefault()) ? Locale.GERMAN : Locale.FRENCH;
+		Locale locale = Locale.GERMAN.equals(Locale.getDefault()) ? Locale.FRENCH : Locale.GERMAN;
 
 		this.sc.addInitParameter(Config.FMT_LOCALIZATION_CONTEXT, "org/springframework/web/context/WEB-INF/context-messages");
 		this.wac.addMessage("code1", locale, "messageX");

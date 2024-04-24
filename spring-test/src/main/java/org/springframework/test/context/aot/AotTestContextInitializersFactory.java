@@ -54,7 +54,7 @@ final class AotTestContextInitializersFactory {
 			synchronized (AotTestContextInitializersFactory.class) {
 				initializers = contextInitializers;
 				if (initializers == null) {
-					initializers = (AotDetector.useGeneratedArtifacts() ? loadContextInitializersMap() : Map.of());
+					initializers = AotDetector.useGeneratedArtifacts() ? loadContextInitializersMap() : Map.of();
 					contextInitializers = initializers;
 				}
 			}
@@ -68,7 +68,7 @@ final class AotTestContextInitializersFactory {
 			synchronized (AotTestContextInitializersFactory.class) {
 				initializerClasses = contextInitializerClasses;
 				if (initializerClasses == null) {
-					initializerClasses = (AotDetector.useGeneratedArtifacts() ? loadContextInitializerClassesMap() : Map.of());
+					initializerClasses = AotDetector.useGeneratedArtifacts() ? loadContextInitializerClassesMap() : Map.of();
 					contextInitializerClasses = initializerClasses;
 				}
 			}

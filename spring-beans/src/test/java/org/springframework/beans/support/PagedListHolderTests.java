@@ -209,11 +209,7 @@ class PagedListHolderTests {
 			if (!extendedInfo.equals(mockFilter.extendedInfo)) {
 				return false;
 			}
-			if (!name.equals(mockFilter.name)) {
-				return false;
-			}
-
-			return true;
+			return !!name.equals(mockFilter.name);
 		}
 
 		@Override

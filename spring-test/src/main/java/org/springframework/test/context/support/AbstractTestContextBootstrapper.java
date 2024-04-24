@@ -155,7 +155,7 @@ public abstract class AbstractTestContextBootstrapper implements TestContextBoot
 
 				listeners.addAll(0, instantiateListeners(testExecutionListeners.listeners()));
 
-				descriptor = (inheritListeners ? parentDescriptor : null);
+				descriptor = inheritListeners ? parentDescriptor : null;
 			}
 		}
 
@@ -410,7 +410,7 @@ public abstract class AbstractTestContextBootstrapper implements TestContextBoot
 					factories.addAll(0, getContextCustomizerFactories());
 				}
 
-				descriptor = (inheritFactories ? parentDescriptor : null);
+				descriptor = inheritFactories ? parentDescriptor : null;
 			}
 		}
 

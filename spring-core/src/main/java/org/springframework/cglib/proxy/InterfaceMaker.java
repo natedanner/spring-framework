@@ -79,7 +79,7 @@ public class InterfaceMaker extends AbstractClassGenerator
     public void add(Class clazz) {
         Method[] methods = clazz.getMethods();
         for (Method m : methods) {
-            if (!m.getDeclaringClass().getName().equals("java.lang.Object")) {
+            if (!"java.lang.Object".equals(m.getDeclaringClass().getName())) {
                 add(m);
             }
         }

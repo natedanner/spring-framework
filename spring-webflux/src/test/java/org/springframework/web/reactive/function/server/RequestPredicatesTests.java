@@ -280,10 +280,10 @@ class RequestPredicatesTests {
 		MockServerHttpRequest mockRequest = MockServerHttpRequest.get("https://example.com")
 				.queryParam("foo", "bar").build();
 		ServerRequest request = new DefaultServerRequest(MockServerWebExchange.from(mockRequest), Collections.emptyList());
-		RequestPredicate predicate = RequestPredicates.queryParam("foo", s -> s.equals("bar"));
+		RequestPredicate predicate = RequestPredicates.queryParam("foo", "bar"::equals);
 		assertThat(predicate.test(request)).isTrue();
 
-		predicate = RequestPredicates.queryParam("foo", s -> s.equals("baz"));
+		predicate = RequestPredicates.queryParam("foo", "baz"::equals);
 		assertThat(predicate.test(request)).isFalse();
 	}
 

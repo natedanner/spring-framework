@@ -78,7 +78,7 @@ class ObjectToObjectConverterTests {
 	}
 
 
-	static class Source {
+	static final class Source {
 
 		private final String value;
 
@@ -92,7 +92,7 @@ class ObjectToObjectConverterTests {
 	}
 
 
-	static class Text {
+	static final class Text {
 
 		private final String value;
 
@@ -106,7 +106,7 @@ class ObjectToObjectConverterTests {
 	}
 
 
-	static class Data {
+	static final class Data {
 
 		private final String value;
 
@@ -120,7 +120,7 @@ class ObjectToObjectConverterTests {
 		}
 
 		public static Optional<Data> valueOf(String string) {
-			return (string != null ? Optional.of(new Data(string)) : Optional.empty());
+			return string != null ? Optional.of(new Data(string)) : Optional.empty();
 		}
 	}
 

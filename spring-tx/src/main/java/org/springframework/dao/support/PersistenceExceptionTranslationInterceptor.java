@@ -48,7 +48,7 @@ public class PersistenceExceptionTranslationInterceptor
 	@Nullable
 	private volatile PersistenceExceptionTranslator persistenceExceptionTranslator;
 
-	private boolean alwaysTranslate = false;
+	private boolean alwaysTranslate;
 
 	@Nullable
 	private ListableBeanFactory beanFactory;

@@ -265,8 +265,8 @@ class ConfigBeanDefinitionParser implements BeanDefinitionParser {
 		}
 		else {
 			String name = parserContext.getDelegate().getLocalName(aNode);
-			return (BEFORE.equals(name) || AFTER.equals(name) || AFTER_RETURNING_ELEMENT.equals(name) ||
-					AFTER_THROWING_ELEMENT.equals(name) || AROUND.equals(name));
+			return BEFORE.equals(name) || AFTER.equals(name) || AFTER_RETURNING_ELEMENT.equals(name) ||
+					AFTER_THROWING_ELEMENT.equals(name) || AROUND.equals(name);
 		}
 	}
 

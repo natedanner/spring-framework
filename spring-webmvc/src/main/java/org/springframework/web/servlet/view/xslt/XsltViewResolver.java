@@ -132,7 +132,7 @@ public class XsltViewResolver extends UrlBasedViewResolver {
 
 	@Override
 	protected AbstractUrlBasedView instantiateView() {
-		return (getViewClass() == XsltView.class ? new XsltView() : super.instantiateView());
+		return getViewClass() == XsltView.class ? new XsltView() : super.instantiateView();
 	}
 
 	@Override

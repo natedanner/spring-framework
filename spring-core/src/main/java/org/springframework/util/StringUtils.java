@@ -103,7 +103,7 @@ public abstract class StringUtils {
 	 */
 	@Deprecated
 	public static boolean isEmpty(@Nullable Object str) {
-		return (str == null || "".equals(str));
+		return str == null || "".equals(str);
 	}
 
 	/**
@@ -123,7 +123,7 @@ public abstract class StringUtils {
 	 * @see #hasText(CharSequence)
 	 */
 	public static boolean hasLength(@Nullable CharSequence str) {
-		return (str != null && str.length() > 0);
+		return str != null && str.length() > 0;
 	}
 
 	/**
@@ -136,7 +136,7 @@ public abstract class StringUtils {
 	 * @see #hasText(String)
 	 */
 	public static boolean hasLength(@Nullable String str) {
-		return (str != null && !str.isEmpty());
+		return str != null && !str.isEmpty();
 	}
 
 	/**
@@ -189,7 +189,7 @@ public abstract class StringUtils {
 	 * @see Character#isWhitespace
 	 */
 	public static boolean hasText(@Nullable String str) {
-		return (str != null && !str.isBlank());
+		return str != null && !str.isBlank();
 	}
 
 	/**
@@ -356,7 +356,7 @@ public abstract class StringUtils {
 	 * @since 5.2.9
 	 */
 	public static boolean matchesCharacter(@Nullable String str, char singleCharacter) {
-		return (str != null && str.length() == 1 && str.charAt(0) == singleCharacter);
+		return str != null && str.length() == 1 && str.charAt(0) == singleCharacter;
 	}
 
 	/**
@@ -367,8 +367,8 @@ public abstract class StringUtils {
 	 * @see java.lang.String#startsWith
 	 */
 	public static boolean startsWithIgnoreCase(@Nullable String str, @Nullable String prefix) {
-		return (str != null && prefix != null && str.length() >= prefix.length() &&
-				str.regionMatches(true, 0, prefix, 0, prefix.length()));
+		return str != null && prefix != null && str.length() >= prefix.length() &&
+				str.regionMatches(true, 0, prefix, 0, prefix.length());
 	}
 
 	/**
@@ -379,8 +379,8 @@ public abstract class StringUtils {
 	 * @see java.lang.String#endsWith
 	 */
 	public static boolean endsWithIgnoreCase(@Nullable String str, @Nullable String suffix) {
-		return (str != null && suffix != null && str.length() >= suffix.length() &&
-				str.regionMatches(true, str.length() - suffix.length(), suffix, 0, suffix.length()));
+		return str != null && suffix != null && str.length() >= suffix.length() &&
+				str.regionMatches(true, str.length() - suffix.length(), suffix, 0, suffix.length());
 	}
 
 	/**
@@ -507,7 +507,7 @@ public abstract class StringUtils {
 	 */
 	@Nullable
 	public static String quote(@Nullable String str) {
-		return (str != null ? "'" + str + "'" : null);
+		return str != null ? "'" + str + "'" : null;
 	}
 
 	/**
@@ -519,7 +519,7 @@ public abstract class StringUtils {
 	 */
 	@Nullable
 	public static Object quoteIfString(@Nullable Object obj) {
-		return (obj instanceof String str ? quote(str) : obj);
+		return obj instanceof String str ? quote(str) : obj;
 	}
 
 	/**
@@ -616,7 +616,7 @@ public abstract class StringUtils {
 		}
 
 		int separatorIndex = path.lastIndexOf(FOLDER_SEPARATOR_CHAR);
-		return (separatorIndex != -1 ? path.substring(separatorIndex + 1) : path);
+		return separatorIndex != -1 ? path.substring(separatorIndex + 1) : path;
 	}
 
 	/**
@@ -831,7 +831,7 @@ public abstract class StringUtils {
 				baos.write(ch);
 			}
 		}
-		return (changed ? StreamUtils.copyToString(baos, charset) : source);
+		return changed ? StreamUtils.copyToString(baos, charset) : source;
 	}
 
 	/**
@@ -876,7 +876,7 @@ public abstract class StringUtils {
 	@SuppressWarnings("deprecation")  // for Locale constructors on JDK 19
 	@Nullable
 	public static Locale parseLocaleString(String localeString) {
-		if (localeString.equals("")) {
+		if ("".equals(localeString)) {
 			return null;
 		}
 
@@ -949,7 +949,7 @@ public abstract class StringUtils {
 	 * @return the resulting {@code String} array
 	 */
 	public static String[] toStringArray(@Nullable Collection<String> collection) {
-		return (!CollectionUtils.isEmpty(collection) ? collection.toArray(EMPTY_STRING_ARRAY) : EMPTY_STRING_ARRAY);
+		return CollectionUtils.isEmpty(collection) ? EMPTY_STRING_ARRAY : collection.toArray(EMPTY_STRING_ARRAY);
 	}
 
 	/**
@@ -960,7 +960,7 @@ public abstract class StringUtils {
 	 * @return the resulting {@code String} array
 	 */
 	public static String[] toStringArray(@Nullable Enumeration<String> enumeration) {
-		return (enumeration != null ? toStringArray(Collections.list(enumeration)) : EMPTY_STRING_ARRAY);
+		return enumeration != null ? toStringArray(Collections.list(enumeration)) : EMPTY_STRING_ARRAY;
 	}
 
 	/**
@@ -1033,7 +1033,7 @@ public abstract class StringUtils {
 		String[] result = new String[array.length];
 		for (int i = 0; i < array.length; i++) {
 			String element = array[i];
-			result[i] = (element != null ? element.trim() : null);
+			result[i] = element != null ? element.trim() : null;
 		}
 		return result;
 	}

@@ -131,7 +131,7 @@ public class ResourceBundleMessageSource extends AbstractResourceBasedMessageSou
 	 */
 	@Nullable
 	protected ClassLoader getBundleClassLoader() {
-		return (this.bundleClassLoader != null ? this.bundleClassLoader : this.beanClassLoader);
+		return this.bundleClassLoader != null ? this.bundleClassLoader : this.beanClassLoader;
 	}
 
 	@Override
@@ -392,7 +392,7 @@ public class ResourceBundleMessageSource extends AbstractResourceBasedMessageSou
 				throws IllegalAccessException, InstantiationException, IOException {
 
 			// Special handling of default encoding
-			if (format.equals("java.properties")) {
+			if ("java.properties".equals(format)) {
 				String bundleName = toBundleName(baseName, locale);
 				final String resourceName = toResourceName(bundleName, "properties");
 				final ClassLoader classLoader = loader;
@@ -438,13 +438,13 @@ public class ResourceBundleMessageSource extends AbstractResourceBasedMessageSou
 		@Nullable
 		public Locale getFallbackLocale(String baseName, Locale locale) {
 			Locale defaultLocale = getDefaultLocale();
-			return (defaultLocale != null && !defaultLocale.equals(locale) ? defaultLocale : null);
+			return defaultLocale != null && !defaultLocale.equals(locale) ? defaultLocale : null;
 		}
 
 		@Override
 		public long getTimeToLive(String baseName, Locale locale) {
 			long cacheMillis = getCacheMillis();
-			return (cacheMillis >= 0 ? cacheMillis : super.getTimeToLive(baseName, locale));
+			return cacheMillis >= 0 ? cacheMillis : super.getTimeToLive(baseName, locale);
 		}
 
 		@Override

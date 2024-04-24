@@ -123,7 +123,7 @@ public class SingleConnectionDataSource extends DriverManagerDataSource
 		Assert.notNull(target, "Connection must not be null");
 		this.target = target;
 		this.suppressClose = suppressClose;
-		this.connection = (suppressClose ? getCloseSuppressingConnectionProxy(target) : target);
+		this.connection = suppressClose ? getCloseSuppressingConnectionProxy(target) : target;
 	}
 
 
@@ -217,7 +217,7 @@ public class SingleConnectionDataSource extends DriverManagerDataSource
 	@Override
 	public boolean shouldClose(Connection con) {
 		synchronized (this.connectionMonitor) {
-			return (con != this.connection && con != this.target);
+			return con != this.connection && con != this.target;
 		}
 	}
 
@@ -265,7 +265,7 @@ public class SingleConnectionDataSource extends DriverManagerDataSource
 			if (logger.isDebugEnabled()) {
 				logger.debug("Established shared JDBC Connection: " + this.target);
 			}
-			this.connection = (isSuppressClose() ? getCloseSuppressingConnectionProxy(this.target) : this.target);
+			this.connection = isSuppressClose() ? getCloseSuppressingConnectionProxy(this.target) : this.target;
 		}
 	}
 

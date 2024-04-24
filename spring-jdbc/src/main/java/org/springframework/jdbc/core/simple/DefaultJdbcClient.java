@@ -177,9 +177,9 @@ final class DefaultJdbcClient implements JdbcClient {
 		@SuppressWarnings({"rawtypes", "unchecked"})
 		@Override
 		public StatementSpec paramSource(Object namedParamObject) {
-			this.namedParamSource = (namedParamObject instanceof Map map ?
+			this.namedParamSource = namedParamObject instanceof Map map ?
 					new MapSqlParameterSource(map) :
-					new SimplePropertySqlParameterSource(namedParamObject));
+					new SimplePropertySqlParameterSource(namedParamObject);
 			return this;
 		}
 
@@ -191,9 +191,9 @@ final class DefaultJdbcClient implements JdbcClient {
 
 		@Override
 		public ResultQuerySpec query() {
-			return (useNamedParams() ?
+			return useNamedParams() ?
 					new NamedParamResultQuerySpec() :
-					new IndexedParamResultQuerySpec());
+					new IndexedParamResultQuerySpec();
 		}
 
 		@SuppressWarnings("unchecked")
@@ -207,9 +207,9 @@ final class DefaultJdbcClient implements JdbcClient {
 
 		@Override
 		public <T> MappedQuerySpec<T> query(RowMapper<T> rowMapper) {
-			return (useNamedParams() ?
+			return useNamedParams() ?
 					new NamedParamMappedQuerySpec<>(rowMapper) :
-					new IndexedParamMappedQuerySpec<>(rowMapper));
+					new IndexedParamMappedQuerySpec<>(rowMapper);
 		}
 
 		@Override
@@ -224,36 +224,36 @@ final class DefaultJdbcClient implements JdbcClient {
 
 		@Override
 		public <T> T query(ResultSetExtractor<T> rse) {
-			T result = (useNamedParams() ?
+			T result = useNamedParams() ?
 					namedParamOps.query(this.sql, this.namedParamSource, rse) :
-					classicOps.query(statementCreatorForIndexedParams(), rse));
+					classicOps.query(statementCreatorForIndexedParams(), rse);
 			Assert.state(result != null, "No result from ResultSetExtractor");
 			return result;
 		}
 
 		@Override
 		public int update() {
-			return (useNamedParams() ?
+			return useNamedParams() ?
 					namedParamOps.update(this.sql, this.namedParamSource) :
-					classicOps.update(statementCreatorForIndexedParams()));
+					classicOps.update(statementCreatorForIndexedParams());
 		}
 
 		@Override
 		public int update(KeyHolder generatedKeyHolder) {
-			return (useNamedParams() ?
+			return useNamedParams() ?
 					namedParamOps.update(this.sql, this.namedParamSource, generatedKeyHolder) :
-					classicOps.update(statementCreatorForIndexedParamsWithKeys(null), generatedKeyHolder));
+					classicOps.update(statementCreatorForIndexedParamsWithKeys(null), generatedKeyHolder);
 		}
 
 		@Override
 		public int update(KeyHolder generatedKeyHolder, String... keyColumnNames) {
-			return (useNamedParams() ?
+			return useNamedParams() ?
 					namedParamOps.update(this.sql, this.namedParamSource, generatedKeyHolder, keyColumnNames) :
-					classicOps.update(statementCreatorForIndexedParamsWithKeys(keyColumnNames), generatedKeyHolder));
+					classicOps.update(statementCreatorForIndexedParamsWithKeys(keyColumnNames), generatedKeyHolder);
 		}
 
 		private boolean useNamedParams() {
-			boolean hasNamedParams = (this.namedParams.hasValues() || this.namedParamSource != this.namedParams);
+			boolean hasNamedParams = this.namedParams.hasValues() || this.namedParamSource != this.namedParams;
 			if (hasNamedParams && !this.indexedParams.isEmpty()) {
 				throw new IllegalStateException("Configure either named or indexed parameters, not both");
 			}

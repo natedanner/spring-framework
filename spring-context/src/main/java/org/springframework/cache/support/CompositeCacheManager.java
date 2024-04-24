@@ -55,7 +55,7 @@ public class CompositeCacheManager implements CacheManager, InitializingBean {
 
 	private final List<CacheManager> cacheManagers = new ArrayList<>();
 
-	private boolean fallbackToNoOpCache = false;
+	private boolean fallbackToNoOpCache;
 
 
 	/**

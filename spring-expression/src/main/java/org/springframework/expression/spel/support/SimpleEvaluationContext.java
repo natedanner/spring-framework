@@ -115,8 +115,8 @@ public final class SimpleEvaluationContext implements EvaluationContext {
 
 		this.propertyAccessors = accessors;
 		this.methodResolvers = resolvers;
-		this.typeConverter = (converter != null ? converter : new StandardTypeConverter());
-		this.rootObject = (rootObject != null ? rootObject : TypedValue.NULL);
+		this.typeConverter = converter != null ? converter : new StandardTypeConverter();
+		this.rootObject = rootObject != null ? rootObject : TypedValue.NULL;
 	}
 
 

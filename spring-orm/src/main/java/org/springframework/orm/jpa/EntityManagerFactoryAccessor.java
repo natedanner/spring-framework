@@ -166,7 +166,7 @@ public abstract class EntityManagerFactoryAccessor implements BeanFactoryAware {
 	protected EntityManager createEntityManager() throws IllegalStateException {
 		EntityManagerFactory emf = obtainEntityManagerFactory();
 		Map<String, Object> properties = getJpaPropertyMap();
-		return (!CollectionUtils.isEmpty(properties) ? emf.createEntityManager(properties) : emf.createEntityManager());
+		return CollectionUtils.isEmpty(properties) ? emf.createEntityManager() : emf.createEntityManager(properties);
 	}
 
 	/**

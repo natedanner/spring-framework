@@ -220,7 +220,7 @@ public class DefaultSimpUserRegistry implements SimpUserRegistry, SmartApplicati
 		@Override
 		@Nullable
 		public SimpSession getSession(@Nullable String sessionId) {
-			return (sessionId != null ? this.userSessions.get(sessionId) : null);
+			return sessionId != null ? this.userSessions.get(sessionId) : null;
 		}
 
 		@Override
@@ -238,7 +238,7 @@ public class DefaultSimpUserRegistry implements SimpUserRegistry, SmartApplicati
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof SimpUser that && getName().equals(that.getName())));
+			return this == other || (other instanceof SimpUser that && getName().equals(that.getName()));
 		}
 
 		@Override
@@ -293,7 +293,7 @@ public class DefaultSimpUserRegistry implements SimpUserRegistry, SmartApplicati
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof SimpSubscription that && getId().equals(that.getId())));
+			return this == other || (other instanceof SimpSubscription that && getId().equals(that.getId()));
 		}
 
 		@Override
@@ -342,9 +342,9 @@ public class DefaultSimpUserRegistry implements SimpUserRegistry, SmartApplicati
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof SimpSubscription that &&
+			return this == other || (other instanceof SimpSubscription that &&
 					getId().equals(that.getId()) &&
-					getSession().getId().equals(that.getSession().getId())));
+					getSession().getId().equals(that.getSession().getId()));
 		}
 
 		@Override

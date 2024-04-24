@@ -60,10 +60,9 @@ class SimpleValueStylerTests {
 			assertThat(styler.style(Map.of())).isEqualTo("{}");
 			assertThat(styler.style(Map.of("key", 1))).isEqualTo("{\"key\" -> 1}");
 
-			Map<String, Integer> map = new LinkedHashMap<>() {{
-				put("key1", 1);
-				put("key2", 2);
-			}};
+			Map<String, Integer> map = new LinkedHashMap<>();
+			map.put("key1", 1);
+			map.put("key2", 2);
 			assertThat(styler.style(map)).isEqualTo("{\"key1\" -> 1, \"key2\" -> 2}");
 		}
 
@@ -128,10 +127,9 @@ class SimpleValueStylerTests {
 
 		@Test
 		void styleClassMap() {
-			Map<String, Class<?>> map = new LinkedHashMap<>() {{
-				put("key1", Integer.class);
-				put("key2", DefaultClassAndMethodStylers.class);
-			}};
+			Map<String, Class<?>> map = new LinkedHashMap<>();
+			map.put("key1", Integer.class);
+			map.put("key2", DefaultClassAndMethodStylers.class);
 			assertThat(styler.style(map)).isEqualTo(
 					"{\"key1\" -> java.lang.Integer, \"key2\" -> %s}",
 					DefaultClassAndMethodStylers.class.getCanonicalName());
@@ -173,10 +171,9 @@ class SimpleValueStylerTests {
 
 		@Test
 		void styleClassMap() {
-			Map<String, Class<?>> map = new LinkedHashMap<>() {{
-				put("key1", Integer.class);
-				put("key2", CustomClassAndMethodStylers.class);
-			}};
+			Map<String, Class<?>> map = new LinkedHashMap<>();
+			map.put("key1", Integer.class);
+			map.put("key2", CustomClassAndMethodStylers.class);
 			assertThat(styler.style(map)).isEqualTo(
 					"{\"key1\" -> %s, \"key2\" -> %s}",
 					Integer.class.getSimpleName(), CustomClassAndMethodStylers.class.getSimpleName());

@@ -137,11 +137,11 @@ public class SendToMethodReturnValueHandler implements HandlerMethodReturnValueH
 
 	@Override
 	public boolean supportsReturnType(MethodParameter returnType) {
-		return (returnType.hasMethodAnnotation(SendTo.class) ||
+		return returnType.hasMethodAnnotation(SendTo.class) ||
 				AnnotatedElementUtils.hasAnnotation(returnType.getDeclaringClass(), SendTo.class) ||
 				returnType.hasMethodAnnotation(SendToUser.class) ||
 				AnnotatedElementUtils.hasAnnotation(returnType.getDeclaringClass(), SendToUser.class) ||
-				!this.annotationRequired);
+				!this.annotationRequired;
 	}
 
 	@Override
@@ -204,16 +204,16 @@ public class SendToMethodReturnValueHandler implements HandlerMethodReturnValueH
 			return new DestinationHelper(headers, c1, c2);
 		}
 
-		return (m1 != null || m2 != null ?
-				new DestinationHelper(headers, m1, m2) : new DestinationHelper(headers, c1, c2));
+		return m1 != null || m2 != null ?
+				new DestinationHelper(headers, m1, m2) : new DestinationHelper(headers, c1, c2);
 	}
 
 	@Nullable
 	protected String getUserName(Message<?> message, MessageHeaders headers) {
 		Principal principal = SimpMessageHeaderAccessor.getUser(headers);
 		if (principal != null) {
-			return (principal instanceof DestinationUserNameProvider provider ?
-					provider.getDestinationUserName() : principal.getName());
+			return principal instanceof DestinationUserNameProvider provider ?
+					provider.getDestinationUserName() : principal.getName();
 		}
 		return null;
 	}
@@ -232,8 +232,8 @@ public class SendToMethodReturnValueHandler implements HandlerMethodReturnValueH
 			throw new IllegalStateException("No lookup destination header in " + message);
 		}
 
-		return (destination.startsWith("/") ?
-				new String[] {defaultPrefix + destination} : new String[] {defaultPrefix + '/' + destination});
+		return destination.startsWith("/") ?
+				new String[] {defaultPrefix + destination} : new String[] {defaultPrefix + '/' + destination};
 	}
 
 	private MessageHeaders createHeaders(@Nullable String sessionId, MethodParameter returnType) {

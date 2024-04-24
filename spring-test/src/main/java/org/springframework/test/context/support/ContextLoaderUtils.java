@@ -268,7 +268,7 @@ abstract class ContextLoaderUtils {
 	}
 
 	private static boolean hasResources(ContextConfiguration contextConfiguration) {
-		return (contextConfiguration.locations().length > 0 || contextConfiguration.classes().length > 0);
+		return contextConfiguration.locations().length > 0 || contextConfiguration.classes().length > 0;
 	}
 
 	/**

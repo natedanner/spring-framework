@@ -384,7 +384,7 @@ class RedirectViewTests {
 
 		private final Map<String, ?> expectedModel;
 
-		private boolean queryPropertiesCalled = false;
+		private boolean queryPropertiesCalled;
 
 
 		public TestRedirectView(String url, boolean contextRelative, Map<String, ?> expectedModel) {

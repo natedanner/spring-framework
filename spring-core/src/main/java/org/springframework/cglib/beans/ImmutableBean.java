@@ -30,11 +30,12 @@ import org.springframework.cglib.core.MethodInfo;
 import org.springframework.cglib.core.ReflectUtils;
 import org.springframework.cglib.core.Signature;
 import org.springframework.cglib.core.TypeUtils;
+
 /**
  * @author Chris Nokleberg
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class ImmutableBean
+public final class ImmutableBean
 {
 	private static final Type ILLEGAL_STATE_EXCEPTION =
 	  TypeUtils.parseType("IllegalStateException");

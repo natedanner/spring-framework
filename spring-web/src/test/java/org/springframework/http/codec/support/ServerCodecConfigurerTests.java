@@ -177,7 +177,7 @@ class ServerCodecConfigurerTests {
 
 		MultipartHttpMessageReader multipartReader = (MultipartHttpMessageReader) nextReader(readers);
 		DefaultPartHttpMessageReader reader = (DefaultPartHttpMessageReader) multipartReader.getPartReader();
-		assertThat((reader).getMaxInMemorySize()).isEqualTo(size);
+		assertThat(reader.getMaxInMemorySize()).isEqualTo(size);
 		assertThat(((PartEventHttpMessageReader) nextReader(readers)).getMaxInMemorySize()).isEqualTo(size);
 
 		assertThat(((KotlinSerializationCborDecoder) getNextDecoder(readers)).getMaxInMemorySize()).isEqualTo(size);

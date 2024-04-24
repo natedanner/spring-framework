@@ -75,7 +75,7 @@ final class HttpComponentsClientHttpResponse implements ClientHttpResponse {
 	@Override
 	public InputStream getBody() throws IOException {
 		HttpEntity entity = this.httpResponse.getEntity();
-		return (entity != null ? entity.getContent() : InputStream.nullInputStream());
+		return entity != null ? entity.getContent() : InputStream.nullInputStream();
 	}
 
 	@Override

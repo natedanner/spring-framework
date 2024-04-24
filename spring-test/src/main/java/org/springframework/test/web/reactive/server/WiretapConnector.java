@@ -280,8 +280,8 @@ class WiretapConnector implements ClientHttpConnector {
 
 		@Nullable
 		public Object getMockServerResult() {
-			return (getDelegate() instanceof MockServerClientHttpResponse mockResponse ?
-					mockResponse.getServerResult() : null);
+			return getDelegate() instanceof MockServerClientHttpResponse mockResponse ?
+					mockResponse.getServerResult() : null;
 		}
 	}
 

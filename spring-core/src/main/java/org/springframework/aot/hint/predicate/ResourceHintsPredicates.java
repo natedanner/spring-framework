@@ -96,7 +96,7 @@ public class ResourceHintsPredicates {
 	 * @return the {@link RuntimeHints} predicate
 	 */
 	public Predicate<RuntimeHints> forResource(String resourceName) {
-		String resourceNameToUse = (resourceName.startsWith("/") ? resourceName.substring(1) : resourceName);
+		String resourceNameToUse = resourceName.startsWith("/") ? resourceName.substring(1) : resourceName;
 		return hints -> {
 			AggregatedResourcePatternHints aggregatedResourcePatternHints = AggregatedResourcePatternHints.of(
 					hints.resources());

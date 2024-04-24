@@ -66,7 +66,7 @@ public abstract class JmsAccessor implements InitializingBean {
 	@Nullable
 	private ConnectionFactory connectionFactory;
 
-	private boolean sessionTransacted = false;
+	private boolean sessionTransacted;
 
 	private int sessionAcknowledgeMode = Session.AUTO_ACKNOWLEDGE;
 
@@ -239,9 +239,9 @@ public abstract class JmsAccessor implements InitializingBean {
 	 */
 	protected boolean isClientAcknowledge(Session session) throws JMSException {
 		int mode = session.getAcknowledgeMode();
-		return (mode != Session.SESSION_TRANSACTED &&
+		return mode != Session.SESSION_TRANSACTED &&
 				mode != Session.AUTO_ACKNOWLEDGE &&
-				mode != Session.DUPS_OK_ACKNOWLEDGE);
+				mode != Session.DUPS_OK_ACKNOWLEDGE;
 	}
 
 }

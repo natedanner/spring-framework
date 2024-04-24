@@ -36,7 +36,7 @@ public abstract class AbstractHttpServer implements HttpServer {
 
 	private String host = "0.0.0.0";
 
-	private int port = 0;
+	private int port;
 
 	private HttpHandler httpHandler;
 
@@ -87,8 +87,8 @@ public abstract class AbstractHttpServer implements HttpServer {
 	}
 
 	protected HttpHandler resolveHttpHandler() {
-		return (getHttpHandlerMap() != null ?
-				new ContextPathCompositeHandler(getHttpHandlerMap()) : getHttpHandler());
+		return getHttpHandlerMap() != null ?
+				new ContextPathCompositeHandler(getHttpHandlerMap()) : getHttpHandler();
 	}
 
 

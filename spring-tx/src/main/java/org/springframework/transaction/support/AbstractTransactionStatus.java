@@ -46,9 +46,9 @@ import org.springframework.transaction.TransactionUsageException;
  */
 public abstract class AbstractTransactionStatus implements TransactionStatus {
 
-	private boolean rollbackOnly = false;
+	private boolean rollbackOnly;
 
-	private boolean completed = false;
+	private boolean completed;
 
 	@Nullable
 	private Object savepoint;
@@ -75,7 +75,7 @@ public abstract class AbstractTransactionStatus implements TransactionStatus {
 	 */
 	@Override
 	public boolean isRollbackOnly() {
-		return (isLocalRollbackOnly() || isGlobalRollbackOnly());
+		return isLocalRollbackOnly() || isGlobalRollbackOnly();
 	}
 
 	/**
@@ -115,7 +115,7 @@ public abstract class AbstractTransactionStatus implements TransactionStatus {
 
 	@Override
 	public boolean hasSavepoint() {
-		return (this.savepoint != null);
+		return this.savepoint != null;
 	}
 
 	/**

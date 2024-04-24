@@ -128,7 +128,7 @@ public class RequestParamMethodArgumentResolver extends AbstractNamedValueMethod
 		if (parameter.hasParameterAnnotation(RequestParam.class)) {
 			if (Map.class.isAssignableFrom(parameter.nestedIfOptional().getNestedParameterType())) {
 				RequestParam requestParam = parameter.getParameterAnnotation(RequestParam.class);
-				return (requestParam != null && StringUtils.hasText(requestParam.name()));
+				return requestParam != null && StringUtils.hasText(requestParam.name());
 			}
 			else {
 				return true;
@@ -154,7 +154,7 @@ public class RequestParamMethodArgumentResolver extends AbstractNamedValueMethod
 	@Override
 	protected NamedValueInfo createNamedValueInfo(MethodParameter parameter) {
 		RequestParam ann = parameter.getParameterAnnotation(RequestParam.class);
-		return (ann != null ? new RequestParamNamedValueInfo(ann) : new RequestParamNamedValueInfo());
+		return ann != null ? new RequestParamNamedValueInfo(ann) : new RequestParamNamedValueInfo();
 	}
 
 	@Override
@@ -174,13 +174,13 @@ public class RequestParamMethodArgumentResolver extends AbstractNamedValueMethod
 		if (multipartRequest != null) {
 			List<MultipartFile> files = multipartRequest.getFiles(name);
 			if (!files.isEmpty()) {
-				arg = (files.size() == 1 ? files.get(0) : files);
+				arg = files.size() == 1 ? files.get(0) : files;
 			}
 		}
 		if (arg == null) {
 			String[] paramValues = request.getParameterValues(name);
 			if (paramValues != null) {
-				arg = (paramValues.length == 1 ? paramValues[0] : paramValues);
+				arg = paramValues.length == 1 ? paramValues[0] : paramValues;
 			}
 		}
 		return arg;
@@ -228,8 +228,8 @@ public class RequestParamMethodArgumentResolver extends AbstractNamedValueMethod
 		}
 
 		RequestParam requestParam = parameter.getParameterAnnotation(RequestParam.class);
-		String name = (requestParam != null && StringUtils.hasLength(requestParam.name()) ?
-				requestParam.name() : parameter.getParameterName());
+		String name = requestParam != null && StringUtils.hasLength(requestParam.name()) ?
+				requestParam.name() : parameter.getParameterName();
 		Assert.state(name != null, "Unresolvable parameter name");
 
 		parameter = parameter.nestedIfOptional();

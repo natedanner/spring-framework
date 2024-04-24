@@ -245,7 +245,7 @@ class WebHttpHandlerBuilderTests {
 		private WebFilter createFilter(String name) {
 			return (exchange, chain) -> {
 				String value = exchange.getAttribute(ATTRIBUTE);
-				value = (value != null ? value + "::" + name : name);
+				value = value != null ? value + "::" + name : name;
 				exchange.getAttributes().put(ATTRIBUTE, value);
 				return chain.filter(exchange);
 			};

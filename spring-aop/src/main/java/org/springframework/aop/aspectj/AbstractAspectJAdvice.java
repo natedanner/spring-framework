@@ -148,7 +148,7 @@ public abstract class AbstractAspectJAdvice implements Advice, AspectJPrecedence
 	@Nullable
 	private Map<String, Integer> argumentBindings;
 
-	private boolean argumentsIntrospected = false;
+	private boolean argumentsIntrospected;
 
 	@Nullable
 	private Type discoveredReturningGenericType;
@@ -674,7 +674,7 @@ public abstract class AbstractAspectJAdvice implements Advice, AspectJPrecedence
 	@Nullable
 	protected JoinPointMatch getJoinPointMatch(ProxyMethodInvocation pmi) {
 		String expression = this.pointcut.getExpression();
-		return (expression != null ? (JoinPointMatch) pmi.getUserAttribute(expression) : null);
+		return expression != null ? (JoinPointMatch) pmi.getUserAttribute(expression) : null;
 	}
 
 
@@ -714,8 +714,8 @@ public abstract class AbstractAspectJAdvice implements Advice, AspectJPrecedence
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof AdviceExcludingMethodMatcher that &&
-					this.adviceMethod.equals(that.adviceMethod)));
+			return this == other || (other instanceof AdviceExcludingMethodMatcher that &&
+					this.adviceMethod.equals(that.adviceMethod));
 		}
 
 		@Override

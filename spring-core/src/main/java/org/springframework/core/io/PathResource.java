@@ -124,7 +124,7 @@ public class PathResource extends AbstractResource implements WritableResource {
 	 */
 	@Override
 	public boolean isReadable() {
-		return (Files.isReadable(this.path) && !Files.isDirectory(this.path));
+		return Files.isReadable(this.path) && !Files.isDirectory(this.path);
 	}
 
 	/**
@@ -170,7 +170,7 @@ public class PathResource extends AbstractResource implements WritableResource {
 	 */
 	@Override
 	public boolean isWritable() {
-		return (Files.isWritable(this.path) && !Files.isDirectory(this.path));
+		return Files.isWritable(this.path) && !Files.isDirectory(this.path);
 	}
 
 	/**
@@ -299,7 +299,7 @@ public class PathResource extends AbstractResource implements WritableResource {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof PathResource that && this.path.equals(that.path)));
+		return this == other || (other instanceof PathResource that && this.path.equals(that.path));
 	}
 
 	/**

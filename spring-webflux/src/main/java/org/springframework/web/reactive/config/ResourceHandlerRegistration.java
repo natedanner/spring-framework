@@ -59,7 +59,7 @@ public class ResourceHandlerRegistration {
 	@Nullable
 	private Function<Resource, String> etagGenerator;
 
-	private boolean optimizeLocations = false;
+	private boolean optimizeLocations;
 
 	@Nullable
 	private Map<String, MediaType> mediaTypes;

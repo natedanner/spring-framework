@@ -58,8 +58,8 @@ public class CookieValueArgumentResolver extends AbstractNamedValueArgumentResol
 	@Override
 	protected NamedValueInfo createNamedValueInfo(MethodParameter parameter) {
 		CookieValue annot = parameter.getParameterAnnotation(CookieValue.class);
-		return (annot == null ? null :
-				new NamedValueInfo(annot.name(), annot.required(), annot.defaultValue(), "cookie value", true));
+		return annot == null ? null :
+				new NamedValueInfo(annot.name(), annot.required(), annot.defaultValue(), "cookie value", true);
 	}
 
 	@Override

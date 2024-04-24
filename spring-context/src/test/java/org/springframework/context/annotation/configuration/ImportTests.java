@@ -291,7 +291,7 @@ class ImportTests {
 	}
 
 	static class InitBean {
-		public static boolean initialized = false;
+		public static boolean initialized;
 
 		InitBean() {
 			initialized = true;

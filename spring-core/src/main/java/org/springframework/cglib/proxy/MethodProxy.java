@@ -34,7 +34,7 @@ import org.springframework.cglib.reflect.FastClass;
  * @version $Id: MethodProxy.java,v 1.16 2009/01/11 20:09:48 herbyderby Exp $
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class MethodProxy {
+public final class MethodProxy {
 
 	private Signature sig1;
 

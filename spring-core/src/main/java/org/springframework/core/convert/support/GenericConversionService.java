@@ -138,7 +138,7 @@ public class GenericConversionService implements ConfigurableConversionService {
 	@Override
 	public boolean canConvert(@Nullable TypeDescriptor sourceType, TypeDescriptor targetType) {
 		Assert.notNull(targetType, "Target type to convert to cannot be null");
-		return (sourceType == null || getConverter(sourceType, targetType) != null);
+		return sourceType == null || getConverter(sourceType, targetType) != null;
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class GenericConversionService implements ConfigurableConversionService {
 	 */
 	public boolean canBypassConvert(@Nullable TypeDescriptor sourceType, TypeDescriptor targetType) {
 		Assert.notNull(targetType, "Target type to convert to cannot be null");
-		return (sourceType == null || getConverter(sourceType, targetType) == NO_OP_CONVERTER);
+		return sourceType == null || getConverter(sourceType, targetType) == NO_OP_CONVERTER;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -227,7 +227,7 @@ public class GenericConversionService implements ConfigurableConversionService {
 		ConverterCacheKey key = new ConverterCacheKey(sourceType, targetType);
 		GenericConverter converter = this.converterCache.get(key);
 		if (converter != null) {
-			return (converter != NO_MATCH ? converter : null);
+			return converter != NO_MATCH ? converter : null;
 		}
 
 		converter = this.converters.find(sourceType, targetType);
@@ -254,7 +254,7 @@ public class GenericConversionService implements ConfigurableConversionService {
 	 */
 	@Nullable
 	protected GenericConverter getDefaultConverter(TypeDescriptor sourceType, TypeDescriptor targetType) {
-		return (sourceType.isAssignableTo(targetType) ? NO_OP_CONVERTER : null);
+		return sourceType.isAssignableTo(targetType) ? NO_OP_CONVERTER : null;
 	}
 
 
@@ -432,9 +432,9 @@ public class GenericConversionService implements ConfigurableConversionService {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof ConverterCacheKey that &&
+			return this == other || (other instanceof ConverterCacheKey that &&
 					this.sourceType.equals(that.sourceType)) &&
-					this.targetType.equals(that.targetType));
+					this.targetType.equals(that.targetType);
 		}
 
 		@Override
@@ -551,7 +551,7 @@ public class GenericConversionService implements ConfigurableConversionService {
 			int i = 0;
 			while (i < hierarchy.size()) {
 				Class<?> candidate = hierarchy.get(i);
-				candidate = (array ? candidate.componentType() : ClassUtils.resolvePrimitiveIfNecessary(candidate));
+				candidate = array ? candidate.componentType() : ClassUtils.resolvePrimitiveIfNecessary(candidate);
 				Class<?> superclass = candidate.getSuperclass();
 				if (superclass != null && superclass != Object.class && superclass != Enum.class) {
 					addToClassHierarchy(i + 1, candidate.getSuperclass(), array, hierarchy, visited);

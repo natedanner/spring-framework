@@ -132,7 +132,7 @@ final class DefaultRestClient implements RestClient {
 		this.uriBuilderFactory = uriBuilderFactory;
 		this.defaultHeaders = defaultHeaders;
 		this.defaultRequest = defaultRequest;
-		this.defaultStatusHandlers = (statusHandlers != null ? new ArrayList<>(statusHandlers) : new ArrayList<>());
+		this.defaultStatusHandlers = statusHandlers != null ? new ArrayList<>(statusHandlers) : new ArrayList<>();
 		this.messageConverters = messageConverters;
 		this.observationRegistry = observationRegistry;
 		this.observationConvention = observationConvention;
@@ -371,8 +371,8 @@ final class DefaultRestClient implements RestClient {
 
 		@Override
 		public RequestBodySpec httpRequest(Consumer<ClientHttpRequest> requestConsumer) {
-			this.httpRequestConsumer = (this.httpRequestConsumer != null ?
-					this.httpRequestConsumer.andThen(requestConsumer) : requestConsumer);
+			this.httpRequestConsumer = this.httpRequestConsumer != null ?
+					this.httpRequestConsumer.andThen(requestConsumer) : requestConsumer;
 			return this;
 		}
 
@@ -502,13 +502,13 @@ final class DefaultRestClient implements RestClient {
 		}
 
 		private URI initUri() {
-			return (this.uri != null ? this.uri : DefaultRestClient.this.uriBuilderFactory.expand(""));
+			return this.uri != null ? this.uri : DefaultRestClient.this.uriBuilderFactory.expand("");
 		}
 
 		private HttpHeaders initHeaders() {
 			HttpHeaders defaultHeaders = DefaultRestClient.this.defaultHeaders;
 			if (CollectionUtils.isEmpty(this.headers)) {
-				return (defaultHeaders != null ? defaultHeaders : new HttpHeaders());
+				return defaultHeaders != null ? defaultHeaders : new HttpHeaders();
 			}
 			else if (CollectionUtils.isEmpty(defaultHeaders)) {
 				return this.headers;

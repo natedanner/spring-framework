@@ -42,15 +42,15 @@ import static org.mockito.Mockito.verify;
  */
 class VersionResourceResolverTests {
 
-	private List<Resource> locations = List.of(
+	private final List<Resource> locations = List.of(
 			new ClassPathResource("test/", getClass()),
 			new ClassPathResource("testalternatepath/", getClass()));
 
-	private VersionResourceResolver resolver = new VersionResourceResolver();
+	private final VersionResourceResolver resolver = new VersionResourceResolver();
 
-	private ResourceResolverChain chain = mock();
+	private final ResourceResolverChain chain = mock();
 
-	private VersionStrategy versionStrategy = mock();
+	private final VersionStrategy versionStrategy = mock();
 
 
 	@Test

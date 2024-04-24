@@ -157,7 +157,7 @@ public abstract class ValueCodeGeneratorDelegates {
 			map = orderForCodeConsistency(map);
 			boolean useOfEntries = map.size() > 10;
 			CodeBlock.Builder code = CodeBlock.builder();
-			code.add("$T" + ((!useOfEntries) ? ".of(" : ".ofEntries("), Map.class);
+			code.add("$T" + (!useOfEntries ? ".of(" : ".ofEntries("), Map.class);
 			Iterator<? extends Entry<?, ?>> iterator = map.entrySet().iterator();
 			while (iterator.hasNext()) {
 				Entry<?, ?> entry = iterator.next();
@@ -238,7 +238,7 @@ public abstract class ValueCodeGeneratorDelegates {
 			if (escaped != null) {
 				return escaped;
 			}
-			return (!Character.isISOControl(ch)) ? Character.toString(ch)
+			return !Character.isISOControl(ch) ? Character.toString(ch)
 					: String.format("\\u%04x", (int) ch);
 		}
 	}

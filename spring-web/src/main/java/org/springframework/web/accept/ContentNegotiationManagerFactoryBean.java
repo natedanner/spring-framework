@@ -104,11 +104,11 @@ public class ContentNegotiationManagerFactoryBean
 	private List<ContentNegotiationStrategy> strategies;
 
 
-	private boolean favorParameter = false;
+	private boolean favorParameter;
 
 	private String parameterName = "format";
 
-	private boolean favorPathExtension = false;
+	private boolean favorPathExtension;
 
 	private final Map<String, MediaType> mediaTypes = new HashMap<>();
 
@@ -117,7 +117,7 @@ public class ContentNegotiationManagerFactoryBean
 	@Nullable
 	private Boolean useRegisteredExtensionsOnly;
 
-	private boolean ignoreAcceptHeader = false;
+	private boolean ignoreAcceptHeader;
 
 	@Nullable
 	private ContentNegotiationStrategy defaultNegotiationStrategy;
@@ -138,7 +138,7 @@ public class ContentNegotiationManagerFactoryBean
 	 * @since 5.0
 	 */
 	public void setStrategies(@Nullable List<ContentNegotiationStrategy> strategies) {
-		this.strategies = (strategies != null ? new ArrayList<>(strategies) : null);
+		this.strategies = strategies != null ? new ArrayList<>(strategies) : null;
 	}
 
 	/**
@@ -262,7 +262,7 @@ public class ContentNegotiationManagerFactoryBean
 	}
 
 	private boolean useRegisteredExtensionsOnly() {
-		return (this.useRegisteredExtensionsOnly != null && this.useRegisteredExtensionsOnly);
+		return this.useRegisteredExtensionsOnly != null && this.useRegisteredExtensionsOnly;
 	}
 
 	/**

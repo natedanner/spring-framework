@@ -128,8 +128,8 @@ public abstract class SharedEntityManagerCreator {
 	public static EntityManager createSharedEntityManager(
 			EntityManagerFactory emf, @Nullable Map<?, ?> properties, boolean synchronizedWithTransaction) {
 
-		Class<?> emIfc = (emf instanceof EntityManagerFactoryInfo emfInfo ?
-				emfInfo.getEntityManagerInterface() : EntityManager.class);
+		Class<?> emIfc = emf instanceof EntityManagerFactoryInfo emfInfo ?
+				emfInfo.getEntityManagerInterface() : EntityManager.class;
 		return createSharedEntityManager(emf, properties, synchronizedWithTransaction,
 				(emIfc == null ? NO_ENTITY_MANAGER_INTERFACES : new Class<?>[] {emIfc}));
 	}
@@ -223,7 +223,7 @@ public abstract class SharedEntityManagerCreator {
 			switch (method.getName()) {
 				case "equals" -> {
 					// Only consider equal when proxies are identical.
-					return (proxy == args[0]);
+					return proxy == args[0];
 				}
 				case "hashCode" -> {
 					// Use hashCode of EntityManager proxy.
@@ -273,25 +273,22 @@ public abstract class SharedEntityManagerCreator {
 			EntityManager target = EntityManagerFactoryUtils.doGetTransactionalEntityManager(
 					this.targetFactory, this.properties, this.synchronizedWithTransaction);
 
-			switch (method.getName()) {
-				case "getTargetEntityManager" -> {
-					// Handle EntityManagerProxy interface.
-					if (target == null) {
-						throw new IllegalStateException("No transactional EntityManager available");
-					}
-					return target;
+			if ("getTargetEntityManager".equals(method.getName())) {
+				// Handle EntityManagerProxy interface.
+				if (target == null) {
+					throw new IllegalStateException("No transactional EntityManager available");
 				}
-				case "unwrap" -> {
-					Class<?> targetClass = (Class<?>) args[0];
-					if (targetClass == null) {
-						return (target != null ? target : proxy);
-					}
-					// We need a transactional target now.
-					if (target == null) {
-						throw new IllegalStateException("No transactional EntityManager available");
-					}
+				return target;
+			}
+			else if ("unwrap".equals(method.getName())) {
+				Class<?> targetClass = (Class<?>) args[0];
+				if (targetClass == null) {
+					return target != null ? target : proxy;
 				}
-				// Still perform unwrap call on target EntityManager.
+				// We need a transactional target now.
+				if (target == null) {
+					throw new IllegalStateException("No transactional EntityManager available");
+				}
 			}
 
 			if (transactionRequiringMethods.contains(method.getName())) {
@@ -308,9 +305,9 @@ public abstract class SharedEntityManagerCreator {
 			boolean isNewEm = false;
 			if (target == null) {
 				logger.debug("Creating new EntityManager for shared EntityManager invocation");
-				target = (!CollectionUtils.isEmpty(this.properties) ?
-						this.targetFactory.createEntityManager(this.properties) :
-						this.targetFactory.createEntityManager());
+				target = CollectionUtils.isEmpty(this.properties) ?
+						this.targetFactory.createEntityManager() :
+						this.targetFactory.createEntityManager(this.properties);
 				isNewEm = true;
 			}
 
@@ -379,7 +376,7 @@ public abstract class SharedEntityManagerCreator {
 			switch (method.getName()) {
 				case "equals" -> {
 					// Only consider equal when proxies are identical.
-					return (proxy == args[0]);
+					return proxy == args[0];
 				}
 				case "hashCode" -> {
 					// Use hashCode of EntityManager proxy.
@@ -413,14 +410,14 @@ public abstract class SharedEntityManagerCreator {
 			// Invoke method on actual Query object.
 			try {
 				Object retVal = method.invoke(this.target, args);
-				if (method.getName().equals("registerStoredProcedureParameter") && args.length == 3 &&
+				if ("registerStoredProcedureParameter".equals(method.getName()) && args.length == 3 &&
 						(args[2] == ParameterMode.OUT || args[2] == ParameterMode.INOUT)) {
 					if (this.outputParameters == null) {
 						this.outputParameters = new LinkedHashMap<>();
 					}
 					this.outputParameters.put(args[0], null);
 				}
-				return (retVal == this.target ? proxy : retVal);
+				return retVal == this.target ? proxy : retVal;
 			}
 			catch (InvocationTargetException ex) {
 				throw ex.getTargetException();

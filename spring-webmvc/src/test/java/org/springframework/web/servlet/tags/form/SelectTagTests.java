@@ -83,7 +83,7 @@ public class SelectTagTests extends AbstractFormTagTests {
 		String dynamicAttribute2 = "attr2";
 
 		this.tag.setPath("country");
-		this.tag.setItems(Collections.EMPTY_LIST);
+		this.tag.setItems(Collections.emptyList());
 		this.tag.setItemValue("isoCode");
 		this.tag.setItemLabel("name");
 		this.tag.setDynamicAttribute(null, dynamicAttribute1, dynamicAttribute1);
@@ -100,7 +100,7 @@ public class SelectTagTests extends AbstractFormTagTests {
 	@Test
 	void emptyItems() throws Exception {
 		this.tag.setPath("country");
-		this.tag.setItems(Collections.EMPTY_LIST);
+		this.tag.setItems(Collections.emptyList());
 
 		this.tag.setItemValue("isoCode");
 		this.tag.setItemLabel("name");

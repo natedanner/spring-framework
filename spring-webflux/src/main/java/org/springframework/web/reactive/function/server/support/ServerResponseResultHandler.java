@@ -45,7 +45,7 @@ public class ServerResponseResultHandler implements HandlerResultHandler, Initia
 
 	private List<ViewResolver> viewResolvers = Collections.emptyList();
 
-	private int order = 0;
+	private int order;
 
 
 	/**
@@ -84,7 +84,7 @@ public class ServerResponseResultHandler implements HandlerResultHandler, Initia
 
 	@Override
 	public boolean supports(HandlerResult result) {
-		return (result.getReturnValue() instanceof ServerResponse);
+		return result.getReturnValue() instanceof ServerResponse;
 	}
 
 	@Override

@@ -40,11 +40,11 @@ public class Proxy implements Serializable {
     protected InvocationHandler h;
 
     private static final CallbackFilter BAD_OBJECT_METHOD_FILTER = method -> {
-	    if (method.getDeclaringClass().getName().equals("java.lang.Object")) {
+	    if ("java.lang.Object".equals(method.getDeclaringClass().getName())) {
 	        String name = method.getName();
-	        if (!(name.equals("hashCode") ||
-	              name.equals("equals") ||
-	              name.equals("toString"))) {
+	        if (!("hashCode".equals(name) ||
+	              "equals".equals(name) ||
+	              "toString".equals(name))) {
 	            return 1;
 	        }
 	    }

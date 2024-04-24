@@ -1056,7 +1056,7 @@ public abstract class AbstractAopProxyTests {
 		};
 
 		class NameSaver implements MethodInterceptor {
-			private List<Object> names = new ArrayList<>();
+			private final List<Object> names = new ArrayList<>();
 
 			@Override
 			public Object invoke(MethodInvocation mi) throws Throwable {
@@ -1093,7 +1093,7 @@ public abstract class AbstractAopProxyTests {
 		pc.addAdvisor(new StaticMethodMatcherPointcutAdvisor(overLoadVoids) {
 			@Override
 			public boolean matches(Method m, @Nullable Class<?> targetClass) {
-				return m.getName().equals("overload") && m.getParameterCount() == 0;
+				return "overload".equals(m.getName()) && m.getParameterCount() == 0;
 			}
 		});
 
@@ -1101,7 +1101,7 @@ public abstract class AbstractAopProxyTests {
 		pc.addAdvisor(new StaticMethodMatcherPointcutAdvisor(overLoadInts) {
 			@Override
 			public boolean matches(Method m, @Nullable Class<?> targetClass) {
-				return m.getName().equals("overload") && m.getParameterCount() == 1 &&
+				return "overload".equals(m.getName()) && m.getParameterCount() == 1 &&
 						m.getParameterTypes()[0].equals(int.class);
 			}
 		});
@@ -1637,7 +1637,7 @@ public abstract class AbstractAopProxyTests {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (other instanceof AllInstancesAreEqual);
+			return other instanceof AllInstancesAreEqual;
 		}
 
 		@Override

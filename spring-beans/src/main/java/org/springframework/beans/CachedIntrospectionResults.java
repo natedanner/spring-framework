@@ -169,7 +169,7 @@ public final class CachedIntrospectionResults {
 		}
 
 		CachedIntrospectionResults existing = classCacheToUse.putIfAbsent(beanClass, results);
-		return (existing != null ? existing : results);
+		return existing != null ? existing : results;
 	}
 
 	/**
@@ -362,10 +362,10 @@ public final class CachedIntrospectionResults {
 	}
 
 	private boolean isInvalidReadOnlyPropertyType(@Nullable Class<?> returnType, Class<?> beanClass) {
-		return (returnType != null && (ClassLoader.class.isAssignableFrom(returnType) ||
+		return returnType != null && (ClassLoader.class.isAssignableFrom(returnType) ||
 				ProtectionDomain.class.isAssignableFrom(returnType) ||
 				(AutoCloseable.class.isAssignableFrom(returnType) &&
-						!AutoCloseable.class.isAssignableFrom(beanClass))));
+						!AutoCloseable.class.isAssignableFrom(beanClass)));
 	}
 
 

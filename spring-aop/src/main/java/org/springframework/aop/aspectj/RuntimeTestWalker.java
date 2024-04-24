@@ -99,18 +99,18 @@ class RuntimeTestWalker {
 	 * then it tests subtype sensitive vars.
 	 */
 	public boolean testsSubtypeSensitiveVars() {
-		return (this.runtimeTest != null &&
-				new SubtypeSensitiveVarTypeTestVisitor().testsSubtypeSensitiveVars(this.runtimeTest));
+		return this.runtimeTest != null &&
+				new SubtypeSensitiveVarTypeTestVisitor().testsSubtypeSensitiveVars(this.runtimeTest);
 	}
 
 	public boolean testThisInstanceOfResidue(Class<?> thisClass) {
-		return (this.runtimeTest != null &&
-				new ThisInstanceOfResidueTestVisitor(thisClass).thisInstanceOfMatches(this.runtimeTest));
+		return this.runtimeTest != null &&
+				new ThisInstanceOfResidueTestVisitor(thisClass).thisInstanceOfMatches(this.runtimeTest);
 	}
 
 	public boolean testTargetInstanceOfResidue(Class<?> targetClass) {
-		return (this.runtimeTest != null &&
-				new TargetInstanceOfResidueTestVisitor(targetClass).targetInstanceOfMatches(this.runtimeTest));
+		return this.runtimeTest != null &&
+				new TargetInstanceOfResidueTestVisitor(targetClass).targetInstanceOfMatches(this.runtimeTest);
 	}
 
 
@@ -267,7 +267,7 @@ class RuntimeTestWalker {
 
 		private final Object[] argsObjs = new Object[0];
 
-		private boolean testsSubtypeSensitiveVars = false;
+		private boolean testsSubtypeSensitiveVars;
 
 		public boolean testsSubtypeSensitiveVars(Test aTest) {
 			aTest.accept(this);

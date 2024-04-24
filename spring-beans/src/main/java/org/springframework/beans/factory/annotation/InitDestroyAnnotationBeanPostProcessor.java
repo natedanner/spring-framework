@@ -207,8 +207,8 @@ public class InitDestroyAnnotationBeanPostProcessor implements DestructionAwareB
 
 	private static String[] safeMerge(@Nullable String[] existingNames, Collection<LifecycleMethod> detectedMethods) {
 		Stream<String> detectedNames = detectedMethods.stream().map(LifecycleMethod::getIdentifier);
-		Stream<String> mergedNames = (existingNames != null ?
-				Stream.concat(detectedNames, Stream.of(existingNames)) : detectedNames);
+		Stream<String> mergedNames = existingNames != null ?
+				Stream.concat(detectedNames, Stream.of(existingNames)) : detectedNames;
 		return mergedNames.distinct().toArray(String[]::new);
 	}
 
@@ -319,8 +319,8 @@ public class InitDestroyAnnotationBeanPostProcessor implements DestructionAwareB
 		}
 		while (currentClass != null && currentClass != Object.class);
 
-		return (initMethods.isEmpty() && destroyMethods.isEmpty() ? this.emptyLifecycleMetadata :
-				new LifecycleMetadata(beanClass, initMethods, destroyMethods));
+		return initMethods.isEmpty() && destroyMethods.isEmpty() ? this.emptyLifecycleMetadata :
+				new LifecycleMetadata(beanClass, initMethods, destroyMethods);
 	}
 
 
@@ -392,7 +392,7 @@ public class InitDestroyAnnotationBeanPostProcessor implements DestructionAwareB
 		public void invokeInitMethods(Object target, String beanName) throws Throwable {
 			Collection<LifecycleMethod> checkedInitMethods = this.checkedInitMethods;
 			Collection<LifecycleMethod> initMethodsToIterate =
-					(checkedInitMethods != null ? checkedInitMethods : this.initMethods);
+					checkedInitMethods != null ? checkedInitMethods : this.initMethods;
 			if (!initMethodsToIterate.isEmpty()) {
 				for (LifecycleMethod lifecycleMethod : initMethodsToIterate) {
 					if (logger.isTraceEnabled()) {
@@ -406,7 +406,7 @@ public class InitDestroyAnnotationBeanPostProcessor implements DestructionAwareB
 		public void invokeDestroyMethods(Object target, String beanName) throws Throwable {
 			Collection<LifecycleMethod> checkedDestroyMethods = this.checkedDestroyMethods;
 			Collection<LifecycleMethod> destroyMethodsToUse =
-					(checkedDestroyMethods != null ? checkedDestroyMethods : this.destroyMethods);
+					checkedDestroyMethods != null ? checkedDestroyMethods : this.destroyMethods;
 			if (!destroyMethodsToUse.isEmpty()) {
 				for (LifecycleMethod lifecycleMethod : destroyMethodsToUse) {
 					if (logger.isTraceEnabled()) {
@@ -420,7 +420,7 @@ public class InitDestroyAnnotationBeanPostProcessor implements DestructionAwareB
 		public boolean hasDestroyMethods() {
 			Collection<LifecycleMethod> checkedDestroyMethods = this.checkedDestroyMethods;
 			Collection<LifecycleMethod> destroyMethodsToUse =
-					(checkedDestroyMethods != null ? checkedDestroyMethods : this.destroyMethods);
+					checkedDestroyMethods != null ? checkedDestroyMethods : this.destroyMethods;
 			return !destroyMethodsToUse.isEmpty();
 		}
 	}
@@ -440,8 +440,8 @@ public class InitDestroyAnnotationBeanPostProcessor implements DestructionAwareB
 				throw new IllegalStateException("Lifecycle annotation requires a no-arg method: " + method);
 			}
 			this.method = method;
-			this.identifier = (isPrivateOrNotVisible(method, beanClass) ?
-					ClassUtils.getQualifiedMethodName(method) : method.getName());
+			this.identifier = isPrivateOrNotVisible(method, beanClass) ?
+					ClassUtils.getQualifiedMethodName(method) : method.getName();
 		}
 
 		public Method getMethod() {
@@ -459,8 +459,8 @@ public class InitDestroyAnnotationBeanPostProcessor implements DestructionAwareB
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof LifecycleMethod that &&
-					this.identifier.equals(that.identifier)));
+			return this == other || (other instanceof LifecycleMethod that &&
+					this.identifier.equals(that.identifier));
 		}
 
 		@Override
@@ -480,8 +480,8 @@ public class InitDestroyAnnotationBeanPostProcessor implements DestructionAwareB
 			}
 			// Method is declared in a class that resides in a different package
 			// than the bean class and the method is neither public nor protected?
-			return (!method.getDeclaringClass().getPackageName().equals(beanClass.getPackageName()) &&
-					!(Modifier.isPublic(modifiers) || Modifier.isProtected(modifiers)));
+			return !method.getDeclaringClass().getPackageName().equals(beanClass.getPackageName()) &&
+					!(Modifier.isPublic(modifiers) || Modifier.isProtected(modifiers));
 		}
 
 	}

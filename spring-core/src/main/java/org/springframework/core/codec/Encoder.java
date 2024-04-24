@@ -111,7 +111,7 @@ public interface Encoder<T> {
 	 * @since 5.3.4
 	 */
 	default List<MimeType> getEncodableMimeTypes(ResolvableType elementType) {
-		return (canEncode(elementType, null) ? getEncodableMimeTypes() : Collections.emptyList());
+		return canEncode(elementType, null) ? getEncodableMimeTypes() : Collections.emptyList();
 	}
 
 }

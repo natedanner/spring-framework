@@ -74,23 +74,23 @@ class JdbcClientNamedParameterTests {
 	private static final String[] COLUMN_NAMES = {"id", "forename"};
 
 
-	private Connection connection = mock();
+	private final Connection connection = mock();
 
-	private DataSource dataSource = mock();
+	private final DataSource dataSource = mock();
 
-	private PreparedStatement preparedStatement = mock();
+	private final PreparedStatement preparedStatement = mock();
 
-	private ResultSet resultSet = mock();
+	private final ResultSet resultSet = mock();
 
-	private ResultSetMetaData resultSetMetaData = mock();
+	private final ResultSetMetaData resultSetMetaData = mock();
 
-	private DatabaseMetaData databaseMetaData = mock();
+	private final DatabaseMetaData databaseMetaData = mock();
 
-	private JdbcClient client = JdbcClient.create(dataSource);
+	private final JdbcClient client = JdbcClient.create(dataSource);
 
-	private Map<String, Object> params = new HashMap<>();
+	private final Map<String, Object> params = new HashMap<>();
 
-	private MapSqlParameterSource paramSource = new MapSqlParameterSource();
+	private final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 
 
 	@BeforeEach

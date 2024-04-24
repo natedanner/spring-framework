@@ -84,8 +84,8 @@ final class ObjectToObjectConverter implements ConditionalGenericConverter {
 
 	@Override
 	public boolean matches(TypeDescriptor sourceType, TypeDescriptor targetType) {
-		return (sourceType.getType() != targetType.getType() &&
-				hasConversionMethodOrConstructor(targetType.getType(), sourceType.getType()));
+		return sourceType.getType() != targetType.getType() &&
+				hasConversionMethodOrConstructor(targetType.getType(), sourceType.getType());
 	}
 
 	@Override
@@ -130,7 +130,7 @@ final class ObjectToObjectConverter implements ConditionalGenericConverter {
 
 
 	static boolean hasConversionMethodOrConstructor(Class<?> targetClass, Class<?> sourceClass) {
-		return (getValidatedExecutable(targetClass, sourceClass) != null);
+		return getValidatedExecutable(targetClass, sourceClass) != null;
 	}
 
 	@Nullable
@@ -157,12 +157,12 @@ final class ObjectToObjectConverter implements ConditionalGenericConverter {
 
 	private static boolean isApplicable(Executable executable, Class<?> sourceClass) {
 		if (executable instanceof Method method) {
-			return (!Modifier.isStatic(method.getModifiers()) ?
-					ClassUtils.isAssignable(method.getDeclaringClass(), sourceClass) :
-					method.getParameterTypes()[0] == sourceClass);
+			return Modifier.isStatic(method.getModifiers()) ?
+					method.getParameterTypes()[0] == sourceClass :
+					ClassUtils.isAssignable(method.getDeclaringClass(), sourceClass);
 		}
 		else if (executable instanceof Constructor<?> constructor) {
-			return (constructor.getParameterTypes()[0] == sourceClass);
+			return constructor.getParameterTypes()[0] == sourceClass;
 		}
 		else {
 			return false;
@@ -177,8 +177,8 @@ final class ObjectToObjectConverter implements ConditionalGenericConverter {
 		}
 
 		Method method = ClassUtils.getMethodIfAvailable(sourceClass, "to" + targetClass.getSimpleName());
-		return (method != null && !Modifier.isStatic(method.getModifiers()) &&
-				ClassUtils.isAssignable(targetClass, method.getReturnType()) ? method : null);
+		return method != null && !Modifier.isStatic(method.getModifiers()) &&
+				ClassUtils.isAssignable(targetClass, method.getReturnType()) ? method : null;
 	}
 
 	@Nullable
@@ -196,7 +196,7 @@ final class ObjectToObjectConverter implements ConditionalGenericConverter {
 			}
 		}
 
-		return (method != null && areRelatedTypes(targetClass, method.getReturnType()) ? method : null);
+		return method != null && areRelatedTypes(targetClass, method.getReturnType()) ? method : null;
 	}
 
 	/**
@@ -206,7 +206,7 @@ final class ObjectToObjectConverter implements ConditionalGenericConverter {
 	 * @see ClassUtils#isAssignable(Class, Class)
 	 */
 	private static boolean areRelatedTypes(Class<?> type1, Class<?> type2) {
-		return (ClassUtils.isAssignable(type1, type2) || ClassUtils.isAssignable(type2, type1));
+		return ClassUtils.isAssignable(type1, type2) || ClassUtils.isAssignable(type2, type1);
 	}
 
 	@Nullable

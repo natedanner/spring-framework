@@ -195,7 +195,7 @@ abstract class AbstractMergedAnnotation<A extends Annotation> implements MergedA
 	public Optional<A> synthesize(Predicate<? super MergedAnnotation<A>> condition)
 			throws NoSuchElementException {
 
-		return (condition.test(this) ? Optional.of(synthesize()) : Optional.empty());
+		return condition.test(this) ? Optional.of(synthesize()) : Optional.empty();
 	}
 
 	@Override

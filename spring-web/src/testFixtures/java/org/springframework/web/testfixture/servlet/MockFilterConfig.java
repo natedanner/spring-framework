@@ -76,7 +76,7 @@ public class MockFilterConfig implements FilterConfig {
 	 * @param filterName the name of the filter
 	 */
 	public MockFilterConfig(@Nullable ServletContext servletContext, String filterName) {
-		this.servletContext = (servletContext != null ? servletContext : new MockServletContext());
+		this.servletContext = servletContext != null ? servletContext : new MockServletContext();
 		this.filterName = filterName;
 	}
 

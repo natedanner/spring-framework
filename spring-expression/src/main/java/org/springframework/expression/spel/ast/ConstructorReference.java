@@ -440,7 +440,7 @@ public class ConstructorReference extends SpelNodeImpl {
 	}
 
 	private boolean hasInitializer() {
-		return (getChildCount() > 1);
+		return getChildCount() > 1;
 	}
 
 	@Override
@@ -459,13 +459,13 @@ public class ConstructorReference extends SpelNodeImpl {
 		}
 
 		Constructor<?> constructor = executor.getConstructor();
-		return (Modifier.isPublic(constructor.getModifiers()) &&
-				Modifier.isPublic(constructor.getDeclaringClass().getModifiers()));
+		return Modifier.isPublic(constructor.getModifiers()) &&
+				Modifier.isPublic(constructor.getDeclaringClass().getModifiers());
 	}
 
 	@Override
 	public void generateCode(MethodVisitor mv, CodeFlow cf) {
-		ReflectiveConstructorExecutor executor = ((ReflectiveConstructorExecutor) this.cachedExecutor);
+		ReflectiveConstructorExecutor executor = (ReflectiveConstructorExecutor) this.cachedExecutor;
 		Assert.state(executor != null, "No cached executor");
 
 		Constructor<?> constructor = executor.getConstructor();

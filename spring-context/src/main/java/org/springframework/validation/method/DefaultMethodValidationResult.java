@@ -45,7 +45,7 @@ final class DefaultMethodValidationResult implements MethodValidationResult {
 		this.target = target;
 		this.method = method;
 		this.allValidationResults = results;
-		this.forReturnValue = (results.get(0).getMethodParameter().getParameterIndex() == -1);
+		this.forReturnValue = results.get(0).getMethodParameter().getParameterIndex() == -1;
 	}
 
 

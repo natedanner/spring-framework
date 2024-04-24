@@ -71,7 +71,7 @@ public class ServletWebRequest extends ServletRequestAttributes implements Nativ
 
 	private static final TimeZone GMT = TimeZone.getTimeZone("GMT");
 
-	private boolean notModified = false;
+	private boolean notModified;
 
 
 	/**
@@ -110,7 +110,7 @@ public class ServletWebRequest extends ServletRequestAttributes implements Nativ
 	@Override
 	public <T> T getNativeResponse(@Nullable Class<T> requiredType) {
 		HttpServletResponse response = getResponse();
-		return (response != null ? WebUtils.getNativeResponse(response, requiredType) : null);
+		return response != null ? WebUtils.getNativeResponse(response, requiredType) : null;
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class ServletWebRequest extends ServletRequestAttributes implements Nativ
 	@Nullable
 	public String[] getHeaderValues(String headerName) {
 		String[] headerValues = StringUtils.toStringArray(getRequest().getHeaders(headerName));
-		return (!ObjectUtils.isEmpty(headerValues) ? headerValues : null);
+		return ObjectUtils.isEmpty(headerValues) ? null : headerValues;
 	}
 
 	@Override
@@ -325,7 +325,7 @@ public class ServletWebRequest extends ServletRequestAttributes implements Nativ
 		if (ifUnmodifiedSince == -1) {
 			return false;
 		}
-		this.notModified = (ifUnmodifiedSince < (lastModifiedTimestamp / 1000 * 1000));
+		this.notModified = ifUnmodifiedSince < (lastModifiedTimestamp / 1000 * 1000);
 		return true;
 	}
 

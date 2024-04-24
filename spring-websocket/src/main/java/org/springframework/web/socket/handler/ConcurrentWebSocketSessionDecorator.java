@@ -133,7 +133,7 @@ public class ConcurrentWebSocketSessionDecorator extends WebSocketSessionDecorat
 	 */
 	public long getTimeSinceSendStarted() {
 		long start = this.sendStartTime;
-		return (start > 0 ? (System.currentTimeMillis() - start) : 0);
+		return start > 0 ? (System.currentTimeMillis() - start) : 0;
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class ConcurrentWebSocketSessionDecorator extends WebSocketSessionDecorat
 	}
 
 	private boolean shouldNotSend() {
-		return (this.limitExceeded || this.closeInProgress);
+		return this.limitExceeded || this.closeInProgress;
 	}
 
 	private boolean tryFlushMessageBuffer() throws IOException {

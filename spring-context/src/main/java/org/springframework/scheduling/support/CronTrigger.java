@@ -108,10 +108,10 @@ public class CronTrigger implements Trigger {
 	@Override
 	public Instant nextExecution(TriggerContext triggerContext) {
 		Instant timestamp = determineLatestTimestamp(triggerContext);
-		ZoneId zone = (this.zoneId != null ? this.zoneId : triggerContext.getClock().getZone());
+		ZoneId zone = this.zoneId != null ? this.zoneId : triggerContext.getClock().getZone();
 		ZonedDateTime zonedTimestamp = ZonedDateTime.ofInstant(timestamp, zone);
 		ZonedDateTime nextTimestamp = this.expression.next(zonedTimestamp);
-		return (nextTimestamp != null ? nextTimestamp.toInstant() : null);
+		return nextTimestamp != null ? nextTimestamp.toInstant() : null;
 	}
 
 	Instant determineLatestTimestamp(TriggerContext triggerContext) {
@@ -138,8 +138,8 @@ public class CronTrigger implements Trigger {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof CronTrigger that &&
-				this.expression.equals(that.expression)));
+		return this == other || (other instanceof CronTrigger that &&
+				this.expression.equals(that.expression));
 	}
 
 	@Override
@@ -214,7 +214,7 @@ public class CronTrigger implements Trigger {
 			@Override
 			protected Instant determineLatestTimestamp(TriggerContext triggerContext) {
 				Instant scheduled = triggerContext.lastScheduledExecution();
-				return (scheduled != null ? scheduled : super.determineInitialTimestamp(triggerContext));
+				return scheduled != null ? scheduled : super.determineInitialTimestamp(triggerContext);
 			}
 		};
 	}
@@ -238,7 +238,7 @@ public class CronTrigger implements Trigger {
 			@Override
 			protected Instant determineLatestTimestamp(TriggerContext triggerContext) {
 				Instant scheduled = triggerContext.lastScheduledExecution();
-				return (scheduled != null ? scheduled : super.determineLatestTimestamp(triggerContext));
+				return scheduled != null ? scheduled : super.determineLatestTimestamp(triggerContext);
 			}
 			@Override
 			Instant determineInitialTimestamp(TriggerContext triggerContext) {

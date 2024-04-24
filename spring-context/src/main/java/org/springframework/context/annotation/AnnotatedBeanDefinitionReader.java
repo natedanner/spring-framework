@@ -112,7 +112,7 @@ public class AnnotatedBeanDefinitionReader {
 	 */
 	public void setBeanNameGenerator(@Nullable BeanNameGenerator beanNameGenerator) {
 		this.beanNameGenerator =
-				(beanNameGenerator != null ? beanNameGenerator : AnnotationBeanNameGenerator.INSTANCE);
+				beanNameGenerator != null ? beanNameGenerator : AnnotationBeanNameGenerator.INSTANCE;
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class AnnotatedBeanDefinitionReader {
 	 */
 	public void setScopeMetadataResolver(@Nullable ScopeMetadataResolver scopeMetadataResolver) {
 		this.scopeMetadataResolver =
-				(scopeMetadataResolver != null ? scopeMetadataResolver : new AnnotationScopeMetadataResolver());
+				scopeMetadataResolver != null ? scopeMetadataResolver : new AnnotationScopeMetadataResolver();
 	}
 
 
@@ -259,7 +259,7 @@ public class AnnotatedBeanDefinitionReader {
 		abd.setInstanceSupplier(supplier);
 		ScopeMetadata scopeMetadata = this.scopeMetadataResolver.resolveScopeMetadata(abd);
 		abd.setScope(scopeMetadata.getScopeName());
-		String beanName = (name != null ? name : this.beanNameGenerator.generateBeanName(abd, this.registry));
+		String beanName = name != null ? name : this.beanNameGenerator.generateBeanName(abd, this.registry);
 
 		AnnotationConfigUtils.processCommonDefinitionAnnotations(abd);
 		if (qualifiers != null) {

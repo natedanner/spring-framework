@@ -243,49 +243,49 @@ public class CodeFlow implements Opcodes {
 		}
 		switch (ch) {
 			case 'Z' -> {
-				if (!stackDescriptor.equals("Ljava/lang/Boolean")) {
+				if (!"Ljava/lang/Boolean".equals(stackDescriptor)) {
 					mv.visitTypeInsn(CHECKCAST, "java/lang/Boolean");
 				}
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Boolean", "booleanValue", "()Z", false);
 			}
 			case 'B' -> {
-				if (!stackDescriptor.equals("Ljava/lang/Byte")) {
+				if (!"Ljava/lang/Byte".equals(stackDescriptor)) {
 					mv.visitTypeInsn(CHECKCAST, "java/lang/Byte");
 				}
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Byte", "byteValue", "()B", false);
 			}
 			case 'C' -> {
-				if (!stackDescriptor.equals("Ljava/lang/Character")) {
+				if (!"Ljava/lang/Character".equals(stackDescriptor)) {
 					mv.visitTypeInsn(CHECKCAST, "java/lang/Character");
 				}
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Character", "charValue", "()C", false);
 			}
 			case 'D' -> {
-				if (!stackDescriptor.equals("Ljava/lang/Double")) {
+				if (!"Ljava/lang/Double".equals(stackDescriptor)) {
 					mv.visitTypeInsn(CHECKCAST, "java/lang/Double");
 				}
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Double", "doubleValue", "()D", false);
 			}
 			case 'F' -> {
-				if (!stackDescriptor.equals("Ljava/lang/Float")) {
+				if (!"Ljava/lang/Float".equals(stackDescriptor)) {
 					mv.visitTypeInsn(CHECKCAST, "java/lang/Float");
 				}
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Float", "floatValue", "()F", false);
 			}
 			case 'I' -> {
-				if (!stackDescriptor.equals("Ljava/lang/Integer")) {
+				if (!"Ljava/lang/Integer".equals(stackDescriptor)) {
 					mv.visitTypeInsn(CHECKCAST, "java/lang/Integer");
 				}
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Integer", "intValue", "()I", false);
 			}
 			case 'J' -> {
-				if (!stackDescriptor.equals("Ljava/lang/Long")) {
+				if (!"Ljava/lang/Long".equals(stackDescriptor)) {
 					mv.visitTypeInsn(CHECKCAST, "java/lang/Long");
 				}
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Long", "longValue", "()J", false);
 			}
 			case 'S' -> {
-				if (!stackDescriptor.equals("Ljava/lang/Short")) {
+				if (!"Ljava/lang/Short".equals(stackDescriptor)) {
 					mv.visitTypeInsn(CHECKCAST, "java/lang/Short");
 				}
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Short", "shortValue", "()S", false);
@@ -310,25 +310,25 @@ public class CodeFlow implements Opcodes {
 
 		switch (targetDescriptor) {
 			case 'D' -> {
-				if (stackDescriptor.equals("Ljava/lang/Object")) {
+				if ("Ljava/lang/Object".equals(stackDescriptor)) {
 					mv.visitTypeInsn(CHECKCAST, "java/lang/Number");
 				}
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Number", "doubleValue", "()D", false);
 			}
 			case 'F' -> {
-				if (stackDescriptor.equals("Ljava/lang/Object")) {
+				if ("Ljava/lang/Object".equals(stackDescriptor)) {
 					mv.visitTypeInsn(CHECKCAST, "java/lang/Number");
 				}
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Number", "floatValue", "()F", false);
 			}
 			case 'J' -> {
-				if (stackDescriptor.equals("Ljava/lang/Object")) {
+				if ("Ljava/lang/Object".equals(stackDescriptor)) {
 					mv.visitTypeInsn(CHECKCAST, "java/lang/Number");
 				}
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Number", "longValue", "()J", false);
 			}
 			case 'I' -> {
-				if (stackDescriptor.equals("Ljava/lang/Object")) {
+				if ("Ljava/lang/Object".equals(stackDescriptor)) {
 					mv.visitTypeInsn(CHECKCAST, "java/lang/Number");
 				}
 				mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Number", "intValue", "()I", false);
@@ -511,7 +511,7 @@ public class CodeFlow implements Opcodes {
 	 * @return {@code true} if the descriptor is boolean compatible
 	 */
 	public static boolean isBooleanCompatible(@Nullable String descriptor) {
-		return (descriptor != null && (descriptor.equals("Z") || descriptor.equals("Ljava/lang/Boolean")));
+		return descriptor != null && ("Z".equals(descriptor) || "Ljava/lang/Boolean".equals(descriptor));
 	}
 
 	/**
@@ -520,7 +520,7 @@ public class CodeFlow implements Opcodes {
 	 * @return {@code true} if a primitive type or {@code void}
 	 */
 	public static boolean isPrimitive(@Nullable String descriptor) {
-		return (descriptor != null && descriptor.length() == 1);
+		return descriptor != null && descriptor.length() == 1;
 	}
 
 	/**
@@ -538,7 +538,7 @@ public class CodeFlow implements Opcodes {
 			if (ch == '[') {
 				continue;
 			}
-			primitive = (ch != 'L');
+			primitive = ch != 'L';
 			break;
 		}
 		return primitive;
@@ -564,11 +564,11 @@ public class CodeFlow implements Opcodes {
 
 	private static boolean checkPairs(String desc1, String desc2) {
 		return switch (desc1) {
-			case "Z" -> desc2.equals("Ljava/lang/Boolean");
-			case "D" -> desc2.equals("Ljava/lang/Double");
-			case "F" -> desc2.equals("Ljava/lang/Float");
-			case "I" -> desc2.equals("Ljava/lang/Integer");
-			case "J" -> desc2.equals("Ljava/lang/Long");
+			case "Z" -> "Ljava/lang/Boolean".equals(desc2);
+			case "D" -> "Ljava/lang/Double".equals(desc2);
+			case "F" -> "Ljava/lang/Float".equals(desc2);
+			case "I" -> "Ljava/lang/Integer".equals(desc2);
+			case "J" -> "Ljava/lang/Long".equals(desc2);
 			default -> false;
 		};
 	}
@@ -587,7 +587,7 @@ public class CodeFlow implements Opcodes {
 		if (isPrimitiveOrUnboxableSupportedNumber(descriptor)) {
 			return true;
 		}
-		return ("Z".equals(descriptor) || descriptor.equals("Ljava/lang/Boolean"));
+		return "Z".equals(descriptor) || "Ljava/lang/Boolean".equals(descriptor);
 	}
 
 	/**
@@ -606,7 +606,7 @@ public class CodeFlow implements Opcodes {
 		}
 		if (descriptor.startsWith("Ljava/lang/")) {
 			String name = descriptor.substring("Ljava/lang/".length());
-			return (name.equals("Double") || name.equals("Float") || name.equals("Integer") || name.equals("Long"));
+			return "Double".equals(name) || "Float".equals(name) || "Integer".equals(name) || "Long".equals(name);
 		}
 		return false;
 	}
@@ -618,7 +618,7 @@ public class CodeFlow implements Opcodes {
 	 * @return {@code true} if it is an {@link Integer}, {@link Short} or {@link Byte}
 	 */
 	public static boolean isIntegerForNumericOp(Number number) {
-		return (number instanceof Integer || number instanceof Short || number instanceof Byte);
+		return number instanceof Integer || number instanceof Short || number instanceof Byte;
 	}
 
 	/**
@@ -659,7 +659,7 @@ public class CodeFlow implements Opcodes {
 				}
 			}
 			else {
-				if (!descriptor.equals("Ljava/lang/Object")) {
+				if (!"Ljava/lang/Object".equals(descriptor)) {
 					// This is chopping off the 'L' to leave us with "java/lang/String"
 					mv.visitTypeInsn(CHECKCAST, descriptor.substring(1));
 				}
@@ -724,27 +724,33 @@ public class CodeFlow implements Opcodes {
 					return "I";
 				case 4:
 					return switch (name) {
-						case "byte" -> "B";
-						case "char" -> "C";
-						case "long" -> "J";
-						case "void" -> "V";
-						default -> throw new IllegalArgumentException("Unknown primitive type: " + name);
+						case "byte" ->
+							break; "B";
+						case "char" ->
+							break; "C";
+						case "long" ->
+							break; "J";
+						case "void" ->
+							break; "V";
+						default ->
+							break; throw new IllegalArgumentException("Unknown primitive type: " + name);
 					};
+					break;
 				case 5:
-					if (name.equals("float")) {
+					if ("float".equals(name)) {
 						return "F";
 					}
-					else if (name.equals("short")) {
+					else if ("short".equals(name)) {
 						return "S";
 					}
 					break;
 				case 6:
-					if (name.equals("double")) {
+					if ("double".equals(name)) {
 						return "D";
 					}
 					break;
 				case 7:
-					if (name.equals("boolean")) {
+					if ("boolean".equals(name)) {
 						return "Z";
 					}
 					break;
@@ -875,7 +881,7 @@ public class CodeFlow implements Opcodes {
 			if (ch == '[') {
 				continue;
 			}
-			return (ch == 'L');
+			return ch == 'L';
 		}
 		return false;
 	}

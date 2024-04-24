@@ -688,7 +688,7 @@ public class XStreamMarshaller extends AbstractMarshaller implements BeanClassLo
 	@Override
 	protected void marshalXmlEventWriter(Object graph, XMLEventWriter eventWriter) throws XmlMappingException {
 		ContentHandler contentHandler = StaxUtils.createContentHandler(eventWriter);
-		LexicalHandler lexicalHandler = (contentHandler instanceof LexicalHandler handler ? handler : null);
+		LexicalHandler lexicalHandler = contentHandler instanceof LexicalHandler handler ? handler : null;
 		marshalSaxHandlers(graph, contentHandler, lexicalHandler);
 	}
 

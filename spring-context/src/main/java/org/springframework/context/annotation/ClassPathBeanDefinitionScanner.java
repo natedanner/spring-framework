@@ -185,7 +185,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 	 */
 	public void setBeanDefinitionDefaults(@Nullable BeanDefinitionDefaults beanDefinitionDefaults) {
 		this.beanDefinitionDefaults =
-				(beanDefinitionDefaults != null ? beanDefinitionDefaults : new BeanDefinitionDefaults());
+				beanDefinitionDefaults != null ? beanDefinitionDefaults : new BeanDefinitionDefaults();
 	}
 
 	/**
@@ -210,7 +210,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 	 */
 	public void setBeanNameGenerator(@Nullable BeanNameGenerator beanNameGenerator) {
 		this.beanNameGenerator =
-				(beanNameGenerator != null ? beanNameGenerator : AnnotationBeanNameGenerator.INSTANCE);
+				beanNameGenerator != null ? beanNameGenerator : AnnotationBeanNameGenerator.INSTANCE;
 	}
 
 	/**
@@ -221,7 +221,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 	 */
 	public void setScopeMetadataResolver(@Nullable ScopeMetadataResolver scopeMetadataResolver) {
 		this.scopeMetadataResolver =
-				(scopeMetadataResolver != null ? scopeMetadataResolver : new AnnotationScopeMetadataResolver());
+				scopeMetadataResolver != null ? scopeMetadataResolver : new AnnotationScopeMetadataResolver();
 	}
 
 	/**
@@ -259,7 +259,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 			AnnotationConfigUtils.registerAnnotationConfigProcessors(this.registry);
 		}
 
-		return (this.registry.getBeanDefinitionCount() - beanCountAtScanStart);
+		return this.registry.getBeanDefinitionCount() - beanCountAtScanStart;
 	}
 
 	/**
@@ -373,8 +373,8 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 	 * new definition to be skipped in favor of the existing definition
 	 */
 	protected boolean isCompatible(BeanDefinition newDef, BeanDefinition existingDef) {
-		return ((newDef.getSource() != null && newDef.getSource().equals(existingDef.getSource())) ||
-				newDef.equals(existingDef));
+		return (newDef.getSource() != null && newDef.getSource().equals(existingDef.getSource())) ||
+				newDef.equals(existingDef);
 	}
 
 

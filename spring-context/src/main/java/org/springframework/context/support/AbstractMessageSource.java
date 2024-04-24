@@ -70,7 +70,7 @@ public abstract class AbstractMessageSource extends MessageSourceSupport impleme
 	@Nullable
 	private Properties commonMessages;
 
-	private boolean useCodeAsDefaultMessage = false;
+	private boolean useCodeAsDefaultMessage;
 
 
 	@Override
@@ -176,7 +176,7 @@ public abstract class AbstractMessageSource extends MessageSourceSupport impleme
 		if (defaultMessage != null) {
 			return defaultMessage;
 		}
-		throw new NoSuchMessageException(!ObjectUtils.isEmpty(codes) ? codes[codes.length - 1] : "", locale);
+		throw new NoSuchMessageException(ObjectUtils.isEmpty(codes) ? "" : codes[codes.length - 1], locale);
 	}
 
 
@@ -299,7 +299,7 @@ public abstract class AbstractMessageSource extends MessageSourceSupport impleme
 			}
 			return renderDefaultMessage(defaultMessage, resolvable.getArguments(), locale);
 		}
-		return (!ObjectUtils.isEmpty(codes) ? getDefaultMessage(codes[0]) : null);
+		return ObjectUtils.isEmpty(codes) ? null : getDefaultMessage(codes[0]);
 	}
 
 	/**

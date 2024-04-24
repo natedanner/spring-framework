@@ -44,7 +44,7 @@ public class MockClientHttpRequest extends MockHttpOutputMessage implements Clie
 	@Nullable
 	private ClientHttpResponse clientHttpResponse;
 
-	private boolean executed = false;
+	private boolean executed;
 
 
 	/**

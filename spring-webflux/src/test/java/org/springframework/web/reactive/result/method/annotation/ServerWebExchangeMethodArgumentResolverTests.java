@@ -53,7 +53,7 @@ class ServerWebExchangeMethodArgumentResolverTests {
 	private final MockServerWebExchange exchange = MockServerWebExchange.from(
 			MockServerHttpRequest.get("https://example.org:9999/path?q=foo"));
 
-	private ResolvableMethod testMethod = ResolvableMethod.on(getClass()).named("handle").build();
+	private final ResolvableMethod testMethod = ResolvableMethod.on(getClass()).named("handle").build();
 
 
 	@Test

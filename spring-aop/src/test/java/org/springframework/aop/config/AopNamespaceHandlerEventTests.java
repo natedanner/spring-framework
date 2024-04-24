@@ -50,9 +50,9 @@ class AopNamespaceHandlerEventTests {
 	private static final Resource POINTCUT_REF_CONTEXT = qualifiedResource(CLASS, "pointcutRefEvents.xml");
 	private static final Resource DIRECT_POINTCUT_EVENTS_CONTEXT = qualifiedResource(CLASS, "directPointcutEvents.xml");
 
-	private CollectingReaderEventListener eventListener = new CollectingReaderEventListener();
+	private final CollectingReaderEventListener eventListener = new CollectingReaderEventListener();
 
-	private DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+	private final DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
 
 	private XmlBeanDefinitionReader reader;
 

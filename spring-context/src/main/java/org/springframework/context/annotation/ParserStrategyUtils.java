@@ -60,8 +60,8 @@ abstract class ParserStrategyUtils {
 		if (clazz.isInterface()) {
 			throw new BeanInstantiationException(clazz, "Specified class is an interface");
 		}
-		ClassLoader classLoader = (registry instanceof ConfigurableBeanFactory cbf ?
-				cbf.getBeanClassLoader() : resourceLoader.getClassLoader());
+		ClassLoader classLoader = registry instanceof ConfigurableBeanFactory cbf ?
+				cbf.getBeanClassLoader() : resourceLoader.getClassLoader();
 		T instance = (T) createInstance(clazz, environment, resourceLoader, registry, classLoader);
 		ParserStrategyUtils.invokeAwareMethods(instance, environment, resourceLoader, registry, classLoader);
 		return instance;
@@ -110,7 +110,7 @@ abstract class ParserStrategyUtils {
 			return resourceLoader;
 		}
 		if (parameterType == BeanFactory.class) {
-			return (registry instanceof BeanFactory ? registry : null);
+			return registry instanceof BeanFactory ? registry : null;
 		}
 		if (parameterType == ClassLoader.class) {
 			return classLoader;

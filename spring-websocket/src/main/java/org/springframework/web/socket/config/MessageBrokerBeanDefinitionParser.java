@@ -169,7 +169,7 @@ class MessageBrokerBeanDefinitionParser implements BeanDefinitionParser {
 				path = path.trim();
 				Assert.hasText(path, () -> "Invalid <stomp-endpoint> path attribute: " + pathAttribute);
 				if (DomUtils.getChildElementByTagName(endpointElem, "sockjs") != null) {
-					path = (path.endsWith("/") ? path + "**" : path + "/**");
+					path = path.endsWith("/") ? path + "**" : path + "/**";
 				}
 				urlMap.put(path, requestHandler);
 			}
@@ -188,7 +188,7 @@ class MessageBrokerBeanDefinitionParser implements BeanDefinitionParser {
 
 	private RuntimeBeanReference registerUserRegistry(Element element, ParserContext context, @Nullable Object source) {
 		Element relayElement = DomUtils.getChildElementByTagName(element, "stomp-broker-relay");
-		boolean multiServer = (relayElement != null && relayElement.hasAttribute("user-registry-broadcast"));
+		boolean multiServer = relayElement != null && relayElement.hasAttribute("user-registry-broadcast");
 
 		if (multiServer) {
 			RootBeanDefinition localRegistryBeanDef = new RootBeanDefinition(DefaultSimpUserRegistry.class);
@@ -278,7 +278,7 @@ class MessageBrokerBeanDefinitionParser implements BeanDefinitionParser {
 
 	@Nullable
 	private RootBeanDefinition getDefaultExecutorBeanDefinition(String channelName) {
-		if (channelName.equals("brokerChannel")) {
+		if ("brokerChannel".equals(channelName)) {
 			return null;
 		}
 		RootBeanDefinition executorDef = new RootBeanDefinition(ThreadPoolTaskExecutor.class);

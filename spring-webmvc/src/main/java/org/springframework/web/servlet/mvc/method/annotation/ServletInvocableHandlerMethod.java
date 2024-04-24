@@ -282,11 +282,11 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 		public ConcurrentResultMethodParameter(@Nullable Object returnValue) {
 			super(-1);
 			this.returnValue = returnValue;
-			this.returnType = (returnValue instanceof CollectedValuesList cvList ?
+			this.returnType = returnValue instanceof CollectedValuesList cvList ?
 					cvList.getReturnType() :
 					KotlinDetector.isSuspendingFunction(super.getMethod()) ?
 					ResolvableType.forMethodParameter(getReturnType()) :
-					ResolvableType.forType(super.getGenericParameterType()).getGeneric());
+					ResolvableType.forType(super.getGenericParameterType()).getGeneric();
 		}
 
 		public ConcurrentResultMethodParameter(ConcurrentResultMethodParameter original) {
@@ -315,9 +315,9 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 		public <T extends Annotation> boolean hasMethodAnnotation(Class<T> annotationType) {
 			// Ensure @ResponseBody-style handling for values collected from a reactive type
 			// even if actual return type is ResponseEntity<Flux<T>>
-			return (super.hasMethodAnnotation(annotationType) ||
+			return super.hasMethodAnnotation(annotationType) ||
 					(annotationType == ResponseBody.class &&
-							this.returnValue instanceof CollectedValuesList));
+							this.returnValue instanceof CollectedValuesList);
 		}
 
 		@Override

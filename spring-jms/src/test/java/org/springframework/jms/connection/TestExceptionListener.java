@@ -24,7 +24,7 @@ import jakarta.jms.JMSException;
  */
 public class TestExceptionListener implements ExceptionListener {
 
-	private int count = 0;
+	private int count;
 
 	@Override
 	public void onException(JMSException ex) {

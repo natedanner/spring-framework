@@ -51,8 +51,8 @@ public class PreFlightRequestWebFilter implements WebFilter {
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-		return (CorsUtils.isPreFlightRequest(exchange.getRequest()) ?
-				this.handler.handlePreFlight(exchange) : chain.filter(exchange));
+		return CorsUtils.isPreFlightRequest(exchange.getRequest()) ?
+				this.handler.handlePreFlight(exchange) : chain.filter(exchange);
 	}
 
 }

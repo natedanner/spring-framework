@@ -450,13 +450,13 @@ class JavaMailSenderTests {
 	}
 
 
-	private static class MockTransport extends Transport {
+	private static final class MockTransport extends Transport {
 
-		private String connectedHost = null;
+		private String connectedHost;
 		private int connectedPort = -2;
-		private String connectedUsername = null;
-		private String connectedPassword = null;
-		private boolean closeCalled = false;
+		private String connectedUsername;
+		private String connectedPassword;
+		private boolean closeCalled;
 		private final List<Message> sentMessages = new ArrayList<>();
 
 		private MockTransport(Session session, URLName urlName) {

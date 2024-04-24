@@ -53,7 +53,7 @@ public class HandlerExceptionResolverComposite implements HandlerExceptionResolv
 	 * Return the list of exception resolvers to delegate to.
 	 */
 	public List<HandlerExceptionResolver> getExceptionResolvers() {
-		return (this.resolvers != null ? Collections.unmodifiableList(this.resolvers) : Collections.emptyList());
+		return this.resolvers != null ? Collections.unmodifiableList(this.resolvers) : Collections.emptyList();
 	}
 
 	public void setOrder(int order) {

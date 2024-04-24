@@ -105,17 +105,17 @@ public interface GenericConverter {
 				return false;
 			}
 			ConvertiblePair otherPair = (ConvertiblePair) other;
-			return (this.sourceType == otherPair.sourceType && this.targetType == otherPair.targetType);
+			return this.sourceType == otherPair.sourceType && this.targetType == otherPair.targetType;
 		}
 
 		@Override
 		public int hashCode() {
-			return (this.sourceType.hashCode() * 31 + this.targetType.hashCode());
+			return this.sourceType.hashCode() * 31 + this.targetType.hashCode();
 		}
 
 		@Override
 		public String toString() {
-			return (this.sourceType.getName() + " -> " + this.targetType.getName());
+			return this.sourceType.getName() + " -> " + this.targetType.getName();
 		}
 	}
 

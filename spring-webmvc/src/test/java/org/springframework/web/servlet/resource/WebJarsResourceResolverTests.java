@@ -40,14 +40,14 @@ import static org.mockito.Mockito.verify;
  */
 class WebJarsResourceResolverTests {
 
-	private List<Resource> locations = List.of(new ClassPathResource("/META-INF/resources/webjars"));
+	private final List<Resource> locations = List.of(new ClassPathResource("/META-INF/resources/webjars"));
 
 	// for this to work, an actual WebJar must be on the test classpath
-	private WebJarsResourceResolver resolver = new WebJarsResourceResolver();
+	private final WebJarsResourceResolver resolver = new WebJarsResourceResolver();
 
-	private ResourceResolverChain chain = mock();
+	private final ResourceResolverChain chain = mock();
 
-	private HttpServletRequest request = new MockHttpServletRequest();
+	private final HttpServletRequest request = new MockHttpServletRequest();
 
 
 	@Test

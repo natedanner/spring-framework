@@ -110,7 +110,7 @@ public class VariableReference extends SpelNodeImpl {
 
 	@Override
 	public boolean isCompilable() {
-		return (this.exitTypeDescriptor != null);
+		return this.exitTypeDescriptor != null;
 	}
 
 	@Override

@@ -58,7 +58,7 @@ public class ConcurrentMapCacheManager implements CacheManager, BeanClassLoaderA
 
 	private boolean allowNullValues = true;
 
-	private boolean storeByValue = false;
+	private boolean storeByValue;
 
 	@Nullable
 	private SerializationDelegate serialization;
@@ -187,7 +187,7 @@ public class ConcurrentMapCacheManager implements CacheManager, BeanClassLoaderA
 	 * @return the ConcurrentMapCache (or a decorator thereof)
 	 */
 	protected Cache createConcurrentMapCache(String name) {
-		SerializationDelegate actualSerialization = (isStoreByValue() ? this.serialization : null);
+		SerializationDelegate actualSerialization = isStoreByValue() ? this.serialization : null;
 		return new ConcurrentMapCache(name, new ConcurrentHashMap<>(256), isAllowNullValues(), actualSerialization);
 	}
 

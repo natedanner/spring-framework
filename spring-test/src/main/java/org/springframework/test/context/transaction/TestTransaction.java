@@ -55,7 +55,7 @@ public final class TestTransaction {
 		TransactionContext transactionContext = TransactionContextHolder.getCurrentTransactionContext();
 		if (transactionContext != null) {
 			TransactionStatus transactionStatus = transactionContext.getTransactionStatus();
-			return (transactionStatus != null && !transactionStatus.isCompleted());
+			return transactionStatus != null && !transactionStatus.isCompleted();
 		}
 		return false;
 	}

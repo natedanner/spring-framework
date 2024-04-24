@@ -39,9 +39,9 @@ import static org.mockito.Mockito.mock;
  */
 class ResultSetWrappingRowSetTests {
 
-	private ResultSet resultSet = mock();
+	private final ResultSet resultSet = mock();
 
-	private ResultSetWrappingSqlRowSet rowSet = new ResultSetWrappingSqlRowSet(resultSet);
+	private final ResultSetWrappingSqlRowSet rowSet = new ResultSetWrappingSqlRowSet(resultSet);
 
 
 	@Test

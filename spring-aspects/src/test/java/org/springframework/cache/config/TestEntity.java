@@ -52,7 +52,7 @@ public class TestEntity {
 		if (obj == this) {
 			return true;
 		}
-		return (obj instanceof TestEntity that && ObjectUtils.nullSafeEquals(this.id, that.id));
+		return obj instanceof TestEntity that && ObjectUtils.nullSafeEquals(this.id, that.id);
 	}
 
 }

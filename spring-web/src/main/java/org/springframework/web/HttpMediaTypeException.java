@@ -78,8 +78,8 @@ public abstract class HttpMediaTypeException extends ServletException implements
 
 		super(message);
 		this.supportedMediaTypes = Collections.unmodifiableList(supportedMediaTypes);
-		this.messageDetailCode = (messageDetailCode != null ?
-				messageDetailCode : ErrorResponse.getDefaultDetailMessageCode(getClass(), null));
+		this.messageDetailCode = messageDetailCode != null ?
+				messageDetailCode : ErrorResponse.getDefaultDetailMessageCode(getClass(), null);
 		this.messageDetailArguments = messageDetailArguments;
 	}
 

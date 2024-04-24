@@ -109,7 +109,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	@Nullable
 	private ResourceLoader resourceLoader;
 
-	private boolean customClassLoader = false;
+	private boolean customClassLoader;
 
 	private final AtomicBoolean refreshed = new AtomicBoolean();
 
@@ -557,7 +557,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 			customizer.customize(beanDefinition);
 		}
 
-		String nameToUse = (beanName != null ? beanName : beanClass.getName());
+		String nameToUse = beanName != null ? beanName : beanClass.getName();
 		registerBeanDefinition(nameToUse, beanDefinition);
 	}
 

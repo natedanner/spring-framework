@@ -23,7 +23,7 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect("perthis(org.springframework.aop.testfixture.aspectj.CommonPointcuts.getAgeExecution())")
 public class PerThisAspect {
 
-	private int invocations = 0;
+	private int invocations;
 
 	public int getInvocations() {
 		return this.invocations;

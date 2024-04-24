@@ -37,7 +37,7 @@ import org.springframework.cglib.core.TypeUtils;
  * This class implements a simple String &rarr; int mapping for a fixed set of keys.
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class StringSwitcher {
+public abstract class StringSwitcher {
     private static final Type STRING_SWITCHER =
       TypeUtils.parseType("org.springframework.cglib.util.StringSwitcher");
     private static final Signature INT_VALUE =
@@ -76,7 +76,7 @@ abstract public class StringSwitcher {
      * <code>fixedInput</code> was specified when this <code>StringSwitcher</code> was created,
      * in which case the return value for an unknown key is undefined)
      */
-    abstract public int intValue(String s);
+    public abstract int intValue(String s);
 
     public static class Generator extends AbstractClassGenerator {
         private static final Source SOURCE = new Source(StringSwitcher.class.getName());

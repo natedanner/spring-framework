@@ -75,7 +75,7 @@ public class CollectingReaderEventListener implements ReaderEventListener {
 
 	public List<AliasDefinition> getAliases(String beanName) {
 		List<AliasDefinition> aliases = this.aliasMap.get(beanName);
-		return (aliases != null ? Collections.unmodifiableList(aliases) : null);
+		return aliases != null ? Collections.unmodifiableList(aliases) : null;
 	}
 
 	@Override

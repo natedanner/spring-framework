@@ -89,7 +89,7 @@ public class TransactionAwareConnectionFactoryProxy
 	@Nullable
 	private ConnectionFactory targetConnectionFactory;
 
-	private boolean synchedLocalTransactionAllowed = false;
+	private boolean synchedLocalTransactionAllowed;
 
 
 	/**
@@ -256,15 +256,13 @@ public class TransactionAwareConnectionFactoryProxy
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 			// Invocation on ConnectionProxy interface coming in...
 
-			switch (method.getName()) {
-				case "equals" -> {
-					// Only consider equal when proxies are identical.
-					return (proxy == args[0]);
-				}
-				case "hashCode" -> {
-					// Use hashCode of Connection proxy.
-					return System.identityHashCode(proxy);
-				}
+			if ("equals".equals(method.getName())) {
+				// Only consider equal when proxies are identical.
+				return proxy == args[0];
+			}
+			else if ("hashCode".equals(method.getName())) {
+				// Use hashCode of Connection proxy.
+				return System.identityHashCode(proxy);
 			}
 
 			if (Session.class == method.getReturnType()) {

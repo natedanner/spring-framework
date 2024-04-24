@@ -186,7 +186,7 @@ public abstract class BshScriptUtils {
 		@Nullable
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 			if (ReflectionUtils.isEqualsMethod(method)) {
-				return (isProxyForSameBshObject(args[0]));
+				return isProxyForSameBshObject(args[0]);
 			}
 			else if (ReflectionUtils.isHashCodeMethod(method)) {
 				return this.xt.hashCode();
@@ -214,7 +214,7 @@ public abstract class BshScriptUtils {
 				return false;
 			}
 			InvocationHandler ih = Proxy.getInvocationHandler(obj);
-			return (ih instanceof BshObjectInvocationHandler that && this.xt.equals(that.xt));
+			return ih instanceof BshObjectInvocationHandler that && this.xt.equals(that.xt);
 		}
 	}
 

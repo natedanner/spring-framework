@@ -190,10 +190,10 @@ public abstract class AbstractHandlerMapping extends ApplicationObjectSupport
 			}
 			ServerHttpRequest request = exchange.getRequest();
 			if (hasCorsConfigurationSource(handler) || CorsUtils.isPreFlightRequest(request)) {
-				CorsConfiguration config = (this.corsConfigurationSource != null ?
-						this.corsConfigurationSource.getCorsConfiguration(exchange) : null);
+				CorsConfiguration config = this.corsConfigurationSource != null ?
+						this.corsConfigurationSource.getCorsConfiguration(exchange) : null;
 				CorsConfiguration handlerConfig = getCorsConfiguration(handler, exchange);
-				config = (config != null ? config.combine(handlerConfig) : handlerConfig);
+				config = config != null ? config.combine(handlerConfig) : handlerConfig;
 				if (config != null) {
 					config.validateAllowCredentials();
 					config.validateAllowPrivateNetwork();
@@ -223,7 +223,7 @@ public abstract class AbstractHandlerMapping extends ApplicationObjectSupport
 	 * @since 5.2
 	 */
 	protected boolean hasCorsConfigurationSource(Object handler) {
-		return (handler instanceof CorsConfigurationSource || this.corsConfigurationSource != null);
+		return handler instanceof CorsConfigurationSource || this.corsConfigurationSource != null;
 	}
 
 	/**

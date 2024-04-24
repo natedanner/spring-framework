@@ -152,7 +152,7 @@ public class MockHttpServletRequestBuilder
 		Assert.notNull(url, "'url' must not be null");
 		Assert.isTrue(url.isEmpty() || url.startsWith("/") || url.startsWith("http://") || url.startsWith("https://"),
 				() -> "'url' should start with a path or be a complete HTTP URL: " + url);
-		String uriString = (url.isEmpty() ? "/" : url);
+		String uriString = url.isEmpty() ? "/" : url;
 		return UriComponentsBuilder.fromUriString(uriString).buildAndExpand(vars).encode().toUri();
 	}
 
@@ -807,15 +807,15 @@ public class MockHttpServletRequestBuilder
 						"Invalid servlet path [" + this.servletPath + "] for request URI [" + requestUri + "]");
 			}
 			String extraPath = requestUri.substring(this.contextPath.length() + this.servletPath.length());
-			this.pathInfo = (StringUtils.hasText(extraPath) ?
-					UrlPathHelper.defaultInstance.decodeRequestString(request, extraPath) : null);
+			this.pathInfo = StringUtils.hasText(extraPath) ?
+					UrlPathHelper.defaultInstance.decodeRequestString(request, extraPath) : null;
 		}
 		request.setPathInfo(this.pathInfo);
 	}
 
 	private void addRequestParams(MockHttpServletRequest request, MultiValueMap<String, String> map) {
 		map.forEach((key, values) -> values.forEach(value -> {
-			value = (value != null ? UriUtils.decode(value, StandardCharsets.UTF_8) : null);
+			value = value != null ? UriUtils.decode(value, StandardCharsets.UTF_8) : null;
 			request.addParameter(UriUtils.decode(key, StandardCharsets.UTF_8), value);
 		}));
 	}
@@ -824,7 +824,7 @@ public class MockHttpServletRequestBuilder
 		HttpInputMessage message = new HttpInputMessage() {
 			@Override
 			public InputStream getBody() {
-				return (content != null ? new ByteArrayInputStream(content) : InputStream.nullInputStream());
+				return content != null ? new ByteArrayInputStream(content) : InputStream.nullInputStream();
 			}
 			@Override
 			public HttpHeaders getHeaders() {
@@ -852,7 +852,7 @@ public class MockHttpServletRequestBuilder
 		catch (IllegalStateException | NoSuchBeanDefinitionException ex) {
 			// ignore
 		}
-		return (flashMapManager != null ? flashMapManager : new SessionFlashMapManager());
+		return flashMapManager != null ? flashMapManager : new SessionFlashMapManager();
 	}
 
 	@Override

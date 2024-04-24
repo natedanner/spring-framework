@@ -86,7 +86,7 @@ class BeanMethodQualificationTests {
 				new AnnotationConfigApplicationContext(CustomConfig.class, CustomPojo.class);
 		assertThat(ctx.getBeanFactory().containsSingleton("testBean1")).isFalse();
 		assertThat(ctx.getBeanFactory().containsSingleton("testBean2")).isFalse();
-		assertThat(BeanFactoryAnnotationUtils.isQualifierMatch(value -> value.equals("boring"),
+		assertThat(BeanFactoryAnnotationUtils.isQualifierMatch("boring"::equals,
 		"testBean2", ctx.getDefaultListableBeanFactory())).isTrue();
 		CustomPojo pojo = ctx.getBean(CustomPojo.class);
 		assertThat(pojo.testBean.getName()).isEqualTo("interesting");
@@ -104,7 +104,7 @@ class BeanMethodQualificationTests {
 		assertThat(ctx.getBeanFactory().containsSingleton("testBean1")).isFalse();
 		assertThat(ctx.getBeanFactory().containsSingleton("testBean2")).isFalse();
 		ctx.getBean("testBean2");
-		assertThat(BeanFactoryAnnotationUtils.isQualifierMatch(value -> value.equals("boring"),
+		assertThat(BeanFactoryAnnotationUtils.isQualifierMatch("boring"::equals,
 		"testBean2", ctx.getDefaultListableBeanFactory())).isTrue();
 		CustomPojo pojo = ctx.getBean(CustomPojo.class);
 		assertThat(pojo.testBean.getName()).isEqualTo("interesting");

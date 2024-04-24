@@ -104,7 +104,7 @@ final class SimpleAnnotationMetadata implements AnnotationMetadata {
 
 	@Override
 	public boolean isIndependent() {
-		return (this.enclosingClassName == null || this.independentInnerClass);
+		return this.enclosingClassName == null || this.independentInnerClass;
 	}
 
 	@Override
@@ -164,7 +164,7 @@ final class SimpleAnnotationMetadata implements AnnotationMetadata {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof SimpleAnnotationMetadata that && this.className.equals(that.className)));
+		return this == other || (other instanceof SimpleAnnotationMetadata that && this.className.equals(that.className));
 	}
 
 	@Override

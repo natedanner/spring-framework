@@ -62,8 +62,8 @@ public class SybaseCallMetaDataProvider extends GenericCallMetaDataProvider {
 
 	@Override
 	public boolean byPassReturnParameter(String parameterName) {
-		return (RETURN_VALUE_NAME.equals(parameterName) ||
-				RETURN_VALUE_NAME.equals(parameterNameToUse(parameterName)));
+		return RETURN_VALUE_NAME.equals(parameterName) ||
+				RETURN_VALUE_NAME.equals(parameterNameToUse(parameterName));
 	}
 
 }

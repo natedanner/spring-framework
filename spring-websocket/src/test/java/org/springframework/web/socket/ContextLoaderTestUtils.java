@@ -29,7 +29,7 @@ import org.springframework.web.context.WebApplicationContext;
  */
 public class ContextLoaderTestUtils {
 
-	private static Map<ClassLoader, WebApplicationContext> currentContextPerThread =
+	private static final Map<ClassLoader, WebApplicationContext> currentContextPerThread =
 			getCurrentContextPerThreadFromContextLoader();
 
 	public static void setCurrentWebApplicationContext(WebApplicationContext applicationContext) {

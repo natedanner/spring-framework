@@ -79,7 +79,7 @@ public interface ClassMetadata {
 	 * class is a top-level class.
 	 */
 	default boolean hasEnclosingClass() {
-		return (getEnclosingClassName() != null);
+		return getEnclosingClassName() != null;
 	}
 
 	/**
@@ -93,7 +93,7 @@ public interface ClassMetadata {
 	 * Return whether the underlying class has a superclass.
 	 */
 	default boolean hasSuperClass() {
-		return (getSuperClassName() != null);
+		return getSuperClassName() != null;
 	}
 
 	/**

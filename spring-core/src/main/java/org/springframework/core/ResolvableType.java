@@ -81,7 +81,7 @@ import org.springframework.util.StringUtils;
  * @see ResolvableTypeProvider
  */
 @SuppressWarnings("serial")
-public class ResolvableType implements Serializable {
+public final class ResolvableType implements Serializable {
 
 	/**
 	 * {@code ResolvableType} returned when no value is available. {@code NONE} is used
@@ -189,7 +189,7 @@ public class ResolvableType implements Serializable {
 	 * @since 4.2
 	 */
 	private ResolvableType(@Nullable Class<?> clazz) {
-		this.resolved = (clazz != null ? clazz : Object.class);
+		this.resolved = clazz != null ? clazz : Object.class;
 		this.type = this.resolved;
 		this.componentType = null;
 		this.typeProvider = null;
@@ -218,7 +218,7 @@ public class ResolvableType implements Serializable {
 		if (rawType instanceof ParameterizedType parameterizedType) {
 			rawType = parameterizedType.getRawType();
 		}
-		return (rawType instanceof Class<?> rawClass ? rawClass : null);
+		return rawType instanceof Class<?> rawClass ? rawClass : null;
 	}
 
 	/**
@@ -228,8 +228,8 @@ public class ResolvableType implements Serializable {
 	 * information or meta-data that alternative JVM languages may provide.
 	 */
 	public Object getSource() {
-		Object source = (this.typeProvider != null ? this.typeProvider.getSource() : null);
-		return (source != null ? source : this.type);
+		Object source = this.typeProvider != null ? this.typeProvider.getSource() : null;
+		return source != null ? source : this.type;
 	}
 
 	/**
@@ -251,7 +251,7 @@ public class ResolvableType implements Serializable {
 	 * @see #isAssignableFrom(Class)
 	 */
 	public boolean isInstance(@Nullable Object obj) {
-		return (obj != null && isAssignableFrom(obj.getClass()));
+		return obj != null && isAssignableFrom(obj.getClass());
 	}
 
 	/**
@@ -263,8 +263,8 @@ public class ResolvableType implements Serializable {
 	 */
 	public boolean isAssignableFrom(Class<?> other) {
 		// As of 6.1: shortcut assignability check for top-level Class references
-		return (this.type instanceof Class<?> clazz ? ClassUtils.isAssignable(clazz, other) :
-				isAssignableFrom(forClass(other), false, null));
+		return this.type instanceof Class<?> clazz ? ClassUtils.isAssignable(clazz, other) :
+				isAssignableFrom(forClass(other), false, null);
 	}
 
 	/**
@@ -298,13 +298,13 @@ public class ResolvableType implements Serializable {
 		else {
 			// As of 6.1: shortcut assignability check for top-level Class references
 			if (this.type instanceof Class<?> clazz && other.type instanceof Class<?> otherClazz) {
-				return (strict ? clazz.isAssignableFrom(otherClazz) : ClassUtils.isAssignable(clazz, otherClazz));
+				return strict ? clazz.isAssignableFrom(otherClazz) : ClassUtils.isAssignable(clazz, otherClazz);
 			}
 		}
 
 		// Deal with array by delegating to the component type
 		if (isArray()) {
-			return (other.isArray() && getComponentType().isAssignableFrom(other.getComponentType(), true, matchedBefore));
+			return other.isArray() && getComponentType().isAssignableFrom(other.getComponentType(), true, matchedBefore);
 		}
 
 		// Deal with wildcard bounds
@@ -313,8 +313,8 @@ public class ResolvableType implements Serializable {
 
 		// In the form X is assignable to <? extends Number>
 		if (typeBounds != null) {
-			return (ourBounds != null && ourBounds.isSameKind(typeBounds) &&
-					ourBounds.isAssignableFrom(typeBounds.getBounds()));
+			return ourBounds != null && ourBounds.isSameKind(typeBounds) &&
+					ourBounds.isAssignableFrom(typeBounds.getBounds());
 		}
 
 		// In the form <? extends Number> is assignable to X...
@@ -323,7 +323,7 @@ public class ResolvableType implements Serializable {
 		}
 
 		// Main assignability check about to follow
-		boolean exactMatch = (matchedBefore != null);  // We're checking nested generic variables now...
+		boolean exactMatch = matchedBefore != null;  // We're checking nested generic variables now...
 		boolean checkGenerics = true;
 		Class<?> ourResolved = null;
 		if (this.type instanceof TypeVariable<?> variable) {
@@ -393,8 +393,8 @@ public class ResolvableType implements Serializable {
 		if (this == NONE) {
 			return false;
 		}
-		return ((this.type instanceof Class<?> clazz && clazz.isArray()) ||
-				this.type instanceof GenericArrayType || resolveType().isArray());
+		return (this.type instanceof Class<?> clazz && clazz.isArray()) ||
+				this.type instanceof GenericArrayType || resolveType().isArray();
 	}
 
 	/**
@@ -530,7 +530,7 @@ public class ResolvableType implements Serializable {
 	 * @see #getGenerics()
 	 */
 	public boolean hasGenerics() {
-		return (getGenerics().length > 0);
+		return getGenerics().length > 0;
 	}
 
 	/**
@@ -672,8 +672,8 @@ public class ResolvableType implements Serializable {
 				while (result != ResolvableType.NONE && !result.hasGenerics()) {
 					result = result.getSuperType();
 				}
-				Integer index = (typeIndexesPerLevel != null ? typeIndexesPerLevel.get(i) : null);
-				index = (index == null ? result.getGenerics().length - 1 : index);
+				Integer index = typeIndexesPerLevel != null ? typeIndexesPerLevel.get(i) : null;
+				index = index == null ? result.getGenerics().length - 1 : index;
 				result = result.getGeneric(index);
 			}
 		}
@@ -700,7 +700,7 @@ public class ResolvableType implements Serializable {
 	public ResolvableType getGeneric(@Nullable int... indexes) {
 		ResolvableType[] generics = getGenerics();
 		if (indexes == null || indexes.length == 0) {
-			return (generics.length == 0 ? NONE : generics[0]);
+			return generics.length == 0 ? NONE : generics[0];
 		}
 		ResolvableType generic = this;
 		for (int index : indexes) {
@@ -833,7 +833,7 @@ public class ResolvableType implements Serializable {
 	 * @see #resolveGenerics()
 	 */
 	public Class<?> resolve(Class<?> fallback) {
-		return (this.resolved != null ? this.resolved : fallback);
+		return this.resolved != null ? this.resolved : fallback;
 	}
 
 	@Nullable
@@ -846,7 +846,7 @@ public class ResolvableType implements Serializable {
 		}
 		if (this.type instanceof GenericArrayType) {
 			Class<?> resolvedComponent = getComponentType().resolve();
-			return (resolvedComponent != null ? Array.newInstance(resolvedComponent, 0).getClass() : null);
+			return resolvedComponent != null ? Array.newInstance(resolvedComponent, 0).getClass() : null;
 		}
 		return resolveType().resolve();
 	}
@@ -947,12 +947,9 @@ public class ResolvableType implements Serializable {
 				!ObjectUtils.nullSafeEquals(this.typeProvider.getType(), otherType.typeProvider.getType()))) {
 			return false;
 		}
-		if (this.variableResolver != otherType.variableResolver &&
+		return !(this.variableResolver != otherType.variableResolver &&
 				(this.variableResolver == null || otherType.variableResolver == null ||
-				!ObjectUtils.nullSafeEquals(this.variableResolver.getSource(), otherType.variableResolver.getSource()))) {
-			return false;
-		}
-		return true;
+						!ObjectUtils.nullSafeEquals(this.variableResolver.getSource(), otherType.variableResolver.getSource())));
 	}
 
 	/**
@@ -964,13 +961,13 @@ public class ResolvableType implements Serializable {
 	 * @since 6.1
 	 */
 	public boolean equalsType(ResolvableType otherType) {
-		return (ObjectUtils.nullSafeEquals(this.type, otherType.type) &&
-				ObjectUtils.nullSafeEquals(this.componentType, otherType.componentType));
+		return ObjectUtils.nullSafeEquals(this.type, otherType.type) &&
+				ObjectUtils.nullSafeEquals(this.componentType, otherType.componentType);
 	}
 
 	@Override
 	public int hashCode() {
-		return (this.hash != null ? this.hash : calculateHashCode());
+		return this.hash != null ? this.hash : calculateHashCode();
 	}
 
 	private int calculateHashCode() {
@@ -1002,7 +999,7 @@ public class ResolvableType implements Serializable {
 	 * Custom serialization support for {@link #NONE}.
 	 */
 	private Object readResolve() {
-		return (this.type == EmptyType.INSTANCE ? NONE : this);
+		return this.type == EmptyType.INSTANCE ? NONE : this;
 	}
 
 	/**
@@ -1067,12 +1064,12 @@ public class ResolvableType implements Serializable {
 			}
 			@Override
 			public boolean isAssignableFrom(Class<?> other) {
-				return (clazz == null || ClassUtils.isAssignable(clazz, other));
+				return clazz == null || ClassUtils.isAssignable(clazz, other);
 			}
 			@Override
 			public boolean isAssignableFrom(ResolvableType other) {
 				Class<?> otherClass = other.resolve();
-				return (otherClass != null && (clazz == null || ClassUtils.isAssignable(clazz, otherClass)));
+				return otherClass != null && (clazz == null || ClassUtils.isAssignable(clazz, otherClass));
 			}
 		};
 	}
@@ -1091,7 +1088,7 @@ public class ResolvableType implements Serializable {
 	public static ResolvableType forClass(Class<?> baseType, Class<?> implementationClass) {
 		Assert.notNull(baseType, "Base type must not be null");
 		ResolvableType asType = forType(implementationClass).as(baseType);
-		return (asType == NONE ? forType(baseType) : asType);
+		return asType == NONE ? forType(baseType) : asType;
 	}
 
 	/**
@@ -1127,8 +1124,8 @@ public class ResolvableType implements Serializable {
 		Type[] arguments = new Type[generics.length];
 		for (int i = 0; i < generics.length; i++) {
 			ResolvableType generic = generics[i];
-			Type argument = (generic != null ? generic.getType() : null);
-			arguments[i] = (argument != null && !(argument instanceof TypeVariable) ? argument : variables[i]);
+			Type argument = generic != null ? generic.getType() : null;
+			arguments[i] = argument != null && !(argument instanceof TypeVariable) ? argument : variables[i];
 		}
 
 		ParameterizedType syntheticType = new SyntheticParameterizedType(clazz, arguments);
@@ -1153,7 +1150,7 @@ public class ResolvableType implements Serializable {
 				return type;
 			}
 		}
-		return (instance != null ? forClass(instance.getClass()) : NONE);
+		return instance != null ? forClass(instance.getClass()) : NONE;
 	}
 
 	/**
@@ -1195,7 +1192,7 @@ public class ResolvableType implements Serializable {
 	 */
 	public static ResolvableType forField(Field field, @Nullable ResolvableType implementationType) {
 		Assert.notNull(field, "Field must not be null");
-		ResolvableType owner = (implementationType != null ? implementationType : NONE);
+		ResolvableType owner = implementationType != null ? implementationType : NONE;
 		owner = owner.as(field.getDeclaringClass());
 		return forType(null, new FieldTypeProvider(field), owner.asVariableResolver());
 	}
@@ -1341,8 +1338,8 @@ public class ResolvableType implements Serializable {
 			@Nullable ResolvableType implementationType) {
 
 		Assert.notNull(methodParameter, "MethodParameter must not be null");
-		implementationType = (implementationType != null ? implementationType :
-				forType(methodParameter.getContainingClass()));
+		implementationType = implementationType != null ? implementationType :
+				forType(methodParameter.getContainingClass());
 		ResolvableType owner = implementationType.as(methodParameter.getDeclaringClass());
 		return forType(null, new MethodParameterTypeProvider(methodParameter), owner.asVariableResolver()).
 				getNested(methodParameter.getNestingLevel(), methodParameter.typeIndexesPerLevel);
@@ -1607,14 +1604,14 @@ public class ResolvableType implements Serializable {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof ParameterizedType that &&
+			return this == other || (other instanceof ParameterizedType that &&
 					that.getOwnerType() == null && this.rawType.equals(that.getRawType()) &&
-					Arrays.equals(this.typeArguments, that.getActualTypeArguments())));
+					Arrays.equals(this.typeArguments, that.getActualTypeArguments()));
 		}
 
 		@Override
 		public int hashCode() {
-			return (this.rawType.hashCode() * 31 + Arrays.hashCode(this.typeArguments));
+			return this.rawType.hashCode() * 31 + Arrays.hashCode(this.typeArguments);
 		}
 
 		@Override
@@ -1668,7 +1665,7 @@ public class ResolvableType implements Serializable {
 		}
 
 		private boolean isAssignable(ResolvableType source, ResolvableType from) {
-			return (this.kind == Kind.UPPER ? source.isAssignableFrom(from) : from.isAssignableFrom(source));
+			return this.kind == Kind.UPPER ? source.isAssignableFrom(from) : from.isAssignableFrom(source);
 		}
 
 		/**
@@ -1693,8 +1690,8 @@ public class ResolvableType implements Serializable {
 				}
 				resolveToWildcard = resolveToWildcard.resolveType();
 			}
-			Kind boundsType = (wildcardType.getLowerBounds().length > 0 ? Kind.LOWER : Kind.UPPER);
-			Type[] bounds = (boundsType == Kind.UPPER ? wildcardType.getUpperBounds() : wildcardType.getLowerBounds());
+			Kind boundsType = wildcardType.getLowerBounds().length > 0 ? Kind.LOWER : Kind.UPPER;
+			Type[] bounds = boundsType == Kind.UPPER ? wildcardType.getUpperBounds() : wildcardType.getLowerBounds();
 			ResolvableType[] resolvableBounds = new ResolvableType[bounds.length];
 			for (int i = 0; i < bounds.length; i++) {
 				resolvableBounds[i] = ResolvableType.forType(bounds[i], type.variableResolver);

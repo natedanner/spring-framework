@@ -71,7 +71,7 @@ public abstract class PropertyAccessException extends BeansException {
 	 */
 	@Nullable
 	public String getPropertyName() {
-		return (this.propertyChangeEvent != null ? this.propertyChangeEvent.getPropertyName() : null);
+		return this.propertyChangeEvent != null ? this.propertyChangeEvent.getPropertyName() : null;
 	}
 
 	/**
@@ -79,7 +79,7 @@ public abstract class PropertyAccessException extends BeansException {
 	 */
 	@Nullable
 	public Object getValue() {
-		return (this.propertyChangeEvent != null ? this.propertyChangeEvent.getNewValue() : null);
+		return this.propertyChangeEvent != null ? this.propertyChangeEvent.getNewValue() : null;
 	}
 
 	/**

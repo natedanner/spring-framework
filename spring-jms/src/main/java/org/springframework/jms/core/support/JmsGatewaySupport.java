@@ -77,7 +77,7 @@ public abstract class JmsGatewaySupport implements InitializingBean {
 	 */
 	@Nullable
 	public final ConnectionFactory getConnectionFactory() {
-		return (this.jmsTemplate != null ? this.jmsTemplate.getConnectionFactory() : null);
+		return this.jmsTemplate != null ? this.jmsTemplate.getConnectionFactory() : null;
 	}
 
 	/**

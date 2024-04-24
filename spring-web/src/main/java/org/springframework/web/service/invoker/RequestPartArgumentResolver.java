@@ -67,9 +67,9 @@ public class RequestPartArgumentResolver extends AbstractNamedValueArgumentResol
 	public RequestPartArgumentResolver(HttpExchangeAdapter exchangeAdapter) {
 		if (REACTOR_PRESENT) {
 			this.reactiveAdapterRegistry =
-					(exchangeAdapter instanceof ReactorHttpExchangeAdapter reactorAdapter ?
+					exchangeAdapter instanceof ReactorHttpExchangeAdapter reactorAdapter ?
 							reactorAdapter.getReactiveAdapterRegistry() :
-							ReactiveAdapterRegistry.getSharedInstance());
+							ReactiveAdapterRegistry.getSharedInstance();
 		}
 		else {
 			this.reactiveAdapterRegistry = null;
@@ -81,7 +81,7 @@ public class RequestPartArgumentResolver extends AbstractNamedValueArgumentResol
 	protected NamedValueInfo createNamedValueInfo(MethodParameter parameter) {
 		RequestPart annot = parameter.getParameterAnnotation(RequestPart.class);
 		boolean isMultiPartFile = parameter.nestedIfOptional().getNestedParameterType().equals(MultipartFile.class);
-		String label = (isMultiPartFile ? "MultipartFile" : "request part");
+		String label = isMultiPartFile ? "MultipartFile" : "request part";
 
 		if (annot != null) {
 			return new NamedValueInfo(annot.name(), annot.required(), null, label, true);

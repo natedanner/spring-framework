@@ -134,8 +134,8 @@ final class SimpleMethodMetadataReadingVisitor extends MethodVisitor {
 				return false;
 			}
 			Source otherSource = (Source) other;
-			return (this.declaringClassName.equals(otherSource.declaringClassName) &&
-					this.methodName.equals(otherSource.methodName) && this.descriptor.equals(otherSource.descriptor));
+			return this.declaringClassName.equals(otherSource.declaringClassName) &&
+					this.methodName.equals(otherSource.methodName) && this.descriptor.equals(otherSource.descriptor);
 		}
 
 		@Override

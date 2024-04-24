@@ -139,7 +139,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 			}
 			catch (IllegalArgumentException ex) {
 				assertTargetBean(getBridgedMethod(), getBean(), args);
-				String text = (ex.getMessage() != null ? ex.getMessage() : "Illegal argument");
+				String text = ex.getMessage() != null ? ex.getMessage() : "Illegal argument";
 				return Mono.error(new IllegalStateException(formatInvokeError(text, args), ex));
 			}
 			catch (InvocationTargetException ex) {
@@ -151,10 +151,10 @@ public class InvocableHandlerMethod extends HandlerMethod {
 			}
 
 			MethodParameter returnType = getReturnType();
-			Class<?> reactiveType = (isSuspendingFunction ? value.getClass() : returnType.getParameterType());
+			Class<?> reactiveType = isSuspendingFunction ? value.getClass() : returnType.getParameterType();
 			ReactiveAdapter adapter = this.reactiveAdapterRegistry.getAdapter(reactiveType);
-			return (isAsyncVoidReturnType(returnType, adapter) ?
-					Mono.from(adapter.toPublisher(value)) : Mono.justOrEmpty(value));
+			return isAsyncVoidReturnType(returnType, adapter) ?
+					Mono.from(adapter.toPublisher(value)) : Mono.justOrEmpty(value);
 		});
 	}
 

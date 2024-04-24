@@ -46,7 +46,7 @@ class ServerSentEventHttpMessageReaderTests extends AbstractLeakCheckingTests {
 
 	private final Jackson2JsonDecoder jsonDecoder = new Jackson2JsonDecoder();
 
-	private ServerSentEventHttpMessageReader reader = new ServerSentEventHttpMessageReader(this.jsonDecoder);
+	private final ServerSentEventHttpMessageReader reader = new ServerSentEventHttpMessageReader(this.jsonDecoder);
 
 
 	@Test
@@ -135,8 +135,8 @@ class ServerSentEventHttpMessageReaderTests extends AbstractLeakCheckingTests {
 				request, Collections.emptyMap()).cast(String.class);
 
 		StepVerifier.create(data)
-				.expectNextMatches(elem -> elem.equals("foo\nbar"))
-				.expectNextMatches(elem -> elem.equals("baz"))
+				.expectNextMatches("foo\nbar"::equals)
+				.expectNextMatches("baz"::equals)
 				.expectComplete()
 				.verify();
 	}
@@ -217,8 +217,8 @@ class ServerSentEventHttpMessageReaderTests extends AbstractLeakCheckingTests {
 				request, Collections.emptyMap()).cast(String.class);
 
 		StepVerifier.create(data)
-				.expectNextMatches(elem -> elem.equals("foo\nbar"))
-				.expectNextMatches(elem -> elem.equals("baz"))
+				.expectNextMatches("foo\nbar"::equals)
+				.expectNextMatches("baz"::equals)
 				.expectError()
 				.verify();
 	}

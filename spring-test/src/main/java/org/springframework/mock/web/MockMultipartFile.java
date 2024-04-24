@@ -82,9 +82,9 @@ public class MockMultipartFile implements MultipartFile {
 
 		Assert.hasLength(name, "Name must not be empty");
 		this.name = name;
-		this.originalFilename = (originalFilename != null ? originalFilename : "");
+		this.originalFilename = originalFilename != null ? originalFilename : "";
 		this.contentType = contentType;
-		this.content = (content != null ? content : new byte[0]);
+		this.content = content != null ? content : new byte[0];
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class MockMultipartFile implements MultipartFile {
 
 	@Override
 	public boolean isEmpty() {
-		return (this.content.length == 0);
+		return this.content.length == 0;
 	}
 
 	@Override

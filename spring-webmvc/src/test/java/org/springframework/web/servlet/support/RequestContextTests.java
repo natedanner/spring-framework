@@ -37,13 +37,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class RequestContextTests {
 
-	private MockHttpServletRequest request = new MockHttpServletRequest();
+	private final MockHttpServletRequest request = new MockHttpServletRequest();
 
-	private MockHttpServletResponse response = new MockHttpServletResponse();
+	private final MockHttpServletResponse response = new MockHttpServletResponse();
 
-	private MockServletContext servletContext = new MockServletContext();
+	private final MockServletContext servletContext = new MockServletContext();
 
-	private Map<String, Object> model = new HashMap<>();
+	private final Map<String, Object> model = new HashMap<>();
 
 	@BeforeEach
 	void init() {

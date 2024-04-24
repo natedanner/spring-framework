@@ -116,7 +116,7 @@ public class Jackson2ObjectMapperBuilder {
 
 	private final Map<Object, Boolean> features = new LinkedHashMap<>();
 
-	private boolean createXmlMapper = false;
+	private boolean createXmlMapper;
 
 	@Nullable
 	private JsonFactory factory;
@@ -151,7 +151,7 @@ public class Jackson2ObjectMapperBuilder {
 	@Nullable
 	private Class<? extends Module>[] moduleClasses;
 
-	private boolean findModulesViaServiceLoader = false;
+	private boolean findModulesViaServiceLoader;
 
 	private boolean findWellKnownModules = true;
 
@@ -562,7 +562,7 @@ public class Jackson2ObjectMapperBuilder {
 	 * @see com.fasterxml.jackson.databind.Module
 	 */
 	public Jackson2ObjectMapperBuilder modules(Consumer<List<Module>> consumer) {
-		this.modules = (this.modules != null ? this.modules : new ArrayList<>());
+		this.modules = this.modules != null ? this.modules : new ArrayList<>();
 		this.findModulesViaServiceLoader = false;
 		this.findWellKnownModules = false;
 		consumer.accept(this.modules);
@@ -598,7 +598,7 @@ public class Jackson2ObjectMapperBuilder {
 	 * @see com.fasterxml.jackson.databind.Module
 	 */
 	public Jackson2ObjectMapperBuilder modulesToInstall(Consumer<List<Module>> consumer) {
-		this.modules = (this.modules != null ? this.modules : new ArrayList<>());
+		this.modules = this.modules != null ? this.modules : new ArrayList<>();
 		this.findWellKnownModules = true;
 		consumer.accept(this.modules);
 		return this;
@@ -678,7 +678,7 @@ public class Jackson2ObjectMapperBuilder {
 	 * @since 5.3
 	 */
 	public Jackson2ObjectMapperBuilder postConfigurer(Consumer<ObjectMapper> configurer) {
-		this.configurer = (this.configurer != null ? this.configurer.andThen(configurer) : configurer);
+		this.configurer = this.configurer != null ? this.configurer.andThen(configurer) : configurer;
 		return this;
 	}
 
@@ -694,12 +694,12 @@ public class Jackson2ObjectMapperBuilder {
 	public <T extends ObjectMapper> T build() {
 		ObjectMapper mapper;
 		if (this.createXmlMapper) {
-			mapper = (this.defaultUseWrapper != null ?
+			mapper = this.defaultUseWrapper != null ?
 					new XmlObjectMapperInitializer().create(this.defaultUseWrapper, this.factory) :
-					new XmlObjectMapperInitializer().create(this.factory));
+					new XmlObjectMapperInitializer().create(this.factory);
 		}
 		else {
-			mapper = (this.factory != null ? new ObjectMapper(this.factory) : new ObjectMapper());
+			mapper = this.factory != null ? new ObjectMapper(this.factory) : new ObjectMapper();
 		}
 		configure(mapper);
 		return (T) mapper;

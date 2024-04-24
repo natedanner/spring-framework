@@ -89,7 +89,7 @@ public final class ReactiveTypeDescriptor {
 	 * Return {@code true} if the reactive type can complete with no values.
 	 */
 	public boolean supportsEmpty() {
-		return (this.emptySupplier != null);
+		return this.emptySupplier != null;
 	}
 
 	/**

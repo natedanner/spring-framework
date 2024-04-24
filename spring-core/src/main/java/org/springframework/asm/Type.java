@@ -776,7 +776,7 @@ public final class Type {
     if (currentChar == 'V') {
       return argumentsSize << 2;
     } else {
-      int returnSize = (currentChar == 'J' || currentChar == 'D') ? 2 : 1;
+      int returnSize = currentChar == 'J' || currentChar == 'D' ? 2 : 1;
       return argumentsSize << 2 | returnSize;
     }
   }

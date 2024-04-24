@@ -22,7 +22,8 @@ import org.springframework.asm.TypePath;
 import org.springframework.cglib.core.Constants;
 
 public class FieldVisitorTee extends FieldVisitor {
-    private FieldVisitor fv1, fv2;
+	private final FieldVisitor fv1;
+	private final FieldVisitor fv2;
 
     public FieldVisitorTee(FieldVisitor fv1, FieldVisitor fv2) {
 	super(Constants.ASM_API);

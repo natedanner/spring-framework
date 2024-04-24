@@ -61,7 +61,7 @@ class LazyLoaderGenerator implements CallbackGenerator {
         }
 
         for (Iterator it = indexes.iterator(); it.hasNext();) {
-            int index = ((Integer)it.next());
+            int index = (Integer)it.next();
 
             String delegate = "CGLIB$LAZY_LOADER_" + index;
             ce.declare_field(Constants.ACC_PRIVATE, delegate, Constants.TYPE_OBJECT, null);

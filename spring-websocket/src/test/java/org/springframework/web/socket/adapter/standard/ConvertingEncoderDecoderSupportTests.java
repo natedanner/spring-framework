@@ -60,7 +60,7 @@ class ConvertingEncoderDecoderSupportTests {
 
 	private WebApplicationContext applicationContext;
 
-	private MyType myType = new MyType("test");
+	private final MyType myType = new MyType("test");
 
 
 	@BeforeEach
@@ -234,7 +234,7 @@ class ConvertingEncoderDecoderSupportTests {
 
 		@Override
 		public boolean equals(@Nullable Object obj) {
-			return (obj instanceof MyType that && this.value.equals(that.value));
+			return obj instanceof MyType that && this.value.equals(that.value);
 		}
 	}
 

@@ -140,12 +140,12 @@ public class HttpHandlerConnector implements ClientHttpConnector {
 	}
 
 	private ServerHttpResponse prepareResponse(ServerHttpResponse response, ServerHttpRequest request) {
-		return (request.getMethod() == HttpMethod.HEAD ? new HttpHeadResponseDecorator(response) : response);
+		return request.getMethod() == HttpMethod.HEAD ? new HttpHeadResponseDecorator(response) : response;
 	}
 
 	private ClientHttpResponse adaptResponse(MockServerHttpResponse response, Flux<DataBuffer> body) {
 		HttpStatusCode status = response.getStatusCode();
-		MockClientHttpResponse clientResponse = new MockClientHttpResponse((status != null) ? status : HttpStatus.OK);
+		MockClientHttpResponse clientResponse = new MockClientHttpResponse(status != null ? status : HttpStatus.OK);
 		clientResponse.getHeaders().putAll(response.getHeaders());
 		clientResponse.getCookies().putAll(response.getCookies());
 		clientResponse.setBody(body);

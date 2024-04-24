@@ -65,7 +65,7 @@ public class RequestHeaderMapMethodArgumentResolver extends HandlerMethodArgumen
 
 		boolean isMultiValueMap = MultiValueMap.class.isAssignableFrom(methodParameter.getParameterType());
 		HttpHeaders headers = exchange.getRequest().getHeaders();
-		return (isMultiValueMap ? headers : headers.toSingleValueMap());
+		return isMultiValueMap ? headers : headers.toSingleValueMap();
 	}
 
 }

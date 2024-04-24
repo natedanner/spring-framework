@@ -109,7 +109,7 @@ public class XmlValidationModeDetector {
 					break;
 				}
 			}
-			return (isDtdValidated ? VALIDATION_DTD : VALIDATION_XSD);
+			return isDtdValidated ? VALIDATION_DTD : VALIDATION_XSD;
 		}
 		catch (CharConversionException ex) {
 			// Choked on some character encoding...
@@ -138,8 +138,8 @@ public class XmlValidationModeDetector {
 			return false;
 		}
 		int openTagIndex = content.indexOf('<');
-		return (openTagIndex > -1 && (content.length() > openTagIndex + 1) &&
-				Character.isLetter(content.charAt(openTagIndex + 1)));
+		return openTagIndex > -1 && (content.length() > openTagIndex + 1) &&
+				Character.isLetter(content.charAt(openTagIndex + 1));
 	}
 
 	/**
@@ -172,8 +172,8 @@ public class XmlValidationModeDetector {
 	 */
 	@Nullable
 	private String consume(String line) {
-		int index = (this.inComment ? endComment(line) : startComment(line));
-		return (index == -1 ? null : line.substring(index));
+		int index = this.inComment ? endComment(line) : startComment(line);
+		return index == -1 ? null : line.substring(index);
 	}
 
 	/**
@@ -203,7 +203,7 @@ public class XmlValidationModeDetector {
 		if (index > - 1) {
 			this.inComment = inCommentIfPresent;
 		}
-		return (index == -1 ? index : index + token.length());
+		return index == -1 ? index : index + token.length();
 	}
 
 }

@@ -66,7 +66,7 @@ public class DummyFactory
 
 	private boolean initialized;
 
-	private TestBean testBean;
+	private final TestBean testBean;
 
 	private TestBean otherTestBean;
 

@@ -59,7 +59,7 @@ public class ModelAndView {
 	private HttpStatusCode status;
 
 	/** Indicates whether this instance has been cleared with a call to {@link #clear()}. */
-	private boolean cleared = false;
+	private boolean cleared;
 
 
 	/**
@@ -195,7 +195,7 @@ public class ModelAndView {
 	 */
 	@Nullable
 	public String getViewName() {
-		return (this.view instanceof String name ? name : null);
+		return this.view instanceof String name ? name : null;
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class ModelAndView {
 	 */
 	@Nullable
 	public View getView() {
-		return (this.view instanceof View v ? v : null);
+		return this.view instanceof View v ? v : null;
 	}
 
 	/**
@@ -220,7 +220,7 @@ public class ModelAndView {
 	 * as a view name or as a direct {@link View} instance.
 	 */
 	public boolean hasView() {
-		return (this.view != null);
+		return this.view != null;
 	}
 
 	/**
@@ -229,7 +229,7 @@ public class ModelAndView {
 	 * DispatcherServlet via a ViewResolver.
 	 */
 	public boolean isReference() {
-		return (this.view instanceof String);
+		return this.view instanceof String;
 	}
 
 	/**
@@ -332,7 +332,7 @@ public class ModelAndView {
 	 * i.e. whether it does not hold any view and does not contain a model.
 	 */
 	public boolean isEmpty() {
-		return (this.view == null && CollectionUtils.isEmpty(this.model));
+		return this.view == null && CollectionUtils.isEmpty(this.model);
 	}
 
 	/**
@@ -343,7 +343,7 @@ public class ModelAndView {
 	 * @see #clear()
 	 */
 	public boolean wasCleared() {
-		return (this.cleared && isEmpty());
+		return this.cleared && isEmpty();
 	}
 
 

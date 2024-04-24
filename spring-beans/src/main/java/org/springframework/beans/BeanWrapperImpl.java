@@ -193,7 +193,7 @@ public class BeanWrapperImpl extends AbstractNestablePropertyAccessor implements
 	@Nullable
 	protected BeanPropertyHandler getLocalPropertyHandler(String propertyName) {
 		PropertyDescriptor pd = getCachedIntrospectionResults().getPropertyDescriptor(propertyName);
-		return (pd != null ? new BeanPropertyHandler((GenericTypeAwarePropertyDescriptor) pd) : null);
+		return pd != null ? new BeanPropertyHandler((GenericTypeAwarePropertyDescriptor) pd) : null;
 	}
 
 	@Override

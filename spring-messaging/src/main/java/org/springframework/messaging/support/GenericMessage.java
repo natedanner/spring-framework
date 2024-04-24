@@ -91,8 +91,8 @@ public class GenericMessage<T> implements Message<T>, Serializable {
 	@Override
 	public boolean equals(@Nullable Object other) {
 		// Using nullSafeEquals for proper array equals comparisons
-		return (this == other || (other instanceof GenericMessage<?> that &&
-				ObjectUtils.nullSafeEquals(this.payload, that.payload) && this.headers.equals(that.headers)));
+		return this == other || (other instanceof GenericMessage<?> that &&
+				ObjectUtils.nullSafeEquals(this.payload, that.payload) && this.headers.equals(that.headers));
 	}
 
 	@Override

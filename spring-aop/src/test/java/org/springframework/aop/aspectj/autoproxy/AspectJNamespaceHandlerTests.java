@@ -41,9 +41,9 @@ class AspectJNamespaceHandlerTests {
 
 	private ParserContext parserContext;
 
-	private CollectingReaderEventListener readerEventListener = new CollectingReaderEventListener();
+	private final CollectingReaderEventListener readerEventListener = new CollectingReaderEventListener();
 
-	private BeanDefinitionRegistry registry = new DefaultListableBeanFactory();
+	private final BeanDefinitionRegistry registry = new DefaultListableBeanFactory();
 
 
 	@BeforeEach

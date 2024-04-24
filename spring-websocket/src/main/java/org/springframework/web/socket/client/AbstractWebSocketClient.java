@@ -88,9 +88,9 @@ public abstract class AbstractWebSocketClient implements WebSocketClient {
 		}
 
 		List<String> subProtocols =
-				(headers != null ? headers.getSecWebSocketProtocol() : Collections.emptyList());
+				headers != null ? headers.getSecWebSocketProtocol() : Collections.emptyList();
 		List<WebSocketExtension> extensions =
-				(headers != null ? headers.getSecWebSocketExtensions() : Collections.emptyList());
+				headers != null ? headers.getSecWebSocketExtensions() : Collections.emptyList();
 
 		return executeInternal(webSocketHandler, headersToUse, uri, subProtocols, extensions,
 				Collections.emptyMap());

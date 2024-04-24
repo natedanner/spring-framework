@@ -49,14 +49,14 @@ import org.springframework.cglib.core.ReflectUtils;
  * @author Chris Nokleberg
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class ParallelSorter extends SorterTemplate {
+public abstract class ParallelSorter extends SorterTemplate {
     protected Object[] a;
     private Comparer comparer;
 
     protected ParallelSorter() {
     }
 
-    abstract public ParallelSorter newInstance(Object[] arrays);
+    public abstract ParallelSorter newInstance(Object[] arrays);
 
     /**
      * Create a new ParallelSorter object for a set of arrays. You may

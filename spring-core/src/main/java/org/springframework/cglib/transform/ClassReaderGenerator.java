@@ -31,7 +31,7 @@ public class ClassReaderGenerator implements ClassGenerator {
 
     public ClassReaderGenerator(ClassReader r, Attribute[] attrs, int flags) {
         this.r = r;
-        this.attrs = (attrs != null) ? attrs : new Attribute[0];
+        this.attrs = attrs != null ? attrs : new Attribute[0];
         this.flags = flags;
     }
 

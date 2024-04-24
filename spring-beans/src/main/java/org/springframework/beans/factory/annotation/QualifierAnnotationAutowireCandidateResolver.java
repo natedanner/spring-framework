@@ -302,13 +302,13 @@ public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwa
 	@Nullable
 	protected Annotation getQualifiedElementAnnotation(RootBeanDefinition bd, Class<? extends Annotation> type) {
 		AnnotatedElement qualifiedElement = bd.getQualifiedElement();
-		return (qualifiedElement != null ? AnnotationUtils.getAnnotation(qualifiedElement, type) : null);
+		return qualifiedElement != null ? AnnotationUtils.getAnnotation(qualifiedElement, type) : null;
 	}
 
 	@Nullable
 	protected Annotation getFactoryMethodAnnotation(RootBeanDefinition bd, Class<? extends Annotation> type) {
 		Method resolvedFactoryMethod = bd.getResolvedFactoryMethod();
-		return (resolvedFactoryMethod != null ? AnnotationUtils.getAnnotation(resolvedFactoryMethod, type) : null);
+		return resolvedFactoryMethod != null ? AnnotationUtils.getAnnotation(resolvedFactoryMethod, type) : null;
 	}
 
 
@@ -323,7 +323,7 @@ public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwa
 			return false;
 		}
 		Autowired autowired = descriptor.getAnnotation(Autowired.class);
-		return (autowired == null || autowired.required());
+		return autowired == null || autowired.required();
 	}
 
 	/**

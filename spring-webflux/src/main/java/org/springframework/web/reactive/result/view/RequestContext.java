@@ -91,10 +91,10 @@ public class RequestContext {
 
 		LocaleContext localeContext = exchange.getLocaleContext();
 		Locale locale = localeContext.getLocale();
-		this.locale = (locale != null ? locale : Locale.getDefault());
-		TimeZone timeZone = (localeContext instanceof TimeZoneAwareLocaleContext tzaLocaleContext ?
-				tzaLocaleContext.getTimeZone() : null);
-		this.timeZone = (timeZone != null ? timeZone : TimeZone.getDefault());
+		this.locale = locale != null ? locale : Locale.getDefault();
+		TimeZone timeZone = localeContext instanceof TimeZoneAwareLocaleContext tzaLocaleContext ?
+				tzaLocaleContext.getTimeZone() : null;
+		this.timeZone = timeZone != null ? timeZone : TimeZone.getDefault();
 
 		this.defaultHtmlEscape = null;  // TODO
 		this.dataValueProcessor = dataValueProcessor;
@@ -164,7 +164,7 @@ public class RequestContext {
 	 * no explicit default given.
 	 */
 	public boolean isDefaultHtmlEscape() {
-		return (this.defaultHtmlEscape != null && this.defaultHtmlEscape);
+		return this.defaultHtmlEscape != null && this.defaultHtmlEscape;
 	}
 
 	/**
@@ -284,7 +284,7 @@ public class RequestContext {
 		if (msg == null) {
 			return "";
 		}
-		return (htmlEscape ? HtmlUtils.htmlEscape(msg) : msg);
+		return htmlEscape ? HtmlUtils.htmlEscape(msg) : msg;
 	}
 
 	/**
@@ -329,7 +329,7 @@ public class RequestContext {
 	 */
 	public String getMessage(String code, @Nullable Object[] args, boolean htmlEscape) throws NoSuchMessageException {
 		String msg = this.messageSource.getMessage(code, args, this.locale);
-		return (htmlEscape ? HtmlUtils.htmlEscape(msg) : msg);
+		return htmlEscape ? HtmlUtils.htmlEscape(msg) : msg;
 	}
 
 	/**
@@ -351,7 +351,7 @@ public class RequestContext {
 	 */
 	public String getMessage(MessageSourceResolvable resolvable, boolean htmlEscape) throws NoSuchMessageException {
 		String msg = this.messageSource.getMessage(resolvable, this.locale);
-		return (htmlEscape ? HtmlUtils.htmlEscape(msg) : msg);
+		return htmlEscape ? HtmlUtils.htmlEscape(msg) : msg;
 	}
 
 	/**

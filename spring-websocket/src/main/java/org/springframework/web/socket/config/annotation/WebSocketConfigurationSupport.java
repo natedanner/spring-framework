@@ -84,9 +84,9 @@ public class WebSocketConfigurationSupport {
 	 */
 	@Bean
 	DefaultSockJsSchedulerContainer defaultSockJsSchedulerContainer() {
-		return (initHandlerRegistry().requiresTaskScheduler() ?
+		return initHandlerRegistry().requiresTaskScheduler() ?
 				new DefaultSockJsSchedulerContainer(initDefaultSockJsScheduler()) :
-				new DefaultSockJsSchedulerContainer(null));
+				new DefaultSockJsSchedulerContainer(null);
 	}
 
 	private ThreadPoolTaskScheduler initDefaultSockJsScheduler() {

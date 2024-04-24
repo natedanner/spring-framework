@@ -79,11 +79,11 @@ public class ScheduledExecutorFactoryBean extends ExecutorConfigurationSupport
 	@Nullable
 	private ScheduledExecutorTask[] scheduledExecutorTasks;
 
-	private boolean removeOnCancelPolicy = false;
+	private boolean removeOnCancelPolicy;
 
-	private boolean continueScheduledExecutionAfterException = false;
+	private boolean continueScheduledExecutionAfterException;
 
-	private boolean exposeUnconfigurableExecutor = false;
+	private boolean exposeUnconfigurableExecutor;
 
 	@Nullable
 	private ScheduledExecutorService exposedExecutor;
@@ -167,8 +167,8 @@ public class ScheduledExecutorFactoryBean extends ExecutorConfigurationSupport
 		}
 
 		// Wrap executor with an unconfigurable decorator.
-		this.exposedExecutor = (this.exposeUnconfigurableExecutor ?
-				Executors.unconfigurableScheduledExecutorService(executor) : executor);
+		this.exposedExecutor = this.exposeUnconfigurableExecutor ?
+				Executors.unconfigurableScheduledExecutorService(executor) : executor;
 
 		return executor;
 	}
@@ -234,9 +234,9 @@ public class ScheduledExecutorFactoryBean extends ExecutorConfigurationSupport
 	 * @return the actual Runnable to schedule (may be a decorator)
 	 */
 	protected Runnable getRunnableToSchedule(ScheduledExecutorTask task) {
-		return (this.continueScheduledExecutionAfterException ?
+		return this.continueScheduledExecutionAfterException ?
 				new DelegatingErrorHandlingRunnable(task.getRunnable(), TaskUtils.LOG_AND_SUPPRESS_ERROR_HANDLER) :
-				new DelegatingErrorHandlingRunnable(task.getRunnable(), TaskUtils.LOG_AND_PROPAGATE_ERROR_HANDLER));
+				new DelegatingErrorHandlingRunnable(task.getRunnable(), TaskUtils.LOG_AND_PROPAGATE_ERROR_HANDLER);
 	}
 
 
@@ -248,7 +248,7 @@ public class ScheduledExecutorFactoryBean extends ExecutorConfigurationSupport
 
 	@Override
 	public Class<? extends ScheduledExecutorService> getObjectType() {
-		return (this.exposedExecutor != null ? this.exposedExecutor.getClass() : ScheduledExecutorService.class);
+		return this.exposedExecutor != null ? this.exposedExecutor.getClass() : ScheduledExecutorService.class;
 	}
 
 	@Override

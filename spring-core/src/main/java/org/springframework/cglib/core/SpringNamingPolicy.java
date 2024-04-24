@@ -60,7 +60,7 @@ public final class SpringNamingPolicy implements NamingPolicy {
 
 		// When the generated class name is for a FastClass, the source is
 		// "org.springframework.cglib.reflect.FastClass".
-		boolean isFastClass = (source != null && source.endsWith(".FastClass"));
+		boolean isFastClass = source != null && source.endsWith(".FastClass");
 		if (isFastClass && !prefix.contains(FAST_CLASS_SUFFIX)) {
 			base += FAST_CLASS_SUFFIX;
 		}

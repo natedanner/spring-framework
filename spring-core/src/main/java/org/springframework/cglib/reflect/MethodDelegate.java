@@ -116,7 +116,7 @@ import org.springframework.cglib.core.TypeUtils;
  * @version $Id: MethodDelegate.java,v 1.25 2006/03/05 02:43:19 herbyderby Exp $
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class MethodDelegate {
+public abstract class MethodDelegate {
     private static final MethodDelegateKey KEY_FACTORY =
       (MethodDelegateKey)KeyFactory.create(MethodDelegateKey.class, KeyFactory.CLASS_BY_NAME);
 
@@ -158,7 +158,7 @@ abstract public class MethodDelegate {
         return target;
     }
 
-    abstract public MethodDelegate newInstance(Object target);
+    public abstract MethodDelegate newInstance(Object target);
 
     public static class Generator extends AbstractClassGenerator {
         private static final Source SOURCE = new Source(MethodDelegate.class.getName());

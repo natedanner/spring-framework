@@ -72,7 +72,7 @@ public class SpringTemplateLoader implements TemplateLoader {
 			logger.debug("Looking for FreeMarker template with name [" + name + "]");
 		}
 		Resource resource = this.resourceLoader.getResource(this.templateLoaderPath + name);
-		return (resource.exists() ? resource : null);
+		return resource.exists() ? resource : null;
 	}
 
 	@Override

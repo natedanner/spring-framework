@@ -146,11 +146,11 @@ public abstract class AbstractClientSockJsSession implements WebSocketSession {
 
 	@Override
 	public boolean isOpen() {
-		return (this.state == State.OPEN);
+		return this.state == State.OPEN;
 	}
 
 	public boolean isDisconnected() {
-		return (this.state == State.CLOSING || this.state == State.CLOSED);
+		return this.state == State.CLOSING || this.state == State.CLOSED;
 	}
 
 	@Override
@@ -192,8 +192,8 @@ public abstract class AbstractClientSockJsSession implements WebSocketSession {
 	}
 
 	private boolean isUserSetStatus(@Nullable CloseStatus status) {
-		return (status != null && (status.getCode() == 1000 ||
-				(status.getCode() >= 3000 && status.getCode() <= 4999)));
+		return status != null && (status.getCode() == 1000 ||
+				(status.getCode() >= 3000 && status.getCode() <= 4999));
 	}
 
 	private void silentClose(CloseStatus status) {

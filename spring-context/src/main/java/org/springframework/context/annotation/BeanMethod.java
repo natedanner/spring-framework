@@ -62,7 +62,7 @@ final class BeanMethod extends ConfigurationMethod {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof BeanMethod that && this.metadata.equals(that.metadata)));
+		return this == other || (other instanceof BeanMethod that && this.metadata.equals(that.metadata));
 	}
 
 	@Override

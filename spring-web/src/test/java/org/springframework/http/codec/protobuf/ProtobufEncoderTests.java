@@ -45,10 +45,10 @@ class ProtobufEncoderTests extends AbstractEncoderTests<ProtobufEncoder> {
 
 	private static final MimeType PROTOBUF_MIME_TYPE = new MimeType("application", "x-protobuf");
 
-	private Msg msg1 =
+	private final Msg msg1 =
 			Msg.newBuilder().setFoo("Foo").setBlah(SecondMsg.newBuilder().setBlah(123).build()).build();
 
-	private Msg msg2 =
+	private final Msg msg2 =
 			Msg.newBuilder().setFoo("Bar").setBlah(SecondMsg.newBuilder().setBlah(456).build()).build();
 
 

@@ -68,9 +68,9 @@ public abstract class PatternMatchUtils {
 			return false;
 		}
 
-		return (str.length() >= firstIndex &&
+		return str.length() >= firstIndex &&
 				pattern.startsWith(str.substring(0, firstIndex)) &&
-				simpleMatch(pattern.substring(firstIndex), str.substring(firstIndex)));
+				simpleMatch(pattern.substring(firstIndex), str.substring(firstIndex));
 	}
 
 	/**

@@ -149,7 +149,7 @@ public class StompHeaders implements MultiValueMap<String, String>, Serializable
 	@Nullable
 	public MimeType getContentType() {
 		String value = getFirst(CONTENT_TYPE);
-		return (StringUtils.hasLength(value) ? MimeTypeUtils.parseMimeType(value) : null);
+		return StringUtils.hasLength(value) ? MimeTypeUtils.parseMimeType(value) : null;
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class StompHeaders implements MultiValueMap<String, String>, Serializable
 	 */
 	public long getContentLength() {
 		String value = getFirst(CONTENT_LENGTH);
-		return (value != null ? Long.parseLong(value) : -1);
+		return value != null ? Long.parseLong(value) : -1;
 	}
 
 	/**
@@ -211,7 +211,7 @@ public class StompHeaders implements MultiValueMap<String, String>, Serializable
 			return;
 		}
 		Arrays.stream(acceptVersions).forEach(version ->
-				Assert.isTrue(version != null && (version.equals("1.1") || version.equals("1.2")),
+				Assert.isTrue(version != null && ("1.1".equals(version) || "1.2".equals(version)),
 						() -> "Invalid version: " + version));
 		set(ACCEPT_VERSION, StringUtils.arrayToCommaDelimitedString(acceptVersions));
 	}
@@ -280,7 +280,7 @@ public class StompHeaders implements MultiValueMap<String, String>, Serializable
 	@Nullable
 	public long[] getHeartbeat() {
 		String rawValue = getFirst(HEARTBEAT);
-		int pos = (rawValue != null ? rawValue.indexOf(',') : -1);
+		int pos = rawValue != null ? rawValue.indexOf(',') : -1;
 		if (pos == -1) {
 			return null;
 		}
@@ -294,7 +294,7 @@ public class StompHeaders implements MultiValueMap<String, String>, Serializable
 	 */
 	public boolean isHeartbeatEnabled() {
 		long[] heartbeat = getHeartbeat();
-		return (heartbeat != null && heartbeat[0] != 0 && heartbeat[1] != 0);
+		return heartbeat != null && heartbeat[0] != 0 && heartbeat[1] != 0;
 	}
 
 	/**
@@ -556,7 +556,7 @@ public class StompHeaders implements MultiValueMap<String, String>, Serializable
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof StompHeaders that && this.headers.equals(that.headers)));
+		return this == other || (other instanceof StompHeaders that && this.headers.equals(that.headers));
 	}
 
 	@Override

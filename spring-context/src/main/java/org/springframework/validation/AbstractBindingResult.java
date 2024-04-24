@@ -219,7 +219,7 @@ public abstract class AbstractBindingResult extends AbstractErrors implements Bi
 		if (fieldError != null) {
 			Object value = fieldError.getRejectedValue();
 			// Do not apply formatting on binding failures like type mismatches.
-			return (fieldError.isBindingFailure() || getTarget() == null ? value : formatFieldValue(field, value));
+			return fieldError.isBindingFailure() || getTarget() == null ? value : formatFieldValue(field, value);
 		}
 		else if (getTarget() != null) {
 			Object value = getActualFieldValue(fixedField(field));
@@ -278,7 +278,7 @@ public abstract class AbstractBindingResult extends AbstractErrors implements Bi
 	@Override
 	@Nullable
 	public Object getRawFieldValue(String field) {
-		return (getTarget() != null ? getActualFieldValue(fixedField(field)) : null);
+		return getTarget() != null ? getActualFieldValue(fixedField(field)) : null;
 	}
 
 	/**
@@ -358,10 +358,10 @@ public abstract class AbstractBindingResult extends AbstractErrors implements Bi
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof BindingResult that &&
+		return this == other || (other instanceof BindingResult that &&
 				getObjectName().equals(that.getObjectName()) &&
 				ObjectUtils.nullSafeEquals(getTarget(), that.getTarget()) &&
-				getAllErrors().equals(that.getAllErrors())));
+				getAllErrors().equals(that.getAllErrors()));
 	}
 
 	@Override

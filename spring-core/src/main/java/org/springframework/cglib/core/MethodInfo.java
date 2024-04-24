@@ -18,15 +18,15 @@ package org.springframework.cglib.core;
 
 import org.springframework.asm.Type;
 
-abstract public class MethodInfo {
+public abstract class MethodInfo {
 
 	protected MethodInfo() {
 	}
 
-	abstract public ClassInfo getClassInfo();
-	abstract public int getModifiers();
-	abstract public Signature getSignature();
-	abstract public Type[] getExceptionTypes();
+	public abstract ClassInfo getClassInfo();
+	public abstract int getModifiers();
+	public abstract Signature getSignature();
+	public abstract Type[] getExceptionTypes();
 
 	@Override
 	public boolean equals(Object o) {

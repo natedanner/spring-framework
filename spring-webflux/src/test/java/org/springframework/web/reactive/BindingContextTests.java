@@ -71,7 +71,7 @@ class BindingContextTests {
 	}
 
 
-	private static class WrappedBeanValidator implements SmartValidator {
+	private static final class WrappedBeanValidator implements SmartValidator {
 
 		private final jakarta.validation.Validator validator;
 

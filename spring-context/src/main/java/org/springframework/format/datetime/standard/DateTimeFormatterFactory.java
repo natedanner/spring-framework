@@ -203,7 +203,7 @@ public class DateTimeFormatterFactory {
 		if (dateTimeFormatter != null && this.timeZone != null) {
 			dateTimeFormatter = dateTimeFormatter.withZone(this.timeZone.toZoneId());
 		}
-		return (dateTimeFormatter != null ? dateTimeFormatter : fallbackFormatter);
+		return dateTimeFormatter != null ? dateTimeFormatter : fallbackFormatter;
 	}
 
 }

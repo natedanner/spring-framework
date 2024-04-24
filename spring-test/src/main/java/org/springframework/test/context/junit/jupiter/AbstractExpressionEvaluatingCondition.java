@@ -111,25 +111,25 @@ abstract class AbstractExpressionEvaluatingCondition implements ExecutionConditi
 		ConditionEvaluationResult result;
 
 		if (evaluatedToTrue) {
-			String adjective = (enabledOnTrue ? "enabled" : "disabled");
+			String adjective = enabledOnTrue ? "enabled" : "disabled";
 			String reason = annotation.map(reasonExtractor).filter(StringUtils::hasText).orElseGet(
 					() -> String.format("%s is %s because @%s(\"%s\") evaluated to true", element, adjective,
 						annotationType.getSimpleName(), expression));
 			if (logger.isInfoEnabled()) {
 				logger.info(reason);
 			}
-			result = (enabledOnTrue ? ConditionEvaluationResult.enabled(reason)
-					: ConditionEvaluationResult.disabled(reason));
+			result = enabledOnTrue ? ConditionEvaluationResult.enabled(reason)
+					: ConditionEvaluationResult.disabled(reason);
 		}
 		else {
-			String adjective = (enabledOnTrue ? "disabled" : "enabled");
+			String adjective = enabledOnTrue ? "disabled" : "enabled";
 			String reason = String.format("%s is %s because @%s(\"%s\") did not evaluate to true",
 					element, adjective, annotationType.getSimpleName(), expression);
 			if (logger.isDebugEnabled()) {
 				logger.debug(reason);
 			}
-			result = (enabledOnTrue ? ConditionEvaluationResult.disabled(reason) :
-					ConditionEvaluationResult.enabled(reason));
+			result = enabledOnTrue ? ConditionEvaluationResult.disabled(reason) :
+					ConditionEvaluationResult.enabled(reason);
 		}
 
 		// If we eagerly loaded the ApplicationContext to evaluate SpEL expressions

@@ -111,12 +111,12 @@ public abstract class PlaceholderConfigurerSupport extends PropertyResourceConfi
 	@Nullable
 	protected String valueSeparator = DEFAULT_VALUE_SEPARATOR;
 
-	protected boolean trimValues = false;
+	protected boolean trimValues;
 
 	@Nullable
 	protected String nullValue;
 
-	protected boolean ignoreUnresolvablePlaceholders = false;
+	protected boolean ignoreUnresolvablePlaceholders;
 
 	@Nullable
 	private String beanName;

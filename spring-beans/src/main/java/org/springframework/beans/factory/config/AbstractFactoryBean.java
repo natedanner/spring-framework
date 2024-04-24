@@ -74,7 +74,7 @@ public abstract class AbstractFactoryBean<T>
 	@Nullable
 	private BeanFactory beanFactory;
 
-	private boolean initialized = false;
+	private boolean initialized;
 
 	@Nullable
 	private T singletonInstance;
@@ -153,7 +153,7 @@ public abstract class AbstractFactoryBean<T>
 	@Override
 	public final T getObject() throws Exception {
 		if (isSingleton()) {
-			return (this.initialized ? this.singletonInstance : getEarlySingletonInstance());
+			return this.initialized ? this.singletonInstance : getEarlySingletonInstance();
 		}
 		else {
 			return createInstance();
@@ -236,7 +236,7 @@ public abstract class AbstractFactoryBean<T>
 	@Nullable
 	protected Class<?>[] getEarlySingletonInterfaces() {
 		Class<?> type = getObjectType();
-		return (type != null && type.isInterface() ? new Class<?>[] {type} : null);
+		return type != null && type.isInterface() ? new Class<?>[] {type} : null;
 	}
 
 	/**
@@ -261,7 +261,7 @@ public abstract class AbstractFactoryBean<T>
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 			if (ReflectionUtils.isEqualsMethod(method)) {
 				// Only consider equal when proxies are identical.
-				return (proxy == args[0]);
+				return proxy == args[0];
 			}
 			else if (ReflectionUtils.isHashCodeMethod(method)) {
 				// Use hashCode of reference proxy.

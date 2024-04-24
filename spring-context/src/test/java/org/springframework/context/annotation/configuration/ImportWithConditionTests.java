@@ -35,7 +35,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class ImportWithConditionTests {
 
-	private AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+	private final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 
 	@Test
 	void conditionalThenUnconditional() {

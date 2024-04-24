@@ -57,7 +57,7 @@ public class MBeanServerFactoryBean implements FactoryBean<MBeanServer>, Initial
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	private boolean locateExistingServerIfPossible = false;
+	private boolean locateExistingServerIfPossible;
 
 	@Nullable
 	private String agentId;
@@ -70,7 +70,7 @@ public class MBeanServerFactoryBean implements FactoryBean<MBeanServer>, Initial
 	@Nullable
 	private MBeanServer server;
 
-	private boolean newlyRegistered = false;
+	private boolean newlyRegistered;
 
 
 	/**
@@ -194,7 +194,7 @@ public class MBeanServerFactoryBean implements FactoryBean<MBeanServer>, Initial
 
 	@Override
 	public Class<? extends MBeanServer> getObjectType() {
-		return (this.server != null ? this.server.getClass() : MBeanServer.class);
+		return this.server != null ? this.server.getClass() : MBeanServer.class;
 	}
 
 	@Override

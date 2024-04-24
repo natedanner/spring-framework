@@ -84,7 +84,7 @@ public @interface ConfigClassesAndProfileResolverWithCustomDefaultsMetaConfig {
 
 		@Override
 		public String[] resolve(Class<?> testClass) {
-			return testClass.getSimpleName().equals("ConfigClassesAndProfileResolverWithCustomDefaultsMetaConfigTests") ? new String[] { "resolver" }
+			return "ConfigClassesAndProfileResolverWithCustomDefaultsMetaConfigTests".equals(testClass.getSimpleName()) ? new String[] { "resolver" }
 					: new String[] {};
 		}
 	}

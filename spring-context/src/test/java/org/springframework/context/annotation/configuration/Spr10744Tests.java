@@ -35,9 +35,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class Spr10744Tests {
 
-	private static int createCount = 0;
+	private static int createCount;
 
-	private static int scopeCount = 0;
+	private static int scopeCount;
 
 
 	@Test

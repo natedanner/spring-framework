@@ -129,7 +129,7 @@ class SQLErrorCodeSQLExceptionTranslatorTests {
 	@Test
 	@SuppressWarnings("serial")
 	void customTranslateMethodTranslation() {
-		final String TASK = "TASK";
+		final String task = "TASK";
 		final String SQL = "SQL SELECT *";
 		final DataAccessException customDex = new DataAccessException("") {};
 
@@ -141,18 +141,18 @@ class SQLErrorCodeSQLExceptionTranslatorTests {
 			@Override
 			@Nullable
 			protected DataAccessException customTranslate(String task, @Nullable String sql, SQLException sqlException) {
-				assertThat(task).isEqualTo(TASK);
+				assertThat(task).isEqualTo(task);
 				assertThat(sql).isEqualTo(SQL);
-				return (sqlException == badSqlEx) ? customDex : null;
+				return sqlException == badSqlEx ? customDex : null;
 			}
 		};
 		translator.setSqlErrorCodes(ERROR_CODES);
 
 		// Should custom translate this
-		assertThat(translator.translate(TASK, SQL, badSqlEx)).isEqualTo(customDex);
+		assertThat(translator.translate(task, SQL, badSqlEx)).isEqualTo(customDex);
 
 		// Shouldn't custom translate this
-		DataAccessException dataAccessException = translator.translate(TASK, SQL, integrityViolationEx);
+		DataAccessException dataAccessException = translator.translate(task, SQL, integrityViolationEx);
 		assertThat(dataAccessException)
 				.isInstanceOf(DataIntegrityViolationException.class)
 				.hasCause(integrityViolationEx);
@@ -160,7 +160,7 @@ class SQLErrorCodeSQLExceptionTranslatorTests {
 
 	@Test
 	void customExceptionTranslation() {
-		final String TASK = "TASK";
+		final String task = "TASK";
 		final String SQL = "SQL SELECT *";
 		final SQLErrorCodes customErrorCodes = new SQLErrorCodes();
 		final CustomSQLErrorCodesTranslation customTranslation = new CustomSQLErrorCodesTranslation();
@@ -175,14 +175,14 @@ class SQLErrorCodeSQLExceptionTranslatorTests {
 
 		// Should custom translate this
 		SQLException badSqlEx = new SQLException("", "", 1);
-		DataAccessException dataAccessException = translator.translate(TASK, SQL, badSqlEx);
+		DataAccessException dataAccessException = translator.translate(task, SQL, badSqlEx);
 		assertThat(dataAccessException)
 				.isInstanceOf(CustomErrorCodeException.class)
 				.hasCause(badSqlEx);
 
 		// Shouldn't custom translate this
 		SQLException invResEx = new SQLException("", "", 3);
-		dataAccessException = translator.translate(TASK, SQL, invResEx);
+		dataAccessException = translator.translate(task, SQL, invResEx);
 		assertThat(dataAccessException)
 				.isInstanceOf(DataIntegrityViolationException.class)
 				.hasCause(invResEx);

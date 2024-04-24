@@ -94,17 +94,17 @@ public class LookupOverride extends MethodOverride {
 			return method.equals(this.method);
 		}
 		else {
-			return (method.getName().equals(getMethodName()) && (!isOverloaded() ||
-					Modifier.isAbstract(method.getModifiers()) || method.getParameterCount() == 0));
+			return method.getName().equals(getMethodName()) && (!isOverloaded() ||
+					Modifier.isAbstract(method.getModifiers()) || method.getParameterCount() == 0);
 		}
 	}
 
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (other instanceof LookupOverride that && super.equals(other) &&
+		return other instanceof LookupOverride that && super.equals(other) &&
 				ObjectUtils.nullSafeEquals(this.method, that.method) &&
-				ObjectUtils.nullSafeEquals(this.beanName, that.beanName));
+				ObjectUtils.nullSafeEquals(this.beanName, that.beanName);
 	}
 
 	@Override

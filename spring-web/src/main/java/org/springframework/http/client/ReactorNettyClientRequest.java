@@ -84,7 +84,7 @@ final class ReactorNettyClientRequest extends AbstractStreamingClientHttpRequest
 		HttpClient.RequestSender requestSender = this.httpClient
 				.request(io.netty.handler.codec.http.HttpMethod.valueOf(this.method.name()));
 
-		requestSender = (this.uri.isAbsolute() ? requestSender.uri(this.uri) : requestSender.uri(this.uri.toString()));
+		requestSender = this.uri.isAbsolute() ? requestSender.uri(this.uri) : requestSender.uri(this.uri.toString());
 
 		try {
 			ReactorNettyClientResponse result = requestSender.send((reactorRequest, nettyOutbound) ->

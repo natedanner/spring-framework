@@ -91,8 +91,8 @@ class DynamicPropertiesContextCustomizer implements ContextCustomizer {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof DynamicPropertiesContextCustomizer that &&
-				this.methods.equals(that.methods)));
+		return this == other || (other instanceof DynamicPropertiesContextCustomizer that &&
+				this.methods.equals(that.methods));
 	}
 
 	@Override

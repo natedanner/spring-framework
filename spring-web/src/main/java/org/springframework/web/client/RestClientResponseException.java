@@ -93,8 +93,8 @@ public class RestClientResponseException extends RestClientException {
 		this.statusCode = statusCode;
 		this.statusText = statusText;
 		this.responseHeaders = copyHeaders(headers);
-		this.responseBody = (responseBody != null ? responseBody : new byte[0]);
-		this.responseCharset = (responseCharset != null ? responseCharset.name() : null);
+		this.responseBody = responseBody != null ? responseBody : new byte[0];
+		this.responseCharset = responseCharset != null ? responseCharset.name() : null;
 	}
 
 	/**

@@ -77,17 +77,17 @@ import static org.mockito.Mockito.verify;
  */
 class JdbcTemplateTests {
 
-	private DataSource dataSource = mock();
+	private final DataSource dataSource = mock();
 
-	private Connection connection = mock();
+	private final Connection connection = mock();
 
-	private Statement statement = mock();
+	private final Statement statement = mock();
 
-	private PreparedStatement preparedStatement = mock();
+	private final PreparedStatement preparedStatement = mock();
 
-	private CallableStatement callableStatement = mock();
+	private final CallableStatement callableStatement = mock();
 
-	private ResultSet resultSet = mock();
+	private final ResultSet resultSet = mock();
 
 	private JdbcTemplate template = new JdbcTemplate(this.dataSource);
 
@@ -191,7 +191,7 @@ class JdbcTemplateTests {
 		String[] results = {"rod", "gary", " portia"};
 
 		class StringHandler implements RowCallbackHandler {
-			private List<String> list = new ArrayList<>();
+			private final List<String> list = new ArrayList<>();
 			@Override
 			public void processRow(ResultSet rs) throws SQLException {
 				this.list.add(rs.getString(1));
@@ -558,7 +558,7 @@ class JdbcTemplateTests {
 					}
 					@Override
 					public boolean isBatchExhausted(int i) {
-						return (i >= ids.length);
+						return i >= ids.length;
 					}
 				};
 

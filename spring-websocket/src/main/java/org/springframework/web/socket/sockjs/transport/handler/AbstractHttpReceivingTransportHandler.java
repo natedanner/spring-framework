@@ -42,7 +42,7 @@ public abstract class AbstractHttpReceivingTransportHandler extends AbstractTran
 
 	@Override
 	public boolean checkSessionType(SockJsSession session) {
-		return (session instanceof AbstractHttpSockJsSession);
+		return session instanceof AbstractHttpSockJsSession;
 	}
 
 	@Override

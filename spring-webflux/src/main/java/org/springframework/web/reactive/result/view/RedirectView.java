@@ -61,7 +61,7 @@ public class RedirectView extends AbstractUrlBasedView {
 
 	private boolean contextRelative = true;
 
-	private boolean propagateQuery = false;
+	private boolean propagateQuery;
 
 	@Nullable
 	private String[] hosts;
@@ -211,7 +211,7 @@ public class RedirectView extends AbstractUrlBasedView {
 		String result = targetUrl.toString();
 
 		RequestDataValueProcessor processor = getRequestDataValueProcessor();
-		return (processor != null ? processor.processUrl(exchange, result) : result);
+		return processor != null ? processor.processUrl(exchange, result) : result;
 	}
 
 	private Map<String, String> getCurrentUriVariables(ServerWebExchange exchange) {
@@ -236,7 +236,7 @@ public class RedirectView extends AbstractUrlBasedView {
 		int endLastMatch = 0;
 		while (found) {
 			String name = matcher.group(1);
-			Object value = (model.containsKey(name) ? model.get(name) : uriVariables.get(name));
+			Object value = model.containsKey(name) ? model.get(name) : uriVariables.get(name);
 			Assert.notNull(value, () -> "No value for URI variable '" + name + "'");
 			result.append(targetUrl, endLastMatch, matcher.start());
 			result.append(encodeUriVariable(value.toString()));
@@ -262,7 +262,7 @@ public class RedirectView extends AbstractUrlBasedView {
 		}
 
 		int index = targetUrl.indexOf('#');
-		String fragment = (index > -1 ? targetUrl.substring(index) : null);
+		String fragment = index > -1 ? targetUrl.substring(index) : null;
 
 		StringBuilder result = new StringBuilder();
 		result.append(index != -1 ? targetUrl.substring(0, index) : targetUrl);
@@ -281,7 +281,7 @@ public class RedirectView extends AbstractUrlBasedView {
 	 * @param exchange current exchange
 	 */
 	protected Mono<Void> sendRedirect(String targetUrl, ServerWebExchange exchange) {
-		String transformedUrl = (isRemoteHost(targetUrl) ? targetUrl : exchange.transformUrl(targetUrl));
+		String transformedUrl = isRemoteHost(targetUrl) ? targetUrl : exchange.transformUrl(targetUrl);
 		ServerHttpResponse response = exchange.getResponse();
 		response.getHeaders().setLocation(URI.create(transformedUrl));
 		response.setStatusCode(getStatusCode());

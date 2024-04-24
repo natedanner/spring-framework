@@ -115,8 +115,8 @@ public abstract class AbstractPrototypeBasedTargetSource extends AbstractBeanFac
 		try {
 			// Create disconnected SingletonTargetSource/EmptyTargetSource.
 			Object target = getTarget();
-			return (target != null ? new SingletonTargetSource(target) :
-					EmptyTargetSource.forClass(getTargetClass()));
+			return target != null ? new SingletonTargetSource(target) :
+					EmptyTargetSource.forClass(getTargetClass());
 		}
 		catch (Exception ex) {
 			String msg = "Cannot get target for disconnecting TargetSource [" + this + "]";

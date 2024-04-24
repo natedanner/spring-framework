@@ -61,13 +61,13 @@ public class FactoryMethods {
 
 	@SuppressWarnings("unused")
 	private static List<?> listInstance() {
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 
-	private int num = 0;
+	private final int num;
 	private String name = "default";
-	private TestBean tb;
+	private final TestBean tb;
 	private String stringValue;
 
 

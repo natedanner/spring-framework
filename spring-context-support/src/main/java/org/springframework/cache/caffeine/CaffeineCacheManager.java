@@ -73,7 +73,7 @@ public class CaffeineCacheManager implements CacheManager {
 	@Nullable
 	private AsyncCacheLoader<Object, Object> cacheLoader;
 
-	private boolean asyncCacheMode = false;
+	private boolean asyncCacheMode;
 
 	private boolean allowNullValues = true;
 
@@ -343,8 +343,8 @@ public class CaffeineCacheManager implements CacheManager {
 	 * @see #createNativeCaffeineCache
 	 */
 	protected Cache createCaffeineCache(String name) {
-		return (this.asyncCacheMode ? adaptCaffeineCache(name, createAsyncCaffeineCache(name)) :
-				adaptCaffeineCache(name, createNativeCaffeineCache(name)));
+		return this.asyncCacheMode ? adaptCaffeineCache(name, createAsyncCaffeineCache(name)) :
+				adaptCaffeineCache(name, createNativeCaffeineCache(name));
 	}
 
 	/**
@@ -376,8 +376,8 @@ public class CaffeineCacheManager implements CacheManager {
 	 * @see #createCaffeineCache
 	 */
 	protected AsyncCache<Object, Object> createAsyncCaffeineCache(String name) {
-		return (this.cacheLoader != null ? this.cacheBuilder.buildAsync(this.cacheLoader) :
-				this.cacheBuilder.buildAsync());
+		return this.cacheLoader != null ? this.cacheBuilder.buildAsync(this.cacheLoader) :
+				this.cacheBuilder.buildAsync();
 	}
 
 	/**

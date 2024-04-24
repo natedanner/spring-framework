@@ -894,7 +894,7 @@ class BeanUtilsTests {
 
 	}
 
-	private static class PrivateBeanWithPrivateConstructor {
+	private static final class PrivateBeanWithPrivateConstructor {
 
 		private PrivateBeanWithPrivateConstructor() {
 		}

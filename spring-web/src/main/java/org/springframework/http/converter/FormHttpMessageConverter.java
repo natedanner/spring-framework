@@ -264,7 +264,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 	 */
 	public void setCharset(@Nullable Charset charset) {
 		if (charset != this.charset) {
-			this.charset = (charset != null ? charset : DEFAULT_CHARSET);
+			this.charset = charset != null ? charset : DEFAULT_CHARSET;
 			applyDefaultCharset();
 		}
 	}
@@ -307,7 +307,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 			return true;
 		}
 		for (MediaType supportedMediaType : getSupportedMediaTypes()) {
-			if (supportedMediaType.getType().equalsIgnoreCase("multipart")) {
+			if ("multipart".equalsIgnoreCase(supportedMediaType.getType())) {
 				// We can't read multipart, so skip this supported media type.
 				continue;
 			}
@@ -339,8 +339,8 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 			HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
 
 		MediaType contentType = inputMessage.getHeaders().getContentType();
-		Charset charset = (contentType != null && contentType.getCharset() != null ?
-				contentType.getCharset() : this.charset);
+		Charset charset = contentType != null && contentType.getCharset() != null ?
+				contentType.getCharset() : this.charset;
 		String body = StreamUtils.copyToString(inputMessage.getBody(), charset);
 
 		String[] pairs = StringUtils.tokenizeToStringArray(body, "&");
@@ -375,7 +375,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 
 	private boolean isMultipart(MultiValueMap<String, ?> map, @Nullable MediaType contentType) {
 		if (contentType != null) {
-			return contentType.getType().equalsIgnoreCase("multipart");
+			return "multipart".equalsIgnoreCase(contentType.getType());
 		}
 		for (List<?> values : map.values()) {
 			for (Object value : values) {
@@ -507,7 +507,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 	 * otherwise we encode directly using the configured {@link #setCharset(Charset)}.
 	 */
 	private boolean isFilenameCharsetSet() {
-		return (this.multipartCharset != null);
+		return this.multipartCharset != null;
 	}
 
 	private void writeParts(OutputStream os, MultiValueMap<String, Object> parts, byte[] boundary) throws IOException {
@@ -570,7 +570,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 	 * or a newly built {@link HttpEntity} wrapper for that part
 	 */
 	protected HttpEntity<?> getHttpEntity(Object part) {
-		return (part instanceof HttpEntity<?> httpEntity ? httpEntity : new HttpEntity<>(part));
+		return part instanceof HttpEntity<?> httpEntity ? httpEntity : new HttpEntity<>(part);
 	}
 
 	/**
@@ -626,7 +626,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 
 		private final HttpHeaders headers = new HttpHeaders();
 
-		private boolean headersWritten = false;
+		private boolean headersWritten;
 
 		public MultipartHttpOutputMessage(OutputStream outputStream, Charset charset) {
 			this.outputStream = new MultipartOutputStream(outputStream);
@@ -635,7 +635,7 @@ public class FormHttpMessageConverter implements HttpMessageConverter<MultiValue
 
 		@Override
 		public HttpHeaders getHeaders() {
-			return (this.headersWritten ? HttpHeaders.readOnlyHttpHeaders(this.headers) : this.headers);
+			return this.headersWritten ? HttpHeaders.readOnlyHttpHeaders(this.headers) : this.headers;
 		}
 
 		@Override

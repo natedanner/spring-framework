@@ -91,7 +91,7 @@ public class ProblemDetail {
 		this.status = other.status;
 		this.detail = other.detail;
 		this.instance = other.instance;
-		this.properties = (other.properties != null ? new LinkedHashMap<>(other.properties) : null);
+		this.properties = other.properties != null ? new LinkedHashMap<>(other.properties) : null;
 	}
 
 	/**
@@ -213,7 +213,7 @@ public class ProblemDetail {
 	 * @see org.springframework.http.converter.json.ProblemDetailJacksonMixin
 	 */
 	public void setProperty(String name, @Nullable Object value) {
-		this.properties = (this.properties != null ? this.properties : new LinkedHashMap<>());
+		this.properties = this.properties != null ? this.properties : new LinkedHashMap<>();
 		this.properties.put(name, value);
 	}
 
@@ -247,13 +247,13 @@ public class ProblemDetail {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ProblemDetail that &&
+		return this == other || (other instanceof ProblemDetail that &&
 				getType().equals(that.getType()) &&
 				ObjectUtils.nullSafeEquals(getTitle(), that.getTitle()) &&
 				this.status == that.status &&
 				ObjectUtils.nullSafeEquals(this.detail, that.detail) &&
 				ObjectUtils.nullSafeEquals(this.instance, that.instance) &&
-				ObjectUtils.nullSafeEquals(this.properties, that.properties)));
+				ObjectUtils.nullSafeEquals(this.properties, that.properties));
 	}
 
 	@Override

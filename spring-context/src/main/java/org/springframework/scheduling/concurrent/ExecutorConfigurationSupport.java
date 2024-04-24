@@ -62,15 +62,15 @@ public abstract class ExecutorConfigurationSupport extends CustomizableThreadFac
 
 	private ThreadFactory threadFactory = this;
 
-	private boolean threadNamePrefixSet = false;
+	private boolean threadNamePrefixSet;
 
 	private RejectedExecutionHandler rejectedExecutionHandler = new ThreadPoolExecutor.AbortPolicy();
 
-	private boolean acceptTasksAfterContextClose = false;
+	private boolean acceptTasksAfterContextClose;
 
-	private boolean waitForTasksToCompleteOnShutdown = false;
+	private boolean waitForTasksToCompleteOnShutdown;
 
-	private long awaitTerminationMillis = 0;
+	private long awaitTerminationMillis;
 
 	private int phase = DEFAULT_PHASE;
 
@@ -104,7 +104,7 @@ public abstract class ExecutorConfigurationSupport extends CustomizableThreadFac
 	 * @see DefaultManagedAwareThreadFactory
 	 */
 	public void setThreadFactory(@Nullable ThreadFactory threadFactory) {
-		this.threadFactory = (threadFactory != null ? threadFactory : this);
+		this.threadFactory = threadFactory != null ? threadFactory : this;
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public abstract class ExecutorConfigurationSupport extends CustomizableThreadFac
 	 */
 	public void setRejectedExecutionHandler(@Nullable RejectedExecutionHandler rejectedExecutionHandler) {
 		this.rejectedExecutionHandler =
-				(rejectedExecutionHandler != null ? rejectedExecutionHandler : new ThreadPoolExecutor.AbortPolicy());
+				rejectedExecutionHandler != null ? rejectedExecutionHandler : new ThreadPoolExecutor.AbortPolicy();
 	}
 
 	/**
@@ -409,7 +409,7 @@ public abstract class ExecutorConfigurationSupport extends CustomizableThreadFac
 	 */
 	@Override
 	public boolean isRunning() {
-		return (this.lifecycleDelegate != null && this.lifecycleDelegate.isRunning());
+		return this.lifecycleDelegate != null && this.lifecycleDelegate.isRunning();
 	}
 
 	/**

@@ -64,7 +64,7 @@ public abstract class ConcurrencyThrottleSupport implements Serializable {
 
 	private int concurrencyLimit = UNBOUNDED_CONCURRENCY;
 
-	private int concurrencyCount = 0;
+	private int concurrencyCount;
 
 
 	/**
@@ -93,7 +93,7 @@ public abstract class ConcurrencyThrottleSupport implements Serializable {
 	 * @see #getConcurrencyLimit()
 	 */
 	public boolean isThrottleActive() {
-		return (this.concurrencyLimit >= 0);
+		return this.concurrencyLimit >= 0;
 	}
 
 

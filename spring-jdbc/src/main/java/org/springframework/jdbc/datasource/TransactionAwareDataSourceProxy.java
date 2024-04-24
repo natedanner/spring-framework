@@ -78,7 +78,7 @@ public class TransactionAwareDataSourceProxy extends DelegatingDataSource {
 
 	private boolean lazyTransactionalConnections = true;
 
-	private boolean reobtainTransactionalConnections = false;
+	private boolean reobtainTransactionalConnections;
 
 
 	/**
@@ -167,8 +167,8 @@ public class TransactionAwareDataSourceProxy extends DelegatingDataSource {
 	 * @param targetDataSource the target DataSource
 	 */
 	protected boolean shouldObtainFixedConnection(DataSource targetDataSource) {
-		return (!TransactionSynchronizationManager.isSynchronizationActive() ||
-				!this.reobtainTransactionalConnections);
+		return !TransactionSynchronizationManager.isSynchronizationActive() ||
+				!this.reobtainTransactionalConnections;
 	}
 
 
@@ -183,7 +183,7 @@ public class TransactionAwareDataSourceProxy extends DelegatingDataSource {
 		@Nullable
 		private Connection target;
 
-		private boolean closed = false;
+		private boolean closed;
 
 		public TransactionAwareInvocationHandler(DataSource targetDataSource) {
 			this.targetDataSource = targetDataSource;
@@ -197,7 +197,7 @@ public class TransactionAwareDataSourceProxy extends DelegatingDataSource {
 			switch (method.getName()) {
 				case "equals" -> {
 					// Only considered as equal when proxies are identical.
-					return (proxy == args[0]);
+					return proxy == args[0];
 				}
 				case "hashCode" -> {
 					// Use hashCode of Connection proxy.
@@ -236,7 +236,7 @@ public class TransactionAwareDataSourceProxy extends DelegatingDataSource {
 			}
 
 			if (this.target == null) {
-				if (method.getName().equals("getWarnings") || method.getName().equals("clearWarnings")) {
+				if ("getWarnings".equals(method.getName()) || "clearWarnings".equals(method.getName())) {
 					// Avoid creation of target Connection on pre-close cleanup (e.g. Hibernate Session)
 					return null;
 				}
@@ -252,7 +252,7 @@ public class TransactionAwareDataSourceProxy extends DelegatingDataSource {
 				actualTarget = DataSourceUtils.doGetConnection(this.targetDataSource);
 			}
 
-			if (method.getName().equals("getTargetConnection")) {
+			if ("getTargetConnection".equals(method.getName())) {
 				// Handle getTargetConnection method: return underlying Connection.
 				return actualTarget;
 			}

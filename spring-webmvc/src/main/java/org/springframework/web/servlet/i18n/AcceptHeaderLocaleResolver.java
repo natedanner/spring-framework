@@ -97,7 +97,7 @@ public class AcceptHeaderLocaleResolver extends AbstractLocaleResolver {
 		if (supportedLocale != null) {
 			return supportedLocale;
 		}
-		return (defaultLocale != null ? defaultLocale : requestLocale);
+		return defaultLocale != null ? defaultLocale : requestLocale;
 	}
 
 	@Nullable

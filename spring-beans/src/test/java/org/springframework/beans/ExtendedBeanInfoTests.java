@@ -159,7 +159,7 @@ class ExtendedBeanInfoTests {
 		assertThat(hasWriteMethodForProperty(ebi, "foo")).isTrue();
 
 		for (PropertyDescriptor pd : ebi.getPropertyDescriptors()) {
-			if (pd.getName().equals("foo")) {
+			if ("foo".equals(pd.getName())) {
 				assertThat(pd.getWriteMethod()).isEqualTo(C.class.getMethod("setFoo", String.class));
 				return;
 			}
@@ -639,7 +639,7 @@ class ExtendedBeanInfoTests {
 		assertThat(hasWriteMethodForProperty(ebi, "foo")).isTrue();
 
 		for (PropertyDescriptor pd : ebi.getPropertyDescriptors()) {
-			if (pd.getName().equals("foo")) {
+			if ("foo".equals(pd.getName())) {
 				assertThat(pd.getWriteMethod()).isEqualTo(C.class.getMethod("setFoo", String.class));
 				return;
 			}
@@ -664,7 +664,7 @@ class ExtendedBeanInfoTests {
 		assertThat(hasWriteMethodForProperty(ebi, "foo")).isTrue();
 
 		for (PropertyDescriptor pd : ebi.getPropertyDescriptors()) {
-			if (pd.getName().equals("foo")) {
+			if ("foo".equals(pd.getName())) {
 				assertThat(pd.getWriteMethod()).isEqualTo(C.class.getMethod("setFoo", String.class));
 				return;
 			}
@@ -725,7 +725,7 @@ class ExtendedBeanInfoTests {
 
 		boolean found = false;
 		for (PropertyDescriptor pd : ebi.getPropertyDescriptors()) {
-			if (pd.getName().equals("foo")) {
+			if ("foo".equals(pd.getName())) {
 				found = true;
 				break;
 			}

@@ -84,8 +84,8 @@ final class GenericTypeAwarePropertyDescriptor extends PropertyDescriptor {
 		super(propertyName, null, null);
 		this.beanClass = beanClass;
 
-		Method readMethodToUse = (readMethod != null ? BridgeMethodResolver.findBridgedMethod(readMethod) : null);
-		Method writeMethodToUse = (writeMethod != null ? BridgeMethodResolver.findBridgedMethod(writeMethod) : null);
+		Method readMethodToUse = readMethod != null ? BridgeMethodResolver.findBridgedMethod(readMethod) : null;
+		Method writeMethodToUse = writeMethod != null ? BridgeMethodResolver.findBridgedMethod(writeMethod) : null;
 		if (writeMethodToUse == null && readMethodToUse != null) {
 			// Fallback: Original JavaBeans introspection might not have found matching setter
 			// method due to lack of bridge method resolution, in case of the getter using a
@@ -215,9 +215,9 @@ final class GenericTypeAwarePropertyDescriptor extends PropertyDescriptor {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof GenericTypeAwarePropertyDescriptor that &&
+		return this == other || (other instanceof GenericTypeAwarePropertyDescriptor that &&
 				getBeanClass().equals(that.getBeanClass()) &&
-				PropertyDescriptorUtils.equals(this, that)));
+				PropertyDescriptorUtils.equals(this, that));
 	}
 
 	@Override

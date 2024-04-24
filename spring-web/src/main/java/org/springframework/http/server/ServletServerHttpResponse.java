@@ -44,9 +44,9 @@ public class ServletServerHttpResponse implements ServerHttpResponse {
 
 	private final HttpHeaders headers;
 
-	private boolean headersWritten = false;
+	private boolean headersWritten;
 
-	private boolean bodyUsed = false;
+	private boolean bodyUsed;
 
 	@Nullable
 	private HttpHeaders readOnlyHeaders;
@@ -151,7 +151,7 @@ public class ServletServerHttpResponse implements ServerHttpResponse {
 
 		@Override
 		public boolean containsKey(Object key) {
-			return (super.containsKey(key) || (get(key) != null));
+			return super.containsKey(key) || (get(key) != null);
 		}
 
 		@Override
@@ -160,11 +160,11 @@ public class ServletServerHttpResponse implements ServerHttpResponse {
 			if (headerName.equalsIgnoreCase(CONTENT_TYPE)) {
 				// Content-Type is written as an override so check super first
 				String value = super.getFirst(headerName);
-				return (value != null ? value : servletResponse.getHeader(headerName));
+				return value != null ? value : servletResponse.getHeader(headerName);
 			}
 			else {
 				String value = servletResponse.getHeader(headerName);
-				return (value != null ? value : super.getFirst(headerName));
+				return value != null ? value : super.getFirst(headerName);
 			}
 		}
 

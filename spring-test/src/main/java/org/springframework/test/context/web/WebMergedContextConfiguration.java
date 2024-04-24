@@ -74,7 +74,7 @@ public class WebMergedContextConfiguration extends MergedContextConfiguration {
 	 */
 	public WebMergedContextConfiguration(MergedContextConfiguration mergedConfig, String resourceBasePath) {
 		super(mergedConfig);
-		this.resourceBasePath = (StringUtils.hasText(resourceBasePath) ? resourceBasePath : "");
+		this.resourceBasePath = StringUtils.hasText(resourceBasePath) ? resourceBasePath : "";
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class WebMergedContextConfiguration extends MergedContextConfiguration {
 		super(testClass, locations, classes, contextInitializerClasses, activeProfiles, propertySourceDescriptors,
 			propertySourceProperties, contextCustomizers, contextLoader, cacheAwareContextLoaderDelegate, parent);
 
-		this.resourceBasePath = (StringUtils.hasText(resourceBasePath) ? resourceBasePath : "");
+		this.resourceBasePath = StringUtils.hasText(resourceBasePath) ? resourceBasePath : "";
 	}
 
 	/**
@@ -218,8 +218,8 @@ public class WebMergedContextConfiguration extends MergedContextConfiguration {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (super.equals(other) &&
-				this.resourceBasePath.equals(((WebMergedContextConfiguration) other).resourceBasePath)));
+		return this == other || (super.equals(other) &&
+				this.resourceBasePath.equals(((WebMergedContextConfiguration) other).resourceBasePath));
 	}
 
 	/**
@@ -229,7 +229,7 @@ public class WebMergedContextConfiguration extends MergedContextConfiguration {
 	 */
 	@Override
 	public int hashCode() {
-		return (31 * super.hashCode() + this.resourceBasePath.hashCode());
+		return 31 * super.hashCode() + this.resourceBasePath.hashCode();
 	}
 
 	/**

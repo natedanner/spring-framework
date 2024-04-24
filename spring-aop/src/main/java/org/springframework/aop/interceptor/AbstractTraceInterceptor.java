@@ -59,7 +59,7 @@ public abstract class AbstractTraceInterceptor implements MethodInterceptor, Ser
 	 * Indicates whether proxy class names should be hidden when using dynamic loggers.
 	 * @see #setUseDynamicLogger
 	 */
-	private boolean hideProxyClassNames = false;
+	private boolean hideProxyClassNames;
 
 	/**
 	 * Indicates whether to pass an exception to the logger.
@@ -80,7 +80,7 @@ public abstract class AbstractTraceInterceptor implements MethodInterceptor, Ser
 	 */
 	public void setUseDynamicLogger(boolean useDynamicLogger) {
 		// Release default logger if it is not being used.
-		this.defaultLogger = (useDynamicLogger ? null : LogFactory.getLog(getClass()));
+		this.defaultLogger = useDynamicLogger ? null : LogFactory.getLog(getClass());
 	}
 
 	/**
@@ -164,7 +164,7 @@ public abstract class AbstractTraceInterceptor implements MethodInterceptor, Ser
 	 * @see #setHideProxyClassNames
 	 */
 	protected Class<?> getClassForLogging(Object target) {
-		return (this.hideProxyClassNames ? AopUtils.getTargetClass(target) : target.getClass());
+		return this.hideProxyClassNames ? AopUtils.getTargetClass(target) : target.getClass();
 	}
 
 	/**

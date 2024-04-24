@@ -34,7 +34,7 @@ public class LoggingCodecSupport {
 	protected final Log logger = HttpLogging.forLogName(getClass());
 
 	/** Whether to log potentially sensitive info (form data at DEBUG and headers at TRACE). */
-	private boolean enableLoggingRequestDetails = false;
+	private boolean enableLoggingRequestDetails;
 
 
 	/**

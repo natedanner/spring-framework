@@ -136,7 +136,7 @@ class ReactorServerHttpRequest extends AbstractServerHttpRequest {
 	protected String initLogPrefix() {
 		String id = null;
 		if (this.request instanceof ChannelOperationsId operationsId) {
-			id = (logger.isDebugEnabled() ? operationsId.asLongText() : operationsId.asShortText());
+			id = logger.isDebugEnabled() ? operationsId.asLongText() : operationsId.asShortText();
 		}
 		if (id != null) {
 			return id;

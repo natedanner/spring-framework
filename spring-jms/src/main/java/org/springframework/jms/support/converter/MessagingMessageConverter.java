@@ -117,8 +117,8 @@ public class MessagingMessageConverter implements MessageConverter, Initializing
 	public Object fromMessage(jakarta.jms.Message message) throws JMSException, MessageConversionException {
 		Map<String, Object> mappedHeaders = extractHeaders(message);
 		Object convertedObject = extractPayload(message);
-		MessageBuilder<Object> builder = (convertedObject instanceof org.springframework.messaging.Message springMessage ?
-				MessageBuilder.fromMessage(springMessage) : MessageBuilder.withPayload(convertedObject));
+		MessageBuilder<Object> builder = convertedObject instanceof org.springframework.messaging.Message springMessage ?
+				MessageBuilder.fromMessage(springMessage) : MessageBuilder.withPayload(convertedObject);
 		return builder.copyHeadersIfAbsent(mappedHeaders).build();
 	}
 

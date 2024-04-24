@@ -28,7 +28,7 @@ public class LifecycleBean {
 
 	private final String name;
 
-	private boolean initialized = false;
+	private boolean initialized;
 
 
 	public LifecycleBean(String name) {

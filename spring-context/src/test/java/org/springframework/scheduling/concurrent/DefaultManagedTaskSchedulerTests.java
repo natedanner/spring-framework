@@ -35,46 +35,46 @@ import static org.mockito.Mockito.mock;
  */
 class DefaultManagedTaskSchedulerTests {
 
-	private final Runnable NO_OP = () -> {};
+	private final Runnable noOp = () -> {};
 
 	@Test
 	void scheduleWithTriggerAndNoScheduledExecutorProvidesDedicatedException() {
 		DefaultManagedTaskScheduler scheduler = new DefaultManagedTaskScheduler();
-		assertNoExecutorException(() -> scheduler.schedule(NO_OP, mock(Trigger.class)));
+		assertNoExecutorException(() -> scheduler.schedule(noOp, mock(Trigger.class)));
 	}
 
 	@Test
 	void scheduleWithInstantAndNoScheduledExecutorProvidesDedicatedException() {
 		DefaultManagedTaskScheduler scheduler = new DefaultManagedTaskScheduler();
-		assertNoExecutorException(() -> scheduler.schedule(NO_OP, Instant.now()));
+		assertNoExecutorException(() -> scheduler.schedule(noOp, Instant.now()));
 	}
 
 	@Test
 	void scheduleAtFixedRateWithStartTimeAndDurationAndNoScheduledExecutorProvidesDedicatedException() {
 		DefaultManagedTaskScheduler scheduler = new DefaultManagedTaskScheduler();
 		assertNoExecutorException(() -> scheduler.scheduleAtFixedRate(
-				NO_OP, Instant.now(), Duration.of(1, ChronoUnit.MINUTES)));
+				noOp, Instant.now(), Duration.of(1, ChronoUnit.MINUTES)));
 	}
 
 	@Test
 	void scheduleAtFixedRateWithDurationAndNoScheduledExecutorProvidesDedicatedException() {
 		DefaultManagedTaskScheduler scheduler = new DefaultManagedTaskScheduler();
 		assertNoExecutorException(() -> scheduler.scheduleAtFixedRate(
-				NO_OP, Duration.of(1, ChronoUnit.MINUTES)));
+				noOp, Duration.of(1, ChronoUnit.MINUTES)));
 	}
 
 	@Test
 	void scheduleWithFixedDelayWithStartTimeAndDurationAndNoScheduledExecutorProvidesDedicatedException() {
 		DefaultManagedTaskScheduler scheduler = new DefaultManagedTaskScheduler();
 		assertNoExecutorException(() -> scheduler.scheduleWithFixedDelay(
-				NO_OP, Instant.now(), Duration.of(1, ChronoUnit.MINUTES)));
+				noOp, Instant.now(), Duration.of(1, ChronoUnit.MINUTES)));
 	}
 
 	@Test
 	void scheduleWithFixedDelayWithDurationAndNoScheduledExecutorProvidesDedicatedException() {
 		DefaultManagedTaskScheduler scheduler = new DefaultManagedTaskScheduler();
 		assertNoExecutorException(() -> scheduler.scheduleWithFixedDelay(
-				NO_OP, Duration.of(1, ChronoUnit.MINUTES)));
+				noOp, Duration.of(1, ChronoUnit.MINUTES)));
 	}
 
 	private void assertNoExecutorException(ThrowingCallable callable) {

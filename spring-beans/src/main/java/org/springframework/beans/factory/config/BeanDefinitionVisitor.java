@@ -247,9 +247,9 @@ public class BeanDefinitionVisitor {
 		Set newContent = new LinkedHashSet();
 		boolean entriesModified = false;
 		for (Object elem : setVal) {
-			int elemHash = (elem != null ? elem.hashCode() : 0);
+			int elemHash = elem != null ? elem.hashCode() : 0;
 			Object newVal = resolveValue(elem);
-			int newValHash = (newVal != null ? newVal.hashCode() : 0);
+			int newValHash = newVal != null ? newVal.hashCode() : 0;
 			newContent.add(newVal);
 			entriesModified = entriesModified || (newVal != elem || newValHash != elemHash);
 		}
@@ -265,9 +265,9 @@ public class BeanDefinitionVisitor {
 		boolean entriesModified = false;
 		for (Map.Entry entry : mapVal.entrySet()) {
 			Object key = entry.getKey();
-			int keyHash = (key != null ? key.hashCode() : 0);
+			int keyHash = key != null ? key.hashCode() : 0;
 			Object newKey = resolveValue(key);
-			int newKeyHash = (newKey != null ? newKey.hashCode() : 0);
+			int newKeyHash = newKey != null ? newKey.hashCode() : 0;
 			Object val = entry.getValue();
 			Object newVal = resolveValue(val);
 			newContent.put(newKey, newVal);
@@ -292,7 +292,7 @@ public class BeanDefinitionVisitor {
 		}
 		String resolvedValue = this.valueResolver.resolveStringValue(strVal);
 		// Return original String if not modified.
-		return (strVal.equals(resolvedValue) ? strVal : resolvedValue);
+		return strVal.equals(resolvedValue) ? strVal : resolvedValue;
 	}
 
 }

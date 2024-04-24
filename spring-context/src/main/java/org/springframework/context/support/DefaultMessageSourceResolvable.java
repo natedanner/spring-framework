@@ -108,7 +108,7 @@ public class DefaultMessageSourceResolvable implements MessageSourceResolvable, 
 	 */
 	@Nullable
 	public String getCode() {
-		return (this.codes != null && this.codes.length > 0 ? this.codes[this.codes.length - 1] : null);
+		return this.codes != null && this.codes.length > 0 ? this.codes[this.codes.length - 1] : null;
 	}
 
 	@Override
@@ -171,10 +171,10 @@ public class DefaultMessageSourceResolvable implements MessageSourceResolvable, 
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof MessageSourceResolvable that &&
+		return this == other || (other instanceof MessageSourceResolvable that &&
 				ObjectUtils.nullSafeEquals(getCodes(), that.getCodes()) &&
 				ObjectUtils.nullSafeEquals(getArguments(), that.getArguments()) &&
-				ObjectUtils.nullSafeEquals(getDefaultMessage(), that.getDefaultMessage())));
+				ObjectUtils.nullSafeEquals(getDefaultMessage(), that.getDefaultMessage()));
 	}
 
 	@Override

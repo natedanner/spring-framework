@@ -48,7 +48,7 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 	@Nullable
 	private ClassLoader proxyClassLoader = ClassUtils.getDefaultClassLoader();
 
-	private boolean classLoaderConfigured = false;
+	private boolean classLoaderConfigured;
 
 
 	/**
@@ -74,7 +74,7 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 	 */
 	public void setProxyClassLoader(@Nullable ClassLoader classLoader) {
 		this.proxyClassLoader = classLoader;
-		this.classLoaderConfigured = (classLoader != null);
+		this.classLoaderConfigured = classLoader != null;
 	}
 
 	/**
@@ -131,8 +131,8 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 	 * @return whether the given interface is just a container callback
 	 */
 	protected boolean isConfigurationCallbackInterface(Class<?> ifc) {
-		return (InitializingBean.class == ifc || DisposableBean.class == ifc || Closeable.class == ifc ||
-				AutoCloseable.class == ifc || ObjectUtils.containsElement(ifc.getInterfaces(), Aware.class));
+		return InitializingBean.class == ifc || DisposableBean.class == ifc || Closeable.class == ifc ||
+				AutoCloseable.class == ifc || ObjectUtils.containsElement(ifc.getInterfaces(), Aware.class);
 	}
 
 	/**
@@ -144,9 +144,9 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 	 * @return whether the given interface is an internal language interface
 	 */
 	protected boolean isInternalLanguageInterface(Class<?> ifc) {
-		return (ifc.getName().equals("groovy.lang.GroovyObject") ||
+		return "groovy.lang.GroovyObject".equals(ifc.getName()) ||
 				ifc.getName().endsWith(".cglib.proxy.Factory") ||
-				ifc.getName().endsWith(".bytebuddy.MockAccess"));
+				ifc.getName().endsWith(".bytebuddy.MockAccess");
 	}
 
 }

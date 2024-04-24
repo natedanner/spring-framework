@@ -93,7 +93,7 @@ public class HtmlFileTransportHandler extends AbstractHttpSendingTransportHandle
 
 	@Override
 	public boolean checkSessionType(SockJsSession session) {
-		return (session instanceof HtmlFileStreamingSockJsSession);
+		return session instanceof HtmlFileStreamingSockJsSession;
 	}
 
 	@Override

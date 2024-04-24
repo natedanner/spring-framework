@@ -42,7 +42,7 @@ public abstract class AbstractRefreshableConfigApplicationContext extends Abstra
 	@Nullable
 	private String[] configLocations;
 
-	private boolean setIdCalled = false;
+	private boolean setIdCalled;
 
 
 	/**
@@ -98,7 +98,7 @@ public abstract class AbstractRefreshableConfigApplicationContext extends Abstra
 	 */
 	@Nullable
 	protected String[] getConfigLocations() {
-		return (this.configLocations != null ? this.configLocations : getDefaultConfigLocations());
+		return this.configLocations != null ? this.configLocations : getDefaultConfigLocations();
 	}
 
 	/**

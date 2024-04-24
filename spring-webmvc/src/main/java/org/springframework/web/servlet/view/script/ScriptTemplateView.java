@@ -238,7 +238,7 @@ public class ScriptTemplateView extends AbstractUrlBasedView {
 			setContentType(viewConfig.getContentType() != null ? viewConfig.getContentType() : DEFAULT_CONTENT_TYPE);
 		}
 		if (this.charset == null) {
-			this.charset = (viewConfig.getCharset() != null ? viewConfig.getCharset() : DEFAULT_CHARSET);
+			this.charset = viewConfig.getCharset() != null ? viewConfig.getCharset() : DEFAULT_CHARSET;
 		}
 		if (this.resourceLoaderPaths == null) {
 			String resourceLoaderPath = viewConfig.getResourceLoaderPath();
@@ -289,8 +289,8 @@ public class ScriptTemplateView extends AbstractUrlBasedView {
 				engines = new HashMap<>(4);
 				enginesHolder.set(engines);
 			}
-			String name = (this.engineName != null ? this.engineName : "");
-			Object engineKey = (!ObjectUtils.isEmpty(this.scripts) ? new EngineKey(name, this.scripts) : name);
+			String name = this.engineName != null ? this.engineName : "";
+			Object engineKey = ObjectUtils.isEmpty(this.scripts) ? name : new EngineKey(name, this.scripts);
 			ScriptEngine engine = engines.get(engineKey);
 			if (engine == null) {
 				if (this.engineName != null) {
@@ -380,7 +380,7 @@ public class ScriptTemplateView extends AbstractUrlBasedView {
 	public boolean checkResource(Locale locale) throws Exception {
 		String url = getUrl();
 		Assert.state(url != null, "'url' not set");
-		return (getResource(url) != null);
+		return getResource(url) != null;
 	}
 
 	@Override
@@ -442,9 +442,9 @@ public class ScriptTemplateView extends AbstractUrlBasedView {
 		if (resource == null) {
 			throw new IllegalStateException("Template resource [" + path + "] not found");
 		}
-		InputStreamReader reader = (this.charset != null ?
+		InputStreamReader reader = this.charset != null ?
 				new InputStreamReader(resource.getInputStream(), this.charset) :
-				new InputStreamReader(resource.getInputStream()));
+				new InputStreamReader(resource.getInputStream());
 		return FileCopyUtils.copyToString(reader);
 	}
 
@@ -467,9 +467,9 @@ public class ScriptTemplateView extends AbstractUrlBasedView {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof EngineKey that &&
+			return this == other || (other instanceof EngineKey that &&
 					this.engineName.equals(that.engineName) &&
-					Arrays.equals(this.scripts, that.scripts)));
+					Arrays.equals(this.scripts, that.scripts));
 		}
 
 		@Override

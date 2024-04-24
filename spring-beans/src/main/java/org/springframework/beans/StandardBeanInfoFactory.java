@@ -68,9 +68,9 @@ public class StandardBeanInfoFactory implements BeanInfoFactory, Ordered {
 	@Override
 	@NonNull
 	public BeanInfo getBeanInfo(Class<?> beanClass) throws IntrospectionException {
-		BeanInfo beanInfo = (shouldIntrospectorIgnoreBeaninfoClasses ?
+		BeanInfo beanInfo = shouldIntrospectorIgnoreBeaninfoClasses ?
 				Introspector.getBeanInfo(beanClass, Introspector.IGNORE_ALL_BEANINFO) :
-				Introspector.getBeanInfo(beanClass));
+				Introspector.getBeanInfo(beanClass);
 
 		// Immediately remove class from Introspector cache to allow for proper garbage
 		// collection on class loader shutdown; we cache it in CachedIntrospectionResults

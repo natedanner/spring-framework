@@ -56,7 +56,7 @@ public abstract class AbstractMessageConverter implements SmartMessageConverter 
 	@Nullable
 	private ContentTypeResolver contentTypeResolver = new DefaultContentTypeResolver();
 
-	private boolean strictContentTypeMatch = false;
+	private boolean strictContentTypeMatch;
 
 	private Class<?> serializedPayloadClass = byte[].class;
 
@@ -226,11 +226,11 @@ public abstract class AbstractMessageConverter implements SmartMessageConverter 
 
 
 	protected boolean canConvertFrom(Message<?> message, Class<?> targetClass) {
-		return (supports(targetClass) && supportsMimeType(message.getHeaders()));
+		return supports(targetClass) && supportsMimeType(message.getHeaders());
 	}
 
 	protected boolean canConvertTo(Object payload, @Nullable MessageHeaders headers) {
-		return (supports(payload.getClass()) && supportsMimeType(headers));
+		return supports(payload.getClass()) && supportsMimeType(headers);
 	}
 
 	protected boolean supportsMimeType(@Nullable MessageHeaders headers) {
@@ -251,7 +251,7 @@ public abstract class AbstractMessageConverter implements SmartMessageConverter 
 
 	@Nullable
 	protected MimeType getMimeType(@Nullable MessageHeaders headers) {
-		return (this.contentTypeResolver != null ? this.contentTypeResolver.resolve(headers) : null);
+		return this.contentTypeResolver != null ? this.contentTypeResolver.resolve(headers) : null;
 	}
 
 	/**
@@ -267,7 +267,7 @@ public abstract class AbstractMessageConverter implements SmartMessageConverter 
 	@Nullable
 	protected MimeType getDefaultContentType(Object payload) {
 		List<MimeType> mimeTypes = getSupportedMimeTypes();
-		return (!mimeTypes.isEmpty() ? mimeTypes.get(0) : null);
+		return mimeTypes.isEmpty() ? null : mimeTypes.get(0);
 	}
 
 

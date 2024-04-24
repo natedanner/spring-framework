@@ -51,7 +51,7 @@ public abstract class KotlinDetector {
 			metadata = null;
 		}
 		kotlinMetadata = (Class<? extends Annotation>) metadata;
-		kotlinPresent = (kotlinMetadata != null);
+		kotlinPresent = kotlinMetadata != null;
 		kotlinReflectPresent = ClassUtils.isPresent("kotlin.reflect.full.KClasses", classLoader);
 	}
 
@@ -76,7 +76,7 @@ public abstract class KotlinDetector {
 	 * (with Kotlin metadata present on it).
 	 */
 	public static boolean isKotlinType(Class<?> clazz) {
-		return (kotlinMetadata != null && clazz.getDeclaredAnnotation(kotlinMetadata) != null);
+		return kotlinMetadata != null && clazz.getDeclaredAnnotation(kotlinMetadata) != null;
 	}
 
 	/**

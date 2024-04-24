@@ -444,7 +444,7 @@ public class UriComponentsBuilder implements UriBuilder, Cloneable {
 			HierarchicalUriComponents uric = new HierarchicalUriComponents(this.scheme, this.fragment,
 					this.userInfo, this.host, this.port, this.pathBuilder.build(), queryParams,
 					hint == EncodingHint.FULLY_ENCODED);
-			result = (hint == EncodingHint.ENCODE_TEMPLATE ? uric.encodeTemplate(this.charset) : uric);
+			result = hint == EncodingHint.ENCODE_TEMPLATE ? uric.encodeTemplate(this.charset) : uric;
 		}
 		if (!this.uriVariables.isEmpty()) {
 			result = result.expand(name -> this.uriVariables.getOrDefault(name, UriTemplateVariables.SKIP_VALUE));
@@ -501,9 +501,9 @@ public class UriComponentsBuilder implements UriBuilder, Cloneable {
 	 * @see UriComponents#toUriString()
 	 */
 	public String toUriString() {
-		return (this.uriVariables.isEmpty() ?
+		return this.uriVariables.isEmpty() ?
 				build().encode().toUriString() :
-				buildInternal(EncodingHint.ENCODE_TEMPLATE).toUriString());
+				buildInternal(EncodingHint.ENCODE_TEMPLATE).toUriString();
 	}
 
 
@@ -688,9 +688,9 @@ public class UriComponentsBuilder implements UriBuilder, Cloneable {
 	@Nullable
 	private String getQueryParamValue(@Nullable Object value) {
 		if (value != null) {
-			return (value instanceof Optional<?> optional ?
+			return value instanceof Optional<?> optional ?
 					optional.map(Object::toString).orElse(null) :
-					value.toString());
+					value.toString();
 		}
 		return null;
 	}
@@ -800,8 +800,8 @@ public class UriComponentsBuilder implements UriBuilder, Cloneable {
 
 	void resetPortIfDefaultForScheme() {
 		if (this.scheme != null &&
-				(((this.scheme.equals("http") || this.scheme.equals("ws")) && "80".equals(this.port)) ||
-						((this.scheme.equals("https") || this.scheme.equals("wss")) && "443".equals(this.port)))) {
+				((("http".equals(this.scheme) || "ws".equals(this.scheme)) && "80".equals(this.port)) ||
+						(("https".equals(this.scheme) || "wss".equals(this.scheme)) && "443".equals(this.port)))) {
 			port(null);
 		}
 	}
@@ -859,7 +859,7 @@ public class UriComponentsBuilder implements UriBuilder, Cloneable {
 				PathSegmentComponentBuilder psBuilder = getLastBuilder(PathSegmentComponentBuilder.class);
 				FullPathComponentBuilder fpBuilder = getLastBuilder(FullPathComponentBuilder.class);
 				if (psBuilder != null) {
-					path = (path.startsWith("/") ? path : "/" + path);
+					path = path.startsWith("/") ? path : "/" + path;
 				}
 				if (fpBuilder == null) {
 					fpBuilder = new FullPathComponentBuilder();
@@ -971,8 +971,8 @@ public class UriComponentsBuilder implements UriBuilder, Cloneable {
 
 		@Override
 		public PathComponent build() {
-			return (this.pathSegments.isEmpty() ? null :
-					new HierarchicalUriComponents.PathSegmentComponent(this.pathSegments));
+			return this.pathSegments.isEmpty() ? null :
+					new HierarchicalUriComponents.PathSegmentComponent(this.pathSegments);
 		}
 
 		@Override

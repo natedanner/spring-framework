@@ -49,7 +49,7 @@ public class GroovyMarkupConfigurerBeanDefinitionParser extends AbstractSimpleBe
 
 	@Override
 	protected boolean isEligibleAttribute(String name) {
-		return (name.equals("auto-indent") || name.equals("cache-templates") || name.equals("resource-loader-path"));
+		return "auto-indent".equals(name) || "cache-templates".equals(name) || "resource-loader-path".equals(name);
 	}
 
 }

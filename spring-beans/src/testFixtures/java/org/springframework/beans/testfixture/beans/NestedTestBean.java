@@ -36,7 +36,7 @@ public class NestedTestBean implements INestedTestBean {
 	}
 
 	public void setCompany(String company) {
-		this.company = (company != null ? company : "");
+		this.company = company != null ? company : "";
 	}
 
 	@Override

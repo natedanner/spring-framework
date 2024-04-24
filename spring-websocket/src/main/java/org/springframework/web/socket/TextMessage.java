@@ -71,13 +71,13 @@ public final class TextMessage extends AbstractWebSocketMessage<String> {
 	}
 
 	public byte[] asBytes() {
-		return (this.bytes != null ? this.bytes : getPayload().getBytes(StandardCharsets.UTF_8));
+		return this.bytes != null ? this.bytes : getPayload().getBytes(StandardCharsets.UTF_8);
 	}
 
 	@Override
 	protected String toStringPayload() {
 		String payload = getPayload();
-		return (payload.length() > 10 ? payload.substring(0, 10) + ".." : payload);
+		return payload.length() > 10 ? payload.substring(0, 10) + ".." : payload;
 	}
 
 }

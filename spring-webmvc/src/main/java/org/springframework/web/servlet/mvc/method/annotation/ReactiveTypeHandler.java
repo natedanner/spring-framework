@@ -109,7 +109,7 @@ class ReactiveTypeHandler {
 	 * Whether the type can be adapted to a Reactive Streams {@link Publisher}.
 	 */
 	public boolean isReactiveType(Class<?> type) {
-		return (this.adapterRegistry.getAdapter(type) != null);
+		return this.adapterRegistry.getAdapter(type) != null;
 	}
 
 

@@ -104,14 +104,14 @@ public abstract class AnnotationConfigContextLoaderUtils {
 	 * @return {@code true} if the supplied class meets the candidate criteria
 	 */
 	private static boolean isDefaultConfigurationClassCandidate(@Nullable Class<?> clazz) {
-		return (clazz != null && isStaticNonPrivateAndNonFinal(clazz) &&
-				AnnotatedElementUtils.hasAnnotation(clazz, Configuration.class));
+		return clazz != null && isStaticNonPrivateAndNonFinal(clazz) &&
+				AnnotatedElementUtils.hasAnnotation(clazz, Configuration.class);
 	}
 
 	private static boolean isStaticNonPrivateAndNonFinal(Class<?> clazz) {
 		Assert.notNull(clazz, "Class must not be null");
 		int modifiers = clazz.getModifiers();
-		return (Modifier.isStatic(modifiers) && !Modifier.isPrivate(modifiers) && !Modifier.isFinal(modifiers));
+		return Modifier.isStatic(modifiers) && !Modifier.isPrivate(modifiers) && !Modifier.isFinal(modifiers);
 	}
 
 }

@@ -85,7 +85,7 @@ public abstract class NestedExceptionUtils {
 	 */
 	public static Throwable getMostSpecificCause(Throwable original) {
 		Throwable rootCause = getRootCause(original);
-		return (rootCause != null ? rootCause : original);
+		return rootCause != null ? rootCause : original;
 	}
 
 }

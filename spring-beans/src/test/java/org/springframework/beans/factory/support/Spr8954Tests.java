@@ -124,7 +124,7 @@ class Spr8954Tests {
 
 		@Override
 		public Class<?> predictBeanType(Class<?> beanClass, String beanName) {
-			return (FactoryBean.class.isAssignableFrom(beanClass) ? PredictedType.class : null);
+			return FactoryBean.class.isAssignableFrom(beanClass) ? PredictedType.class : null;
 		}
 	}
 

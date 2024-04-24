@@ -113,11 +113,11 @@ public class MockServletContext implements ServletContext {
 
 	private int majorVersion = 6;
 
-	private int minorVersion = 0;
+	private int minorVersion;
 
 	private int effectiveMajorVersion = 6;
 
-	private int effectiveMinorVersion = 0;
+	private int effectiveMinorVersion;
 
 	private final Map<String, RequestDispatcher> namedRequestDispatchers = new HashMap<>();
 
@@ -184,7 +184,7 @@ public class MockServletContext implements ServletContext {
 	 * @see #registerNamedDispatcher
 	 */
 	public MockServletContext(String resourceBasePath, @Nullable ResourceLoader resourceLoader) {
-		this.resourceLoader = (resourceLoader != null ? resourceLoader : new DefaultResourceLoader());
+		this.resourceLoader = resourceLoader != null ? resourceLoader : new DefaultResourceLoader();
 		this.resourceBasePath = resourceBasePath;
 
 		// Use JVM temp dir as ServletContext temp dir.
@@ -293,7 +293,7 @@ public class MockServletContext implements ServletContext {
 	@Override
 	@Nullable
 	public Set<String> getResourcePaths(String path) {
-		String actualPath = (path.endsWith("/") ? path : path + "/");
+		String actualPath = path.endsWith("/") ? path : path + "/";
 		String resourceLocation = getResourceLocation(actualPath);
 		Resource resource = null;
 		try {
@@ -333,9 +333,6 @@ public class MockServletContext implements ServletContext {
 				return null;
 			}
 			return resource.getURL();
-		}
-		catch (MalformedURLException ex) {
-			throw ex;
 		}
 		catch (InvalidPathException | IOException ex) {
 			if (logger.isDebugEnabled()) {
@@ -559,8 +556,8 @@ public class MockServletContext implements ServletContext {
 
 	@Override
 	public Set<SessionTrackingMode> getEffectiveSessionTrackingModes() {
-		return (this.sessionTrackingModes != null ?
-				Collections.unmodifiableSet(this.sessionTrackingModes) : DEFAULT_SESSION_TRACKING_MODES);
+		return this.sessionTrackingModes != null ?
+				Collections.unmodifiableSet(this.sessionTrackingModes) : DEFAULT_SESSION_TRACKING_MODES;
 	}
 
 	@Override

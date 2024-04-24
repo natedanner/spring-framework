@@ -80,7 +80,7 @@ public class AotTestContextInitializers {
 	public ApplicationContextInitializer<ConfigurableApplicationContext> getContextInitializer(Class<?> testClass) {
 		Supplier<ApplicationContextInitializer<ConfigurableApplicationContext>> supplier =
 				this.contextInitializers.get(testClass.getName());
-		return (supplier != null ? supplier.get() : null);
+		return supplier != null ? supplier.get() : null;
 	}
 
 	/**

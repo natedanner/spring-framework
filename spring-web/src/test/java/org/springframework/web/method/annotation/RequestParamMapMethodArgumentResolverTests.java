@@ -48,13 +48,13 @@ import static org.springframework.web.testfixture.method.MvcAnnotationPredicates
  */
 class RequestParamMapMethodArgumentResolverTests {
 
-	private RequestParamMapMethodArgumentResolver resolver = new RequestParamMapMethodArgumentResolver();
+	private final RequestParamMapMethodArgumentResolver resolver = new RequestParamMapMethodArgumentResolver();
 
-	private MockHttpServletRequest request = new MockHttpServletRequest();
+	private final MockHttpServletRequest request = new MockHttpServletRequest();
 
 	private NativeWebRequest webRequest = new ServletWebRequest(request, new MockHttpServletResponse());
 
-	private ResolvableMethod testMethod = ResolvableMethod.on(getClass()).named("handle").build();
+	private final ResolvableMethod testMethod = ResolvableMethod.on(getClass()).named("handle").build();
 
 
 	@Test

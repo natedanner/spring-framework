@@ -252,7 +252,7 @@ public class CheckboxTag extends AbstractSingleCheckedElementTag {
 			if (boundValue instanceof String string) {
 				boundValue = Boolean.valueOf(string);
 			}
-			Boolean booleanValue = (boundValue != null ? (Boolean) boundValue : Boolean.FALSE);
+			Boolean booleanValue = boundValue != null ? (Boolean) boundValue : Boolean.FALSE;
 			renderFromBoolean(booleanValue, tagWriter);
 		}
 
@@ -261,7 +261,7 @@ public class CheckboxTag extends AbstractSingleCheckedElementTag {
 			if (value == null) {
 				throw new IllegalArgumentException("Attribute 'value' is required when binding to non-boolean values");
 			}
-			Object resolvedValue = (value instanceof String ? evaluate("value", value) : value);
+			Object resolvedValue = value instanceof String ? evaluate("value", value) : value;
 			renderFromValue(resolvedValue, tagWriter);
 		}
 	}

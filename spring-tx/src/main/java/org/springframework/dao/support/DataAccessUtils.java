@@ -81,7 +81,7 @@ public abstract class DataAccessUtils {
 			if (resultList.size() > 1) {
 				throw new IncorrectResultSizeDataAccessException(1);
 			}
-			return (!resultList.isEmpty() ? resultList.get(0) : null);
+			return resultList.isEmpty() ? null : resultList.get(0);
 		}
 	}
 
@@ -100,7 +100,7 @@ public abstract class DataAccessUtils {
 		if (results == null) {
 			return null;
 		}
-		T result = (results.hasNext() ? results.next() : null);
+		T result = results.hasNext() ? results.next() : null;
 		if (results.hasNext()) {
 			throw new IncorrectResultSizeDataAccessException(1);
 		}
@@ -333,7 +333,7 @@ public abstract class DataAccessUtils {
 
 		Assert.notNull(pet, "PersistenceExceptionTranslator must not be null");
 		DataAccessException dae = pet.translateExceptionIfPossible(rawException);
-		return (dae != null ? dae : rawException);
+		return dae != null ? dae : rawException;
 	}
 
 }

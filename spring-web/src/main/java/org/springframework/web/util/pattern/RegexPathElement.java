@@ -151,7 +151,7 @@ class RegexPathElement extends PathElement {
 				}
 			}
 			else {
-				matches = (this.next != null && this.next.matches(pathIndex + 1, matchingContext));
+				matches = this.next != null && this.next.matches(pathIndex + 1, matchingContext);
 			}
 		}
 
@@ -167,7 +167,7 @@ class RegexPathElement extends PathElement {
 				String name = this.variableNames.get(i - 1);
 				String value = matcher.group(i);
 				matchingContext.set(name, value,
-						(i == this.variableNames.size())?
+						i == this.variableNames.size()?
 								((PathSegment)matchingContext.pathElements.get(pathIndex)).parameters():
 								NO_PARAMETERS);
 			}
@@ -181,7 +181,7 @@ class RegexPathElement extends PathElement {
 		for (String variableName : this.variableNames) {
 			varsLength += variableName.length();
 		}
-		return (this.regex.length - varsLength - this.variableNames.size());
+		return this.regex.length - varsLength - this.variableNames.size();
 	}
 
 	@Override
@@ -201,7 +201,7 @@ class RegexPathElement extends PathElement {
 
 	@Override
 	public int getScore() {
-		return (getCaptureCount() * CAPTURE_VARIABLE_WEIGHT + getWildcardCount() * WILDCARD_WEIGHT);
+		return getCaptureCount() * CAPTURE_VARIABLE_WEIGHT + getWildcardCount() * WILDCARD_WEIGHT;
 	}
 
 

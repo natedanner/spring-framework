@@ -95,7 +95,7 @@ public class DefaultResourceLoader implements ResourceLoader {
 	@Override
 	@Nullable
 	public ClassLoader getClassLoader() {
-		return (this.classLoader != null ? this.classLoader : ClassUtils.getDefaultClassLoader());
+		return this.classLoader != null ? this.classLoader : ClassUtils.getDefaultClassLoader();
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class DefaultResourceLoader implements ResourceLoader {
 			try {
 				// Try to parse the location as a URL...
 				URL url = ResourceUtils.toURL(location);
-				return (ResourceUtils.isFileURL(url) ? new FileUrlResource(url) : new UrlResource(url));
+				return ResourceUtils.isFileURL(url) ? new FileUrlResource(url) : new UrlResource(url);
 			}
 			catch (MalformedURLException ex) {
 				// No URL -> resolve as resource path.

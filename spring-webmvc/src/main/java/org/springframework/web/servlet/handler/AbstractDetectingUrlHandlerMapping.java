@@ -33,7 +33,7 @@ import org.springframework.util.ObjectUtils;
  */
 public abstract class AbstractDetectingUrlHandlerMapping extends AbstractUrlHandlerMapping {
 
-	private boolean detectHandlersInAncestorContexts = false;
+	private boolean detectHandlersInAncestorContexts;
 
 
 	/**
@@ -69,9 +69,9 @@ public abstract class AbstractDetectingUrlHandlerMapping extends AbstractUrlHand
 	 */
 	protected void detectHandlers() throws BeansException {
 		ApplicationContext applicationContext = obtainApplicationContext();
-		String[] beanNames = (this.detectHandlersInAncestorContexts ?
+		String[] beanNames = this.detectHandlersInAncestorContexts ?
 				BeanFactoryUtils.beanNamesForTypeIncludingAncestors(applicationContext, Object.class) :
-				applicationContext.getBeanNamesForType(Object.class));
+				applicationContext.getBeanNamesForType(Object.class);
 
 		// Take any bean name that we can determine URLs for.
 		for (String beanName : beanNames) {

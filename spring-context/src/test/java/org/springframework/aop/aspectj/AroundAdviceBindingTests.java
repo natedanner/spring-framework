@@ -40,7 +40,7 @@ import static org.mockito.Mockito.verify;
  */
 class AroundAdviceBindingTests {
 
-	private AroundAdviceBindingCollaborator mockCollaborator = mock();
+	private final AroundAdviceBindingCollaborator mockCollaborator = mock();
 
 	private ITestBean testBeanProxy;
 
@@ -95,7 +95,7 @@ class AroundAdviceBindingTests {
 
 class AroundAdviceBindingTestAspect {
 
-	private AroundAdviceBindingCollaborator collaborator = null;
+	private AroundAdviceBindingCollaborator collaborator;
 
 	public void setCollaborator(AroundAdviceBindingCollaborator aCollaborator) {
 		this.collaborator = aCollaborator;

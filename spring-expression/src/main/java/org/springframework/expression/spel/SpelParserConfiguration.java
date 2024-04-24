@@ -45,8 +45,8 @@ public class SpelParserConfiguration {
 
 	static {
 		String compilerMode = SpringProperties.getProperty(SPRING_EXPRESSION_COMPILER_MODE_PROPERTY_NAME);
-		defaultCompilerMode = (compilerMode != null ?
-				SpelCompilerMode.valueOf(compilerMode.toUpperCase()) : SpelCompilerMode.OFF);
+		defaultCompilerMode = compilerMode != null ?
+				SpelCompilerMode.valueOf(compilerMode.toUpperCase()) : SpelCompilerMode.OFF;
 	}
 
 
@@ -129,7 +129,7 @@ public class SpelParserConfiguration {
 	public SpelParserConfiguration(@Nullable SpelCompilerMode compilerMode, @Nullable ClassLoader compilerClassLoader,
 			boolean autoGrowNullReferences, boolean autoGrowCollections, int maximumAutoGrowSize, int maximumExpressionLength) {
 
-		this.compilerMode = (compilerMode != null ? compilerMode : defaultCompilerMode);
+		this.compilerMode = compilerMode != null ? compilerMode : defaultCompilerMode;
 		this.compilerClassLoader = compilerClassLoader;
 		this.autoGrowNullReferences = autoGrowNullReferences;
 		this.autoGrowCollections = autoGrowCollections;

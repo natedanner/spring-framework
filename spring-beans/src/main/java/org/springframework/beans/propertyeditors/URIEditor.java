@@ -95,7 +95,7 @@ public class URIEditor extends PropertyEditorSupport {
 	 * @since 3.0
 	 */
 	public URIEditor(@Nullable ClassLoader classLoader, boolean encode) {
-		this.classLoader = (classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader());
+		this.classLoader = classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader();
 		this.encode = encode;
 	}
 
@@ -141,7 +141,7 @@ public class URIEditor extends PropertyEditorSupport {
 			int fragmentIndex = value.indexOf('#', colonIndex + 1);
 			String scheme = value.substring(0, colonIndex);
 			String ssp = value.substring(colonIndex + 1, (fragmentIndex > 0 ? fragmentIndex : value.length()));
-			String fragment = (fragmentIndex > 0 ? value.substring(fragmentIndex + 1) : null);
+			String fragment = fragmentIndex > 0 ? value.substring(fragmentIndex + 1) : null;
 			return new URI(scheme, ssp, fragment);
 		}
 		else {
@@ -154,7 +154,7 @@ public class URIEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		URI value = (URI) getValue();
-		return (value != null ? value.toString() : "");
+		return value != null ? value.toString() : "";
 	}
 
 }

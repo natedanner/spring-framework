@@ -92,7 +92,7 @@ public abstract class FactoryBeanRegistrySupport extends DefaultSingletonBeanReg
 	 * @return the nested object type, or {@code NONE} if not resolvable
 	 */
 	ResolvableType getFactoryBeanGeneric(@Nullable ResolvableType type) {
-		return (type != null ? type.as(FactoryBean.class).getGeneric() : ResolvableType.NONE);
+		return type != null ? type.as(FactoryBean.class).getGeneric() : ResolvableType.NONE;
 	}
 
 	/**

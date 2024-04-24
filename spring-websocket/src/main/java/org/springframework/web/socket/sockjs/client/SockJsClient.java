@@ -370,7 +370,7 @@ public class SockJsClient implements WebSocketClient, Lifecycle {
 		}
 
 		public long getRetransmissionTimeout() {
-			return (this.responseTime > 100 ? 4 * this.responseTime : this.responseTime + 300);
+			return this.responseTime > 100 ? 4 * this.responseTime : this.responseTime + 300;
 		}
 	}
 

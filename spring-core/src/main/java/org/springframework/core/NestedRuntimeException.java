@@ -76,7 +76,7 @@ public abstract class NestedRuntimeException extends RuntimeException {
 	 */
 	public Throwable getMostSpecificCause() {
 		Throwable rootCause = getRootCause();
-		return (rootCause != null ? rootCause : this);
+		return rootCause != null ? rootCause : this;
 	}
 
 	/**

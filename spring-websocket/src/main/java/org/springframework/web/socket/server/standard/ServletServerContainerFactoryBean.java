@@ -140,7 +140,7 @@ public class ServletServerContainerFactoryBean
 
 	@Override
 	public Class<?> getObjectType() {
-		return (this.serverContainer != null ? this.serverContainer.getClass() : ServerContainer.class);
+		return this.serverContainer != null ? this.serverContainer.getClass() : ServerContainer.class;
 	}
 
 	@Override

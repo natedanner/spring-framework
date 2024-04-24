@@ -42,7 +42,7 @@ class WebSessionMethodArgumentResolverTests {
 	private final WebSessionMethodArgumentResolver resolver =
 			new WebSessionMethodArgumentResolver(ReactiveAdapterRegistry.getSharedInstance());
 
-	private ResolvableMethod testMethod = ResolvableMethod.on(getClass()).named("handle").build();
+	private final ResolvableMethod testMethod = ResolvableMethod.on(getClass()).named("handle").build();
 
 
 	@Test

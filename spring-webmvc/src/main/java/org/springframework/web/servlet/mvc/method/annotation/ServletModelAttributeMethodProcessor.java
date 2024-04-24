@@ -112,7 +112,7 @@ public class ServletModelAttributeMethodProcessor extends ModelAttributeMethodPr
 		@SuppressWarnings("unchecked")
 		Map<String, String> variables = (Map<String, String>) request.getAttribute(
 				HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE, RequestAttributes.SCOPE_REQUEST);
-		return (variables != null ? variables : Collections.emptyMap());
+		return variables != null ? variables : Collections.emptyMap();
 	}
 
 	/**

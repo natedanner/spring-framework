@@ -18,7 +18,7 @@ package org.springframework.cglib.reflect;
 import java.lang.reflect.Member;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class FastMember
+public abstract class FastMember
 {
     protected FastClass fc;
     protected Member member;
@@ -30,8 +30,8 @@ abstract public class FastMember
         this.index = index;
     }
 
-    abstract public Class[] getParameterTypes();
-    abstract public Class[] getExceptionTypes();
+    public abstract Class[] getParameterTypes();
+    public abstract Class[] getExceptionTypes();
 
     public int getIndex() {
         return index;

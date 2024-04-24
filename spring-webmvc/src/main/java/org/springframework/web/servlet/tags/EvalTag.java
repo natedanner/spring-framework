@@ -119,7 +119,7 @@ public class EvalTag extends HtmlEscapingAwareTag {
 
 	private int scope = PageContext.PAGE_SCOPE;
 
-	private boolean javaScriptEscape = false;
+	private boolean javaScriptEscape;
 
 
 	/**
@@ -168,16 +168,16 @@ public class EvalTag extends HtmlEscapingAwareTag {
 			this.pageContext.setAttribute(EVALUATION_CONTEXT_PAGE_ATTRIBUTE, evaluationContext);
 		}
 		if (this.var != null) {
-			Object result = (this.expression != null ? this.expression.getValue(evaluationContext) : null);
+			Object result = this.expression != null ? this.expression.getValue(evaluationContext) : null;
 			this.pageContext.setAttribute(this.var, result, this.scope);
 		}
 		else {
 			try {
-				String result = (this.expression != null ?
-						this.expression.getValue(evaluationContext, String.class) : null);
+				String result = this.expression != null ?
+						this.expression.getValue(evaluationContext, String.class) : null;
 				result = ObjectUtils.getDisplayString(result);
 				result = htmlEscape(result);
-				result = (this.javaScriptEscape ? JavaScriptUtils.javaScriptEscape(result) : result);
+				result = this.javaScriptEscape ? JavaScriptUtils.javaScriptEscape(result) : result;
 				this.pageContext.getOut().print(result);
 			}
 			catch (IOException ex) {
@@ -227,8 +227,8 @@ public class EvalTag extends HtmlEscapingAwareTag {
 
 		@Override
 		public boolean canRead(EvaluationContext context, @Nullable Object target, String name) throws AccessException {
-			return (target == null &&
-					(resolveImplicitVariable(name) != null || this.pageContext.findAttribute(name) != null));
+			return target == null &&
+					(resolveImplicitVariable(name) != null || this.pageContext.findAttribute(name) != null);
 		}
 
 		@Override

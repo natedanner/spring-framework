@@ -25,7 +25,7 @@ package org.springframework.web.bind.support;
  */
 public class SimpleSessionStatus implements SessionStatus {
 
-	private boolean complete = false;
+	private boolean complete;
 
 
 	@Override

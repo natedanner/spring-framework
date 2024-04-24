@@ -117,7 +117,7 @@ public class HttpMessageWriterView implements View {
 			@Nullable Map<String, ?> model, @Nullable MediaType contentType, ServerWebExchange exchange) {
 
 		Object value = getObjectToRender(model);
-		return (value != null ? write(value, contentType, exchange) : exchange.getResponse().setComplete());
+		return value != null ? write(value, contentType, exchange) : exchange.getResponse().setComplete();
 	}
 
 	@Nullable

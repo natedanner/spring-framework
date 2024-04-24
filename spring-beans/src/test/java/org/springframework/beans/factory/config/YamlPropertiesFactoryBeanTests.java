@@ -118,8 +118,8 @@ class YamlPropertiesFactoryBeanTests {
 			if (!properties.containsKey("foo")) {
 				return MatchStatus.ABSTAIN;
 			}
-			return ("bag".equals(properties.getProperty("foo")) ?
-					MatchStatus.FOUND : MatchStatus.NOT_FOUND);
+			return "bag".equals(properties.getProperty("foo")) ?
+					MatchStatus.FOUND : MatchStatus.NOT_FOUND;
 		});
 		Properties properties = factory.getObject();
 		assertThat(properties.getProperty("foo")).isEqualTo("bag");
@@ -137,8 +137,8 @@ class YamlPropertiesFactoryBeanTests {
 				if (!properties.containsKey("foo")) {
 					return MatchStatus.ABSTAIN;
 				}
-				return ("bag".equals(properties.getProperty("foo")) ?
-						MatchStatus.FOUND : MatchStatus.NOT_FOUND);
+				return "bag".equals(properties.getProperty("foo")) ?
+						MatchStatus.FOUND : MatchStatus.NOT_FOUND;
 		});
 		Properties properties = factory.getObject();
 		assertThat(properties.getProperty("foo")).isEqualTo("bag");
@@ -156,8 +156,8 @@ class YamlPropertiesFactoryBeanTests {
 			if (!properties.containsKey("foo")) {
 				return MatchStatus.ABSTAIN;
 			}
-			return ("bag".equals(properties.getProperty("foo")) ?
-					MatchStatus.FOUND : MatchStatus.NOT_FOUND);
+			return "bag".equals(properties.getProperty("foo")) ?
+					MatchStatus.FOUND : MatchStatus.NOT_FOUND;
 		});
 		Properties properties = factory.getObject();
 		assertThat(properties.getProperty("foo")).isEqualTo("bag");

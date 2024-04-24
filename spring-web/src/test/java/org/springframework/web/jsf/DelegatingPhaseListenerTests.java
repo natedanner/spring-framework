@@ -85,8 +85,8 @@ class DelegatingPhaseListenerTests {
 	@SuppressWarnings("serial")
 	public static class TestListener implements PhaseListener {
 
-		boolean beforeCalled = false;
-		boolean afterCalled = false;
+		boolean beforeCalled;
+		boolean afterCalled;
 
 		@Override
 		public PhaseId getPhaseId() {

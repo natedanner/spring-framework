@@ -39,7 +39,7 @@ public class JtaTransactionObject implements SmartTransactionObject {
 
 	private final UserTransaction userTransaction;
 
-	boolean resetTransactionTimeout = false;
+	boolean resetTransactionTimeout;
 
 
 	/**
@@ -66,7 +66,7 @@ public class JtaTransactionObject implements SmartTransactionObject {
 	public boolean isRollbackOnly() {
 		try {
 			int jtaStatus = this.userTransaction.getStatus();
-			return (jtaStatus == Status.STATUS_MARKED_ROLLBACK || jtaStatus == Status.STATUS_ROLLEDBACK);
+			return jtaStatus == Status.STATUS_MARKED_ROLLBACK || jtaStatus == Status.STATUS_ROLLEDBACK;
 		}
 		catch (SystemException ex) {
 			throw new TransactionSystemException("JTA failure on getStatus", ex);

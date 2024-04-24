@@ -242,7 +242,7 @@ public class UrlBasedCorsConfigurationSource implements CorsConfigurationSource 
 	@Nullable
 	public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
 		Object path = resolvePath(request);
-		boolean isPathContainer = (path instanceof PathContainer);
+		boolean isPathContainer = path instanceof PathContainer;
 		for (Map.Entry<PathPattern, CorsConfiguration> entry : this.corsConfigurations.entrySet()) {
 			if (match(path, isPathContainer, entry.getKey())) {
 				return entry.getValue();
@@ -255,9 +255,9 @@ public class UrlBasedCorsConfigurationSource implements CorsConfigurationSource 
 	@SuppressWarnings("deprecation")
 	private Object resolvePath(HttpServletRequest request) {
 		if (this.allowInitLookupPath && !ServletRequestPathUtils.hasCachedPath(request)) {
-			return (this.lookupPathAttributeName != null ?
+			return this.lookupPathAttributeName != null ?
 					this.urlPathHelper.getLookupPathForRequest(request, this.lookupPathAttributeName) :
-					this.urlPathHelper.getLookupPathForRequest(request));
+					this.urlPathHelper.getLookupPathForRequest(request);
 		}
 		Object lookupPath = ServletRequestPathUtils.getCachedPath(request);
 		if (this.pathMatcher != defaultPathMatcher) {
@@ -267,9 +267,9 @@ public class UrlBasedCorsConfigurationSource implements CorsConfigurationSource 
 	}
 
 	private boolean match(Object path, boolean isPathContainer, PathPattern pattern) {
-		return (isPathContainer ?
+		return isPathContainer ?
 				pattern.matches((PathContainer) path) :
-				this.pathMatcher.match(pattern.getPatternString(), (String) path));
+				this.pathMatcher.match(pattern.getPatternString(), (String) path);
 	}
 
 }

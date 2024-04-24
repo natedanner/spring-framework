@@ -242,8 +242,8 @@ public class MessageMappingMessageHandler extends AbstractMethodMessageHandler<C
 		List<HandlerMethodArgumentResolver> resolvers = new ArrayList<>();
 
 		ApplicationContext context = getApplicationContext();
-		ConfigurableBeanFactory beanFactory = (context instanceof ConfigurableApplicationContext cac ?
-				cac.getBeanFactory() : null);
+		ConfigurableBeanFactory beanFactory = context instanceof ConfigurableApplicationContext cac ?
+				cac.getBeanFactory() : null;
 
 		// Annotation-based resolvers
 		resolvers.add(new HeaderMethodArgumentResolver(this.conversionService, beanFactory));

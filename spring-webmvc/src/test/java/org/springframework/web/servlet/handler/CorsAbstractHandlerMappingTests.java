@@ -229,10 +229,10 @@ class CorsAbstractHandlerMappingTests {
 		@Override
 		protected Object getHandlerInternal(HttpServletRequest request) {
 			String lookupPath = initLookupPath(request);
-			if (lookupPath.equals("/cors")) {
+			if ("/cors".equals(lookupPath)) {
 				return new CorsAwareHandler();
 			}
-			else if (lookupPath.equals("/chain")) {
+			else if ("/chain".equals(lookupPath)) {
 				return new HandlerExecutionChain(new CorsAwareHandler());
 			}
 			return new SimpleHandler();

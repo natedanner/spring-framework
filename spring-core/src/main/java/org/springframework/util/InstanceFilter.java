@@ -57,8 +57,8 @@ public class InstanceFilter<T> {
 	public InstanceFilter(@Nullable Collection<? extends T> includes,
 			@Nullable Collection<? extends T> excludes, boolean matchIfEmpty) {
 
-		this.includes = (includes != null ? includes : Collections.emptyList());
-		this.excludes = (excludes != null ? excludes : Collections.emptyList());
+		this.includes = includes != null ? includes : Collections.emptyList();
+		this.excludes = excludes != null ? excludes : Collections.emptyList();
 		this.matchIfEmpty = matchIfEmpty;
 	}
 

@@ -96,8 +96,8 @@ public class RequestMatchResult {
 	 */
 	@SuppressWarnings("ConstantConditions")
 	public Map<String, String> extractUriTemplateVariables() {
-		return (this.pathPattern != null ?
+		return this.pathPattern != null ?
 				this.pathPattern.matchAndExtract(this.lookupPathContainer).getUriVariables() :
-				this.pathMatcher.extractUriTemplateVariables(this.pattern, this.lookupPath));
+				this.pathMatcher.extractUriTemplateVariables(this.pattern, this.lookupPath);
 	}
 }

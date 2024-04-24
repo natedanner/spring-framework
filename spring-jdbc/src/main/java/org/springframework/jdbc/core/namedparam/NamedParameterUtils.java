@@ -370,8 +370,8 @@ public abstract class NamedParameterUtils {
 					paramArray[i] = paramValue;
 				}
 				else {
-					paramArray[i] = (param != null ? new SqlParameterValue(param, paramValue) :
-							SqlParameterSourceUtils.getTypedValue(paramSource, paramName));
+					paramArray[i] = param != null ? new SqlParameterValue(param, paramValue) :
+							SqlParameterSourceUtils.getTypedValue(paramSource, paramName);
 				}
 			}
 			catch (IllegalArgumentException ex) {

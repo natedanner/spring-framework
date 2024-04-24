@@ -164,7 +164,7 @@ class ListenerWriteProcessorTests {
 
 		@Override
 		public void request(long n) {
-			this.demand = (n == Long.MAX_VALUE ? n : this.demand + n);
+			this.demand = n == Long.MAX_VALUE ? n : this.demand + n;
 		}
 
 		@Override

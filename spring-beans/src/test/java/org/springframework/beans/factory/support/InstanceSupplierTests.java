@@ -46,7 +46,7 @@ class InstanceSupplierTests {
 	@Test
 	void getWithExceptionWithoutRegisteredBeanThrowsException() {
 		InstanceSupplier<String> supplier = registeredBean -> "test";
-		assertThatIllegalStateException().isThrownBy(() -> supplier.getWithException())
+		assertThatIllegalStateException().isThrownBy(supplier::getWithException)
 				.withMessage("No RegisteredBean parameter provided");
 	}
 

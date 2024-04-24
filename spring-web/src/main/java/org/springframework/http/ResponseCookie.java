@@ -144,10 +144,10 @@ public final class ResponseCookie extends HttpCookie {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other ||(other instanceof ResponseCookie that &&
+		return this == other ||(other instanceof ResponseCookie that &&
 				getName().equalsIgnoreCase(that.getName()) &&
 				ObjectUtils.nullSafeEquals(this.path, that.getPath()) &&
-				ObjectUtils.nullSafeEquals(this.domain, that.getDomain())));
+				ObjectUtils.nullSafeEquals(this.domain, that.getDomain()));
 	}
 
 	@Override
@@ -420,7 +420,7 @@ public final class ResponseCookie extends HttpCookie {
 
 		@Override
 		public ResponseCookieBuilder maxAge(long maxAgeSeconds) {
-			this.maxAge = (maxAgeSeconds >= 0 ? Duration.ofSeconds(maxAgeSeconds) : Duration.ofSeconds(-1));
+			this.maxAge = maxAgeSeconds >= 0 ? Duration.ofSeconds(maxAgeSeconds) : Duration.ofSeconds(-1);
 			return this;
 		}
 

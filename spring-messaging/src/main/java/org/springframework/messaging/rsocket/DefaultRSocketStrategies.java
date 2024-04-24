@@ -211,16 +211,16 @@ final class DefaultRSocketStrategies implements RSocketStrategies {
 
 		@Override
 		public RSocketStrategies build() {
-			RouteMatcher matcher = (this.routeMatcher != null ? this.routeMatcher : initRouteMatcher());
+			RouteMatcher matcher = this.routeMatcher != null ? this.routeMatcher : initRouteMatcher();
 
-			ReactiveAdapterRegistry registry = (this.adapterRegistry != null ?
-					this.adapterRegistry : ReactiveAdapterRegistry.getSharedInstance());
+			ReactiveAdapterRegistry registry = this.adapterRegistry != null ?
+					this.adapterRegistry : ReactiveAdapterRegistry.getSharedInstance();
 
-			DataBufferFactory factory = (this.bufferFactory != null ?
-					this.bufferFactory : new NettyDataBufferFactory(PooledByteBufAllocator.DEFAULT));
+			DataBufferFactory factory = this.bufferFactory != null ?
+					this.bufferFactory : new NettyDataBufferFactory(PooledByteBufAllocator.DEFAULT);
 
-			MetadataExtractor extractor = (this.metadataExtractor != null ?
-					this.metadataExtractor : new DefaultMetadataExtractor(this.decoders));
+			MetadataExtractor extractor = this.metadataExtractor != null ?
+					this.metadataExtractor : new DefaultMetadataExtractor(this.decoders);
 
 			if (extractor instanceof MetadataExtractorRegistry metadataExtractorRegistry) {
 				this.metadataExtractors.forEach(consumer -> consumer.accept(metadataExtractorRegistry));

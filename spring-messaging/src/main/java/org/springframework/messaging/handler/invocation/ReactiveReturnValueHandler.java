@@ -47,13 +47,13 @@ public class ReactiveReturnValueHandler extends AbstractAsyncReturnValueHandler 
 
 	@Override
 	public boolean supportsReturnType(MethodParameter returnType) {
-		return (this.adapterRegistry.getAdapter(returnType.getParameterType()) != null);
+		return this.adapterRegistry.getAdapter(returnType.getParameterType()) != null;
 	}
 
 	@Override
 	public boolean isAsyncReturnValue(Object returnValue, MethodParameter returnType) {
 		ReactiveAdapter adapter = this.adapterRegistry.getAdapter(returnType.getParameterType(), returnValue);
-		return (adapter != null && !adapter.isMultiValue() && !adapter.isNoValue());
+		return adapter != null && !adapter.isMultiValue() && !adapter.isNoValue();
 	}
 
 	@Override

@@ -49,9 +49,9 @@ public class RequestBodyArgumentResolver implements HttpServiceArgumentResolver 
 	public RequestBodyArgumentResolver(HttpExchangeAdapter exchangeAdapter) {
 		if (REACTOR_PRESENT) {
 			this.reactiveAdapterRegistry =
-					(exchangeAdapter instanceof ReactorHttpExchangeAdapter reactorAdapter ?
+					exchangeAdapter instanceof ReactorHttpExchangeAdapter reactorAdapter ?
 							reactorAdapter.getReactiveAdapterRegistry() :
-							ReactiveAdapterRegistry.getSharedInstance());
+							ReactiveAdapterRegistry.getSharedInstance();
 		}
 		else {
 			this.reactiveAdapterRegistry = null;

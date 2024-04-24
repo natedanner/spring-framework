@@ -134,7 +134,7 @@ class NumberUtilsTests {
 
 	@Test
 	void convertDoubleToBigInteger() {
-		Double decimal = 3.14d;
+		Double decimal = 3.14D;
 		assertThat(NumberUtils.convertNumberToTargetClass(decimal, BigInteger.class)).isEqualTo(new BigInteger("3"));
 	}
 

@@ -874,46 +874,46 @@ class EvaluationTests extends AbstractExpressionTests {
 			// BigDecimal
 			e = parser.parseExpression("bd++");
 			assertThat(new BigDecimal("2").equals(helper.bd)).isTrue();
-			BigDecimal return_bd = e.getValue(ctx, BigDecimal.class);
-			assertThat(new BigDecimal("2")).isEqualTo(return_bd);
+			BigDecimal returnBd = e.getValue(ctx, BigDecimal.class);
+			assertThat(new BigDecimal("2")).isEqualTo(returnBd);
 			assertThat(new BigDecimal("3").equals(helper.bd)).isTrue();
 
 			// double
 			e = parser.parseExpression("ddd++");
 			assertThat((float) helper.ddd).isCloseTo((float) 2.0d, within((float) 0d));
-			double return_ddd = e.getValue(ctx, Double.TYPE);
-			assertThat((float) return_ddd).isCloseTo((float) 2.0d, within((float) 0d));
+			double returnDdd = e.getValue(ctx, Double.TYPE);
+			assertThat((float) returnDdd).isCloseTo((float) 2.0d, within((float) 0d));
 			assertThat((float) helper.ddd).isCloseTo((float) 3.0d, within((float) 0d));
 
 			// float
 			e = parser.parseExpression("fff++");
 			assertThat(helper.fff).isCloseTo(3.0f, within((float) 0d));
-			float return_fff = e.getValue(ctx, Float.TYPE);
-			assertThat(return_fff).isCloseTo(3.0f, within((float) 0d));
+			float returnFff = e.getValue(ctx, Float.TYPE);
+			assertThat(returnFff).isCloseTo(3.0f, within((float) 0d));
 			assertThat(helper.fff).isCloseTo(4.0f, within((float) 0d));
 
 			// long
 			e = parser.parseExpression("lll++");
 			assertThat(helper.lll).isEqualTo(66666L);
-			long return_lll = e.getValue(ctx, Long.TYPE);
-			assertThat(return_lll).isEqualTo(66666L);
+			long returnLll = e.getValue(ctx, Long.TYPE);
+			assertThat(returnLll).isEqualTo(66666L);
 			assertThat(helper.lll).isEqualTo(66667L);
 
 			// int
 			e = parser.parseExpression("iii++");
 			assertThat(helper.iii).isEqualTo(42);
-			int return_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_iii).isEqualTo(42);
+			int returnIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnIii).isEqualTo(42);
 			assertThat(helper.iii).isEqualTo(43);
-			return_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_iii).isEqualTo(43);
+			returnIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnIii).isEqualTo(43);
 			assertThat(helper.iii).isEqualTo(44);
 
 			// short
 			e = parser.parseExpression("sss++");
 			assertThat(helper.sss).isEqualTo((short) 15);
-			short return_sss = e.getValue(ctx, Short.TYPE);
-			assertThat(return_sss).isEqualTo((short) 15);
+			short returnSss = e.getValue(ctx, Short.TYPE);
+			assertThat(returnSss).isEqualTo((short) 15);
 			assertThat(helper.sss).isEqualTo((short) 16);
 		}
 
@@ -927,46 +927,46 @@ class EvaluationTests extends AbstractExpressionTests {
 			// BigDecimal
 			e = parser.parseExpression("++bd");
 			assertThat(new BigDecimal("2").equals(helper.bd)).isTrue();
-			BigDecimal return_bd = e.getValue(ctx, BigDecimal.class);
-			assertThat(new BigDecimal("3")).isEqualTo(return_bd);
+			BigDecimal returnBd = e.getValue(ctx, BigDecimal.class);
+			assertThat(new BigDecimal("3")).isEqualTo(returnBd);
 			assertThat(new BigDecimal("3").equals(helper.bd)).isTrue();
 
 			// double
 			e = parser.parseExpression("++ddd");
 			assertThat((float) helper.ddd).isCloseTo((float) 2.0d, within((float) 0d));
-			double return_ddd = e.getValue(ctx, Double.TYPE);
-			assertThat((float) return_ddd).isCloseTo((float) 3.0d, within((float) 0d));
+			double returnDdd = e.getValue(ctx, Double.TYPE);
+			assertThat((float) returnDdd).isCloseTo((float) 3.0d, within((float) 0d));
 			assertThat((float) helper.ddd).isCloseTo((float) 3.0d, within((float) 0d));
 
 			// float
 			e = parser.parseExpression("++fff");
 			assertThat(helper.fff).isCloseTo(3.0f, within((float) 0d));
-			float return_fff = e.getValue(ctx, Float.TYPE);
-			assertThat(return_fff).isCloseTo(4.0f, within((float) 0d));
+			float returnFff = e.getValue(ctx, Float.TYPE);
+			assertThat(returnFff).isCloseTo(4.0f, within((float) 0d));
 			assertThat(helper.fff).isCloseTo(4.0f, within((float) 0d));
 
 			// long
 			e = parser.parseExpression("++lll");
 			assertThat(helper.lll).isEqualTo(66666L);
-			long return_lll = e.getValue(ctx, Long.TYPE);
-			assertThat(return_lll).isEqualTo(66667L);
+			long returnLll = e.getValue(ctx, Long.TYPE);
+			assertThat(returnLll).isEqualTo(66667L);
 			assertThat(helper.lll).isEqualTo(66667L);
 
 			// int
 			e = parser.parseExpression("++iii");
 			assertThat(helper.iii).isEqualTo(42);
-			int return_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_iii).isEqualTo(43);
+			int returnIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnIii).isEqualTo(43);
 			assertThat(helper.iii).isEqualTo(43);
-			return_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_iii).isEqualTo(44);
+			returnIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnIii).isEqualTo(44);
 			assertThat(helper.iii).isEqualTo(44);
 
 			// short
 			e = parser.parseExpression("++sss");
 			assertThat(helper.sss).isEqualTo((short) 15);
-			int return_sss = (Integer) e.getValue(ctx);
-			assertThat(return_sss).isEqualTo((short) 16);
+			int returnSss = (Integer) e.getValue(ctx);
+			assertThat(returnSss).isEqualTo((short) 16);
 			assertThat(helper.sss).isEqualTo((short) 16);
 		}
 
@@ -1024,46 +1024,46 @@ class EvaluationTests extends AbstractExpressionTests {
 			// BigDecimal
 			e = parser.parseExpression("bd--");
 			assertThat(new BigDecimal("2").equals(helper.bd)).isTrue();
-			BigDecimal return_bd = e.getValue(ctx,BigDecimal.class);
-			assertThat(new BigDecimal("2")).isEqualTo(return_bd);
+			BigDecimal returnBd = e.getValue(ctx,BigDecimal.class);
+			assertThat(new BigDecimal("2")).isEqualTo(returnBd);
 			assertThat(new BigDecimal("1").equals(helper.bd)).isTrue();
 
 			// double
 			e = parser.parseExpression("ddd--");
 			assertThat((float) helper.ddd).isCloseTo((float) 2.0d, within((float) 0d));
-			double return_ddd = e.getValue(ctx, Double.TYPE);
-			assertThat((float) return_ddd).isCloseTo((float) 2.0d, within((float) 0d));
+			double returnDdd = e.getValue(ctx, Double.TYPE);
+			assertThat((float) returnDdd).isCloseTo((float) 2.0d, within((float) 0d));
 			assertThat((float) helper.ddd).isCloseTo((float) 1.0d, within((float) 0d));
 
 			// float
 			e = parser.parseExpression("fff--");
 			assertThat(helper.fff).isCloseTo(3.0f, within((float) 0d));
-			float return_fff = e.getValue(ctx, Float.TYPE);
-			assertThat(return_fff).isCloseTo(3.0f, within((float) 0d));
+			float returnFff = e.getValue(ctx, Float.TYPE);
+			assertThat(returnFff).isCloseTo(3.0f, within((float) 0d));
 			assertThat(helper.fff).isCloseTo(2.0f, within((float) 0d));
 
 			// long
 			e = parser.parseExpression("lll--");
 			assertThat(helper.lll).isEqualTo(66666L);
-			long return_lll = e.getValue(ctx, Long.TYPE);
-			assertThat(return_lll).isEqualTo(66666L);
+			long returnLll = e.getValue(ctx, Long.TYPE);
+			assertThat(returnLll).isEqualTo(66666L);
 			assertThat(helper.lll).isEqualTo(66665L);
 
 			// int
 			e = parser.parseExpression("iii--");
 			assertThat(helper.iii).isEqualTo(42);
-			int return_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_iii).isEqualTo(42);
+			int returnIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnIii).isEqualTo(42);
 			assertThat(helper.iii).isEqualTo(41);
-			return_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_iii).isEqualTo(41);
+			returnIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnIii).isEqualTo(41);
 			assertThat(helper.iii).isEqualTo(40);
 
 			// short
 			e = parser.parseExpression("sss--");
 			assertThat(helper.sss).isEqualTo((short) 15);
-			short return_sss = e.getValue(ctx, Short.TYPE);
-			assertThat(return_sss).isEqualTo((short) 15);
+			short returnSss = e.getValue(ctx, Short.TYPE);
+			assertThat(returnSss).isEqualTo((short) 15);
 			assertThat(helper.sss).isEqualTo((short) 14);
 		}
 
@@ -1077,46 +1077,46 @@ class EvaluationTests extends AbstractExpressionTests {
 			// BigDecimal
 			e = parser.parseExpression("--bd");
 			assertThat(new BigDecimal("2").equals(helper.bd)).isTrue();
-			BigDecimal return_bd = e.getValue(ctx,BigDecimal.class);
-			assertThat(new BigDecimal("1")).isEqualTo(return_bd);
+			BigDecimal returnBd = e.getValue(ctx,BigDecimal.class);
+			assertThat(new BigDecimal("1")).isEqualTo(returnBd);
 			assertThat(new BigDecimal("1").equals(helper.bd)).isTrue();
 
 			// double
 			e = parser.parseExpression("--ddd");
 			assertThat((float) helper.ddd).isCloseTo((float) 2.0d, within((float) 0d));
-			double return_ddd = e.getValue(ctx, Double.TYPE);
-			assertThat((float) return_ddd).isCloseTo((float) 1.0d, within((float) 0d));
+			double returnDdd = e.getValue(ctx, Double.TYPE);
+			assertThat((float) returnDdd).isCloseTo((float) 1.0d, within((float) 0d));
 			assertThat((float) helper.ddd).isCloseTo((float) 1.0d, within((float) 0d));
 
 			// float
 			e = parser.parseExpression("--fff");
 			assertThat(helper.fff).isCloseTo(3.0f, within((float) 0d));
-			float return_fff = e.getValue(ctx, Float.TYPE);
-			assertThat(return_fff).isCloseTo(2.0f, within((float) 0d));
+			float returnFff = e.getValue(ctx, Float.TYPE);
+			assertThat(returnFff).isCloseTo(2.0f, within((float) 0d));
 			assertThat(helper.fff).isCloseTo(2.0f, within((float) 0d));
 
 			// long
 			e = parser.parseExpression("--lll");
 			assertThat(helper.lll).isEqualTo(66666L);
-			long return_lll = e.getValue(ctx, Long.TYPE);
-			assertThat(return_lll).isEqualTo(66665L);
+			long returnLll = e.getValue(ctx, Long.TYPE);
+			assertThat(returnLll).isEqualTo(66665L);
 			assertThat(helper.lll).isEqualTo(66665L);
 
 			// int
 			e = parser.parseExpression("--iii");
 			assertThat(helper.iii).isEqualTo(42);
-			int return_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_iii).isEqualTo(41);
+			int returnIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnIii).isEqualTo(41);
 			assertThat(helper.iii).isEqualTo(41);
-			return_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_iii).isEqualTo(40);
+			returnIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnIii).isEqualTo(40);
 			assertThat(helper.iii).isEqualTo(40);
 
 			// short
 			e = parser.parseExpression("--sss");
 			assertThat(helper.sss).isEqualTo((short) 15);
-			int return_sss = (Integer)e.getValue(ctx);
-			assertThat(return_sss).isEqualTo(14);
+			int returnSss = (Integer)e.getValue(ctx);
+			assertThat(returnSss).isEqualTo(14);
 			assertThat(helper.sss).isEqualTo((short) 14);
 		}
 
@@ -1336,47 +1336,47 @@ class EvaluationTests extends AbstractExpressionTests {
 			// iii=42
 			e = parser.parseExpression("iii=iii++");
 			assertThat(helper.iii).isEqualTo(42);
-			int return_iii = e.getValue(ctx, Integer.TYPE);
+			int returnIii = e.getValue(ctx, Integer.TYPE);
 			assertThat(helper.iii).isEqualTo(42);
-			assertThat(return_iii).isEqualTo(42);
+			assertThat(returnIii).isEqualTo(42);
 
 			// Identifier
 			e = parser.parseExpression("iii++");
 			assertThat(helper.iii).isEqualTo(42);
-			return_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_iii).isEqualTo(42);
+			returnIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnIii).isEqualTo(42);
 			assertThat(helper.iii).isEqualTo(43);
 
 			e = parser.parseExpression("--iii");
 			assertThat(helper.iii).isEqualTo(43);
-			return_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_iii).isEqualTo(42);
+			returnIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnIii).isEqualTo(42);
 			assertThat(helper.iii).isEqualTo(42);
 
 			e = parser.parseExpression("iii=99");
 			assertThat(helper.iii).isEqualTo(42);
-			return_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_iii).isEqualTo(99);
+			returnIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnIii).isEqualTo(99);
 			assertThat(helper.iii).isEqualTo(99);
 
 			// CompoundExpression
 			// foo.iii == 99
 			e = parser.parseExpression("foo.iii++");
 			assertThat(helper.foo.iii).isEqualTo(99);
-			int return_foo_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_foo_iii).isEqualTo(99);
+			int returnFooIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnFooIii).isEqualTo(99);
 			assertThat(helper.foo.iii).isEqualTo(100);
 
 			e = parser.parseExpression("--foo.iii");
 			assertThat(helper.foo.iii).isEqualTo(100);
-			return_foo_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_foo_iii).isEqualTo(99);
+			returnFooIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnFooIii).isEqualTo(99);
 			assertThat(helper.foo.iii).isEqualTo(99);
 
 			e = parser.parseExpression("foo.iii=999");
 			assertThat(helper.foo.iii).isEqualTo(99);
-			return_foo_iii = e.getValue(ctx, Integer.TYPE);
-			assertThat(return_foo_iii).isEqualTo(999);
+			returnFooIii = e.getValue(ctx, Integer.TYPE);
+			assertThat(returnFooIii).isEqualTo(999);
 			assertThat(helper.foo.iii).isEqualTo(999);
 
 			// ConstructorReference
@@ -1460,7 +1460,7 @@ class EvaluationTests extends AbstractExpressionTests {
 
 			// BeanReference
 			BeanResolver beanResolver = (context, beanName) -> {
-				if (beanName.equals("foo") || beanName.equals("bar")) {
+				if ("foo".equals(beanName) || "bar".equals(beanName)) {
 					return new Spr9751_2();
 				}
 				throw new AccessException("unknown bean " + beanName);
@@ -1554,8 +1554,8 @@ class EvaluationTests extends AbstractExpressionTests {
 
 		public String type = "hello";
 		public BigDecimal bd = new BigDecimal("2");
-		public double ddd = 2.0d;
-		public float fff = 3.0f;
+		public double ddd = 2.0D;
+		public float fff = 3.0F;
 		public long lll = 66666L;
 		public int iii = 42;
 		public short sss = (short)15;
@@ -1568,7 +1568,7 @@ class EvaluationTests extends AbstractExpressionTests {
 		public int index2 = 2;
 
 		public List<String> listOfStrings;
-		public int index3 = 0;
+		public int index3;
 
 		public Spr9751() {
 			integerArray = new Integer[5];

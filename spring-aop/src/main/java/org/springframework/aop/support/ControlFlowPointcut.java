@@ -84,8 +84,8 @@ public class ControlFlowPointcut implements Pointcut, ClassFilter, MethodMatcher
 	public ControlFlowPointcut(Class<?> clazz, @Nullable String methodNamePattern) {
 		Assert.notNull(clazz, "Class must not be null");
 		this.clazz = clazz;
-		this.methodNamePatterns = (methodNamePattern != null ?
-				Collections.singletonList(methodNamePattern) : Collections.emptyList());
+		this.methodNamePatterns = methodNamePattern != null ?
+				Collections.singletonList(methodNamePattern) : Collections.emptyList();
 	}
 
 	/**
@@ -217,8 +217,8 @@ public class ControlFlowPointcut implements Pointcut, ClassFilter, MethodMatcher
 	 * @see PatternMatchUtils#simpleMatch(String, String)
 	 */
 	protected boolean isMatch(String methodName, String methodNamePattern) {
-		return (methodName.equals(methodNamePattern) ||
-				PatternMatchUtils.simpleMatch(methodNamePattern, methodName));
+		return methodName.equals(methodNamePattern) ||
+				PatternMatchUtils.simpleMatch(methodNamePattern, methodName);
 	}
 
 
@@ -235,8 +235,8 @@ public class ControlFlowPointcut implements Pointcut, ClassFilter, MethodMatcher
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ControlFlowPointcut that &&
-				this.clazz.equals(that.clazz)) && this.methodNamePatterns.equals(that.methodNamePatterns));
+		return this == other || (other instanceof ControlFlowPointcut that &&
+				this.clazz.equals(that.clazz)) && this.methodNamePatterns.equals(that.methodNamePatterns);
 	}
 
 	@Override

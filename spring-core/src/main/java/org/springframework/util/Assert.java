@@ -574,7 +574,7 @@ public abstract class Assert {
 
 
 	private static void instanceCheckFailed(Class<?> type, @Nullable Object obj, @Nullable String msg) {
-		String className = (obj != null ? obj.getClass().getName() : "null");
+		String className = obj != null ? obj.getClass().getName() : "null";
 		String result = "";
 		boolean defaultMessage = true;
 		if (StringUtils.hasLength(msg)) {
@@ -611,7 +611,7 @@ public abstract class Assert {
 	}
 
 	private static boolean endsWithSeparator(String msg) {
-		return (msg.endsWith(":") || msg.endsWith(";") || msg.endsWith(",") || msg.endsWith("."));
+		return msg.endsWith(":") || msg.endsWith(";") || msg.endsWith(",") || msg.endsWith(".");
 	}
 
 	private static String messageWithTypeName(String msg, @Nullable Object typeName) {
@@ -620,7 +620,7 @@ public abstract class Assert {
 
 	@Nullable
 	private static String nullSafeGet(@Nullable Supplier<String> messageSupplier) {
-		return (messageSupplier != null ? messageSupplier.get() : null);
+		return messageSupplier != null ? messageSupplier.get() : null;
 	}
 
 }

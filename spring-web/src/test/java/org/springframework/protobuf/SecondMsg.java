@@ -25,7 +25,7 @@ private static final long serialVersionUID = 0L;
     return new SecondMsg();
   }
 
-  public static final com.google.protobuf.Descriptors.Descriptor
+  public static com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return OuterSample.internal_static_SecondMsg_descriptor;
   }
@@ -40,14 +40,14 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int BLAH_FIELD_NUMBER = 1;
-  private int blah_ = 0;
+  private int blah_;
   /**
    * <code>optional int32 blah = 1;</code>
    * @return Whether the blah field is set.
    */
   @Override
   public boolean hasBlah() {
-    return ((bitField0_ & 0x00000001) != 0);
+    return (bitField0_ & 0x00000001) != 0;
   }
   /**
    * <code>optional int32 blah = 1;</code>
@@ -62,8 +62,12 @@ private static final long serialVersionUID = 0L;
   @Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
-    if (isInitialized == 1) return true;
-    if (isInitialized == 0) return false;
+	  if (isInitialized == 1) {
+		  return true;
+	  }
+	  if (isInitialized == 0) {
+		  return false;
+	  }
 
     memoizedIsInitialized = 1;
     return true;
@@ -72,7 +76,7 @@ private static final long serialVersionUID = 0L;
   @Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (((bitField0_ & 0x00000001) != 0)) {
+    if ((bitField0_ & 0x00000001) != 0) {
       output.writeInt32(1, blah_);
     }
     getUnknownFields().writeTo(output);
@@ -81,10 +85,12 @@ private static final long serialVersionUID = 0L;
   @Override
   public int getSerializedSize() {
     int size = memoizedSize;
-    if (size != -1) return size;
+	  if (size != -1) {
+		  return size;
+	  }
 
     size = 0;
-    if (((bitField0_ & 0x00000001) != 0)) {
+    if ((bitField0_ & 0x00000001) != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(1, blah_);
     }
@@ -103,13 +109,16 @@ private static final long serialVersionUID = 0L;
     }
     SecondMsg other = (SecondMsg) obj;
 
-    if (hasBlah() != other.hasBlah()) return false;
+	  if (hasBlah() != other.hasBlah()) {
+		  return false;
+	  }
     if (hasBlah()) {
-      if (getBlah()
-          != other.getBlah()) return false;
+		if (getBlah()
+				!= other.getBlah()) {
+			return false;
+		}
     }
-    if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-    return true;
+		return !!getUnknownFields().equals(other.getUnknownFields());
   }
 
   @Override
@@ -217,8 +226,7 @@ private static final long serialVersionUID = 0L;
   @Override
   protected Builder newBuilderForType(
       BuilderParent parent) {
-    Builder builder = new Builder(parent);
-    return builder;
+    return new Builder(parent);
   }
   /**
    * Protobuf type {@code SecondMsg}
@@ -227,7 +235,7 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:SecondMsg)
       SecondMsgOrBuilder {
-    public static final com.google.protobuf.Descriptors.Descriptor
+    public static com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return OuterSample.internal_static_SecondMsg_descriptor;
     }
@@ -287,13 +295,13 @@ private static final long serialVersionUID = 0L;
     }
 
     private void buildPartial0(SecondMsg result) {
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) != 0)) {
+      int fromBitField0 = bitField0_;
+      int toBitField0 = 0;
+      if ((fromBitField0 & 0x00000001) != 0) {
         result.blah_ = blah_;
-        to_bitField0_ |= 0x00000001;
+        toBitField0 |= 0x00000001;
       }
-      result.bitField0_ |= to_bitField0_;
+      result.bitField0_ |= toBitField0;
     }
 
     @Override
@@ -339,7 +347,9 @@ private static final long serialVersionUID = 0L;
     }
 
     public Builder mergeFrom(SecondMsg other) {
-      if (other == SecondMsg.getDefaultInstance()) return this;
+		if (other == SecondMsg.getDefaultInstance()) {
+			return this;
+		}
       if (other.hasBlah()) {
         setBlah(other.getBlah());
       }
@@ -398,7 +408,7 @@ private static final long serialVersionUID = 0L;
      */
     @Override
     public boolean hasBlah() {
-      return ((bitField0_ & 0x00000001) != 0);
+      return (bitField0_ & 0x00000001) != 0;
     }
     /**
      * <code>optional int32 blah = 1;</code>
@@ -425,7 +435,7 @@ private static final long serialVersionUID = 0L;
      * @return This builder for chaining.
      */
     public Builder clearBlah() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      bitField0_ = bitField0_ & ~0x00000001;
       blah_ = 0;
       onChanged();
       return this;
@@ -457,7 +467,7 @@ private static final long serialVersionUID = 0L;
   }
 
   @Deprecated public static final com.google.protobuf.Parser<SecondMsg>
-      PARSER = new com.google.protobuf.AbstractParser<SecondMsg>() {
+      PARSER = new com.google.protobuf.AbstractParser<>() {
     @Override
     public SecondMsg parsePartialFrom(
         com.google.protobuf.CodedInputStream input,

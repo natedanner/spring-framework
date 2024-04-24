@@ -68,7 +68,7 @@ public abstract class BeanFactoryUtils {
 	 * @see BeanFactory#FACTORY_BEAN_PREFIX
 	 */
 	public static boolean isFactoryDereference(@Nullable String name) {
-		return (name != null && name.startsWith(BeanFactory.FACTORY_BEAN_PREFIX));
+		return name != null && name.startsWith(BeanFactory.FACTORY_BEAN_PREFIX);
 	}
 
 	/**
@@ -102,7 +102,7 @@ public abstract class BeanFactoryUtils {
 	 * @see org.springframework.beans.factory.support.DefaultBeanNameGenerator
 	 */
 	public static boolean isGeneratedBeanName(@Nullable String name) {
-		return (name != null && name.contains(GENERATED_BEAN_NAME_SEPARATOR));
+		return name != null && name.contains(GENERATED_BEAN_NAME_SEPARATOR);
 	}
 
 	/**
@@ -115,7 +115,7 @@ public abstract class BeanFactoryUtils {
 	public static String originalBeanName(String name) {
 		Assert.notNull(name, "'name' must not be null");
 		int separatorIndex = name.indexOf(GENERATED_BEAN_NAME_SEPARATOR);
-		return (separatorIndex != -1 ? name.substring(0, separatorIndex) : name);
+		return separatorIndex != -1 ? name.substring(0, separatorIndex) : name;
 	}
 
 

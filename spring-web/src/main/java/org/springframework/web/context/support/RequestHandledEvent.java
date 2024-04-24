@@ -115,7 +115,7 @@ public class RequestHandledEvent extends ApplicationEvent {
 	 * Return whether the request failed.
 	 */
 	public boolean wasFailure() {
-		return (this.failureCause != null);
+		return this.failureCause != null;
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class RequestHandledEvent extends ApplicationEvent {
 
 	@Override
 	public String toString() {
-		return ("RequestHandledEvent: " + getDescription());
+		return "RequestHandledEvent: " + getDescription();
 	}
 
 }

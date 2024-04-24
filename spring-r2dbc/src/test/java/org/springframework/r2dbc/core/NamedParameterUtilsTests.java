@@ -43,7 +43,7 @@ import static org.mockito.Mockito.verify;
  */
 class NamedParameterUtilsTests {
 
-	private final BindMarkersFactory BIND_MARKERS = BindMarkersFactory.indexed("$", 1);
+	private final BindMarkersFactory bindMarkers = BindMarkersFactory.indexed("$", 1);
 
 
 	@Test
@@ -71,7 +71,7 @@ class NamedParameterUtilsTests {
 		namedParams.addValue("a", "a").addValue("b", "b").addValue("c", "c");
 
 		PreparedOperation<?> operation = NamedParameterUtils.substituteNamedParameters(
-				"xxx :a :b :c", BIND_MARKERS, namedParams);
+				"xxx :a :b :c", bindMarkers, namedParams);
 
 		assertThat(operation.toQuery()).isEqualTo("xxx $1 $2 $3");
 
@@ -89,7 +89,7 @@ class NamedParameterUtilsTests {
 				new Object[] {"Walt Jr.", "Flynn"}));
 
 		PreparedOperation<?> operation = NamedParameterUtils.substituteNamedParameters(
-				"xxx :a", BIND_MARKERS, namedParams);
+				"xxx :a", bindMarkers, namedParams);
 
 		assertThat(operation.toQuery()).isEqualTo("xxx ($1, $2), ($3, $4)");
 	}
@@ -104,7 +104,7 @@ class NamedParameterUtilsTests {
 		BindTarget bindTarget = mock();
 
 		PreparedOperation<?> operation = NamedParameterUtils.substituteNamedParameters(
-				"xxx :a", BIND_MARKERS, namedParams);
+				"xxx :a", bindMarkers, namedParams);
 		operation.bindTo(bindTarget);
 
 		verify(bindTarget).bind(0, "Walter");
@@ -139,7 +139,7 @@ class NamedParameterUtilsTests {
 
 		ParsedSql parsedSql = NamedParameterUtils.parseSqlStatement(sql);
 		PreparedOperation<?> operation = NamedParameterUtils.substituteNamedParameters(
-				parsedSql, BIND_MARKERS, new MapBindParameterSource());
+				parsedSql, bindMarkers, new MapBindParameterSource());
 
 		assertThat(operation.toQuery()).isEqualTo(expectedSql);
 	}
@@ -445,12 +445,12 @@ class NamedParameterUtilsTests {
 
 
 	private String expand(ParsedSql sql) {
-		return NamedParameterUtils.substituteNamedParameters(sql, BIND_MARKERS,
+		return NamedParameterUtils.substituteNamedParameters(sql, bindMarkers,
 				new MapBindParameterSource()).toQuery();
 	}
 
 	private String expand(String sql) {
-		return NamedParameterUtils.substituteNamedParameters(sql, BIND_MARKERS,
+		return NamedParameterUtils.substituteNamedParameters(sql, bindMarkers,
 				new MapBindParameterSource()).toQuery();
 	}
 

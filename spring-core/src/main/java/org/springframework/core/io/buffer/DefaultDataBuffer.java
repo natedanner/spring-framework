@@ -231,7 +231,7 @@ public class DefaultDataBuffer implements DataBuffer {
 	}
 
 	private static ByteBuffer allocate(int capacity, boolean direct) {
-		return (direct ? ByteBuffer.allocateDirect(capacity) : ByteBuffer.allocate(capacity));
+		return direct ? ByteBuffer.allocateDirect(capacity) : ByteBuffer.allocate(capacity);
 	}
 
 	@Override
@@ -481,10 +481,10 @@ public class DefaultDataBuffer implements DataBuffer {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof DefaultDataBuffer that &&
+		return this == other || (other instanceof DefaultDataBuffer that &&
 				this.readPosition == that.readPosition &&
 				this.writePosition == that.writePosition &&
-				this.byteBuffer.equals(that.byteBuffer)));
+				this.byteBuffer.equals(that.byteBuffer));
 	}
 
 	@Override

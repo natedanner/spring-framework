@@ -41,9 +41,9 @@ public class DeferredResultMethodReturnValueHandler implements HandlerMethodRetu
 	@Override
 	public boolean supportsReturnType(MethodParameter returnType) {
 		Class<?> type = returnType.getParameterType();
-		return (DeferredResult.class.isAssignableFrom(type) ||
+		return DeferredResult.class.isAssignableFrom(type) ||
 				org.springframework.util.concurrent.ListenableFuture.class.isAssignableFrom(type) ||
-				CompletionStage.class.isAssignableFrom(type));
+				CompletionStage.class.isAssignableFrom(type);
 	}
 
 	@SuppressWarnings("deprecation")

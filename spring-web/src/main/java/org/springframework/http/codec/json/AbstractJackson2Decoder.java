@@ -224,11 +224,11 @@ public abstract class AbstractJackson2Decoder extends Jackson2CodecSupport imple
 			contextClass = getContextClass((ResolvableType) hints.get(ACTUAL_TYPE_HINT));
 		}
 		JavaType javaType = getJavaType(elementType.getType(), contextClass);
-		Class<?> jsonView = (hints != null ? (Class<?>) hints.get(Jackson2CodecSupport.JSON_VIEW_HINT) : null);
+		Class<?> jsonView = hints != null ? (Class<?>) hints.get(Jackson2CodecSupport.JSON_VIEW_HINT) : null;
 
-		ObjectReader objectReader = (jsonView != null ?
+		ObjectReader objectReader = jsonView != null ?
 				mapper.readerWithView(jsonView).forType(javaType) :
-				mapper.readerFor(javaType));
+				mapper.readerFor(javaType);
 
 		return customizeReader(objectReader, elementType, hints);
 	}
@@ -252,8 +252,8 @@ public abstract class AbstractJackson2Decoder extends Jackson2CodecSupport imple
 
 	@Nullable
 	private Class<?> getContextClass(@Nullable ResolvableType elementType) {
-		MethodParameter param = (elementType != null ? getParameter(elementType) : null);
-		return (param != null ? param.getContainingClass() : null);
+		MethodParameter param = elementType != null ? getParameter(elementType) : null;
+		return param != null ? param.getContainingClass() : null;
 	}
 
 	private void logValue(@Nullable Object value, @Nullable Map<String, Object> hints) {

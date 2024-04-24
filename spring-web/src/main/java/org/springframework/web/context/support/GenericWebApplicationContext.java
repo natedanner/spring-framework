@@ -150,7 +150,7 @@ public class GenericWebApplicationContext extends GenericApplicationContext
 
 	@Override
 	public String getApplicationName() {
-		return (this.servletContext != null ? this.servletContext.getContextPath() : "");
+		return this.servletContext != null ? this.servletContext.getContextPath() : "";
 	}
 
 	/**

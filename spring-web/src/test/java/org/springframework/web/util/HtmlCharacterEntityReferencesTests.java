@@ -109,7 +109,7 @@ class HtmlCharacterEntityReferencesTests {
 
 		private final StreamTokenizer tokenizer;
 
-		private String currentEntityName = null;
+		private String currentEntityName;
 
 		private int referredCharacter = -1;
 
@@ -127,7 +127,7 @@ class HtmlCharacterEntityReferencesTests {
 		}
 
 		public boolean hasNext() {
-			return (currentEntityName != null || readNextEntity());
+			return currentEntityName != null || readNextEntity();
 		}
 
 		public String nextEntry() {

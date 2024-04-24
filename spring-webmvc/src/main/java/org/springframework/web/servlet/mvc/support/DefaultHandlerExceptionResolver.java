@@ -219,8 +219,8 @@ public class DefaultHandlerExceptionResolver extends AbstractHandlerExceptionRes
 					mav = handleAsyncRequestTimeoutException(theEx, request, response, handler);
 				}
 
-				return (mav != null ? mav :
-						handleErrorResponse(errorResponse, request, response, handler));
+				return mav != null ? mav :
+						handleErrorResponse(errorResponse, request, response, handler);
 			}
 
 			// Other, lower level exceptions

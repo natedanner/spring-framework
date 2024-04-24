@@ -25,7 +25,7 @@ import java.util.Map;
 import org.springframework.asm.Type;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class TypeUtils {
+public final class TypeUtils {
     private static final Map transforms = new HashMap();
     private static final Map rtransforms = new HashMap();
 
@@ -93,7 +93,7 @@ public class TypeUtils {
 
     public static String getPackageName(String className) {
         int idx = className.lastIndexOf('.');
-        return (idx < 0) ? "" : className.substring(0, idx);
+        return idx < 0 ? "" : className.substring(0, idx);
     }
 
     public static String upperFirst(String s) {
@@ -230,7 +230,7 @@ public class TypeUtils {
     }
 
     private static String map(String type) {
-        if (type.equals("")) {
+        if ("".equals(type)) {
             return type;
         }
         String t = (String)transforms.get(type);

@@ -123,7 +123,7 @@ public class SqlOutParameter extends ResultSetSupportingSqlParameter {
 	 * Return whether this parameter holds a custom return type.
 	 */
 	public boolean isReturnTypeSupported() {
-		return (this.sqlReturnType != null);
+		return this.sqlReturnType != null;
 	}
 
 }

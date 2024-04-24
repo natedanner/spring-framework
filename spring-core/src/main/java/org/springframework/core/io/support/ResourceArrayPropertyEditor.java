@@ -145,7 +145,7 @@ public class ResourceArrayPropertyEditor extends PropertyEditorSupport {
 	@Override
 	public void setValue(Object value) throws IllegalArgumentException {
 		if (value instanceof Collection || (value instanceof Object[] && !(value instanceof Resource[]))) {
-			Collection<?> input = (value instanceof Collection<?> collection ? collection : Arrays.asList((Object[]) value));
+			Collection<?> input = value instanceof Collection<?> collection ? collection : Arrays.asList((Object[]) value);
 			Set<Resource> merged = new LinkedHashSet<>();
 			for (Object element : input) {
 				if (element instanceof String path) {
@@ -194,8 +194,8 @@ public class ResourceArrayPropertyEditor extends PropertyEditorSupport {
 		if (this.propertyResolver == null) {
 			this.propertyResolver = new StandardEnvironment();
 		}
-		return (this.ignoreUnresolvablePlaceholders ? this.propertyResolver.resolvePlaceholders(path) :
-				this.propertyResolver.resolveRequiredPlaceholders(path));
+		return this.ignoreUnresolvablePlaceholders ? this.propertyResolver.resolvePlaceholders(path) :
+				this.propertyResolver.resolveRequiredPlaceholders(path);
 	}
 
 }

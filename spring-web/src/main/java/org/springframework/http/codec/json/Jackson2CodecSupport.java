@@ -97,7 +97,7 @@ public abstract class Jackson2CodecSupport {
 	protected Jackson2CodecSupport(ObjectMapper objectMapper, MimeType... mimeTypes) {
 		Assert.notNull(objectMapper, "ObjectMapper must not be null");
 		this.defaultObjectMapper = objectMapper;
-		this.mimeTypes = (!ObjectUtils.isEmpty(mimeTypes) ? List.of(mimeTypes) : defaultMimeTypes);
+		this.mimeTypes = ObjectUtils.isEmpty(mimeTypes) ? defaultMimeTypes : List.of(mimeTypes);
 	}
 
 
@@ -161,7 +161,7 @@ public abstract class Jackson2CodecSupport {
 	}
 
 	protected Map<Class<?>, Map<MimeType, ObjectMapper>> getObjectMapperRegistrations() {
-		return (this.objectMapperRegistrations != null ? this.objectMapperRegistrations : Collections.emptyMap());
+		return this.objectMapperRegistrations != null ? this.objectMapperRegistrations : Collections.emptyMap();
 	}
 
 	/**
@@ -176,14 +176,14 @@ public abstract class Jackson2CodecSupport {
 		List<MimeType> result = null;
 		for (Map.Entry<Class<?>, Map<MimeType, ObjectMapper>> entry : getObjectMapperRegistrations().entrySet()) {
 			if (entry.getKey().isAssignableFrom(elementClass)) {
-				result = (result != null ? result : new ArrayList<>(entry.getValue().size()));
+				result = result != null ? result : new ArrayList<>(entry.getValue().size());
 				result.addAll(entry.getValue().keySet());
 			}
 		}
 		if (!CollectionUtils.isEmpty(result)) {
 			return result;
 		}
-		return (ProblemDetail.class.isAssignableFrom(elementClass) ? getMediaTypesForProblemDetail() : getMimeTypes());
+		return ProblemDetail.class.isAssignableFrom(elementClass) ? getMediaTypesForProblemDetail() : getMimeTypes();
 	}
 
 	/**
@@ -242,7 +242,7 @@ public abstract class Jackson2CodecSupport {
 			if (annotation != null) {
 				Class<?>[] classes = annotation.value();
 				Assert.isTrue(classes.length == 1, () -> JSON_VIEW_HINT_ERROR + param);
-				hints = (hints != null ? hints : new HashMap<>(1));
+				hints = hints != null ? hints : new HashMap<>(1);
 				hints.put(JSON_VIEW_HINT, classes[0]);
 			}
 			if (hints != null) {
@@ -254,7 +254,7 @@ public abstract class Jackson2CodecSupport {
 
 	@Nullable
 	protected MethodParameter getParameter(ResolvableType type) {
-		return (type.getSource() instanceof MethodParameter methodParameter ? methodParameter : null);
+		return type.getSource() instanceof MethodParameter methodParameter ? methodParameter : null;
 	}
 
 	@Nullable

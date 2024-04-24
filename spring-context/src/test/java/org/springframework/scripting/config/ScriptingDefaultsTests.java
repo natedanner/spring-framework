@@ -47,7 +47,7 @@ public class ScriptingDefaultsTests {
 		ApplicationContext context = new ClassPathXmlApplicationContext(CONFIG);
 		Advised advised = (Advised) context.getBean("testBean");
 		AbstractRefreshableTargetSource targetSource =
-				((AbstractRefreshableTargetSource) advised.getTargetSource());
+				(AbstractRefreshableTargetSource) advised.getTargetSource();
 		Field field = AbstractRefreshableTargetSource.class.getDeclaredField("refreshCheckDelay");
 		field.setAccessible(true);
 		long delay = (Long) field.get(targetSource);

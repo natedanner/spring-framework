@@ -130,9 +130,9 @@ public abstract class AbstractRegexpMethodPointcut extends StaticMethodMatcherPo
 	 */
 	@Override
 	public boolean matches(Method method, Class<?> targetClass) {
-		return (matchesPattern(ClassUtils.getQualifiedMethodName(method, targetClass)) ||
+		return matchesPattern(ClassUtils.getQualifiedMethodName(method, targetClass)) ||
 				(targetClass != method.getDeclaringClass() &&
-						matchesPattern(ClassUtils.getQualifiedMethodName(method, method.getDeclaringClass()))));
+						matchesPattern(ClassUtils.getQualifiedMethodName(method, method.getDeclaringClass())));
 	}
 
 	/**
@@ -196,9 +196,9 @@ public abstract class AbstractRegexpMethodPointcut extends StaticMethodMatcherPo
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof AbstractRegexpMethodPointcut otherPointcut &&
+		return this == other || (other instanceof AbstractRegexpMethodPointcut otherPointcut &&
 				Arrays.equals(this.patterns, otherPointcut.patterns) &&
-				Arrays.equals(this.excludedPatterns, otherPointcut.excludedPatterns)));
+				Arrays.equals(this.excludedPatterns, otherPointcut.excludedPatterns));
 	}
 
 	@Override

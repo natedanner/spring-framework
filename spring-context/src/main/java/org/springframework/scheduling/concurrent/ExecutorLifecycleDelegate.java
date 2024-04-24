@@ -42,7 +42,7 @@ final class ExecutorLifecycleDelegate implements SmartLifecycle {
 
 	private volatile boolean paused;
 
-	private int executingTaskCount = 0;
+	private int executingTaskCount;
 
 	@Nullable
 	private Runnable stopCallback;
@@ -97,7 +97,7 @@ final class ExecutorLifecycleDelegate implements SmartLifecycle {
 
 	@Override
 	public boolean isRunning() {
-		return (!this.paused && !this.executor.isTerminated());
+		return !this.paused && !this.executor.isTerminated();
 	}
 
 	void beforeExecute(Thread thread) {

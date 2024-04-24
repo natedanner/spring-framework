@@ -77,7 +77,7 @@ public class PagedListHolder<E> implements Serializable {
 
 	private int pageSize = DEFAULT_PAGE_SIZE;
 
-	private int page = 0;
+	private int page;
 
 	private boolean newPageSet;
 
@@ -218,7 +218,7 @@ public class PagedListHolder<E> implements Serializable {
 	 */
 	public int getPageCount() {
 		float nrOfPages = (float) getNrOfElements() / getPageSize();
-		return (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages);
+		return (int) (nrOfPages > (int) nrOfPages || nrOfPages == 0.0 ? nrOfPages + 1 : nrOfPages);
 	}
 
 	/**
@@ -267,7 +267,7 @@ public class PagedListHolder<E> implements Serializable {
 	 * Element numbering starts with 0.
 	 */
 	public int getFirstElementOnPage() {
-		return (getPageSize() * getPage());
+		return getPageSize() * getPage();
 	}
 
 	/**

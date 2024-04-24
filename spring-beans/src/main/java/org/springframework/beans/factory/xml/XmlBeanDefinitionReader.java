@@ -113,7 +113,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
 	private int validationMode = VALIDATION_AUTO;
 
-	private boolean namespaceAware = false;
+	private boolean namespaceAware;
 
 	private Class<? extends BeanDefinitionDocumentReader> documentReaderClass =
 			DefaultBeanDefinitionDocumentReader.class;
@@ -158,7 +158,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * @see #setNamespaceAware
 	 */
 	public void setValidating(boolean validating) {
-		this.validationMode = (validating ? VALIDATION_AUTO : VALIDATION_NONE);
+		this.validationMode = validating ? VALIDATION_AUTO : VALIDATION_NONE;
 		this.namespaceAware = !validating;
 	}
 
@@ -217,7 +217,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * that collates errors and warnings for display in the tool UI.
 	 */
 	public void setProblemReporter(@Nullable ProblemReporter problemReporter) {
-		this.problemReporter = (problemReporter != null ? problemReporter : new FailFastProblemReporter());
+		this.problemReporter = problemReporter != null ? problemReporter : new FailFastProblemReporter();
 	}
 
 	/**
@@ -227,7 +227,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * registered in the BeanFactory.
 	 */
 	public void setEventListener(@Nullable ReaderEventListener eventListener) {
-		this.eventListener = (eventListener != null ? eventListener : new EmptyReaderEventListener());
+		this.eventListener = eventListener != null ? eventListener : new EmptyReaderEventListener();
 	}
 
 	/**
@@ -237,7 +237,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * no additional source metadata is attached to the bean configuration metadata.
 	 */
 	public void setSourceExtractor(@Nullable SourceExtractor sourceExtractor) {
-		this.sourceExtractor = (sourceExtractor != null ? sourceExtractor : new NullSourceExtractor());
+		this.sourceExtractor = sourceExtractor != null ? sourceExtractor : new NullSourceExtractor();
 	}
 
 	/**
@@ -255,7 +255,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * which loads {@link Document} instances using JAXP.
 	 */
 	public void setDocumentLoader(@Nullable DocumentLoader documentLoader) {
-		this.documentLoader = (documentLoader != null ? documentLoader : new DefaultDocumentLoader());
+		this.documentLoader = documentLoader != null ? documentLoader : new DefaultDocumentLoader();
 	}
 
 	/**
@@ -557,7 +557,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 */
 	protected NamespaceHandlerResolver createDefaultNamespaceHandlerResolver() {
 		ResourceLoader resourceLoader = getResourceLoader();
-		ClassLoader cl = (resourceLoader != null ? resourceLoader.getClassLoader() : getBeanClassLoader());
+		ClassLoader cl = resourceLoader != null ? resourceLoader.getClassLoader() : getBeanClassLoader();
 		return new DefaultNamespaceHandlerResolver(cl);
 	}
 

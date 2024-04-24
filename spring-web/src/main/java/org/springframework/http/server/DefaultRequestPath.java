@@ -132,9 +132,9 @@ class DefaultRequestPath implements RequestPath {
 			return false;
 		}
 		DefaultRequestPath otherPath= (DefaultRequestPath) other;
-		return (this.fullPath.equals(otherPath.fullPath) &&
+		return this.fullPath.equals(otherPath.fullPath) &&
 				this.contextPath.equals(otherPath.contextPath) &&
-				this.pathWithinApplication.equals(otherPath.pathWithinApplication));
+				this.pathWithinApplication.equals(otherPath.pathWithinApplication);
 	}
 
 	@Override

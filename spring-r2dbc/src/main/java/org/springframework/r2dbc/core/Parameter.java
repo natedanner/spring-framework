@@ -62,7 +62,7 @@ public final class Parameter {
 	 * @return the {@link Parameter} value for {@code value}
 	 */
 	public static Parameter fromOrEmpty(@Nullable Object value, Class<?> type) {
-		return (value == null ? empty(type) : new Parameter(value, ClassUtils.getUserClass(value)));
+		return value == null ? empty(type) : new Parameter(value, ClassUtils.getUserClass(value));
 	}
 
 	/**
@@ -96,7 +96,7 @@ public final class Parameter {
 	 * @return {@code false} if {@link #getValue()} is {@code null}
 	 */
 	public boolean hasValue() {
-		return (this.value != null);
+		return this.value != null;
 	}
 
 	/**
@@ -104,15 +104,15 @@ public final class Parameter {
 	 * @return {@code true} if {@link #getValue()} is {@code null}
 	 */
 	public boolean isEmpty() {
-		return (this.value == null);
+		return this.value == null;
 	}
 
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof Parameter that &&
+		return this == other || (other instanceof Parameter that &&
 				ObjectUtils.nullSafeEquals(this.value, that.value) &&
-				ObjectUtils.nullSafeEquals(this.type, that.type)));
+				ObjectUtils.nullSafeEquals(this.type, that.type));
 	}
 
 	@Override

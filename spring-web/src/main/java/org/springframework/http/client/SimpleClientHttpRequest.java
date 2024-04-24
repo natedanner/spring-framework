@@ -98,7 +98,7 @@ final class SimpleClientHttpRequest extends AbstractStreamingClientHttpRequest {
 	 */
 	static void addHeaders(HttpURLConnection connection, HttpHeaders headers) {
 		String method = connection.getRequestMethod();
-		if (method.equals("PUT") || method.equals("DELETE")) {
+		if ("PUT".equals(method) || "DELETE".equals(method)) {
 			if (!StringUtils.hasText(headers.getFirst(HttpHeaders.ACCEPT))) {
 				// Avoid "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2"
 				// from HttpUrlConnection which prevents JSON error response details.

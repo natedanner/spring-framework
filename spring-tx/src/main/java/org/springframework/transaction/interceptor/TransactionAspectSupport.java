@@ -341,7 +341,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 
 		// If the transaction attribute is null, the method is non-transactional.
 		TransactionAttributeSource tas = getTransactionAttributeSource();
-		final TransactionAttribute txAttr = (tas != null ? tas.getTransactionAttribute(method, targetClass) : null);
+		final TransactionAttribute txAttr = tas != null ? tas.getTransactionAttribute(method, targetClass) : null;
 		final TransactionManager tm = determineTransactionManager(txAttr);
 
 		if (this.reactiveAdapterRegistry != null && tm instanceof ReactiveTransactionManager rtm) {
@@ -351,11 +351,11 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 			if (isSuspendingFunction && !(invocation instanceof CoroutinesInvocationCallback)) {
 				throw new IllegalStateException("Coroutines invocation not supported: " + method);
 			}
-			CoroutinesInvocationCallback corInv = (isSuspendingFunction ? (CoroutinesInvocationCallback) invocation : null);
+			CoroutinesInvocationCallback corInv = isSuspendingFunction ? (CoroutinesInvocationCallback) invocation : null;
 
 			ReactiveTransactionSupport txSupport = this.transactionSupportCache.computeIfAbsent(method, key -> {
 				Class<?> reactiveType =
-						(isSuspendingFunction ? (hasSuspendingFlowReturnType ? Flux.class : Mono.class) : method.getReturnType());
+						isSuspendingFunction ? (hasSuspendingFlowReturnType ? Flux.class : Mono.class) : method.getReturnType();
 				ReactiveAdapter adapter = this.reactiveAdapterRegistry.getAdapter(reactiveType);
 				if (adapter == null) {
 					throw new IllegalStateException("Cannot apply reactive transaction to non-reactive return type [" +
@@ -787,7 +787,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 		 * or whether we just have a placeholder to keep ThreadLocal stack integrity.
 		 */
 		public boolean hasTransaction() {
-			return (this.transactionStatus != null);
+			return this.transactionStatus != null;
 		}
 
 		private void bindToThread() {
@@ -805,7 +805,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 
 		@Override
 		public String toString() {
-			return (this.transactionAttribute != null ? this.transactionAttribute.toString() : "No transaction");
+			return this.transactionAttribute != null ? this.transactionAttribute.toString() : "No transaction";
 		}
 	}
 
@@ -872,7 +872,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 	private static class VavrDelegate {
 
 		public static boolean isVavrTry(Object retVal) {
-			return (retVal instanceof Try);
+			return retVal instanceof Try;
 		}
 
 		public static Object evaluateTryFailure(Object retVal, TransactionAttribute txAttr, TransactionStatus status) {
@@ -972,7 +972,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 			}
 
 			final TransactionAttribute attrToUse = txAttr;
-			Mono<ReactiveTransaction> tx = (attrToUse != null ? tm.getReactiveTransaction(attrToUse) : Mono.empty());
+			Mono<ReactiveTransaction> tx = attrToUse != null ? tm.getReactiveTransaction(attrToUse) : Mono.empty();
 			return tx.map(it -> prepareTransactionInfo(tm, attrToUse, joinpointIdentification, it)).switchIfEmpty(
 					Mono.defer(() -> Mono.just(prepareTransactionInfo(tm, attrToUse, joinpointIdentification, null))));
 		}
@@ -1130,7 +1130,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 
 		@Override
 		public String toString() {
-			return (this.transactionAttribute != null ? this.transactionAttribute.toString() : "No transaction");
+			return this.transactionAttribute != null ? this.transactionAttribute.toString() : "No transaction";
 		}
 	}
 

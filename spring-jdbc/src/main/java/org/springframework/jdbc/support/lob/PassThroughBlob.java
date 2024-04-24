@@ -64,7 +64,7 @@ class PassThroughBlob implements Blob {
 			return new ByteArrayInputStream(this.content);
 		}
 		else {
-			return (this.binaryStream != null ? this.binaryStream : InputStream.nullInputStream());
+			return this.binaryStream != null ? this.binaryStream : InputStream.nullInputStream();
 		}
 	}
 

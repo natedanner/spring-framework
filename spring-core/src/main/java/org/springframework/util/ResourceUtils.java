@@ -132,7 +132,7 @@ public abstract class ResourceUtils {
 		if (resourceLocation.startsWith(CLASSPATH_URL_PREFIX)) {
 			String path = resourceLocation.substring(CLASSPATH_URL_PREFIX.length());
 			ClassLoader cl = ClassUtils.getDefaultClassLoader();
-			URL url = (cl != null ? cl.getResource(path) : ClassLoader.getSystemResource(path));
+			URL url = cl != null ? cl.getResource(path) : ClassLoader.getSystemResource(path);
 			if (url == null) {
 				String description = "class path resource [" + path + "]";
 				throw new FileNotFoundException(description +
@@ -173,7 +173,7 @@ public abstract class ResourceUtils {
 			String path = resourceLocation.substring(CLASSPATH_URL_PREFIX.length());
 			String description = "class path resource [" + path + "]";
 			ClassLoader cl = ClassUtils.getDefaultClassLoader();
-			URL url = (cl != null ? cl.getResource(path) : ClassLoader.getSystemResource(path));
+			URL url = cl != null ? cl.getResource(path) : ClassLoader.getSystemResource(path);
 			if (url == null) {
 				throw new FileNotFoundException(description +
 						" cannot be resolved to absolute file path because it does not exist");
@@ -271,8 +271,8 @@ public abstract class ResourceUtils {
 	 */
 	public static boolean isFileURL(URL url) {
 		String protocol = url.getProtocol();
-		return (URL_PROTOCOL_FILE.equals(protocol) || URL_PROTOCOL_VFSFILE.equals(protocol) ||
-				URL_PROTOCOL_VFS.equals(protocol));
+		return URL_PROTOCOL_FILE.equals(protocol) || URL_PROTOCOL_VFSFILE.equals(protocol) ||
+				URL_PROTOCOL_VFS.equals(protocol);
 	}
 
 	/**
@@ -284,9 +284,9 @@ public abstract class ResourceUtils {
 	 */
 	public static boolean isJarURL(URL url) {
 		String protocol = url.getProtocol();
-		return (URL_PROTOCOL_JAR.equals(protocol) || URL_PROTOCOL_WAR.equals(protocol) ||
+		return URL_PROTOCOL_JAR.equals(protocol) || URL_PROTOCOL_WAR.equals(protocol) ||
 				URL_PROTOCOL_ZIP.equals(protocol) || URL_PROTOCOL_VFSZIP.equals(protocol) ||
-				URL_PROTOCOL_WSJAR.equals(protocol));
+				URL_PROTOCOL_WSJAR.equals(protocol);
 	}
 
 	/**
@@ -297,8 +297,8 @@ public abstract class ResourceUtils {
 	 * @since 4.1
 	 */
 	public static boolean isJarFileURL(URL url) {
-		return (URL_PROTOCOL_FILE.equals(url.getProtocol()) &&
-				url.getPath().toLowerCase().endsWith(JAR_FILE_EXTENSION));
+		return URL_PROTOCOL_FILE.equals(url.getProtocol()) &&
+				url.getPath().toLowerCase().endsWith(JAR_FILE_EXTENSION);
 	}
 
 	/**

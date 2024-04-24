@@ -45,13 +45,13 @@ public abstract class SqlCall extends RdbmsOperation {
 	 * Flag used to indicate that this call is for a function and to
 	 * use the {? = call get_invoice_count(?)} syntax.
 	 */
-	private boolean function = false;
+	private boolean function;
 
 	/**
 	 * Flag used to indicate that the sql for this call should be used exactly as
 	 * it is defined. No need to add the escape syntax and parameter placeholders.
 	 */
-	private boolean sqlReadyForUse = false;
+	private boolean sqlReadyForUse;
 
 	/**
 	 * Call string as defined in java.sql.CallableStatement.

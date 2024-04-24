@@ -98,7 +98,7 @@ public class RuntimeHintsInvocationsAssert extends AbstractAssert<RuntimeHintsIn
 					invocation.getArguments(), formatStackTrace(invocation.getStackFrames()));
 		}
 		else {
-			Class<?> instanceType = (invocation.getInstance() instanceof Class<?> clazz) ? clazz : invocation.getInstance().getClass();
+			Class<?> instanceType = invocation.getInstance() instanceof Class<?> clazz ? clazz : invocation.getInstance().getClass();
 			return new BasicErrorMessageFactory("%nMissing <%s> for invocation <%s> on type <%s> %nwith arguments %s.%nStacktrace:%n<%s>",
 					invocation.getHintType().hintClassName(), invocation.getMethodReference(),
 					instanceType, invocation.getArguments(),

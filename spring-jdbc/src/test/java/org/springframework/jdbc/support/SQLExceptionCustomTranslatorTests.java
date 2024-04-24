@@ -35,7 +35,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class SQLExceptionCustomTranslatorTests {
 
-	private static SQLErrorCodes ERROR_CODES = new SQLErrorCodes();
+	private static final SQLErrorCodes ERROR_CODES = new SQLErrorCodes();
 
 	static {
 		ERROR_CODES.setBadSqlGrammarCodes("1");

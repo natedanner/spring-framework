@@ -44,7 +44,7 @@ class InterceptingClientHttpRequestFactoryTests {
 
 	private MockClientHttpRequest requestMock = new MockClientHttpRequest();
 
-	private MockClientHttpResponse responseMock = new MockClientHttpResponse();
+	private final MockClientHttpResponse responseMock = new MockClientHttpResponse();
 
 	private InterceptingClientHttpRequestFactory requestFactory;
 
@@ -183,7 +183,7 @@ class InterceptingClientHttpRequestFactoryTests {
 
 	private static class NoOpInterceptor implements ClientHttpRequestInterceptor {
 
-		private boolean invoked = false;
+		private boolean invoked;
 
 		@Override
 		public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)

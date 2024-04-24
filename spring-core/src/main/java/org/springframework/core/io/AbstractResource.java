@@ -237,8 +237,8 @@ public abstract class AbstractResource implements Resource {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof Resource that &&
-				getDescription().equals(that.getDescription())));
+		return this == other || (other instanceof Resource that &&
+				getDescription().equals(that.getDescription()));
 	}
 
 	/**

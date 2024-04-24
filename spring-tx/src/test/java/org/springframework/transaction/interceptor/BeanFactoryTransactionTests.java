@@ -232,7 +232,7 @@ class BeanFactoryTransactionTests {
 
 	public static class InvocationCounterPointcut extends StaticMethodMatcherPointcut {
 
-		int counter = 0;
+		int counter;
 
 		@Override
 		public boolean matches(Method method, @Nullable Class<?> clazz) {
@@ -244,7 +244,7 @@ class BeanFactoryTransactionTests {
 
 	public static class InvocationCounterInterceptor implements MethodInterceptor {
 
-		int counter = 0;
+		int counter;
 
 		@Override
 		public Object invoke(MethodInvocation methodInvocation) throws Throwable {

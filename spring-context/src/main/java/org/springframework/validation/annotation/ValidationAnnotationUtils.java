@@ -73,7 +73,7 @@ public abstract class ValidationAnnotationUtils {
 		if (hints == null) {
 			return EMPTY_OBJECT_ARRAY;
 		}
-		return (hints instanceof Object[] objectHints ? objectHints : new Object[] {hints});
+		return hints instanceof Object[] objectHints ? objectHints : new Object[] {hints};
 	}
 
 }

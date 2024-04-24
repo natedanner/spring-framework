@@ -62,7 +62,7 @@ class Jaxb2CollectionHttpMessageConverterTests {
 
 	@BeforeEach
 	void setup() {
-		converter = new Jaxb2CollectionHttpMessageConverter<Collection<Object>>();
+		converter = new Jaxb2CollectionHttpMessageConverter<>();
 		rootElementListType = new ParameterizedTypeReference<List<RootElement>>() {}.getType();
 		rootElementSetType = new ParameterizedTypeReference<Set<RootElement>>() {}.getType();
 		typeListType = new ParameterizedTypeReference<List<TestType>>() {}.getType();
@@ -135,7 +135,7 @@ class Jaxb2CollectionHttpMessageConverterTests {
 				"  <list><rootElement><type s=\"1\"/><external>&ext;</external></rootElement></list>";
 		MockHttpInputMessage inputMessage = new MockHttpInputMessage(content.getBytes(StandardCharsets.UTF_8));
 
-		converter = new Jaxb2CollectionHttpMessageConverter<Collection<Object>>() {
+		converter = new Jaxb2CollectionHttpMessageConverter<>() {
 			@Override
 			protected XMLInputFactory createXmlInputFactory() {
 				XMLInputFactory inputFactory = super.createXmlInputFactory();

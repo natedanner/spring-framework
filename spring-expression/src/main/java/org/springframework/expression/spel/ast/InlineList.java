@@ -122,7 +122,7 @@ public class InlineList extends SpelNodeImpl {
 	 * Return whether this list is a constant value.
 	 */
 	public boolean isConstant() {
-		return (this.constant != null);
+		return this.constant != null;
 	}
 
 	@SuppressWarnings("unchecked")

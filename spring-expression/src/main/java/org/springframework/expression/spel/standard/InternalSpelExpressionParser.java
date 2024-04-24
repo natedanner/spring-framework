@@ -387,7 +387,7 @@ class InternalSpelExpressionParser extends TemplateAwareExpressionParser {
 	// node : ((DOT dottedNode) | (SAFE_NAVI dottedNode) | nonDottedNode)+;
 	@Nullable
 	private SpelNodeImpl eatNode() {
-		return (peekToken(TokenKind.DOT, TokenKind.SAFE_NAVI) ? eatDottedNode() : eatNonDottedNode());
+		return peekToken(TokenKind.DOT, TokenKind.SAFE_NAVI) ? eatDottedNode() : eatNonDottedNode();
 	}
 
 	// nonDottedNode: indexer;
@@ -412,7 +412,7 @@ class InternalSpelExpressionParser extends TemplateAwareExpressionParser {
 	//	;
 	private SpelNodeImpl eatDottedNode() {
 		Token t = takeToken();  // it was a '.' or a '?.'
-		boolean nullSafeNavigation = (t.kind == TokenKind.SAFE_NAVI);
+		boolean nullSafeNavigation = t.kind == TokenKind.SAFE_NAVI;
 		if (maybeEatMethodOrProperty(nullSafeNavigation) || maybeEatFunctionOrVar() ||
 				maybeEatProjection(nullSafeNavigation) || maybeEatSelection(nullSafeNavigation)) {
 			return pop();
@@ -764,7 +764,7 @@ class InternalSpelExpressionParser extends TemplateAwareExpressionParser {
 			return true;
 		}
 		String value = node.stringValue();
-		return (StringUtils.hasLength(value) && VALID_QUALIFIED_ID_PATTERN.matcher(value).matches());
+		return StringUtils.hasLength(value) && VALID_QUALIFIED_ID_PATTERN.matcher(value).matches();
 	}
 
 	// This is complicated due to the support for dollars in identifiers.
@@ -921,13 +921,13 @@ class InternalSpelExpressionParser extends TemplateAwareExpressionParser {
 		}
 		if (t.isIdentifier()) {
 			String idString = t.stringValue();
-			if (idString.equalsIgnoreCase("instanceof")) {
+			if ("instanceof".equalsIgnoreCase(idString)) {
 				return t.asInstanceOfToken();
 			}
-			if (idString.equalsIgnoreCase("matches")) {
+			if ("matches".equalsIgnoreCase(idString)) {
 				return t.asMatchesToken();
 			}
-			if (idString.equalsIgnoreCase("between")) {
+			if ("between".equalsIgnoreCase(idString)) {
 				return t.asBetweenToken();
 			}
 		}
@@ -981,7 +981,7 @@ class InternalSpelExpressionParser extends TemplateAwareExpressionParser {
 		if (t == null) {
 			return false;
 		}
-		return (t.kind == possible1 || t.kind == possible2);
+		return t.kind == possible1 || t.kind == possible2;
 	}
 
 	private boolean peekToken(TokenKind possible1, TokenKind possible2, TokenKind possible3) {
@@ -989,7 +989,7 @@ class InternalSpelExpressionParser extends TemplateAwareExpressionParser {
 		if (t == null) {
 			return false;
 		}
-		return (t.kind == possible1 || t.kind == possible2 || t.kind == possible3);
+		return t.kind == possible1 || t.kind == possible2 || t.kind == possible3;
 	}
 
 	private boolean peekIdentifierToken(String identifierString) {
@@ -997,7 +997,7 @@ class InternalSpelExpressionParser extends TemplateAwareExpressionParser {
 		if (t == null) {
 			return false;
 		}
-		return (t.kind == TokenKind.IDENTIFIER && identifierString.equalsIgnoreCase(t.stringValue()));
+		return t.kind == TokenKind.IDENTIFIER && identifierString.equalsIgnoreCase(t.stringValue());
 	}
 
 	private boolean peekSelectToken() {
@@ -1005,7 +1005,7 @@ class InternalSpelExpressionParser extends TemplateAwareExpressionParser {
 		if (t == null) {
 			return false;
 		}
-		return (t.kind == TokenKind.SELECT || t.kind == TokenKind.SELECT_FIRST || t.kind == TokenKind.SELECT_LAST);
+		return t.kind == TokenKind.SELECT || t.kind == TokenKind.SELECT_FIRST || t.kind == TokenKind.SELECT_LAST;
 	}
 
 	private Token takeToken() {

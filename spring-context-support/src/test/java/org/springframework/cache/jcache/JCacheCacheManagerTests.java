@@ -82,7 +82,7 @@ class JCacheCacheManagerTests extends AbstractTransactionSupportingCacheManagerT
 	}
 
 
-	private static class CacheManagerMock {
+	private static final class CacheManagerMock {
 
 		private final List<String> cacheNames;
 

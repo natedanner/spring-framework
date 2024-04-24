@@ -154,7 +154,7 @@ class PathMatchingResourcePatternResolverTests {
 				List<String> actualSubPaths = getSubPathsIgnoringClassFilesEtc(pattern, pathPrefix);
 
 				URL url = getClass().getClassLoader().getResource("org/springframework/core/io/support/EncodedResource.class");
-				if (!url.getProtocol().equals("jar")) {
+				if (!"jar".equals(url.getProtocol())) {
 					// We do NOT find "support" if the pattern ENDS with a slash if org/springframework/core/io/support
 					// is in the local file system.
 					assertThat(actualSubPaths).isEmpty();

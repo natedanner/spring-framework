@@ -122,7 +122,7 @@ public class SimpleAsyncTaskExecutor extends CustomizableThreadCreator
 	 * @since 6.1
 	 */
 	public void setVirtualThreads(boolean virtual) {
-		this.virtualThreadDelegate = (virtual ? new VirtualThreadDelegate() : null);
+		this.virtualThreadDelegate = virtual ? new VirtualThreadDelegate() : null;
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class SimpleAsyncTaskExecutor extends CustomizableThreadCreator
 	public void setTaskTerminationTimeout(long timeout) {
 		Assert.isTrue(timeout >= 0, "Timeout value must be >=0");
 		this.taskTerminationTimeout = timeout;
-		this.activeThreads = (timeout > 0 ? Collections.newSetFromMap(new ConcurrentHashMap<>()) : null);
+		this.activeThreads = timeout > 0 ? Collections.newSetFromMap(new ConcurrentHashMap<>()) : null;
 	}
 
 	/**
@@ -253,7 +253,7 @@ public class SimpleAsyncTaskExecutor extends CustomizableThreadCreator
 			throw new TaskRejectedException(getClass().getSimpleName() + " has been closed already");
 		}
 
-		Runnable taskToUse = (this.taskDecorator != null ? this.taskDecorator.decorate(task) : task);
+		Runnable taskToUse = this.taskDecorator != null ? this.taskDecorator.decorate(task) : task;
 		if (isThrottleActive() && startTimeout > TIMEOUT_IMMEDIATE) {
 			this.concurrencyThrottle.beforeAccess();
 			doExecute(new TaskTrackingRunnable(taskToUse));
@@ -323,7 +323,7 @@ public class SimpleAsyncTaskExecutor extends CustomizableThreadCreator
 			return this.virtualThreadDelegate.newVirtualThread(nextThreadName(), task);
 		}
 		else {
-			return (this.threadFactory != null ? this.threadFactory.newThread(task) : createThread(task));
+			return this.threadFactory != null ? this.threadFactory.newThread(task) : createThread(task);
 		}
 	}
 

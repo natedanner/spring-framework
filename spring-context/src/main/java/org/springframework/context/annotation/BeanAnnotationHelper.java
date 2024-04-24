@@ -65,7 +65,7 @@ abstract class BeanAnnotationHelper {
 		if (scopedProxy == null) {
 			AnnotationAttributes scope =
 					AnnotatedElementUtils.findMergedAnnotationAttributes(beanMethod, Scope.class, false, false);
-			scopedProxy = (scope != null && scope.getEnum("proxyMode") != ScopedProxyMode.NO);
+			scopedProxy = scope != null && scope.getEnum("proxyMode") != ScopedProxyMode.NO;
 			scopedProxyCache.put(beanMethod, scopedProxy);
 		}
 		return scopedProxy;

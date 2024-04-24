@@ -96,11 +96,11 @@ class InputTagTests extends AbstractFormTagTests {
 
 	@Test
 	void simpleBindWithHtmlEscaping() throws Exception {
-		final String NAME = "Rob \"I Love Mangos\" Harrop";
-		final String HTML_ESCAPED_NAME = "Rob &quot;I Love Mangos&quot; Harrop";
+		final String name = "Rob \"I Love Mangos\" Harrop";
+		final String htmlEscapedName = "Rob &quot;I Love Mangos&quot; Harrop";
 
 		this.tag.setPath("name");
-		this.rob.setName(NAME);
+		this.rob.setName(name);
 
 		assertThat(this.tag.doStartTag()).isEqualTo(Tag.SKIP_BODY);
 
@@ -109,7 +109,7 @@ class InputTagTests extends AbstractFormTagTests {
 		assertTagClosed(output);
 
 		assertContainsAttribute(output, "type", getType());
-		assertValueAttribute(output, HTML_ESCAPED_NAME);
+		assertValueAttribute(output, htmlEscapedName);
 	}
 
 	protected void assertValueAttribute(String output, String expectedValue) {

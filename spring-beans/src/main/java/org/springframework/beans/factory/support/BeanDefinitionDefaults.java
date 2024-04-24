@@ -59,7 +59,7 @@ public class BeanDefinitionDefaults {
 	 * @return whether to apply lazy-init semantics ({@code false} by default)
 	 */
 	public boolean isLazyInit() {
-		return (this.lazyInit != null && this.lazyInit);
+		return this.lazyInit != null && this.lazyInit;
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class BeanDefinitionDefaults {
 	 * @see AbstractBeanDefinition#setEnforceInitMethod
 	 */
 	public void setInitMethodName(@Nullable String initMethodName) {
-		this.initMethodName = (StringUtils.hasText(initMethodName) ? initMethodName : null);
+		this.initMethodName = StringUtils.hasText(initMethodName) ? initMethodName : null;
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class BeanDefinitionDefaults {
 	 * @see AbstractBeanDefinition#setEnforceDestroyMethod
 	 */
 	public void setDestroyMethodName(@Nullable String destroyMethodName) {
-		this.destroyMethodName = (StringUtils.hasText(destroyMethodName) ? destroyMethodName : null);
+		this.destroyMethodName = StringUtils.hasText(destroyMethodName) ? destroyMethodName : null;
 	}
 
 	/**

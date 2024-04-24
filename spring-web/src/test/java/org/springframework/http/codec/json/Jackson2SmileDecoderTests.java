@@ -44,11 +44,11 @@ class Jackson2SmileDecoderTests extends AbstractDecoderTests<Jackson2SmileDecode
 	private static final MimeType SMILE_MIME_TYPE = new MimeType("application", "x-jackson-smile");
 	private static final MimeType STREAM_SMILE_MIME_TYPE = new MimeType("application", "stream+x-jackson-smile");
 
-	private Pojo pojo1 = new Pojo("f1", "b1");
+	private final Pojo pojo1 = new Pojo("f1", "b1");
 
-	private Pojo pojo2 = new Pojo("f2", "b2");
+	private final Pojo pojo2 = new Pojo("f2", "b2");
 
-	private ObjectMapper mapper = Jackson2ObjectMapperBuilder.smile().build();
+	private final ObjectMapper mapper = Jackson2ObjectMapperBuilder.smile().build();
 
 	public Jackson2SmileDecoderTests() {
 		super(new Jackson2SmileDecoder());

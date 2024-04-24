@@ -125,7 +125,7 @@ import static java.util.stream.Collectors.joining;
  * @author Juergen Hoeller
  * @since 5.0
  */
-public class ResolvableMethod {
+public final class ResolvableMethod {
 
 	private static final Log logger = LogFactory.getLog(ResolvableMethod.class);
 
@@ -218,17 +218,17 @@ public class ResolvableMethod {
 
 
 	private String formatMethod() {
-		return (method().getName() +
+		return method().getName() +
 				Arrays.stream(this.method.getParameters())
 						.map(this::formatParameter)
-						.collect(joining(",\n\t", "(\n\t", "\n)")));
+						.collect(joining(",\n\t", "(\n\t", "\n)"));
 	}
 
 	private String formatParameter(Parameter param) {
 		Annotation[] anns = param.getAnnotations();
-		return (anns.length > 0 ?
+		return anns.length > 0 ?
 				Arrays.stream(anns).map(this::formatAnnotation).collect(joining(",", "[", "]")) + " " + param :
-				param.toString());
+				param.toString();
 	}
 
 	private String formatAnnotation(Annotation annotation) {
@@ -242,8 +242,8 @@ public class ResolvableMethod {
 	}
 
 	private static ResolvableType toResolvableType(Class<?> type, Class<?>... generics) {
-		return (ObjectUtils.isEmpty(generics) ? ResolvableType.forClass(type) :
-				ResolvableType.forClassWithGenerics(type, generics));
+		return ObjectUtils.isEmpty(generics) ? ResolvableType.forClass(type) :
+				ResolvableType.forClassWithGenerics(type, generics);
 	}
 
 	private static ResolvableType toResolvableType(Class<?> type, ResolvableType generic, ResolvableType... generics) {
@@ -265,7 +265,7 @@ public class ResolvableMethod {
 	/**
 	 * Builder for {@code ResolvableMethod}.
 	 */
-	public static class Builder<T> {
+	public static final class Builder<T> {
 
 		private final Class<?> objectClass;
 
@@ -475,7 +475,7 @@ public class ResolvableMethod {
 	/**
 	 * Predicate with a descriptive label.
 	 */
-	private static class LabeledPredicate<T> implements Predicate<T> {
+	private static final class LabeledPredicate<T> implements Predicate<T> {
 
 		private final String label;
 
@@ -518,7 +518,7 @@ public class ResolvableMethod {
 	/**
 	 * Resolver for method arguments.
 	 */
-	public class ArgResolver {
+	public final class ArgResolver {
 
 		private final List<Predicate<MethodParameter>> filters = new ArrayList<>(4);
 

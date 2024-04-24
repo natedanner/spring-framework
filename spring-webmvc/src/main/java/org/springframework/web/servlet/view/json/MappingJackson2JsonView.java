@@ -63,7 +63,7 @@ public class MappingJackson2JsonView extends AbstractJackson2View {
 	@Nullable
 	private Set<String> modelKeys;
 
-	private boolean extractValueFromSingleKeyModel = false;
+	private boolean extractValueFromSingleKeyModel;
 
 
 	/**
@@ -103,7 +103,7 @@ public class MappingJackson2JsonView extends AbstractJackson2View {
 	 * @see #setJsonPrefix
 	 */
 	public void setPrefixJson(boolean prefixJson) {
-		this.jsonPrefix = (prefixJson ? ")]}', " : null);
+		this.jsonPrefix = prefixJson ? ")]}', " : null;
 	}
 
 	@Override
@@ -150,7 +150,7 @@ public class MappingJackson2JsonView extends AbstractJackson2View {
 	@Override
 	protected Object filterModel(Map<String, Object> model) {
 		Map<String, Object> result = CollectionUtils.newHashMap(model.size());
-		Set<String> modelKeys = (!CollectionUtils.isEmpty(this.modelKeys) ? this.modelKeys : model.keySet());
+		Set<String> modelKeys = CollectionUtils.isEmpty(this.modelKeys) ? model.keySet() : this.modelKeys;
 		model.forEach((clazz, value) -> {
 			if (!(value instanceof BindingResult) && modelKeys.contains(clazz) &&
 					!clazz.equals(JsonView.class.getName()) &&
@@ -158,7 +158,7 @@ public class MappingJackson2JsonView extends AbstractJackson2View {
 				result.put(clazz, value);
 			}
 		});
-		return (this.extractValueFromSingleKeyModel && result.size() == 1 ? result.values().iterator().next() : result);
+		return this.extractValueFromSingleKeyModel && result.size() == 1 ? result.values().iterator().next() : result;
 	}
 
 	@Override

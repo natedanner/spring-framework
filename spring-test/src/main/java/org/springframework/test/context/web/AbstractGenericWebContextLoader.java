@@ -303,8 +303,8 @@ public abstract class AbstractGenericWebContextLoader extends AbstractContextLoa
 		// set the current context as the root WebApplicationContext:
 		if (!(parent instanceof WebApplicationContext)) {
 			String resourceBasePath = webMergedConfig.getResourceBasePath();
-			ResourceLoader resourceLoader = (resourceBasePath.startsWith(ResourceLoader.CLASSPATH_URL_PREFIX) ?
-					new DefaultResourceLoader() : new FileSystemResourceLoader());
+			ResourceLoader resourceLoader = resourceBasePath.startsWith(ResourceLoader.CLASSPATH_URL_PREFIX) ?
+					new DefaultResourceLoader() : new FileSystemResourceLoader();
 			ServletContext servletContext = new MockServletContext(resourceBasePath, resourceLoader);
 			servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, context);
 			context.setServletContext(servletContext);

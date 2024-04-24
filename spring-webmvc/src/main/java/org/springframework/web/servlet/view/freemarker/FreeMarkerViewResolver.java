@@ -73,7 +73,7 @@ public class FreeMarkerViewResolver extends AbstractTemplateViewResolver {
 
 	@Override
 	protected AbstractUrlBasedView instantiateView() {
-		return (getViewClass() == FreeMarkerView.class ? new FreeMarkerView() : super.instantiateView());
+		return getViewClass() == FreeMarkerView.class ? new FreeMarkerView() : super.instantiateView();
 	}
 
 }

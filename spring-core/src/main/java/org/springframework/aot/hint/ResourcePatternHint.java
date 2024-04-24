@@ -82,8 +82,8 @@ public final class ResourcePatternHint implements ConditionalHint {
 	 * @return the regex pattern
 	 */
 	public Pattern toRegex() {
-		String prefix = (this.pattern.startsWith("*") ? ".*" : "");
-		String suffix = (this.pattern.endsWith("*") ? ".*" : "");
+		String prefix = this.pattern.startsWith("*") ? ".*" : "";
+		String suffix = this.pattern.endsWith("*") ? ".*" : "";
 		String regex = Arrays.stream(this.pattern.split("\\*"))
 				.filter(s -> !s.isEmpty())
 				.map(Pattern::quote)

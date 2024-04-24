@@ -259,8 +259,8 @@ public class DefaultLifecycleProcessor implements LifecycleProcessor, BeanFactor
 
 	private boolean isAutoStartupCandidate(String beanName, Lifecycle bean) {
 		Set<String> stoppedBeans = this.stoppedBeans;
-		return (stoppedBeans != null ? stoppedBeans.contains(beanName) :
-				(bean instanceof SmartLifecycle smartLifecycle && smartLifecycle.isAutoStartup()));
+		return stoppedBeans != null ? stoppedBeans.contains(beanName) :
+				(bean instanceof SmartLifecycle smartLifecycle && smartLifecycle.isAutoStartup());
 	}
 
 	/**
@@ -295,8 +295,8 @@ public class DefaultLifecycleProcessor implements LifecycleProcessor, BeanFactor
 
 	private boolean toBeStarted(String beanName, Lifecycle bean) {
 		Set<String> stoppedBeans = this.stoppedBeans;
-		return (stoppedBeans != null ? stoppedBeans.contains(beanName) :
-				(!(bean instanceof SmartLifecycle smartLifecycle) || smartLifecycle.isAutoStartup()));
+		return stoppedBeans != null ? stoppedBeans.contains(beanName) :
+				(!(bean instanceof SmartLifecycle smartLifecycle) || smartLifecycle.isAutoStartup());
 	}
 
 	private void stopBeans() {
@@ -388,7 +388,7 @@ public class DefaultLifecycleProcessor implements LifecycleProcessor, BeanFactor
 		for (String beanName : beanNames) {
 			String beanNameToRegister = BeanFactoryUtils.transformedBeanName(beanName);
 			boolean isFactoryBean = beanFactory.isFactoryBean(beanNameToRegister);
-			String beanNameToCheck = (isFactoryBean ? BeanFactory.FACTORY_BEAN_PREFIX + beanName : beanName);
+			String beanNameToCheck = isFactoryBean ? BeanFactory.FACTORY_BEAN_PREFIX + beanName : beanName;
 			if ((beanFactory.containsSingleton(beanNameToRegister) &&
 					(!isFactoryBean || matchesBeanType(Lifecycle.class, beanNameToCheck, beanFactory))) ||
 					matchesBeanType(SmartLifecycle.class, beanNameToCheck, beanFactory)) {
@@ -403,7 +403,7 @@ public class DefaultLifecycleProcessor implements LifecycleProcessor, BeanFactor
 
 	private boolean matchesBeanType(Class<?> targetType, String beanName, BeanFactory beanFactory) {
 		Class<?> beanType = beanFactory.getType(beanName);
-		return (beanType != null && targetType.isAssignableFrom(beanType));
+		return beanType != null && targetType.isAssignableFrom(beanType);
 	}
 
 	/**
@@ -416,7 +416,7 @@ public class DefaultLifecycleProcessor implements LifecycleProcessor, BeanFactor
 	 * @see SmartLifecycle
 	 */
 	protected int getPhase(Lifecycle bean) {
-		return (bean instanceof Phased phased ? phased.getPhase() : 0);
+		return bean instanceof Phased phased ? phased.getPhase() : 0;
 	}
 
 

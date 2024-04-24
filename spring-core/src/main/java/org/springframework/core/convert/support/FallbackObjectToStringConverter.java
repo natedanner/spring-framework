@@ -55,15 +55,15 @@ final class FallbackObjectToStringConverter implements ConditionalGenericConvert
 			// no conversion required
 			return false;
 		}
-		return (CharSequence.class.isAssignableFrom(sourceClass) ||
+		return CharSequence.class.isAssignableFrom(sourceClass) ||
 				StringWriter.class.isAssignableFrom(sourceClass) ||
-				ObjectToObjectConverter.hasConversionMethodOrConstructor(sourceClass, String.class));
+				ObjectToObjectConverter.hasConversionMethodOrConstructor(sourceClass, String.class);
 	}
 
 	@Override
 	@Nullable
 	public Object convert(@Nullable Object source, TypeDescriptor sourceType, TypeDescriptor targetType) {
-		return (source != null ? source.toString() : null);
+		return source != null ? source.toString() : null;
 	}
 
 }

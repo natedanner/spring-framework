@@ -154,7 +154,7 @@ public class PartEventHttpMessageReader extends LoggingCodecSupport implements H
 
 			AtomicInteger partCount = new AtomicInteger();
 			return allPartsTokens
-					.windowUntil(t -> t instanceof MultipartParser.HeadersToken, true)
+					.windowUntil(MultipartParser.HeadersToken.class::isInstance, true)
 					.concatMap(partTokens -> {
 						if (tooManyParts(partCount)) {
 							return Mono.error(new DecodingException("Too many parts (" + partCount.get() + "/" +

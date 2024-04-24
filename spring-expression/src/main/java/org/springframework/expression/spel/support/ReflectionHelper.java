@@ -88,7 +88,7 @@ public abstract class ReflectionHelper {
 				}
 			}
 		}
-		return (match != null ? new ArgumentsMatchInfo(match) : null);
+		return match != null ? new ArgumentsMatchInfo(match) : null;
 	}
 
 	/**
@@ -98,7 +98,7 @@ public abstract class ReflectionHelper {
 		int result = 0;
 		for (int i = 0; i < paramTypes.size(); i++) {
 			TypeDescriptor paramType = paramTypes.get(i);
-			TypeDescriptor argType = (i < argTypes.size() ? argTypes.get(i) : null);
+			TypeDescriptor argType = i < argTypes.size() ? argTypes.get(i) : null;
 			if (argType == null) {
 				if (paramType.isPrimitive()) {
 					return Integer.MAX_VALUE;
@@ -230,7 +230,7 @@ public abstract class ReflectionHelper {
 			}
 		}
 
-		return (match != null ? new ArgumentsMatchInfo(match) : null);
+		return match != null ? new ArgumentsMatchInfo(match) : null;
 	}
 
 
@@ -251,7 +251,7 @@ public abstract class ReflectionHelper {
 	public static boolean convertAllArguments(TypeConverter converter, Object[] arguments, Method method)
 			throws SpelEvaluationException {
 
-		Integer varargsPosition = (method.isVarArgs() ? method.getParameterCount() - 1 : null);
+		Integer varargsPosition = method.isVarArgs() ? method.getParameterCount() - 1 : null;
 		return convertArguments(converter, arguments, method, varargsPosition);
 	}
 
@@ -275,7 +275,7 @@ public abstract class ReflectionHelper {
 				TypeDescriptor targetType = new TypeDescriptor(MethodParameter.forExecutable(executable, i));
 				Object argument = arguments[i];
 				arguments[i] = converter.convertValue(argument, TypeDescriptor.forObject(argument), targetType);
-				conversionOccurred |= (argument != arguments[i]);
+				conversionOccurred |= argument != arguments[i];
 			}
 		}
 		else {
@@ -284,7 +284,7 @@ public abstract class ReflectionHelper {
 				TypeDescriptor targetType = new TypeDescriptor(MethodParameter.forExecutable(executable, i));
 				Object argument = arguments[i];
 				arguments[i] = converter.convertValue(argument, TypeDescriptor.forObject(argument), targetType);
-				conversionOccurred |= (argument != arguments[i]);
+				conversionOccurred |= argument != arguments[i];
 			}
 
 			MethodParameter methodParam = MethodParameter.forExecutable(executable, varargsPosition);
@@ -326,7 +326,7 @@ public abstract class ReflectionHelper {
 				for (int i = varargsPosition; i < arguments.length; i++) {
 					Object argument = arguments[i];
 					arguments[i] = converter.convertValue(argument, TypeDescriptor.forObject(argument), targetType);
-					conversionOccurred |= (argument != arguments[i]);
+					conversionOccurred |= argument != arguments[i];
 				}
 			}
 		}
@@ -358,7 +358,7 @@ public abstract class ReflectionHelper {
 
 				Object argument = arguments[i];
 				arguments[i] = converter.convertValue(argument, TypeDescriptor.forObject(argument), targetType);
-				conversionOccurred |= (argument != arguments[i]);
+				conversionOccurred |= argument != arguments[i];
 			}
 		}
 		else {
@@ -370,7 +370,7 @@ public abstract class ReflectionHelper {
 
 				Object argument = arguments[i];
 				arguments[i] = converter.convertValue(argument, TypeDescriptor.forObject(argument), targetType);
-				conversionOccurred |= (argument != arguments[i]);
+				conversionOccurred |= argument != arguments[i];
 			}
 
 			final Class<?> varArgClass = methodHandleArgumentTypes.lastParameterType().componentType();
@@ -412,7 +412,7 @@ public abstract class ReflectionHelper {
 				for (int i = varargsPosition; i < arguments.length; i++) {
 					Object argument = arguments[i];
 					arguments[i] = converter.convertValue(argument, TypeDescriptor.forObject(argument), varArgContentType);
-					conversionOccurred |= (argument != arguments[i]);
+					conversionOccurred |= argument != arguments[i];
 				}
 			}
 		}
@@ -435,7 +435,7 @@ public abstract class ReflectionHelper {
 			return false;
 		}
 		Object arrayValue = Array.get(possibleArray, 0);
-		return (type.componentType().isPrimitive() ? arrayValue.equals(value) : arrayValue == value);
+		return type.componentType().isPrimitive() ? arrayValue.equals(value) : arrayValue == value;
 	}
 
 	/**
@@ -513,15 +513,15 @@ public abstract class ReflectionHelper {
 		}
 
 		public boolean isExactMatch() {
-			return (this.kind == ArgumentsMatchKind.EXACT);
+			return this.kind == ArgumentsMatchKind.EXACT;
 		}
 
 		public boolean isCloseMatch() {
-			return (this.kind == ArgumentsMatchKind.CLOSE);
+			return this.kind == ArgumentsMatchKind.CLOSE;
 		}
 
 		public boolean isMatchRequiringConversion() {
-			return (this.kind == ArgumentsMatchKind.REQUIRES_CONVERSION);
+			return this.kind == ArgumentsMatchKind.REQUIRES_CONVERSION;
 		}
 
 		@Override

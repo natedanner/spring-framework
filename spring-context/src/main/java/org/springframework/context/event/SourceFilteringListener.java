@@ -51,8 +51,8 @@ public class SourceFilteringListener implements GenericApplicationListener {
 	 */
 	public SourceFilteringListener(Object source, ApplicationListener<?> delegate) {
 		this.source = source;
-		this.delegate = (delegate instanceof GenericApplicationListener gal ? gal :
-				new GenericApplicationListenerAdapter(delegate));
+		this.delegate = delegate instanceof GenericApplicationListener gal ? gal :
+				new GenericApplicationListenerAdapter(delegate);
 	}
 
 	/**
@@ -76,22 +76,22 @@ public class SourceFilteringListener implements GenericApplicationListener {
 
 	@Override
 	public boolean supportsEventType(ResolvableType eventType) {
-		return (this.delegate == null || this.delegate.supportsEventType(eventType));
+		return this.delegate == null || this.delegate.supportsEventType(eventType);
 	}
 
 	@Override
 	public boolean supportsSourceType(@Nullable Class<?> sourceType) {
-		return (sourceType != null && sourceType.isInstance(this.source));
+		return sourceType != null && sourceType.isInstance(this.source);
 	}
 
 	@Override
 	public int getOrder() {
-		return (this.delegate != null ? this.delegate.getOrder() : Ordered.LOWEST_PRECEDENCE);
+		return this.delegate != null ? this.delegate.getOrder() : Ordered.LOWEST_PRECEDENCE;
 	}
 
 	@Override
 	public String getListenerId() {
-		return (this.delegate != null ? this.delegate.getListenerId() : "");
+		return this.delegate != null ? this.delegate.getListenerId() : "";
 	}
 
 

@@ -66,9 +66,9 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 	@Nullable
 	private Object rootHandler;
 
-	private boolean useTrailingSlashMatch = false;
+	private boolean useTrailingSlashMatch;
 
-	private boolean lazyInitHandlers = false;
+	private boolean lazyInitHandlers;
 
 	private final Map<String, Object> handlerMap = new LinkedHashMap<>();
 
@@ -198,7 +198,7 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 		List<PathPattern> matches = null;
 		for (PathPattern pattern : this.pathPatternHandlerMap.keySet()) {
 			if (pattern.matches(path.pathWithinApplication())) {
-				matches = (matches != null ? matches : new ArrayList<>());
+				matches = matches != null ? matches : new ArrayList<>();
 				matches.add(pattern);
 			}
 		}
@@ -431,13 +431,13 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 			}
 		}
 		else {
-			if (urlPath.equals("/")) {
+			if ("/".equals(urlPath)) {
 				if (logger.isTraceEnabled()) {
 					logger.trace("Root mapping to " + getHandlerDescription(handler));
 				}
 				setRootHandler(resolvedHandler);
 			}
-			else if (urlPath.equals("/*")) {
+			else if ("/*".equals(urlPath)) {
 				if (logger.isTraceEnabled()) {
 					logger.trace("Default mapping to " + getHandlerDescription(handler));
 				}
@@ -456,7 +456,7 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 	}
 
 	private String getHandlerDescription(Object handler) {
-		return (handler instanceof String ? "'" + handler + "'" : handler.toString());
+		return handler instanceof String ? "'" + handler + "'" : handler.toString();
 	}
 
 
@@ -476,8 +476,8 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 	 * @since 5.3
 	 */
 	public final Map<PathPattern, Object> getPathPatternHandlerMap() {
-		return (this.pathPatternHandlerMap.isEmpty() ?
-				Collections.emptyMap() : Collections.unmodifiableMap(this.pathPatternHandlerMap));
+		return this.pathPatternHandlerMap.isEmpty() ?
+				Collections.emptyMap() : Collections.unmodifiableMap(this.pathPatternHandlerMap);
 	}
 
 	/**

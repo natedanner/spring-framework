@@ -43,12 +43,12 @@ abstract class AbstractNameValueExpression<T> implements NameValueExpression<T> 
 		int separator = expression.indexOf('=');
 		if (separator == -1) {
 			this.isNegated = expression.startsWith("!");
-			this.name = (this.isNegated ? expression.substring(1) : expression);
+			this.name = this.isNegated ? expression.substring(1) : expression;
 			this.value = null;
 		}
 		else {
 			this.isNegated = (separator > 0) && (expression.charAt(separator - 1) == '!');
-			this.name = (this.isNegated ? expression.substring(0, separator - 1) : expression.substring(0, separator));
+			this.name = this.isNegated ? expression.substring(0, separator - 1) : expression.substring(0, separator);
 			this.value = parseValue(expression.substring(separator + 1));
 		}
 	}
@@ -100,8 +100,8 @@ abstract class AbstractNameValueExpression<T> implements NameValueExpression<T> 
 			return false;
 		}
 		AbstractNameValueExpression<?> that = (AbstractNameValueExpression<?>) other;
-		return ((isCaseSensitiveName() ? this.name.equals(that.name) : this.name.equalsIgnoreCase(that.name)) &&
-				ObjectUtils.nullSafeEquals(this.value, that.value) && this.isNegated == that.isNegated);
+		return (isCaseSensitiveName() ? this.name.equals(that.name) : this.name.equalsIgnoreCase(that.name)) &&
+				ObjectUtils.nullSafeEquals(this.value, that.value) && this.isNegated == that.isNegated;
 	}
 
 	@Override

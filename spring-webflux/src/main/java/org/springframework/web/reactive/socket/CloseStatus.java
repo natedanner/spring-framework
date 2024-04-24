@@ -192,7 +192,7 @@ public final class CloseStatus {
 	 */
 	@Deprecated
 	public boolean equalsCode(CloseStatus other) {
-		return (this.code == other.code);
+		return this.code == other.code;
 	}
 
 
@@ -226,9 +226,9 @@ public final class CloseStatus {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof CloseStatus that &&
+		return this == other || (other instanceof CloseStatus that &&
 				this.code == that.code &&
-				ObjectUtils.nullSafeEquals(this.reason, that.reason)));
+				ObjectUtils.nullSafeEquals(this.reason, that.reason));
 	}
 
 	@Override

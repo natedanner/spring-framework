@@ -78,9 +78,9 @@ public abstract class AbstractMarshaller implements Marshaller, Unmarshaller {
 	/** Logger available to subclasses. */
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	private boolean supportDtd = false;
+	private boolean supportDtd;
 
-	private boolean processExternalEntities = false;
+	private boolean processExternalEntities;
 
 	@Nullable
 	private DocumentBuilderFactory documentBuilderFactory;

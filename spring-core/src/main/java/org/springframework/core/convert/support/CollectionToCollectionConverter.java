@@ -95,7 +95,7 @@ final class CollectionToCollectionConverter implements ConditionalGenericConvert
 			}
 		}
 
-		return (copyRequired ? target : source);
+		return copyRequired ? target : source;
 	}
 
 }

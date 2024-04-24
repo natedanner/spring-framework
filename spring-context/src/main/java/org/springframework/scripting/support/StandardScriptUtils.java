@@ -74,7 +74,7 @@ public abstract class StandardScriptUtils {
 	}
 
 	static Bindings getBindings(Map<String, Object> bindings) {
-		return (bindings instanceof Bindings b ? b : new SimpleBindings(bindings));
+		return bindings instanceof Bindings b ? b : new SimpleBindings(bindings);
 	}
 
 }

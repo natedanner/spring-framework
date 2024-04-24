@@ -95,7 +95,7 @@ public class ContentNegotiatingViewResolver extends WebApplicationObjectSupport
 
 	private final ContentNegotiationManagerFactoryBean cnmFactoryBean = new ContentNegotiationManagerFactoryBean();
 
-	private boolean useNotAcceptableStatusCode = false;
+	private boolean useNotAcceptableStatusCode;
 
 	@Nullable
 	private List<View> defaultViews;
@@ -154,8 +154,8 @@ public class ContentNegotiatingViewResolver extends WebApplicationObjectSupport
 	}
 
 	public List<View> getDefaultViews() {
-		return (this.defaultViews != null ? Collections.unmodifiableList(this.defaultViews) :
-				Collections.emptyList());
+		return this.defaultViews != null ? Collections.unmodifiableList(this.defaultViews) :
+				Collections.emptyList();
 	}
 
 	/**
@@ -167,8 +167,8 @@ public class ContentNegotiatingViewResolver extends WebApplicationObjectSupport
 	}
 
 	public List<ViewResolver> getViewResolvers() {
-		return (this.viewResolvers != null ? Collections.unmodifiableList(this.viewResolvers) :
-				Collections.emptyList());
+		return this.viewResolvers != null ? Collections.unmodifiableList(this.viewResolvers) :
+				Collections.emptyList();
 	}
 
 	public void setOrder(int order) {
@@ -233,8 +233,8 @@ public class ContentNegotiatingViewResolver extends WebApplicationObjectSupport
 			}
 		}
 
-		String mediaTypeInfo = (logger.isDebugEnabled() && requestedMediaTypes != null ?
-				" given " + requestedMediaTypes.toString() : "");
+		String mediaTypeInfo = logger.isDebugEnabled() && requestedMediaTypes != null ?
+				" given " + requestedMediaTypes.toString() : "";
 
 		if (this.useNotAcceptableStatusCode) {
 			if (logger.isDebugEnabled()) {

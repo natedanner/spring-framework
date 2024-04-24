@@ -45,7 +45,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class ResourceRegionEncoderTests extends AbstractLeakCheckingTests {
 
-	private ResourceRegionEncoder encoder = new ResourceRegionEncoder();
+	private final ResourceRegionEncoder encoder = new ResourceRegionEncoder();
 
 	@Test
 	void canEncode() {

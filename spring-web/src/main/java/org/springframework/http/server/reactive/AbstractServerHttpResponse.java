@@ -119,7 +119,7 @@ public abstract class AbstractServerHttpResponse implements ServerHttpResponse {
 	@Override
 	@Nullable
 	public Integer getRawStatusCode() {
-		return (this.statusCode != null ? this.statusCode.value() : null);
+		return this.statusCode != null ? this.statusCode.value() : null;
 	}
 
 	@Override
@@ -138,8 +138,8 @@ public abstract class AbstractServerHttpResponse implements ServerHttpResponse {
 
 	@Override
 	public MultiValueMap<String, ResponseCookie> getCookies() {
-		return (this.state.get() == State.COMMITTED ?
-				CollectionUtils.unmodifiableMultiValueMap(this.cookies) : this.cookies);
+		return this.state.get() == State.COMMITTED ?
+				CollectionUtils.unmodifiableMultiValueMap(this.cookies) : this.cookies;
 	}
 
 	@Override
@@ -171,7 +171,7 @@ public abstract class AbstractServerHttpResponse implements ServerHttpResponse {
 	@Override
 	public boolean isCommitted() {
 		State state = this.state.get();
-		return (state != State.NEW && state != State.COMMIT_ACTION_FAILED);
+		return state != State.NEW && state != State.COMMIT_ACTION_FAILED;
 	}
 
 	@Override
@@ -219,7 +219,7 @@ public abstract class AbstractServerHttpResponse implements ServerHttpResponse {
 
 	@Override
 	public Mono<Void> setComplete() {
-		return !isCommitted() ? doCommit(null) : Mono.empty();
+		return isCommitted() ? Mono.empty() : doCommit(null);
 	}
 
 	/**

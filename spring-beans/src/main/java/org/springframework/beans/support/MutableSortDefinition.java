@@ -39,7 +39,7 @@ public class MutableSortDefinition implements SortDefinition, Serializable {
 
 	private boolean ascending = true;
 
-	private boolean toggleAscendingOnProperty = false;
+	private boolean toggleAscendingOnProperty;
 
 
 	/**
@@ -99,7 +99,7 @@ public class MutableSortDefinition implements SortDefinition, Serializable {
 		else {
 			// Implicit toggling of ascending?
 			if (isToggleAscendingOnProperty()) {
-				this.ascending = (!property.equals(this.property) || !this.ascending);
+				this.ascending = !property.equals(this.property) || !this.ascending;
 			}
 			this.property = property;
 		}
@@ -156,10 +156,10 @@ public class MutableSortDefinition implements SortDefinition, Serializable {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof SortDefinition that &&
+		return this == other || (other instanceof SortDefinition that &&
 				getProperty().equals(that.getProperty()) &&
 				isAscending() == that.isAscending() &&
-				isIgnoreCase() == that.isIgnoreCase()));
+				isIgnoreCase() == that.isIgnoreCase());
 	}
 
 	@Override

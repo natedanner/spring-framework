@@ -249,7 +249,7 @@ class MergedSqlConfig {
 		String[] commentPrefixes = attributes.getStringArray(COMMENT_PREFIXES);
 
 		boolean explicitCommentPrefix = !commentPrefix.isEmpty();
-		boolean explicitCommentPrefixes = (commentPrefixes.length != 0);
+		boolean explicitCommentPrefixes = commentPrefixes.length != 0;
 		Assert.isTrue(!(explicitCommentPrefix && explicitCommentPrefixes),
 			"You may declare the 'commentPrefix' or 'commentPrefixes' attribute in @SqlConfig but not both");
 
@@ -277,7 +277,7 @@ class MergedSqlConfig {
 		Assert.state(Arrays.equals(commentPrefix, commentPrefixes),
 			"Failed to properly handle 'commentPrefix' and 'commentPrefixes' aliases");
 
-		return (commentPrefixes.length != 0 ? commentPrefixes : ScriptUtils.DEFAULT_COMMENT_PREFIXES);
+		return commentPrefixes.length != 0 ? commentPrefixes : ScriptUtils.DEFAULT_COMMENT_PREFIXES;
 	}
 
 	/**
@@ -291,11 +291,11 @@ class MergedSqlConfig {
 	}
 
 	private static boolean isEmptyString(@Nullable Object value) {
-		return (value instanceof String str && str.isEmpty());
+		return value instanceof String str && str.isEmpty();
 	}
 
 	private static boolean isEmptyArray(@Nullable Object value) {
-		return (value != null && value.getClass().isArray() && Array.getLength(value) == 0);
+		return value != null && value.getClass().isArray() && Array.getLength(value) == 0;
 	}
 
 }

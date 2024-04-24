@@ -184,7 +184,7 @@ public class GenericMessagingTemplate extends AbstractDestinationResolvingMessag
 					.build();
 		}
 
-		boolean sent = (timeout >= 0 ? channel.send(messageToSend, timeout) : channel.send(messageToSend));
+		boolean sent = timeout >= 0 ? channel.send(messageToSend, timeout) : channel.send(messageToSend);
 
 		if (!sent) {
 			throw new MessageDeliveryException(message,
@@ -205,7 +205,7 @@ public class GenericMessagingTemplate extends AbstractDestinationResolvingMessag
 			throw new IllegalStateException("A PollableChannel is required to receive messages");
 		}
 
-		Message<?> message = (timeout >= 0 ? pollableChannel.receive(timeout) : pollableChannel.receive());
+		Message<?> message = timeout >= 0 ? pollableChannel.receive(timeout) : pollableChannel.receive();
 
 		if (message == null && logger.isTraceEnabled()) {
 			logger.trace("Failed to receive message from channel '" + channel + "' within timeout: " + timeout);
@@ -251,12 +251,12 @@ public class GenericMessagingTemplate extends AbstractDestinationResolvingMessag
 
 	private long sendTimeout(Message<?> requestMessage) {
 		Long sendTimeout = headerToLong(requestMessage.getHeaders().get(this.sendTimeoutHeader));
-		return (sendTimeout != null ? sendTimeout : this.sendTimeout);
+		return sendTimeout != null ? sendTimeout : this.sendTimeout;
 	}
 
 	private long receiveTimeout(Message<?> requestMessage) {
 		Long receiveTimeout = headerToLong(requestMessage.getHeaders().get(this.receiveTimeoutHeader));
-		return (receiveTimeout != null ? receiveTimeout : this.receiveTimeout);
+		return receiveTimeout != null ? receiveTimeout : this.receiveTimeout;
 	}
 
 	@Nullable

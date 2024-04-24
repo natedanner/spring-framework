@@ -183,7 +183,7 @@ class UriTemplateServletAnnotationControllerHandlerMethodTests extends AbstractS
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		getServlet().service(request, response);
 		assertThat(response.getContentAsString())
-				.isEqualTo(!usePathPatterns ? "test-42-24" : "test-42-24.xml");
+				.isEqualTo(usePathPatterns ? "test-42-24.xml" : "test-42-24");
 	}
 
 	@PathPatternsParameterizedTest
@@ -290,7 +290,7 @@ class UriTemplateServletAnnotationControllerHandlerMethodTests extends AbstractS
 		getServlet().service(request, response);
 		assertThat(response.getStatus()).isEqualTo(200);
 		assertThat(response.getContentAsString())
-				.isEqualTo(!usePathPatterns ? "test-42-;q=1;q=2-[1, 2]" : "test-42--[1, 2]");
+				.isEqualTo(usePathPatterns ? "test-42--[1, 2]" : "test-42-;q=1;q=2-[1, 2]");
 	}
 
 	@PathPatternsParameterizedTest // gh-11306
@@ -331,7 +331,7 @@ class UriTemplateServletAnnotationControllerHandlerMethodTests extends AbstractS
 		MockHttpServletRequest request = new MockHttpServletRequest("GET", "/test/foo.json");
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		getServlet().service(request, response);
-		assertThat(response.getContentAsString()).isEqualTo(!usePathPatterns ? "foo-foo" : "foo-foo.json");
+		assertThat(response.getContentAsString()).isEqualTo(usePathPatterns ? "foo-foo.json" : "foo-foo");
 	}
 
 	@PathPatternsParameterizedTest // gh-11643

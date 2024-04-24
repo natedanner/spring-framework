@@ -114,18 +114,18 @@ public final class JettyHeadersAdapter implements MultiValueMap<String, String> 
 
 	@Override
 	public boolean isEmpty() {
-		return (this.headers.size() == 0);
+		return this.headers.size() == 0;
 	}
 
 	@Override
 	public boolean containsKey(Object key) {
-		return (key instanceof String headerName && this.headers.contains(headerName));
+		return key instanceof String headerName && this.headers.contains(headerName);
 	}
 
 	@Override
 	public boolean containsValue(Object value) {
-		return (value instanceof String searchString &&
-				this.headers.stream().anyMatch(field -> field.contains(searchString)));
+		return value instanceof String searchString &&
+				this.headers.stream().anyMatch(field -> field.contains(searchString));
 	}
 
 	@Nullable

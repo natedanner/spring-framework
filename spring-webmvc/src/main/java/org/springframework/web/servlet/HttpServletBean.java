@@ -198,7 +198,7 @@ public abstract class HttpServletBean extends HttpServlet implements Environment
 	@Override
 	@Nullable
 	public String getServletName() {
-		return (getServletConfig() != null ? getServletConfig().getServletName() : null);
+		return getServletConfig() != null ? getServletConfig().getServletName() : null;
 	}
 
 
@@ -217,8 +217,8 @@ public abstract class HttpServletBean extends HttpServlet implements Environment
 		public ServletConfigPropertyValues(ServletConfig config, Set<String> requiredProperties)
 				throws ServletException {
 
-			Set<String> missingProps = (!CollectionUtils.isEmpty(requiredProperties) ?
-					new HashSet<>(requiredProperties) : null);
+			Set<String> missingProps = CollectionUtils.isEmpty(requiredProperties) ? null :
+					new HashSet<>(requiredProperties);
 
 			Enumeration<String> paramNames = config.getInitParameterNames();
 			while (paramNames.hasMoreElements()) {

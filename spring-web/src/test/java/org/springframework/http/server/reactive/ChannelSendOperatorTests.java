@@ -226,7 +226,7 @@ class ChannelSendOperatorTests {
 
 		private List<String> items = new ArrayList<>();
 
-		private boolean completed = false;
+		private boolean completed;
 
 		private Throwable error;
 

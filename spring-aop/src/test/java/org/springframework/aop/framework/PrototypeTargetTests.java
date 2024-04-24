@@ -74,7 +74,7 @@ class PrototypeTargetTests {
 
 	public static class TestBeanImpl implements TestBean {
 
-		private static int constructionCount = 0;
+		private static int constructionCount;
 
 		public TestBeanImpl() {
 			constructionCount++;
@@ -88,7 +88,7 @@ class PrototypeTargetTests {
 
 	public static class TestInterceptor implements MethodInterceptor {
 
-		private int invocationCount = 0;
+		private int invocationCount;
 
 		@Override
 		public Object invoke(MethodInvocation methodInvocation) throws Throwable {

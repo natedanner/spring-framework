@@ -67,8 +67,8 @@ public class HttpHeadResponseDecorator extends ServerHttpResponseDecorator {
 	}
 
 	private boolean shouldSetContentLength() {
-		return (getHeaders().getFirst(HttpHeaders.CONTENT_LENGTH) == null &&
-				getHeaders().getFirst(HttpHeaders.TRANSFER_ENCODING) == null);
+		return getHeaders().getFirst(HttpHeaders.CONTENT_LENGTH) == null &&
+				getHeaders().getFirst(HttpHeaders.TRANSFER_ENCODING) == null;
 	}
 
 	/**

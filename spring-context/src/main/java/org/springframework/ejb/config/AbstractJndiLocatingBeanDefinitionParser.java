@@ -49,9 +49,9 @@ abstract class AbstractJndiLocatingBeanDefinitionParser extends AbstractSimpleBe
 
 	@Override
 	protected boolean isEligibleAttribute(String attributeName) {
-		return (super.isEligibleAttribute(attributeName) &&
+		return super.isEligibleAttribute(attributeName) &&
 				!ENVIRONMENT_REF.equals(attributeName) &&
-				!LAZY_INIT_ATTRIBUTE.equals(attributeName));
+				!LAZY_INIT_ATTRIBUTE.equals(attributeName);
 	}
 
 	@Override

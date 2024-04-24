@@ -112,7 +112,7 @@ public class DefaultResponseErrorHandler implements ResponseErrorHandler {
 	@Deprecated
 	protected boolean hasError(int statusCode) {
 		HttpStatus.Series series = HttpStatus.Series.resolve(statusCode);
-		return (series == HttpStatus.Series.CLIENT_ERROR || series == HttpStatus.Series.SERVER_ERROR);
+		return series == HttpStatus.Series.CLIENT_ERROR || series == HttpStatus.Series.SERVER_ERROR;
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class DefaultResponseErrorHandler implements ResponseErrorHandler {
 			return preface + "[no body]";
 		}
 
-		charset = (charset != null ? charset : StandardCharsets.UTF_8);
+		charset = charset != null ? charset : StandardCharsets.UTF_8;
 
 		String bodyText = new String(responseBody, charset);
 		bodyText = LogFormatUtils.formatValue(bodyText, -1, true);
@@ -249,7 +249,7 @@ public class DefaultResponseErrorHandler implements ResponseErrorHandler {
 	protected Charset getCharset(ClientHttpResponse response) {
 		HttpHeaders headers = response.getHeaders();
 		MediaType contentType = headers.getContentType();
-		return (contentType != null ? contentType.getCharset() : null);
+		return contentType != null ? contentType.getCharset() : null;
 	}
 
 }

@@ -377,7 +377,7 @@ class ControllerMethodResolver {
 	@Nullable
 	public InvocableHandlerMethod getExceptionHandlerMethod(Throwable ex, @Nullable HandlerMethod handlerMethod) {
 
-		Class<?> handlerType = (handlerMethod != null ? handlerMethod.getBeanType() : null);
+		Class<?> handlerType = handlerMethod != null ? handlerMethod.getBeanType() : null;
 		Object exceptionHandlerObject = null;
 		Method exceptionHandlerMethod = null;
 
@@ -413,7 +413,7 @@ class ControllerMethodResolver {
 	}
 
 	public boolean hasMethodValidator() {
-		return (this.methodValidator != null);
+		return this.methodValidator != null;
 	}
 
 	/**

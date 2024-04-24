@@ -655,7 +655,7 @@ class DefaultLifecycleProcessorTests {
 	}
 
 
-	private static class TestSmartLifecycleBean extends TestLifecycleBean implements SmartLifecycle {
+	private static final class TestSmartLifecycleBean extends TestLifecycleBean implements SmartLifecycle {
 
 		private final int phase;
 
@@ -715,7 +715,7 @@ class DefaultLifecycleProcessorTests {
 
 	public static class DummySmartLifecycleBean implements SmartLifecycle {
 
-		public boolean running = false;
+		public boolean running;
 
 		@Override
 		public boolean isAutoStartup() {
@@ -752,7 +752,7 @@ class DefaultLifecycleProcessorTests {
 
 	public static class DummySmartLifecycleFactoryBean implements FactoryBean<Object>, SmartLifecycle {
 
-		public boolean running = false;
+		public boolean running;
 
 		DummySmartLifecycleBean bean = new DummySmartLifecycleBean();
 

@@ -137,7 +137,7 @@ class HttpWebHandlerAdapterObservabilityTests {
 	}
 
 
-	private static class ThrowingExceptionWebHandler implements WebHandler {
+	private static final class ThrowingExceptionWebHandler implements WebHandler {
 
 		private final Throwable exception;
 

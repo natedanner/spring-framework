@@ -103,7 +103,7 @@ class BeanDefinitionMethodGenerator {
 	 */
 	private boolean isWritablePackageName(ClassName target) {
 		String packageName = target.packageName();
-		return (!packageName.startsWith("java.") && !packageName.startsWith("javax."));
+		return !packageName.startsWith("java.") && !packageName.startsWith("javax.");
 	}
 
 	/**
@@ -196,9 +196,9 @@ class BeanDefinitionMethodGenerator {
 
 	private String getSimpleBeanName(String beanName) {
 		int lastDot = beanName.lastIndexOf('.');
-		beanName = (lastDot != -1 ? beanName.substring(lastDot + 1) : beanName);
+		beanName = lastDot != -1 ? beanName.substring(lastDot + 1) : beanName;
 		int lastDollar = beanName.lastIndexOf('$');
-		beanName = (lastDollar != -1 ? beanName.substring(lastDollar + 1) : beanName);
+		beanName = lastDollar != -1 ? beanName.substring(lastDollar + 1) : beanName;
 		return StringUtils.uncapitalize(beanName);
 	}
 

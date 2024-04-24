@@ -81,7 +81,7 @@ public class AnnotationJmxAttributeSource implements JmxAttributeSource, BeanFac
 			return null;
 		}
 		Class<?> declaringClass = (Class<?>) ann.getSource();
-		Class<?> target = (declaringClass != null && !declaringClass.isInterface() ? declaringClass : beanClass);
+		Class<?> target = declaringClass != null && !declaringClass.isInterface() ? declaringClass : beanClass;
 		if (!Modifier.isPublic(target.getModifiers())) {
 			throw new InvalidMetadataException("@ManagedResource class '" + target.getName() + "' must be public");
 		}

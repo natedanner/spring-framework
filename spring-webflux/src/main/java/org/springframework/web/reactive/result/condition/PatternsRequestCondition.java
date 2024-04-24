@@ -67,7 +67,7 @@ public final class PatternsRequestCondition extends AbstractRequestCondition<Pat
 	 * Creates a new instance with the given URL patterns.
 	 */
 	public PatternsRequestCondition(List<PathPattern> patterns) {
-		this.patterns = (patterns.isEmpty() ? EMPTY_PATH_PATTERN : new TreeSet<>(patterns));
+		this.patterns = patterns.isEmpty() ? EMPTY_PATH_PATTERN : new TreeSet<>(patterns);
 	}
 
 	private PatternsRequestCondition(SortedSet<PathPattern> patterns) {
@@ -94,7 +94,7 @@ public final class PatternsRequestCondition extends AbstractRequestCondition<Pat
 	 * @since 6.0.10
 	 */
 	public boolean isEmptyPathMapping() {
-		return (this.patterns == EMPTY_PATH_PATTERN);
+		return this.patterns == EMPTY_PATH_PATTERN;
 	}
 
 	/**
@@ -108,7 +108,7 @@ public final class PatternsRequestCondition extends AbstractRequestCondition<Pat
 		Set<String> result = Collections.emptySet();
 		for (PathPattern pattern : this.patterns) {
 			if (!pattern.hasPatternSyntax()) {
-				result = (result.isEmpty() ? new HashSet<>(1) : result);
+				result = result.isEmpty() ? new HashSet<>(1) : result;
 				result.add(pattern.getPatternString());
 			}
 		}
@@ -158,7 +158,7 @@ public final class PatternsRequestCondition extends AbstractRequestCondition<Pat
 	@Nullable
 	public PatternsRequestCondition getMatchingCondition(ServerWebExchange exchange) {
 		SortedSet<PathPattern> matches = getMatchingPatterns(exchange);
-		return (matches != null ? new PatternsRequestCondition(matches) : null);
+		return matches != null ? new PatternsRequestCondition(matches) : null;
 	}
 
 	@Nullable
@@ -167,7 +167,7 @@ public final class PatternsRequestCondition extends AbstractRequestCondition<Pat
 		TreeSet<PathPattern> result = null;
 		for (PathPattern pattern : this.patterns) {
 			if (pattern.matches(lookupPath)) {
-				result = (result != null ? result : new TreeSet<>());
+				result = result != null ? result : new TreeSet<>();
 				result.add(pattern);
 			}
 		}

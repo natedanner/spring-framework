@@ -44,7 +44,7 @@ public class RSocketRequesterMethodArgumentResolver implements HandlerMethodArgu
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		Class<?> type = parameter.getParameterType();
-		return (RSocketRequester.class.equals(type) || RSocket.class.isAssignableFrom(type));
+		return RSocketRequester.class.equals(type) || RSocket.class.isAssignableFrom(type);
 	}
 
 	@Override

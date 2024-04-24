@@ -44,7 +44,7 @@ import org.springframework.asm.Type;
  * @version $Id: ReflectUtils.java,v 1.30 2009/01/11 19:47:49 herbyderby Exp $
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class ReflectUtils {
+public final class ReflectUtils {
 
 	private ReflectUtils() {
 	}
@@ -94,6 +94,7 @@ public class ReflectUtils {
 			OBJECT_METHODS.add(method);
 		}
 	}
+
 	// SPRING PATCH END
 
 	private static final String[] CGLIB_PACKAGES = {"java.lang"};
@@ -223,8 +224,8 @@ public class ReflectUtils {
 		}
 		className = className.substring(0, className.length() - 2 * dimensions);
 
-		String prefix = (dimensions > 0) ? brackets + "L" : "";
-		String suffix = (dimensions > 0) ? ";" : "";
+		String prefix = dimensions > 0 ? brackets + "L" : "";
+		String suffix = dimensions > 0 ? ";" : "";
 		try {
 			return Class.forName(prefix + className + suffix, false, loader);
 		}
@@ -271,8 +272,7 @@ public class ReflectUtils {
 			if (!flag) {
 				cstruct.setAccessible(true);
 			}
-			Object result = cstruct.newInstance(args);
-			return result;
+			return cstruct.newInstance(args);
 		}
 		catch (InstantiationException | IllegalAccessException e) {
 			throw new CodeGenerationException(e);
@@ -319,7 +319,7 @@ public class ReflectUtils {
 
 	public static Method findNewInstance(Class iface) {
 		Method m = findInterfaceMethod(iface);
-		if (!m.getName().equals("newInstance")) {
+		if (!"newInstance".equals(m.getName())) {
 			throw new IllegalArgumentException(iface + " missing newInstance method");
 		}
 		return m;
@@ -613,7 +613,7 @@ public class ReflectUtils {
 
 	public static ClassInfo getClassInfo(final Class clazz) {
 		final Type type = Type.getType(clazz);
-		final Type sc = (clazz.getSuperclass() == null) ? null : Type.getType(clazz.getSuperclass());
+		final Type sc = clazz.getSuperclass() == null ? null : Type.getType(clazz.getSuperclass());
 		return new ClassInfo() {
 			@Override
 			public Type getType() {

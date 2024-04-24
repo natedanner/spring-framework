@@ -66,7 +66,7 @@ import static org.mockito.Mockito.verify;
  */
 class DefaultRSocketRequesterBuilderTests {
 
-	private ClientTransport transport = mock();
+	private final ClientTransport transport = mock();
 
 	private final MockConnection connection = new MockConnection();
 

@@ -53,7 +53,7 @@ public class ContextPathCompositeHandler implements HttpHandler {
 
 	private static void assertValidContextPath(String contextPath) {
 		Assert.hasText(contextPath, "Context path must not be empty");
-		if (contextPath.equals("/")) {
+		if ("/".equals(contextPath)) {
 			return;
 		}
 		Assert.isTrue(contextPath.startsWith("/"), "Context path must begin with '/'");

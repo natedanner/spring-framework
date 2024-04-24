@@ -175,9 +175,9 @@ public class MimeMessageHelper {
 
 	private FileTypeMap fileTypeMap;
 
-	private boolean encodeFilenames = false;
+	private boolean encodeFilenames;
 
-	private boolean validateAddresses = false;
+	private boolean validateAddresses;
 
 
 	/**
@@ -206,7 +206,7 @@ public class MimeMessageHelper {
 	 */
 	public MimeMessageHelper(MimeMessage mimeMessage, @Nullable String encoding) {
 		this.mimeMessage = mimeMessage;
-		this.encoding = (encoding != null ? encoding : getDefaultEncoding(mimeMessage));
+		this.encoding = encoding != null ? encoding : getDefaultEncoding(mimeMessage);
 		this.fileTypeMap = getDefaultFileTypeMap(mimeMessage);
 	}
 
@@ -295,7 +295,7 @@ public class MimeMessageHelper {
 
 		this.mimeMessage = mimeMessage;
 		createMimeMultiparts(mimeMessage, multipartMode);
-		this.encoding = (encoding != null ? encoding : getDefaultEncoding(mimeMessage));
+		this.encoding = encoding != null ? encoding : getDefaultEncoding(mimeMessage);
 		this.fileTypeMap = getDefaultFileTypeMap(mimeMessage);
 	}
 
@@ -377,7 +377,7 @@ public class MimeMessageHelper {
 	 * @see #MimeMessageHelper(MimeMessage, boolean)
 	 */
 	public final boolean isMultipart() {
-		return (this.rootMimeMultipart != null);
+		return this.rootMimeMultipart != null;
 	}
 
 	/**
@@ -475,7 +475,7 @@ public class MimeMessageHelper {
 	 * @see ConfigurableMimeFileTypeMap
 	 */
 	public void setFileTypeMap(@Nullable FileTypeMap fileTypeMap) {
-		this.fileTypeMap = (fileTypeMap != null ? fileTypeMap : getDefaultFileTypeMap(getMimeMessage()));
+		this.fileTypeMap = fileTypeMap != null ? fileTypeMap : getDefaultFileTypeMap(getMimeMessage());
 	}
 
 	/**
@@ -591,7 +591,7 @@ public class MimeMessageHelper {
 
 	public void setReplyTo(String replyTo, String personal) throws MessagingException, UnsupportedEncodingException {
 		Assert.notNull(replyTo, "Reply-to address must not be null");
-		InternetAddress replyToAddress = (getEncoding() != null) ?
+		InternetAddress replyToAddress = getEncoding() != null ?
 				new InternetAddress(replyTo, personal, getEncoding()) : new InternetAddress(replyTo, personal);
 		setReplyTo(replyToAddress);
 	}
@@ -738,8 +738,8 @@ public class MimeMessageHelper {
 		}
 		InternetAddress raw = parsed[0];
 		try {
-			return (getEncoding() != null ?
-					new InternetAddress(raw.getAddress(), raw.getPersonal(), getEncoding()) : raw);
+			return getEncoding() != null ?
+					new InternetAddress(raw.getAddress(), raw.getPersonal(), getEncoding()) : raw;
 		}
 		catch (UnsupportedEncodingException ex) {
 			throw new MessagingException("Failed to parse embedded personal name to correct encoding", ex);

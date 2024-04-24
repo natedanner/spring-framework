@@ -44,8 +44,8 @@ public class HeadersMethodArgumentResolver implements SyncHandlerMethodArgumentR
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		Class<?> paramType = parameter.getParameterType();
-		return ((parameter.hasParameterAnnotation(Headers.class) && Map.class.isAssignableFrom(paramType)) ||
-				MessageHeaders.class == paramType || MessageHeaderAccessor.class.isAssignableFrom(paramType));
+		return (parameter.hasParameterAnnotation(Headers.class) && Map.class.isAssignableFrom(paramType)) ||
+				MessageHeaders.class == paramType || MessageHeaderAccessor.class.isAssignableFrom(paramType);
 	}
 
 	@Override

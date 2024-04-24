@@ -89,7 +89,7 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 	@Nullable
 	private String allowHeader;
 
-	private boolean requireSession = false;
+	private boolean requireSession;
 
 	@Nullable
 	private CacheControl cacheControl;
@@ -103,7 +103,7 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 	// deprecated fields
 
 	/** Use HTTP 1.0 expires header? */
-	private boolean useExpiresHeader = false;
+	private boolean useExpiresHeader;
 
 	/** Use HTTP 1.1 cache-control header? */
 	private boolean useCacheControlHeader = true;
@@ -111,7 +111,7 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 	/** Use HTTP 1.1 cache-control header value "no-store"? */
 	private boolean useCacheControlNoStore = true;
 
-	private boolean alwaysMustRevalidate = false;
+	private boolean alwaysMustRevalidate;
 
 
 	/**
@@ -167,7 +167,7 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 	 */
 	@Nullable
 	public final String[] getSupportedMethods() {
-		return (this.supportedMethods != null ? StringUtils.toStringArray(this.supportedMethods) : null);
+		return this.supportedMethods != null ? StringUtils.toStringArray(this.supportedMethods) : null;
 	}
 
 	private void initAllowHeader() {
@@ -465,7 +465,7 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 				}
 			}
 			else if (cacheSeconds == 0) {
-				cControl = (this.useCacheControlNoStore ? CacheControl.noStore() : CacheControl.noCache());
+				cControl = this.useCacheControlNoStore ? CacheControl.noStore() : CacheControl.noCache();
 			}
 			else {
 				cControl = CacheControl.empty();

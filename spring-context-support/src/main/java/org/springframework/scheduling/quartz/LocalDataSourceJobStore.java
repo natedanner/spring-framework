@@ -125,7 +125,7 @@ public class LocalDataSourceJobStore extends JobStoreCMT {
 		// Non-transactional DataSource is optional: fall back to default
 		// DataSource if not explicitly specified.
 		DataSource nonTxDataSource = SchedulerFactoryBean.getConfigTimeNonTransactionalDataSource();
-		final DataSource nonTxDataSourceToUse = (nonTxDataSource != null ? nonTxDataSource : this.dataSource);
+		final DataSource nonTxDataSourceToUse = nonTxDataSource != null ? nonTxDataSource : this.dataSource;
 
 		// Configure non-transactional connection settings for Quartz.
 		setNonManagedTXDataSource(NON_TX_DATA_SOURCE_PREFIX + getInstanceName());

@@ -175,7 +175,7 @@ public class StandardBeanExpressionResolver implements BeanExpressionResolver {
 				sec.setTypeLocator(new StandardTypeLocator(beanExpressionContext.getBeanFactory().getBeanClassLoader()));
 				sec.setTypeConverter(new StandardTypeConverter(() -> {
 					ConversionService cs = beanExpressionContext.getBeanFactory().getConversionService();
-					return (cs != null ? cs : DefaultConversionService.getSharedInstance());
+					return cs != null ? cs : DefaultConversionService.getSharedInstance();
 				}));
 				customizeEvaluationContext(sec);
 				this.evaluationCache.put(beanExpressionContext, sec);

@@ -418,7 +418,7 @@ class CacheReproTests {
 
 	public static class Spr11124ServiceImpl implements Spr11124Service {
 
-		private int multipleCount = 0;
+		private int multipleCount;
 
 		@Override
 		@Cacheable("smallCache")
@@ -685,7 +685,7 @@ class CacheReproTests {
 
 	public static class Spr14235FluxService {
 
-		private int counter = 0;
+		private int counter;
 
 		private boolean emptyCalled;
 
@@ -715,7 +715,7 @@ class CacheReproTests {
 
 	public static class Spr14235FluxServiceSync {
 
-		private int counter = 0;
+		private int counter;
 
 		private boolean emptyCalled;
 

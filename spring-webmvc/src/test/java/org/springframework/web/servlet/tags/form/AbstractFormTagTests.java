@@ -28,7 +28,7 @@ import org.springframework.web.testfixture.servlet.MockPageContext;
  */
 public abstract class AbstractFormTagTests extends AbstractHtmlElementTagTests {
 
-	private FormTag formTag = new FormTag();
+	private final FormTag formTag = new FormTag();
 
 
 	@Override

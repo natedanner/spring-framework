@@ -89,7 +89,7 @@ public abstract class HibernateDaoSupport extends DaoSupport {
 	 */
 	@Nullable
 	public final SessionFactory getSessionFactory() {
-		return (this.hibernateTemplate != null ? this.hibernateTemplate.getSessionFactory() : null);
+		return this.hibernateTemplate != null ? this.hibernateTemplate.getSessionFactory() : null;
 	}
 
 	/**

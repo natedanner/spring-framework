@@ -209,10 +209,10 @@ public abstract class AbstractSockJsSession implements SockJsSession {
 	@Override
 	public long getTimeSinceLastActive() {
 		if (isNew()) {
-			return (System.currentTimeMillis() - this.timeCreated);
+			return System.currentTimeMillis() - this.timeCreated;
 		}
 		else {
-			return (isActive() ? 0 : System.currentTimeMillis() - this.timeLastActive);
+			return isActive() ? 0 : System.currentTimeMillis() - this.timeLastActive;
 		}
 	}
 
@@ -369,7 +369,7 @@ public abstract class AbstractSockJsSession implements SockJsSession {
 		return switch (messages.length - i) {
 			case 0 -> Collections.emptyList();
 			case 1 -> (messages[i].trim().isEmpty() ?
-					Collections.<String>emptyList() : Collections.singletonList(messages[i]));
+					Collections.emptyList() : Collections.singletonList(messages[i]));
 			default -> Arrays.stream(Arrays.copyOfRange(messages, i, messages.length))
 					.filter(message -> !message.trim().isEmpty())
 					.toList();

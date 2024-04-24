@@ -157,8 +157,8 @@ final class DefaultClientRequestBuilder implements ClientRequest.Builder {
 
 	@Override
 	public ClientRequest.Builder httpRequest(Consumer<ClientHttpRequest> requestConsumer) {
-		this.httpRequestConsumer = (this.httpRequestConsumer != null ?
-				this.httpRequestConsumer.andThen(requestConsumer) : requestConsumer);
+		this.httpRequestConsumer = this.httpRequestConsumer != null ?
+				this.httpRequestConsumer.andThen(requestConsumer) : requestConsumer;
 		return this;
 	}
 

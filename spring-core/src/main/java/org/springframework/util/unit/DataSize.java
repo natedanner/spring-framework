@@ -255,7 +255,7 @@ public final class DataSize implements Comparable<DataSize>, Serializable {
 			return false;
 		}
 		DataSize that = (DataSize) obj;
-		return (this.bytes == that.bytes);
+		return this.bytes == that.bytes;
 	}
 
 	@Override
@@ -276,8 +276,8 @@ public final class DataSize implements Comparable<DataSize>, Serializable {
 		private static final Pattern PATTERN = Pattern.compile("^([+\\-]?\\d+)([a-zA-Z]{0,2})$");
 
 		private static DataUnit determineDataUnit(String suffix, @Nullable DataUnit defaultUnit) {
-			DataUnit defaultUnitToUse = (defaultUnit != null ? defaultUnit : DataUnit.BYTES);
-			return (StringUtils.hasLength(suffix) ? DataUnit.fromSuffix(suffix) : defaultUnitToUse);
+			DataUnit defaultUnitToUse = defaultUnit != null ? defaultUnit : DataUnit.BYTES;
+			return StringUtils.hasLength(suffix) ? DataUnit.fromSuffix(suffix) : defaultUnitToUse;
 		}
 
 	}

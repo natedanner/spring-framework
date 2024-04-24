@@ -107,12 +107,12 @@ public class MarshallingHttpMessageConverter extends AbstractXmlHttpMessageConve
 
 	@Override
 	public boolean canRead(Class<?> clazz, @Nullable MediaType mediaType) {
-		return (canRead(mediaType) && this.unmarshaller != null && this.unmarshaller.supports(clazz));
+		return canRead(mediaType) && this.unmarshaller != null && this.unmarshaller.supports(clazz);
 	}
 
 	@Override
 	public boolean canWrite(Class<?> clazz, @Nullable MediaType mediaType) {
-		return (canWrite(mediaType) && this.marshaller != null && this.marshaller.supports(clazz));
+		return canWrite(mediaType) && this.marshaller != null && this.marshaller.supports(clazz);
 	}
 
 	@Override

@@ -465,10 +465,10 @@ public abstract class RequestMappingInfoHandlerMapping extends AbstractHandlerMe
 			 */
 			public PartialMatch(RequestMappingInfo info, HttpServletRequest request) {
 				this.info = info;
-				this.methodsMatch = (info.getMethodsCondition().getMatchingCondition(request) != null);
-				this.consumesMatch = (info.getConsumesCondition().getMatchingCondition(request) != null);
-				this.producesMatch = (info.getProducesCondition().getMatchingCondition(request) != null);
-				this.paramsMatch = (info.getParamsCondition().getMatchingCondition(request) != null);
+				this.methodsMatch = info.getMethodsCondition().getMatchingCondition(request) != null;
+				this.consumesMatch = info.getConsumesCondition().getMatchingCondition(request) != null;
+				this.producesMatch = info.getProducesCondition().getMatchingCondition(request) != null;
+				this.paramsMatch = info.getParamsCondition().getMatchingCondition(request) != null;
 			}
 
 			public RequestMappingInfo getInfo() {
@@ -480,15 +480,15 @@ public abstract class RequestMappingInfoHandlerMapping extends AbstractHandlerMe
 			}
 
 			public boolean hasConsumesMatch() {
-				return (hasMethodsMatch() && this.consumesMatch);
+				return hasMethodsMatch() && this.consumesMatch;
 			}
 
 			public boolean hasProducesMatch() {
-				return (hasConsumesMatch() && this.producesMatch);
+				return hasConsumesMatch() && this.producesMatch;
 			}
 
 			public boolean hasParamsMatch() {
-				return (hasProducesMatch() && this.paramsMatch);
+				return hasProducesMatch() && this.paramsMatch;
 			}
 
 			@Override

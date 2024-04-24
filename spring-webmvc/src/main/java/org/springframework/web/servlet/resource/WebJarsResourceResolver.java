@@ -105,7 +105,7 @@ public class WebJarsResourceResolver extends AbstractResourceResolver {
 
 	@Nullable
 	protected String findWebJarResourcePath(String path) {
-		int startOffset = (path.startsWith("/") ? 1 : 0);
+		int startOffset = path.startsWith("/") ? 1 : 0;
 		int endOffset = path.indexOf('/', 1);
 		if (endOffset != -1) {
 			String webjar = path.substring(startOffset, endOffset);

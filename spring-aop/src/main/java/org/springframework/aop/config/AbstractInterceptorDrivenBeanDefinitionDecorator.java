@@ -117,8 +117,8 @@ public abstract class AbstractInterceptorDrivenBeanDefinitionDecorator implement
 
 	protected String getInterceptorNameSuffix(BeanDefinition interceptorDefinition) {
 		String beanClassName = interceptorDefinition.getBeanClassName();
-		return (StringUtils.hasLength(beanClassName) ?
-				StringUtils.uncapitalize(ClassUtils.getShortName(beanClassName)) : "");
+		return StringUtils.hasLength(beanClassName) ?
+				StringUtils.uncapitalize(ClassUtils.getShortName(beanClassName)) : "";
 	}
 
 	/**

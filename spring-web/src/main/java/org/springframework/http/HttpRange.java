@@ -270,9 +270,9 @@ public abstract class HttpRange {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof ByteRange that &&
+			return this == other || (other instanceof ByteRange that &&
 					this.firstPos == that.firstPos &&
-					ObjectUtils.nullSafeEquals(this.lastPos, that.lastPos)));
+					ObjectUtils.nullSafeEquals(this.lastPos, that.lastPos));
 		}
 
 		@Override
@@ -326,8 +326,8 @@ public abstract class HttpRange {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof SuffixByteRange that &&
-					this.suffixLength == that.suffixLength));
+			return this == other || (other instanceof SuffixByteRange that &&
+					this.suffixLength == that.suffixLength);
 		}
 
 		@Override

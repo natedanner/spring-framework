@@ -48,7 +48,7 @@ public class GenericTableMetaDataProvider implements TableMetaDataProvider {
 	protected static final Log logger = LogFactory.getLog(TableMetaDataProvider.class);
 
 	/** indicator whether column meta-data should be used. */
-	private boolean tableColumnMetaDataUsed = false;
+	private boolean tableColumnMetaDataUsed;
 
 	/** the version of the database. */
 	@Nullable
@@ -62,7 +62,7 @@ public class GenericTableMetaDataProvider implements TableMetaDataProvider {
 	private boolean storesUpperCaseIdentifiers = true;
 
 	/** indicates whether the identifiers are lowercased. */
-	private boolean storesLowerCaseIdentifiers = false;
+	private boolean storesLowerCaseIdentifiers;
 
 	/** indicates whether generated keys retrieval is supported. */
 	private boolean getGeneratedKeysSupported = true;

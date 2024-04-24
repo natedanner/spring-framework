@@ -192,7 +192,7 @@ public class PropertiesBeanDefinitionReader extends AbstractBeanDefinitionReader
 	 */
 	public void setPropertiesPersister(@Nullable PropertiesPersister propertiesPersister) {
 		this.propertiesPersister =
-				(propertiesPersister != null ? propertiesPersister : DefaultPropertiesPersister.INSTANCE);
+				propertiesPersister != null ? propertiesPersister : DefaultPropertiesPersister.INSTANCE;
 	}
 
 	/**
@@ -448,8 +448,8 @@ public class PropertiesBeanDefinitionReader extends AbstractBeanDefinitionReader
 				else if (SINGLETON_KEY.equals(property)) {
 					// Spring 1.2 style
 					String val = ((String) entry.getValue()).strip();
-					scope = (!StringUtils.hasLength(val) || TRUE_VALUE.equals(val) ?
-							BeanDefinition.SCOPE_SINGLETON : BeanDefinition.SCOPE_PROTOTYPE);
+					scope = !StringUtils.hasLength(val) || TRUE_VALUE.equals(val) ?
+							BeanDefinition.SCOPE_SINGLETON : BeanDefinition.SCOPE_PROTOTYPE;
 				}
 				else if (LAZY_INIT_KEY.equals(property)) {
 					String val = ((String) entry.getValue()).strip();

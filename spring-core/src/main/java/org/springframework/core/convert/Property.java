@@ -77,7 +77,7 @@ public final class Property {
 		this.readMethod = readMethod;
 		this.writeMethod = writeMethod;
 		this.methodParameter = resolveMethodParameter();
-		this.name = (name != null ? name : resolveName());
+		this.name = name != null ? name : resolveName();
 	}
 
 
@@ -261,11 +261,11 @@ public final class Property {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof Property that &&
+		return this == other || (other instanceof Property that &&
 				ObjectUtils.nullSafeEquals(this.objectType, that.objectType) &&
 				ObjectUtils.nullSafeEquals(this.name, that.name) &&
 				ObjectUtils.nullSafeEquals(this.readMethod, that.readMethod) &&
-				ObjectUtils.nullSafeEquals(this.writeMethod, that.writeMethod)));
+				ObjectUtils.nullSafeEquals(this.writeMethod, that.writeMethod));
 	}
 
 	@Override

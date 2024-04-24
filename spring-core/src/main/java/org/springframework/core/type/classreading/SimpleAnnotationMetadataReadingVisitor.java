@@ -102,7 +102,7 @@ final class SimpleAnnotationMetadataReadingVisitor extends ClassVisitor {
 			String outerClassName = toClassName(outerName);
 			if (this.className.equals(className)) {
 				this.enclosingClassName = outerClassName;
-				this.independentInnerClass = ((access & Opcodes.ACC_STATIC) != 0);
+				this.independentInnerClass = (access & Opcodes.ACC_STATIC) != 0;
 			}
 			else if (this.className.equals(outerClassName)) {
 				this.memberClassNames.add(className);
@@ -123,7 +123,7 @@ final class SimpleAnnotationMetadataReadingVisitor extends ClassVisitor {
 			int access, String name, String descriptor, String signature, String[] exceptions) {
 
 		// Skip bridge methods and constructors - we're only interested in original user methods.
-		if (isBridge(access) || name.equals("<init>")) {
+		if (isBridge(access) || "<init>".equals(name)) {
 			return null;
 		}
 		return new SimpleMethodMetadataReadingVisitor(this.classLoader, this.className,
@@ -178,7 +178,7 @@ final class SimpleAnnotationMetadataReadingVisitor extends ClassVisitor {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof Source that && this.className.equals(that.className)));
+			return this == other || (other instanceof Source that && this.className.equals(that.className));
 		}
 
 		@Override

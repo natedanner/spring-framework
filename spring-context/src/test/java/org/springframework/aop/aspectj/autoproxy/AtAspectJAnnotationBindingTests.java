@@ -74,7 +74,7 @@ class AtAspectJAnnotationBindingTestAspect {
 	public Object doWithAnnotation(ProceedingJoinPoint pjp, TestAnnotation testAnn) throws Throwable {
 		String annValue = testAnn.value();
 		Object result = pjp.proceed();
-		return (result instanceof String ? annValue + " " + result : result);
+		return result instanceof String ? annValue + " " + result : result;
 	}
 
 }

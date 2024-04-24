@@ -171,7 +171,7 @@ public final class AutowiredMethodArgumentsResolver extends AutowiredElementReso
 			MethodParameter parameter = new MethodParameter(method, i);
 			DependencyDescriptor descriptor = new DependencyDescriptor(parameter, this.required);
 			descriptor.setContainingClass(beanClass);
-			String shortcut = (this.shortcuts != null ? this.shortcuts[i] : null);
+			String shortcut = this.shortcuts != null ? this.shortcuts[i] : null;
 			if (shortcut != null) {
 				descriptor = new ShortcutDependencyDescriptor(descriptor, shortcut);
 			}

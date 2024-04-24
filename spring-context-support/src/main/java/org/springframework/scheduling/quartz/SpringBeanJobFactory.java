@@ -85,9 +85,9 @@ public class SpringBeanJobFactory extends AdaptableJobFactory
 	 */
 	@Override
 	protected Object createJobInstance(TriggerFiredBundle bundle) throws Exception {
-		Object job = (this.applicationContext != null ?
+		Object job = this.applicationContext != null ?
 				this.applicationContext.getAutowireCapableBeanFactory().createBean(bundle.getJobDetail().getJobClass()) :
-				super.createJobInstance(bundle));
+				super.createJobInstance(bundle);
 
 		if (isEligibleForPropertyPopulation(job)) {
 			BeanWrapper bw = PropertyAccessorFactory.forBeanPropertyAccess(job);
@@ -122,7 +122,7 @@ public class SpringBeanJobFactory extends AdaptableJobFactory
 	 * @see QuartzJobBean
 	 */
 	protected boolean isEligibleForPropertyPopulation(Object jobObject) {
-		return (!(jobObject instanceof QuartzJobBean));
+		return !(jobObject instanceof QuartzJobBean);
 	}
 
 }

@@ -60,7 +60,7 @@ class SockJsClientTests {
 	@SuppressWarnings("deprecation")
 	private org.springframework.util.concurrent.ListenableFutureCallback<WebSocketSession> connectCallback = mock();
 
-	private SockJsClient sockJsClient = new SockJsClient(List.of(this.webSocketTransport, this.xhrTransport));
+	private final SockJsClient sockJsClient = new SockJsClient(List.of(this.webSocketTransport, this.xhrTransport));
 
 
 	@BeforeEach

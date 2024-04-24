@@ -307,11 +307,11 @@ public class LazyConnectionDataSourceProxy extends DelegatingDataSource {
 		@Nullable
 		private Integer transactionIsolation;
 
-		private boolean readOnly = false;
+		private boolean readOnly;
 
 		private int holdability = ResultSet.CLOSE_CURSORS_AT_COMMIT;
 
-		private boolean closed = false;
+		private boolean closed;
 
 		@Nullable
 		private Connection target;
@@ -336,7 +336,7 @@ public class LazyConnectionDataSourceProxy extends DelegatingDataSource {
 				case "equals" -> {
 					// We must avoid fetching a target Connection for "equals".
 					// Only consider equal when proxies are identical.
-					return (proxy == args[0]);
+					return proxy == args[0];
 				}
 				case "hashCode" -> {
 					// We must avoid fetching a target Connection for "hashCode",
@@ -451,7 +451,7 @@ public class LazyConnectionDataSourceProxy extends DelegatingDataSource {
 		 * Return whether the proxy currently holds a target Connection.
 		 */
 		private boolean hasTargetConnection() {
-			return (this.target != null);
+			return this.target != null;
 		}
 
 		/**
@@ -466,8 +466,8 @@ public class LazyConnectionDataSourceProxy extends DelegatingDataSource {
 
 				// Fetch physical Connection from DataSource.
 				DataSource dataSource = getDataSourceToUse();
-				this.target = (this.username != null ? dataSource.getConnection(this.username, this.password) :
-						dataSource.getConnection());
+				this.target = this.username != null ? dataSource.getConnection(this.username, this.password) :
+						dataSource.getConnection();
 				if (this.target == null) {
 					throw new IllegalStateException("DataSource returned null from getConnection(): " + dataSource);
 				}
@@ -502,7 +502,7 @@ public class LazyConnectionDataSourceProxy extends DelegatingDataSource {
 		}
 
 		private DataSource getDataSourceToUse() {
-			return (this.readOnly && readOnlyDataSource != null ? readOnlyDataSource : obtainTargetDataSource());
+			return this.readOnly && readOnlyDataSource != null ? readOnlyDataSource : obtainTargetDataSource();
 		}
 	}
 

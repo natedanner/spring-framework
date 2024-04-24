@@ -42,7 +42,7 @@ import org.springframework.util.StringUtils;
  */
 public final class RuntimeHintsAgent {
 
-	private static boolean loaded = false;
+	private static boolean loaded;
 
 	private RuntimeHintsAgent() {
 

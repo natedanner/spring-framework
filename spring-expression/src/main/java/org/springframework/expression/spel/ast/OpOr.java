@@ -73,9 +73,9 @@ public class OpOr extends Operator {
 	public boolean isCompilable() {
 		SpelNodeImpl left = getLeftOperand();
 		SpelNodeImpl right = getRightOperand();
-		return (left.isCompilable() && right.isCompilable() &&
+		return left.isCompilable() && right.isCompilable() &&
 				CodeFlow.isBooleanCompatible(left.exitTypeDescriptor) &&
-				CodeFlow.isBooleanCompatible(right.exitTypeDescriptor));
+				CodeFlow.isBooleanCompatible(right.exitTypeDescriptor);
 	}
 
 	@Override

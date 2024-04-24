@@ -116,7 +116,7 @@ public class StopWatch {
 	 * <p>Default is {@code true}.
 	 */
 	public void setKeepTaskList(boolean keepTaskList) {
-		this.taskList = (keepTaskList ? new ArrayList<>() : null);
+		this.taskList = keepTaskList ? new ArrayList<>() : null;
 	}
 
 
@@ -173,7 +173,7 @@ public class StopWatch {
 	 * @see #currentTaskName()
 	 */
 	public boolean isRunning() {
-		return (this.currentTaskName != null);
+		return this.currentTaskName != null;
 	}
 
 	/**
@@ -326,8 +326,8 @@ public class StopWatch {
 
 		StringBuilder sb = new StringBuilder(128);
 		sb.append("StopWatch '").append(getId()).append("': ");
-		String total = (timeUnit == TimeUnit.NANOSECONDS ?
-				nf.format(getTotalTimeNanos()) : nf.format(getTotalTime(timeUnit)));
+		String total = timeUnit == TimeUnit.NANOSECONDS ?
+				nf.format(getTotalTimeNanos()) : nf.format(getTotalTime(timeUnit));
 		sb.append(total).append(" ").append(timeUnit.name().toLowerCase(Locale.ENGLISH));
 		int width = Math.max(sb.length(), 40);
 		sb.append("\n");

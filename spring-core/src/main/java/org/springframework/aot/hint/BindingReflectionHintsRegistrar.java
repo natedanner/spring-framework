@@ -217,7 +217,7 @@ public class BindingReflectionHintsRegistrar {
 			if (kClass.isData()) {
 				for (Method method : type.getMethods()) {
 					String methodName = method.getName();
-					if (methodName.startsWith("component") || methodName.equals("copy") || methodName.equals("copy$default")) {
+					if (methodName.startsWith("component") || "copy".equals(methodName) || "copy$default".equals(methodName)) {
 						hints.registerMethod(method, ExecutableMode.INVOKE);
 					}
 				}

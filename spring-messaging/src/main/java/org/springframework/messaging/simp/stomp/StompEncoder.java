@@ -126,8 +126,8 @@ public class StompEncoder {
 			return;
 		}
 
-		boolean shouldEscape = (command != StompCommand.CONNECT && command != StompCommand.STOMP
-				&& command != StompCommand.CONNECTED);
+		boolean shouldEscape = command != StompCommand.CONNECT && command != StompCommand.STOMP
+				&& command != StompCommand.CONNECTED;
 
 		for (Entry<String, List<String>> entry : nativeHeaders.entrySet()) {
 			if (command.requiresContentLength() && "content-length".equals(entry.getKey())) {
@@ -158,7 +158,7 @@ public class StompEncoder {
 	}
 
 	private byte[] encodeHeaderKey(String input, boolean escape) {
-		String inputToUse = (escape ? escape(input) : input);
+		String inputToUse = escape ? escape(input) : input;
 		if (this.headerKeyAccessCache.containsKey(inputToUse)) {
 			return this.headerKeyAccessCache.get(inputToUse);
 		}
@@ -174,7 +174,7 @@ public class StompEncoder {
 	}
 
 	private byte[] encodeHeaderValue(String input, boolean escape) {
-		String inputToUse = (escape ? escape(input) : input);
+		String inputToUse = escape ? escape(input) : input;
 		return inputToUse.getBytes(StandardCharsets.UTF_8);
 	}
 
@@ -206,7 +206,7 @@ public class StompEncoder {
 				sb.append(c);
 			}
 		}
-		return (sb != null ? sb.toString() : inString);
+		return sb != null ? sb.toString() : inString;
 	}
 
 	private StringBuilder getStringBuilder(@Nullable StringBuilder sb, String inString, int i) {

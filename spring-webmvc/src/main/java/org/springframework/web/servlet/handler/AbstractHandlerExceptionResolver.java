@@ -66,7 +66,7 @@ public abstract class AbstractHandlerExceptionResolver implements HandlerExcepti
 	@Nullable
 	private Log warnLogger;
 
-	private boolean preventResponseCaching = false;
+	private boolean preventResponseCaching;
 
 
 	public void setOrder(int order) {
@@ -88,7 +88,7 @@ public abstract class AbstractHandlerExceptionResolver implements HandlerExcepti
 	 */
 	public void setMappedHandlerPredicate(Predicate<Object> predicate) {
 		this.mappedHandlerPredicate =
-				(this.mappedHandlerPredicate != null ? this.mappedHandlerPredicate.and(predicate) : predicate);
+				this.mappedHandlerPredicate != null ? this.mappedHandlerPredicate.and(predicate) : predicate;
 	}
 
 	/**
@@ -118,9 +118,9 @@ public abstract class AbstractHandlerExceptionResolver implements HandlerExcepti
 	 * @since 6.1
 	 */
 	public void addMappedHandlerClass(Class<?> mappedHandlerClass) {
-		this.mappedHandlerClasses = (this.mappedHandlerClasses != null ?
+		this.mappedHandlerClasses = this.mappedHandlerClasses != null ?
 				ObjectUtils.addObjectToArray(this.mappedHandlerClasses, mappedHandlerClass) :
-				new Class<?>[] {mappedHandlerClass});
+				new Class<?>[] {mappedHandlerClass};
 	}
 
 	/**
@@ -145,7 +145,7 @@ public abstract class AbstractHandlerExceptionResolver implements HandlerExcepti
 	 * @see java.util.logging.Logger#getLogger(String)
 	 */
 	public void setWarnLogCategory(String loggerName) {
-		this.warnLogger = (StringUtils.hasLength(loggerName) ? LogFactory.getLog(loggerName) : null);
+		this.warnLogger = StringUtils.hasLength(loggerName) ? LogFactory.getLog(loggerName) : null;
 	}
 
 	/**
@@ -228,8 +228,8 @@ public abstract class AbstractHandlerExceptionResolver implements HandlerExcepti
 	 * @since 5.3
 	 */
 	protected boolean hasHandlerMappings() {
-		return (this.mappedHandlers != null || this.mappedHandlerClasses != null ||
-				this.mappedHandlerPredicate != null);
+		return this.mappedHandlers != null || this.mappedHandlerClasses != null ||
+				this.mappedHandlerPredicate != null;
 	}
 
 	/**

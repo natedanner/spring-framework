@@ -27,9 +27,9 @@ import jakarta.servlet.FilterRegistration.Dynamic;
 
 class MockFilterRegistration implements Dynamic {
 
-	private boolean asyncSupported = false;
+	private boolean asyncSupported;
 
-	private Map<String, EnumSet<DispatcherType>> mappings = new HashMap<>();
+	private final Map<String, EnumSet<DispatcherType>> mappings = new HashMap<>();
 
 
 	public Map<String, EnumSet<DispatcherType>> getMappings() {

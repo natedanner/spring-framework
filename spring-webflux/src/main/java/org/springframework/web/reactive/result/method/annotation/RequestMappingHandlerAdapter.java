@@ -155,7 +155,7 @@ public class RequestMappingHandlerAdapter
 	 * @since 6.1
 	 */
 	public void setBlockingExecutor(@Nullable Executor executor) {
-		this.scheduler = (executor != null ? Schedulers.fromExecutor(executor) : null);
+		this.scheduler = executor != null ? Schedulers.fromExecutor(executor) : null;
 	}
 
 	/**
@@ -300,7 +300,7 @@ public class RequestMappingHandlerAdapter
 				while (exToExpose != null) {
 					exceptions.add(exToExpose);
 					Throwable cause = exToExpose.getCause();
-					exToExpose = (cause != exToExpose ? cause : null);
+					exToExpose = cause != exToExpose ? cause : null;
 				}
 				Object[] arguments = new Object[exceptions.size() + 1];
 				exceptions.toArray(arguments);  // efficient arraycopy call in ArrayList
@@ -336,7 +336,7 @@ public class RequestMappingHandlerAdapter
 		@Override
 		public boolean test(HandlerMethod handlerMethod) {
 			Class<?> returnType = handlerMethod.getReturnType().getParameterType();
-			return (this.adapterRegistry.getAdapter(returnType) == null);
+			return this.adapterRegistry.getAdapter(returnType) == null;
 		}
 	}
 

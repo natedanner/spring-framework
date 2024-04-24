@@ -293,7 +293,7 @@ public class JpaTransactionManager extends AbstractPlatformTransactionManager
 	 * @see JpaDialect#getJdbcConnection
 	 */
 	public void setJpaDialect(@Nullable JpaDialect jpaDialect) {
-		this.jpaDialect = (jpaDialect != null ? jpaDialect : new DefaultJpaDialect());
+		this.jpaDialect = jpaDialect != null ? jpaDialect : new DefaultJpaDialect();
 	}
 
 	/**
@@ -484,8 +484,8 @@ public class JpaTransactionManager extends AbstractPlatformTransactionManager
 			em = emfInfo.createNativeEntityManager(properties);
 		}
 		else {
-			em = (!CollectionUtils.isEmpty(properties) ?
-					emf.createEntityManager(properties) : emf.createEntityManager());
+			em = CollectionUtils.isEmpty(properties) ? emf.createEntityManager() :
+					emf.createEntityManager(properties);
 		}
 		if (this.entityManagerInitializer != null) {
 			this.entityManagerInitializer.accept(em);
@@ -685,7 +685,7 @@ public class JpaTransactionManager extends AbstractPlatformTransactionManager
 		}
 
 		public boolean hasEntityManagerHolder() {
-			return (this.entityManagerHolder != null);
+			return this.entityManagerHolder != null;
 		}
 
 		public boolean isNewEntityManagerHolder() {
@@ -693,7 +693,7 @@ public class JpaTransactionManager extends AbstractPlatformTransactionManager
 		}
 
 		public boolean hasTransaction() {
-			return (this.entityManagerHolder != null && this.entityManagerHolder.isTransactionActive());
+			return this.entityManagerHolder != null && this.entityManagerHolder.isTransactionActive();
 		}
 
 		public void setTransactionData(@Nullable Object transactionData) {

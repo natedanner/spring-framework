@@ -118,7 +118,7 @@ public abstract class AbstractMultipartHttpServletRequest extends HttpServletReq
 	 * @see #getMultipartFiles()
 	 */
 	public boolean isResolved() {
-		return (this.multipartFiles != null);
+		return this.multipartFiles != null;
 	}
 
 

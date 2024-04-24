@@ -83,7 +83,7 @@ public abstract class AbstractJsonHttpMessageConverter extends AbstractGenericHt
 	 * @see #setJsonPrefix
 	 */
 	public void setPrefixJson(boolean prefixJson) {
-		this.jsonPrefix = (prefixJson ? ")]}', " : null);
+		this.jsonPrefix = prefixJson ? ")]}', " : null;
 	}
 
 
@@ -159,8 +159,8 @@ public abstract class AbstractJsonHttpMessageConverter extends AbstractGenericHt
 	}
 
 	private static Charset getCharset(HttpHeaders headers) {
-		Charset charset = (headers.getContentType() != null ? headers.getContentType().getCharset() : null);
-		return (charset != null ? charset : DEFAULT_CHARSET);
+		Charset charset = headers.getContentType() != null ? headers.getContentType().getCharset() : null;
+		return charset != null ? charset : DEFAULT_CHARSET;
 	}
 
 }

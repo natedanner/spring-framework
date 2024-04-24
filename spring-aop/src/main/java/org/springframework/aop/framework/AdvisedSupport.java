@@ -81,7 +81,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 	TargetSource targetSource = EMPTY_TARGET_SOURCE;
 
 	/** Whether the Advisors are already filtered for the specific target class. */
-	private boolean preFiltered = false;
+	private boolean preFiltered;
 
 	/** The AdvisorChainFactory to use. */
 	private AdvisorChainFactory advisorChainFactory = DefaultAdvisorChainFactory.INSTANCE;
@@ -151,7 +151,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 
 	@Override
 	public void setTargetSource(@Nullable TargetSource targetSource) {
-		this.targetSource = (targetSource != null ? targetSource : EMPTY_TARGET_SOURCE);
+		this.targetSource = targetSource != null ? targetSource : EMPTY_TARGET_SOURCE;
 	}
 
 	@Override
@@ -639,7 +639,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof MethodCacheKey that && this.method == that.method));
+			return this == other || (other instanceof MethodCacheKey that && this.method == that.method);
 		}
 
 		@Override
@@ -701,10 +701,10 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 
 		@Override
 		public boolean equals(Object other) {
-			return (this == other || (other instanceof AdvisorKeyEntry that &&
+			return this == other || (other instanceof AdvisorKeyEntry that &&
 					this.adviceType == that.adviceType &&
 					ObjectUtils.nullSafeEquals(this.classFilterKey, that.classFilterKey) &&
-					ObjectUtils.nullSafeEquals(this.methodMatcherKey, that.methodMatcherKey)));
+					ObjectUtils.nullSafeEquals(this.methodMatcherKey, that.methodMatcherKey));
 		}
 
 		@Override

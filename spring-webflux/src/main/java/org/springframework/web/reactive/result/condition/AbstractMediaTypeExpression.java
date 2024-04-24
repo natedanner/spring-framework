@@ -71,7 +71,7 @@ abstract class AbstractMediaTypeExpression implements Comparable<AbstractMediaTy
 	public final boolean match(ServerWebExchange exchange) {
 		try {
 			boolean match = matchMediaType(exchange);
-			return (!this.isNegated == match);
+			return !this.isNegated == match;
 		}
 		catch (NotAcceptableStatusException | UnsupportedMediaTypeStatusException ex) {
 			return false;
@@ -117,7 +117,7 @@ abstract class AbstractMediaTypeExpression implements Comparable<AbstractMediaTy
 			return false;
 		}
 		AbstractMediaTypeExpression otherExpr = (AbstractMediaTypeExpression) other;
-		return (this.mediaType.equals(otherExpr.mediaType) && this.isNegated == otherExpr.isNegated);
+		return this.mediaType.equals(otherExpr.mediaType) && this.isNegated == otherExpr.isNegated;
 	}
 
 	@Override

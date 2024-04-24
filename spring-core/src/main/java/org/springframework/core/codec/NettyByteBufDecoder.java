@@ -44,8 +44,8 @@ public class NettyByteBufDecoder extends AbstractDataBufferDecoder<ByteBuf> {
 
 	@Override
 	public boolean canDecode(ResolvableType elementType, @Nullable MimeType mimeType) {
-		return (ByteBuf.class.isAssignableFrom(elementType.toClass()) &&
-				super.canDecode(elementType, mimeType));
+		return ByteBuf.class.isAssignableFrom(elementType.toClass()) &&
+				super.canDecode(elementType, mimeType);
 	}
 
 	@Override

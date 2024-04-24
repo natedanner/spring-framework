@@ -64,8 +64,8 @@ public final class RequestMethodsRequestCondition extends AbstractRequestConditi
 	 * if, 0 the condition will match to every request
 	 */
 	public RequestMethodsRequestCondition(RequestMethod... requestMethods) {
-		this.methods = (ObjectUtils.isEmpty(requestMethods) ?
-				Collections.emptySet() : new LinkedHashSet<>(Arrays.asList(requestMethods)));
+		this.methods = ObjectUtils.isEmpty(requestMethods) ?
+				Collections.emptySet() : new LinkedHashSet<>(Arrays.asList(requestMethods));
 	}
 
 	/**

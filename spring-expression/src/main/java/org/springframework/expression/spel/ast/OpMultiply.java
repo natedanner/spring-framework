@@ -144,7 +144,7 @@ public class OpMultiply extends Operator {
 				return false;
 			}
 		}
-		return (this.exitTypeDescriptor != null);
+		return this.exitTypeDescriptor != null;
 	}
 
 	@Override

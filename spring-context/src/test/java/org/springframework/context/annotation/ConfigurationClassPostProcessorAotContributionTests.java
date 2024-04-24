@@ -226,7 +226,7 @@ class ConfigurationClassPostProcessorAotContributionTests {
 			@Nullable
 			@Override
 			public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-				if (beanName.equals("testProcessing")) {
+				if ("testProcessing".equals(beanName)) {
 					return this.metadata;
 				}
 				return bean;

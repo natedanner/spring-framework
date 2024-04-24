@@ -130,7 +130,7 @@ public interface MethodReference {
 		default ArgumentCodeGenerator and(ArgumentCodeGenerator argumentCodeGenerator) {
 			return from(type -> {
 				CodeBlock code = generateCode(type);
-				return (code != null ? code : argumentCodeGenerator.generateCode(type));
+				return code != null ? code : argumentCodeGenerator.generateCode(type);
 			});
 		}
 

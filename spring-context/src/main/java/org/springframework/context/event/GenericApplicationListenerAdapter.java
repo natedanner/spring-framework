@@ -72,26 +72,26 @@ public class GenericApplicationListenerAdapter implements GenericApplicationList
 		}
 		else if (this.delegate instanceof SmartApplicationListener sal) {
 			Class<? extends ApplicationEvent> eventClass = (Class<? extends ApplicationEvent>) eventType.resolve();
-			return (eventClass != null && sal.supportsEventType(eventClass));
+			return eventClass != null && sal.supportsEventType(eventClass);
 		}
 		else {
-			return (this.declaredEventType == null || this.declaredEventType.isAssignableFrom(eventType));
+			return this.declaredEventType == null || this.declaredEventType.isAssignableFrom(eventType);
 		}
 	}
 
 	@Override
 	public boolean supportsSourceType(@Nullable Class<?> sourceType) {
-		return (!(this.delegate instanceof SmartApplicationListener sal) || sal.supportsSourceType(sourceType));
+		return !(this.delegate instanceof SmartApplicationListener sal) || sal.supportsSourceType(sourceType);
 	}
 
 	@Override
 	public int getOrder() {
-		return (this.delegate instanceof Ordered ordered ? ordered.getOrder() : Ordered.LOWEST_PRECEDENCE);
+		return this.delegate instanceof Ordered ordered ? ordered.getOrder() : Ordered.LOWEST_PRECEDENCE;
 	}
 
 	@Override
 	public String getListenerId() {
-		return (this.delegate instanceof SmartApplicationListener sal ? sal.getListenerId() : "");
+		return this.delegate instanceof SmartApplicationListener sal ? sal.getListenerId() : "";
 	}
 
 
@@ -114,7 +114,7 @@ public class GenericApplicationListenerAdapter implements GenericApplicationList
 			eventType = ResolvableType.forClass(listenerType).as(ApplicationListener.class).getGeneric();
 			eventTypeCache.put(listenerType, eventType);
 		}
-		return (eventType != ResolvableType.NONE ? eventType : null);
+		return eventType != ResolvableType.NONE ? eventType : null;
 	}
 
 }

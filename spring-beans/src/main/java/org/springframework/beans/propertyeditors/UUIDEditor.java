@@ -44,7 +44,7 @@ public class UUIDEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		UUID value = (UUID) getValue();
-		return (value != null ? value.toString() : "");
+		return value != null ? value.toString() : "";
 	}
 
 }

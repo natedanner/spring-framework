@@ -247,10 +247,10 @@ public class PeriodicTrigger implements Trigger {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof PeriodicTrigger that &&
+		return this == other || (other instanceof PeriodicTrigger that &&
 				this.fixedRate == that.fixedRate &&
 				this.period.equals(that.period) &&
-				ObjectUtils.nullSafeEquals(this.initialDelay, that.initialDelay)));
+				ObjectUtils.nullSafeEquals(this.initialDelay, that.initialDelay));
 	}
 
 	@Override

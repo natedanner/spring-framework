@@ -111,7 +111,7 @@ public class ModelAndViewMethodReturnValueHandler implements HandlerMethodReturn
 	 * reference; "false" otherwise.
 	 */
 	protected boolean isRedirectViewName(String viewName) {
-		return (PatternMatchUtils.simpleMatch(this.redirectPatterns, viewName) || viewName.startsWith("redirect:"));
+		return PatternMatchUtils.simpleMatch(this.redirectPatterns, viewName) || viewName.startsWith("redirect:");
 	}
 
 }

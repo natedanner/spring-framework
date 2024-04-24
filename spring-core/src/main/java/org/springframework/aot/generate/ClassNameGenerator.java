@@ -73,7 +73,7 @@ public final class ClassNameGenerator {
 			Map<String, AtomicInteger> sequenceGenerator) {
 		Assert.notNull(defaultTarget, "'defaultTarget' must not be null");
 		this.defaultTarget = defaultTarget;
-		this.featureNamePrefix = (!StringUtils.hasText(featureNamePrefix) ? "" : featureNamePrefix);
+		this.featureNamePrefix = StringUtils.hasText(featureNamePrefix) ? featureNamePrefix : "";
 		this.sequenceGenerator = sequenceGenerator;
 	}
 
@@ -105,7 +105,7 @@ public final class ClassNameGenerator {
 	private String getRootName(String featureName, @Nullable ClassName target) {
 		Assert.hasLength(featureName, "'featureName' must not be empty");
 		featureName = clean(featureName);
-		ClassName targetToUse = (target != null ? target : this.defaultTarget);
+		ClassName targetToUse = target != null ? target : this.defaultTarget;
 		String featureNameToUse = this.featureNamePrefix + featureName;
 		return toName(targetToUse).replace("$", "_") + SEPARATOR + StringUtils.capitalize(featureNameToUse);
 	}
@@ -121,7 +121,7 @@ public final class ClassNameGenerator {
 			clean.append(lastNotLetter ? Character.toUpperCase(ch) : ch);
 			lastNotLetter = false;
 		}
-		return (!clean.isEmpty()) ? clean.toString() : AOT_FEATURE;
+		return !clean.isEmpty() ? clean.toString() : AOT_FEATURE;
 	}
 
 	private ClassName generateSequencedClassName(String name) {

@@ -63,7 +63,7 @@ public final class RequestConditionHolder extends AbstractRequestCondition<Reque
 
 	@Override
 	protected Collection<?> getContent() {
-		return (this.condition != null ? Collections.singleton(this.condition) : Collections.emptyList());
+		return this.condition != null ? Collections.singleton(this.condition) : Collections.emptyList();
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public final class RequestConditionHolder extends AbstractRequestCondition<Reque
 			return this;
 		}
 		RequestCondition<?> match = (RequestCondition<?>) this.condition.getMatchingCondition(request);
-		return (match != null ? new RequestConditionHolder(match) : null);
+		return match != null ? new RequestConditionHolder(match) : null;
 	}
 
 	/**

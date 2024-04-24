@@ -152,8 +152,8 @@ public final class LocaleContextHolder {
 	 */
 	public static void setLocale(@Nullable Locale locale, boolean inheritable) {
 		LocaleContext localeContext = getLocaleContext();
-		TimeZone timeZone = (localeContext instanceof TimeZoneAwareLocaleContext timeZoneAware ?
-				timeZoneAware.getTimeZone() : null);
+		TimeZone timeZone = localeContext instanceof TimeZoneAwareLocaleContext timeZoneAware ?
+				timeZoneAware.getTimeZone() : null;
 		if (timeZone != null) {
 			localeContext = new SimpleTimeZoneAwareLocaleContext(locale, timeZone);
 		}
@@ -226,7 +226,7 @@ public final class LocaleContextHolder {
 				return locale;
 			}
 		}
-		return (defaultLocale != null ? defaultLocale : Locale.getDefault());
+		return defaultLocale != null ? defaultLocale : Locale.getDefault();
 	}
 
 	/**
@@ -256,7 +256,7 @@ public final class LocaleContextHolder {
 	 */
 	public static void setTimeZone(@Nullable TimeZone timeZone, boolean inheritable) {
 		LocaleContext localeContext = getLocaleContext();
-		Locale locale = (localeContext != null ? localeContext.getLocale() : null);
+		Locale locale = localeContext != null ? localeContext.getLocale() : null;
 		if (timeZone != null) {
 			localeContext = new SimpleTimeZoneAwareLocaleContext(locale, timeZone);
 		}
@@ -330,7 +330,7 @@ public final class LocaleContextHolder {
 				return timeZone;
 			}
 		}
-		return (defaultTimeZone != null ? defaultTimeZone : TimeZone.getDefault());
+		return defaultTimeZone != null ? defaultTimeZone : TimeZone.getDefault();
 	}
 
 }

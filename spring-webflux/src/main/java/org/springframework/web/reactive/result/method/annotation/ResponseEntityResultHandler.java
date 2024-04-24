@@ -108,9 +108,9 @@ public class ResponseEntityResultHandler extends AbstractMessageWriterResultHand
 		if (type == null) {
 			return false;
 		}
-		return ((HttpEntity.class.isAssignableFrom(type) && !RequestEntity.class.isAssignableFrom(type)) ||
+		return (HttpEntity.class.isAssignableFrom(type) && !RequestEntity.class.isAssignableFrom(type)) ||
 				ErrorResponse.class.isAssignableFrom(type) || ProblemDetail.class.isAssignableFrom(type) ||
-				HttpHeaders.class.isAssignableFrom(type));
+				HttpHeaders.class.isAssignableFrom(type);
 	}
 
 
@@ -126,9 +126,9 @@ public class ResponseEntityResultHandler extends AbstractMessageWriterResultHand
 		if (adapter != null) {
 			Assert.isTrue(!adapter.isMultiValue(), "Only a single ResponseEntity supported");
 			returnValueMono = Mono.from(adapter.toPublisher(result.getReturnValue()));
-			boolean isContinuation = (KotlinDetector.isSuspendingFunction(actualParameter.getMethod()) &&
-					!COROUTINES_FLOW_CLASS_NAME.equals(actualParameter.getParameterType().getName()));
-			bodyParameter = (isContinuation ? actualParameter.nested() : actualParameter.nested().nested());
+			boolean isContinuation = KotlinDetector.isSuspendingFunction(actualParameter.getMethod()) &&
+					!COROUTINES_FLOW_CLASS_NAME.equals(actualParameter.getParameterType().getName());
+			bodyParameter = isContinuation ? actualParameter.nested() : actualParameter.nested().nested();
 		}
 		else {
 			returnValueMono = Mono.justOrEmpty(result.getReturnValue());
@@ -185,9 +185,9 @@ public class ResponseEntityResultHandler extends AbstractMessageWriterResultHand
 			String etag = entityHeaders.getETag();
 			Instant lastModified = Instant.ofEpochMilli(entityHeaders.getLastModified());
 			HttpMethod httpMethod = exchange.getRequest().getMethod();
-			return ((SAFE_METHODS.contains(httpMethod) && exchange.checkNotModified(etag, lastModified)) ?
+			return SAFE_METHODS.contains(httpMethod) && exchange.checkNotModified(etag, lastModified) ?
 					exchange.getResponse().setComplete() :
-					writeBody(httpEntity.getBody(), bodyParameter, actualParameter, exchange));
+					writeBody(httpEntity.getBody(), bodyParameter, actualParameter, exchange);
 		});
 	}
 

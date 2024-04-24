@@ -95,7 +95,7 @@ public class BindTag extends HtmlEscapingAwareTag implements EditorAwareTag {
 
 	private String path = "";
 
-	private boolean ignoreNestedPath = false;
+	private boolean ignoreNestedPath;
 
 	@Nullable
 	private BindStatus status;

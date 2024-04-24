@@ -66,11 +66,11 @@ import static org.mockito.Mockito.verify;
  */
 class StoredProcedureTests {
 
-	private Connection connection = mock();
+	private final Connection connection = mock();
 
-	private DataSource dataSource = mock();
+	private final DataSource dataSource = mock();
 
-	private CallableStatement callableStatement = mock();
+	private final CallableStatement callableStatement = mock();
 
 	private boolean verifyClosedAfter = true;
 
@@ -594,7 +594,7 @@ class StoredProcedureTests {
 			return execute(new TestParameterMapper());
 		}
 
-		private static class TestParameterMapper implements ParameterMapper {
+		private static final class TestParameterMapper implements ParameterMapper {
 
 			private TestParameterMapper() {
 			}

@@ -116,8 +116,8 @@ class RequestMappingDataBindingIntegrationTests extends AbstractRequestMappingIn
 
 		@PostMapping("/foos/{id}")
 		public String handleForm(@ModelAttribute Foo foo, Errors errors) {
-			return (errors.hasErrors() ?
-					"Form not processed" : "Processed form: " + foo);
+			return errors.hasErrors() ?
+					"Form not processed" : "Processed form: " + foo;
 		}
 	}
 

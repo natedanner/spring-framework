@@ -286,7 +286,7 @@ class MissingMergedAnnotationTests {
 	@Test
 	void asMapReturnsEmptyMap() {
 		Map<String, Object> map = this.missing.asMap();
-		assertThat(map).isSameAs(Collections.EMPTY_MAP);
+		assertThat(map).isSameAs(Collections.emptyMap());
 	}
 
 	@Test

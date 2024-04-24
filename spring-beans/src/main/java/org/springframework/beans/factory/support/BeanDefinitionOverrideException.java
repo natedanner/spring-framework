@@ -61,7 +61,7 @@ public class BeanDefinitionOverrideException extends BeanDefinitionStoreExceptio
 	@Override
 	@NonNull
 	public String getResourceDescription() {
-		return String.valueOf(super.getResourceDescription());
+		return super.getResourceDescription();
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class BeanDefinitionOverrideException extends BeanDefinitionStoreExceptio
 	@Override
 	@NonNull
 	public String getBeanName() {
-		return String.valueOf(super.getBeanName());
+		return super.getBeanName();
 	}
 
 	/**

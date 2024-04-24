@@ -116,7 +116,7 @@ class ConditionEvaluator {
 	@SuppressWarnings("unchecked")
 	private List<String[]> getConditionClasses(AnnotatedTypeMetadata metadata) {
 		MultiValueMap<String, Object> attributes = metadata.getAllAnnotationAttributes(Conditional.class.getName(), true);
-		Object values = (attributes != null ? attributes.get("value") : null);
+		Object values = attributes != null ? attributes.get("value") : null;
 		return (List<String[]>) (values != null ? values : Collections.emptyList());
 	}
 
@@ -149,8 +149,8 @@ class ConditionEvaluator {
 
 			this.registry = registry;
 			this.beanFactory = deduceBeanFactory(registry);
-			this.environment = (environment != null ? environment : deduceEnvironment(registry));
-			this.resourceLoader = (resourceLoader != null ? resourceLoader : deduceResourceLoader(registry));
+			this.environment = environment != null ? environment : deduceEnvironment(registry);
+			this.resourceLoader = resourceLoader != null ? resourceLoader : deduceResourceLoader(registry);
 			this.classLoader = deduceClassLoader(resourceLoader, this.beanFactory);
 		}
 

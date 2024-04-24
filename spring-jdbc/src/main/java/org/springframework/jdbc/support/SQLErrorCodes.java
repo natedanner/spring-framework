@@ -38,7 +38,7 @@ public class SQLErrorCodes {
 	@Nullable
 	private String[] databaseProductNames;
 
-	private boolean useSqlStateForTranslation = false;
+	private boolean useSqlStateForTranslation;
 
 	private String[] badSqlGrammarCodes = new String[0];
 
@@ -77,8 +77,8 @@ public class SQLErrorCodes {
 
 	@Nullable
 	public String getDatabaseProductName() {
-		return (this.databaseProductNames != null && this.databaseProductNames.length > 0 ?
-				this.databaseProductNames[0] : null);
+		return this.databaseProductNames != null && this.databaseProductNames.length > 0 ?
+				this.databaseProductNames[0] : null;
 	}
 
 	/**

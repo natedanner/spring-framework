@@ -41,7 +41,7 @@ public class BeanFactoryAccessor implements PropertyAccessor {
 
 	@Override
 	public boolean canRead(EvaluationContext context, @Nullable Object target, String name) throws AccessException {
-		return (target instanceof BeanFactory beanFactory && beanFactory.containsBean(name));
+		return target instanceof BeanFactory beanFactory && beanFactory.containsBean(name);
 	}
 
 	@Override

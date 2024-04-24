@@ -60,8 +60,8 @@ final class RelativeRedirectResponseWrapper extends HttpServletResponseWrapper {
 		RelativeRedirectResponseWrapper wrapper =
 				WebUtils.getNativeResponse(response, RelativeRedirectResponseWrapper.class);
 
-		return (wrapper != null ? response :
-				new RelativeRedirectResponseWrapper(response, redirectStatus));
+		return wrapper != null ? response :
+				new RelativeRedirectResponseWrapper(response, redirectStatus);
 	}
 
 }

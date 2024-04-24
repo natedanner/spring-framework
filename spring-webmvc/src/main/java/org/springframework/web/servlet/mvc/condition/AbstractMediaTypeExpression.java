@@ -102,7 +102,7 @@ abstract class AbstractMediaTypeExpression implements MediaTypeExpression, Compa
 			return false;
 		}
 		AbstractMediaTypeExpression otherExpr = (AbstractMediaTypeExpression) other;
-		return (this.mediaType.equals(otherExpr.mediaType) && this.isNegated == otherExpr.isNegated);
+		return this.mediaType.equals(otherExpr.mediaType) && this.isNegated == otherExpr.isNegated;
 	}
 
 	@Override

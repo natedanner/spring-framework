@@ -1082,6 +1082,6 @@ public class ClassWriter extends ClassVisitor {
     } catch (Throwable ex) {
       // Cannot access thread context ClassLoader - falling back...
     }
-    return (classLoader != null ? classLoader : getClass().getClassLoader());
+    return classLoader != null ? classLoader : getClass().getClassLoader();
   }
 }

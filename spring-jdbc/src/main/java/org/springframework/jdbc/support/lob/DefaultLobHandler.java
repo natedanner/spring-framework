@@ -85,11 +85,11 @@ public class DefaultLobHandler extends AbstractLobHandler {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	private boolean wrapAsLob = false;
+	private boolean wrapAsLob;
 
-	private boolean streamAsLob = false;
+	private boolean streamAsLob;
 
-	private boolean createTemporaryLob = false;
+	private boolean createTemporaryLob;
 
 
 	/**
@@ -212,7 +212,7 @@ public class DefaultLobHandler extends AbstractLobHandler {
 
 	@Override
 	public LobCreator getLobCreator() {
-		return (this.createTemporaryLob ? new TemporaryLobCreator() : new DefaultLobCreator());
+		return this.createTemporaryLob ? new TemporaryLobCreator() : new DefaultLobCreator();
 	}
 
 

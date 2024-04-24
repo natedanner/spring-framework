@@ -46,9 +46,9 @@ import static org.mockito.Mockito.verify;
  */
 class MarshallingViewTests {
 
-	private Marshaller marshallerMock = mock();
+	private final Marshaller marshallerMock = mock();
 
-	private MarshallingView view = new MarshallingView(marshallerMock);
+	private final MarshallingView view = new MarshallingView(marshallerMock);
 
 
 	@Test

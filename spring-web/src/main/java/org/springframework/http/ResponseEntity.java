@@ -168,7 +168,7 @@ public class ResponseEntity<T> extends HttpEntity<T> {
 
 	@Override
 	public int hashCode() {
-		return (29 * super.hashCode() + ObjectUtils.nullSafeHashCode(this.status));
+		return 29 * super.hashCode() + ObjectUtils.nullSafeHashCode(this.status);
 	}
 
 	@Override

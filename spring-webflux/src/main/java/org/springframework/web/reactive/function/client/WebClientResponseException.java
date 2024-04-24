@@ -137,7 +137,7 @@ public class WebClientResponseException extends WebClientException {
 		this.statusCode = statusCode;
 		this.statusText = statusText;
 		this.headers = copy(headers);
-		this.responseBody = (responseBody != null ? responseBody : new byte[0]);
+		this.responseBody = responseBody != null ? responseBody : new byte[0];
 		this.responseCharset = charset;
 		this.request = request;
 	}

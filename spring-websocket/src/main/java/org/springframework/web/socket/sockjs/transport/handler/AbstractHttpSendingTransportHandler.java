@@ -122,7 +122,7 @@ public abstract class AbstractHttpSendingTransportHandler extends AbstractTransp
 			return null;
 		}
 		String result = UriUtils.decode(value, StandardCharsets.UTF_8);
-		return (CALLBACK_PARAM_PATTERN.matcher(result).matches() ? result : null);
+		return CALLBACK_PARAM_PATTERN.matcher(result).matches() ? result : null;
 	}
 
 }

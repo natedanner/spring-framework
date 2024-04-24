@@ -63,7 +63,7 @@ class HtmlUtilsTests {
 	// SPR-9293
 	@Test
 	void testEncodeIntoHtmlCharacterSetFromUtf8() {
-		String utf8 = ("UTF-8");
+		String utf8 = "UTF-8";
 		assertThat(HtmlUtils.htmlEscape("", utf8)).as("An empty string should be converted to an empty string")
 				.isEmpty();
 		assertThat(HtmlUtils.htmlEscape("A sentence containing no special characters.")).as("A string containing no special characters should not be affected").isEqualTo("A sentence containing no special characters.");

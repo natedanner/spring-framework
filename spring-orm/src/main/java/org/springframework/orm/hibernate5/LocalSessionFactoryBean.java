@@ -144,7 +144,7 @@ public class LocalSessionFactoryBean extends HibernateExceptionTranslator
 	@Nullable
 	private Integrator[] hibernateIntegrators;
 
-	private boolean metadataSourcesAccessed = false;
+	private boolean metadataSourcesAccessed;
 
 	@Nullable
 	private MetadataSources metadataSources;
@@ -612,8 +612,8 @@ public class LocalSessionFactoryBean extends HibernateExceptionTranslator
 	 * @see LocalSessionFactoryBuilder#buildSessionFactory
 	 */
 	protected SessionFactory buildSessionFactory(LocalSessionFactoryBuilder sfb) {
-		return (this.bootstrapExecutor != null ? sfb.buildSessionFactory(this.bootstrapExecutor) :
-				sfb.buildSessionFactory());
+		return this.bootstrapExecutor != null ? sfb.buildSessionFactory(this.bootstrapExecutor) :
+				sfb.buildSessionFactory();
 	}
 
 	/**
@@ -637,7 +637,7 @@ public class LocalSessionFactoryBean extends HibernateExceptionTranslator
 
 	@Override
 	public Class<?> getObjectType() {
-		return (this.sessionFactory != null ? this.sessionFactory.getClass() : SessionFactory.class);
+		return this.sessionFactory != null ? this.sessionFactory.getClass() : SessionFactory.class;
 	}
 
 	@Override

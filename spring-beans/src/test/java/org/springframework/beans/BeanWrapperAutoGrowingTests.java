@@ -285,7 +285,7 @@ class BeanWrapperAutoGrowingTests {
 	}
 
 
-	public static class NestedNoDefaultConstructor {
+	public static final class NestedNoDefaultConstructor {
 
 		private NestedNoDefaultConstructor() {
 		}

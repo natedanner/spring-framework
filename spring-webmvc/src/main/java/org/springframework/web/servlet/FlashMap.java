@@ -139,7 +139,7 @@ public final class FlashMap extends HashMap<String, Object> implements Comparabl
 	 * elapsed time since the call to {@link #startExpirationPeriod}.
 	 */
 	public boolean isExpired() {
-		return (this.expirationTime != -1 && System.currentTimeMillis() > this.expirationTime);
+		return this.expirationTime != -1 && System.currentTimeMillis() > this.expirationTime;
 	}
 
 
@@ -150,8 +150,8 @@ public final class FlashMap extends HashMap<String, Object> implements Comparabl
 	 */
 	@Override
 	public int compareTo(FlashMap other) {
-		int thisUrlPath = (this.targetRequestPath != null ? 1 : 0);
-		int otherUrlPath = (other.targetRequestPath != null ? 1 : 0);
+		int thisUrlPath = this.targetRequestPath != null ? 1 : 0;
+		int otherUrlPath = other.targetRequestPath != null ? 1 : 0;
 		if (thisUrlPath != otherUrlPath) {
 			return otherUrlPath - thisUrlPath;
 		}
@@ -162,10 +162,10 @@ public final class FlashMap extends HashMap<String, Object> implements Comparabl
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof FlashMap that &&
+		return this == other || (other instanceof FlashMap that &&
 				super.equals(other) &&
 				ObjectUtils.nullSafeEquals(this.targetRequestPath, that.targetRequestPath) &&
-				this.targetRequestParams.equals(that.targetRequestParams)));
+				this.targetRequestParams.equals(that.targetRequestParams));
 	}
 
 	@Override

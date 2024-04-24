@@ -170,7 +170,7 @@ class OrderSourceProviderTests {
 	}
 
 
-	private static class C implements Ordered {
+	private static final class C implements Ordered {
 
 		private final int order;
 

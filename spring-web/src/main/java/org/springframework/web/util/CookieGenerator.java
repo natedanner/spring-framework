@@ -59,9 +59,9 @@ public class CookieGenerator {
 	@Nullable
 	private Integer cookieMaxAge;
 
-	private boolean cookieSecure = false;
+	private boolean cookieSecure;
 
-	private boolean cookieHttpOnly = false;
+	private boolean cookieHttpOnly;
 
 
 	/**

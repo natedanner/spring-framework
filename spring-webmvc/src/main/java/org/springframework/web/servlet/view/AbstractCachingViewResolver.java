@@ -116,14 +116,14 @@ public abstract class AbstractCachingViewResolver extends WebApplicationObjectSu
 	 * Disable this only for debugging and development.
 	 */
 	public void setCache(boolean cache) {
-		this.cacheLimit = (cache ? DEFAULT_CACHE_LIMIT : 0);
+		this.cacheLimit = cache ? DEFAULT_CACHE_LIMIT : 0;
 	}
 
 	/**
 	 * Return if caching is enabled.
 	 */
 	public boolean isCache() {
-		return (this.cacheLimit > 0);
+		return this.cacheLimit > 0;
 	}
 
 	/**
@@ -197,7 +197,7 @@ public abstract class AbstractCachingViewResolver extends WebApplicationObjectSu
 					logger.trace(formatKey(cacheKey) + "served from cache");
 				}
 			}
-			return (view != UNRESOLVED_VIEW ? view : null);
+			return view != UNRESOLVED_VIEW ? view : null;
 		}
 	}
 

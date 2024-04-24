@@ -30,11 +30,11 @@ class MockServletRegistration implements ServletRegistration.Dynamic {
 
 	private int loadOnStartup;
 
-	private Set<String> mappings = new LinkedHashSet<>();
+	private final Set<String> mappings = new LinkedHashSet<>();
 
 	private String roleName;
 
-	private boolean asyncSupported = false;
+	private boolean asyncSupported;
 
 	public int getLoadOnStartup() {
 		return loadOnStartup;

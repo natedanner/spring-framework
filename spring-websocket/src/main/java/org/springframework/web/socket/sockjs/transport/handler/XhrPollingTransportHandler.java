@@ -54,7 +54,7 @@ public class XhrPollingTransportHandler extends AbstractHttpSendingTransportHand
 
 	@Override
 	public boolean checkSessionType(SockJsSession session) {
-		return (session instanceof PollingSockJsSession);
+		return session instanceof PollingSockJsSession;
 	}
 
 	@Override

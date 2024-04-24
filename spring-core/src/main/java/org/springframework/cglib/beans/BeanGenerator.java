@@ -103,7 +103,7 @@ public class BeanGenerator extends AbstractClassGenerator
 		if (superclass != null) {
 			setNamePrefix(superclass.getName());
 		}
-		String superName = (superclass != null) ? superclass.getName() : "java.lang.Object";
+		String superName = superclass != null ? superclass.getName() : "java.lang.Object";
 		Object key = KEY_FACTORY.newInstance(superName, props);
 		return super.create(key);
 	}
@@ -139,7 +139,7 @@ public class BeanGenerator extends AbstractClassGenerator
 
 	@Override
 	protected Object nextInstance(Object instance) {
-		Class protoclass = (instance instanceof Class<?> clazz) ? clazz : instance.getClass();
+		Class protoclass = instance instanceof Class<?> clazz ? clazz : instance.getClass();
 		if (classOnly) {
 			return protoclass;
 		} else {

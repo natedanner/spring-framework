@@ -175,8 +175,8 @@ class ModelInitializer {
 	 */
 	public static String getNameForParameter(MethodParameter parameter) {
 		ModelAttribute ann = parameter.getParameterAnnotation(ModelAttribute.class);
-		String name = (ann != null ? ann.value() : null);
-		return (StringUtils.hasText(name) ? name : Conventions.getVariableNameForParameter(parameter));
+		String name = ann != null ? ann.value() : null;
+		return StringUtils.hasText(name) ? name : Conventions.getVariableNameForParameter(parameter);
 	}
 
 }

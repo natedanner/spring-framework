@@ -70,9 +70,9 @@ public abstract class CorsUtils {
 	 * {@code Origin} and {@code Access-Control-Request-Method} headers presence.
 	 */
 	public static boolean isPreFlightRequest(HttpServletRequest request) {
-		return (HttpMethod.OPTIONS.matches(request.getMethod()) &&
+		return HttpMethod.OPTIONS.matches(request.getMethod()) &&
 				request.getHeader(HttpHeaders.ORIGIN) != null &&
-				request.getHeader(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD) != null);
+				request.getHeader(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD) != null;
 	}
 
 }

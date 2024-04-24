@@ -164,8 +164,8 @@ public class NameMatchTransactionAttributeSource
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof NameMatchTransactionAttributeSource otherTas &&
-				ObjectUtils.nullSafeEquals(this.nameMap, otherTas.nameMap)));
+		return this == other || (other instanceof NameMatchTransactionAttributeSource otherTas &&
+				ObjectUtils.nullSafeEquals(this.nameMap, otherTas.nameMap));
 	}
 
 	@Override

@@ -20,8 +20,8 @@ abstract class SorterTemplate {
     private static final int MERGESORT_THRESHOLD = 12;
     private static final int QUICKSORT_THRESHOLD = 7;
 
-    abstract protected void swap(int i, int j);
-    abstract protected int compare(int i, int j);
+    protected abstract void swap(int i, int j);
+    protected abstract int compare(int i, int j);
 
     protected void quickSort(int lo, int hi) {
         quickSortHelper(lo, hi);
@@ -105,23 +105,25 @@ abstract class SorterTemplate {
             }
             return;
         }
-        int first_cut, second_cut;
-        int len11, len22;
+		int firstCut;
+		int secondCut;
+		int len11;
+		int len22;
         if (len1 > len2) {
             len11 = len1 / 2;
-            first_cut = lo + len11;
-            second_cut = lower(pivot, hi, first_cut);
-            len22 = second_cut - pivot;
+            firstCut = lo + len11;
+            secondCut = lower(pivot, hi, firstCut);
+            len22 = secondCut - pivot;
         } else {
             len22 = len2 / 2;
-            second_cut = pivot + len22;
-            first_cut = upper(lo, pivot, second_cut);
-            len11 = first_cut - lo;
+            secondCut = pivot + len22;
+            firstCut = upper(lo, pivot, secondCut);
+            len11 = firstCut - lo;
         }
-        rotate(first_cut, pivot, second_cut);
-        int new_mid = first_cut + len22;
-        merge(lo, first_cut, new_mid, len11, len22);
-        merge(new_mid, second_cut, hi, len1 - len11, len2 - len22);
+        rotate(firstCut, pivot, secondCut);
+        int newMid = firstCut + len22;
+        merge(lo, firstCut, newMid, len11, len22);
+        merge(newMid, secondCut, hi, len1 - len11, len2 - len22);
     }
 
     private void rotate(int lo, int mid, int hi) {

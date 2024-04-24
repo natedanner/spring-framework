@@ -122,7 +122,7 @@ public class ModelAttributeMethodArgumentResolver extends HandlerMethodArgumentR
 				.flatMap(binder -> {
 					Object attribute = binder.getTarget();
 					Assert.state(attribute != null, "Expected model attribute instance");
-					return (!bindingDisabled(parameter) ? bindRequestParameters(binder, exchange) : Mono.empty())
+					return (bindingDisabled(parameter) ? Mono.empty() : bindRequestParameters(binder, exchange))
 							.doOnError(bindingResultSink::tryEmitError)
 							.doOnSuccess(aVoid -> {
 								validateIfApplicable(binder, parameter, exchange);
@@ -135,9 +135,9 @@ public class ModelAttributeMethodArgumentResolver extends HandlerMethodArgumentR
 							.then(Mono.fromCallable(() -> {
 								BindingResult errors = binder.getBindingResult();
 								if (adapter != null) {
-									Mono<Object> mono = (errors.hasErrors() ?
+									Mono<Object> mono = errors.hasErrors() ?
 											Mono.error(new WebExchangeBindException(parameter, errors)) :
-											Mono.just(attribute));
+											Mono.just(attribute);
 									return adapter.fromPublisher(mono);
 								}
 								else {
@@ -204,7 +204,7 @@ public class ModelAttributeMethodArgumentResolver extends HandlerMethodArgumentR
 	 */
 	private boolean bindingDisabled(MethodParameter parameter) {
 		ModelAttribute modelAttribute = parameter.getParameterAnnotation(ModelAttribute.class);
-		return (modelAttribute != null && !modelAttribute.binding());
+		return modelAttribute != null && !modelAttribute.binding();
 	}
 
 	/**
@@ -220,7 +220,7 @@ public class ModelAttributeMethodArgumentResolver extends HandlerMethodArgumentR
 	private boolean hasErrorsArgument(MethodParameter parameter) {
 		int i = parameter.getParameterIndex();
 		Class<?>[] paramTypes = parameter.getExecutable().getParameterTypes();
-		return (paramTypes.length > i + 1 && Errors.class.isAssignableFrom(paramTypes[i + 1]));
+		return paramTypes.length > i + 1 && Errors.class.isAssignableFrom(paramTypes[i + 1]);
 	}
 
 	private void validateIfApplicable(WebExchangeDataBinder binder, MethodParameter parameter, ServerWebExchange exchange) {

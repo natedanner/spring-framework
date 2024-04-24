@@ -104,7 +104,7 @@ class AnnotationDrivenTests {
 
 		@Override
 		public Object invoke(MethodInvocation methodInvocation) throws Throwable {
-			if (methodInvocation.getMethod().getName().equals("setSomething")) {
+			if ("setSomething".equals(methodInvocation.getMethod().getName())) {
 				assertThat(TransactionSynchronizationManager.isActualTransactionActive()).isTrue();
 				assertThat(TransactionSynchronizationManager.isSynchronizationActive()).isTrue();
 			}

@@ -618,7 +618,7 @@ class SpelReproTests extends AbstractExpressionTests {
 			}
 		}
 
-		final Integer INTEGER = 7;
+		final Integer integer = 7;
 
 		EvaluationContext emptyEvalContext = new StandardEvaluationContext();
 
@@ -630,7 +630,7 @@ class SpelReproTests extends AbstractExpressionTests {
 		// MethodInvoker chooses getX(int i) when passing Integer
 		final int actual = (Integer) me.execute(emptyEvalContext, target, 42).getValue();
 		// Compiler chooses getX(Number i) when passing Integer
-		final int compiler = target.getX(INTEGER);
+		final int compiler = target.getX(integer);
 		// Fails!
 		assertThat(actual).isEqualTo(compiler);
 
@@ -639,7 +639,7 @@ class SpelReproTests extends AbstractExpressionTests {
 		// MethodInvoker chooses getX(int i) when passing Integer
 		int actual2 = (Integer) me2.execute(emptyEvalContext, target2, 42).getValue();
 		// Compiler chooses getX(Number i) when passing Integer
-		int compiler2 = target2.getX(INTEGER);
+		int compiler2 = target2.getX(integer);
 		// Fails!
 		assertThat(actual2).isEqualTo(compiler2);
 
@@ -658,17 +658,17 @@ class SpelReproTests extends AbstractExpressionTests {
 			}
 		}
 
-		final Integer INTEGER_VALUE = 7;
+		final Integer integerValue = 7;
 		WideningPrimitiveConversion target = new WideningPrimitiveConversion();
 		EvaluationContext emptyEvalContext = new StandardEvaluationContext();
 
 		List<TypeDescriptor> args = new ArrayList<>();
-		args.add(TypeDescriptor.forObject(INTEGER_VALUE));
+		args.add(TypeDescriptor.forObject(integerValue));
 
 		MethodExecutor me = new ReflectiveMethodResolver(true).resolve(emptyEvalContext, target, "getX", args);
-		final int actual = (Integer) me.execute(emptyEvalContext, target, INTEGER_VALUE).getValue();
+		final int actual = (Integer) me.execute(emptyEvalContext, target, integerValue).getValue();
 
-		final int compiler = target.getX(INTEGER_VALUE);
+		final int compiler = target.getX(integerValue);
 		assertThat(actual).isEqualTo(compiler);
 	}
 
@@ -1641,10 +1641,10 @@ class SpelReproTests extends AbstractExpressionTests {
 
 		@Override
 		public Class<?> findType(String typeName) throws EvaluationException {
-			if (typeName.equals("Spr5899Class")) {
+			if ("Spr5899Class".equals(typeName)) {
 				return Spr5899Class.class;
 			}
-			if (typeName.equals("Outer")) {
+			if ("Outer".equals(typeName)) {
 				return Outer.class;
 			}
 			return super.findType(typeName);
@@ -1710,7 +1710,7 @@ class SpelReproTests extends AbstractExpressionTests {
 
 		@Override
 		public boolean canRead(EvaluationContext context, Object target, String name) {
-			return (((Map<?, ?>) target).containsKey(name));
+			return ((Map<?, ?>) target).containsKey(name);
 		}
 
 		@Override
@@ -1806,7 +1806,7 @@ class SpelReproTests extends AbstractExpressionTests {
 	}
 
 
-	static class D {
+	static final class D {
 
 		public String a;
 
@@ -1876,7 +1876,7 @@ class SpelReproTests extends AbstractExpressionTests {
 
 		public String bar = "key";
 
-		public String value = null;
+		public String value;
 
 		public String wibble = "wobble";
 
@@ -2219,8 +2219,8 @@ class SpelReproTests extends AbstractExpressionTests {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof TestClass2 &&
-					this.string.equals(((TestClass2) other).string)));
+			return this == other || (other instanceof TestClass2 &&
+					this.string.equals(((TestClass2) other).string));
 		}
 
 		@Override
@@ -2244,7 +2244,7 @@ class SpelReproTests extends AbstractExpressionTests {
 
 		@Override
 		public Object resolve(EvaluationContext context, String beanName) {
-			return (beanName.equals("bean") ? this : null);
+			return "bean".equals(beanName) ? this : null;
 		}
 	}
 

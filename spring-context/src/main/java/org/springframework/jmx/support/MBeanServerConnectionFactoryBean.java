@@ -166,7 +166,7 @@ public class MBeanServerConnectionFactoryBean
 
 	@Override
 	public Class<? extends MBeanServerConnection> getObjectType() {
-		return (this.connection != null ? this.connection.getClass() : MBeanServerConnection.class);
+		return this.connection != null ? this.connection.getClass() : MBeanServerConnection.class;
 	}
 
 	@Override

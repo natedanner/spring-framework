@@ -88,7 +88,7 @@ public final class ConsumesRequestCondition extends AbstractRequestCondition<Con
 			for (String header : headers) {
 				HeadersRequestCondition.HeaderExpression expr = new HeadersRequestCondition.HeaderExpression(header);
 				if ("Content-Type".equalsIgnoreCase(expr.name)) {
-					result = (result != null ? result : new LinkedHashSet<>());
+					result = result != null ? result : new LinkedHashSet<>();
 					for (MediaType mediaType : MediaType.parseMediaTypes(expr.value)) {
 						result.add(new ConsumeMediaTypeExpression(mediaType, expr.isNegated));
 					}
@@ -96,12 +96,12 @@ public final class ConsumesRequestCondition extends AbstractRequestCondition<Con
 			}
 		}
 		if (!ObjectUtils.isEmpty(consumes)) {
-			result = (result != null ? result : new LinkedHashSet<>());
+			result = result != null ? result : new LinkedHashSet<>();
 			for (String consume : consumes) {
 				result.add(new ConsumeMediaTypeExpression(consume));
 			}
 		}
-		return (result != null ? new ArrayList<>(result) : Collections.emptyList());
+		return result != null ? new ArrayList<>(result) : Collections.emptyList();
 	}
 
 	/**
@@ -180,7 +180,7 @@ public final class ConsumesRequestCondition extends AbstractRequestCondition<Con
 	 */
 	@Override
 	public ConsumesRequestCondition combine(ConsumesRequestCondition other) {
-		return (!other.expressions.isEmpty() ? other : this);
+		return other.expressions.isEmpty() ? this : other;
 	}
 
 	/**
@@ -207,14 +207,14 @@ public final class ConsumesRequestCondition extends AbstractRequestCondition<Con
 			return EMPTY_CONDITION;
 		}
 		List<ConsumeMediaTypeExpression> result = getMatchingExpressions(exchange);
-		return !CollectionUtils.isEmpty(result) ? new ConsumesRequestCondition(result) : null;
+		return CollectionUtils.isEmpty(result) ? null : new ConsumesRequestCondition(result);
 	}
 
 	private boolean hasBody(ServerHttpRequest request) {
 		String contentLength = request.getHeaders().getFirst(HttpHeaders.CONTENT_LENGTH);
 		String transferEncoding = request.getHeaders().getFirst(HttpHeaders.TRANSFER_ENCODING);
 		return StringUtils.hasText(transferEncoding) ||
-				(StringUtils.hasText(contentLength) && !contentLength.trim().equals("0"));
+				(StringUtils.hasText(contentLength) && !"0".equals(contentLength.trim()));
 	}
 
 	@Nullable
@@ -274,8 +274,8 @@ public final class ConsumesRequestCondition extends AbstractRequestCondition<Con
 		protected boolean matchMediaType(ServerWebExchange exchange) throws UnsupportedMediaTypeStatusException {
 			try {
 				MediaType contentType = exchange.getRequest().getHeaders().getContentType();
-				contentType = (contentType != null ? contentType : MediaType.APPLICATION_OCTET_STREAM);
-				return (getMediaType().includes(contentType) && matchParameters(contentType));
+				contentType = contentType != null ? contentType : MediaType.APPLICATION_OCTET_STREAM;
+				return getMediaType().includes(contentType) && matchParameters(contentType);
 			}
 			catch (InvalidMediaTypeException ex) {
 				throw new UnsupportedMediaTypeStatusException("Can't parse Content-Type [" +

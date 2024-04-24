@@ -34,7 +34,7 @@ import org.springframework.cglib.core.internal.LoadingCache;
  * applied before generation.
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class AbstractClassGenerator<T> implements ClassGenerator {
+public abstract class AbstractClassGenerator<T> implements ClassGenerator {
 
 	private static final ThreadLocal CURRENT = new ThreadLocal();
 
@@ -161,7 +161,7 @@ abstract public class AbstractClassGenerator<T> implements ClassGenerator {
 		this.namePrefix = namePrefix;
 	}
 
-	final protected String getClassName() {
+	protected final String getClassName() {
 		return className;
 	}
 
@@ -282,7 +282,7 @@ abstract public class AbstractClassGenerator<T> implements ClassGenerator {
 		return t;
 	}
 
-	abstract protected ClassLoader getDefaultClassLoader();
+	protected abstract ClassLoader getDefaultClassLoader();
 
 	/**
 	 * Returns the protection domain to use when defining the class.
@@ -384,8 +384,8 @@ abstract public class AbstractClassGenerator<T> implements ClassGenerator {
 		}
 	}
 
-	abstract protected Object firstInstance(Class type) throws Exception;
+	protected abstract Object firstInstance(Class type) throws Exception;
 
-	abstract protected Object nextInstance(Object instance) throws Exception;
+	protected abstract Object nextInstance(Object instance) throws Exception;
 
 }

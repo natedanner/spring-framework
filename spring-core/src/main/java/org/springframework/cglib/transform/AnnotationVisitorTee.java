@@ -19,7 +19,8 @@ import org.springframework.asm.AnnotationVisitor;
 import org.springframework.cglib.core.Constants;
 
 public class AnnotationVisitorTee extends AnnotationVisitor {
-    private AnnotationVisitor av1, av2;
+	private final AnnotationVisitor av1;
+	private final AnnotationVisitor av2;
 
     public static AnnotationVisitor getInstance(AnnotationVisitor av1, AnnotationVisitor av2) {
         if (av1 == null) {

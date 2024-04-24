@@ -101,8 +101,8 @@ class ControllerMappingReflectiveProcessor implements ReflectiveProcessor {
 	@Nullable
 	private Type getHttpEntityType(MethodParameter parameter) {
 		MethodParameter nestedParameter = parameter.nested();
-		return (nestedParameter.getNestedParameterType() == nestedParameter.getParameterType() ?
-				null : nestedParameter.getNestedParameterType());
+		return nestedParameter.getNestedParameterType() == nestedParameter.getParameterType() ?
+				null : nestedParameter.getNestedParameterType();
 	}
 
 }

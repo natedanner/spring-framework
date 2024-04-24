@@ -79,8 +79,8 @@ public class SingletonTargetSource implements TargetSource, Serializable {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof SingletonTargetSource that &&
-				this.target.equals(that.target)));
+		return this == other || (other instanceof SingletonTargetSource that &&
+				this.target.equals(that.target));
 	}
 
 	/**

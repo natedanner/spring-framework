@@ -243,7 +243,7 @@ public class BindStatus {
 			return displayValue;
 		}
 		if (this.value != null) {
-			return (this.htmlEscape ? HtmlUtils.htmlEscape(this.value.toString()) : this.value.toString());
+			return this.htmlEscape ? HtmlUtils.htmlEscape(this.value.toString()) : this.value.toString();
 		}
 		return "";
 	}
@@ -252,7 +252,7 @@ public class BindStatus {
 	 * Return if this status represents a field or object error.
 	 */
 	public boolean isError() {
-		return (this.errorCodes.length > 0);
+		return this.errorCodes.length > 0;
 	}
 
 	/**
@@ -267,7 +267,7 @@ public class BindStatus {
 	 * Return the first error codes for the field or object, if any.
 	 */
 	public String getErrorCode() {
-		return (this.errorCodes.length > 0 ? this.errorCodes[0] : "");
+		return this.errorCodes.length > 0 ? this.errorCodes[0] : "";
 	}
 
 	/**
@@ -283,7 +283,7 @@ public class BindStatus {
 	 */
 	public String getErrorMessage() {
 		String[] errorMessages = initErrorMessages();
-		return (errorMessages.length > 0 ? errorMessages[0] : "");
+		return errorMessages.length > 0 ? errorMessages[0] : "";
 	}
 
 	/**
@@ -344,7 +344,7 @@ public class BindStatus {
 	 */
 	@Nullable
 	public PropertyEditor findEditor(Class<?> valueClass) {
-		return (this.bindingResult != null ? this.bindingResult.findEditor(this.expression, valueClass) : null);
+		return this.bindingResult != null ? this.bindingResult.findEditor(this.expression, valueClass) : null;
 	}
 
 

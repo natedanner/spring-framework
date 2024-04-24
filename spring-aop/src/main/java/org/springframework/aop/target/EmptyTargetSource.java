@@ -63,7 +63,7 @@ public final class EmptyTargetSource implements TargetSource, Serializable {
 	 * @see #getTargetClass()
 	 */
 	public static EmptyTargetSource forClass(@Nullable Class<?> targetClass, boolean isStatic) {
-		return (targetClass == null && isStatic ? INSTANCE : new EmptyTargetSource(targetClass, isStatic));
+		return targetClass == null && isStatic ? INSTANCE : new EmptyTargetSource(targetClass, isStatic);
 	}
 
 
@@ -122,14 +122,14 @@ public final class EmptyTargetSource implements TargetSource, Serializable {
 	 * of no target class, thus protecting the Singleton pattern.
 	 */
 	private Object readResolve() {
-		return (this.targetClass == null && this.isStatic ? INSTANCE : this);
+		return this.targetClass == null && this.isStatic ? INSTANCE : this;
 	}
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof EmptyTargetSource that &&
+		return this == other || (other instanceof EmptyTargetSource that &&
 				ObjectUtils.nullSafeEquals(this.targetClass, that.targetClass) &&
-				this.isStatic == that.isStatic));
+				this.isStatic == that.isStatic);
 	}
 
 	@Override

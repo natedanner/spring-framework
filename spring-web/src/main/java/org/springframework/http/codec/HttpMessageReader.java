@@ -64,7 +64,7 @@ public interface HttpMessageReader<T> {
 	 * @since 5.3.4
 	 */
 	default List<MediaType> getReadableMediaTypes(ResolvableType elementType) {
-		return (canRead(elementType, null) ? getReadableMediaTypes() : Collections.emptyList());
+		return canRead(elementType, null) ? getReadableMediaTypes() : Collections.emptyList();
 	}
 
 	/**

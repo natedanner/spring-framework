@@ -217,9 +217,9 @@ public class StompDecoder {
 
 	private void readHeaders(ByteBuffer byteBuffer, StompHeaderAccessor headerAccessor, StompCommand command) {
 
-		boolean shouldUnescape = (command != StompCommand.CONNECT &&
+		boolean shouldUnescape = command != StompCommand.CONNECT &&
 				command != StompCommand.CONNECTED &&
-				command != StompCommand.STOMP);
+				command != StompCommand.STOMP;
 
 		while (true) {
 			ByteArrayOutputStream headerStream = new ByteArrayOutputStream(256);

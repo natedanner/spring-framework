@@ -129,7 +129,7 @@ public class CustomBooleanEditor extends PropertyEditorSupport {
 
 	@Override
 	public void setAsText(@Nullable String text) throws IllegalArgumentException {
-		String input = (text != null ? text.trim() : null);
+		String input = text != null ? text.trim() : null;
 		if (this.allowEmpty && !StringUtils.hasLength(input)) {
 			// Treat empty String as null value.
 			setValue(null);
@@ -158,10 +158,10 @@ public class CustomBooleanEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		if (Boolean.TRUE.equals(getValue())) {
-			return (this.trueString != null ? this.trueString : VALUE_TRUE);
+			return this.trueString != null ? this.trueString : VALUE_TRUE;
 		}
 		else if (Boolean.FALSE.equals(getValue())) {
-			return (this.falseString != null ? this.falseString : VALUE_FALSE);
+			return this.falseString != null ? this.falseString : VALUE_FALSE;
 		}
 		else {
 			return "";

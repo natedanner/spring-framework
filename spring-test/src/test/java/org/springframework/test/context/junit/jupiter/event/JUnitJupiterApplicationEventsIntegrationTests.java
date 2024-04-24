@@ -152,7 +152,7 @@ class JUnitJupiterApplicationEventsIntegrationTests {
 	@TestInstance(PER_CLASS)
 	class TestInstancePerClassTests {
 
-		private boolean testAlreadyExecuted = false;
+		private boolean testAlreadyExecuted;
 
 		@BeforeEach
 		void beforeEach(TestInfo testInfo) {

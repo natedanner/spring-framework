@@ -43,7 +43,7 @@ class DefaultServerWebExchangeCheckNotModifiedTests {
 
 	private final Instant currentDate = Instant.now().truncatedTo(ChronoUnit.SECONDS);
 
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
+	private final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
 
 
 	@BeforeEach

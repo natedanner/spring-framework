@@ -93,7 +93,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 	}
 
 
-	private boolean detectHandlerMethodsInAncestorContexts = false;
+	private boolean detectHandlerMethodsInAncestorContexts;
 
 	@Nullable
 	private HandlerMethodMappingNamingStrategy<T> namingStrategy;
@@ -234,9 +234,9 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 	 * @see BeanFactoryUtils#beanNamesForTypeIncludingAncestors
 	 */
 	protected String[] getCandidateBeanNames() {
-		return (this.detectHandlerMethodsInAncestorContexts ?
+		return this.detectHandlerMethodsInAncestorContexts ?
 				BeanFactoryUtils.beanNamesForTypeIncludingAncestors(obtainApplicationContext(), Object.class) :
-				obtainApplicationContext().getBeanNamesForType(Object.class));
+				obtainApplicationContext().getBeanNamesForType(Object.class);
 	}
 
 	/**
@@ -272,8 +272,8 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 	 * @see #getMappingForMethod
 	 */
 	protected void detectHandlerMethods(Object handler) {
-		Class<?> handlerType = (handler instanceof String beanName ?
-				obtainApplicationContext().getType(beanName) : handler.getClass());
+		Class<?> handlerType = handler instanceof String beanName ?
+				obtainApplicationContext().getType(beanName) : handler.getClass();
 
 		if (handlerType != null) {
 			Class<?> userType = ClassUtils.getUserClass(handlerType);
@@ -302,11 +302,11 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 
 	private String formatMappings(Class<?> userType, Map<Method, T> methods) {
 		String packageName = ClassUtils.getPackageName(userType);
-		String formattedType = (StringUtils.hasText(packageName) ?
+		String formattedType = StringUtils.hasText(packageName) ?
 				Arrays.stream(packageName.split("\\."))
 						.map(packageSegment -> packageSegment.substring(0, 1))
 						.collect(Collectors.joining(".", "", "." + userType.getSimpleName())) :
-				userType.getSimpleName());
+				userType.getSimpleName();
 		Function<Method, String> methodFormatter = method -> Arrays.stream(method.getParameterTypes())
 				.map(Class::getSimpleName)
 				.collect(Collectors.joining(",", "(", ")"));
@@ -380,7 +380,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 		this.mappingRegistry.acquireReadLock();
 		try {
 			HandlerMethod handlerMethod = lookupHandlerMethod(lookupPath, request);
-			return (handlerMethod != null ? handlerMethod.createWithResolvedBean() : null);
+			return handlerMethod != null ? handlerMethod.createWithResolvedBean() : null;
 		}
 		finally {
 			this.mappingRegistry.releaseReadLock();
@@ -491,7 +491,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 			}
 			else {
 				CorsConfiguration corsConfigFromMethod = this.mappingRegistry.getCorsConfiguration(handlerMethod);
-				corsConfig = (corsConfig != null ? corsConfig.combine(corsConfigFromMethod) : corsConfigFromMethod);
+				corsConfig = corsConfig != null ? corsConfig.combine(corsConfigFromMethod) : corsConfigFromMethod;
 			}
 		}
 		return corsConfig;
@@ -536,7 +536,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 		Set<String> urls = Collections.emptySet();
 		for (String path : getMappingPathPatterns(mapping)) {
 			if (!getPathMatcher().isPattern(path)) {
-				urls = (urls.isEmpty() ? new HashSet<>(1) : urls);
+				urls = urls.isEmpty() ? new HashSet<>(1) : urls;
 				urls.add(path);
 			}
 		}
@@ -664,7 +664,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 
 		private void validateMethodMapping(HandlerMethod handlerMethod, T mapping) {
 			MappingRegistration<T> registration = this.registry.get(mapping);
-			HandlerMethod existingHandlerMethod = (registration != null ? registration.getHandlerMethod() : null);
+			HandlerMethod existingHandlerMethod = registration != null ? registration.getHandlerMethod() : null;
 			if (existingHandlerMethod != null && !existingHandlerMethod.equals(handlerMethod)) {
 				throw new IllegalStateException(
 						"Ambiguous mapping. Cannot map '" + handlerMethod.getBean() + "' method \n" +
@@ -763,7 +763,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 			Assert.notNull(handlerMethod, "HandlerMethod must not be null");
 			this.mapping = mapping;
 			this.handlerMethod = handlerMethod;
-			this.directPaths = (directPaths != null ? directPaths : Collections.emptySet());
+			this.directPaths = directPaths != null ? directPaths : Collections.emptySet();
 			this.mappingName = mappingName;
 			this.corsConfig = corsConfig;
 		}

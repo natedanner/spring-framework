@@ -40,7 +40,7 @@ class RequestContextTests {
 
 	private GenericApplicationContext applicationContext;
 
-	private Map<String, Object> model = new HashMap<>();
+	private final Map<String, Object> model = new HashMap<>();
 
 
 	@BeforeEach

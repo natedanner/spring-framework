@@ -54,7 +54,7 @@ class GlobalFruitContextCustomizer implements ContextCustomizer {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other != null && getClass() == other.getClass()));
+		return this == other || (other != null && getClass() == other.getClass());
 	}
 
 	@Override

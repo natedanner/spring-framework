@@ -315,7 +315,7 @@ public final class WebHttpHandlerBuilder {
 	 * @since 5.0.9
 	 */
 	public boolean hasSessionManager() {
-		return (this.sessionManager != null);
+		return this.sessionManager != null;
 	}
 
 	/**
@@ -334,7 +334,7 @@ public final class WebHttpHandlerBuilder {
 	 * @since 5.0.9
 	 */
 	public boolean hasCodecConfigurer() {
-		return (this.codecConfigurer != null);
+		return this.codecConfigurer != null;
 	}
 
 	/**
@@ -353,7 +353,7 @@ public final class WebHttpHandlerBuilder {
 	 * @since 5.0.9
 	 */
 	public boolean hasLocaleContextResolver() {
-		return (this.localeContextResolver != null);
+		return this.localeContextResolver != null;
 	}
 
 	/**
@@ -374,7 +374,7 @@ public final class WebHttpHandlerBuilder {
 	 * @since 5.1
 	 */
 	public boolean hasForwardedHeaderTransformer() {
-		return (this.forwardedHeaderTransformer != null);
+		return this.forwardedHeaderTransformer != null;
 	}
 
 	/**
@@ -410,8 +410,8 @@ public final class WebHttpHandlerBuilder {
 	 * @since 5.3
 	 */
 	public WebHttpHandlerBuilder httpHandlerDecorator(Function<HttpHandler, HttpHandler> handlerDecorator) {
-		this.httpHandlerDecorator = (this.httpHandlerDecorator != null ?
-				handlerDecorator.andThen(this.httpHandlerDecorator) : handlerDecorator);
+		this.httpHandlerDecorator = this.httpHandlerDecorator != null ?
+				handlerDecorator.andThen(this.httpHandlerDecorator) : handlerDecorator;
 		return this;
 	}
 
@@ -421,7 +421,7 @@ public final class WebHttpHandlerBuilder {
 	 * @since 5.3
 	 */
 	public boolean hasHttpHandlerDecorator() {
-		return (this.httpHandlerDecorator != null);
+		return this.httpHandlerDecorator != null;
 	}
 
 	/**
@@ -455,7 +455,7 @@ public final class WebHttpHandlerBuilder {
 		}
 		adapted.afterPropertiesSet();
 
-		return (this.httpHandlerDecorator != null ? this.httpHandlerDecorator.apply(adapted) : adapted);
+		return this.httpHandlerDecorator != null ? this.httpHandlerDecorator.apply(adapted) : adapted;
 	}
 
 	/**

@@ -94,7 +94,7 @@ public class FixedBackOff implements BackOff {
 
 	private class FixedBackOffExecution implements BackOffExecution {
 
-		private long currentAttempts = 0;
+		private long currentAttempts;
 
 		@Override
 		public long nextBackOff() {
@@ -109,8 +109,8 @@ public class FixedBackOff implements BackOff {
 
 		@Override
 		public String toString() {
-			String attemptValue = (FixedBackOff.this.maxAttempts == Long.MAX_VALUE ?
-					"unlimited" : String.valueOf(FixedBackOff.this.maxAttempts));
+			String attemptValue = FixedBackOff.this.maxAttempts == Long.MAX_VALUE ?
+					"unlimited" : String.valueOf(FixedBackOff.this.maxAttempts);
 			return "FixedBackOff{interval=" + FixedBackOff.this.interval +
 					", currentAttempts=" + this.currentAttempts +
 					", maxAttempts=" + attemptValue +

@@ -88,9 +88,9 @@ public class SpringCacheAnnotationParser implements CacheAnnotationParser, Seria
 	private Collection<CacheOperation> parseCacheAnnotations(
 			DefaultCacheConfig cachingConfig, AnnotatedElement ae, boolean localOnly) {
 
-		Collection<? extends Annotation> annotations = (localOnly ?
+		Collection<? extends Annotation> annotations = localOnly ?
 				AnnotatedElementUtils.getAllMergedAnnotations(ae, CACHE_OPERATION_ANNOTATIONS) :
-				AnnotatedElementUtils.findAllMergedAnnotations(ae, CACHE_OPERATION_ANNOTATIONS));
+				AnnotatedElementUtils.findAllMergedAnnotations(ae, CACHE_OPERATION_ANNOTATIONS);
 		if (annotations.isEmpty()) {
 			return null;
 		}
@@ -216,7 +216,7 @@ public class SpringCacheAnnotationParser implements CacheAnnotationParser, Seria
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (other instanceof SpringCacheAnnotationParser);
+		return other instanceof SpringCacheAnnotationParser;
 	}
 
 	@Override
@@ -244,7 +244,7 @@ public class SpringCacheAnnotationParser implements CacheAnnotationParser, Seria
 		@Nullable
 		private String cacheResolver;
 
-		private boolean initialized = false;
+		private boolean initialized;
 
 		public DefaultCacheConfig(Class<?> target) {
 			this.target = target;

@@ -111,7 +111,7 @@ public final class ProducesRequestCondition extends AbstractRequestCondition<Pro
 				HeaderExpression expr = new HeaderExpression(header);
 				if ("Accept".equalsIgnoreCase(expr.name) && expr.value != null) {
 					for (MediaType mediaType : MediaType.parseMediaTypes(expr.value)) {
-						result = (result != null ? result : new LinkedHashSet<>());
+						result = result != null ? result : new LinkedHashSet<>();
 						result.add(new ProduceMediaTypeExpression(mediaType, expr.isNegated));
 					}
 				}
@@ -119,11 +119,11 @@ public final class ProducesRequestCondition extends AbstractRequestCondition<Pro
 		}
 		if (!ObjectUtils.isEmpty(produces)) {
 			for (String produce : produces) {
-				result = (result != null ? result : new LinkedHashSet<>());
+				result = result != null ? result : new LinkedHashSet<>();
 				result.add(new ProduceMediaTypeExpression(produce));
 			}
 		}
-		return (result != null ? new ArrayList<>(result) : Collections.emptyList());
+		return result != null ? new ArrayList<>(result) : Collections.emptyList();
 	}
 
 	/**
@@ -181,7 +181,7 @@ public final class ProducesRequestCondition extends AbstractRequestCondition<Pro
 	 */
 	@Override
 	public ProducesRequestCondition combine(ProducesRequestCondition other) {
-		return (!other.expressions.isEmpty() ? other : this);
+		return other.expressions.isEmpty() ? this : other;
 	}
 
 	/**
@@ -324,7 +324,7 @@ public final class ProducesRequestCondition extends AbstractRequestCondition<Pro
 			ProduceMediaTypeExpression expr1 = condition1.getExpressionsToCompare().get(index1);
 			ProduceMediaTypeExpression expr2 = condition2.getExpressionsToCompare().get(index2);
 			result = expr1.compareTo(expr2);
-			result = (result != 0) ? result : expr1.getMediaType().compareTo(expr2.getMediaType());
+			result = result != 0 ? result : expr1.getMediaType().compareTo(expr2.getMediaType());
 		}
 		return result;
 	}
@@ -334,7 +334,7 @@ public final class ProducesRequestCondition extends AbstractRequestCondition<Pro
 	 * with a {@value MediaType#ALL_VALUE} expression.
 	 */
 	private List<ProduceMediaTypeExpression> getExpressionsToCompare() {
-		return (this.expressions.isEmpty() ? MEDIA_TYPE_ALL_LIST : this.expressions);
+		return this.expressions.isEmpty() ? MEDIA_TYPE_ALL_LIST : this.expressions;
 	}
 
 

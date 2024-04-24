@@ -148,8 +148,8 @@ class ConfigurationClassParser {
 		this.problemReporter = problemReporter;
 		this.environment = environment;
 		this.resourceLoader = resourceLoader;
-		this.propertySourceRegistry = (this.environment instanceof ConfigurableEnvironment ce ?
-				new PropertySourceRegistry(new PropertySourceProcessor(ce, this.resourceLoader)) : null);
+		this.propertySourceRegistry = this.environment instanceof ConfigurableEnvironment ce ?
+				new PropertySourceRegistry(new PropertySourceProcessor(ce, this.resourceLoader)) : null;
 		this.registry = registry;
 		this.componentScanParser = new ComponentScanAnnotationParser(
 				environment, resourceLoader, componentScanBeanNameGenerator, registry);
@@ -212,8 +212,8 @@ class ConfigurationClassParser {
 	}
 
 	List<PropertySourceDescriptor> getPropertySourceDescriptors() {
-		return (this.propertySourceRegistry != null ? this.propertySourceRegistry.getDescriptors() :
-				Collections.emptyList());
+		return this.propertySourceRegistry != null ? this.propertySourceRegistry.getDescriptors() :
+				Collections.emptyList();
 	}
 
 	protected void processConfigurationClass(ConfigurationClass configClass, Predicate<String> filter) throws IOException {
@@ -760,7 +760,7 @@ class ConfigurationClassParser {
 		}
 
 		private Group createGroup(@Nullable Class<? extends Group> type) {
-			Class<? extends Group> effectiveType = (type != null ? type : DefaultDeferredImportSelectorGroup.class);
+			Class<? extends Group> effectiveType = type != null ? type : DefaultDeferredImportSelectorGroup.class;
 			return ParserStrategyUtils.instantiateClass(effectiveType, Group.class,
 					ConfigurationClassParser.this.environment,
 					ConfigurationClassParser.this.resourceLoader,
@@ -874,7 +874,7 @@ class ConfigurationClassParser {
 		@Override
 		public int getOrder() {
 			Integer order = ConfigurationClassUtils.getOrder(this.metadata);
-			return (order != null ? order : Ordered.LOWEST_PRECEDENCE);
+			return order != null ? order : Ordered.LOWEST_PRECEDENCE;
 		}
 
 		public Class<?> loadClass() throws ClassNotFoundException {
@@ -1023,8 +1023,8 @@ class ConfigurationClassParser {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof SourceClass that &&
-					this.metadata.getClassName().equals(that.metadata.getClassName())));
+			return this == other || (other instanceof SourceClass that &&
+					this.metadata.getClassName().equals(that.metadata.getClassName()));
 		}
 
 		@Override

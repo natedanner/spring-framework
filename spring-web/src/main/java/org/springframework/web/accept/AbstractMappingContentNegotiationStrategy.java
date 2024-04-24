@@ -54,9 +54,9 @@ public abstract class AbstractMappingContentNegotiationStrategy extends MappingM
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	private boolean useRegisteredExtensionsOnly = false;
+	private boolean useRegisteredExtensionsOnly;
 
-	private boolean ignoreUnknownExtensions = false;
+	private boolean ignoreUnknownExtensions;
 
 
 	/**

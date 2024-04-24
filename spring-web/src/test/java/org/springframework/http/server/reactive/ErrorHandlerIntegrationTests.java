@@ -86,7 +86,7 @@ class ErrorHandlerIntegrationTests extends AbstractHttpHandlerIntegrationTests {
 		// https://www.eclipse.org/jetty/documentation/jetty-11/programming_guide.php
 
 		HttpStatus expectedStatus =
-				(httpServer instanceof JettyHttpServer ? HttpStatus.BAD_REQUEST : HttpStatus.OK);
+				httpServer instanceof JettyHttpServer ? HttpStatus.BAD_REQUEST : HttpStatus.OK;
 
 		assertThat(response.getStatusCode()).isEqualTo(expectedStatus);
 	}

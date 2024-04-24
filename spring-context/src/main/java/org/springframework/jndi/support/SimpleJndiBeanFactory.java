@@ -223,13 +223,13 @@ public class SimpleJndiBeanFactory extends JndiLocatorSupport implements BeanFac
 	@Override
 	public boolean isTypeMatch(String name, ResolvableType typeToMatch) throws NoSuchBeanDefinitionException {
 		Class<?> type = getType(name);
-		return (type != null && typeToMatch.isAssignableFrom(type));
+		return type != null && typeToMatch.isAssignableFrom(type);
 	}
 
 	@Override
 	public boolean isTypeMatch(String name, @Nullable Class<?> typeToMatch) throws NoSuchBeanDefinitionException {
 		Class<?> type = getType(name);
-		return (typeToMatch == null || (type != null && typeToMatch.isAssignableFrom(type)));
+		return typeToMatch == null || (type != null && typeToMatch.isAssignableFrom(type));
 	}
 
 	@Override

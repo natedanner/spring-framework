@@ -80,10 +80,10 @@ public class PropertySourceProcessor {
 		String name = descriptor.name();
 		String encoding = descriptor.encoding();
 		List<String> locations = descriptor.locations();
-		Assert.isTrue(locations.size() > 0, "At least one @PropertySource(value) location is required");
+		Assert.isTrue(!locations.isEmpty(), "At least one @PropertySource(value) location is required");
 		boolean ignoreResourceNotFound = descriptor.ignoreResourceNotFound();
-		PropertySourceFactory factory = (descriptor.propertySourceFactory() != null ?
-				instantiateClass(descriptor.propertySourceFactory()) : defaultPropertySourceFactory);
+		PropertySourceFactory factory = descriptor.propertySourceFactory() != null ?
+				instantiateClass(descriptor.propertySourceFactory()) : defaultPropertySourceFactory;
 
 		for (String location : locations) {
 			try {
@@ -115,8 +115,8 @@ public class PropertySourceProcessor {
 			// We've already added a version, we need to extend it
 			PropertySource<?> existing = propertySources.get(name);
 			if (existing != null) {
-				PropertySource<?> newSource = (propertySource instanceof ResourcePropertySource rps ?
-						rps.withResourceName() : propertySource);
+				PropertySource<?> newSource = propertySource instanceof ResourcePropertySource rps ?
+						rps.withResourceName() : propertySource;
 				if (existing instanceof CompositePropertySource cps) {
 					cps.addFirstPropertySource(newSource);
 				}
@@ -160,9 +160,9 @@ public class PropertySourceProcessor {
 	 * {@code ignoreResourceNotFound} semantics.
 	 */
 	private static boolean isIgnorableException(@Nullable Throwable ex) {
-		return (ex instanceof FileNotFoundException ||
+		return ex instanceof FileNotFoundException ||
 				ex instanceof UnknownHostException ||
-				ex instanceof SocketException);
+				ex instanceof SocketException;
 	}
 
 }

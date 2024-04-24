@@ -68,7 +68,7 @@ public class SimplePropertySqlParameterSource extends AbstractSqlParameterSource
 
 	@Override
 	public boolean hasValue(String paramName) {
-		return (getDescriptor(paramName) != NO_DESCRIPTOR);
+		return getDescriptor(paramName) != NO_DESCRIPTOR;
 	}
 
 	@Override

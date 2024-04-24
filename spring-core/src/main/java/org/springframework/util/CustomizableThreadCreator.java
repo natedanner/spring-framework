@@ -39,7 +39,7 @@ public class CustomizableThreadCreator implements Serializable {
 
 	private int threadPriority = Thread.NORM_PRIORITY;
 
-	private boolean daemon = false;
+	private boolean daemon;
 
 	@Nullable
 	private ThreadGroup threadGroup;
@@ -59,7 +59,7 @@ public class CustomizableThreadCreator implements Serializable {
 	 * @param threadNamePrefix the prefix to use for the names of newly created threads
 	 */
 	public CustomizableThreadCreator(@Nullable String threadNamePrefix) {
-		this.threadNamePrefix = (threadNamePrefix != null ? threadNamePrefix : getDefaultThreadNamePrefix());
+		this.threadNamePrefix = threadNamePrefix != null ? threadNamePrefix : getDefaultThreadNamePrefix();
 	}
 
 
@@ -68,7 +68,7 @@ public class CustomizableThreadCreator implements Serializable {
 	 * Default is "SimpleAsyncTaskExecutor-".
 	 */
 	public void setThreadNamePrefix(@Nullable String threadNamePrefix) {
-		this.threadNamePrefix = (threadNamePrefix != null ? threadNamePrefix : getDefaultThreadNamePrefix());
+		this.threadNamePrefix = threadNamePrefix != null ? threadNamePrefix : getDefaultThreadNamePrefix();
 	}
 
 	/**

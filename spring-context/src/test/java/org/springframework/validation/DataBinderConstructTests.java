@@ -173,7 +173,7 @@ class DataBinderConstructTests {
 	}
 
 
-	private static class MapValueResolver implements DataBinder.ValueResolver {
+	private static final class MapValueResolver implements DataBinder.ValueResolver {
 
 		private final Map<String, Object> map;
 

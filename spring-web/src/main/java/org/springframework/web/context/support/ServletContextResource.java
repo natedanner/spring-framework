@@ -103,7 +103,7 @@ public class ServletContextResource extends AbstractFileResolvingResource implem
 	public boolean exists() {
 		try {
 			URL url = this.servletContext.getResource(this.path);
-			return (url != null);
+			return url != null;
 		}
 		catch (MalformedURLException ex) {
 			return false;
@@ -145,7 +145,7 @@ public class ServletContextResource extends AbstractFileResolvingResource implem
 					return false;
 				}
 				File file = new File(realPath);
-				return (file.exists() && file.isFile());
+				return file.exists() && file.isFile();
 			}
 		}
 		catch (IOException ex) {
@@ -244,8 +244,8 @@ public class ServletContextResource extends AbstractFileResolvingResource implem
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ServletContextResource that &&
-				this.path.equals(that.path) && this.servletContext.equals(that.servletContext)));
+		return this == other || (other instanceof ServletContextResource that &&
+				this.path.equals(that.path) && this.servletContext.equals(that.servletContext));
 	}
 
 	/**

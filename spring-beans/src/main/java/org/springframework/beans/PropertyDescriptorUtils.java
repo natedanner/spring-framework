@@ -106,7 +106,7 @@ abstract class PropertyDescriptorUtils {
 				}
 			}
 			else {
-				pd = new BasicPropertyDescriptor(propertyName, (!setter ? method : null), (setter ? method : null));
+				pd = new BasicPropertyDescriptor(propertyName, (setter ? null : method), (setter ? method : null));
 				pdMap.put(propertyName, pd);
 			}
 		}
@@ -248,11 +248,11 @@ abstract class PropertyDescriptorUtils {
 	 * @see java.beans.PropertyDescriptor#equals(Object)
 	 */
 	public static boolean equals(PropertyDescriptor pd, PropertyDescriptor otherPd) {
-		return (ObjectUtils.nullSafeEquals(pd.getReadMethod(), otherPd.getReadMethod()) &&
+		return ObjectUtils.nullSafeEquals(pd.getReadMethod(), otherPd.getReadMethod()) &&
 				ObjectUtils.nullSafeEquals(pd.getWriteMethod(), otherPd.getWriteMethod()) &&
 				ObjectUtils.nullSafeEquals(pd.getPropertyType(), otherPd.getPropertyType()) &&
 				ObjectUtils.nullSafeEquals(pd.getPropertyEditorClass(), otherPd.getPropertyEditorClass()) &&
-				pd.isBound() == otherPd.isBound() && pd.isConstrained() == otherPd.isConstrained());
+				pd.isBound() == otherPd.isBound() && pd.isConstrained() == otherPd.isConstrained();
 	}
 
 

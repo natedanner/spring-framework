@@ -65,7 +65,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 	private static final Class<?>[] EMPTY_GROUPS = new Class<?>[0];
 
 	private static final ReflectionUtils.MethodFilter boxImplFilter =
-			(method -> method.isSynthetic() && Modifier.isStatic(method.getModifiers()) && method.getName().equals("box-impl"));
+			method -> method.isSynthetic() && Modifier.isStatic(method.getModifiers()) && "box-impl".equals(method.getName());
 
 
 	private HandlerMethodArgumentResolverComposite resolvers = new HandlerMethodArgumentResolverComposite();
@@ -151,8 +151,8 @@ public class InvocableHandlerMethod extends HandlerMethod {
 	 */
 	public void setMethodValidator(@Nullable MethodValidator methodValidator) {
 		this.methodValidator = methodValidator;
-		this.validationGroups = (methodValidator != null ?
-				methodValidator.determineValidationGroups(getBean(), getBridgedMethod()) : EMPTY_GROUPS);
+		this.validationGroups = methodValidator != null ?
+				methodValidator.determineValidationGroups(getBean(), getBridgedMethod()) : EMPTY_GROUPS;
 	}
 
 
@@ -260,7 +260,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 		}
 		catch (IllegalArgumentException ex) {
 			assertTargetBean(method, getBean(), args);
-			String text = (ex.getMessage() == null || ex.getCause() instanceof NullPointerException) ?
+			String text = ex.getMessage() == null || ex.getCause() instanceof NullPointerException ?
 					"Illegal argument" : ex.getMessage();
 			throw new IllegalStateException(formatInvokeError(text, args), ex);
 		}
@@ -334,7 +334,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 				}
 			}
 			Object result = function.callBy(argMap);
-			return (result == Unit.INSTANCE ? null : result);
+			return result == Unit.INSTANCE ? null : result;
 		}
 	}
 

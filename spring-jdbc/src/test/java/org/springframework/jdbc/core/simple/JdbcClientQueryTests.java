@@ -46,17 +46,17 @@ import static org.mockito.Mockito.verify;
  */
 class JdbcClientQueryTests {
 
-	private DataSource dataSource = mock();
+	private final DataSource dataSource = mock();
 
-	private Connection connection = mock();
+	private final Connection connection = mock();
 
-	private PreparedStatement preparedStatement = mock();
+	private final PreparedStatement preparedStatement = mock();
 
-	private ResultSet resultSet = mock();
+	private final ResultSet resultSet = mock();
 
-	private ResultSetMetaData resultSetMetaData = mock();
+	private final ResultSetMetaData resultSetMetaData = mock();
 
-	private JdbcClient client = JdbcClient.create(dataSource);
+	private final JdbcClient client = JdbcClient.create(dataSource);
 
 
 	@BeforeEach

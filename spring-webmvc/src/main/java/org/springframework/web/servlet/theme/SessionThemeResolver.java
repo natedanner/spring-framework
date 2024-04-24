@@ -56,7 +56,7 @@ public class SessionThemeResolver extends AbstractThemeResolver {
 	public String resolveThemeName(HttpServletRequest request) {
 		String themeName = (String) WebUtils.getSessionAttribute(request, THEME_SESSION_ATTRIBUTE_NAME);
 		// A specific theme indicated, or do we need to fall back to the default?
-		return (themeName != null ? themeName : getDefaultThemeName());
+		return themeName != null ? themeName : getDefaultThemeName();
 	}
 
 	@Override

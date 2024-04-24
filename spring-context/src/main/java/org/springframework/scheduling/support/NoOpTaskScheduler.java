@@ -42,7 +42,7 @@ public class NoOpTaskScheduler implements TaskScheduler {
 	@Nullable
 	public ScheduledFuture<?> schedule(Runnable task, Trigger trigger) {
 		Instant nextExecution = trigger.nextExecution(new SimpleTriggerContext(getClock()));
-		return (nextExecution != null ? new NoOpScheduledFuture<>() : null);
+		return nextExecution != null ? new NoOpScheduledFuture<>() : null;
 	}
 
 	@Override

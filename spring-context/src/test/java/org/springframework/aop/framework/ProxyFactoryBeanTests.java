@@ -210,15 +210,15 @@ class ProxyFactoryBeanTests {
 	@Test
 	void testSingletonInstancesAreEqual() {
 		ITestBean test1 = (ITestBean) factory.getBean("test1");
-		ITestBean test1_1 = (ITestBean) factory.getBean("test1");
+		ITestBean test11 = (ITestBean) factory.getBean("test1");
 		//assertTrue("Singleton instances ==", test1 == test1_1);
-		assertThat(test1_1).as("Singleton instances ==").isEqualTo(test1);
+		assertThat(test11).as("Singleton instances ==").isEqualTo(test1);
 		test1.setAge(25);
-		assertThat(test1_1.getAge()).isEqualTo(test1.getAge());
+		assertThat(test11.getAge()).isEqualTo(test1.getAge());
 		test1.setAge(250);
-		assertThat(test1_1.getAge()).isEqualTo(test1.getAge());
+		assertThat(test11.getAge()).isEqualTo(test1.getAge());
 		Advised pc1 = (Advised) test1;
-		Advised pc2 = (Advised) test1_1;
+		Advised pc2 = (Advised) test11;
 		assertThat(pc2.getAdvisors()).isEqualTo(pc1.getAdvisors());
 		int oldLength = pc1.getAdvisors().length;
 		NopInterceptor di = new NopInterceptor();
@@ -227,7 +227,7 @@ class ProxyFactoryBeanTests {
 		assertThat(pc2.getAdvisors().length).as("Now have one more advisor").isEqualTo((oldLength + 1));
 		assertThat(di.getCount()).isEqualTo(0);
 		test1.setAge(5);
-		assertThat(test1.getAge()).isEqualTo(test1_1.getAge());
+		assertThat(test1.getAge()).isEqualTo(test11.getAge());
 		assertThat(di.getCount()).isEqualTo(3);
 	}
 
@@ -235,9 +235,9 @@ class ProxyFactoryBeanTests {
 	void testPrototypeInstancesAreNotEqual() {
 		assertThat(factory.getType("prototype")).isAssignableTo(ITestBean.class);
 		ITestBean test2 = (ITestBean) factory.getBean("prototype");
-		ITestBean test2_1 = (ITestBean) factory.getBean("prototype");
-		assertThat(test2).as("Prototype instances !=").isNotSameAs(test2_1);
-		assertThat(test2).as("Prototype instances equal").isEqualTo(test2_1);
+		ITestBean test21 = (ITestBean) factory.getBean("prototype");
+		assertThat(test2).as("Prototype instances !=").isNotSameAs(test21);
+		assertThat(test2).as("Prototype instances equal").isEqualTo(test21);
 		assertThat(factory.getType("prototype")).isAssignableTo(ITestBean.class);
 	}
 
@@ -248,29 +248,29 @@ class ProxyFactoryBeanTests {
 	 */
 	private Object testPrototypeInstancesAreIndependent(String beanName) {
 		// Initial count value set in bean factory XML
-		int INITIAL_COUNT = 10;
+		int initialCount = 10;
 
 		DefaultListableBeanFactory bf = new DefaultListableBeanFactory();
 		new XmlBeanDefinitionReader(bf).loadBeanDefinitions(new ClassPathResource(PROTOTYPE_CONTEXT, CLASS));
 
 		// Check it works without AOP
 		SideEffectBean raw = (SideEffectBean) bf.getBean("prototypeTarget");
-		assertThat(raw.getCount()).isEqualTo(INITIAL_COUNT);
+		assertThat(raw.getCount()).isEqualTo(initialCount);
 		raw.doWork();
-		assertThat(raw.getCount()).isEqualTo(INITIAL_COUNT+1);
+		assertThat(raw.getCount()).isEqualTo(initialCount+1);
 		raw = (SideEffectBean) bf.getBean("prototypeTarget");
-		assertThat(raw.getCount()).isEqualTo(INITIAL_COUNT);
+		assertThat(raw.getCount()).isEqualTo(initialCount);
 
 		// Now try with advised instances
 		SideEffectBean prototype2FirstInstance = (SideEffectBean) bf.getBean(beanName);
-		assertThat(prototype2FirstInstance.getCount()).isEqualTo(INITIAL_COUNT);
+		assertThat(prototype2FirstInstance.getCount()).isEqualTo(initialCount);
 		prototype2FirstInstance.doWork();
-		assertThat(prototype2FirstInstance.getCount()).isEqualTo(INITIAL_COUNT + 1);
+		assertThat(prototype2FirstInstance.getCount()).isEqualTo(initialCount + 1);
 
 		SideEffectBean prototype2SecondInstance = (SideEffectBean) bf.getBean(beanName);
 		assertThat(prototype2FirstInstance).as("Prototypes are not ==").isNotSameAs(prototype2SecondInstance);
-		assertThat(prototype2SecondInstance.getCount()).isEqualTo(INITIAL_COUNT);
-		assertThat(prototype2FirstInstance.getCount()).isEqualTo(INITIAL_COUNT + 1);
+		assertThat(prototype2SecondInstance.getCount()).isEqualTo(initialCount);
+		assertThat(prototype2FirstInstance.getCount()).isEqualTo(initialCount + 1);
 
 		return prototype2FirstInstance;
 	}

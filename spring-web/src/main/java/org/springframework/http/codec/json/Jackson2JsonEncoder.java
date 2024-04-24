@@ -82,10 +82,10 @@ public class Jackson2JsonEncoder extends AbstractJackson2Encoder {
 	protected ObjectWriter customizeWriter(ObjectWriter writer, @Nullable MimeType mimeType,
 			ResolvableType elementType, @Nullable Map<String, Object> hints) {
 
-		return (this.ssePrettyPrinter != null &&
+		return this.ssePrettyPrinter != null &&
 				MediaType.TEXT_EVENT_STREAM.isCompatibleWith(mimeType) &&
 				writer.getConfig().isEnabled(SerializationFeature.INDENT_OUTPUT) ?
-				writer.with(this.ssePrettyPrinter) : writer);
+				writer.with(this.ssePrettyPrinter) : writer;
 	}
 
 }

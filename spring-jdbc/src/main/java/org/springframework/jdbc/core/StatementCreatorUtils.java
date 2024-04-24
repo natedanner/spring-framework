@@ -469,8 +469,8 @@ public abstract class StatementCreatorUtils {
 	 */
 	private static boolean isStringValue(Class<?> inValueType) {
 		// Consider any CharSequence (including StringBuffer and StringBuilder) as a String.
-		return (CharSequence.class.isAssignableFrom(inValueType) ||
-				StringWriter.class.isAssignableFrom(inValueType));
+		return CharSequence.class.isAssignableFrom(inValueType) ||
+				StringWriter.class.isAssignableFrom(inValueType);
 	}
 
 	/**
@@ -478,10 +478,10 @@ public abstract class StatementCreatorUtils {
 	 * (but not one of the JDBC-specific subclasses).
 	 */
 	private static boolean isDateValue(Class<?> inValueType) {
-		return (java.util.Date.class.isAssignableFrom(inValueType) &&
+		return java.util.Date.class.isAssignableFrom(inValueType) &&
 				!(java.sql.Date.class.isAssignableFrom(inValueType) ||
 						java.sql.Time.class.isAssignableFrom(inValueType) ||
-						java.sql.Timestamp.class.isAssignableFrom(inValueType)));
+						java.sql.Timestamp.class.isAssignableFrom(inValueType));
 	}
 
 	/**

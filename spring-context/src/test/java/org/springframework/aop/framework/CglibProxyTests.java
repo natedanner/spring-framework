@@ -499,7 +499,7 @@ class CglibProxyTests extends AbstractAopProxyTests {
 
 	public static class NoArgCtorTestBean {
 
-		private boolean called = false;
+		private boolean called;
 
 		public NoArgCtorTestBean(String x, int y) {
 			called = true;

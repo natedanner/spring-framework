@@ -128,8 +128,8 @@ public class ShadowingClassLoader extends DecoratingClassLoader {
 	 * @return whether the specified class should be shadowed
 	 */
 	private boolean shouldShadow(String className) {
-		return (!className.equals(getClass().getName()) && !className.endsWith("ShadowingClassLoader") &&
-				isEligibleForShadowing(className));
+		return !className.equals(getClass().getName()) && !className.endsWith("ShadowingClassLoader") &&
+				isEligibleForShadowing(className);
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class ShadowingClassLoader extends DecoratingClassLoader {
 		try {
 			for (ClassFileTransformer transformer : this.classFileTransformers) {
 				byte[] transformed = transformer.transform(this, internalName, null, null, bytes);
-				bytes = (transformed != null ? transformed : bytes);
+				bytes = transformed != null ? transformed : bytes;
 			}
 			return bytes;
 		}

@@ -182,7 +182,7 @@ public class AsyncAnnotationAdvisor extends AbstractPointcutAdvisor implements B
 			}
 			result = result.union(mpc);
 		}
-		return (result != null ? result : Pointcut.TRUE);
+		return result != null ? result : Pointcut.TRUE;
 	}
 
 }

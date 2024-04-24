@@ -51,13 +51,13 @@ public class ContextAnnotationAutowireCandidateResolver extends QualifierAnnotat
 	@Override
 	@Nullable
 	public Object getLazyResolutionProxyIfNecessary(DependencyDescriptor descriptor, @Nullable String beanName) {
-		return (isLazy(descriptor) ? buildLazyResolutionProxy(descriptor, beanName) : null);
+		return isLazy(descriptor) ? buildLazyResolutionProxy(descriptor, beanName) : null;
 	}
 
 	@Override
 	@Nullable
 	public Class<?> getLazyResolutionProxyClass(DependencyDescriptor descriptor, @Nullable String beanName) {
-		return (isLazy(descriptor) ? (Class<?>) buildLazyResolutionProxy(descriptor, beanName, true) : null);
+		return isLazy(descriptor) ? (Class<?>) buildLazyResolutionProxy(descriptor, beanName, true) : null;
 	}
 
 	protected boolean isLazy(DependencyDescriptor descriptor) {
@@ -99,7 +99,7 @@ public class ContextAnnotationAutowireCandidateResolver extends QualifierAnnotat
 			}
 			@Override
 			public Object getTarget() {
-				Set<String> autowiredBeanNames = (beanName != null ? new LinkedHashSet<>(1) : null);
+				Set<String> autowiredBeanNames = beanName != null ? new LinkedHashSet<>(1) : null;
 				Object target = dlbf.doResolveDependency(descriptor, beanName, autowiredBeanNames, null);
 				if (target == null) {
 					Class<?> type = getTargetClass();
@@ -133,7 +133,7 @@ public class ContextAnnotationAutowireCandidateResolver extends QualifierAnnotat
 			pf.addInterface(dependencyType);
 		}
 		ClassLoader classLoader = dlbf.getBeanClassLoader();
-		return (classOnly ? pf.getProxyClass(classLoader) : pf.getProxy(classLoader));
+		return classOnly ? pf.getProxyClass(classLoader) : pf.getProxy(classLoader);
 	}
 
 }

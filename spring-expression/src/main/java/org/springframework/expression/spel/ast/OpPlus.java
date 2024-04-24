@@ -137,14 +137,14 @@ public class OpPlus extends Operator {
 
 		if (leftOperand instanceof String leftString) {
 			checkStringLength(leftString);
-			String rightString = (rightOperand == null ? "null" : convertTypedValueToString(operandTwoValue, state));
+			String rightString = rightOperand == null ? "null" : convertTypedValueToString(operandTwoValue, state);
 			checkStringLength(rightString);
 			return concatenate(leftString, rightString);
 		}
 
 		if (rightOperand instanceof String rightString) {
 			checkStringLength(rightString);
-			String leftString = (leftOperand == null ? "null" : convertTypedValueToString(operandOneValue, state));
+			String leftString = leftOperand == null ? "null" : convertTypedValueToString(operandOneValue, state);
 			checkStringLength(leftString);
 			return concatenate(leftString, rightString);
 		}
@@ -208,7 +208,7 @@ public class OpPlus extends Operator {
 				return false;
 			}
 		}
-		return (this.exitTypeDescriptor != null);
+		return this.exitTypeDescriptor != null;
 	}
 
 	/**

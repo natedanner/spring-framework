@@ -57,7 +57,7 @@ public class AnnotationProcessorBenchmark {
 			this.context = new GenericApplicationContext();
 			AnnotationConfigUtils.registerAnnotationConfigProcessors(this.context);
 			this.context.refresh();
-			if (this.testBeanClass.equals("ResourceAnnotatedTestBean")) {
+			if ("ResourceAnnotatedTestBean".equals(this.testBeanClass)) {
 				rbd = new RootBeanDefinition(ResourceAnnotatedTestBean.class);
 			}
 			else {

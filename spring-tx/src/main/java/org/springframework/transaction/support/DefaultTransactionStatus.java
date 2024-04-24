@@ -112,7 +112,7 @@ public class DefaultTransactionStatus extends AbstractTransactionStatus {
 
 	@Override
 	public String getTransactionName() {
-		return (this.transactionName != null ? this.transactionName : "");
+		return this.transactionName != null ? this.transactionName : "";
 	}
 
 	/**
@@ -126,12 +126,12 @@ public class DefaultTransactionStatus extends AbstractTransactionStatus {
 
 	@Override
 	public boolean hasTransaction() {
-		return (this.transaction != null);
+		return this.transaction != null;
 	}
 
 	@Override
 	public boolean isNewTransaction() {
-		return (hasTransaction() && this.newTransaction);
+		return hasTransaction() && this.newTransaction;
 	}
 
 	/**
@@ -183,8 +183,8 @@ public class DefaultTransactionStatus extends AbstractTransactionStatus {
 	 */
 	@Override
 	public boolean isGlobalRollbackOnly() {
-		return (this.transaction instanceof SmartTransactionObject smartTransactionObject &&
-				smartTransactionObject.isRollbackOnly());
+		return this.transaction instanceof SmartTransactionObject smartTransactionObject &&
+				smartTransactionObject.isRollbackOnly();
 	}
 
 	/**
@@ -210,7 +210,7 @@ public class DefaultTransactionStatus extends AbstractTransactionStatus {
 	 * @see #getSavepointManager()
 	 */
 	public boolean isTransactionSavepointManager() {
-		return (this.transaction instanceof SavepointManager);
+		return this.transaction instanceof SavepointManager;
 	}
 
 	/**

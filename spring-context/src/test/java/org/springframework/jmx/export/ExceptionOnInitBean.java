@@ -21,7 +21,7 @@ package org.springframework.jmx.export;
  */
 public class ExceptionOnInitBean {
 
-	private boolean exceptOnInit = false;
+	private boolean exceptOnInit;
 
 	private String name;
 

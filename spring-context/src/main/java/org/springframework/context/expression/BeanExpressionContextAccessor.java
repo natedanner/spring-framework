@@ -36,7 +36,7 @@ public class BeanExpressionContextAccessor implements PropertyAccessor {
 
 	@Override
 	public boolean canRead(EvaluationContext context, @Nullable Object target, String name) throws AccessException {
-		return (target instanceof BeanExpressionContext bec && bec.containsObject(name));
+		return target instanceof BeanExpressionContext bec && bec.containsObject(name);
 	}
 
 	@Override

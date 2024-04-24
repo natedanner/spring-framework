@@ -134,7 +134,7 @@ public interface PathContainer {
 	 * Options to customize parsing based on the type of input path.
 	 * @since 5.2
 	 */
-	class Options {
+	final class Options {
 
 		/**
 		 * Options for HTTP URL paths.

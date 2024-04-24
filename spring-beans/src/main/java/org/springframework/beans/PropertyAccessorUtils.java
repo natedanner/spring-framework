@@ -34,9 +34,9 @@ public abstract class PropertyAccessorUtils {
 	 * @return the actual property name, without any key elements
 	 */
 	public static String getPropertyName(String propertyPath) {
-		int separatorIndex = (propertyPath.endsWith(PropertyAccessor.PROPERTY_KEY_SUFFIX) ?
-				propertyPath.indexOf(PropertyAccessor.PROPERTY_KEY_PREFIX_CHAR) : -1);
-		return (separatorIndex != -1 ? propertyPath.substring(0, separatorIndex) : propertyPath);
+		int separatorIndex = propertyPath.endsWith(PropertyAccessor.PROPERTY_KEY_SUFFIX) ?
+				propertyPath.indexOf(PropertyAccessor.PROPERTY_KEY_PREFIX_CHAR) : -1;
+		return separatorIndex != -1 ? propertyPath.substring(0, separatorIndex) : propertyPath;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public abstract class PropertyAccessorUtils {
 	private static int getNestedPropertySeparatorIndex(String propertyPath, boolean last) {
 		boolean inKey = false;
 		int length = propertyPath.length();
-		int i = (last ? length - 1 : 0);
+		int i = last ? length - 1 : 0;
 		while (last ? i >= 0 : i < length) {
 			switch (propertyPath.charAt(i)) {
 				case PropertyAccessor.PROPERTY_KEY_PREFIX_CHAR, PropertyAccessor.PROPERTY_KEY_SUFFIX_CHAR -> {
@@ -127,8 +127,8 @@ public abstract class PropertyAccessorUtils {
 		if (registeredPath.charAt(propertyPath.length()) != PropertyAccessor.PROPERTY_KEY_PREFIX_CHAR) {
 			return false;
 		}
-		return (registeredPath.indexOf(PropertyAccessor.PROPERTY_KEY_SUFFIX_CHAR, propertyPath.length() + 1) ==
-				registeredPath.length() - 1);
+		return registeredPath.indexOf(PropertyAccessor.PROPERTY_KEY_SUFFIX_CHAR, propertyPath.length() + 1) ==
+				registeredPath.length() - 1;
 	}
 
 	/**

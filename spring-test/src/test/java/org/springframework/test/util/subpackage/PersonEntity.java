@@ -33,7 +33,7 @@ public class PersonEntity extends PersistentEntity implements Person {
 
 	String eyeColor;
 
-	boolean likesPets = false;
+	boolean likesPets;
 
 	private Number favoriteNumber;
 

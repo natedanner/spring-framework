@@ -58,7 +58,7 @@ final class SimpleClientHttpResponse implements ClientHttpResponse {
 	@Override
 	public String getStatusText() throws IOException {
 		String result = this.connection.getResponseMessage();
-		return (result != null) ? result : "";
+		return result != null ? result : "";
 	}
 
 	@Override
@@ -86,7 +86,7 @@ final class SimpleClientHttpResponse implements ClientHttpResponse {
 	@Override
 	public InputStream getBody() throws IOException {
 		InputStream errorStream = this.connection.getErrorStream();
-		this.responseStream = (errorStream != null ? errorStream : this.connection.getInputStream());
+		this.responseStream = errorStream != null ? errorStream : this.connection.getInputStream();
 		return this.responseStream;
 	}
 

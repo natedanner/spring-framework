@@ -73,7 +73,7 @@ public class ContextCacheTestUtils {
 	public static void assertContextCacheStatistics(ContextCache contextCache, String usageScenario,
 			int expectedSize, int expectedHitCount, int expectedMissCount) {
 
-		String context = (StringUtils.hasText(usageScenario) ? " (" + usageScenario + ")" : "");
+		String context = StringUtils.hasText(usageScenario) ? " (" + usageScenario + ")" : "";
 
 		assertSoftly(softly -> {
 			softly.assertThat(contextCache.size()).as("contexts in cache" + context).isEqualTo(expectedSize);

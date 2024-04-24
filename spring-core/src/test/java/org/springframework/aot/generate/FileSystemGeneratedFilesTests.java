@@ -81,7 +81,7 @@ class FileSystemGeneratedFilesTests {
 	@Test
 	void createWhenRootsResultsInNullThrowsException() {
 		assertThatIllegalArgumentException()
-				.isThrownBy(() -> new FileSystemGeneratedFiles(kind -> (kind != Kind.CLASS) ?
+				.isThrownBy(() -> new FileSystemGeneratedFiles(kind -> kind != Kind.CLASS ?
 								this.root.resolve(kind.toString()) : null))
 				.withMessage("'roots' must return a value for all file kinds");
 	}

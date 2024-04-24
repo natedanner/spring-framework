@@ -35,7 +35,7 @@ import org.springframework.util.StringUtils;
  */
 public class PathPatternParser {
 
-	private boolean matchOptionalTrailingSeparator = false;
+	private boolean matchOptionalTrailingSeparator;
 
 	private boolean caseSensitive = true;
 
@@ -112,7 +112,7 @@ public class PathPatternParser {
 	 * @since 5.2.25
 	 */
 	public String initFullPathPattern(String pattern) {
-		return (StringUtils.hasLength(pattern) && !pattern.startsWith("/") ? "/" + pattern : pattern);
+		return StringUtils.hasLength(pattern) && !pattern.startsWith("/") ? "/" + pattern : pattern;
 	}
 
 	/**

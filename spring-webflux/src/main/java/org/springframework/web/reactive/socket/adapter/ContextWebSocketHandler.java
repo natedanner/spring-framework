@@ -59,7 +59,7 @@ public final class ContextWebSocketHandler implements WebSocketHandler {
 	 * same handler instance when the context is empty.
 	 */
 	public static WebSocketHandler decorate(WebSocketHandler handler, ContextView contextView) {
-		return (!contextView.isEmpty() ? new ContextWebSocketHandler(handler, contextView) : handler);
+		return contextView.isEmpty() ? handler : new ContextWebSocketHandler(handler, contextView);
 	}
 
 }

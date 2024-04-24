@@ -70,11 +70,11 @@ import static org.springframework.web.testfixture.http.server.reactive.MockServe
  */
 class MessageReaderArgumentResolverTests {
 
-	private AbstractMessageReaderArgumentResolver resolver = resolver(new Jackson2JsonDecoder());
+	private final AbstractMessageReaderArgumentResolver resolver = resolver(new Jackson2JsonDecoder());
 
 	private BindingContext bindingContext;
 
-	private ResolvableMethod testMethod = ResolvableMethod.on(getClass()).named("handle").build();
+	private final ResolvableMethod testMethod = ResolvableMethod.on(getClass()).named("handle").build();
 
 
 	@BeforeEach

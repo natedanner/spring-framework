@@ -159,7 +159,7 @@ class ReschedulingRunnable extends DelegatingErrorHandlingRunnable implements Sc
 			return 0;
 		}
 		long diff = getDelay(TimeUnit.NANOSECONDS) - other.getDelay(TimeUnit.NANOSECONDS);
-		return (diff == 0 ? 0 : (diff < 0 ? -1 : 1));
+		return diff == 0 ? 0 : (diff < 0 ? -1 : 1);
 	}
 
 }

@@ -266,8 +266,8 @@ public abstract class ConnectionFactoryUtils {
 	 * @see org.springframework.jdbc.support.SQLStateSQLExceptionTranslator#indicatesDuplicateKey
 	 */
 	static boolean indicatesDuplicateKey(@Nullable String sqlState, int errorCode) {
-		return ("23505".equals(sqlState) ||
-				("23000".equals(sqlState) && DUPLICATE_KEY_ERROR_CODES.contains(errorCode)));
+		return "23505".equals(sqlState) ||
+				("23000".equals(sqlState) && DUPLICATE_KEY_ERROR_CODES.contains(errorCode));
 	}
 
 	/**
@@ -300,8 +300,8 @@ public abstract class ConnectionFactoryUtils {
 		Connection heldCon = conHolder.getConnection();
 		// Explicitly check for identity too: for Connection handles that do not implement
 		// "equals" properly).
-		return (heldCon == passedInCon || heldCon.equals(passedInCon) ||
-				getTargetConnection(heldCon).equals(passedInCon));
+		return heldCon == passedInCon || heldCon.equals(passedInCon) ||
+				getTargetConnection(heldCon).equals(passedInCon);
 	}
 
 	/**

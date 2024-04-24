@@ -75,7 +75,7 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 	public ContentCachingRequestWrapper(HttpServletRequest request) {
 		super(request);
 		int contentLength = request.getContentLength();
-		this.cachedContent = (contentLength > 0) ? new FastByteArrayOutputStream(contentLength) : new FastByteArrayOutputStream();
+		this.cachedContent = contentLength > 0 ? new FastByteArrayOutputStream(contentLength) : new FastByteArrayOutputStream();
 		this.contentCacheLimit = null;
 	}
 
@@ -89,7 +89,7 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 	public ContentCachingRequestWrapper(HttpServletRequest request, int contentCacheLimit) {
 		super(request);
 		int contentLength = request.getContentLength();
-		this.cachedContent = (contentLength > 0) ? new FastByteArrayOutputStream(contentLength) : new FastByteArrayOutputStream();
+		this.cachedContent = contentLength > 0 ? new FastByteArrayOutputStream(contentLength) : new FastByteArrayOutputStream();
 		this.contentCacheLimit = contentCacheLimit;
 	}
 
@@ -105,7 +105,7 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 	@Override
 	public String getCharacterEncoding() {
 		String enc = super.getCharacterEncoding();
-		return (enc != null ? enc : WebUtils.DEFAULT_CHARACTER_ENCODING);
+		return enc != null ? enc : WebUtils.DEFAULT_CHARACTER_ENCODING;
 	}
 
 	@Override
@@ -151,8 +151,8 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 
 	private boolean isFormPost() {
 		String contentType = getContentType();
-		return (contentType != null && contentType.contains(MediaType.APPLICATION_FORM_URLENCODED_VALUE) &&
-				HttpMethod.POST.matches(getMethod()));
+		return contentType != null && contentType.contains(MediaType.APPLICATION_FORM_URLENCODED_VALUE) &&
+				HttpMethod.POST.matches(getMethod());
 	}
 
 	private void writeRequestParametersToCachedContent() {
@@ -230,7 +230,7 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 
 		private final ServletInputStream is;
 
-		private boolean overflow = false;
+		private boolean overflow;
 
 		public ContentCachingInputStream(ServletInputStream is) {
 			this.is = is;

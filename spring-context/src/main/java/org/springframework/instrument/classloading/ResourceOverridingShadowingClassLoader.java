@@ -97,7 +97,7 @@ public class ResourceOverridingShadowingClassLoader extends ShadowingClassLoader
 	public URL getResource(String requestedPath) {
 		if (this.overrides.containsKey(requestedPath)) {
 			String overriddenPath = this.overrides.get(requestedPath);
-			return (overriddenPath != null ? super.getResource(overriddenPath) : null);
+			return overriddenPath != null ? super.getResource(overriddenPath) : null;
 		}
 		else {
 			return super.getResource(requestedPath);
@@ -109,7 +109,7 @@ public class ResourceOverridingShadowingClassLoader extends ShadowingClassLoader
 	public InputStream getResourceAsStream(String requestedPath) {
 		if (this.overrides.containsKey(requestedPath)) {
 			String overriddenPath = this.overrides.get(requestedPath);
-			return (overriddenPath != null ? super.getResourceAsStream(overriddenPath) : null);
+			return overriddenPath != null ? super.getResourceAsStream(overriddenPath) : null;
 		}
 		else {
 			return super.getResourceAsStream(requestedPath);
@@ -120,8 +120,8 @@ public class ResourceOverridingShadowingClassLoader extends ShadowingClassLoader
 	public Enumeration<URL> getResources(String requestedPath) throws IOException {
 		if (this.overrides.containsKey(requestedPath)) {
 			String overriddenLocation = this.overrides.get(requestedPath);
-			return (overriddenLocation != null ?
-					super.getResources(overriddenLocation) : EMPTY_URL_ENUMERATION);
+			return overriddenLocation != null ?
+					super.getResources(overriddenLocation) : EMPTY_URL_ENUMERATION;
 		}
 		else {
 			return super.getResources(requestedPath);

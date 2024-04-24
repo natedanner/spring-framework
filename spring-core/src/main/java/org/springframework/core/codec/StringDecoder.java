@@ -49,7 +49,7 @@ public final class StringDecoder extends AbstractCharSequenceDecoder<String> {
 
 	@Override
 	public boolean canDecode(ResolvableType elementType, @Nullable MimeType mimeType) {
-		return (elementType.resolve() == String.class && super.canDecode(elementType, mimeType));
+		return elementType.resolve() == String.class && super.canDecode(elementType, mimeType);
 	}
 
 

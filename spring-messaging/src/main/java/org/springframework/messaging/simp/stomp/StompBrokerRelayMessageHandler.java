@@ -579,7 +579,7 @@ public class StompBrokerRelayMessageHandler extends AbstractBrokerMessageHandler
 			if (logger.isDebugEnabled()) {
 				logger.debug(stompHeaderAccessor.getShortLogMessage(EMPTY_PAYLOAD));
 			}
-			stompHeaderAccessor = (stompHeaderAccessor.isMutable() ? stompHeaderAccessor : StompHeaderAccessor.wrap(message));
+			stompHeaderAccessor = stompHeaderAccessor.isMutable() ? stompHeaderAccessor : StompHeaderAccessor.wrap(message);
 			stompHeaderAccessor.setLogin(this.clientLogin);
 			stompHeaderAccessor.setPasscode(this.clientPasscode);
 			if (getVirtualHost() != null) {
@@ -814,7 +814,7 @@ public class StompBrokerRelayMessageHandler extends AbstractBrokerMessageHandler
 		 * @since 5.3
 		 */
 		protected boolean shouldSendHeartbeatForIgnoredMessage() {
-			return (this.clientSendMessageCount != null && this.clientSendMessageCount.get() == 0);
+			return this.clientSendMessageCount != null && this.clientSendMessageCount.get() == 0;
 		}
 
 		/**
@@ -906,7 +906,7 @@ public class StompBrokerRelayMessageHandler extends AbstractBrokerMessageHandler
 				this.clientSendMessageCount.incrementAndGet();
 			}
 
-			final Message<?> messageToSend = (accessor.isMutable() && accessor.isModified()) ?
+			final Message<?> messageToSend = accessor.isMutable() && accessor.isModified() ?
 					MessageBuilder.createMessage(message.getPayload(), accessor.getMessageHeaders()) : message;
 
 			StompCommand command = accessor.getCommand();
@@ -1200,10 +1200,10 @@ public class StompBrokerRelayMessageHandler extends AbstractBrokerMessageHandler
 
 		@Override
 		public String toString() {
-			return (connectionHandlers.size() + " sessions, " + getTcpClientInfo() +
+			return connectionHandlers.size() + " sessions, " + getTcpClientInfo() +
 					(isBrokerAvailable() ? " (available)" : " (not available)") +
 					", processed CONNECT(" + this.connect.get() + ")-CONNECTED(" +
-					this.connected.get() + ")-DISCONNECT(" + this.disconnect.get() + ")");
+					this.connected.get() + ")-DISCONNECT(" + this.disconnect.get() + ")";
 		}
 	}
 

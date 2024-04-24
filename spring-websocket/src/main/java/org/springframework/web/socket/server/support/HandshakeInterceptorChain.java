@@ -47,7 +47,7 @@ public class HandshakeInterceptorChain {
 
 
 	public HandshakeInterceptorChain(@Nullable List<HandshakeInterceptor> interceptors, WebSocketHandler wsHandler) {
-		this.interceptors = (interceptors != null ? interceptors : Collections.emptyList());
+		this.interceptors = interceptors != null ? interceptors : Collections.emptyList();
 		this.wsHandler = wsHandler;
 	}
 

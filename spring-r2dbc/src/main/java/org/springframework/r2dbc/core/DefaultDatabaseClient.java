@@ -91,7 +91,7 @@ final class DefaultDatabaseClient implements DatabaseClient {
 		this.bindMarkersFactory = bindMarkersFactory;
 		this.connectionFactory = connectionFactory;
 		this.executeFunction = executeFunction;
-		this.namedParameterExpander = (namedParameters ? new NamedParameterExpander() : null);
+		this.namedParameterExpander = namedParameters ? new NamedParameterExpander() : null;
 	}
 
 
@@ -254,7 +254,7 @@ final class DefaultDatabaseClient implements DatabaseClient {
 			}
 			else if (value instanceof org.springframework.r2dbc.core.Parameter param) {
 				Object paramValue = param.getValue();
-				return (paramValue != null ? Parameters.in(paramValue) : Parameters.in(param.getType()));
+				return paramValue != null ? Parameters.in(paramValue) : Parameters.in(param.getType());
 			}
 			else {
 				return Parameters.in(value);

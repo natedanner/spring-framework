@@ -45,7 +45,7 @@ public enum ExecutableMode {
 	 * @return {@code true} if this mode includes the other mode
 	 */
 	boolean includes(@Nullable ExecutableMode other) {
-		return (other == null || this.ordinal() >= other.ordinal());
+		return other == null || this.ordinal() >= other.ordinal();
 	}
 
 }

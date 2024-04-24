@@ -85,8 +85,8 @@ class DefaultTransportRequest implements TransportRequest {
 		Assert.notNull(serverTransportType, "TransportType is required");
 		Assert.notNull(codec, "SockJsMessageCodec is required");
 		this.sockJsUrlInfo = sockJsUrlInfo;
-		this.handshakeHeaders = (handshakeHeaders != null ? handshakeHeaders : new HttpHeaders());
-		this.httpRequestHeaders = (httpRequestHeaders != null ? httpRequestHeaders : new HttpHeaders());
+		this.handshakeHeaders = handshakeHeaders != null ? handshakeHeaders : new HttpHeaders();
+		this.httpRequestHeaders = httpRequestHeaders != null ? httpRequestHeaders : new HttpHeaders();
 		this.transport = transport;
 		this.serverTransportType = serverTransportType;
 		this.codec = codec;

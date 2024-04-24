@@ -99,9 +99,9 @@ class TestTransport implements Transport {
 
 		@Override
 		public List<TransportType> getTransportTypes() {
-			return (isXhrStreamingDisabled() ?
+			return isXhrStreamingDisabled() ?
 					Collections.singletonList(TransportType.XHR) :
-					Arrays.asList(TransportType.XHR_STREAMING, TransportType.XHR));
+					Arrays.asList(TransportType.XHR_STREAMING, TransportType.XHR);
 		}
 
 		public void setStreamingDisabled(boolean streamingDisabled) {

@@ -60,7 +60,7 @@ public class RouterFunctionMapping extends AbstractHandlerMapping implements Ini
 
 	private List<HttpMessageConverter<?>> messageConverters = Collections.emptyList();
 
-	private boolean detectHandlerFunctionsInAncestorContexts = false;
+	private boolean detectHandlerFunctionsInAncestorContexts;
 
 
 	/**

@@ -49,12 +49,12 @@ import static org.springframework.web.testfixture.method.MvcAnnotationPredicates
  */
 class MatrixVariablesMethodArgumentResolverTests {
 
-	private MatrixVariableMethodArgumentResolver resolver =
+	private final MatrixVariableMethodArgumentResolver resolver =
 			new MatrixVariableMethodArgumentResolver(null, ReactiveAdapterRegistry.getSharedInstance());
 
 	private final MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.get("/"));
 
-	private ResolvableMethod testMethod = ResolvableMethod.on(this.getClass()).named("handle").build();
+	private final ResolvableMethod testMethod = ResolvableMethod.on(this.getClass()).named("handle").build();
 
 
 	@BeforeEach

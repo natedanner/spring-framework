@@ -239,7 +239,7 @@ public class ReactorNetty2TcpClient<P> implements TcpOperations<P> {
 
 	private Publisher<? extends Long> reconnect(Integer attempt, ReconnectStrategy reconnectStrategy) {
 		Long time = reconnectStrategy.getTimeToNextAttempt(attempt);
-		return (time != null ? Mono.delay(Duration.ofMillis(time), this.scheduler) : Mono.empty());
+		return time != null ? Mono.delay(Duration.ofMillis(time), this.scheduler) : Mono.empty();
 	}
 
 	@Override

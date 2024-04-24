@@ -178,11 +178,11 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 	@Nullable
 	private LSResourceResolver schemaResourceResolver;
 
-	private boolean lazyInit = false;
+	private boolean lazyInit;
 
-	private boolean mtomEnabled = false;
+	private boolean mtomEnabled;
 
-	private boolean supportJaxbElementClass = false;
+	private boolean supportJaxbElementClass;
 
 	private boolean checkForXmlRootElement = true;
 
@@ -200,9 +200,9 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 	@Nullable
 	private Schema schema;
 
-	private boolean supportDtd = false;
+	private boolean supportDtd;
 
-	private boolean processExternalEntities = false;
+	private boolean processExternalEntities;
 
 
 	/**
@@ -619,12 +619,12 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 					parameterizedType.getActualTypeArguments().length == 1) {
 				Type typeArgument = parameterizedType.getActualTypeArguments()[0];
 				if (typeArgument instanceof Class<?> classArgument) {
-					return ((classArgument.isArray() && Byte.TYPE == classArgument.componentType()) ||
+					return (classArgument.isArray() && Byte.TYPE == classArgument.componentType()) ||
 							isPrimitiveWrapper(classArgument) || isStandardClass(classArgument) ||
-							supportsInternal(classArgument, false));
+							supportsInternal(classArgument, false);
 				}
 				else if (typeArgument instanceof GenericArrayType arrayType) {
-					return (Byte.TYPE == arrayType.getGenericComponentType());
+					return Byte.TYPE == arrayType.getGenericComponentType();
 				}
 			}
 		}
@@ -659,13 +659,13 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 	 * Compare section 8.5.1 of the JAXB2 spec.
 	 */
 	private boolean isPrimitiveWrapper(Class<?> clazz) {
-		return (Boolean.class == clazz ||
+		return Boolean.class == clazz ||
 				Byte.class == clazz ||
 				Short.class == clazz ||
 				Integer.class == clazz ||
 				Long.class == clazz ||
 				Float.class == clazz ||
-				Double.class == clazz);
+				Double.class == clazz;
 	}
 
 	/**
@@ -673,7 +673,7 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 	 * Compare section 8.5.2 of the JAXB2 spec.
 	 */
 	private boolean isStandardClass(Class<?> clazz) {
-		return (String.class == clazz ||
+		return String.class == clazz ||
 				BigInteger.class.isAssignableFrom(clazz) ||
 				BigDecimal.class.isAssignableFrom(clazz) ||
 				Calendar.class.isAssignableFrom(clazz) ||
@@ -686,7 +686,7 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 				DataHandler.class == clazz ||
 				// Source and subclasses should be supported according to the JAXB2 spec, but aren't in the RI
 				// Source.class.isAssignableFrom(clazz) ||
-				UUID.class == clazz);
+				UUID.class == clazz;
 
 	}
 
@@ -843,16 +843,16 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 	protected Object unmarshalStaxSource(Unmarshaller jaxbUnmarshaller, Source staxSource) throws JAXBException {
 		XMLStreamReader streamReader = StaxUtils.getXMLStreamReader(staxSource);
 		if (streamReader != null) {
-			return (this.mappedClass != null ?
+			return this.mappedClass != null ?
 					jaxbUnmarshaller.unmarshal(streamReader, this.mappedClass).getValue() :
-					jaxbUnmarshaller.unmarshal(streamReader));
+					jaxbUnmarshaller.unmarshal(streamReader);
 		}
 		else {
 			XMLEventReader eventReader = StaxUtils.getXMLEventReader(staxSource);
 			if (eventReader != null) {
-				return (this.mappedClass != null ?
+				return this.mappedClass != null ?
 						jaxbUnmarshaller.unmarshal(eventReader, this.mappedClass).getValue() :
-						jaxbUnmarshaller.unmarshal(eventReader));
+						jaxbUnmarshaller.unmarshal(eventReader);
 			}
 			else {
 				throw new IllegalArgumentException("StaxSource contains neither XMLStreamReader nor XMLEventReader");

@@ -289,7 +289,7 @@ public class ScheduledAnnotationBeanPostProcessor
 					(MethodIntrospector.MetadataLookup<Set<Scheduled>>) method -> {
 						Set<Scheduled> scheduledAnnotations = AnnotatedElementUtils.getMergedRepeatableAnnotations(
 								method, Scheduled.class, Schedules.class);
-						return (!scheduledAnnotations.isEmpty() ? scheduledAnnotations : null);
+						return scheduledAnnotations.isEmpty() ? null : scheduledAnnotations;
 					});
 			if (annotatedMethods.isEmpty()) {
 				this.nonAnnotatedClasses.add(targetClass);
@@ -441,7 +441,7 @@ public class ScheduledAnnotationBeanPostProcessor
 			}
 
 			// At this point we don't need to differentiate between initial delay set or not anymore
-			Duration delayToUse = (initialDelay.isNegative() ? Duration.ZERO : initialDelay);
+			Duration delayToUse = initialDelay.isNegative() ? Duration.ZERO : initialDelay;
 
 			// Check fixed delay
 			Duration fixedDelay = toDuration(scheduled.fixedDelay(), scheduled.timeUnit());
@@ -565,11 +565,11 @@ public class ScheduledAnnotationBeanPostProcessor
 	}
 
 	private static boolean isDurationString(String value) {
-		return (value.length() > 1 && (isP(value.charAt(0)) || isP(value.charAt(1))));
+		return value.length() > 1 && (isP(value.charAt(0)) || isP(value.charAt(1)));
 	}
 
 	private static boolean isP(char ch) {
-		return (ch == 'P' || ch == 'p');
+		return ch == 'P' || ch == 'p';
 	}
 
 
@@ -616,7 +616,7 @@ public class ScheduledAnnotationBeanPostProcessor
 	@Override
 	public boolean requiresDestruction(Object bean) {
 		synchronized (this.scheduledTasks) {
-			return (this.scheduledTasks.containsKey(bean) || this.reactiveSubscriptions.containsKey(bean));
+			return this.scheduledTasks.containsKey(bean) || this.reactiveSubscriptions.containsKey(bean);
 		}
 	}
 

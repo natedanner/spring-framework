@@ -104,8 +104,8 @@ public final class ServerSentEvent<T> {
 
 	@Override
 	public String toString() {
-		return ("ServerSentEvent [id = '" + this.id + "\', event='" + this.event + "\', retry=" +
-				this.retry + ", comment='" + this.comment + "', data=" + this.data + ']');
+		return "ServerSentEvent [id = '" + this.id + "\', event='" + this.event + "\', retry=" +
+				this.retry + ", comment='" + this.comment + "', data=" + this.data + ']';
 	}
 
 

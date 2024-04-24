@@ -92,7 +92,7 @@ final class MethodName {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof MethodName that && this.value.equals(that.value)));
+		return this == other || (other instanceof MethodName that && this.value.equals(that.value));
 	}
 
 	@Override
@@ -102,7 +102,7 @@ final class MethodName {
 
 	@Override
 	public String toString() {
-		return (!StringUtils.hasLength(this.value)) ? "$$aot" : this.value ;
+		return !StringUtils.hasLength(this.value) ? "$$aot" : this.value ;
 	}
 
 
@@ -112,13 +112,13 @@ final class MethodName {
 	}
 
 	private static String clean(@Nullable String part) {
-		char[] chars = (part != null) ? part.toCharArray() : new char[0];
+		char[] chars = part != null ? part.toCharArray() : new char[0];
 		StringBuilder name = new StringBuilder(chars.length);
 		boolean uppercase = false;
 		for (char ch : chars) {
-			char outputChar = (!uppercase ? ch : Character.toUpperCase(ch));
-			name.append((!Character.isLetter(ch)) ? "" : outputChar);
-			uppercase = (ch == '.');
+			char outputChar = uppercase ? Character.toUpperCase(ch) : ch;
+			name.append(!Character.isLetter(ch) ? "" : outputChar);
+			uppercase = ch == '.';
 		}
 		return name.toString();
 	}

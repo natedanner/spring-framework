@@ -180,7 +180,7 @@ public class ResourceUrlProvider implements ApplicationListener<ContextRefreshed
 		String suffix = requestUrl.substring(suffixIndex);
 		String lookupPath = requestUrl.substring(prefixIndex, suffixIndex);
 		String resolvedLookupPath = getForLookupPath(lookupPath);
-		return (resolvedLookupPath != null ? prefix + resolvedLookupPath + suffix : null);
+		return resolvedLookupPath != null ? prefix + resolvedLookupPath + suffix : null;
 	}
 
 	private int getLookupPathIndex(HttpServletRequest request) {

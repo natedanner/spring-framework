@@ -166,9 +166,9 @@ class TopsyTurvyTargetImpl implements TopsyTurvyTarget {
 
 class AspectCollaborator implements TopsyTurvyAspect.Collaborator {
 
-	public boolean afterReturningFired = false;
-	public boolean aroundFired = false;
-	public boolean beforeFired = false;
+	public boolean afterReturningFired;
+	public boolean aroundFired;
+	public boolean beforeFired;
 
 	@Override
 	public void afterReturningAdviceFired() {

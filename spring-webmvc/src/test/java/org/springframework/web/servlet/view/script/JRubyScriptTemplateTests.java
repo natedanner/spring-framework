@@ -42,9 +42,9 @@ import static org.mockito.Mockito.mock;
  */
 class JRubyScriptTemplateTests {
 
-	private WebApplicationContext webAppContext = mock();
+	private final WebApplicationContext webAppContext = mock();
 
-	private ServletContext servletContext = new MockServletContext();
+	private final ServletContext servletContext = new MockServletContext();
 
 
 	@BeforeEach

@@ -42,7 +42,7 @@ public class CookieWebSessionIdResolver implements WebSessionIdResolver {
 	private Duration cookieMaxAge = Duration.ofSeconds(-1);
 
 	@Nullable
-	private Consumer<ResponseCookie.ResponseCookieBuilder> initializer = null;
+	private Consumer<ResponseCookie.ResponseCookieBuilder> initializer;
 
 
 	/**

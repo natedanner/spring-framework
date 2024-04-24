@@ -46,13 +46,13 @@ import static org.mockito.Mockito.verify;
  */
 class TableMetaDataContextTests {
 
-	private DataSource dataSource = mock();
+	private final DataSource dataSource = mock();
 
-	private Connection connection = mock();
+	private final Connection connection = mock();
 
-	private DatabaseMetaData databaseMetaData = mock();
+	private final DatabaseMetaData databaseMetaData = mock();
 
-	private TableMetaDataContext context = new TableMetaDataContext();
+	private final TableMetaDataContext context = new TableMetaDataContext();
 
 
 	@BeforeEach
@@ -64,13 +64,13 @@ class TableMetaDataContextTests {
 
 	@Test
 	void testMatchInParametersAndSqlTypeInfoWrapping() throws Exception {
-		final String TABLE = "customers";
-		final String USER = "me";
+		final String table = "customers";
+		final String user = "me";
 
 		ResultSet metaDataResultSet = mock();
 		given(metaDataResultSet.next()).willReturn(true, false);
-		given(metaDataResultSet.getString("TABLE_SCHEM")).willReturn(USER);
-		given(metaDataResultSet.getString("TABLE_NAME")).willReturn(TABLE);
+		given(metaDataResultSet.getString("TABLE_SCHEM")).willReturn(user);
+		given(metaDataResultSet.getString("TABLE_NAME")).willReturn(table);
 		given(metaDataResultSet.getString("TABLE_TYPE")).willReturn("TABLE");
 
 		ResultSet columnsResultSet = mock();
@@ -85,10 +85,10 @@ class TableMetaDataContextTests {
 
 		given(databaseMetaData.getDatabaseProductName()).willReturn("MyDB");
 		given(databaseMetaData.getDatabaseProductName()).willReturn("1.0");
-		given(databaseMetaData.getUserName()).willReturn(USER);
+		given(databaseMetaData.getUserName()).willReturn(user);
 		given(databaseMetaData.storesLowerCaseIdentifiers()).willReturn(true);
-		given(databaseMetaData.getTables(null, null, TABLE, null)).willReturn(metaDataResultSet);
-		given(databaseMetaData.getColumns(null, USER, TABLE, null)).willReturn(columnsResultSet);
+		given(databaseMetaData.getTables(null, null, table, null)).willReturn(metaDataResultSet);
+		given(databaseMetaData.getColumns(null, user, table, null)).willReturn(columnsResultSet);
 
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("id", 1);
@@ -98,7 +98,7 @@ class TableMetaDataContextTests {
 		map.registerSqlType("customersince", Types.DATE);
 		map.registerSqlType("version", Types.NUMERIC);
 
-		context.setTableName(TABLE);
+		context.setTableName(table);
 		context.processMetaData(dataSource, new ArrayList<>(), new String[] {});
 
 		List<Object> values = context.matchInParameterValuesWithInsertColumns(map);
@@ -120,13 +120,13 @@ class TableMetaDataContextTests {
 
 	@Test
 	void testTableWithSingleColumnGeneratedKey() throws Exception {
-		final String TABLE = "customers";
-		final String USER = "me";
+		final String table = "customers";
+		final String user = "me";
 
 		ResultSet metaDataResultSet = mock();
 		given(metaDataResultSet.next()).willReturn(true, false);
-		given(metaDataResultSet.getString("TABLE_SCHEM")).willReturn(USER);
-		given(metaDataResultSet.getString("TABLE_NAME")).willReturn(TABLE);
+		given(metaDataResultSet.getString("TABLE_SCHEM")).willReturn(user);
+		given(metaDataResultSet.getString("TABLE_NAME")).willReturn(table);
 		given(metaDataResultSet.getString("TABLE_TYPE")).willReturn("TABLE");
 
 		ResultSet columnsResultSet = mock();
@@ -137,14 +137,14 @@ class TableMetaDataContextTests {
 
 		given(databaseMetaData.getDatabaseProductName()).willReturn("MyDB");
 		given(databaseMetaData.getDatabaseProductName()).willReturn("1.0");
-		given(databaseMetaData.getUserName()).willReturn(USER);
+		given(databaseMetaData.getUserName()).willReturn(user);
 		given(databaseMetaData.storesLowerCaseIdentifiers()).willReturn(true);
-		given(databaseMetaData.getTables(null, null, TABLE, null)).willReturn(metaDataResultSet);
-		given(databaseMetaData.getColumns(null, USER, TABLE, null)).willReturn(columnsResultSet);
+		given(databaseMetaData.getTables(null, null, table, null)).willReturn(metaDataResultSet);
+		given(databaseMetaData.getColumns(null, user, table, null)).willReturn(columnsResultSet);
 
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		String[] keyCols = new String[] { "id" };
-		context.setTableName(TABLE);
+		context.setTableName(table);
 		context.processMetaData(dataSource, new ArrayList<>(), keyCols);
 		List<Object> values = context.matchInParameterValuesWithInsertColumns(map);
 		String insertString = context.createInsertString(keyCols);

@@ -111,8 +111,8 @@ public class NameMatchCacheOperationSource implements CacheOperationSource, Seri
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof NameMatchCacheOperationSource otherCos &&
-				ObjectUtils.nullSafeEquals(this.nameMap, otherCos.nameMap)));
+		return this == other || (other instanceof NameMatchCacheOperationSource otherCos &&
+				ObjectUtils.nullSafeEquals(this.nameMap, otherCos.nameMap));
 	}
 
 	@Override

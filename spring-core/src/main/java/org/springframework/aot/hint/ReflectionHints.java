@@ -62,7 +62,7 @@ public class ReflectionHints {
 	@Nullable
 	public TypeHint getTypeHint(TypeReference type) {
 		Builder typeHintBuilder = this.types.get(type);
-		return (typeHintBuilder != null ? typeHintBuilder.build() : null);
+		return typeHintBuilder != null ? typeHintBuilder.build() : null;
 	}
 
 	/**

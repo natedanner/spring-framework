@@ -87,7 +87,7 @@ class ApplicationContextExpressionTests {
 			}
 			@Override
 			public Object resolveContextualObject(String key) {
-				if (key.equals("mySpecialAttr")) {
+				if ("mySpecialAttr".equals(key)) {
 					return "42";
 				}
 				else {

@@ -123,7 +123,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 * Indicates whether the proxy should be frozen. Overridden from super
 	 * to prevent the configuration from becoming frozen too early.
 	 */
-	private boolean freezeProxy = false;
+	private boolean freezeProxy;
 
 	/** Default is no common interceptors. */
 	private String[] interceptorNames = new String[0];
@@ -253,7 +253,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 				this.proxyTypes.put(cacheKey, proxyType);
 			}
 		}
-		return (proxyType != null ? proxyType : beanClass);
+		return proxyType != null ? proxyType : beanClass;
 	}
 
 	@Override
@@ -335,8 +335,8 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 */
 	protected Object getCacheKey(Class<?> beanClass, @Nullable String beanName) {
 		if (StringUtils.hasLength(beanName)) {
-			return (FactoryBean.class.isAssignableFrom(beanClass) ?
-					BeanFactory.FACTORY_BEAN_PREFIX + beanName : beanName);
+			return FactoryBean.class.isAssignableFrom(beanClass) ?
+					BeanFactory.FACTORY_BEAN_PREFIX + beanName : beanName;
 		}
 		else {
 			return beanClass;
@@ -514,7 +514,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		if (classLoader instanceof SmartClassLoader smartClassLoader && classLoader != beanClass.getClassLoader()) {
 			classLoader = smartClassLoader.getOriginalClassLoader();
 		}
-		return (classOnly ? proxyFactory.getProxyClass(classLoader) : proxyFactory.getProxy(classLoader));
+		return classOnly ? proxyFactory.getProxyClass(classLoader) : proxyFactory.getProxy(classLoader);
 	}
 
 	/**
@@ -527,8 +527,8 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 * @see AutoProxyUtils#shouldProxyTargetClass
 	 */
 	protected boolean shouldProxyTargetClass(Class<?> beanClass, @Nullable String beanName) {
-		return (this.beanFactory instanceof ConfigurableListableBeanFactory clbf &&
-				AutoProxyUtils.shouldProxyTargetClass(clbf, beanName));
+		return this.beanFactory instanceof ConfigurableListableBeanFactory clbf &&
+				AutoProxyUtils.shouldProxyTargetClass(clbf, beanName);
 	}
 
 	/**
@@ -574,7 +574,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		}
 		if (logger.isTraceEnabled()) {
 			int nrOfCommonInterceptors = commonInterceptors.length;
-			int nrOfSpecificInterceptors = (specificInterceptors != null ? specificInterceptors.length : 0);
+			int nrOfSpecificInterceptors = specificInterceptors != null ? specificInterceptors.length : 0;
 			logger.trace("Creating implicit proxy for bean '" + beanName + "' with " + nrOfCommonInterceptors +
 					" common interceptors and " + nrOfSpecificInterceptors + " specific interceptors");
 		}
@@ -592,7 +592,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 */
 	private Advisor[] resolveInterceptorNames() {
 		BeanFactory bf = this.beanFactory;
-		ConfigurableBeanFactory cbf = (bf instanceof ConfigurableBeanFactory _cbf ? _cbf : null);
+		ConfigurableBeanFactory cbf = bf instanceof ConfigurableBeanFactory _cbf ? _cbf : null;
 		List<Advisor> advisors = new ArrayList<>();
 		for (String beanName : this.interceptorNames) {
 			if (cbf == null || !cbf.isCurrentlyInCreation(beanName)) {

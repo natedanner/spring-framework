@@ -184,8 +184,8 @@ public class CglibSubclassingInstantiationStrategy extends SimpleInstantiationSt
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (other != null && getClass() == other.getClass() &&
-					this.beanDefinition.equals(((CglibIdentitySupport) other).beanDefinition));
+			return other != null && getClass() == other.getClass() &&
+					this.beanDefinition.equals(((CglibIdentitySupport) other).beanDefinition);
 		}
 
 		@Override
@@ -245,18 +245,18 @@ public class CglibSubclassingInstantiationStrategy extends SimpleInstantiationSt
 			// Cast is safe, as CallbackFilter filters are used selectively.
 			LookupOverride lo = (LookupOverride) getBeanDefinition().getMethodOverrides().getOverride(method);
 			Assert.state(lo != null, "LookupOverride not found");
-			Object[] argsToUse = (args.length > 0 ? args : null);  // if no-arg, don't insist on args at all
+			Object[] argsToUse = args.length > 0 ? args : null;  // if no-arg, don't insist on args at all
 			if (StringUtils.hasText(lo.getBeanName())) {
-				Object bean = (argsToUse != null ? this.owner.getBean(lo.getBeanName(), argsToUse) :
-						this.owner.getBean(lo.getBeanName()));
+				Object bean = argsToUse != null ? this.owner.getBean(lo.getBeanName(), argsToUse) :
+						this.owner.getBean(lo.getBeanName());
 				// Detect package-protected NullBean instance through equals(null) check
-				return (bean.equals(null) ? null : bean);
+				return bean.equals(null) ? null : bean;
 			}
 			else {
 				// Find target bean matching the (potentially generic) method return type
 				ResolvableType genericReturnType = ResolvableType.forMethodReturnType(method);
-				return (argsToUse != null ? this.owner.getBeanProvider(genericReturnType).getObject(argsToUse) :
-						this.owner.getBeanProvider(genericReturnType).getObject());
+				return argsToUse != null ? this.owner.getBeanProvider(genericReturnType).getObject(argsToUse) :
+						this.owner.getBeanProvider(genericReturnType).getObject();
 			}
 		}
 	}

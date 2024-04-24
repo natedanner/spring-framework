@@ -76,7 +76,7 @@ public abstract class ResourceTransformerSupport implements ResourceTransformer 
 		if (resourcePath.startsWith("/")) {
 			// full resource path
 			ResourceUrlProvider urlProvider = getResourceUrlProvider();
-			return (urlProvider != null ? urlProvider.getForUriString(resourcePath, exchange) : Mono.empty());
+			return urlProvider != null ? urlProvider.getForUriString(resourcePath, exchange) : Mono.empty();
 		}
 		else {
 			// try resolving as relative path
@@ -95,7 +95,7 @@ public abstract class ResourceTransformerSupport implements ResourceTransformer 
 	 */
 	protected String toAbsolutePath(String path, ServerWebExchange exchange) {
 		String requestPath = exchange.getRequest().getURI().getPath();
-		String absolutePath = (path.startsWith("/") ? path : StringUtils.applyRelativePath(requestPath, path));
+		String absolutePath = path.startsWith("/") ? path : StringUtils.applyRelativePath(requestPath, path);
 		return StringUtils.cleanPath(absolutePath);
 	}
 

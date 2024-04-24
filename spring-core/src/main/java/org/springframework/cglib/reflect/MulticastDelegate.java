@@ -35,7 +35,7 @@ import org.springframework.cglib.core.Signature;
 import org.springframework.cglib.core.TypeUtils;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class MulticastDelegate implements Cloneable {
+public abstract class MulticastDelegate implements Cloneable {
     protected Object[] targets = {};
 
     protected MulticastDelegate() {
@@ -45,7 +45,7 @@ abstract public class MulticastDelegate implements Cloneable {
         return new ArrayList(Arrays.asList(targets));
     }
 
-    abstract public MulticastDelegate add(Object target);
+    public abstract MulticastDelegate add(Object target);
 
     protected MulticastDelegate addHelper(Object target) {
         MulticastDelegate copy = newInstance();
@@ -68,7 +68,7 @@ abstract public class MulticastDelegate implements Cloneable {
         return this;
     }
 
-    abstract public MulticastDelegate newInstance();
+    public abstract MulticastDelegate newInstance();
 
     public static MulticastDelegate create(Class iface) {
         Generator gen = new Generator();

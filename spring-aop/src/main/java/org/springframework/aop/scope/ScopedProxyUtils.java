@@ -129,7 +129,7 @@ public abstract class ScopedProxyUtils {
 	 * @since 4.1.4
 	 */
 	public static boolean isScopedTarget(@Nullable String beanName) {
-		return (beanName != null && beanName.startsWith(TARGET_NAME_PREFIX));
+		return beanName != null && beanName.startsWith(TARGET_NAME_PREFIX);
 	}
 
 }

@@ -82,14 +82,14 @@ class LiteralPathElement extends PathElement {
 					return true;
 				}
 				else {
-					return (matchingContext.isMatchOptionalTrailingSeparator() &&
+					return matchingContext.isMatchOptionalTrailingSeparator() &&
 							(pathIndex + 1) == matchingContext.pathLength &&
-							matchingContext.isSeparator(pathIndex));
+							matchingContext.isSeparator(pathIndex);
 				}
 			}
 		}
 		else {
-			return (this.next != null && this.next.matches(pathIndex, matchingContext));
+			return this.next != null && this.next.matches(pathIndex, matchingContext);
 		}
 	}
 

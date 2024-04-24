@@ -264,8 +264,7 @@ class TypeConverterDelegate {
 				}
 				if (editor != null) {
 					msg.append(": PropertyEditor [").append(editor.getClass().getName()).append(
-							"] returned inappropriate value of type '").append(
-							ClassUtils.getDescriptiveType(convertedValue)).append('\'');
+							"] returned inappropriate value of type '").append(ClassUtils.getDescriptiveType(convertedValue)).append('\'');
 					throw new IllegalArgumentException(msg.toString());
 				}
 				else {
@@ -495,7 +494,7 @@ class TypeConverterDelegate {
 		}
 
 		boolean originalAllowed = requiredType.isInstance(original);
-		TypeDescriptor elementType = (typeDescriptor != null ? typeDescriptor.getElementTypeDescriptor() : null);
+		TypeDescriptor elementType = typeDescriptor != null ? typeDescriptor.getElementTypeDescriptor() : null;
 		if (elementType == null && originalAllowed &&
 				!this.propertyEditorRegistry.hasCustomEditorForElement(null, propertyName)) {
 			return original;
@@ -547,7 +546,7 @@ class TypeConverterDelegate {
 			}
 			originalAllowed = originalAllowed && (element == convertedElement);
 		}
-		return (originalAllowed ? original : convertedCopy);
+		return originalAllowed ? original : convertedCopy;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -568,8 +567,8 @@ class TypeConverterDelegate {
 		}
 
 		boolean originalAllowed = requiredType.isInstance(original);
-		TypeDescriptor keyType = (typeDescriptor != null ? typeDescriptor.getMapKeyTypeDescriptor() : null);
-		TypeDescriptor valueType = (typeDescriptor != null ? typeDescriptor.getMapValueTypeDescriptor() : null);
+		TypeDescriptor keyType = typeDescriptor != null ? typeDescriptor.getMapKeyTypeDescriptor() : null;
+		TypeDescriptor valueType = typeDescriptor != null ? typeDescriptor.getMapValueTypeDescriptor() : null;
 		if (keyType == null && valueType == null && originalAllowed &&
 				!this.propertyEditorRegistry.hasCustomEditorForElement(null, propertyName)) {
 			return original;
@@ -625,26 +624,26 @@ class TypeConverterDelegate {
 			}
 			originalAllowed = originalAllowed && (key == convertedKey) && (value == convertedValue);
 		}
-		return (originalAllowed ? original : convertedCopy);
+		return originalAllowed ? original : convertedCopy;
 	}
 
 	@Nullable
 	private String buildIndexedPropertyName(@Nullable String propertyName, int index) {
-		return (propertyName != null ?
+		return propertyName != null ?
 				propertyName + PropertyAccessor.PROPERTY_KEY_PREFIX + index + PropertyAccessor.PROPERTY_KEY_SUFFIX :
-				null);
+				null;
 	}
 
 	@Nullable
 	private String buildKeyedPropertyName(@Nullable String propertyName, Object key) {
-		return (propertyName != null ?
+		return propertyName != null ?
 				propertyName + PropertyAccessor.PROPERTY_KEY_PREFIX + key + PropertyAccessor.PROPERTY_KEY_SUFFIX :
-				null);
+				null;
 	}
 
 	private boolean canCreateCopy(Class<?> requiredType) {
-		return (!requiredType.isInterface() && !Modifier.isAbstract(requiredType.getModifiers()) &&
-				Modifier.isPublic(requiredType.getModifiers()) && ClassUtils.hasConstructor(requiredType));
+		return !requiredType.isInterface() && !Modifier.isAbstract(requiredType.getModifiers()) &&
+				Modifier.isPublic(requiredType.getModifiers()) && ClassUtils.hasConstructor(requiredType);
 	}
 
 }

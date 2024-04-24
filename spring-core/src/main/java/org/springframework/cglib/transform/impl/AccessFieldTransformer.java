@@ -24,7 +24,7 @@ import org.springframework.cglib.core.TypeUtils;
 import org.springframework.cglib.transform.ClassEmitterTransformer;
 
 public class AccessFieldTransformer extends ClassEmitterTransformer {
-    private Callback callback;
+	private final Callback callback;
 
     public AccessFieldTransformer(Callback callback) {
         this.callback = callback;

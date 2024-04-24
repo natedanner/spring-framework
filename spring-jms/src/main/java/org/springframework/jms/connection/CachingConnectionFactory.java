@@ -303,7 +303,7 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 
 		private final Map<ConsumerCacheKey, MessageConsumer> cachedConsumers = new HashMap<>();
 
-		private boolean transactionOpen = false;
+		private boolean transactionOpen;
 
 		public CachedSessionInvocationHandler(Session target, Deque<Session> sessionList) {
 			this.target = target;
@@ -314,18 +314,18 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 		@Nullable
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 			String methodName = method.getName();
-			if (methodName.equals("equals")) {
+			if ("equals".equals(methodName)) {
 				// Only consider equal when proxies are identical.
-				return (proxy == args[0]);
+				return proxy == args[0];
 			}
-			else if (methodName.equals("hashCode")) {
+			else if ("hashCode".equals(methodName)) {
 				// Use hashCode of Session proxy.
 				return System.identityHashCode(proxy);
 			}
-			else if (methodName.equals("toString")) {
+			else if ("toString".equals(methodName)) {
 				return "Cached JMS Session: " + this.target;
 			}
-			else if (methodName.equals("close")) {
+			else if ("close".equals(methodName)) {
 				// Handle close method: don't pass the call on.
 				if (active) {
 					synchronized (this.sessionList) {
@@ -346,17 +346,17 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 				physicalClose();
 				return null;
 			}
-			else if (methodName.equals("getTargetSession")) {
+			else if ("getTargetSession".equals(methodName)) {
 				// Handle getTargetSession method: return underlying Session.
 				return this.target;
 			}
-			else if (methodName.equals("commit") || methodName.equals("rollback")) {
+			else if ("commit".equals(methodName) || "rollback".equals(methodName)) {
 				this.transactionOpen = false;
 			}
 			else if (methodName.startsWith("create")) {
 				this.transactionOpen = true;
-				if (isCacheProducers() && (methodName.equals("createProducer") ||
-						methodName.equals("createSender") || methodName.equals("createPublisher"))) {
+				if (isCacheProducers() && ("createProducer".equals(methodName) ||
+						"createSender".equals(methodName) || "createPublisher".equals(methodName))) {
 					// Destination argument being null is ok for a producer
 					Destination dest = (Destination) args[0];
 					if (!(dest instanceof TemporaryQueue || dest instanceof TemporaryTopic)) {
@@ -426,7 +426,7 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 		}
 
 		private MessageProducer getCachedProducer(@Nullable Destination dest) throws JMSException {
-			DestinationCacheKey cacheKey = (dest != null ? new DestinationCacheKey(dest) : null);
+			DestinationCacheKey cacheKey = dest != null ? new DestinationCacheKey(dest) : null;
 			MessageProducer producer = this.cachedProducers.get(cacheKey);
 			if (producer != null) {
 				if (logger.isTraceEnabled()) {
@@ -457,14 +457,14 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 			else {
 				if (dest instanceof Topic topic) {
 					if (noLocal == null) {
-						consumer = (durable ?
+						consumer = durable ?
 								this.target.createSharedDurableConsumer(topic, subscription, selector) :
-								this.target.createSharedConsumer(topic, subscription, selector));
+								this.target.createSharedConsumer(topic, subscription, selector);
 					}
 					else {
-						consumer = (durable ?
+						consumer = durable ?
 								this.target.createDurableSubscriber(topic, subscription, selector, noLocal) :
-								this.target.createConsumer(dest, selector, noLocal));
+								this.target.createConsumer(dest, selector, noLocal);
 					}
 				}
 				else {
@@ -553,16 +553,16 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 		}
 
 		protected boolean destinationEquals(DestinationCacheKey otherKey) {
-			return (this.destination.getClass() == otherKey.destination.getClass() &&
+			return this.destination.getClass() == otherKey.destination.getClass() &&
 					(this.destination.equals(otherKey.destination) ||
-							getDestinationString().equals(otherKey.getDestinationString())));
+							getDestinationString().equals(otherKey.getDestinationString()));
 		}
 
 		@Override
 		public boolean equals(@Nullable Object other) {
 			// Effectively checking object equality as well as toString equality.
 			// On WebSphere MQ, Destination objects do not implement equals...
-			return (this == other || (other instanceof DestinationCacheKey that && destinationEquals(that)));
+			return this == other || (other instanceof DestinationCacheKey that && destinationEquals(that));
 		}
 
 		@Override
@@ -614,12 +614,12 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof ConsumerCacheKey that &&
+			return this == other || (other instanceof ConsumerCacheKey that &&
 					destinationEquals(that) &&
 					ObjectUtils.nullSafeEquals(this.selector, that.selector) &&
 					ObjectUtils.nullSafeEquals(this.noLocal, that.noLocal) &&
 					ObjectUtils.nullSafeEquals(this.subscription, that.subscription) &&
-					this.durable == that.durable));
+					this.durable == that.durable);
 		}
 
 		@Override

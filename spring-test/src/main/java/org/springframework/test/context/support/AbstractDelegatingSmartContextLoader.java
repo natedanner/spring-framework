@@ -301,10 +301,10 @@ public abstract class AbstractDelegatingSmartContextLoader implements AotContext
 
 	private boolean supports(SmartContextLoader loader, MergedContextConfiguration mergedConfig) {
 		if (loader == getAnnotationConfigLoader()) {
-			return (mergedConfig.hasClasses() && !mergedConfig.hasLocations());
+			return mergedConfig.hasClasses() && !mergedConfig.hasLocations();
 		}
 		else {
-			return (mergedConfig.hasLocations() && !mergedConfig.hasClasses());
+			return mergedConfig.hasLocations() && !mergedConfig.hasClasses();
 		}
 	}
 

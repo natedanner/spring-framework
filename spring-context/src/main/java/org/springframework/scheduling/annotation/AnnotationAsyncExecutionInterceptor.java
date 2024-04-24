@@ -87,7 +87,7 @@ public class AnnotationAsyncExecutionInterceptor extends AsyncExecutionIntercept
 		if (async == null) {
 			async = AnnotatedElementUtils.findMergedAnnotation(method.getDeclaringClass(), Async.class);
 		}
-		return (async != null ? async.value() : null);
+		return async != null ? async.value() : null;
 	}
 
 }

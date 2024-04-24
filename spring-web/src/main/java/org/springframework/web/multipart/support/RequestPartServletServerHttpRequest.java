@@ -84,7 +84,7 @@ public class RequestPartServletServerHttpRequest extends ServletServerHttpReques
 	@Override
 	public InputStream getBody() throws IOException {
 		// Prefer Servlet Part resolution to cover file as well as parameter streams
-		boolean servletParts = (this.multipartRequest instanceof StandardMultipartHttpServletRequest);
+		boolean servletParts = this.multipartRequest instanceof StandardMultipartHttpServletRequest;
 		if (servletParts) {
 			Part part = retrieveServletPart();
 			if (part != null) {
@@ -132,7 +132,7 @@ public class RequestPartServletServerHttpRequest extends ServletServerHttpReques
 			}
 		}
 		String encoding = this.multipartRequest.getCharacterEncoding();
-		return (encoding != null ? Charset.forName(encoding) : FORM_CHARSET);
+		return encoding != null ? Charset.forName(encoding) : FORM_CHARSET;
 	}
 
 }

@@ -377,9 +377,9 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 	private boolean indexSupportsIncludeFilter(TypeFilter filter) {
 		if (filter instanceof AnnotationTypeFilter annotationTypeFilter) {
 			Class<? extends Annotation> annotationType = annotationTypeFilter.getAnnotationType();
-			return (AnnotationUtils.isAnnotationDeclaredLocally(Indexed.class, annotationType) ||
+			return AnnotationUtils.isAnnotationDeclaredLocally(Indexed.class, annotationType) ||
 					annotationType.getName().startsWith("jakarta.") ||
-					annotationType.getName().startsWith("javax."));
+					annotationType.getName().startsWith("javax.");
 		}
 		if (filter instanceof AssignableTypeFilter assignableTypeFilter) {
 			Class<?> target = assignableTypeFilter.getTargetType();
@@ -574,8 +574,8 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 	 */
 	protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
 		AnnotationMetadata metadata = beanDefinition.getMetadata();
-		return (metadata.isIndependent() && (metadata.isConcrete() ||
-				(metadata.isAbstract() && metadata.hasAnnotatedMethods(Lookup.class.getName()))));
+		return metadata.isIndependent() && (metadata.isConcrete() ||
+				(metadata.isAbstract() && metadata.hasAnnotatedMethods(Lookup.class.getName())));
 	}
 
 

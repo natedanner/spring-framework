@@ -234,12 +234,12 @@ public class StompHeaderAccessor extends SimpMessageHeaderAccessor {
 	}
 
 	public boolean isHeartbeat() {
-		return (SimpMessageType.HEARTBEAT == getMessageType());
+		return SimpMessageType.HEARTBEAT == getMessageType();
 	}
 
 	public long[] getHeartbeat() {
 		String rawValue = getFirstNativeHeader(STOMP_HEARTBEAT_HEADER);
-		int pos = (rawValue != null ? rawValue.indexOf(',') : -1);
+		int pos = rawValue != null ? rawValue.indexOf(',') : -1;
 		if (pos == -1) {
 			return Arrays.copyOf(DEFAULT_HEARTBEAT, 2);
 		}
@@ -253,7 +253,7 @@ public class StompHeaderAccessor extends SimpMessageHeaderAccessor {
 
 	public Set<String> getAcceptVersion() {
 		String rawValue = getFirstNativeHeader(STOMP_ACCEPT_VERSION_HEADER);
-		return (rawValue != null ? StringUtils.commaDelimitedListToSet(rawValue) : Collections.emptySet());
+		return rawValue != null ? StringUtils.commaDelimitedListToSet(rawValue) : Collections.emptySet();
 	}
 
 	public void setHost(@Nullable String host) {
@@ -302,7 +302,7 @@ public class StompHeaderAccessor extends SimpMessageHeaderAccessor {
 	@Nullable
 	public Integer getContentLength() {
 		String header = getFirstNativeHeader(STOMP_CONTENT_LENGTH_HEADER);
-		return (header != null ? Integer.valueOf(header) : null);
+		return header != null ? Integer.valueOf(header) : null;
 	}
 
 	public void setContentLength(int contentLength) {
@@ -359,7 +359,7 @@ public class StompHeaderAccessor extends SimpMessageHeaderAccessor {
 	@Nullable
 	public String getPasscode() {
 		StompPasscode credentials = (StompPasscode) getHeader(CREDENTIALS_HEADER);
-		return (credentials != null ? credentials.passcode : null);
+		return credentials != null ? credentials.passcode : null;
 	}
 
 	public void setReceiptId(@Nullable String receiptId) {
@@ -479,13 +479,13 @@ public class StompHeaderAccessor extends SimpMessageHeaderAccessor {
 		}
 		byte[] bytes = (byte[]) payload;
 		MimeType mimeType = getContentType();
-		String contentType = (mimeType != null ? " " + mimeType.toString() : "");
+		String contentType = mimeType != null ? " " + mimeType.toString() : "";
 		if (bytes.length == 0 || mimeType == null || !isReadableContentType()) {
 			return contentType;
 		}
 		Charset charset = mimeType.getCharset();
-		charset = (charset != null ? charset : StandardCharsets.UTF_8);
-		return (bytes.length < 80) ?
+		charset = charset != null ? charset : StandardCharsets.UTF_8;
+		return bytes.length < 80 ?
 				contentType + " payload=" + new String(bytes, charset) :
 				contentType + " payload=" + new String(Arrays.copyOf(bytes, 80), charset) + "...(truncated)";
 	}
@@ -536,13 +536,13 @@ public class StompHeaderAccessor extends SimpMessageHeaderAccessor {
 	@Nullable
 	public static String getPasscode(Map<String, Object> headers) {
 		StompPasscode credentials = (StompPasscode) headers.get(CREDENTIALS_HEADER);
-		return (credentials != null ? credentials.passcode : null);
+		return credentials != null ? credentials.passcode : null;
 	}
 
 	@Nullable
 	public static Integer getContentLength(Map<String, List<String>> nativeHeaders) {
 		List<String> values = nativeHeaders.get(STOMP_CONTENT_LENGTH_HEADER);
-		return (!CollectionUtils.isEmpty(values) ? Integer.valueOf(values.get(0)) : null);
+		return CollectionUtils.isEmpty(values) ? null : Integer.valueOf(values.get(0));
 	}
 
 

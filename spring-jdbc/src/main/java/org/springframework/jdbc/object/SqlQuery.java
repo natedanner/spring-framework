@@ -57,7 +57,7 @@ import org.springframework.lang.Nullable;
 public abstract class SqlQuery<T> extends SqlOperation {
 
 	/** The number of rows to expect; if 0, unknown. */
-	private int rowsExpected = 0;
+	private int rowsExpected;
 
 
 	/**

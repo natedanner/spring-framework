@@ -108,7 +108,7 @@ public class CachingMetadataReaderFactory extends SimpleMetadataReaderFactory {
 			return localResourceCache.getCacheLimit();
 		}
 		else {
-			return (this.metadataReaderCache != null ? Integer.MAX_VALUE : 0);
+			return this.metadataReaderCache != null ? Integer.MAX_VALUE : 0;
 		}
 	}
 

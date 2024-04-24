@@ -147,7 +147,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	 * callable statement processing. This can be used to avoid a bug in some older Oracle
 	 * JDBC drivers like 10.1.0.2.
 	 */
-	private boolean skipResultsProcessing = false;
+	private boolean skipResultsProcessing;
 
 	/**
 	 * If this variable is set to true then all results from a stored procedure call
@@ -155,13 +155,13 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	 * All other results processing will be take place unless the variable
 	 * {@code skipResultsProcessing} is set to {@code true}.
 	 */
-	private boolean skipUndeclaredResults = false;
+	private boolean skipUndeclaredResults;
 
 	/**
 	 * If this variable is set to true then execution of a CallableStatement will return
 	 * the results in a Map that uses case-insensitive names for the parameters.
 	 */
-	private boolean resultsMapCaseInsensitive = false;
+	private boolean resultsMapCaseInsensitive;
 
 
 	/**
@@ -619,7 +619,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 			}
 
 			private String appendSql(@Nullable String sql, String statement) {
-				return (StringUtils.hasLength(sql) ? sql + "; " + statement : statement);
+				return StringUtils.hasLength(sql) ? sql + "; " + statement : statement;
 			}
 
 			@Override
@@ -1110,8 +1110,8 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 						ps.addBatch();
 						if (n % batchSize == 0 || n == batchArgs.size()) {
 							if (logger.isTraceEnabled()) {
-								int batchIdx = (n % batchSize == 0) ? n / batchSize : (n / batchSize) + 1;
-								int items = n - ((n % batchSize == 0) ? n / batchSize - 1 : (n / batchSize)) * batchSize;
+								int batchIdx = n % batchSize == 0 ? n / batchSize : (n / batchSize) + 1;
+								int items = n - (n % batchSize == 0 ? n / batchSize - 1 : (n / batchSize)) * batchSize;
 								logger.trace("Sending SQL batch update #" + batchIdx + " with " + items + " items");
 							}
 							rowsAffected.add(ps.executeBatch());
@@ -1546,7 +1546,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	 */
 	protected DataAccessException translateException(String task, @Nullable String sql, SQLException ex) {
 		DataAccessException dae = getExceptionTranslator().translate(task, sql, ex);
-		return (dae != null ? dae : new UncategorizedSQLException(task, sql, ex));
+		return dae != null ? dae : new UncategorizedSQLException(task, sql, ex);
 	}
 
 
@@ -1558,7 +1558,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	 */
 	@Nullable
 	private static String getSql(Object obj) {
-		return (obj instanceof SqlProvider sqlProvider ? sqlProvider.getSql() : null);
+		return obj instanceof SqlProvider sqlProvider ? sqlProvider.getSql() : null;
 	}
 
 	private static <T> T result(@Nullable T result) {
@@ -1594,7 +1594,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 			try {
 				int batchSize = pss.getBatchSize();
 				InterruptibleBatchPreparedStatementSetter ipss =
-						(pss instanceof InterruptibleBatchPreparedStatementSetter ibpss ? ibpss : null);
+						pss instanceof InterruptibleBatchPreparedStatementSetter ibpss ? ibpss : null;
 				if (generatedKeyHolder != null) {
 					generatedKeyHolder.getKeyList().clear();
 				}
@@ -1776,7 +1776,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 
 		private final RowMapper<T> rowMapper;
 
-		private int rowNum = 0;
+		private int rowNum;
 
 		public ResultSetSpliterator(ResultSet rs, RowMapper<T> rowMapper) {
 			this.rs = rs;

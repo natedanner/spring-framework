@@ -375,7 +375,7 @@ public abstract class ResponseEntityExceptionHandler implements MessageSourceAwa
 
 	private static Locale getLocale(ServerWebExchange exchange) {
 		Locale locale = exchange.getLocaleContext().getLocale();
-		return (locale != null ? locale : Locale.getDefault());
+		return locale != null ? locale : Locale.getDefault();
 	}
 
 	/**

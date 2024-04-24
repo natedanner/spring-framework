@@ -115,7 +115,7 @@ public class SharedEntityManagerBean extends EntityManagerFactoryAccessor
 
 	@Override
 	public Class<? extends EntityManager> getObjectType() {
-		return (this.entityManagerInterface != null ? this.entityManagerInterface : EntityManager.class);
+		return this.entityManagerInterface != null ? this.entityManagerInterface : EntityManager.class;
 	}
 
 	@Override

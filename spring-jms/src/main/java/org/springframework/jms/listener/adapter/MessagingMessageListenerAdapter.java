@@ -131,9 +131,9 @@ public class MessagingMessageListenerAdapter extends AbstractAdaptableMessageLis
 	@Override
 	protected Object preProcessResponse(Object result) {
 		MethodParameter returnType = getHandlerMethod().getReturnType();
-		MessageBuilder<?> messageBuilder = (result instanceof Message<?> message ?
+		MessageBuilder<?> messageBuilder = result instanceof Message<?> message ?
 				MessageBuilder.fromMessage(message) :
-				MessageBuilder.withPayload(result));
+				MessageBuilder.withPayload(result);
 		return messageBuilder
 				.setHeader(AbstractMessageSendingTemplate.CONVERSION_HINT_HEADER, returnType)
 				.build();

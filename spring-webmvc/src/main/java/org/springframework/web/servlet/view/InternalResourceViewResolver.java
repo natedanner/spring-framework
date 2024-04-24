@@ -100,8 +100,8 @@ public class InternalResourceViewResolver extends UrlBasedViewResolver {
 
 	@Override
 	protected AbstractUrlBasedView instantiateView() {
-		return (getViewClass() == InternalResourceView.class ? new InternalResourceView() :
-				(getViewClass() == JstlView.class ? new JstlView() : super.instantiateView()));
+		return getViewClass() == InternalResourceView.class ? new InternalResourceView() :
+				(getViewClass() == JstlView.class ? new JstlView() : super.instantiateView());
 	}
 
 	@Override

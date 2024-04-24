@@ -90,7 +90,7 @@ public class SessionLocaleResolver extends AbstractLocaleContextResolver {
 
 	private Function<HttpServletRequest, Locale> defaultLocaleFunction = request -> {
 		Locale defaultLocale = getDefaultLocale();
-		return (defaultLocale != null ? defaultLocale : request.getLocale());
+		return defaultLocale != null ? defaultLocale : request.getLocale();
 	};
 
 	private Function<HttpServletRequest, TimeZone> defaultTimeZoneFunction = request -> getDefaultTimeZone();

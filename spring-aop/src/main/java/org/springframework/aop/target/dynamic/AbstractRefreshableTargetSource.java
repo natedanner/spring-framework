@@ -51,7 +51,7 @@ public abstract class AbstractRefreshableTargetSource implements TargetSource, R
 
 	private long lastRefreshTime = -1;
 
-	private long refreshCount = 0;
+	private long refreshCount;
 
 
 	/**

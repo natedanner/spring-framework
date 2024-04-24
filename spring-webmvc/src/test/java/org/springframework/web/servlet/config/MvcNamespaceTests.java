@@ -1004,7 +1004,7 @@ public class MvcNamespaceTests {
 
 			this.date = date;
 			this.percent = percent;
-			this.recordedValidationError = (result.getErrorCount() == 1);
+			this.recordedValidationError = result.getErrorCount() == 1;
 		}
 	}
 
@@ -1051,7 +1051,7 @@ public class MvcNamespaceTests {
 
 		@Override
 		public RequestDispatcher getNamedDispatcher(String path) {
-			if (path.equals("default") || path.equals("custom")) {
+			if ("default".equals(path) || "custom".equals(path)) {
 				return new MockRequestDispatcher("/");
 			}
 			else {

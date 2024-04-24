@@ -158,7 +158,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 * i.e. has been refreshed at least once and not been closed yet.
 	 */
 	protected final boolean hasBeanFactory() {
-		return (this.beanFactory != null);
+		return this.beanFactory != null;
 	}
 
 	@Override

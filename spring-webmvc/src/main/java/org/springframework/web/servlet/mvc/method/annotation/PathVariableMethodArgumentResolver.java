@@ -75,7 +75,7 @@ public class PathVariableMethodArgumentResolver extends AbstractNamedValueMethod
 		}
 		if (Map.class.isAssignableFrom(parameter.nestedIfOptional().getNestedParameterType())) {
 			PathVariable pathVariable = parameter.getParameterAnnotation(PathVariable.class);
-			return (pathVariable != null && StringUtils.hasText(pathVariable.value()));
+			return pathVariable != null && StringUtils.hasText(pathVariable.value());
 		}
 		return true;
 	}
@@ -93,7 +93,7 @@ public class PathVariableMethodArgumentResolver extends AbstractNamedValueMethod
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
 		Map<String, String> uriTemplateVars = (Map<String, String>) request.getAttribute(
 				HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE, RequestAttributes.SCOPE_REQUEST);
-		return (uriTemplateVars != null ? uriTemplateVars.get(name) : null);
+		return uriTemplateVars != null ? uriTemplateVars.get(name) : null;
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class PathVariableMethodArgumentResolver extends AbstractNamedValueMethod
 		}
 
 		PathVariable ann = parameter.getParameterAnnotation(PathVariable.class);
-		String name = (ann != null && StringUtils.hasLength(ann.value()) ? ann.value() : parameter.getParameterName());
+		String name = ann != null && StringUtils.hasLength(ann.value()) ? ann.value() : parameter.getParameterName();
 		String formatted = formatUriValue(conversionService, new TypeDescriptor(parameter.nestedIfOptional()), value);
 		uriVariables.put(name, formatted);
 	}

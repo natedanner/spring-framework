@@ -144,7 +144,7 @@ public abstract class RequestContextUtils {
 	 */
 	public static Locale getLocale(HttpServletRequest request) {
 		LocaleResolver localeResolver = getLocaleResolver(request);
-		return (localeResolver != null ? localeResolver.resolveLocale(request) : request.getLocale());
+		return localeResolver != null ? localeResolver.resolveLocale(request) : request.getLocale();
 	}
 
 	/**

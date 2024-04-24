@@ -106,7 +106,7 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	Executable resolvedConstructorOrFactoryMethod;
 
 	/** Package-visible field that marks the constructor arguments as resolved. */
-	boolean constructorArgumentsResolved = false;
+	boolean constructorArgumentsResolved;
 
 	/** Package-visible field for caching fully resolved constructor arguments. */
 	@Nullable
@@ -120,7 +120,7 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	final Object postProcessingLock = new Object();
 
 	/** Package-visible field that indicates MergedBeanDefinitionPostProcessor having been applied. */
-	boolean postProcessed = false;
+	boolean postProcessed;
 
 	/** Package-visible field that indicates a before-instantiation post-processor having kicked in. */
 	@Nullable
@@ -337,7 +337,7 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	 * @since 3.2.2
 	 */
 	public void setTargetType(@Nullable Class<?> targetType) {
-		this.targetType = (targetType != null ? ResolvableType.forClass(targetType) : null);
+		this.targetType = targetType != null ? ResolvableType.forClass(targetType) : null;
 	}
 
 	/**
@@ -351,7 +351,7 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 			return this.resolvedTargetType;
 		}
 		ResolvableType targetType = this.targetType;
-		return (targetType != null ? targetType.resolve() : null);
+		return targetType != null ? targetType.resolve() : null;
 	}
 
 	/**
@@ -458,8 +458,8 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	@Override
 	public void setInstanceSupplier(@Nullable Supplier<?> supplier) {
 		super.setInstanceSupplier(supplier);
-		Method factoryMethod = (supplier instanceof InstanceSupplier<?> instanceSupplier ?
-				instanceSupplier.getFactoryMethod() : null);
+		Method factoryMethod = supplier instanceof InstanceSupplier<?> instanceSupplier ?
+				instanceSupplier.getFactoryMethod() : null;
 		if (factoryMethod != null) {
 			setResolvedFactoryMethod(factoryMethod);
 		}
@@ -493,8 +493,8 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	 */
 	public boolean isExternallyManagedConfigMember(Member configMember) {
 		synchronized (this.postProcessingLock) {
-			return (this.externallyManagedConfigMembers != null &&
-					this.externallyManagedConfigMembers.contains(configMember));
+			return this.externallyManagedConfigMembers != null &&
+					this.externallyManagedConfigMembers.contains(configMember);
 		}
 	}
 
@@ -504,9 +504,9 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	 */
 	public Set<Member> getExternallyManagedConfigMembers() {
 		synchronized (this.postProcessingLock) {
-			return (this.externallyManagedConfigMembers != null ?
+			return this.externallyManagedConfigMembers != null ?
 					Collections.unmodifiableSet(new LinkedHashSet<>(this.externallyManagedConfigMembers)) :
-					Collections.emptySet());
+					Collections.emptySet();
 		}
 	}
 
@@ -539,8 +539,8 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	 */
 	public boolean isExternallyManagedInitMethod(String initMethod) {
 		synchronized (this.postProcessingLock) {
-			return (this.externallyManagedInitMethods != null &&
-					this.externallyManagedInitMethods.contains(initMethod));
+			return this.externallyManagedInitMethods != null &&
+					this.externallyManagedInitMethods.contains(initMethod);
 		}
 	}
 
@@ -571,9 +571,9 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	 */
 	public Set<String> getExternallyManagedInitMethods() {
 		synchronized (this.postProcessingLock) {
-			return (this.externallyManagedInitMethods != null ?
+			return this.externallyManagedInitMethods != null ?
 					Collections.unmodifiableSet(new LinkedHashSet<>(this.externallyManagedInitMethods)) :
-					Collections.emptySet());
+					Collections.emptySet();
 		}
 	}
 
@@ -614,8 +614,8 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	 */
 	public boolean isExternallyManagedDestroyMethod(String destroyMethod) {
 		synchronized (this.postProcessingLock) {
-			return (this.externallyManagedDestroyMethods != null &&
-					this.externallyManagedDestroyMethods.contains(destroyMethod));
+			return this.externallyManagedDestroyMethods != null &&
+					this.externallyManagedDestroyMethods.contains(destroyMethod);
 		}
 	}
 
@@ -661,9 +661,9 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	 */
 	public Set<String> getExternallyManagedDestroyMethods() {
 		synchronized (this.postProcessingLock) {
-			return (this.externallyManagedDestroyMethods != null ?
+			return this.externallyManagedDestroyMethods != null ?
 					Collections.unmodifiableSet(new LinkedHashSet<>(this.externallyManagedDestroyMethods)) :
-					Collections.emptySet());
+					Collections.emptySet();
 		}
 	}
 
@@ -675,7 +675,7 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof RootBeanDefinition && super.equals(other)));
+		return this == other || (other instanceof RootBeanDefinition && super.equals(other));
 	}
 
 	@Override

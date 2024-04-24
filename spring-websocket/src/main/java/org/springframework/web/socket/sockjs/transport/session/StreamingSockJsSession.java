@@ -74,7 +74,7 @@ public abstract class StreamingSockJsSession extends AbstractHttpSockJsSession {
 			SockJsFrame frame = SockJsFrame.messageFrame(messageCodec, message);
 			writeFrame(frame);
 
-			this.byteCount += (frame.getContentBytes().length + 1);
+			this.byteCount += frame.getContentBytes().length + 1;
 			if (logger.isTraceEnabled()) {
 				logger.trace(this.byteCount + " bytes written so far, " +
 						getMessageCache().size() + " more messages not flushed");

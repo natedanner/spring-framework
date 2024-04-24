@@ -170,7 +170,7 @@ public class ExpressionState {
 
 	public TypedValue lookupVariable(String name) {
 		Object value = this.relatedContext.lookupVariable(name);
-		return (value != null ? new TypedValue(value) : TypedValue.NULL);
+		return value != null ? new TypedValue(value) : TypedValue.NULL;
 	}
 
 	public TypeComparator getTypeComparator() {
@@ -261,8 +261,8 @@ public class ExpressionState {
 			return new TypedValue(returnValue);
 		}
 		else {
-			String leftType = (left == null ? "null" : left.getClass().getName());
-			String rightType = (right == null? "null" : right.getClass().getName());
+			String leftType = left == null ? "null" : left.getClass().getName();
+			String rightType = right == null? "null" : right.getClass().getName();
 			throw new SpelEvaluationException(SpelMessage.OPERATOR_NOT_SUPPORTED_BETWEEN_TYPES, op, leftType, rightType);
 		}
 	}

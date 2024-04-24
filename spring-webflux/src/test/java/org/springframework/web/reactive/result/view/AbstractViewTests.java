@@ -46,7 +46,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class AbstractViewTests {
 
-	private MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.get("/"));
+	private final MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.get("/"));
 
 
 	@Test

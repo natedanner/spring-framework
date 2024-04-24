@@ -82,8 +82,8 @@ class BeanDefinitionResource extends AbstractResource {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof BeanDefinitionResource that &&
-				this.beanDefinition.equals(that.beanDefinition)));
+		return this == other || (other instanceof BeanDefinitionResource that &&
+				this.beanDefinition.equals(that.beanDefinition));
 	}
 
 	/**

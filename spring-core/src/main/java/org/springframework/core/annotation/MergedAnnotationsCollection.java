@@ -130,7 +130,7 @@ final class MergedAnnotationsCollection implements MergedAnnotations {
 			@Nullable MergedAnnotationSelector<A> selector) {
 
 		MergedAnnotation<A> result = find(annotationType, predicate, selector);
-		return (result != null ? result : MergedAnnotation.missing());
+		return result != null ? result : MergedAnnotation.missing();
 	}
 
 	@Override
@@ -151,7 +151,7 @@ final class MergedAnnotationsCollection implements MergedAnnotations {
 			@Nullable MergedAnnotationSelector<A> selector) {
 
 		MergedAnnotation<A> result = find(annotationType, predicate, selector);
-		return (result != null ? result : MergedAnnotation.missing());
+		return result != null ? result : MergedAnnotation.missing();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -173,13 +173,13 @@ final class MergedAnnotationsCollection implements MergedAnnotations {
 				if (!isMappingForType(mapping, requiredType)) {
 					continue;
 				}
-				MergedAnnotation<A> candidate = (mappingIndex == 0 ? (MergedAnnotation<A>) root :
-						TypeMappedAnnotation.createIfPossible(mapping, root, IntrospectionFailureLogger.INFO));
+				MergedAnnotation<A> candidate = mappingIndex == 0 ? (MergedAnnotation<A>) root :
+						TypeMappedAnnotation.createIfPossible(mapping, root, IntrospectionFailureLogger.INFO);
 				if (candidate != null && (predicate == null || predicate.test(candidate))) {
 					if (selector.isBestCandidate(candidate)) {
 						return candidate;
 					}
-					result = (result != null ? selector.select(result, candidate) : candidate);
+					result = result != null ? selector.select(result, candidate) : candidate;
 				}
 			}
 		}
@@ -206,7 +206,7 @@ final class MergedAnnotationsCollection implements MergedAnnotations {
 			return true;
 		}
 		Class<? extends Annotation> actualType = mapping.getAnnotationType();
-		return (actualType == requiredType || actualType.getName().equals(requiredType));
+		return actualType == requiredType || actualType.getName().equals(requiredType);
 	}
 
 	static MergedAnnotations of(Collection<MergedAnnotation<?>> annotations) {
@@ -274,7 +274,7 @@ final class MergedAnnotationsCollection implements MergedAnnotations {
 		@Nullable
 		private AnnotationTypeMapping getMapping(int annotationIndex, int mappingIndex) {
 			AnnotationTypeMappings mappings = MergedAnnotationsCollection.this.mappings[annotationIndex];
-			return (mappingIndex < mappings.size() ? mappings.get(mappingIndex) : null);
+			return mappingIndex < mappings.size() ? mappings.get(mappingIndex) : null;
 		}
 
 		@Nullable
@@ -284,8 +284,8 @@ final class MergedAnnotationsCollection implements MergedAnnotations {
 			if (mappingIndex == 0) {
 				return (MergedAnnotation<A>) root;
 			}
-			IntrospectionFailureLogger logger = (this.requiredType != null ?
-					IntrospectionFailureLogger.INFO : IntrospectionFailureLogger.DEBUG);
+			IntrospectionFailureLogger logger = this.requiredType != null ?
+					IntrospectionFailureLogger.INFO : IntrospectionFailureLogger.DEBUG;
 			return TypeMappedAnnotation.createIfPossible(
 					mappings[annotationIndex].get(mappingIndex), root, logger);
 		}

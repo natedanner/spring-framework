@@ -46,7 +46,7 @@ public class SessionFlashMapManager extends AbstractFlashMapManager {
 	@Nullable
 	protected List<FlashMap> retrieveFlashMaps(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		return (session != null ? (List<FlashMap>) session.getAttribute(FLASH_MAPS_SESSION_ATTRIBUTE) : null);
+		return session != null ? (List<FlashMap>) session.getAttribute(FLASH_MAPS_SESSION_ATTRIBUTE) : null;
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class SessionFlashMapManager extends AbstractFlashMapManager {
 	 */
 	@Override
 	protected void updateFlashMaps(List<FlashMap> flashMaps, HttpServletRequest request, HttpServletResponse response) {
-		WebUtils.setSessionAttribute(request, FLASH_MAPS_SESSION_ATTRIBUTE, (!flashMaps.isEmpty() ? flashMaps : null));
+		WebUtils.setSessionAttribute(request, FLASH_MAPS_SESSION_ATTRIBUTE, (flashMaps.isEmpty() ? null : flashMaps));
 	}
 
 	/**

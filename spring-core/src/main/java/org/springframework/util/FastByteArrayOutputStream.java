@@ -58,17 +58,17 @@ public class FastByteArrayOutputStream extends OutputStream {
 	private final int initialBlockSize;
 
 	// The size, in bytes, to use when allocating the next byte[]
-	private int nextBlockSize = 0;
+	private int nextBlockSize;
 
 	// The number of bytes in previous buffers.
 	// (The number of bytes in the current buffer is in 'index'.)
-	private int alreadyBufferedSize = 0;
+	private int alreadyBufferedSize;
 
 	// The index in the byte[] found at buffers.getLast() to be written next
-	private int index = 0;
+	private int index;
 
 	// Is the stream closed?
-	private boolean closed = false;
+	private boolean closed;
 
 
 	/**
@@ -191,7 +191,7 @@ public class FastByteArrayOutputStream extends OutputStream {
 	 * Return the number of bytes stored in this {@code FastByteArrayOutputStream}.
 	 */
 	public int size() {
-		return (this.alreadyBufferedSize + this.index);
+		return this.alreadyBufferedSize + this.index;
 	}
 
 	/**
@@ -354,11 +354,11 @@ public class FastByteArrayOutputStream extends OutputStream {
 		@Nullable
 		private byte[] currentBuffer;
 
-		private int currentBufferLength = 0;
+		private int currentBufferLength;
 
-		private int nextIndexInCurrentBuffer = 0;
+		private int nextIndexInCurrentBuffer;
 
-		private int totalBytesRead = 0;
+		private int totalBytesRead;
 
 		/**
 		 * Create a new {@code FastByteArrayInputStream} backed by the given
@@ -373,7 +373,7 @@ public class FastByteArrayOutputStream extends OutputStream {
 					this.currentBufferLength = fastByteArrayOutputStream.index;
 				}
 				else {
-					this.currentBufferLength = (this.currentBuffer != null ? this.currentBuffer.length : 0);
+					this.currentBufferLength = this.currentBuffer != null ? this.currentBuffer.length : 0;
 				}
 			}
 		}
@@ -466,7 +466,7 @@ public class FastByteArrayOutputStream extends OutputStream {
 					int bytesToSkip = Math.min(len, this.currentBufferLength - this.nextIndexInCurrentBuffer);
 					this.totalBytesRead += bytesToSkip;
 					this.nextIndexInCurrentBuffer += bytesToSkip;
-					return (bytesToSkip + skip(len - bytesToSkip));
+					return bytesToSkip + skip(len - bytesToSkip);
 				}
 				else {
 					if (this.buffersIterator.hasNext()) {
@@ -484,7 +484,7 @@ public class FastByteArrayOutputStream extends OutputStream {
 
 		@Override
 		public int available() {
-			return (this.fastByteArrayOutputStream.size() - this.totalBytesRead);
+			return this.fastByteArrayOutputStream.size() - this.totalBytesRead;
 		}
 
 		/**
@@ -540,7 +540,7 @@ public class FastByteArrayOutputStream extends OutputStream {
 				this.currentBufferLength = this.fastByteArrayOutputStream.index;
 			}
 			else {
-				this.currentBufferLength = (this.currentBuffer != null ? this.currentBuffer.length : 0);
+				this.currentBufferLength = this.currentBuffer != null ? this.currentBuffer.length : 0;
 			}
 		}
 	}

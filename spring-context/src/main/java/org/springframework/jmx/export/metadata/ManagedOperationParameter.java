@@ -25,7 +25,7 @@ package org.springframework.jmx.export.metadata;
  */
 public class ManagedOperationParameter {
 
-	private int index = 0;
+	private int index;
 
 	private String name = "";
 

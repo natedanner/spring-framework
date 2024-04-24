@@ -88,8 +88,8 @@ public class CompositeUriComponentsContributor implements UriComponentsContribut
 	 * need to be formatted as Strings before being added to the URI
 	 */
 	public CompositeUriComponentsContributor(@Nullable Collection<?> contributors, @Nullable ConversionService cs) {
-		this.contributors = (contributors != null ? new ArrayList<>(contributors) : Collections.emptyList());
-		this.conversionService = (cs != null ? cs : new DefaultFormattingConversionService());
+		this.contributors = contributors != null ? new ArrayList<>(contributors) : Collections.emptyList();
+		this.conversionService = cs != null ? cs : new DefaultFormattingConversionService();
 	}
 
 	/**

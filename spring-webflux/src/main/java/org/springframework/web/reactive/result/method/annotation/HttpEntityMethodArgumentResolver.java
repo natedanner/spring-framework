@@ -62,9 +62,9 @@ public class HttpEntityMethodArgumentResolver extends AbstractMessageReaderArgum
 	}
 
 	private Object createEntity(@Nullable Object body, Class<?> entityType, ServerHttpRequest request) {
-		return (RequestEntity.class.equals(entityType) ?
+		return RequestEntity.class.equals(entityType) ?
 				new RequestEntity<>(body, request.getHeaders(), request.getMethod(), request.getURI()) :
-				new HttpEntity<>(body, request.getHeaders()));
+				new HttpEntity<>(body, request.getHeaders());
 	}
 
 }

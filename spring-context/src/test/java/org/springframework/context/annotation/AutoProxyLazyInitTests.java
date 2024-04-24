@@ -101,7 +101,7 @@ class AutoProxyLazyInitTests {
 
 	static class MyBeanImpl implements MyBean {
 
-		static boolean initialized = false;
+		static boolean initialized;
 
 		MyBeanImpl() {
 			initialized = true;

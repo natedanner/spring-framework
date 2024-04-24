@@ -30,13 +30,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class InstanceComparatorTests {
 
-	private C1 c1 = new C1();
+	private final C1 c1 = new C1();
 
-	private C2 c2 = new C2();
+	private final C2 c2 = new C2();
 
-	private C3 c3 = new C3();
+	private final C3 c3 = new C3();
 
-	private C4 c4 = new C4();
+	private final C4 c4 = new C4();
 
 	@Test
 	void shouldCompareClasses() {

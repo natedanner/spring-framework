@@ -64,7 +64,7 @@ public class MockJspWriter extends JspWriter {
 	 */
 	public MockJspWriter(@Nullable HttpServletResponse response, @Nullable Writer targetWriter) {
 		super(DEFAULT_BUFFER, true);
-		this.response = (response != null ? response : new MockHttpServletResponse());
+		this.response = response != null ? response : new MockHttpServletResponse();
 		if (targetWriter instanceof PrintWriter printWriter) {
 			this.targetWriter = printWriter;
 		}

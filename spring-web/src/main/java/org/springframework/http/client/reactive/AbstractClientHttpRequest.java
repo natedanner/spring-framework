@@ -114,7 +114,7 @@ public abstract class AbstractClientHttpRequest implements ClientHttpRequest {
 
 	@Override
 	public boolean isCommitted() {
-		return (this.state.get() != State.NEW);
+		return this.state.get() != State.NEW;
 	}
 
 	/**

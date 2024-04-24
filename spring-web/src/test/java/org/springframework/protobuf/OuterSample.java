@@ -45,8 +45,8 @@ public final class OuterSample {
       getDescriptor() {
     return descriptor;
   }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
+	private static final  com.google.protobuf.Descriptors.FileDescriptor
+			descriptor;
   static {
     String[] descriptorData = {
       "\n\014sample.proto\",\n\003Msg\022\013\n\003foo\030\001 \001(\t\022\030\n\004bl" +

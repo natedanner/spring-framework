@@ -38,7 +38,7 @@ public  final class SecondMsg extends
       throws com.google.protobuf.InvalidProtocolBufferException {
     initFields();
     @SuppressWarnings("unused")
-	int mutable_bitField0_ = 0;
+	int mutableBitField0 = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -49,16 +49,17 @@ public  final class SecondMsg extends
           case 0:
             done = true;
             break;
+          case 8: {
+			bitField0_ |= 0x00000001;
+			blah_ = input.readInt32();
+			break;
+		}
+				break;
           default: {
             if (!parseUnknownField(input, unknownFields,
                                    extensionRegistry, tag)) {
               done = true;
             }
-            break;
-          }
-          case 8: {
-            bitField0_ |= 0x00000001;
-            blah_ = input.readInt32();
             break;
           }
         }
@@ -73,7 +74,7 @@ public  final class SecondMsg extends
       makeExtensionsImmutable();
     }
   }
-  public static final com.google.protobuf.Descriptors.Descriptor
+  public static com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return OuterSample.internal_static_SecondMsg_descriptor;
   }
@@ -86,7 +87,7 @@ public  final class SecondMsg extends
   }
 
   public static com.google.protobuf.Parser<SecondMsg> PARSER =
-      new com.google.protobuf.AbstractParser<SecondMsg>() {
+      new com.google.protobuf.AbstractParser<>() {
     public SecondMsg parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -108,7 +109,7 @@ public  final class SecondMsg extends
    * <code>optional int32 blah = 1;</code>
    */
   public boolean hasBlah() {
-    return ((bitField0_ & 0x00000001) == 0x00000001);
+    return (bitField0_ & 0x00000001) == 0x00000001;
   }
   /**
    * <code>optional int32 blah = 1;</code>
@@ -123,7 +124,9 @@ public  final class SecondMsg extends
   private byte memoizedIsInitialized = -1;
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
-    if (isInitialized != -1) return isInitialized == 1;
+	  if (isInitialized != -1) {
+		  return isInitialized == 1;
+	  }
 
     memoizedIsInitialized = 1;
     return true;
@@ -132,7 +135,7 @@ public  final class SecondMsg extends
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     getSerializedSize();
-    if (((bitField0_ & 0x00000001) == 0x00000001)) {
+    if ((bitField0_ & 0x00000001) == 0x00000001) {
       output.writeInt32(1, blah_);
     }
     getUnknownFields().writeTo(output);
@@ -141,10 +144,12 @@ public  final class SecondMsg extends
   private int memoizedSerializedSize = -1;
   public int getSerializedSize() {
     int size = memoizedSerializedSize;
-    if (size != -1) return size;
+	  if (size != -1) {
+		  return size;
+	  }
 
     size = 0;
-    if (((bitField0_ & 0x00000001) == 0x00000001)) {
+    if ((bitField0_ & 0x00000001) == 0x00000001) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(1, blah_);
     }
@@ -223,8 +228,7 @@ public  final class SecondMsg extends
   @java.lang.Override
   protected Builder newBuilderForType(
       com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-    Builder builder = new Builder(parent);
-    return builder;
+    return new Builder(parent);
   }
   /**
    * Protobuf type {@code SecondMsg}
@@ -232,7 +236,7 @@ public  final class SecondMsg extends
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder>
      implements SecondMsgOrBuilder {
-    public static final com.google.protobuf.Descriptors.Descriptor
+    public static com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return OuterSample.internal_static_SecondMsg_descriptor;
     }
@@ -255,8 +259,6 @@ public  final class SecondMsg extends
       maybeForceBuilderInitialization();
     }
     private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-      }
     }
     private static Builder create() {
       return new Builder();
@@ -265,7 +267,7 @@ public  final class SecondMsg extends
     public Builder clear() {
       super.clear();
       blah_ = 0;
-      bitField0_ = (bitField0_ & ~0x00000001);
+      bitField0_ = bitField0_ & ~0x00000001;
       return this;
     }
 
@@ -292,13 +294,13 @@ public  final class SecondMsg extends
 
     public SecondMsg buildPartial() {
       SecondMsg result = new SecondMsg(this);
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-        to_bitField0_ |= 0x00000001;
+      int fromBitField0 = bitField0_;
+      int toBitField0 = 0;
+      if ((fromBitField0 & 0x00000001) == 0x00000001) {
+        toBitField0 |= 0x00000001;
       }
       result.blah_ = blah_;
-      result.bitField0_ = to_bitField0_;
+      result.bitField0_ = toBitField0;
       onBuilt();
       return result;
     }
@@ -313,7 +315,9 @@ public  final class SecondMsg extends
     }
 
     public Builder mergeFrom(SecondMsg other) {
-      if (other == SecondMsg.getDefaultInstance()) return this;
+		if (other == SecondMsg.getDefaultInstance()) {
+			return this;
+		}
       if (other.hasBlah()) {
         setBlah(other.getBlah());
       }
@@ -350,7 +354,7 @@ public  final class SecondMsg extends
      * <code>optional int32 blah = 1;</code>
      */
     public boolean hasBlah() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return (bitField0_ & 0x00000001) == 0x00000001;
     }
     /**
      * <code>optional int32 blah = 1;</code>
@@ -371,7 +375,7 @@ public  final class SecondMsg extends
      * <code>optional int32 blah = 1;</code>
      */
     public Builder clearBlah() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      bitField0_ = bitField0_ & ~0x00000001;
       blah_ = 0;
       onChanged();
       return this;

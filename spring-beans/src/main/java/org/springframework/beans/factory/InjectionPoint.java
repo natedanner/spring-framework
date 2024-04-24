@@ -73,8 +73,8 @@ public class InjectionPoint {
 	 * @param original the original descriptor to create a copy from
 	 */
 	protected InjectionPoint(InjectionPoint original) {
-		this.methodParameter = (original.methodParameter != null ?
-				new MethodParameter(original.methodParameter) : null);
+		this.methodParameter = original.methodParameter != null ?
+				new MethodParameter(original.methodParameter) : null;
 		this.field = original.field;
 		this.fieldAnnotations = original.fieldAnnotations;
 	}
@@ -142,8 +142,8 @@ public class InjectionPoint {
 	 */
 	@Nullable
 	public <A extends Annotation> A getAnnotation(Class<A> annotationType) {
-		return (this.field != null ? this.field.getAnnotation(annotationType) :
-				obtainMethodParameter().getParameterAnnotation(annotationType));
+		return this.field != null ? this.field.getAnnotation(annotationType) :
+				obtainMethodParameter().getParameterAnnotation(annotationType);
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class InjectionPoint {
 	 * indicating the injection type.
 	 */
 	public Class<?> getDeclaredType() {
-		return (this.field != null ? this.field.getType() : obtainMethodParameter().getParameterType());
+		return this.field != null ? this.field.getType() : obtainMethodParameter().getParameterType();
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class InjectionPoint {
 	 * @return the Field / Method / Constructor as Member
 	 */
 	public Member getMember() {
-		return (this.field != null ? this.field : obtainMethodParameter().getMember());
+		return this.field != null ? this.field : obtainMethodParameter().getMember();
 	}
 
 	/**
@@ -172,7 +172,7 @@ public class InjectionPoint {
 	 * @return the Field / Method / Constructor as AnnotatedElement
 	 */
 	public AnnotatedElement getAnnotatedElement() {
-		return (this.field != null ? this.field : obtainMethodParameter().getAnnotatedElement());
+		return this.field != null ? this.field : obtainMethodParameter().getAnnotatedElement();
 	}
 
 
@@ -185,8 +185,8 @@ public class InjectionPoint {
 			return false;
 		}
 		InjectionPoint otherPoint = (InjectionPoint) other;
-		return (ObjectUtils.nullSafeEquals(this.field, otherPoint.field) &&
-				ObjectUtils.nullSafeEquals(this.methodParameter, otherPoint.methodParameter));
+		return ObjectUtils.nullSafeEquals(this.field, otherPoint.field) &&
+				ObjectUtils.nullSafeEquals(this.methodParameter, otherPoint.methodParameter);
 	}
 
 	@Override
@@ -196,7 +196,7 @@ public class InjectionPoint {
 
 	@Override
 	public String toString() {
-		return (this.field != null ? "field '" + this.field.getName() + "'" : String.valueOf(this.methodParameter));
+		return this.field != null ? "field '" + this.field.getName() + "'" : String.valueOf(this.methodParameter);
 	}
 
 }

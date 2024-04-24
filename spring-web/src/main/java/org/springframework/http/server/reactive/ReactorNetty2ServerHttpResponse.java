@@ -73,14 +73,14 @@ class ReactorNetty2ServerHttpResponse extends AbstractServerHttpResponse impleme
 	@Override
 	public HttpStatusCode getStatusCode() {
 		HttpStatusCode status = super.getStatusCode();
-		return (status != null ? status : HttpStatusCode.valueOf(this.response.status().code()));
+		return status != null ? status : HttpStatusCode.valueOf(this.response.status().code());
 	}
 
 	@Override
 	@Deprecated
 	public Integer getRawStatusCode() {
 		Integer status = super.getRawStatusCode();
-		return (status != null ? status : this.response.status().code());
+		return status != null ? status : this.response.status().code();
 	}
 
 	@Override
@@ -109,8 +109,8 @@ class ReactorNetty2ServerHttpResponse extends AbstractServerHttpResponse impleme
 	protected void applyCookies() {
 		for (String name : getCookies().keySet()) {
 			for (ResponseCookie httpCookie : getCookies().get(name)) {
-				Long maxAge = (!httpCookie.getMaxAge().isNegative()) ? httpCookie.getMaxAge().getSeconds() : null;
-				HttpSetCookie.SameSite sameSite = (httpCookie.getSameSite() != null) ? HttpSetCookie.SameSite.valueOf(httpCookie.getSameSite()) : null;
+				Long maxAge = !httpCookie.getMaxAge().isNegative() ? httpCookie.getMaxAge().getSeconds() : null;
+				HttpSetCookie.SameSite sameSite = httpCookie.getSameSite() != null ? HttpSetCookie.SameSite.valueOf(httpCookie.getSameSite()) : null;
 				DefaultHttpSetCookie cookie = new DefaultHttpSetCookie(name, httpCookie.getValue(), httpCookie.getPath(),
 						httpCookie.getDomain(), null, maxAge, sameSite, false, httpCookie.isSecure(), httpCookie.isHttpOnly());
 				this.response.addCookie(cookie);

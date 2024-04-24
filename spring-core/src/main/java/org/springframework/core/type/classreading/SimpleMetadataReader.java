@@ -36,7 +36,7 @@ import org.springframework.lang.Nullable;
 final class SimpleMetadataReader implements MetadataReader {
 
 	private static final int PARSING_OPTIONS =
-			(ClassReader.SKIP_DEBUG | ClassReader.SKIP_CODE | ClassReader.SKIP_FRAMES);
+			ClassReader.SKIP_DEBUG | ClassReader.SKIP_CODE | ClassReader.SKIP_FRAMES;
 
 	private final Resource resource;
 

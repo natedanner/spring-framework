@@ -48,7 +48,7 @@ public class InputStreamResource extends AbstractResource {
 
 	private final String description;
 
-	private boolean read = false;
+	private boolean read;
 
 
 	/**
@@ -67,7 +67,7 @@ public class InputStreamResource extends AbstractResource {
 	public InputStreamResource(InputStream inputStream, @Nullable String description) {
 		Assert.notNull(inputStream, "InputStream must not be null");
 		this.inputStream = inputStream;
-		this.description = (description != null ? description : "");
+		this.description = description != null ? description : "";
 	}
 
 
@@ -116,8 +116,8 @@ public class InputStreamResource extends AbstractResource {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof InputStreamResource that &&
-				this.inputStream.equals(that.inputStream)));
+		return this == other || (other instanceof InputStreamResource that &&
+				this.inputStream.equals(that.inputStream));
 	}
 
 	/**

@@ -101,7 +101,7 @@ public class YamlMapFactoryBean extends YamlProcessor implements FactoryBean<Map
 	@Override
 	@Nullable
 	public Map<String, Object> getObject() {
-		return (this.map != null ? this.map : createMap());
+		return this.map != null ? this.map : createMap();
 	}
 
 	@Override

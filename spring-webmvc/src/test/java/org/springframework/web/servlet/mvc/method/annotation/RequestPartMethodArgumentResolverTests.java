@@ -77,7 +77,7 @@ import static org.mockito.Mockito.reset;
  */
 class RequestPartMethodArgumentResolverTests {
 
-	private HttpMessageConverter<SimpleBean> messageConverter = mock();
+	private final HttpMessageConverter<SimpleBean> messageConverter = mock();
 
 	private RequestPartMethodArgumentResolver resolver;
 
@@ -608,7 +608,7 @@ class RequestPartMethodArgumentResolverTests {
 
 	private static class CloseTrackingInputStream extends FilterInputStream {
 
-		public boolean closed = false;
+		public boolean closed;
 
 		public CloseTrackingInputStream(InputStream in) {
 			super(in);

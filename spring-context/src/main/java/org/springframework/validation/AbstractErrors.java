@@ -98,8 +98,8 @@ public abstract class AbstractErrors implements Errors, Serializable {
 		}
 		else {
 			String path = getNestedPath();
-			return (path.endsWith(NESTED_PATH_SEPARATOR) ?
-					path.substring(0, path.length() - NESTED_PATH_SEPARATOR.length()) : path);
+			return path.endsWith(NESTED_PATH_SEPARATOR) ?
+					path.substring(0, path.length() - NESTED_PATH_SEPARATOR.length()) : path;
 		}
 	}
 
@@ -138,8 +138,8 @@ public abstract class AbstractErrors implements Errors, Serializable {
 		}
 		// Optimization: use charAt and regionMatches instead of endsWith and startsWith (SPR-11304)
 		int endIndex = field.length() - 1;
-		return (endIndex >= 0 && field.charAt(endIndex) == '*' &&
-				(endIndex == 0 || field.regionMatches(0, fieldError.getField(), 0, endIndex)));
+		return endIndex >= 0 && field.charAt(endIndex) == '*' &&
+				(endIndex == 0 || field.regionMatches(0, fieldError.getField(), 0, endIndex));
 	}
 
 

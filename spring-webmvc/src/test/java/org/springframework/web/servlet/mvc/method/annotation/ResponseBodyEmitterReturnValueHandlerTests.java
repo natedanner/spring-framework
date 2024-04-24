@@ -62,14 +62,14 @@ import static org.springframework.web.testfixture.method.ResolvableMethod.on;
  */
 class ResponseBodyEmitterReturnValueHandlerTests {
 
-	private ResponseBodyEmitterReturnValueHandler handler =
+	private final ResponseBodyEmitterReturnValueHandler handler =
 			new ResponseBodyEmitterReturnValueHandler(List.of(new MappingJackson2HttpMessageConverter()));
 
-	private MockHttpServletRequest request = new MockHttpServletRequest();
+	private final MockHttpServletRequest request = new MockHttpServletRequest();
 
-	private MockHttpServletResponse response = new MockHttpServletResponse();
+	private final MockHttpServletResponse response = new MockHttpServletResponse();
 
-	private NativeWebRequest webRequest = new ServletWebRequest(this.request, this.response);
+	private final NativeWebRequest webRequest = new ServletWebRequest(this.request, this.response);
 
 	private final ModelAndViewContainer mavContainer = new ModelAndViewContainer();
 
@@ -138,10 +138,10 @@ class ResponseBodyEmitterReturnValueHandlerTests {
 		bean.setName("Jason");
 		emitter.send(bean);
 
-		assertThat(this.response.getContentAsString()).isEqualTo(("""
+		assertThat(this.response.getContentAsString()).isEqualTo("""
 				{"id":1,"name":"Joe"}
 				{"id":2,"name":"John"}
-				{"id":3,"name":"Jason"}"""));
+				{"id":3,"name":"Jason"}""");
 
 		MockAsyncContext asyncContext = (MockAsyncContext) this.request.getAsyncContext();
 		assertThat(asyncContext.getDispatchedPath()).isNull();
@@ -207,7 +207,7 @@ class ResponseBodyEmitterReturnValueHandlerTests {
 				comment("a test").name("update").id("1").reconnectTime(5000L).data(bean1).data(bean2));
 
 		assertThat(this.response.getContentType()).isEqualTo("text/event-stream");
-		assertThat(this.response.getContentAsString()).isEqualTo(("""
+		assertThat(this.response.getContentAsString()).isEqualTo("""
 				:a test
 				event:update
 				id:1
@@ -215,7 +215,7 @@ class ResponseBodyEmitterReturnValueHandlerTests {
 				data:{"id":1,"name":"Joe"}
 				data:{"id":2,"name":"John"}
 
-				"""));
+				""");
 	}
 
 	@Test

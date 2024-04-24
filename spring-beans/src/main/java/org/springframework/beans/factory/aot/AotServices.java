@@ -116,8 +116,8 @@ public final class AotServices<T> implements Iterable<T> {
 	 * @return a new {@link Loader} instance
 	 */
 	public static Loader factoriesAndBeans(ListableBeanFactory beanFactory) {
-		ClassLoader classLoader = (beanFactory instanceof ConfigurableBeanFactory configurableBeanFactory ?
-				configurableBeanFactory.getBeanClassLoader() : null);
+		ClassLoader classLoader = beanFactory instanceof ConfigurableBeanFactory configurableBeanFactory ?
+				configurableBeanFactory.getBeanClassLoader() : null;
 		return factoriesAndBeans(getSpringFactoriesLoader(classLoader), beanFactory);
 	}
 
@@ -212,7 +212,7 @@ public final class AotServices<T> implements Iterable<T> {
 		}
 
 		private <T> Map<String, T> loadBeans(Class<T> type) {
-			return (this.beanFactory != null) ? BeanFactoryUtils
+			return this.beanFactory != null ? BeanFactoryUtils
 					.beansOfTypeIncludingAncestors(this.beanFactory, type, true, false)
 					: Collections.emptyMap();
 		}

@@ -83,10 +83,10 @@ public class TypedValue {
 	@Override
 	public boolean equals(@Nullable Object other) {
 		// Avoid TypeDescriptor initialization if not necessary
-		return (this == other || (other instanceof TypedValue that &&
+		return this == other || (other instanceof TypedValue that &&
 				ObjectUtils.nullSafeEquals(this.value, that.value) &&
 				((this.typeDescriptor == null && that.typeDescriptor == null) ||
-						ObjectUtils.nullSafeEquals(getTypeDescriptor(), that.getTypeDescriptor()))));
+						ObjectUtils.nullSafeEquals(getTypeDescriptor(), that.getTypeDescriptor())));
 	}
 
 	@Override

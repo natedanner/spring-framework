@@ -54,13 +54,13 @@ public class SqlUpdate extends SqlOperation {
 	 * Maximum number of rows the update may affect. If more are
 	 * affected, an exception will be thrown. Ignored if 0.
 	 */
-	private int maxRowsAffected = 0;
+	private int maxRowsAffected;
 
 	/**
 	 * An exact number of rows that must be affected.
 	 * Ignored if 0.
 	 */
-	private int requiredRowsAffected = 0;
+	private int requiredRowsAffected;
 
 
 	/**

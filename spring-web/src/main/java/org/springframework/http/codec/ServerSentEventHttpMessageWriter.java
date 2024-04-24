@@ -98,15 +98,15 @@ public class ServerSentEventHttpMessageWriter implements HttpMessageWriter<Objec
 
 	@Override
 	public boolean canWrite(ResolvableType elementType, @Nullable MediaType mediaType) {
-		return (mediaType == null || MediaType.TEXT_EVENT_STREAM.includes(mediaType) ||
-				ServerSentEvent.class.isAssignableFrom(elementType.toClass()));
+		return mediaType == null || MediaType.TEXT_EVENT_STREAM.includes(mediaType) ||
+				ServerSentEvent.class.isAssignableFrom(elementType.toClass());
 	}
 
 	@Override
 	public Mono<Void> write(Publisher<?> input, ResolvableType elementType, @Nullable MediaType mediaType,
 			ReactiveHttpOutputMessage message, Map<String, Object> hints) {
 
-		mediaType = (mediaType != null && mediaType.getCharset() != null ? mediaType : DEFAULT_MEDIA_TYPE);
+		mediaType = mediaType != null && mediaType.getCharset() != null ? mediaType : DEFAULT_MEDIA_TYPE;
 		DataBufferFactory bufferFactory = message.bufferFactory();
 
 		message.getHeaders().setContentType(mediaType);
@@ -116,13 +116,13 @@ public class ServerSentEventHttpMessageWriter implements HttpMessageWriter<Objec
 	private Flux<Publisher<DataBuffer>> encode(Publisher<?> input, ResolvableType elementType,
 			MediaType mediaType, DataBufferFactory factory, Map<String, Object> hints) {
 
-		ResolvableType dataType = (ServerSentEvent.class.isAssignableFrom(elementType.toClass()) ?
-				elementType.getGeneric() : elementType);
+		ResolvableType dataType = ServerSentEvent.class.isAssignableFrom(elementType.toClass()) ?
+				elementType.getGeneric() : elementType;
 
 		return Flux.from(input).map(element -> {
 
-			ServerSentEvent<?> sse = (element instanceof ServerSentEvent<?> serverSentEvent ?
-					serverSentEvent : ServerSentEvent.builder().data(element).build());
+			ServerSentEvent<?> sse = element instanceof ServerSentEvent<?> serverSentEvent ?
+					serverSentEvent : ServerSentEvent.builder().data(element).build();
 
 			StringBuilder sb = new StringBuilder();
 			String id = sse.id();

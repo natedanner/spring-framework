@@ -75,7 +75,7 @@ public class TestSimpUser implements SimpUser {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof SimpUser && this.name.equals(((SimpUser) other).getName())));
+		return this == other || (other instanceof SimpUser && this.name.equals(((SimpUser) other).getName()));
 	}
 
 	@Override

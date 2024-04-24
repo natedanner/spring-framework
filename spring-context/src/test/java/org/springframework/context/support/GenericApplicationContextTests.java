@@ -557,7 +557,7 @@ class GenericApplicationContextTests {
 
 			@Override
 			public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-				return (beanName.equals("test") ? "42" : bean);
+				return "test".equals(beanName) ? "42" : bean;
 			}
 		};
 		GenericApplicationContext context = new GenericApplicationContext();

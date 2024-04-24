@@ -192,7 +192,7 @@ public final class ReactiveHttpRequestValues extends HttpRequestValues {
 		 */
 		@Override
 		public Builder addRequestPart(String name, Object part) {
-			this.multipartBuilder = (this.multipartBuilder != null ? this.multipartBuilder : new MultipartBodyBuilder());
+			this.multipartBuilder = this.multipartBuilder != null ? this.multipartBuilder : new MultipartBodyBuilder();
 			this.multipartBuilder.part(name, part);
 			return this;
 		}
@@ -204,7 +204,7 @@ public final class ReactiveHttpRequestValues extends HttpRequestValues {
 		public <T, P extends Publisher<T>> Builder addRequestPartPublisher(
 				String name, P publisher, ParameterizedTypeReference<T> elementTye) {
 
-			this.multipartBuilder = (this.multipartBuilder != null ? this.multipartBuilder : new MultipartBodyBuilder());
+			this.multipartBuilder = this.multipartBuilder != null ? this.multipartBuilder : new MultipartBodyBuilder();
 			this.multipartBuilder.asyncPart(name, publisher, elementTye);
 			return this;
 		}
@@ -252,12 +252,12 @@ public final class ReactiveHttpRequestValues extends HttpRequestValues {
 
 		@Override
 		protected boolean hasParts() {
-			return (this.multipartBuilder != null);
+			return this.multipartBuilder != null;
 		}
 
 		@Override
 		protected boolean hasBody() {
-			return (super.hasBody() || this.body != null);
+			return super.hasBody() || this.body != null;
 		}
 
 		@Override

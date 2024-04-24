@@ -54,7 +54,7 @@ public class SimpleValueWrapper implements ValueWrapper {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ValueWrapper wrapper && Objects.equals(get(), wrapper.get())));
+		return this == other || (other instanceof ValueWrapper wrapper && Objects.equals(get(), wrapper.get()));
 	}
 
 	@Override

@@ -65,7 +65,7 @@ public class PatternEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		Pattern value = (Pattern) getValue();
-		return (value != null ? value.pattern() : "");
+		return value != null ? value.pattern() : "";
 	}
 
 }

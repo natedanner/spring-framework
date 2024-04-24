@@ -142,8 +142,8 @@ public class SimpleConstructorNamespaceHandler implements NamespaceHandler {
 	}
 
 	private boolean containsArgWithName(String name, ConstructorArgumentValues cvs) {
-		return (checkName(name, cvs.getGenericArgumentValues()) ||
-				checkName(name, cvs.getIndexedArgumentValues().values()));
+		return checkName(name, cvs.getGenericArgumentValues()) ||
+				checkName(name, cvs.getIndexedArgumentValues().values());
 	}
 
 	private boolean checkName(String name, Collection<ValueHolder> values) {

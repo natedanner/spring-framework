@@ -75,7 +75,7 @@ public abstract class FutureUtils {
 			}
 			catch (Exception ex) {
 				// wrap the exception just like CompletableFuture::supplyAsync does
-				result.completeExceptionally((ex instanceof CompletionException) ? ex : new CompletionException(ex));
+				result.completeExceptionally(ex instanceof CompletionException ? ex : new CompletionException(ex));
 				return null;
 			}
 		};

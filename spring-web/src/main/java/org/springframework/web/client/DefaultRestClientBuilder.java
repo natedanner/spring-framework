@@ -145,8 +145,8 @@ final class DefaultRestClientBuilder implements RestClient.Builder {
 		Assert.notNull(other, "Other must not be null");
 
 		this.baseUrl = other.baseUrl;
-		this.defaultUriVariables = (other.defaultUriVariables != null ?
-				new LinkedHashMap<>(other.defaultUriVariables) : null);
+		this.defaultUriVariables = other.defaultUriVariables != null ?
+				new LinkedHashMap<>(other.defaultUriVariables) : null;
 		this.uriBuilderFactory = other.uriBuilderFactory;
 
 		if (other.defaultHeaders != null) {
@@ -157,14 +157,14 @@ final class DefaultRestClientBuilder implements RestClient.Builder {
 			this.defaultHeaders = null;
 		}
 		this.defaultRequest = other.defaultRequest;
-		this.statusHandlers = (other.statusHandlers != null ? new ArrayList<>(other.statusHandlers) : null);
+		this.statusHandlers = other.statusHandlers != null ? new ArrayList<>(other.statusHandlers) : null;
 
 		this.requestFactory = other.requestFactory;
-		this.messageConverters = (other.messageConverters != null ?
-				new ArrayList<>(other.messageConverters) : null);
+		this.messageConverters = other.messageConverters != null ?
+				new ArrayList<>(other.messageConverters) : null;
 
-		this.interceptors = (other.interceptors != null) ? new ArrayList<>(other.interceptors) : null;
-		this.initializers = (other.initializers != null) ? new ArrayList<>(other.initializers) : null;
+		this.interceptors = other.interceptors != null ? new ArrayList<>(other.interceptors) : null;
+		this.initializers = other.initializers != null ? new ArrayList<>(other.initializers) : null;
 		this.observationRegistry = other.observationRegistry;
 		this.observationConvention = other.observationConvention;
 	}
@@ -377,8 +377,8 @@ final class DefaultRestClientBuilder implements RestClient.Builder {
 		ClientHttpRequestFactory requestFactory = initRequestFactory();
 		UriBuilderFactory uriBuilderFactory = initUriBuilderFactory();
 		HttpHeaders defaultHeaders = copyDefaultHeaders();
-		List<HttpMessageConverter<?>> messageConverters = (this.messageConverters != null ?
-				this.messageConverters : initMessageConverters());
+		List<HttpMessageConverter<?>> messageConverters = this.messageConverters != null ?
+				this.messageConverters : initMessageConverters();
 		return new DefaultRestClient(requestFactory,
 				this.interceptors, this.initializers, uriBuilderFactory,
 				defaultHeaders,
@@ -414,8 +414,8 @@ final class DefaultRestClientBuilder implements RestClient.Builder {
 		if (this.uriBuilderFactory != null) {
 			return this.uriBuilderFactory;
 		}
-		DefaultUriBuilderFactory factory = (this.baseUrl != null ?
-				new DefaultUriBuilderFactory(this.baseUrl) : new DefaultUriBuilderFactory());
+		DefaultUriBuilderFactory factory = this.baseUrl != null ?
+				new DefaultUriBuilderFactory(this.baseUrl) : new DefaultUriBuilderFactory();
 		factory.setDefaultUriVariables(this.defaultUriVariables);
 		return factory;
 	}

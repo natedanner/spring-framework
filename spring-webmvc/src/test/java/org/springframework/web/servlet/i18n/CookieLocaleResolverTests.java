@@ -50,7 +50,7 @@ class CookieLocaleResolverTests {
 
 	private MockHttpServletRequest request = new MockHttpServletRequest();
 
-	private MockHttpServletResponse response = new MockHttpServletResponse();
+	private final MockHttpServletResponse response = new MockHttpServletResponse();
 
 	private CookieLocaleResolver resolver = new CookieLocaleResolver();
 

@@ -91,11 +91,11 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 
 	private boolean defaultPatternParser = true;
 
-	private boolean useSuffixPatternMatch = false;
+	private boolean useSuffixPatternMatch;
 
-	private boolean useRegisteredSuffixPatternMatch = false;
+	private boolean useRegisteredSuffixPatternMatch;
 
-	private boolean useTrailingSlashMatch = false;
+	private boolean useTrailingSlashMatch;
 
 	private Map<String, Predicate<Class<?>>> pathPrefixes = Collections.emptyMap();
 
@@ -147,7 +147,7 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	@Deprecated
 	public void setUseRegisteredSuffixPatternMatch(boolean useRegisteredSuffixPatternMatch) {
 		this.useRegisteredSuffixPatternMatch = useRegisteredSuffixPatternMatch;
-		this.useSuffixPatternMatch = (useRegisteredSuffixPatternMatch || this.useSuffixPatternMatch);
+		this.useSuffixPatternMatch = useRegisteredSuffixPatternMatch || this.useSuffixPatternMatch;
 	}
 
 	/**
@@ -178,9 +178,9 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	 * @since 5.1
 	 */
 	public void setPathPrefixes(Map<String, Predicate<Class<?>>> prefixes) {
-		this.pathPrefixes = (!prefixes.isEmpty() ?
-				Collections.unmodifiableMap(new LinkedHashMap<>(prefixes)) :
-				Collections.emptyMap());
+		this.pathPrefixes = prefixes.isEmpty() ?
+				Collections.emptyMap() :
+				Collections.unmodifiableMap(new LinkedHashMap<>(prefixes));
 	}
 
 	/**
@@ -348,8 +348,8 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	@Nullable
 	private RequestMappingInfo createRequestMappingInfo(AnnotatedElement element) {
 		RequestMappingInfo requestMappingInfo = null;
-		RequestCondition<?> customCondition = (element instanceof Class<?> clazz ?
-				getCustomTypeCondition(clazz) : getCustomMethodCondition((Method) element));
+		RequestCondition<?> customCondition = element instanceof Class<?> clazz ?
+				getCustomTypeCondition(clazz) : getCustomMethodCondition((Method) element);
 
 		List<AnnotationDescriptor> descriptors = getAnnotationDescriptors(element);
 
@@ -476,12 +476,12 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	}
 
 	private static String[] toStringArray(String value) {
-		return (StringUtils.hasText(value) ? new String[] {value} : EMPTY_STRING_ARRAY);
+		return StringUtils.hasText(value) ? new String[] {value} : EMPTY_STRING_ARRAY;
 	}
 
 	private static RequestMethod[] toMethodArray(String method) {
-		return (StringUtils.hasText(method) ?
-				new RequestMethod[] {RequestMethod.valueOf(method)} : EMPTY_REQUEST_METHOD_ARRAY);
+		return StringUtils.hasText(method) ?
+				new RequestMethod[] {RequestMethod.valueOf(method)} : EMPTY_REQUEST_METHOD_ARRAY;
 	}
 
 	@Override
@@ -527,11 +527,11 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 		Assert.state(getPatternParser() == null, "This HandlerMapping uses PathPatterns.");
 		RequestMappingInfo info = RequestMappingInfo.paths(pattern).options(this.config).build();
 		RequestMappingInfo match = info.getMatchingCondition(request);
-		return (match != null && match.getPatternsCondition() != null ?
+		return match != null && match.getPatternsCondition() != null ?
 				new RequestMatchResult(
 						match.getPatternsCondition().getPatterns().iterator().next(),
 						UrlPathHelper.getResolvedLookupPath(request),
-						getPathMatcher()) : null);
+						getPathMatcher()) : null;
 	}
 
 	@Override
@@ -609,7 +609,7 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	private String resolveCorsAnnotationValue(String value) {
 		if (this.embeddedValueResolver != null) {
 			String resolved = this.embeddedValueResolver.resolveStringValue(value);
-			return (resolved != null ? resolved : "");
+			return resolved != null ? resolved : "";
 		}
 		else {
 			return value;
@@ -638,7 +638,7 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 
 		@Override
 		public boolean equals(Object obj) {
-			return (obj instanceof AnnotationDescriptor that && this.annotation.equals(that.annotation));
+			return obj instanceof AnnotationDescriptor that && this.annotation.equals(that.annotation);
 		}
 
 		@Override

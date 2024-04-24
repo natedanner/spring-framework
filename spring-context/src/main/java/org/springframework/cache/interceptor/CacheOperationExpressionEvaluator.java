@@ -107,13 +107,13 @@ class CacheOperationExpressionEvaluator extends CachedExpressionEvaluator {
 	}
 
 	public boolean condition(String conditionExpression, AnnotatedElementKey methodKey, EvaluationContext evalContext) {
-		return (Boolean.TRUE.equals(getExpression(this.conditionCache, methodKey, conditionExpression).getValue(
-				evalContext, Boolean.class)));
+		return Boolean.TRUE.equals(getExpression(this.conditionCache, methodKey, conditionExpression).getValue(
+				evalContext, Boolean.class));
 	}
 
 	public boolean unless(String unlessExpression, AnnotatedElementKey methodKey, EvaluationContext evalContext) {
-		return (Boolean.TRUE.equals(getExpression(this.unlessCache, methodKey, unlessExpression).getValue(
-				evalContext, Boolean.class)));
+		return Boolean.TRUE.equals(getExpression(this.unlessCache, methodKey, unlessExpression).getValue(
+				evalContext, Boolean.class));
 	}
 
 	/**

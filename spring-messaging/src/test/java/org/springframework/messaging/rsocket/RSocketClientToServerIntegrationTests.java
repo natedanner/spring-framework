@@ -67,7 +67,7 @@ class RSocketClientToServerIntegrationTests {
 
 	private static CloseableChannel server;
 
-	private static CountingInterceptor interceptor = new CountingInterceptor();
+	private static final CountingInterceptor interceptor = new CountingInterceptor();
 
 	private static RSocketRequester requester;
 
@@ -280,9 +280,9 @@ class RSocketClientToServerIntegrationTests {
 
 		@MessageMapping("void-return-value")
 		Mono<Void> voidReturnValue(String payload) {
-			return !payload.equals("bad") ?
-					Mono.delay(Duration.ofMillis(10)).then(Mono.empty()) :
-					Mono.error(new IllegalStateException("bad"));
+			return "bad".equals(payload) ?
+					Mono.error(new IllegalStateException("bad")) :
+					Mono.delay(Duration.ofMillis(10)).then(Mono.empty());
 		}
 
 		@ConnectMapping("foo-updates")

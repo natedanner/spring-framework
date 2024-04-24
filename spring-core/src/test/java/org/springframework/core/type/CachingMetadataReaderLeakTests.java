@@ -58,7 +58,7 @@ class CachingMetadataReaderLeakTests {
 
 				@Override
 				public boolean equals(@Nullable Object obj) {
-					return (obj == this);
+					return obj == this;
 				}
 
 				@Override

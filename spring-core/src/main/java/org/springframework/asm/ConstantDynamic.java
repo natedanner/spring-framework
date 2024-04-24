@@ -139,7 +139,7 @@ public final class ConstantDynamic {
    */
   public int getSize() {
     char firstCharOfDescriptor = descriptor.charAt(0);
-    return (firstCharOfDescriptor == 'J' || firstCharOfDescriptor == 'D') ? 2 : 1;
+    return firstCharOfDescriptor == 'J' || firstCharOfDescriptor == 'D' ? 2 : 1;
   }
 
   @Override

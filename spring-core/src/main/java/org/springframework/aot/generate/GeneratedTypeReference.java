@@ -39,7 +39,7 @@ public final class GeneratedTypeReference extends AbstractTypeReference {
 
 	@Nullable
 	private static GeneratedTypeReference safeCreate(@Nullable ClassName className) {
-		return (className != null ? new GeneratedTypeReference(className) : null);
+		return className != null ? new GeneratedTypeReference(className) : null;
 	}
 
 	public static GeneratedTypeReference of(ClassName className) {

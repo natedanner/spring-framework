@@ -84,14 +84,14 @@ class UndertowServerHttpResponse extends AbstractListenerServerHttpResponse impl
 	@Override
 	public HttpStatusCode getStatusCode() {
 		HttpStatusCode status = super.getStatusCode();
-		return (status != null ? status : HttpStatusCode.valueOf(this.exchange.getStatusCode()));
+		return status != null ? status : HttpStatusCode.valueOf(this.exchange.getStatusCode());
 	}
 
 	@Override
 	@Deprecated
 	public Integer getRawStatusCode() {
 		Integer status = super.getRawStatusCode();
-		return (status != null ? status : this.exchange.getStatusCode());
+		return status != null ? status : this.exchange.getStatusCode();
 	}
 
 	@Override
@@ -237,7 +237,7 @@ class UndertowServerHttpResponse extends AbstractListenerServerHttpResponse impl
 
 		@Override
 		protected boolean isDataEmpty(DataBuffer dataBuffer) {
-			return (dataBuffer.readableByteCount() == 0);
+			return dataBuffer.readableByteCount() == 0;
 		}
 
 		@Override

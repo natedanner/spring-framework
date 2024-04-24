@@ -110,9 +110,9 @@ class DefaultServerRequest implements ServerRequest {
 
 		// DispatcherServlet parses the path but for other scenarios (e.g. tests) we might need to
 
-		this.requestPath = (ServletRequestPathUtils.hasParsedRequestPath(servletRequest) ?
+		this.requestPath = ServletRequestPathUtils.hasParsedRequestPath(servletRequest) ?
 				ServletRequestPathUtils.getParsedRequestPath(servletRequest) :
-				ServletRequestPathUtils.parseAndCache(servletRequest));
+				ServletRequestPathUtils.parseAndCache(servletRequest);
 	}
 
 	@Override
@@ -365,7 +365,7 @@ class DefaultServerRequest implements ServerRequest {
 		@Override
 		public OptionalLong contentLength() {
 			long value = this.httpHeaders.getContentLength();
-			return (value != -1 ? OptionalLong.of(value) : OptionalLong.empty());
+			return value != -1 ? OptionalLong.of(value) : OptionalLong.empty();
 		}
 
 		@Override
@@ -386,7 +386,7 @@ class DefaultServerRequest implements ServerRequest {
 		@Override
 		public List<String> header(String headerName) {
 			List<String> headerValues = this.httpHeaders.get(headerName);
-			return (headerValues != null ? headerValues : Collections.emptyList());
+			return headerValues != null ? headerValues : Collections.emptyList();
 		}
 
 		@Override
@@ -557,7 +557,7 @@ class DefaultServerRequest implements ServerRequest {
 		@Override
 		public Collection<String> getHeaders(String name) {
 			List<String> result = this.headers.get(name);
-			return (result != null ? result : Collections.emptyList());
+			return result != null ? result : Collections.emptyList();
 		}
 
 		@Override

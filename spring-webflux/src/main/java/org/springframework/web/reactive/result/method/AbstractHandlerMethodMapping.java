@@ -199,8 +199,8 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 	 * @param handler the bean name of a handler or a handler instance
 	 */
 	protected void detectHandlerMethods(final Object handler) {
-		Class<?> handlerType = (handler instanceof String beanName ?
-				obtainApplicationContext().getType(beanName) : handler.getClass());
+		Class<?> handlerType = handler instanceof String beanName ?
+				obtainApplicationContext().getType(beanName) : handler.getClass();
 
 		if (handlerType != null) {
 			final Class<?> userType = ClassUtils.getUserClass(handlerType);
@@ -221,11 +221,11 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 
 	private String formatMappings(Class<?> userType, Map<Method, T> methods) {
 		String packageName = ClassUtils.getPackageName(userType);
-		String formattedType = (StringUtils.hasText(packageName) ?
+		String formattedType = StringUtils.hasText(packageName) ?
 				Arrays.stream(packageName.split("\\."))
 						.map(packageSegment -> packageSegment.substring(0, 1))
 						.collect(Collectors.joining(".", "", "." + userType.getSimpleName())) :
-				userType.getSimpleName());
+				userType.getSimpleName();
 		Function<Method, String> methodFormatter = method -> Arrays.stream(method.getParameterTypes())
 				.map(Class::getSimpleName)
 				.collect(Collectors.joining(",", "(", ")"));
@@ -407,7 +407,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 				return ALLOW_CORS_CONFIG;
 			}
 			CorsConfiguration methodConfig = this.mappingRegistry.getCorsConfiguration(handlerMethod);
-			corsConfig = (corsConfig != null ? corsConfig.combine(methodConfig) : methodConfig);
+			corsConfig = corsConfig != null ? corsConfig.combine(methodConfig) : methodConfig;
 		}
 		return corsConfig;
 	}
@@ -549,7 +549,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 
 		private void validateMethodMapping(HandlerMethod handlerMethod, T mapping) {
 			MappingRegistration<T> registration = this.registry.get(mapping);
-			HandlerMethod existingHandlerMethod = (registration != null ? registration.getHandlerMethod() : null);
+			HandlerMethod existingHandlerMethod = registration != null ? registration.getHandlerMethod() : null;
 			if (existingHandlerMethod != null && !existingHandlerMethod.equals(handlerMethod)) {
 				throw new IllegalStateException(
 						"Ambiguous mapping. Cannot map '" + handlerMethod.getBean() + "' method \n" +
@@ -602,7 +602,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 			Assert.notNull(handlerMethod, "HandlerMethod must not be null");
 			this.mapping = mapping;
 			this.handlerMethod = handlerMethod;
-			this.directPaths = (directPaths != null ? directPaths : Collections.emptySet());
+			this.directPaths = directPaths != null ? directPaths : Collections.emptySet();
 			this.corsConfig = corsConfig;
 		}
 

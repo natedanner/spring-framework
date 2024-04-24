@@ -50,9 +50,9 @@ public abstract class CorsUtils {
 	 */
 	public static boolean isPreFlightRequest(ServerHttpRequest request) {
 		HttpHeaders headers = request.getHeaders();
-		return (request.getMethod() == HttpMethod.OPTIONS
+		return request.getMethod() == HttpMethod.OPTIONS
 				&& headers.containsKey(HttpHeaders.ORIGIN)
-				&& headers.containsKey(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD));
+				&& headers.containsKey(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD);
 	}
 
 	/**
@@ -83,9 +83,9 @@ public abstract class CorsUtils {
 		Assert.isTrue(actualPort != -1, "Actual request port must not be undefined");
 
 		UriComponents originUrl = UriComponentsBuilder.fromOriginHeader(origin).build();
-		return (actualScheme.equals(originUrl.getScheme()) &&
+		return actualScheme.equals(originUrl.getScheme()) &&
 				actualHost.equals(originUrl.getHost()) &&
-				actualPort == getPort(originUrl.getScheme(), originUrl.getPort()));
+				actualPort == getPort(originUrl.getScheme(), originUrl.getPort());
 	}
 
 	private static int getPort(@Nullable String scheme, int port) {

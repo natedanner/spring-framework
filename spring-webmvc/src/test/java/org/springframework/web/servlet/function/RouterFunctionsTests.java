@@ -101,7 +101,7 @@ class RouterFunctionsTests {
 	@Test
 	void nestPathVariable() {
 		HandlerFunction<ServerResponse> handlerFunction = request -> ServerResponse.ok().build();
-		RequestPredicate requestPredicate = request -> request.pathVariable("foo").equals("bar");
+		RequestPredicate requestPredicate = request -> "bar".equals(request.pathVariable("foo"));
 		RouterFunction<ServerResponse> nestedFunction = RouterFunctions.route(requestPredicate, handlerFunction);
 
 		RouterFunction<ServerResponse> result = RouterFunctions.nest(RequestPredicates.path("/{foo}"), nestedFunction);
@@ -118,7 +118,7 @@ class RouterFunctionsTests {
 	void composedPathVariable() {
 		HandlerFunction<ServerResponse> handlerFunction = request -> ServerResponse.ok().build();
 		RequestPredicate requestPredicate = RequestPredicates.path("/{foo}").and(
-				request -> request.pathVariable("foo").equals("bar"));
+				request -> "bar".equals(request.pathVariable("foo")));
 		RouterFunction<ServerResponse> routerFunction = RouterFunctions.route(requestPredicate, handlerFunction);
 
 		MockHttpServletRequest servletRequest = new MockHttpServletRequest("GET", "/bar");

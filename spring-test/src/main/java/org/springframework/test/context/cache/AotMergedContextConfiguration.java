@@ -73,8 +73,8 @@ final class AotMergedContextConfiguration extends MergedContextConfiguration {
 		if (this == other) {
 			return true;
 		}
-		return ((other instanceof AotMergedContextConfiguration that) &&
-				this.contextInitializerClass.equals(that.contextInitializerClass));
+		return (other instanceof AotMergedContextConfiguration that) &&
+				this.contextInitializerClass.equals(that.contextInitializerClass);
 	}
 
 	@Override

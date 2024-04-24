@@ -115,7 +115,7 @@ public abstract class DomUtils {
 	@Nullable
 	public static String getChildElementValueByTagName(Element ele, String childEleName) {
 		Element child = getChildElementByTagName(ele, childEleName);
-		return (child != null ? getTextValue(child) : null);
+		return child != null ? getTextValue(child) : null;
 	}
 
 	/**
@@ -182,14 +182,14 @@ public abstract class DomUtils {
 	 * Matches the given node's name and local name against the given desired name.
 	 */
 	private static boolean nodeNameMatch(Node node, String desiredName) {
-		return (desiredName.equals(node.getNodeName()) || desiredName.equals(node.getLocalName()));
+		return desiredName.equals(node.getNodeName()) || desiredName.equals(node.getLocalName());
 	}
 
 	/**
 	 * Matches the given node's name and local name against the given desired names.
 	 */
 	private static boolean nodeNameMatch(Node node, Collection<?> desiredNames) {
-		return (desiredNames.contains(node.getNodeName()) || desiredNames.contains(node.getLocalName()));
+		return desiredNames.contains(node.getNodeName()) || desiredNames.contains(node.getLocalName());
 	}
 
 }

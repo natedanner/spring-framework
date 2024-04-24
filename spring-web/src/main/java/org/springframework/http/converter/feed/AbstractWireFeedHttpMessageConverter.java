@@ -73,8 +73,8 @@ public abstract class AbstractWireFeedHttpMessageConverter<T extends WireFeed>
 
 		WireFeedInput feedInput = new WireFeedInput();
 		MediaType contentType = inputMessage.getHeaders().getContentType();
-		Charset charset = (contentType != null && contentType.getCharset() != null ?
-				contentType.getCharset() : DEFAULT_CHARSET);
+		Charset charset = contentType != null && contentType.getCharset() != null ?
+				contentType.getCharset() : DEFAULT_CHARSET;
 		try {
 			InputStream inputStream = StreamUtils.nonClosing(inputMessage.getBody());
 			Reader reader = new InputStreamReader(inputStream, charset);
@@ -89,8 +89,8 @@ public abstract class AbstractWireFeedHttpMessageConverter<T extends WireFeed>
 	protected void writeInternal(T wireFeed, HttpOutputMessage outputMessage)
 			throws IOException, HttpMessageNotWritableException {
 
-		Charset charset = (StringUtils.hasLength(wireFeed.getEncoding()) ?
-				Charset.forName(wireFeed.getEncoding()) : DEFAULT_CHARSET);
+		Charset charset = StringUtils.hasLength(wireFeed.getEncoding()) ?
+				Charset.forName(wireFeed.getEncoding()) : DEFAULT_CHARSET;
 		MediaType contentType = outputMessage.getHeaders().getContentType();
 		if (contentType != null) {
 			contentType = new MediaType(contentType, charset);

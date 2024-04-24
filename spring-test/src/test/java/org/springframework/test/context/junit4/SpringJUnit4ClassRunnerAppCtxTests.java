@@ -122,7 +122,7 @@ public class SpringJUnit4ClassRunnerAppCtxTests implements ApplicationContextAwa
 
 	private ApplicationContext applicationContext;
 
-	private boolean beanInitialized = false;
+	private boolean beanInitialized;
 
 
 	@Autowired

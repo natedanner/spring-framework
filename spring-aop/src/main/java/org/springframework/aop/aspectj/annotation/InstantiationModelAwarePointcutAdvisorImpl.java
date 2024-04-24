@@ -134,7 +134,7 @@ final class InstantiationModelAwarePointcutAdvisorImpl
 
 	@Override
 	public synchronized boolean isAdviceInstantiated() {
-		return (this.instantiatedAdvice != null);
+		return this.instantiatedAdvice != null;
 	}
 
 	/**
@@ -151,7 +151,7 @@ final class InstantiationModelAwarePointcutAdvisorImpl
 	private Advice instantiateAdvice(AspectJExpressionPointcut pointcut) {
 		Advice advice = this.aspectJAdvisorFactory.getAdvice(this.aspectJAdviceMethod, pointcut,
 				this.aspectInstanceFactory, this.declarationOrder, this.aspectName);
-		return (advice != null ? advice : EMPTY_ADVICE);
+		return advice != null ? advice : EMPTY_ADVICE;
 	}
 
 	/**
@@ -161,7 +161,7 @@ final class InstantiationModelAwarePointcutAdvisorImpl
 	 */
 	@Override
 	public boolean isPerInstance() {
-		return (getAspectMetadata().getAjType().getPerClause().getKind() != PerClauseKind.SINGLETON);
+		return getAspectMetadata().getAjType().getPerClause().getKind() != PerClauseKind.SINGLETON;
 	}
 
 	/**
@@ -293,11 +293,11 @@ final class InstantiationModelAwarePointcutAdvisorImpl
 		@Override
 		public boolean matches(Method method, Class<?> targetClass, Object... args) {
 			// This can match only on declared pointcut.
-			return (isAspectMaterialized() && this.declaredPointcut.matches(method, targetClass, args));
+			return isAspectMaterialized() && this.declaredPointcut.matches(method, targetClass, args);
 		}
 
 		private boolean isAspectMaterialized() {
-			return (this.aspectInstanceFactory == null || this.aspectInstanceFactory.isMaterialized());
+			return this.aspectInstanceFactory == null || this.aspectInstanceFactory.isMaterialized();
 		}
 
 		@Override
@@ -306,8 +306,8 @@ final class InstantiationModelAwarePointcutAdvisorImpl
 			// they include the declaredPointcut fields. In addition, we should not compare the
 			// aspectInstanceFactory fields since LazySingletonAspectInstanceFactoryDecorator does
 			// not implement equals().
-			return (this == other || (other instanceof PerTargetInstantiationModelPointcut that &&
-					ObjectUtils.nullSafeEquals(this.preInstantiationPointcut, that.preInstantiationPointcut)));
+			return this == other || (other instanceof PerTargetInstantiationModelPointcut that &&
+					ObjectUtils.nullSafeEquals(this.preInstantiationPointcut, that.preInstantiationPointcut));
 		}
 
 		@Override

@@ -27,7 +27,7 @@ import org.xmlunit.assertj.XmlAssert;
  *
  * @author Phillip Webb
  */
-public class XmlContent implements AssertProvider<XmlContentAssert> {
+public final class XmlContent implements AssertProvider<XmlContentAssert> {
 
 	private final Object source;
 

@@ -48,7 +48,7 @@ class MBeanServerBeanDefinitionParser extends AbstractBeanDefinitionParser {
 	@Override
 	protected String resolveId(Element element, AbstractBeanDefinition definition, ParserContext parserContext) {
 		String id = element.getAttribute(ID_ATTRIBUTE);
-		return (StringUtils.hasText(id) ? id : MBEAN_SERVER_BEAN_NAME);
+		return StringUtils.hasText(id) ? id : MBEAN_SERVER_BEAN_NAME;
 	}
 
 	@Override

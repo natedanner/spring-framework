@@ -15,7 +15,7 @@
  */
 package org.springframework.cglib.core;
 
-public class ClassesKey {
+public final class ClassesKey {
     private static final Key FACTORY = (Key)KeyFactory.create(Key.class);
 
     interface Key {

@@ -266,7 +266,7 @@ final class SynthesizedMergedAnnotationInvocationHandler<A extends Annotation> i
 
 	private static String getName(Class<?> clazz) {
 		String canonicalName = clazz.getCanonicalName();
-		return (canonicalName != null ? canonicalName : clazz.getName());
+		return canonicalName != null ? canonicalName : clazz.getName();
 	}
 
 }

@@ -41,7 +41,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MultipleInitializersXmlConfigTests {
 
 	@Autowired
-	private String foo, bar, baz;
+	private String foo;
+	@Autowired
+	private String bar;
+	@Autowired
+	private String baz;
 
 
 	@Test

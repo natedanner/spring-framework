@@ -42,8 +42,8 @@ public class MapMethodProcessor implements HandlerMethodArgumentResolver, Handle
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		return (Map.class.isAssignableFrom(parameter.getParameterType()) &&
-				parameter.getParameterAnnotations().length == 0);
+		return Map.class.isAssignableFrom(parameter.getParameterType()) &&
+				parameter.getParameterAnnotations().length == 0;
 	}
 
 	@Override

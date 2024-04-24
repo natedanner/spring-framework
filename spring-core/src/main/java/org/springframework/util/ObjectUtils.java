@@ -101,7 +101,7 @@ public abstract class ObjectUtils {
 	 * @param obj the object to check
 	 */
 	public static boolean isArray(@Nullable Object obj) {
-		return (obj != null && obj.getClass().isArray());
+		return obj != null && obj.getClass().isArray();
 	}
 
 	/**
@@ -111,7 +111,7 @@ public abstract class ObjectUtils {
 	 * @see #isEmpty(Object)
 	 */
 	public static boolean isEmpty(@Nullable Object[] array) {
-		return (array == null || array.length == 0);
+		return array == null || array.length == 0;
 	}
 
 	/**
@@ -273,7 +273,7 @@ public abstract class ObjectUtils {
 		else if (obj != null) {
 			componentType = obj.getClass();
 		}
-		int newArrayLength = (array != null ? array.length + 1 : 1);
+		int newArrayLength = array != null ? array.length + 1 : 1;
 		@SuppressWarnings("unchecked")
 		A[] newArray = (A[]) Array.newInstance(componentType, newArrayLength);
 		if (array != null) {
@@ -591,7 +591,7 @@ public abstract class ObjectUtils {
 	 * @return the corresponding class name
 	 */
 	public static String nullSafeClassName(@Nullable Object obj) {
-		return (obj != null ? obj.getClass().getName() : NULL_STRING);
+		return obj != null ? obj.getClass().getName() : NULL_STRING;
 	}
 
 	/**
@@ -637,7 +637,7 @@ public abstract class ObjectUtils {
 			return nullSafeToString(shorts);
 		}
 		String str = obj.toString();
-		return (str != null ? str : EMPTY_STRING);
+		return str != null ? str : EMPTY_STRING;
 	}
 
 	/**
@@ -903,11 +903,11 @@ public abstract class ObjectUtils {
 			return "null";
 		}
 		if (obj instanceof Optional<?> optional) {
-			return (optional.isEmpty() ? "Optional.empty" :
-				"Optional[%s]".formatted(nullSafeConciseToString(optional.get())));
+			return optional.isEmpty() ? "Optional.empty" :
+				"Optional[%s]".formatted(nullSafeConciseToString(optional.get()));
 		}
 		if (obj.getClass().isArray()) {
-			return (Array.getLength(obj) == 0 ? EMPTY_ARRAY : NON_EMPTY_ARRAY);
+			return Array.getLength(obj) == 0 ? EMPTY_ARRAY : NON_EMPTY_ARRAY;
 		}
 		if (obj instanceof Collection) {
 			return COLLECTION;

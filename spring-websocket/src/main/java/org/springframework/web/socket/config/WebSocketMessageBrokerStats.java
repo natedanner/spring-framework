@@ -162,21 +162,21 @@ public class WebSocketMessageBrokerStats implements SmartInitializingSingleton {
 	 * Get stats about WebSocket sessions.
 	 */
 	public String getWebSocketSessionStatsInfo() {
-		return (this.webSocketHandler != null ? this.webSocketHandler.getStatsInfo() : "null");
+		return this.webSocketHandler != null ? this.webSocketHandler.getStatsInfo() : "null";
 	}
 
 	/**
 	 * Get stats about STOMP-related WebSocket message processing.
 	 */
 	public String getStompSubProtocolStatsInfo() {
-		return (this.stompSubProtocolHandler != null ? this.stompSubProtocolHandler.getStatsInfo() : "null");
+		return this.stompSubProtocolHandler != null ? this.stompSubProtocolHandler.getStatsInfo() : "null";
 	}
 
 	/**
 	 * Get stats about STOMP broker relay (when using a full-featured STOMP broker).
 	 */
 	public String getStompBrokerRelayStatsInfo() {
-		return (this.stompBrokerRelay != null ? this.stompBrokerRelay.getStatsInfo() : "null");
+		return this.stompBrokerRelay != null ? this.stompBrokerRelay.getStatsInfo() : "null";
 	}
 
 	/**

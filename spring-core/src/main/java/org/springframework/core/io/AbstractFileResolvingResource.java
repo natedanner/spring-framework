@@ -56,7 +56,7 @@ public abstract class AbstractFileResolvingResource extends AbstractResource {
 				// Try a URL connection content-length header
 				URLConnection con = url.openConnection();
 				customizeConnection(con);
-				HttpURLConnection httpCon = (con instanceof HttpURLConnection huc ? huc : null);
+				HttpURLConnection httpCon = con instanceof HttpURLConnection huc ? huc : null;
 				if (httpCon != null) {
 					httpCon.setRequestMethod("HEAD");
 					int code = httpCon.getResponseCode();
@@ -102,7 +102,7 @@ public abstract class AbstractFileResolvingResource extends AbstractResource {
 			if (ResourceUtils.isFileURL(url)) {
 				// Proceed with file system resolution
 				File file = getFile();
-				return (file.canRead() && !file.isDirectory());
+				return file.canRead() && !file.isDirectory();
 			}
 			else {
 				// Try InputStream resolution for jar resources

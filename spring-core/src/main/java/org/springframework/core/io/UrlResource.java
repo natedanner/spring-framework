@@ -340,7 +340,7 @@ public class UrlResource extends AbstractFileResolvingResource {
 		}
 		// Otherwise, process URL path
 		String filename = StringUtils.getFilename(StringUtils.cleanPath(this.url.getPath()));
-		return (filename != null ? URLDecoder.decode(filename, StandardCharsets.UTF_8) : null);
+		return filename != null ? URLDecoder.decode(filename, StandardCharsets.UTF_8) : null;
 	}
 
 	/**
@@ -357,8 +357,8 @@ public class UrlResource extends AbstractFileResolvingResource {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof UrlResource that &&
-				getCleanedUrl().equals(that.getCleanedUrl())));
+		return this == other || (other instanceof UrlResource that &&
+				getCleanedUrl().equals(that.getCleanedUrl()));
 	}
 
 	/**

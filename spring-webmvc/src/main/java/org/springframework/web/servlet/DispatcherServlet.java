@@ -817,8 +817,8 @@ public class DispatcherServlet extends FrameworkServlet {
 	@Deprecated
 	@Nullable
 	public final org.springframework.ui.context.ThemeSource getThemeSource() {
-		return (getWebApplicationContext() instanceof org.springframework.ui.context.ThemeSource themeSource ?
-				themeSource : null);
+		return getWebApplicationContext() instanceof org.springframework.ui.context.ThemeSource themeSource ?
+				themeSource : null;
 	}
 
 	/**
@@ -843,7 +843,7 @@ public class DispatcherServlet extends FrameworkServlet {
 	 */
 	@Nullable
 	public final List<HandlerMapping> getHandlerMappings() {
-		return (this.handlerMappings != null ? Collections.unmodifiableList(this.handlerMappings) : null);
+		return this.handlerMappings != null ? Collections.unmodifiableList(this.handlerMappings) : null;
 	}
 
 	/**
@@ -1005,16 +1005,16 @@ public class DispatcherServlet extends FrameworkServlet {
 			}
 			else {
 				// Avoid request body parsing for form data
-				params = (StringUtils.startsWithIgnoreCase(contentType, MediaType.APPLICATION_FORM_URLENCODED_VALUE) ||
-						!request.getParameterMap().isEmpty() ? "masked" : "");
+				params = StringUtils.startsWithIgnoreCase(contentType, MediaType.APPLICATION_FORM_URLENCODED_VALUE) ||
+						!request.getParameterMap().isEmpty() ? "masked" : "";
 			}
 
 			String queryString = request.getQueryString();
-			String queryClause = (StringUtils.hasLength(queryString) ? "?" + queryString : "");
-			String dispatchType = (!DispatcherType.REQUEST.equals(request.getDispatcherType()) ?
-					"\"" + request.getDispatcherType() + "\" dispatch for " : "");
-			String message = (dispatchType + request.getMethod() + " \"" + getRequestUri(request) +
-					queryClause + "\", parameters={" + params + "}");
+			String queryClause = StringUtils.hasLength(queryString) ? "?" + queryString : "";
+			String dispatchType = DispatcherType.REQUEST.equals(request.getDispatcherType()) ? "" :
+					"\"" + request.getDispatcherType() + "\" dispatch for ";
+			String message = dispatchType + request.getMethod() + " \"" + getRequestUri(request) +
+					queryClause + "\", parameters={" + params + "}";
 
 			if (traceOn) {
 				List<String> values = Collections.list(request.getHeaderNames());
@@ -1024,7 +1024,7 @@ public class DispatcherServlet extends FrameworkServlet {
 							.collect(Collectors.joining(", "));
 				}
 				else {
-					headers = (!values.isEmpty() ? "masked" : "");
+					headers = values.isEmpty() ? "" : "masked";
 				}
 				return message + ", headers={" + headers + "} in DispatcherServlet '" + getServletName() + "'";
 			}
@@ -1059,7 +1059,7 @@ public class DispatcherServlet extends FrameworkServlet {
 
 			try {
 				processedRequest = checkMultipart(request);
-				multipartRequestParsed = (processedRequest != request);
+				multipartRequestParsed = processedRequest != request;
 
 				// Determine handler for the current request.
 				mappedHandler = getHandler(processedRequest);
@@ -1156,9 +1156,9 @@ public class DispatcherServlet extends FrameworkServlet {
 				mv = mavDefiningException.getModelAndView();
 			}
 			else {
-				Object handler = (mappedHandler != null ? mappedHandler.getHandler() : null);
+				Object handler = mappedHandler != null ? mappedHandler.getHandler() : null;
 				mv = processHandlerException(request, response, handler, exception);
-				errorView = (mv != null);
+				errorView = mv != null;
 			}
 		}
 
@@ -1397,7 +1397,7 @@ public class DispatcherServlet extends FrameworkServlet {
 	protected void render(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// Determine locale for request and apply it to the response.
 		Locale locale =
-				(this.localeResolver != null ? this.localeResolver.resolveLocale(request) : request.getLocale());
+				this.localeResolver != null ? this.localeResolver.resolveLocale(request) : request.getLocale();
 		response.setLocale(locale);
 
 		View view;
@@ -1446,7 +1446,7 @@ public class DispatcherServlet extends FrameworkServlet {
 	 */
 	@Nullable
 	protected String getDefaultViewName(HttpServletRequest request) throws Exception {
-		return (this.viewNameTranslator != null ? this.viewNameTranslator.getViewName(request) : null);
+		return this.viewNameTranslator != null ? this.viewNameTranslator.getViewName(request) : null;
 	}
 
 	/**

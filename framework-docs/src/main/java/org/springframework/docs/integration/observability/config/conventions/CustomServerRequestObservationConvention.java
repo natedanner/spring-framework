@@ -59,7 +59,7 @@ public class CustomServerRequestObservationConvention implements ServerRequestOb
 	}
 
 	private KeyValue exception(ServerRequestObservationContext context) {
-		String exception = (context.getError() != null ? context.getError().getClass().getSimpleName() : KeyValue.NONE_VALUE);
+		String exception = context.getError() != null ? context.getError().getClass().getSimpleName() : KeyValue.NONE_VALUE;
 		return KeyValue.of(ServerHttpObservationDocumentation.LowCardinalityKeyNames.EXCEPTION, exception);
 	}
 

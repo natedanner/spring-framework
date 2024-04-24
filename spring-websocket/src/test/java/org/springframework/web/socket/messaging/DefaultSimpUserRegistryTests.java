@@ -142,7 +142,7 @@ class DefaultSimpUserRegistryTests {
 		subscribeEvent = new SessionSubscribeEvent(this, message, user);
 		registry.onApplicationEvent(subscribeEvent);
 
-		Set<SimpSubscription> matches = registry.findSubscriptions(subscription -> subscription.getDestination().equals("/match"));
+		Set<SimpSubscription> matches = registry.findSubscriptions(subscription -> "/match".equals(subscription.getDestination()));
 
 		assertThat(matches).hasSize(2);
 

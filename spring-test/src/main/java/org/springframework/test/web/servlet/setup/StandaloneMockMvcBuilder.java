@@ -126,12 +126,12 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 	@Nullable
 	private FlashMapManager flashMapManager;
 
-	private boolean preferPathMatcher = false;
+	private boolean preferPathMatcher;
 
 	@Nullable
 	private PathPatternParser patternParser;
 
-	private boolean useSuffixPatternMatch = false;
+	private boolean useSuffixPatternMatch;
 
 	private boolean useTrailingSlashPatternMatch = true;
 
@@ -289,7 +289,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 	 * View instance only -- e.g. rendering generated content (JSON, XML, Atom).
 	 */
 	public StandaloneMockMvcBuilder setSingleView(View view) {
-		this.viewResolvers = Collections.<ViewResolver>singletonList(new StaticViewResolver(view));
+		this.viewResolvers = Collections.singletonList(new StaticViewResolver(view));
 		return this;
 	}
 
@@ -320,7 +320,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 	 */
 	public StandaloneMockMvcBuilder setPatternParser(@Nullable PathPatternParser parser) {
 		this.patternParser = parser;
-		this.preferPathMatcher = (this.patternParser == null);
+		this.preferPathMatcher = this.patternParser == null;
 		return this;
 	}
 
@@ -444,8 +444,8 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 	}
 
 	private List<ViewResolver> initViewResolvers(WebApplicationContext wac) {
-		this.viewResolvers = (this.viewResolvers != null ? this.viewResolvers :
-				Collections.singletonList(new InternalResourceViewResolver()));
+		this.viewResolvers = this.viewResolvers != null ? this.viewResolvers :
+				Collections.singletonList(new InternalResourceViewResolver());
 		for (Object viewResolver : this.viewResolvers) {
 			if (viewResolver instanceof WebApplicationObjectSupport support) {
 				support.setApplicationContext(wac);
@@ -522,12 +522,12 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 
 		@Override
 		public ContentNegotiationManager mvcContentNegotiationManager() {
-			return (contentNegotiationManager != null) ? contentNegotiationManager : super.mvcContentNegotiationManager();
+			return contentNegotiationManager != null ? contentNegotiationManager : super.mvcContentNegotiationManager();
 		}
 
 		@Override
 		public FormattingConversionService mvcConversionService() {
-			return (conversionService != null ? conversionService : super.mvcConversionService());
+			return conversionService != null ? conversionService : super.mvcConversionService();
 		}
 
 		@Override
@@ -539,7 +539,7 @@ public class StandaloneMockMvcBuilder extends AbstractMockMvcBuilder<StandaloneM
 
 		@Override
 		public Validator mvcValidator() {
-			Validator mvcValidator = (validator != null) ? validator : super.mvcValidator();
+			Validator mvcValidator = validator != null ? validator : super.mvcValidator();
 			if (mvcValidator instanceof InitializingBean initializingBean) {
 				try {
 					initializingBean.afterPropertiesSet();

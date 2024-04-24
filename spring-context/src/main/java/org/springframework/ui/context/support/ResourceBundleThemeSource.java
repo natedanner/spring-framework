@@ -97,7 +97,7 @@ public class ResourceBundleThemeSource implements HierarchicalThemeSource, BeanC
 	 * @see java.util.ResourceBundle#getBundle(String)
 	 */
 	public void setBasenamePrefix(@Nullable String basenamePrefix) {
-		this.basenamePrefix = (basenamePrefix != null ? basenamePrefix : "");
+		this.basenamePrefix = basenamePrefix != null ? basenamePrefix : "";
 	}
 
 	/**

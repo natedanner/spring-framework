@@ -162,7 +162,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 
 	private MetadataReaderFactory metadataReaderFactory = new CachingMetadataReaderFactory();
 
-	private boolean setMetadataReaderFactoryCalled = false;
+	private boolean setMetadataReaderFactoryCalled;
 
 	private final Set<Integer> registriesPostProcessed = new HashSet<>();
 
@@ -171,7 +171,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 	@Nullable
 	private ConfigurationClassBeanDefinitionReader reader;
 
-	private boolean localBeanNameGeneratorSet = false;
+	private boolean localBeanNameGeneratorSet;
 
 	/* Using short class names as default bean names by default. */
 	private BeanNameGenerator componentScanBeanNameGenerator = AnnotationBeanNameGenerator.INSTANCE;
@@ -195,7 +195,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 	 * that correspond to {@link Bean} factory methods.
 	 */
 	public void setSourceExtractor(@Nullable SourceExtractor sourceExtractor) {
-		this.sourceExtractor = (sourceExtractor != null ? sourceExtractor : new PassThroughSourceExtractor());
+		this.sourceExtractor = sourceExtractor != null ? sourceExtractor : new PassThroughSourceExtractor();
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 	 * and would be reported as a problem. Defaults to {@link FailFastProblemReporter}.
 	 */
 	public void setProblemReporter(@Nullable ProblemReporter problemReporter) {
-		this.problemReporter = (problemReporter != null ? problemReporter : new FailFastProblemReporter());
+		this.problemReporter = problemReporter != null ? problemReporter : new FailFastProblemReporter();
 	}
 
 	/**
@@ -345,8 +345,8 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 	@Nullable
 	private Resource resolvePropertySourceLocation(String location) {
 		try {
-			String resolvedLocation = (this.environment != null ?
-					this.environment.resolveRequiredPlaceholders(location) : location);
+			String resolvedLocation = this.environment != null ?
+					this.environment.resolveRequiredPlaceholders(location) : location;
 			return this.resourceLoader.getResource(resolvedLocation);
 		}
 		catch (Exception ex) {
@@ -490,8 +490,8 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 				// -> eagerly resolve bean class at this point, unless it's a 'lite' configuration
 				// or component class without @Bean methods.
 				boolean liteConfigurationCandidateWithoutBeanMethods =
-						(ConfigurationClassUtils.CONFIGURATION_CLASS_LITE.equals(configClassAttr) &&
-							annotationMetadata != null && !ConfigurationClassUtils.hasBeanMethods(annotationMetadata));
+						ConfigurationClassUtils.CONFIGURATION_CLASS_LITE.equals(configClassAttr) &&
+							annotationMetadata != null && !ConfigurationClassUtils.hasBeanMethods(annotationMetadata);
 				if (!liteConfigurationCandidateWithoutBeanMethods) {
 					try {
 						abd.resolveBeanClass(this.beanClassLoader);

@@ -41,11 +41,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class PrincipalMethodArgumentResolverTests {
 
-	private PrincipalMethodArgumentResolver resolver = new PrincipalMethodArgumentResolver();
+	private final PrincipalMethodArgumentResolver resolver = new PrincipalMethodArgumentResolver();
 
-	private MockHttpServletRequest servletRequest = new MockHttpServletRequest("GET", "");
+	private final MockHttpServletRequest servletRequest = new MockHttpServletRequest("GET", "");
 
-	private ServletWebRequest webRequest = new ServletWebRequest(servletRequest, new MockHttpServletResponse());
+	private final ServletWebRequest webRequest = new ServletWebRequest(servletRequest, new MockHttpServletResponse());
 
 	private Method method;
 

@@ -129,7 +129,7 @@ abstract class SelectedValueComparator {
 
 		Map<PropertyEditor, Object> convertedValueCache = new HashMap<>();
 		PropertyEditor editor = null;
-		boolean candidateIsString = (candidateValue instanceof String);
+		boolean candidateIsString = candidateValue instanceof String;
 		if (!candidateIsString) {
 			editor = bindStatus.findEditor(candidateValue.getClass());
 		}

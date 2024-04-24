@@ -87,8 +87,8 @@ public class Projection extends SpelNodeImpl {
 		}
 
 		if (operand instanceof Iterable || operandIsArray) {
-			Iterable<?> data = (operand instanceof Iterable<?> iterable ?
-					iterable : Arrays.asList(ObjectUtils.toObjectArray(operand)));
+			Iterable<?> data = operand instanceof Iterable<?> iterable ?
+					iterable : Arrays.asList(ObjectUtils.toObjectArray(operand));
 
 			List<Object> result = new ArrayList<>();
 			Class<?> arrayElementType = null;

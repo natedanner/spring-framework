@@ -68,7 +68,7 @@ public class AutowiredArgumentsCodeGenerator {
 		boolean ambiguous = isAmbiguous();
 		CodeBlock.Builder code = CodeBlock.builder();
 		for (int i = startIndex; i < parameterTypes.length; i++) {
-			code.add((i != startIndex) ? ", " : "");
+			code.add(i != startIndex ? ", " : "");
 			if (!ambiguous) {
 				code.add("$L.get($L)", variableName, i - startIndex);
 			}

@@ -215,8 +215,8 @@ public class WebContentInterceptor extends WebContentGenerator implements Handle
 		}
 
 		if (!ObjectUtils.isEmpty(this.cacheControlMappings)) {
-			CacheControl control = (path instanceof PathContainer pathContainer ?
-					lookupCacheControl(pathContainer) : lookupCacheControl((String) path));
+			CacheControl control = path instanceof PathContainer pathContainer ?
+					lookupCacheControl(pathContainer) : lookupCacheControl((String) path);
 			if (control != null) {
 				if (logger.isTraceEnabled()) {
 					logger.trace("Applying " + control);
@@ -227,8 +227,8 @@ public class WebContentInterceptor extends WebContentGenerator implements Handle
 		}
 
 		if (!ObjectUtils.isEmpty(this.cacheMappings)) {
-			Integer cacheSeconds = (path instanceof PathContainer pathContainer ?
-					lookupCacheSeconds(pathContainer) : lookupCacheSeconds((String) path));
+			Integer cacheSeconds = path instanceof PathContainer pathContainer ?
+					lookupCacheSeconds(pathContainer) : lookupCacheSeconds((String) path);
 			if (cacheSeconds != null) {
 				if (logger.isTraceEnabled()) {
 					logger.trace("Applying cacheSeconds " + cacheSeconds);

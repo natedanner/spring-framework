@@ -38,7 +38,7 @@ import org.springframework.cglib.core.ReflectUtils;
  * @version $Id: Mixin.java,v 1.7 2005/09/27 11:42:27 baliuka Exp $
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class Mixin {
+public abstract class Mixin {
     private static final MixinKey KEY_FACTORY =
       (MixinKey)KeyFactory.create(MixinKey.class, KeyFactory.CLASS_BY_NAME);
     private static final Map ROUTE_CACHE = Collections.synchronizedMap(new HashMap());
@@ -51,7 +51,7 @@ abstract public class Mixin {
         public Object newInstance(int style, String[] classes, int[] route);
     }
 
-    abstract public Mixin newInstance(Object[] delegates);
+    public abstract Mixin newInstance(Object[] delegates);
 
     /**
      * Helper method to create an interface mixin. For finer control over the
@@ -245,7 +245,7 @@ abstract public class Mixin {
             for (Iterator it = map.keySet().iterator(); it.hasNext();) {
                 Class key = (Class)it.next();
                 classes[index] = key;
-                route[index] = ((Integer)map.get(key));
+                route[index] = (Integer)map.get(key);
                 index++;
             }
         }

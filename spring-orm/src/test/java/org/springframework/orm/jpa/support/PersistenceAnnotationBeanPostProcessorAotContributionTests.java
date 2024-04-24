@@ -235,7 +235,7 @@ class PersistenceAnnotationBeanPostProcessorAotContributionTests {
 			assertThat(compiledClasses).hasSize(1);
 			Class<?> compiledClass = compiledClasses.get(0);
 			for (Method method : ReflectionUtils.getDeclaredMethods(compiledClass)) {
-				if (method.getName().equals("apply")) {
+				if ("apply".equals(method.getName())) {
 					ReflectionUtils.invokeMethod(method, null, registeredBean, instance);
 					return;
 				}

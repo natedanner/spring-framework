@@ -70,7 +70,7 @@ public class GenericMessageConverter extends SimpleMessageConverter {
 						payload + "' to '" + targetClass.getName() + "'", ex);
 			}
 		}
-		return (ClassUtils.isAssignableValue(targetClass, payload) ? payload : null);
+		return ClassUtils.isAssignableValue(targetClass, payload) ? payload : null;
 	}
 
 }

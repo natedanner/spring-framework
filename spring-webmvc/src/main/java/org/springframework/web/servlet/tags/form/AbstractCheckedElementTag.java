@@ -84,7 +84,7 @@ public abstract class AbstractCheckedElementTag extends AbstractHtmlInputElement
 	@Nullable
 	protected String autogenerateId() throws JspException {
 		String id = super.autogenerateId();
-		return (id != null ? TagIdGenerator.nextId(id, this.pageContext) : null);
+		return id != null ? TagIdGenerator.nextId(id, this.pageContext) : null;
 	}
 
 

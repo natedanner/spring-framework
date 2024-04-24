@@ -290,7 +290,7 @@ class ModelMapTests {
 
 		@Override
 		public boolean equals(@Nullable Object obj) {
-			return (obj instanceof SomeInnerClass);
+			return obj instanceof SomeInnerClass;
 		}
 
 		@Override

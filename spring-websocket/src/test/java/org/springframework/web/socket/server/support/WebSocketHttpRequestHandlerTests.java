@@ -94,7 +94,7 @@ class WebSocketHttpRequestHandlerTests {
 	}
 
 
-	private static class TestInterceptor implements HandshakeInterceptor {
+	private static final class TestInterceptor implements HandshakeInterceptor {
 
 		private final boolean allowHandshake;
 

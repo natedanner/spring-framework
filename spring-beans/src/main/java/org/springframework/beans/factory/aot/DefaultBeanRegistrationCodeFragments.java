@@ -88,7 +88,7 @@ class DefaultBeanRegistrationCodeFragments implements BeanRegistrationCodeFragme
 			Assert.state(parent != null, "No parent available for inner bean");
 			target = parent.getBeanClass();
 		}
-		return (target.isArray() ? ClassName.get(target.getComponentType()) : ClassName.get(target));
+		return target.isArray() ? ClassName.get(target.getComponentType()) : ClassName.get(target);
 	}
 
 	private Class<?> extractDeclaringClass(ResolvableType beanType, Executable executable) {
@@ -127,8 +127,8 @@ class DefaultBeanRegistrationCodeFragments implements BeanRegistrationCodeFragme
 
 		CodeBlock.Builder code = CodeBlock.builder();
 		RootBeanDefinition mergedBeanDefinition = this.registeredBean.getMergedBeanDefinition();
-		Class<?> beanClass = (mergedBeanDefinition.hasBeanClass()
-				? ClassUtils.getUserClass(mergedBeanDefinition.getBeanClass()) : null);
+		Class<?> beanClass = mergedBeanDefinition.hasBeanClass()
+				? ClassUtils.getUserClass(mergedBeanDefinition.getBeanClass()) : null;
 		CodeBlock beanClassCode = generateBeanClassCode(
 				beanRegistrationCode.getClassName().packageName(),
 				(beanClass != null ? beanClass : beanType.toClass()));
@@ -165,7 +165,7 @@ class DefaultBeanRegistrationCodeFragments implements BeanRegistrationCodeFragme
 				&& this.registeredBean.getMergedBeanDefinition().getFactoryMethodName() != null) {
 			return true;
 		}
-		return (beanClass != null && !beanType.toClass().equals(beanClass));
+		return beanClass != null && !beanType.toClass().equals(beanClass);
 	}
 
 	@Override

@@ -253,7 +253,7 @@ public abstract class JdbcUtils {
 		}
 
 		// Perform was-null check if necessary (for results that the JDBC driver returns as primitives).
-		return (rs.wasNull() ? null : value);
+		return rs.wasNull() ? null : value;
 	}
 
 	/**
@@ -466,10 +466,10 @@ public abstract class JdbcUtils {
 	 * @return whether the type is numeric
 	 */
 	public static boolean isNumeric(int sqlType) {
-		return (Types.BIT == sqlType || Types.BIGINT == sqlType || Types.DECIMAL == sqlType ||
+		return Types.BIT == sqlType || Types.BIGINT == sqlType || Types.DECIMAL == sqlType ||
 				Types.DOUBLE == sqlType || Types.FLOAT == sqlType || Types.INTEGER == sqlType ||
 				Types.NUMERIC == sqlType || Types.REAL == sqlType || Types.SMALLINT == sqlType ||
-				Types.TINYINT == sqlType);
+				Types.TINYINT == sqlType;
 	}
 
 	/**

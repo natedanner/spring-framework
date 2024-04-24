@@ -151,7 +151,7 @@ public class TaskSchedulerRouter implements TaskScheduler, BeanNameAware, BeanFa
 
 	@Nullable
 	protected String determineQualifier(Runnable task) {
-		return (task instanceof SchedulingAwareRunnable sar ? sar.getQualifier() : null);
+		return task instanceof SchedulingAwareRunnable sar ? sar.getQualifier() : null;
 	}
 
 	protected TaskScheduler determineQualifiedScheduler(String qualifier) {

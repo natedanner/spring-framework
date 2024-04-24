@@ -55,7 +55,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
  */
 public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping {
 
-	private boolean lazyInitHandlers = false;
+	private boolean lazyInitHandlers;
 
 	private final Map<PathPattern, Object> handlerMap = new LinkedHashMap<>();
 
@@ -99,8 +99,8 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping {
 	 * @see org.springframework.web.reactive.socket.server.support.WebSocketUpgradeHandlerPredicate
 	 */
 	public void setHandlerPredicate(BiPredicate<Object, ServerWebExchange> handlerPredicate) {
-		this.handlerPredicate = (this.handlerPredicate != null ?
-				this.handlerPredicate.and(handlerPredicate) : handlerPredicate);
+		this.handlerPredicate = this.handlerPredicate != null ?
+				this.handlerPredicate.and(handlerPredicate) : handlerPredicate;
 	}
 
 
@@ -133,7 +133,7 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping {
 		List<PathPattern> matches = null;
 		for (PathPattern pattern : this.handlerMap.keySet()) {
 			if (pattern.matches(lookupPath)) {
-				matches = (matches != null ? matches : new ArrayList<>());
+				matches = matches != null ? matches : new ArrayList<>();
 				matches.add(pattern);
 			}
 		}
@@ -244,7 +244,7 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping {
 	}
 
 	private String getHandlerDescription(Object handler) {
-		return (handler instanceof String ? "'" + handler + "'" : handler.toString());
+		return handler instanceof String ? "'" + handler + "'" : handler.toString();
 	}
 
 }

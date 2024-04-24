@@ -42,8 +42,8 @@ abstract class ReactorUriHelper {
 		appendHostName(request, builder);
 
 		int port = request.hostPort();
-		if ((scheme.equals("http") || scheme.equals("ws")) && port != 80 ||
-				(scheme.equals("https") || scheme.equals("wss")) && port != 443) {
+		if (("http".equals(scheme) || "ws".equals(scheme)) && port != 80 ||
+				("https".equals(scheme) || "wss".equals(scheme)) && port != 443) {
 			builder.append(':');
 			builder.append(port);
 		}

@@ -152,9 +152,9 @@ public class ResponseStatusExceptionResolver extends AbstractHandlerExceptionRes
 			response.sendError(statusCode);
 		}
 		else {
-			String resolvedReason = (this.messageSource != null ?
+			String resolvedReason = this.messageSource != null ?
 					this.messageSource.getMessage(reason, null, reason, LocaleContextHolder.getLocale()) :
-					reason);
+					reason;
 			response.sendError(statusCode, resolvedReason);
 		}
 		return new ModelAndView();

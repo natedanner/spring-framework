@@ -127,7 +127,7 @@ public class LinkedCaseInsensitiveMap<V> implements Map<String, V>, Serializable
 			}
 		};
 		this.caseInsensitiveKeys = CollectionUtils.newHashMap(expectedSize);
-		this.locale = (locale != null ? locale : Locale.getDefault());
+		this.locale = locale != null ? locale : Locale.getDefault();
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class LinkedCaseInsensitiveMap<V> implements Map<String, V>, Serializable
 
 	@Override
 	public boolean containsKey(Object key) {
-		return (key instanceof String string && this.caseInsensitiveKeys.containsKey(convertKey(string)));
+		return key instanceof String string && this.caseInsensitiveKeys.containsKey(convertKey(string));
 	}
 
 	@Override
@@ -196,7 +196,7 @@ public class LinkedCaseInsensitiveMap<V> implements Map<String, V>, Serializable
 			oldKeyValue = this.targetMap.remove(oldKey);
 		}
 		V oldValue = this.targetMap.put(key, value);
-		return (oldKeyValue != null ? oldKeyValue : oldValue);
+		return oldKeyValue != null ? oldKeyValue : oldValue;
 	}
 
 	@Override
@@ -299,7 +299,7 @@ public class LinkedCaseInsensitiveMap<V> implements Map<String, V>, Serializable
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || this.targetMap.equals(other));
+		return this == other || this.targetMap.equals(other);
 	}
 
 	@Override

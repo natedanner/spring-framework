@@ -95,7 +95,7 @@ public final class HandlerTypePredicate implements Predicate<Class<?>> {
 	}
 
 	private boolean hasSelectors() {
-		return (!this.basePackages.isEmpty() || !this.assignableTypes.isEmpty() || !this.annotations.isEmpty());
+		return !this.basePackages.isEmpty() || !this.assignableTypes.isEmpty() || !this.annotations.isEmpty();
 	}
 
 

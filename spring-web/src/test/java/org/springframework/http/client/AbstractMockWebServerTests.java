@@ -62,7 +62,7 @@ public abstract class AbstractMockWebServerTests {
 		@Override
 		public MockResponse dispatch(RecordedRequest request) {
 			try {
-				if (request.getPath().equals("/echo")) {
+				if ("/echo".equals(request.getPath())) {
 					assertThat(request.getHeader("Host"))
 							.contains("localhost:" + port);
 					MockResponse response = new MockResponse()
@@ -73,13 +73,13 @@ public abstract class AbstractMockWebServerTests {
 					request.getBody().flush();
 					return response;
 				}
-				else if(request.getPath().equals("/status/ok")) {
+				else if("/status/ok".equals(request.getPath())) {
 					return new MockResponse();
 				}
-				else if(request.getPath().equals("/status/notfound")) {
+				else if("/status/notfound".equals(request.getPath())) {
 					return new MockResponse().setResponseCode(404);
 				}
-				else if (request.getPath().equals("/status/299")) {
+				else if ("/status/299".equals(request.getPath())) {
 					assertThat(request.getHeader("Expect"))
 							.contains("299");
 					return new MockResponse().setResponseCode(299);
@@ -89,7 +89,7 @@ public abstract class AbstractMockWebServerTests {
 					assertThat(request.getPath()).contains("param2=value1&param2=value2");
 					return new MockResponse();
 				}
-				else if(request.getPath().equals("/methods/post")) {
+				else if("/methods/post".equals(request.getPath())) {
 					assertThat(request.getMethod()).isEqualTo("POST");
 					String transferEncoding = request.getHeader("Transfer-Encoding");
 					if(StringUtils.hasLength(transferEncoding)) {

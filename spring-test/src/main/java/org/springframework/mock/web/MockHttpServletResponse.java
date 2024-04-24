@@ -90,7 +90,7 @@ public class MockHttpServletResponse implements HttpServletResponse {
 	 * {@link HttpServletResponse} methods or through a {@code charset} parameter
 	 * on the {@code Content-Type}.
 	 */
-	private boolean characterEncodingSet = false;
+	private boolean characterEncodingSet;
 
 	private final ByteArrayOutputStream content = new ByteArrayOutputStream(1024);
 
@@ -99,7 +99,7 @@ public class MockHttpServletResponse implements HttpServletResponse {
 	@Nullable
 	private PrintWriter writer;
 
-	private long contentLength = 0;
+	private long contentLength;
 
 	@Nullable
 	private String contentType;
@@ -457,7 +457,7 @@ public class MockHttpServletResponse implements HttpServletResponse {
 			buf.append("; Domain=").append(cookie.getDomain());
 		}
 		int maxAge = cookie.getMaxAge();
-		ZonedDateTime expires = (cookie instanceof MockCookie mockCookie ? mockCookie.getExpires() : null);
+		ZonedDateTime expires = cookie instanceof MockCookie mockCookie ? mockCookie.getExpires() : null;
 		if (maxAge >= 0) {
 			buf.append("; Max-Age=").append(maxAge);
 			buf.append("; Expires=");
@@ -535,7 +535,7 @@ public class MockHttpServletResponse implements HttpServletResponse {
 	@Nullable
 	public String getHeader(String name) {
 		HeaderValueHolder header = this.headers.get(name);
-		return (header != null ? header.getStringValue() : null);
+		return header != null ? header.getStringValue() : null;
 	}
 
 	/**
@@ -566,7 +566,7 @@ public class MockHttpServletResponse implements HttpServletResponse {
 	@Nullable
 	public Object getHeaderValue(String name) {
 		HeaderValueHolder header = this.headers.get(name);
-		return (header != null ? header.getValue() : null);
+		return header != null ? header.getValue() : null;
 	}
 
 	/**
@@ -819,7 +819,7 @@ public class MockHttpServletResponse implements HttpServletResponse {
 		int count = this.includedUrls.size();
 		Assert.state(count <= 1,
 				() -> "More than 1 URL included - check getIncludedUrls instead: " + this.includedUrls);
-		return (count == 1 ? this.includedUrls.get(0) : null);
+		return count == 1 ? this.includedUrls.get(0) : null;
 	}
 
 	public void addIncludedUrl(String includedUrl) {

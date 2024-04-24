@@ -156,12 +156,12 @@ public class ViewResolutionResultHandler extends HandlerResultHandlerSupport imp
 			type = result.getReturnType().getGeneric().toClass();
 		}
 
-		return (CharSequence.class.isAssignableFrom(type) ||
+		return CharSequence.class.isAssignableFrom(type) ||
 				Rendering.class.isAssignableFrom(type) ||
 				Model.class.isAssignableFrom(type) ||
 				Map.class.isAssignableFrom(type) ||
 				View.class.isAssignableFrom(type) ||
-				!BeanUtils.isSimpleProperty(type));
+				!BeanUtils.isSimpleProperty(type);
 	}
 
 	@Override
@@ -177,11 +177,11 @@ public class ViewResolutionResultHandler extends HandlerResultHandlerSupport imp
 						"Multi-value reactive types not supported in view resolution: " + result.getReturnType());
 			}
 
-			valueMono = (result.getReturnValue() != null ?
-					Mono.from(adapter.toPublisher(result.getReturnValue())) : Mono.empty());
+			valueMono = result.getReturnValue() != null ?
+					Mono.from(adapter.toPublisher(result.getReturnValue())) : Mono.empty();
 
-			valueType = (adapter.isNoValue() ? ResolvableType.forClass(Void.class) :
-					result.getReturnType().getGeneric());
+			valueType = adapter.isNoValue() ? ResolvableType.forClass(Void.class) :
+					result.getReturnType().getGeneric();
 		}
 		else {
 			valueMono = Mono.justOrEmpty(result.getReturnValue());
@@ -220,8 +220,8 @@ public class ViewResolutionResultHandler extends HandlerResultHandlerSupport imp
 						if (view == null) {
 							view = getDefaultViewName(exchange);
 						}
-						viewsMono = (view instanceof String viewName ? resolveViews(viewName, locale) :
-								Mono.just(Collections.singletonList((View) view)));
+						viewsMono = view instanceof String viewName ? resolveViews(viewName, locale) :
+								Mono.just(Collections.singletonList((View) view));
 					}
 					else if (Model.class.isAssignableFrom(clazz)) {
 						model.addAllAttributes(((Model) returnValue).asMap());

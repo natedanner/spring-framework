@@ -201,8 +201,8 @@ public class MethodValidationInterceptor implements MethodInterceptor {
 
 		// Call from interface-based proxy handle, allowing for an efficient check?
 		if (clazz.isInterface()) {
-			return ((clazz == FactoryBean.class || clazz == SmartFactoryBean.class) &&
-					!method.getName().equals("getObject"));
+			return (clazz == FactoryBean.class || clazz == SmartFactoryBean.class) &&
+					!"getObject".equals(method.getName());
 		}
 
 		// Call from CGLIB proxy handle, potentially implementing a FactoryBean method?
@@ -213,8 +213,8 @@ public class MethodValidationInterceptor implements MethodInterceptor {
 		else if (FactoryBean.class.isAssignableFrom(clazz)) {
 			factoryBeanType = FactoryBean.class;
 		}
-		return (factoryBeanType != null && !method.getName().equals("getObject") &&
-				ClassUtils.hasMethod(factoryBeanType, method));
+		return factoryBeanType != null && !"getObject".equals(method.getName()) &&
+				ClassUtils.hasMethod(factoryBeanType, method);
 	}
 
 	/**
@@ -259,11 +259,11 @@ public class MethodValidationInterceptor implements MethodInterceptor {
 				}
 				SpringValidatorAdapter validatorAdapter = validatorAdapterSupplier.get();
 				MethodParameter param = new MethodParameter(method, i);
-				arguments[i] = (reactiveAdapter.isMultiValue() ?
+				arguments[i] = reactiveAdapter.isMultiValue() ?
 						Flux.from(reactiveAdapter.toPublisher(arguments[i])).doOnNext(value ->
 								validate(validatorAdapter, adaptViolations, target, method, param, value, groups)) :
 						Mono.from(reactiveAdapter.toPublisher(arguments[i])).doOnNext(value ->
-								validate(validatorAdapter, adaptViolations, target, method, param, value, groups)));
+								validate(validatorAdapter, adaptViolations, target, method, param, value, groups));
 			}
 			return arguments;
 		}

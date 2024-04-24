@@ -80,7 +80,7 @@ public class JndiObjectFactoryBean extends JndiObjectLocator
 
 	private boolean cache = true;
 
-	private boolean exposeAccessContext = false;
+	private boolean exposeAccessContext;
 
 	@Nullable
 	private Object defaultObject;
@@ -210,8 +210,8 @@ public class JndiObjectFactoryBean extends JndiObjectLocator
 		else {
 			if (this.defaultObject != null && getExpectedType() != null &&
 					!getExpectedType().isInstance(this.defaultObject)) {
-				TypeConverter converter = (this.beanFactory != null ?
-						this.beanFactory.getTypeConverter() : new SimpleTypeConverter());
+				TypeConverter converter = this.beanFactory != null ?
+						this.beanFactory.getTypeConverter() : new SimpleTypeConverter();
 				try {
 					this.defaultObject = converter.convertIfNecessary(this.defaultObject, getExpectedType());
 				}
@@ -370,7 +370,7 @@ public class JndiObjectFactoryBean extends JndiObjectLocator
 		@Override
 		@Nullable
 		public Object invoke(MethodInvocation invocation) throws Throwable {
-			Context ctx = (isEligible(invocation.getMethod()) ? this.jndiTemplate.getContext() : null);
+			Context ctx = isEligible(invocation.getMethod()) ? this.jndiTemplate.getContext() : null;
 			try {
 				return invocation.proceed();
 			}
@@ -380,7 +380,7 @@ public class JndiObjectFactoryBean extends JndiObjectLocator
 		}
 
 		protected boolean isEligible(Method method) {
-			return (Object.class != method.getDeclaringClass());
+			return Object.class != method.getDeclaringClass();
 		}
 	}
 

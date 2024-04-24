@@ -46,7 +46,7 @@ public abstract class AbstractBeanFactoryAwareAdvisingPostProcessor extends Abst
 
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) {
-		this.beanFactory = (beanFactory instanceof ConfigurableListableBeanFactory clbf ? clbf : null);
+		this.beanFactory = beanFactory instanceof ConfigurableListableBeanFactory clbf ? clbf : null;
 	}
 
 	@Override
@@ -65,8 +65,8 @@ public abstract class AbstractBeanFactoryAwareAdvisingPostProcessor extends Abst
 
 	@Override
 	protected boolean isEligible(Object bean, String beanName) {
-		return (!AutoProxyUtils.isOriginalInstance(beanName, bean.getClass()) &&
-				super.isEligible(bean, beanName));
+		return !AutoProxyUtils.isOriginalInstance(beanName, bean.getClass()) &&
+				super.isEligible(bean, beanName);
 	}
 
 }

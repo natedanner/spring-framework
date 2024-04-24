@@ -261,9 +261,9 @@ public abstract class JmxUtils {
 	 * @see org.springframework.jmx.export.MBeanExporter#isMBean(Class)
 	 */
 	public static boolean isMBean(@Nullable Class<?> clazz) {
-		return (clazz != null &&
+		return clazz != null &&
 				(DynamicMBean.class.isAssignableFrom(clazz) ||
-						(getMBeanInterface(clazz) != null || getMXBeanInterface(clazz) != null)));
+						(getMBeanInterface(clazz) != null || getMXBeanInterface(clazz) != null));
 	}
 
 	/**

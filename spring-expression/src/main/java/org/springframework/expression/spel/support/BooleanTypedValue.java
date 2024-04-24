@@ -43,7 +43,7 @@ public final class BooleanTypedValue extends TypedValue {
 
 
 	public static BooleanTypedValue forValue(boolean b) {
-		return (b ? TRUE : FALSE);
+		return b ? TRUE : FALSE;
 	}
 
 }

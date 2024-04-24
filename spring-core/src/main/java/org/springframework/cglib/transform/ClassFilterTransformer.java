@@ -19,7 +19,7 @@ package org.springframework.cglib.transform;
 import org.springframework.cglib.core.ClassTransformer;
 
 public class ClassFilterTransformer extends AbstractClassFilterTransformer {
-    private ClassFilter filter;
+	private final ClassFilter filter;
 
     public ClassFilterTransformer(ClassFilter filter, ClassTransformer pass) {
         super(pass);

@@ -160,8 +160,8 @@ public class ReactiveAdapterRegistry {
 	private ReactiveAdapter buildAdapter(ReactiveTypeDescriptor descriptor,
 			Function<Object, Publisher<?>> toAdapter, Function<Publisher<?>, Object> fromAdapter) {
 
-		return (reactorPresent ? new ReactorAdapter(descriptor, toAdapter, fromAdapter) :
-				new ReactiveAdapter(descriptor, toAdapter, fromAdapter));
+		return reactorPresent ? new ReactorAdapter(descriptor, toAdapter, fromAdapter) :
+				new ReactiveAdapter(descriptor, toAdapter, fromAdapter);
 	}
 
 	/**
@@ -195,8 +195,8 @@ public class ReactiveAdapterRegistry {
 			return null;
 		}
 
-		Object sourceToUse = (source instanceof Optional<?> optional ? optional.orElse(null) : source);
-		Class<?> clazz = (sourceToUse != null ? sourceToUse.getClass() : reactiveType);
+		Object sourceToUse = source instanceof Optional<?> optional ? optional.orElse(null) : source;
+		Class<?> clazz = sourceToUse != null ? sourceToUse.getClass() : reactiveType;
 		if (clazz == null) {
 			return null;
 		}
@@ -257,7 +257,7 @@ public class ReactiveAdapterRegistry {
 		@Override
 		public <T> Publisher<T> toPublisher(@Nullable Object source) {
 			Publisher<T> publisher = super.toPublisher(source);
-			return (isMultiValue() ? Flux.from(publisher) : Mono.from(publisher));
+			return isMultiValue() ? Flux.from(publisher) : Mono.from(publisher);
 		}
 	}
 

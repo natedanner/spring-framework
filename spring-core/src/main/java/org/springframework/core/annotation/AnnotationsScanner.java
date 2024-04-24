@@ -254,8 +254,8 @@ abstract class AnnotationsScanner {
 
 		try {
 			R result = processor.doWithAggregate(context, 0);
-			return (result != null ? result :
-				processMethodAnnotations(context, 0, source, processor));
+			return result != null ? result :
+				processMethodAnnotations(context, 0, source, processor);
 		}
 		catch (Throwable ex) {
 			AnnotationUtils.handleIntrospectionFailure(source, ex);
@@ -353,9 +353,9 @@ abstract class AnnotationsScanner {
 	}
 
 	private static boolean isOverride(Method rootMethod, Method candidateMethod) {
-		return (!Modifier.isPrivate(candidateMethod.getModifiers()) &&
+		return !Modifier.isPrivate(candidateMethod.getModifiers()) &&
 				candidateMethod.getName().equals(rootMethod.getName()) &&
-				hasSameParameterTypes(rootMethod, candidateMethod));
+				hasSameParameterTypes(rootMethod, candidateMethod);
 	}
 
 	private static boolean hasSameParameterTypes(Method rootMethod, Method candidateMethod) {
@@ -417,8 +417,8 @@ abstract class AnnotationsScanner {
 
 		try {
 			R result = processor.doWithAggregate(context, 0);
-			return (result != null ? result : processor.doWithAnnotations(
-				context, 0, source, getDeclaredAnnotations(source, false)));
+			return result != null ? result : processor.doWithAnnotations(
+				context, 0, source, getDeclaredAnnotations(source, false));
 		}
 		catch (Throwable ex) {
 			AnnotationUtils.handleIntrospectionFailure(source, ex);
@@ -458,7 +458,7 @@ abstract class AnnotationsScanner {
 						allIgnored = false;
 					}
 				}
-				annotations = (allIgnored ? NO_ANNOTATIONS : annotations);
+				annotations = allIgnored ? NO_ANNOTATIONS : annotations;
 				if (source instanceof Class || source instanceof Member) {
 					declaredAnnotationCache.put(source, annotations);
 					cached = true;
@@ -503,7 +503,7 @@ abstract class AnnotationsScanner {
 	}
 
 	static boolean hasPlainJavaAnnotationsOnly(Class<?> type) {
-		return (type.getName().startsWith("java.") || type == Ordered.class);
+		return type.getName().startsWith("java.") || type == Ordered.class;
 	}
 
 	private static boolean isWithoutHierarchy(AnnotatedElement source, SearchStrategy searchStrategy,
@@ -513,14 +513,14 @@ abstract class AnnotationsScanner {
 			return true;
 		}
 		if (source instanceof Class<?> sourceClass) {
-			boolean noSuperTypes = (sourceClass.getSuperclass() == Object.class &&
-					sourceClass.getInterfaces().length == 0);
-			return (searchEnclosingClass.test(sourceClass) ? noSuperTypes &&
-					sourceClass.getEnclosingClass() == null : noSuperTypes);
+			boolean noSuperTypes = sourceClass.getSuperclass() == Object.class &&
+					sourceClass.getInterfaces().length == 0;
+			return searchEnclosingClass.test(sourceClass) ? noSuperTypes &&
+					sourceClass.getEnclosingClass() == null : noSuperTypes;
 		}
 		if (source instanceof Method sourceMethod) {
-			return (Modifier.isPrivate(sourceMethod.getModifiers()) ||
-					isWithoutHierarchy(sourceMethod.getDeclaringClass(), searchStrategy, searchEnclosingClass));
+			return Modifier.isPrivate(sourceMethod.getModifiers()) ||
+					isWithoutHierarchy(sourceMethod.getDeclaringClass(), searchStrategy, searchEnclosingClass);
 		}
 		return true;
 	}

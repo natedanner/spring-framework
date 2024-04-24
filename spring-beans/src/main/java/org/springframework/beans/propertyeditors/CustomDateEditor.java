@@ -120,7 +120,7 @@ public class CustomDateEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		Date value = (Date) getValue();
-		return (value != null ? this.dateFormat.format(value) : "");
+		return value != null ? this.dateFormat.format(value) : "";
 	}
 
 }

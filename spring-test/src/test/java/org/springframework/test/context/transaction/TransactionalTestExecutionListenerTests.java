@@ -314,7 +314,7 @@ class TransactionalTestExecutionListenerTests {
 
 	private static class AbstractInvocable implements Invocable {
 
-		boolean invoked = false;
+		boolean invoked;
 
 
 		@Override

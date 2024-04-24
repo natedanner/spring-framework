@@ -159,10 +159,10 @@ final class OpaqueUriComponents extends UriComponents {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof OpaqueUriComponents that &&
+		return this == other || (other instanceof OpaqueUriComponents that &&
 				ObjectUtils.nullSafeEquals(getScheme(), that.getScheme()) &&
 				ObjectUtils.nullSafeEquals(this.ssp, that.ssp) &&
-				ObjectUtils.nullSafeEquals(getFragment(), that.getFragment())));
+				ObjectUtils.nullSafeEquals(getFragment(), that.getFragment()));
 	}
 
 	@Override

@@ -150,7 +150,7 @@ public abstract class AnnotationUtils {
 	 * @see #isCandidateClass(Class, String)
 	 */
 	public static boolean isCandidateClass(Class<?> clazz, @Nullable Class<? extends Annotation> annotationType) {
-		return (annotationType != null && isCandidateClass(clazz, annotationType.getName()));
+		return annotationType != null && isCandidateClass(clazz, annotationType.getName());
 	}
 
 	/**
@@ -168,10 +168,7 @@ public abstract class AnnotationUtils {
 		if (annotationName.startsWith("java.")) {
 			return true;
 		}
-		if (AnnotationsScanner.hasPlainJavaAnnotationsOnly(clazz)) {
-			return false;
-		}
-		return true;
+		return !AnnotationsScanner.hasPlainJavaAnnotationsOnly(clazz);
 	}
 
 	/**
@@ -230,7 +227,7 @@ public abstract class AnnotationUtils {
 
 	private static <A extends Annotation> boolean isSingleLevelPresent(MergedAnnotation<A> mergedAnnotation) {
 		int distance = mergedAnnotation.getDistance();
-		return (distance == 0 || distance == 1);
+		return distance == 0 || distance == 1;
 	}
 
 	/**
@@ -372,9 +369,9 @@ public abstract class AnnotationUtils {
 	public static <A extends Annotation> Set<A> getRepeatableAnnotations(AnnotatedElement annotatedElement,
 			Class<A> annotationType, @Nullable Class<? extends Annotation> containerAnnotationType) {
 
-		RepeatableContainers repeatableContainers = (containerAnnotationType != null ?
+		RepeatableContainers repeatableContainers = containerAnnotationType != null ?
 				RepeatableContainers.of(annotationType, containerAnnotationType) :
-				RepeatableContainers.standardRepeatables());
+				RepeatableContainers.standardRepeatables();
 
 		return MergedAnnotations.from(annotatedElement, SearchStrategy.SUPERCLASS, repeatableContainers)
 				.stream(annotationType)
@@ -738,7 +735,7 @@ public abstract class AnnotationUtils {
 	 * @return {@code true} if the annotation is in the {@code java.lang.annotation} package
 	 */
 	public static boolean isInJavaLangAnnotationPackage(@Nullable Annotation annotation) {
-		return (annotation != null && JAVA_LANG_ANNOTATION_FILTER.matches(annotation));
+		return annotation != null && JAVA_LANG_ANNOTATION_FILTER.matches(annotation);
 	}
 
 	/**
@@ -749,7 +746,7 @@ public abstract class AnnotationUtils {
 	 * @since 4.2
 	 */
 	public static boolean isInJavaLangAnnotationPackage(@Nullable String annotationType) {
-		return (annotationType != null && JAVA_LANG_ANNOTATION_FILTER.matches(annotationType));
+		return annotationType != null && JAVA_LANG_ANNOTATION_FILTER.matches(annotationType);
 	}
 
 	/**
@@ -987,7 +984,7 @@ public abstract class AnnotationUtils {
 
 	private static Object getAttributeValueForMirrorResolution(Method attribute, Object attributes) {
 		Object result = ((AnnotationAttributes) attributes).get(attribute.getName());
-		return (result instanceof DefaultValueHolder defaultValueHolder ? defaultValueHolder.defaultValue : result);
+		return result instanceof DefaultValueHolder defaultValueHolder ? defaultValueHolder.defaultValue : result;
 	}
 
 	@Nullable
@@ -1167,7 +1164,7 @@ public abstract class AnnotationUtils {
 	 */
 	@Nullable
 	public static Object getDefaultValue(@Nullable Annotation annotation, @Nullable String attributeName) {
-		return (annotation != null ? getDefaultValue(annotation.annotationType(), attributeName) : null);
+		return annotation != null ? getDefaultValue(annotation.annotationType(), attributeName) : null;
 	}
 
 	/**
@@ -1324,8 +1321,8 @@ public abstract class AnnotationUtils {
 	 */
 	public static boolean isSynthesizedAnnotation(@Nullable Annotation annotation) {
 		try {
-			return (annotation != null && Proxy.isProxyClass(annotation.getClass()) &&
-					Proxy.getInvocationHandler(annotation) instanceof SynthesizedMergedAnnotationInvocationHandler);
+			return annotation != null && Proxy.isProxyClass(annotation.getClass()) &&
+					Proxy.getInvocationHandler(annotation) instanceof SynthesizedMergedAnnotationInvocationHandler;
 		}
 		catch (SecurityException ex) {
 			// Security settings disallow reflective access to the InvocationHandler:

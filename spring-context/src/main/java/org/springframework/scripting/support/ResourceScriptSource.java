@@ -107,7 +107,7 @@ public class ResourceScriptSource implements ScriptSource {
 	@Override
 	public boolean isModified() {
 		synchronized (this.lastModifiedMonitor) {
-			return (this.lastModified < 0 || retrieveLastModifiedTime() > this.lastModified);
+			return this.lastModified < 0 || retrieveLastModifiedTime() > this.lastModified;
 		}
 	}
 
@@ -132,7 +132,7 @@ public class ResourceScriptSource implements ScriptSource {
 	@Nullable
 	public String suggestedClassName() {
 		String filename = getResource().getFilename();
-		return (filename != null ? StringUtils.stripFilenameExtension(filename) : null);
+		return filename != null ? StringUtils.stripFilenameExtension(filename) : null;
 	}
 
 	@Override

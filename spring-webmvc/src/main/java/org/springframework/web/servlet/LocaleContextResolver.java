@@ -90,7 +90,7 @@ public interface LocaleContextResolver extends LocaleResolver {
 	@Override
 	default Locale resolveLocale(HttpServletRequest request) {
 		Locale locale = resolveLocaleContext(request).getLocale();
-		return (locale != null ? locale : request.getLocale());
+		return locale != null ? locale : request.getLocale();
 	}
 
 	/**

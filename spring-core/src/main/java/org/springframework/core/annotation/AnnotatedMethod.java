@@ -214,8 +214,8 @@ public class AnnotatedMethod {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other != null && getClass() == other.getClass() &&
-				this.method.equals(((AnnotatedMethod) other).method)));
+		return this == other || (other != null && getClass() == other.getClass() &&
+				this.method.equals(((AnnotatedMethod) other).method));
 	}
 
 	@Override
@@ -339,7 +339,7 @@ public class AnnotatedMethod {
 
 		public ReturnValueMethodParameter(@Nullable Object returnValue) {
 			super(-1);
-			this.returnValueType = (returnValue != null ? returnValue.getClass() : null);
+			this.returnValueType = returnValue != null ? returnValue.getClass() : null;
 		}
 
 		protected ReturnValueMethodParameter(ReturnValueMethodParameter original) {
@@ -349,7 +349,7 @@ public class AnnotatedMethod {
 
 		@Override
 		public Class<?> getParameterType() {
-			return (this.returnValueType != null ? this.returnValueType : super.getParameterType());
+			return this.returnValueType != null ? this.returnValueType : super.getParameterType();
 		}
 
 		@Override

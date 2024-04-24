@@ -257,8 +257,8 @@ public final class HttpServiceProxyFactory {
 			// Custom
 			List<HttpServiceArgumentResolver> resolvers = new ArrayList<>(this.customArgumentResolvers);
 
-			ConversionService service = (this.conversionService != null ?
-					this.conversionService : new DefaultFormattingConversionService());
+			ConversionService service = this.conversionService != null ?
+					this.conversionService : new DefaultFormattingConversionService();
 
 			// Annotation-based
 			resolvers.add(new RequestHeaderArgumentResolver(service));

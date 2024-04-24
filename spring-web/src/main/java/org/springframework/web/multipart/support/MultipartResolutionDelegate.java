@@ -65,13 +65,13 @@ public final class MultipartResolutionDelegate {
 	}
 
 	public static boolean isMultipartRequest(HttpServletRequest request) {
-		return (WebUtils.getNativeRequest(request, MultipartHttpServletRequest.class) != null ||
-				isMultipartContent(request));
+		return WebUtils.getNativeRequest(request, MultipartHttpServletRequest.class) != null ||
+				isMultipartContent(request);
 	}
 
 	private static boolean isMultipartContent(HttpServletRequest request) {
 		String contentType = request.getContentType();
-		return (contentType != null && contentType.toLowerCase().startsWith("multipart/"));
+		return contentType != null && contentType.toLowerCase().startsWith("multipart/");
 	}
 
 	static MultipartHttpServletRequest asMultipartHttpServletRequest(HttpServletRequest request) {
@@ -85,9 +85,9 @@ public final class MultipartResolutionDelegate {
 
 	public static boolean isMultipartArgument(MethodParameter parameter) {
 		Class<?> paramType = parameter.getNestedParameterType();
-		return (MultipartFile.class == paramType ||
+		return MultipartFile.class == paramType ||
 				isMultipartFileCollection(parameter) || isMultipartFileArray(parameter) ||
-				(Part.class == paramType || isPartCollection(parameter) || isPartArray(parameter)));
+				(Part.class == paramType || isPartCollection(parameter) || isPartArray(parameter));
 	}
 
 	@Nullable
@@ -96,7 +96,7 @@ public final class MultipartResolutionDelegate {
 
 		MultipartHttpServletRequest multipartRequest =
 				WebUtils.getNativeRequest(request, MultipartHttpServletRequest.class);
-		boolean isMultipart = (multipartRequest != null || isMultipartContent(request));
+		boolean isMultipart = multipartRequest != null || isMultipartContent(request);
 
 		if (MultipartFile.class == parameter.getNestedParameterType()) {
 			if (!isMultipart) {
@@ -115,7 +115,7 @@ public final class MultipartResolutionDelegate {
 				multipartRequest = new StandardMultipartHttpServletRequest(request);
 			}
 			List<MultipartFile> files = multipartRequest.getFiles(name);
-			return (!files.isEmpty() ? files : null);
+			return files.isEmpty() ? null : files;
 		}
 		else if (isMultipartFileArray(parameter)) {
 			if (!isMultipart) {
@@ -125,7 +125,7 @@ public final class MultipartResolutionDelegate {
 				multipartRequest = new StandardMultipartHttpServletRequest(request);
 			}
 			List<MultipartFile> files = multipartRequest.getFiles(name);
-			return (!files.isEmpty() ? files.toArray(new MultipartFile[0]) : null);
+			return files.isEmpty() ? null : files.toArray(new MultipartFile[0]);
 		}
 		else if (Part.class == parameter.getNestedParameterType()) {
 			if (!isMultipart) {
@@ -138,14 +138,14 @@ public final class MultipartResolutionDelegate {
 				return null;
 			}
 			List<Part> parts = resolvePartList(request, name);
-			return (!parts.isEmpty() ? parts : null);
+			return parts.isEmpty() ? null : parts;
 		}
 		else if (isPartArray(parameter)) {
 			if (!isMultipart) {
 				return null;
 			}
 			List<Part> parts = resolvePartList(request, name);
-			return (!parts.isEmpty() ? parts.toArray(new Part[0]) : null);
+			return parts.isEmpty() ? null : parts.toArray(new Part[0]);
 		}
 		else {
 			return UNRESOLVABLE;
@@ -153,19 +153,19 @@ public final class MultipartResolutionDelegate {
 	}
 
 	private static boolean isMultipartFileCollection(MethodParameter methodParam) {
-		return (MultipartFile.class == getCollectionParameterType(methodParam));
+		return MultipartFile.class == getCollectionParameterType(methodParam);
 	}
 
 	private static boolean isMultipartFileArray(MethodParameter methodParam) {
-		return (MultipartFile.class == methodParam.getNestedParameterType().componentType());
+		return MultipartFile.class == methodParam.getNestedParameterType().componentType();
 	}
 
 	private static boolean isPartCollection(MethodParameter methodParam) {
-		return (Part.class == getCollectionParameterType(methodParam));
+		return Part.class == getCollectionParameterType(methodParam);
 	}
 
 	private static boolean isPartArray(MethodParameter methodParam) {
-		return (Part.class == methodParam.getNestedParameterType().componentType());
+		return Part.class == methodParam.getNestedParameterType().componentType();
 	}
 
 	@Nullable

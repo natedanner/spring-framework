@@ -75,12 +75,12 @@ class ObjenesisCglibAopProxy extends CglibAopProxy {
 		if (proxyInstance == null) {
 			// Regular instantiation via default constructor...
 			try {
-				Constructor<?> ctor = (this.constructorArgs != null ?
+				Constructor<?> ctor = this.constructorArgs != null ?
 						proxyClass.getDeclaredConstructor(this.constructorArgTypes) :
-						proxyClass.getDeclaredConstructor());
+						proxyClass.getDeclaredConstructor();
 				ReflectionUtils.makeAccessible(ctor);
-				proxyInstance = (this.constructorArgs != null ?
-						ctor.newInstance(this.constructorArgs) : ctor.newInstance());
+				proxyInstance = this.constructorArgs != null ?
+						ctor.newInstance(this.constructorArgs) : ctor.newInstance();
 			}
 			catch (Throwable ex) {
 				throw new AopConfigException("Unable to instantiate proxy using Objenesis, " +

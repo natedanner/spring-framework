@@ -116,7 +116,7 @@ public class MethodNameBasedMBeanInfoAssembler extends AbstractConfigurableMBean
 				return methodNames.contains(method.getName());
 			}
 		}
-		return (this.managedMethods != null && this.managedMethods.contains(method.getName()));
+		return this.managedMethods != null && this.managedMethods.contains(method.getName());
 	}
 
 }

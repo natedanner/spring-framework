@@ -208,9 +208,9 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 
 	private final Set<AsyncMessageListenerInvoker> scheduledInvokers = new HashSet<>();
 
-	private int activeInvokerCount = 0;
+	private int activeInvokerCount;
 
-	private int registeredWithDestination = 0;
+	private int registeredWithDestination;
 
 	private volatile boolean recovering;
 
@@ -581,7 +581,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 	public void initialize() {
 		// Adapt default cache level.
 		if (this.cacheLevel == CACHE_AUTO) {
-			this.cacheLevel = (getTransactionManager() != null ? CACHE_NONE : CACHE_CONSUMER);
+			this.cacheLevel = getTransactionManager() != null ? CACHE_NONE : CACHE_CONSUMER;
 		}
 
 		// Prepare taskExecutor and maxMessagesPerTask.
@@ -750,7 +750,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 	 */
 	public boolean isRegisteredWithDestination() {
 		synchronized (this.lifecycleMonitor) {
-			return (this.registeredWithDestination > 0);
+			return this.registeredWithDestination > 0;
 		}
 	}
 
@@ -763,7 +763,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 	 */
 	protected TaskExecutor createDefaultTaskExecutor() {
 		String beanName = getBeanName();
-		String threadNamePrefix = (beanName != null ? beanName + "-" : DEFAULT_THREAD_NAME_PREFIX);
+		String threadNamePrefix = beanName != null ? beanName + "-" : DEFAULT_THREAD_NAME_PREFIX;
 		return new SimpleAsyncTaskExecutor(threadNamePrefix);
 	}
 
@@ -786,7 +786,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 	 */
 	@Override
 	protected final boolean sharedConnectionEnabled() {
-		return (getCacheLevel() >= CACHE_CONNECTION);
+		return getCacheLevel() >= CACHE_CONNECTION;
 	}
 
 	/**
@@ -851,9 +851,9 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 	 */
 	private boolean shouldRescheduleInvoker(int idleTaskExecutionCount) {
 		boolean superfluous =
-				(idleTaskExecutionCount >= this.idleTaskExecutionLimit && getIdleInvokerCount() > 1);
-		return (this.scheduledInvokers.size() <=
-				(superfluous ? this.concurrentConsumers : this.maxConcurrentConsumers));
+				idleTaskExecutionCount >= this.idleTaskExecutionLimit && getIdleInvokerCount() > 1;
+		return this.scheduledInvokers.size() <=
+				(superfluous ? this.concurrentConsumers : this.maxConcurrentConsumers);
 	}
 
 	/**
@@ -1120,7 +1120,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 
 		private boolean lastMessageSucceeded;
 
-		private int idleTaskExecutionCount = 0;
+		private int idleTaskExecutionCount;
 
 		private volatile boolean idle = true;
 
@@ -1148,7 +1148,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 						boolean currentReceived = invokeListener();
 						messageReceived |= currentReceived;
 						messageCount++;
-						idleCount = (currentReceived ? 0 : idleCount + 1);
+						idleCount = currentReceived ? 0 : idleCount + 1;
 					}
 				}
 			}
@@ -1245,7 +1245,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 					}
 				}
 				if (active) {
-					messageReceived = (invokeListener() || messageReceived);
+					messageReceived = invokeListener() || messageReceived;
 				}
 			}
 			return messageReceived;
@@ -1342,7 +1342,7 @@ public class DefaultMessageListenerContainer extends AbstractPollingMessageListe
 
 		@Override
 		public boolean isLongLived() {
-			return (maxMessagesPerTask < 0);
+			return maxMessagesPerTask < 0;
 		}
 
 		public void setIdle(boolean idle) {

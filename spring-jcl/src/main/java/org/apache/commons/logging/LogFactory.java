@@ -150,7 +150,7 @@ public abstract class LogFactory {
 
 	@Deprecated
 	public static String objectId(Object o) {
-		return (o == null ? "null" : o.getClass().getName() + "@" + System.identityHashCode(o));
+		return o == null ? "null" : o.getClass().getName() + "@" + System.identityHashCode(o);
 	}
 
 }

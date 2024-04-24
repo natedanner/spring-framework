@@ -51,7 +51,7 @@ public class SpringJtaSynchronizationAdapter implements Synchronization {
 	@Nullable
 	private UserTransaction jtaTransaction;
 
-	private boolean beforeCompletionCalled = false;
+	private boolean beforeCompletionCalled;
 
 
 	/**
@@ -100,7 +100,7 @@ public class SpringJtaSynchronizationAdapter implements Synchronization {
 
 		this(springSynchronization);
 		this.jtaTransaction =
-				(jtaTransactionManager != null ? new UserTransactionAdapter(jtaTransactionManager) : null);
+				jtaTransactionManager != null ? new UserTransactionAdapter(jtaTransactionManager) : null;
 	}
 
 

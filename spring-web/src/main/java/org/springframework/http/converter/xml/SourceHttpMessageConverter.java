@@ -84,9 +84,9 @@ public class SourceHttpMessageConverter<T extends Source> extends AbstractHttpMe
 
 	private final TransformerFactory transformerFactory = TransformerFactory.newInstance();
 
-	private boolean supportDtd = false;
+	private boolean supportDtd;
 
-	private boolean processExternalEntities = false;
+	private boolean processExternalEntities;
 
 
 	/**
@@ -277,7 +277,7 @@ public class SourceHttpMessageConverter<T extends Source> extends AbstractHttpMe
 
 	private static class CountingOutputStream extends OutputStream {
 
-		long count = 0;
+		long count;
 
 		@Override
 		public void write(int b) throws IOException {

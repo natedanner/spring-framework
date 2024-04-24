@@ -111,7 +111,7 @@ public class ServerSentEventHttpMessageReader implements HttpMessageReader<Objec
 
 	@Override
 	public boolean canRead(ResolvableType elementType, @Nullable MediaType mediaType) {
-		return (MediaType.TEXT_EVENT_STREAM.includes(mediaType) || isServerSentEvent(elementType));
+		return MediaType.TEXT_EVENT_STREAM.includes(mediaType) || isServerSentEvent(elementType);
 	}
 
 	private boolean isServerSentEvent(ResolvableType elementType) {
@@ -126,14 +126,14 @@ public class ServerSentEventHttpMessageReader implements HttpMessageReader<Objec
 		LimitTracker limitTracker = new LimitTracker();
 
 		boolean shouldWrap = isServerSentEvent(elementType);
-		ResolvableType valueType = (shouldWrap ? elementType.getGeneric() : elementType);
+		ResolvableType valueType = shouldWrap ? elementType.getGeneric() : elementType;
 
 		return this.lineDecoder.decode(message.getBody(), STRING_TYPE, null, hints)
 				.doOnNext(limitTracker::afterLineParsed)
 				.bufferUntil(String::isEmpty)
 				.concatMap(lines -> {
 					Object event = buildEvent(lines, valueType, shouldWrap, hints);
-					return (event != null ? Mono.just(event) : Mono.empty());
+					return event != null ? Mono.just(event) : Mono.empty();
 				});
 	}
 
@@ -141,7 +141,7 @@ public class ServerSentEventHttpMessageReader implements HttpMessageReader<Objec
 	private Object buildEvent(List<String> lines, ResolvableType valueType, boolean shouldWrap,
 			Map<String, Object> hints) {
 
-		ServerSentEvent.Builder<Object> sseBuilder = (shouldWrap ? ServerSentEvent.builder() : null);
+		ServerSentEvent.Builder<Object> sseBuilder = shouldWrap ? ServerSentEvent.builder() : null;
 		StringBuilder data = null;
 		StringBuilder comment = null;
 
@@ -149,9 +149,9 @@ public class ServerSentEventHttpMessageReader implements HttpMessageReader<Objec
 			if (line.startsWith("data:")) {
 				int length = line.length();
 				if (length > 5) {
-					int index = (line.charAt(5) != ' ' ? 5 : 6);
+					int index = line.charAt(5) != ' ' ? 5 : 6;
 					if (length > index) {
-						data = (data != null ? data : new StringBuilder());
+						data = data != null ? data : new StringBuilder();
 						data.append(line, index, line.length());
 						data.append('\n');
 					}
@@ -168,13 +168,13 @@ public class ServerSentEventHttpMessageReader implements HttpMessageReader<Objec
 					sseBuilder.retry(Duration.ofMillis(Long.parseLong(line.substring(6).trim())));
 				}
 				else if (line.startsWith(":")) {
-					comment = (comment != null ? comment : new StringBuilder());
+					comment = comment != null ? comment : new StringBuilder();
 					comment.append(line.substring(1).trim()).append('\n');
 				}
 			}
 		}
 
-		Object decodedData = (data != null ? decodeData(data, valueType, hints) : null);
+		Object decodedData = data != null ? decodeData(data, valueType, hints) : null;
 
 		if (shouldWrap) {
 			if (comment != null) {
@@ -222,7 +222,7 @@ public class ServerSentEventHttpMessageReader implements HttpMessageReader<Objec
 
 	private class LimitTracker {
 
-		private int accumulated = 0;
+		private int accumulated;
 
 		public void afterLineParsed(String line) {
 			if (getMaxInMemorySize() < 0) {

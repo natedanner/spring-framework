@@ -185,7 +185,7 @@ class StompDecoderTests {
 	@Test // gh-23713
 	public void decodeFramesWithExtraNewLines() {
 		String frame1 = "SEND\ndestination:test\n\nbody\0\n\n\n";
-		ByteBuffer buffer = ByteBuffer.wrap((frame1).getBytes());
+		ByteBuffer buffer = ByteBuffer.wrap(frame1.getBytes());
 
 		final List<Message<byte[]>> messages = decoder.decode(buffer);
 

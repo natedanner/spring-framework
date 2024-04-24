@@ -143,12 +143,12 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 	@Nullable
 	private BeanFactory beanFactory;
 
-	private boolean initialized = false;
+	private boolean initialized;
 
 
 	protected CacheAspectSupport() {
 		this.reactiveCachingHandler =
-				(reactiveStreamsPresent && !shouldIgnoreReactiveStreams ? new ReactiveCachingHandler() : null);
+				reactiveStreamsPresent && !shouldIgnoreReactiveStreams ? new ReactiveCachingHandler() : null;
 	}
 
 
@@ -176,8 +176,8 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 	 */
 	public void setCacheOperationSources(CacheOperationSource... cacheOperationSources) {
 		Assert.notEmpty(cacheOperationSources, "At least 1 CacheOperationSource needs to be specified");
-		this.cacheOperationSource = (cacheOperationSources.length > 1 ?
-				new CompositeCacheOperationSource(cacheOperationSources) : cacheOperationSources[0]);
+		this.cacheOperationSource = cacheOperationSources.length > 1 ?
+				new CompositeCacheOperationSource(cacheOperationSources) : cacheOperationSources[0];
 	}
 
 	/**
@@ -578,7 +578,7 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 
 	@Nullable
 	private Object unwrapCacheValue(@Nullable Object cacheValue) {
-		return (cacheValue instanceof Cache.ValueWrapper wrapper ? wrapper.get() : cacheValue);
+		return cacheValue instanceof Cache.ValueWrapper wrapper ? wrapper.get() : cacheValue;
 	}
 
 	@Nullable
@@ -610,7 +610,7 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 			}
 		}
 		// Check if all puts have been excluded by condition
-		return (cachePutContexts.size() != excluded.size());
+		return cachePutContexts.size() != excluded.size();
 	}
 
 	@Nullable
@@ -734,7 +734,7 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 
 		public Collection<CacheOperationContext> get(Class<? extends CacheOperation> operationClass) {
 			Collection<CacheOperationContext> result = this.contexts.get(operationClass);
-			return (result != null ? result : Collections.emptyList());
+			return result != null ? result : Collections.emptyList();
 		}
 
 		public boolean isSynchronized() {
@@ -805,8 +805,8 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 			this.operation = operation;
 			this.method = BridgeMethodResolver.findBridgedMethod(method);
 			this.targetClass = targetClass;
-			this.targetMethod = (!Proxy.isProxyClass(targetClass) ?
-					AopUtils.getMostSpecificMethod(method, targetClass) : this.method);
+			this.targetMethod = Proxy.isProxyClass(targetClass) ? this.method :
+					AopUtils.getMostSpecificMethod(method, targetClass);
 			this.methodKey = new AnnotatedElementKey(this.targetMethod, targetClass);
 			this.keyGenerator = keyGenerator;
 			this.cacheResolver = cacheResolver;
@@ -964,14 +964,14 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof CacheOperationCacheKey that &&
+			return this == other || (other instanceof CacheOperationCacheKey that &&
 					this.cacheOperation.equals(that.cacheOperation) &&
-					this.methodCacheKey.equals(that.methodCacheKey)));
+					this.methodCacheKey.equals(that.methodCacheKey));
 		}
 
 		@Override
 		public int hashCode() {
-			return (this.cacheOperation.hashCode() * 31 + this.methodCacheKey.hashCode());
+			return this.cacheOperation.hashCode() * 31 + this.methodCacheKey.hashCode();
 		}
 
 		@Override
@@ -1094,14 +1094,14 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 				}
 			}
 			if (KotlinDetector.isKotlinReflectPresent() && KotlinDetector.isSuspendingFunction(method)) {
-				return Mono.fromFuture(cache.retrieve(key, () -> ((Mono<?>) invokeOperation(invoker)).toFuture()));
+				return Mono.fromFuture(cache.retrieve(key, ((Mono<?>) invokeOperation(invoker))::toFuture));
 			}
 			return NOT_HANDLED;
 		}
 
 		@Nullable
 		public Object processCacheEvicts(List<CacheOperationContext> contexts, @Nullable Object result) {
-			ReactiveAdapter adapter = (result != null ? this.registry.getAdapter(result.getClass()) : null);
+			ReactiveAdapter adapter = result != null ? this.registry.getAdapter(result.getClass()) : null;
 			if (adapter != null) {
 				return adapter.fromPublisher(Mono.from(adapter.toPublisher(result))
 						.doOnSuccess(value -> performCacheEvicts(contexts, result)));
@@ -1136,13 +1136,13 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 
 		private Flux<?> valueToFlux(Object value, CacheOperationContexts contexts) {
 			Object data = unwrapCacheValue(value);
-			return (!contexts.processed && data instanceof Iterable<?> iterable ? Flux.fromIterable(iterable) :
-					(data != null ? Flux.just(data) : Flux.empty()));
+			return !contexts.processed && data instanceof Iterable<?> iterable ? Flux.fromIterable(iterable) :
+					(data != null ? Flux.just(data) : Flux.empty());
 		}
 
 		@Nullable
 		public Object processPutRequest(CachePutRequest request, @Nullable Object result) {
-			ReactiveAdapter adapter = (result != null ? this.registry.getAdapter(result.getClass()) : null);
+			ReactiveAdapter adapter = result != null ? this.registry.getAdapter(result.getClass()) : null;
 			if (adapter != null) {
 				if (adapter.isMultiValue()) {
 					Flux<?> source = Flux.from(adapter.toPublisher(result));

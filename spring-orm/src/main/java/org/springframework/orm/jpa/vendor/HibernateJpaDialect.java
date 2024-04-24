@@ -154,7 +154,7 @@ public class HibernateJpaDialect extends DefaultJpaDialect {
 			session.getTransaction().setTimeout(definition.getTimeout());
 		}
 
-		boolean isolationLevelNeeded = (definition.getIsolationLevel() != TransactionDefinition.ISOLATION_DEFAULT);
+		boolean isolationLevelNeeded = definition.getIsolationLevel() != TransactionDefinition.ISOLATION_DEFAULT;
 		Integer previousIsolationLevel = null;
 		Connection preparedCon = null;
 

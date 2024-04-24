@@ -63,7 +63,7 @@ class ConcurrentMapCacheTests extends AbstractValueAdaptingCacheTests<Concurrent
 
 	@Override
 	protected ConcurrentMapCache getCache(boolean allowNull) {
-		return (allowNull ? this.cache : this.cacheNoNull);
+		return allowNull ? this.cache : this.cacheNoNull;
 	}
 
 	@Override

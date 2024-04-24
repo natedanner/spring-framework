@@ -88,7 +88,7 @@ public class ResourceHttpMessageConverter extends AbstractHttpMessageConverter<R
 				@Override
 				public long contentLength() throws IOException {
 					long length = inputMessage.getHeaders().getContentLength();
-					return (length != -1 ? length : super.contentLength());
+					return length != -1 ? length : super.contentLength();
 				}
 			};
 		}
@@ -120,7 +120,7 @@ public class ResourceHttpMessageConverter extends AbstractHttpMessageConverter<R
 			return null;
 		}
 		long contentLength = resource.contentLength();
-		return (contentLength < 0 ? null : contentLength);
+		return contentLength < 0 ? null : contentLength;
 	}
 
 	/**

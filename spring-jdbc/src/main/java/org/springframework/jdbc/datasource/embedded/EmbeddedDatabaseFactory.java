@@ -71,7 +71,7 @@ public class EmbeddedDatabaseFactory {
 
 	private static final Log logger = LogFactory.getLog(EmbeddedDatabaseFactory.class);
 
-	private boolean generateUniqueDatabaseName = false;
+	private boolean generateUniqueDatabaseName;
 
 	private String databaseName = DEFAULT_DATABASE_NAME;
 

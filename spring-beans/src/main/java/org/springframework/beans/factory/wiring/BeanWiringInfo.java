@@ -52,11 +52,11 @@ public class BeanWiringInfo {
 	@Nullable
 	private String beanName;
 
-	private boolean isDefaultBeanName = false;
+	private boolean isDefaultBeanName;
 
 	private int autowireMode = AutowireCapableBeanFactory.AUTOWIRE_NO;
 
-	private boolean dependencyCheck = false;
+	private boolean dependencyCheck;
 
 
 	/**
@@ -114,7 +114,7 @@ public class BeanWiringInfo {
 	 * Return whether this BeanWiringInfo indicates autowiring.
 	 */
 	public boolean indicatesAutowiring() {
-		return (this.beanName == null);
+		return this.beanName == null;
 	}
 
 	/**

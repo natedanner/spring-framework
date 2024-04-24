@@ -182,9 +182,9 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 
 	private boolean ignoreDefaultModelOnRedirect = true;
 
-	private int cacheSecondsForSessionAttributeHandlers = 0;
+	private int cacheSecondsForSessionAttributeHandlers;
 
-	private boolean synchronizeOnSession = false;
+	private boolean synchronizeOnSession;
 
 	private SessionAttributeStore sessionAttributeStore = new DefaultSessionAttributeStore();
 
@@ -241,7 +241,7 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 	 */
 	@Nullable
 	public List<HandlerMethodArgumentResolver> getArgumentResolvers() {
-		return (this.argumentResolvers != null ? this.argumentResolvers.getResolvers() : null);
+		return this.argumentResolvers != null ? this.argumentResolvers.getResolvers() : null;
 	}
 
 	/**
@@ -263,7 +263,7 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 	 */
 	@Nullable
 	public List<HandlerMethodArgumentResolver> getInitBinderArgumentResolvers() {
-		return (this.initBinderArgumentResolvers != null ? this.initBinderArgumentResolvers.getResolvers() : null);
+		return this.initBinderArgumentResolvers != null ? this.initBinderArgumentResolvers.getResolvers() : null;
 	}
 
 	/**
@@ -303,7 +303,7 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 	 */
 	@Nullable
 	public List<HandlerMethodReturnValueHandler> getReturnValueHandlers() {
-		return (this.returnValueHandlers != null ? this.returnValueHandlers.getHandlers() : null);
+		return this.returnValueHandlers != null ? this.returnValueHandlers.getHandlers() : null;
 	}
 
 	/**

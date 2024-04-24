@@ -54,7 +54,7 @@ class HttpSockJsSessionTests extends AbstractSockJsSessionTests<TestAbstractHttp
 
 	protected ServerHttpResponse response = new ServletServerHttpResponse(this.servletResponse);
 
-	private SockJsFrameFormat frameFormat = new DefaultSockJsFrameFormat("%s");
+	private final SockJsFrameFormat frameFormat = new DefaultSockJsFrameFormat("%s");
 
 
 	@Override

@@ -1124,7 +1124,7 @@ class PathPatternTests {
 
 		comparator = (p1, p2) -> {
 			int index = p1.compareTo(p2);
-			return (index != 0 ? index : p1.getPatternString().compareTo(p2.getPatternString()));
+			return index != 0 ? index : p1.getPatternString().compareTo(p2.getPatternString());
 		};
 		paths.add(pp.parse("/*/login.*"));
 		paths.add(pp.parse("/*/endUser/action/login.*"));

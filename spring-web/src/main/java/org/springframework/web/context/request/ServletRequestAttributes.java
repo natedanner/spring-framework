@@ -306,7 +306,7 @@ public class ServletRequestAttributes extends AbstractRequestAttributes {
 	 * @see #updateAccessedSessionAttributes()
 	 */
 	protected boolean isImmutableSessionAttribute(String name, @Nullable Object value) {
-		return (value == null || immutableValueTypes.contains(value.getClass()));
+		return value == null || immutableValueTypes.contains(value.getClass());
 	}
 
 	/**

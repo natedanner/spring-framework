@@ -76,14 +76,14 @@ public class BeanFactoryJCacheOperationSourceAdvisor extends AbstractBeanFactory
 
 		@Override
 		public boolean matches(Method method, Class<?> targetClass) {
-			return (this.cacheOperationSource == null ||
-					this.cacheOperationSource.getCacheOperation(method, targetClass) != null);
+			return this.cacheOperationSource == null ||
+					this.cacheOperationSource.getCacheOperation(method, targetClass) != null;
 		}
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof JCacheOperationSourcePointcut that &&
-					ObjectUtils.nullSafeEquals(this.cacheOperationSource, that.cacheOperationSource)));
+			return this == other || (other instanceof JCacheOperationSourcePointcut that &&
+					ObjectUtils.nullSafeEquals(this.cacheOperationSource, that.cacheOperationSource));
 		}
 
 		@Override

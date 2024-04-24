@@ -97,7 +97,7 @@ public class NativeMessageHeaderAccessor extends MessageHeaderAccessor {
 	 */
 	public Map<String, List<String>> toNativeHeaderMap() {
 		Map<String, List<String>> map = getNativeHeaders();
-		return (map != null ? new LinkedMultiValueMap<>(map) : Collections.emptyMap());
+		return map != null ? new LinkedMultiValueMap<>(map) : Collections.emptyMap();
 	}
 
 	@Override
@@ -150,7 +150,7 @@ public class NativeMessageHeaderAccessor extends MessageHeaderAccessor {
 	 */
 	public boolean containsNativeHeader(String headerName) {
 		Map<String, List<String>> map = getNativeHeaders();
-		return (map != null && map.containsKey(headerName));
+		return map != null && map.containsKey(headerName);
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class NativeMessageHeaderAccessor extends MessageHeaderAccessor {
 	@Nullable
 	public List<String> getNativeHeader(String headerName) {
 		Map<String, List<String>> map = getNativeHeaders();
-		return (map != null ? map.get(headerName) : null);
+		return map != null ? map.get(headerName) : null;
 	}
 
 	/**

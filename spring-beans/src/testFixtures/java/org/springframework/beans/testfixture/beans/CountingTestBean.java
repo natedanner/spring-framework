@@ -23,7 +23,7 @@ package org.springframework.beans.testfixture.beans;
  */
 public class CountingTestBean extends TestBean {
 
-	public static int count = 0;
+	public static int count;
 
 	public CountingTestBean() {
 		count++;

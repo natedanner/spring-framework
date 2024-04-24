@@ -575,7 +575,7 @@ public class SimpAnnotationMethodMessageHandlerTests {
 
 		org.springframework.util.concurrent.ListenableFutureTask<String> future;
 
-		boolean exceptionCaught = false;
+		boolean exceptionCaught;
 
 		@MessageMapping("success")
 		public org.springframework.util.concurrent.ListenableFutureTask<String> handleListenableFuture() {
@@ -603,7 +603,7 @@ public class SimpAnnotationMethodMessageHandlerTests {
 
 		CompletableFuture<String> future;
 
-		boolean exceptionCaught = false;
+		boolean exceptionCaught;
 
 		@MessageMapping("completable-future")
 		public CompletableFuture<String> handleCompletableFuture() {
@@ -625,7 +625,7 @@ public class SimpAnnotationMethodMessageHandlerTests {
 
 		Sinks.Many<String> sinkMany;
 
-		boolean exceptionCaught = false;
+		boolean exceptionCaught;
 
 		@MessageMapping("mono")
 		public Mono<String> handleMono() {

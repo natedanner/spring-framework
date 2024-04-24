@@ -193,8 +193,8 @@ class DefaultServerHttpRequestBuilder implements ServerHttpRequest.Builder {
 				HttpHeaders headers, Flux<DataBuffer> body, ServerHttpRequest originalRequest) {
 
 			super(method, uri, contextPath, headers);
-			this.remoteAddress = (remoteAddress != null ? remoteAddress : originalRequest.getRemoteAddress());
-			this.sslInfo = (sslInfo != null ? sslInfo : originalRequest.getSslInfo());
+			this.remoteAddress = remoteAddress != null ? remoteAddress : originalRequest.getRemoteAddress();
+			this.sslInfo = sslInfo != null ? sslInfo : originalRequest.getSslInfo();
 			this.body = body;
 			this.originalRequest = originalRequest;
 		}

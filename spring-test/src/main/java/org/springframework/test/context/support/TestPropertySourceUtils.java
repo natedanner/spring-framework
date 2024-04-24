@@ -139,7 +139,7 @@ public abstract class TestPropertySourceUtils {
 			@Nullable TestPropertySourceAttributes previousAttributes) {
 
 		boolean duplicationDetected =
-				(currentAttributes.equals(previousAttributes) && !currentAttributes.isEmpty());
+				currentAttributes.equals(previousAttributes) && !currentAttributes.isEmpty();
 
 		if (duplicationDetected && logger.isTraceEnabled()) {
 			logger.trace(String.format("Ignoring duplicate %s declaration on %s since it is also declared on %s",
@@ -298,8 +298,8 @@ public abstract class TestPropertySourceUtils {
 			for (PropertySourceDescriptor descriptor : descriptors) {
 				if (!descriptor.locations().isEmpty()) {
 					Class<? extends PropertySourceFactory> factoryClass = descriptor.propertySourceFactory();
-					PropertySourceFactory factory = (factoryClass != null ?
-							BeanUtils.instantiateClass(factoryClass) : defaultPropertySourceFactory);
+					PropertySourceFactory factory = factoryClass != null ?
+							BeanUtils.instantiateClass(factoryClass) : defaultPropertySourceFactory;
 
 					for (String location : descriptor.locations()) {
 						String resolvedLocation = environment.resolveRequiredPlaceholders(location);

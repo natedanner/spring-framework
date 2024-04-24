@@ -1050,9 +1050,9 @@ class DefaultConversionServiceTests {
 
 	private static class SSN {
 
-		static int constructorCount = 0;
+		static int constructorCount;
 
-		static int toStringCount = 0;
+		static int toStringCount;
 
 		static void reset() {
 			constructorCount = 0;
@@ -1089,9 +1089,9 @@ class DefaultConversionServiceTests {
 
 	private static class ISBN {
 
-		static int constructorCount = 0;
-		static int toStringCount = 0;
-		static int valueOfCount = 0;
+		static int constructorCount;
+		static int toStringCount;
+		static int valueOfCount;
 
 		static void reset() {
 			constructorCount = 0;

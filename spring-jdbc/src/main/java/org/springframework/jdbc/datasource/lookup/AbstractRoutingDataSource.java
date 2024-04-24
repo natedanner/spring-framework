@@ -112,7 +112,7 @@ public abstract class AbstractRoutingDataSource extends AbstractDataSource imple
 	 * of application server DataSources to be specified directly.
 	 */
 	public void setDataSourceLookup(@Nullable DataSourceLookup dataSourceLookup) {
-		this.dataSourceLookup = (dataSourceLookup != null ? dataSourceLookup : new JndiDataSourceLookup());
+		this.dataSourceLookup = dataSourceLookup != null ? dataSourceLookup : new JndiDataSourceLookup();
 	}
 
 
@@ -239,7 +239,7 @@ public abstract class AbstractRoutingDataSource extends AbstractDataSource imple
 
 	@Override
 	public boolean isWrapperFor(Class<?> iface) throws SQLException {
-		return (iface.isInstance(this) || determineTargetDataSource().isWrapperFor(iface));
+		return iface.isInstance(this) || determineTargetDataSource().isWrapperFor(iface);
 	}
 
 

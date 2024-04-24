@@ -103,7 +103,7 @@ public class JmsMessagingTemplate extends AbstractMessagingTemplate<Destination>
 	 */
 	@Nullable
 	public ConnectionFactory getConnectionFactory() {
-		return (this.jmsTemplate != null ? this.jmsTemplate.getConnectionFactory() : null);
+		return this.jmsTemplate != null ? this.jmsTemplate.getConnectionFactory() : null;
 	}
 
 	/**
@@ -347,7 +347,7 @@ public class JmsMessagingTemplate extends AbstractMessagingTemplate<Destination>
 
 		Message<?> requestMessage = doConvert(request, headers, postProcessor);
 		Message<?> replyMessage = sendAndReceive(destinationName, requestMessage);
-		return (replyMessage != null ? (T) getMessageConverter().fromMessage(replyMessage, targetClass) : null);
+		return replyMessage != null ? (T) getMessageConverter().fromMessage(replyMessage, targetClass) : null;
 	}
 
 	@Override

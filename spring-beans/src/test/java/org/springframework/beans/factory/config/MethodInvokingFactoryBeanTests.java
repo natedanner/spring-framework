@@ -294,7 +294,7 @@ class MethodInvokingFactoryBeanTests {
 
 		public static int _staticField1;
 
-		public int _field1 = 0;
+		public int _field1;
 
 		public int method1() {
 			return ++_field1;

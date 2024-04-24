@@ -81,7 +81,7 @@ public class URLEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		URL value = (URL) getValue();
-		return (value != null ? value.toExternalForm() : "");
+		return value != null ? value.toExternalForm() : "";
 	}
 
 }

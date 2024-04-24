@@ -30,7 +30,7 @@ import org.springframework.cglib.transform.ClassEmitterTransformer;
  * @author Juozas Baliuka, Chris Nokleberg
  */
 public class AddStaticInitTransformer extends ClassEmitterTransformer {
-    private MethodInfo info;
+	private final MethodInfo info;
 
     public AddStaticInitTransformer(Method classInit) {
         info = ReflectUtils.getMethodInfo(classInit);

@@ -106,8 +106,8 @@ final class DefaultClientResponseBuilder implements ClientResponse.Builder {
 			this.headers.addAll(other.headers().asHttpHeaders());
 		}
 		this.originalResponse = other;
-		this.request = (other instanceof DefaultClientResponse defaultClientResponse ?
-				defaultClientResponse.request() : EMPTY_REQUEST);
+		this.request = other instanceof DefaultClientResponse defaultClientResponse ?
+				defaultClientResponse.request() : EMPTY_REQUEST;
 	}
 
 
@@ -244,8 +244,8 @@ final class DefaultClientResponseBuilder implements ClientResponse.Builder {
 					"Expected either cookies or an original response with cookies.");
 
 			this.statusCode = statusCode;
-			this.headers = (headers != null ? HttpHeaders.readOnlyHttpHeaders(headers) : null);
-			this.cookies = (cookies != null ? CollectionUtils.unmodifiableMultiValueMap(cookies) : null);
+			this.headers = headers != null ? HttpHeaders.readOnlyHttpHeaders(headers) : null;
+			this.cookies = cookies != null ? CollectionUtils.unmodifiableMultiValueMap(cookies) : null;
 			this.body = body;
 			this.originalResponse = originalResponse;
 		}
@@ -258,13 +258,13 @@ final class DefaultClientResponseBuilder implements ClientResponse.Builder {
 		@Override
 		@SuppressWarnings("ConstantConditions")
 		public HttpHeaders getHeaders() {
-			return (this.headers != null ? this.headers : this.originalResponse.headers().asHttpHeaders());
+			return this.headers != null ? this.headers : this.originalResponse.headers().asHttpHeaders();
 		}
 
 		@Override
 		@SuppressWarnings("ConstantConditions")
 		public MultiValueMap<String, ResponseCookie> getCookies() {
-			return (this.cookies != null ? this.cookies : this.originalResponse.cookies());
+			return this.cookies != null ? this.cookies : this.originalResponse.cookies();
 		}
 
 		@Override

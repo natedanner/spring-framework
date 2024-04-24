@@ -39,13 +39,13 @@ import static org.mockito.Mockito.verify;
  */
 class MarshallingMessageConverterTests {
 
-	private Marshaller marshallerMock = mock();
+	private final Marshaller marshallerMock = mock();
 
-	private Unmarshaller unmarshallerMock = mock();
+	private final Unmarshaller unmarshallerMock = mock();
 
-	private Session sessionMock = mock();
+	private final Session sessionMock = mock();
 
-	private MarshallingMessageConverter converter = new MarshallingMessageConverter(marshallerMock, unmarshallerMock);
+	private final MarshallingMessageConverter converter = new MarshallingMessageConverter(marshallerMock, unmarshallerMock);
 
 
 	@Test

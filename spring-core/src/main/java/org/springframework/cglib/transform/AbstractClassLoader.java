@@ -25,13 +25,13 @@ import org.springframework.cglib.core.CodeGenerationException;
 import org.springframework.cglib.core.DebuggingClassWriter;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class AbstractClassLoader extends ClassLoader {
+public abstract class AbstractClassLoader extends ClassLoader {
     private ClassFilter filter;
     private ClassLoader classPath;
-    private static java.security.ProtectionDomain DOMAIN ;
+    private static java.security.ProtectionDomain domain ;
 
     static{
-        DOMAIN = AbstractClassLoader.class.getProtectionDomain();
+        domain = AbstractClassLoader.class.getProtectionDomain();
      }
 
     protected AbstractClassLoader(ClassLoader parent, ClassLoader classPath, ClassFilter filter) {
@@ -84,7 +84,7 @@ abstract public class AbstractClassLoader extends ClassLoader {
         	    new DebuggingClassWriter(ClassWriter.COMPUTE_FRAMES);
             getGenerator(r).generateClass(w);
             byte[] b = w.toByteArray();
-            Class c = super.defineClass(name, b, 0, b.length, DOMAIN);
+            Class c = super.defineClass(name, b, 0, b.length, domain);
             postProcess(c);
             return c;
         } catch (RuntimeException | Error e) {

@@ -63,7 +63,7 @@ class AspectJBeanFactoryInitializationAotProcessor implements BeanFactoryInitial
 		private static AspectContribution processAheadOfTime(ConfigurableListableBeanFactory beanFactory) {
 			BeanFactoryAspectJAdvisorsBuilder builder = new BeanFactoryAspectJAdvisorsBuilder(beanFactory);
 			List<Advisor> advisors = builder.buildAspectJAdvisors();
-			return (advisors.isEmpty() ? null : new AspectContribution(advisors));
+			return advisors.isEmpty() ? null : new AspectContribution(advisors);
 		}
 	}
 

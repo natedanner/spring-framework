@@ -27,7 +27,7 @@ import org.springframework.beans.testfixture.beans.TestBean;
  */
 public class InstanceFactory {
 
-	protected static int count = 0;
+	protected static int count;
 
 	private String factoryBeanProperty;
 

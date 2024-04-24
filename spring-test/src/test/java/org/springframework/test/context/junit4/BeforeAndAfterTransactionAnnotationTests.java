@@ -49,10 +49,10 @@ public class BeforeAndAfterTransactionAnnotationTests extends AbstractTransactio
 
 	protected static JdbcTemplate jdbcTemplate;
 
-	protected static int numBeforeTransactionCalls = 0;
-	protected static int numAfterTransactionCalls = 0;
+	protected static int numBeforeTransactionCalls;
+	protected static int numAfterTransactionCalls;
 
-	protected boolean inTransaction = false;
+	protected boolean inTransaction;
 
 	@Rule
 	public final TestName testName = new TestName();
@@ -98,13 +98,13 @@ public class BeforeAndAfterTransactionAnnotationTests extends AbstractTransactio
 	@Before
 	public void before() {
 		assertShouldBeInTransaction();
-		long expected = (this.inTransaction ? 1
-				: 0);
+		long expected = this.inTransaction ? 1
+				: 0;
 		assertThat(countRowsInPersonTable(jdbcTemplate)).as("Verifying the number of rows in the person table before a test method.").isEqualTo(expected);
 	}
 
 	private void assertShouldBeInTransaction() {
-		boolean shouldBeInTransaction = !testName.getMethodName().equals("nonTransactionalMethod");
+		boolean shouldBeInTransaction = !"nonTransactionalMethod".equals(testName.getMethodName());
 		if (shouldBeInTransaction) {
 			assertThatTransaction().isActive();
 		}

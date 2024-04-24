@@ -479,7 +479,7 @@ class AnnotationDrivenBeanDefinitionParser implements BeanDefinitionParser {
 	@Nullable
 	private String getAsyncTimeout(Element element) {
 		Element asyncElement = DomUtils.getChildElementByTagName(element, "async-support");
-		return (asyncElement != null ? asyncElement.getAttribute("default-timeout") : null);
+		return asyncElement != null ? asyncElement.getAttribute("default-timeout") : null;
 	}
 
 	@Nullable
@@ -544,7 +544,7 @@ class AnnotationDrivenBeanDefinitionParser implements BeanDefinitionParser {
 	@Nullable
 	private ManagedList<?> getReturnValueHandlers(Element element, ParserContext context) {
 		Element handlers = DomUtils.getChildElementByTagName(element, "return-value-handlers");
-		return (handlers != null ? extractBeanSubElements(handlers, context) : null);
+		return handlers != null ? extractBeanSubElements(handlers, context) : null;
 	}
 
 	private ManagedList<?> getMessageConverters(Element element, @Nullable Object source, ParserContext context) {

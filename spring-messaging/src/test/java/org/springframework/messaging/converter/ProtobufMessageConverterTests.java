@@ -42,12 +42,12 @@ class ProtobufMessageConverterTests {
 
 	private final ProtobufMessageConverter converter = new ProtobufMessageConverter();
 
-	private Msg testMsg = Msg.newBuilder().setFoo("Foo").setBlah(SecondMsg.newBuilder().setBlah(123).build()).build();
+	private final Msg testMsg = Msg.newBuilder().setFoo("Foo").setBlah(SecondMsg.newBuilder().setBlah(123).build()).build();
 
-	private Message<byte[]> message = MessageBuilder.withPayload(this.testMsg.toByteArray())
+	private final Message<byte[]> message = MessageBuilder.withPayload(this.testMsg.toByteArray())
 			.setHeader(CONTENT_TYPE, ProtobufMessageConverter.PROTOBUF).build();
 
-	private Message<byte[]> messageWithoutContentType = MessageBuilder.withPayload(this.testMsg.toByteArray()).build();
+	private final Message<byte[]> messageWithoutContentType = MessageBuilder.withPayload(this.testMsg.toByteArray()).build();
 
 	private final Message<String> messageJson = MessageBuilder.withPayload("""
 			{

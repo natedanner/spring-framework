@@ -110,19 +110,19 @@ public abstract class AbstractApplicationContextTests extends AbstractListableBe
 	@Test
 	protected void overrideWorked() {
 		TestBean rod = (TestBean) applicationContext.getParent().getBean("rod");
-		assertThat(rod.getName().equals("Roderick")).as("Parent's name differs").isTrue();
+		assertThat("Roderick".equals(rod.getName())).as("Parent's name differs").isTrue();
 	}
 
 	@Test
 	protected void grandparentDefinitionFound() {
 		TestBean dad = (TestBean) applicationContext.getBean("father");
-		assertThat(dad.getName().equals("Albert")).as("Dad has correct name").isTrue();
+		assertThat("Albert".equals(dad.getName())).as("Dad has correct name").isTrue();
 	}
 
 	@Test
 	protected void grandparentTypedDefinitionFound() {
 		TestBean dad = applicationContext.getBean("father", TestBean.class);
-		assertThat(dad.getName().equals("Albert")).as("Dad has correct name").isTrue();
+		assertThat("Albert".equals(dad.getName())).as("Dad has correct name").isTrue();
 	}
 
 	@Test

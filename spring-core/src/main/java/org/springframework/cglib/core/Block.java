@@ -19,8 +19,8 @@ import org.springframework.asm.Label;
 
 public class Block
 {
-    private CodeEmitter e;
-    private Label start;
+	private final CodeEmitter e;
+	private final Label start;
     private Label end;
 
     public Block(CodeEmitter e) {

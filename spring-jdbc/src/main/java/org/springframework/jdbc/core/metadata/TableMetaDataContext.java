@@ -71,13 +71,13 @@ public class TableMetaDataContext {
 	private boolean accessTableColumnMetaData = true;
 
 	// Should we override default for including synonyms for meta-data lookups
-	private boolean overrideIncludeSynonymsDefault = false;
+	private boolean overrideIncludeSynonymsDefault;
 
 	// Are we using generated key columns?
-	private boolean generatedKeyColumnsUsed = false;
+	private boolean generatedKeyColumnsUsed;
 
 	// Are we quoting identifiers?
-	private boolean quoteIdentifiers = false;
+	private boolean quoteIdentifiers;
 
 	// The provider of table meta-data
 	@Nullable
@@ -301,8 +301,8 @@ public class TableMetaDataContext {
 			keys.add(key.toUpperCase());
 		}
 
-		String identifierQuoteString = (isQuoteIdentifiers() ?
-				obtainMetaDataProvider().getIdentifierQuoteString() : null);
+		String identifierQuoteString = isQuoteIdentifiers() ?
+				obtainMetaDataProvider().getIdentifierQuoteString() : null;
 		QuoteHandler quoteHandler = new QuoteHandler(identifierQuoteString);
 
 		StringBuilder insertStatement = new StringBuilder();

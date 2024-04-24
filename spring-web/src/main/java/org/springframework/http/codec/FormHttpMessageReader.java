@@ -114,7 +114,7 @@ public class FormHttpMessageReader extends LoggingCodecSupport
 	}
 
 	private static boolean supportsMediaType(@Nullable MediaType mediaType) {
-		return (mediaType == null || MediaType.APPLICATION_FORM_URLENCODED.isCompatibleWith(mediaType));
+		return mediaType == null || MediaType.APPLICATION_FORM_URLENCODED.isCompatibleWith(mediaType);
 	}
 
 	@Override

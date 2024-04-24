@@ -188,8 +188,8 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	@Nullable
 	private RequestMappingInfo createRequestMappingInfo(AnnotatedElement element) {
 		RequestMappingInfo requestMappingInfo = null;
-		RequestCondition<?> customCondition = (element instanceof Class<?> clazz ?
-				getCustomTypeCondition(clazz) : getCustomMethodCondition((Method) element));
+		RequestCondition<?> customCondition = element instanceof Class<?> clazz ?
+				getCustomTypeCondition(clazz) : getCustomMethodCondition((Method) element);
 
 		List<AnnotationDescriptor> descriptors = getAnnotationDescriptors(element);
 
@@ -322,12 +322,12 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	}
 
 	private static String[] toStringArray(String value) {
-		return (StringUtils.hasText(value) ? new String[] {value} : EMPTY_STRING_ARRAY);
+		return StringUtils.hasText(value) ? new String[] {value} : EMPTY_STRING_ARRAY;
 	}
 
 	private static RequestMethod[] toMethodArray(String method) {
-		return (StringUtils.hasText(method) ?
-				new RequestMethod[] {RequestMethod.valueOf(method)} : EMPTY_REQUEST_METHOD_ARRAY);
+		return StringUtils.hasText(method) ?
+				new RequestMethod[] {RequestMethod.valueOf(method)} : EMPTY_REQUEST_METHOD_ARRAY;
 	}
 
 	@Override
@@ -430,7 +430,7 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	private String resolveCorsAnnotationValue(String value) {
 		if (this.embeddedValueResolver != null) {
 			String resolved = this.embeddedValueResolver.resolveStringValue(value);
-			return (resolved != null ? resolved : "");
+			return resolved != null ? resolved : "";
 		}
 		else {
 			return value;
@@ -459,7 +459,7 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 
 		@Override
 		public boolean equals(Object obj) {
-			return (obj instanceof AnnotationDescriptor that && this.annotation.equals(that.annotation));
+			return obj instanceof AnnotationDescriptor that && this.annotation.equals(that.annotation);
 		}
 
 		@Override

@@ -40,9 +40,9 @@ import static org.mockito.Mockito.mock;
  */
 class DefaultUserDestinationResolverTests {
 
-	private SimpUserRegistry registry = mock();
+	private final SimpUserRegistry registry = mock();
 
-	private DefaultUserDestinationResolver resolver = new DefaultUserDestinationResolver(this.registry);
+	private final DefaultUserDestinationResolver resolver = new DefaultUserDestinationResolver(this.registry);
 
 
 	@BeforeEach

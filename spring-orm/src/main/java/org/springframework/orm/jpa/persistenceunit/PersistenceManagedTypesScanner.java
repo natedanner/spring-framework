@@ -102,7 +102,7 @@ public final class PersistenceManagedTypesScanner {
 
 		this.resourcePatternResolver = ResourcePatternUtils.getResourcePatternResolver(resourceLoader);
 		this.componentsIndex = CandidateComponentsIndexLoader.loadIndex(resourceLoader.getClassLoader());
-		this.managedClassNameFilter = (managedClassNameFilter != null ? managedClassNameFilter : className -> true);
+		this.managedClassNameFilter = managedClassNameFilter != null ? managedClassNameFilter : className -> true;
 	}
 
 

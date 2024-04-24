@@ -200,7 +200,7 @@ public class InstanceSupplierCodeGenerator {
 			method.addModifiers(PRIVATE_STATIC);
 			codeWarnings.suppress(method);
 			method.returns(ParameterizedTypeName.get(BeanInstanceSupplier.class, beanClass));
-			int parameterOffset = (!dependsOnBean) ? 0 : 1;
+			int parameterOffset = !dependsOnBean ? 0 : 1;
 			method.addStatement(generateResolverForConstructor(beanClass, constructor, parameterOffset));
 		});
 
@@ -219,7 +219,7 @@ public class InstanceSupplierCodeGenerator {
 		codeWarnings.suppress(method);
 		method.returns(ParameterizedTypeName.get(BeanInstanceSupplier.class, beanClass));
 
-		int parameterOffset = (!dependsOnBean) ? 0 : 1;
+		int parameterOffset = !dependsOnBean ? 0 : 1;
 		CodeBlock.Builder code = CodeBlock.builder();
 		code.add(generateResolverForConstructor(beanClass, constructor, parameterOffset));
 		boolean hasArguments = constructor.getParameterCount() > 0;
@@ -363,9 +363,9 @@ public class InstanceSupplierCodeGenerator {
 	}
 
 	private CodeBlock generateWithGeneratorCode(boolean hasArguments, CodeBlock newInstance) {
-		CodeBlock lambdaArguments = (hasArguments ?
+		CodeBlock lambdaArguments = hasArguments ?
 				CodeBlock.of("($L, $L)", REGISTERED_BEAN_PARAMETER_NAME, ARGS_PARAMETER_NAME) :
-				CodeBlock.of("($L)", REGISTERED_BEAN_PARAMETER_NAME));
+				CodeBlock.of("($L)", REGISTERED_BEAN_PARAMETER_NAME);
 		Builder code = CodeBlock.builder();
 		code.add("\n");
 		code.indent().indent();

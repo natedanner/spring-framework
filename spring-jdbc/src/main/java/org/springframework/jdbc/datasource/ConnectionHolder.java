@@ -53,12 +53,12 @@ public class ConnectionHolder extends ResourceHolderSupport {
 	@Nullable
 	private Connection currentConnection;
 
-	private boolean transactionActive = false;
+	private boolean transactionActive;
 
 	@Nullable
 	private Boolean savepointsSupported;
 
-	private int savepointCounter = 0;
+	private int savepointCounter;
 
 
 	/**
@@ -108,7 +108,7 @@ public class ConnectionHolder extends ResourceHolderSupport {
 	 * Return whether this holder currently has a Connection.
 	 */
 	protected boolean hasConnection() {
-		return (this.connectionHandle != null);
+		return this.connectionHandle != null;
 	}
 
 	/**

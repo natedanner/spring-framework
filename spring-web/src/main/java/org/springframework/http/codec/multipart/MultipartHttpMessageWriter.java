@@ -195,7 +195,7 @@ public class MultipartHttpMessageWriter extends MultipartWriterSupport
 
 	private boolean isMultipart(MultiValueMap<String, ?> map, @Nullable MediaType contentType) {
 		if (contentType != null) {
-			return contentType.getType().equalsIgnoreCase("multipart");
+			return "multipart".equalsIgnoreCase(contentType.getType());
 		}
 		for (List<?> values : map.values()) {
 			for (Object value : values) {
@@ -287,7 +287,7 @@ public class MultipartHttpMessageWriter extends MultipartWriterSupport
 			return Flux.error(new CodecException("No suitable writer found for part: " + name));
 		}
 
-		Publisher<T> bodyPublisher = (body instanceof Publisher publisher ? publisher : Mono.just(body));
+		Publisher<T> bodyPublisher = body instanceof Publisher publisher ? publisher : Mono.just(body);
 
 		// The writer will call MultipartHttpOutputMessage#write which doesn't actually write
 		// but only stores the body Flux and returns Mono.empty().
@@ -324,7 +324,7 @@ public class MultipartHttpMessageWriter extends MultipartWriterSupport
 
 		@Override
 		public HttpHeaders getHeaders() {
-			return (this.body != null ? HttpHeaders.readOnlyHttpHeaders(this.headers) : this.headers);
+			return this.body != null ? HttpHeaders.readOnlyHttpHeaders(this.headers) : this.headers;
 		}
 
 		@Override
@@ -359,8 +359,8 @@ public class MultipartHttpMessageWriter extends MultipartWriterSupport
 		}
 
 		public Flux<DataBuffer> getBody() {
-			return (this.body != null ? this.body :
-					Flux.error(new IllegalStateException("Body has not been written yet")));
+			return this.body != null ? this.body :
+					Flux.error(new IllegalStateException("Body has not been written yet"));
 		}
 
 		@Override

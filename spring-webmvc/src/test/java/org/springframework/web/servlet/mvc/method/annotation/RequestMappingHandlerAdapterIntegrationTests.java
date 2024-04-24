@@ -635,8 +635,8 @@ class RequestMappingHandlerAdapterIntegrationTests {
 
 		@Override
 		public boolean supportsParameter(MethodParameter parameter) {
-			return (Principal.class.isAssignableFrom(parameter.getParameterType()) &&
-					parameter.hasParameterAnnotation(AuthenticationPrincipal.class));
+			return Principal.class.isAssignableFrom(parameter.getParameterType()) &&
+					parameter.hasParameterAnnotation(AuthenticationPrincipal.class);
 		}
 
 		@Nullable

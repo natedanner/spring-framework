@@ -129,7 +129,7 @@ public class BeanComponentDefinition extends BeanDefinitionHolder implements Com
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof BeanComponentDefinition && super.equals(other)));
+		return this == other || (other instanceof BeanComponentDefinition && super.equals(other));
 	}
 
 }

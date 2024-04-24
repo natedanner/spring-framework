@@ -91,8 +91,7 @@ abstract class AbstractSchedulingTaskExecutorTests {
 				.dontCatchUncaughtExceptions()
 				.atMost(1, TimeUnit.SECONDS)
 				.pollInterval(10, TimeUnit.MILLISECONDS)
-				.until(() -> task.exception.get() != null && task.exception.get().getMessage().equals(
-						"TestTask failure for test 'executeFailingRunnable': expectedRunCount:<0>, actualRunCount:<1>"));
+				.until(() -> task.exception.get() != null && "TestTask failure for test 'executeFailingRunnable': expectedRunCount:<0>, actualRunCount:<1>".equals(task.exception.get().getMessage()));
 	}
 
 	@Test
@@ -388,7 +387,7 @@ abstract class AbstractSchedulingTaskExecutorTests {
 		TestTask(String testName, int expectedRunCount) {
 			this.testName = testName;
 			this.expectedRunCount = expectedRunCount;
-			this.latch = (expectedRunCount > 0 ? new CountDownLatch(expectedRunCount) : null);
+			this.latch = expectedRunCount > 0 ? new CountDownLatch(expectedRunCount) : null;
 		}
 
 		@Override

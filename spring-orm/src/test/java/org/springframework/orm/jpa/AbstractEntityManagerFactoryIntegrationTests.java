@@ -63,11 +63,11 @@ public abstract class AbstractEntityManagerFactoryIntegrationTests {
 
 	protected TransactionStatus transactionStatus;
 
-	private boolean complete = false;
+	private boolean complete;
 
 	protected JdbcTemplate jdbcTemplate;
 
-	private boolean zappedTables = false;
+	private boolean zappedTables;
 
 
 	@Autowired

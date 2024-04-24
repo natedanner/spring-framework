@@ -305,7 +305,7 @@ public class HttpRequestValues {
 		 * Add a URI variable name-value pair.
 		 */
 		public Builder setUriVariable(String name, String value) {
-			this.uriVars = (this.uriVars != null ? this.uriVars : new LinkedHashMap<>());
+			this.uriVars = this.uriVars != null ? this.uriVars : new LinkedHashMap<>();
 			this.uriVars.put(name, value);
 			return this;
 		}
@@ -337,7 +337,7 @@ public class HttpRequestValues {
 		}
 
 		private HttpHeaders initHeaders() {
-			this.headers = (this.headers != null ? this.headers : new HttpHeaders());
+			this.headers = this.headers != null ? this.headers : new HttpHeaders();
 			return this.headers;
 		}
 
@@ -345,7 +345,7 @@ public class HttpRequestValues {
 		 * Add the given cookie name and values.
 		 */
 		public Builder addCookie(String name, String... values) {
-			this.cookies = (this.cookies != null ? this.cookies : new LinkedMultiValueMap<>());
+			this.cookies = this.cookies != null ? this.cookies : new LinkedMultiValueMap<>();
 			for (String value : values) {
 				this.cookies.add(name, value);
 			}
@@ -360,7 +360,7 @@ public class HttpRequestValues {
 		 * parameters.
 		 */
 		public Builder addRequestParameter(String name, String... values) {
-			this.requestParams = (this.requestParams != null ? this.requestParams : new LinkedMultiValueMap<>());
+			this.requestParams = this.requestParams != null ? this.requestParams : new LinkedMultiValueMap<>();
 			for (String value : values) {
 				this.requestParams.add(name, value);
 			}
@@ -378,7 +378,7 @@ public class HttpRequestValues {
 		 * </ul>
 		 */
 		public Builder addRequestPart(String name, Object part) {
-			this.parts = (this.parts != null ? this.parts : new LinkedMultiValueMap<>());
+			this.parts = this.parts != null ? this.parts : new LinkedMultiValueMap<>();
 			this.parts.add(name, part);
 			return this;
 		}
@@ -400,7 +400,7 @@ public class HttpRequestValues {
 		 * @param value the attribute value
 		 */
 		public Builder addAttribute(String name, Object value) {
-			this.attributes = (this.attributes != null ? this.attributes : new HashMap<>());
+			this.attributes = this.attributes != null ? this.attributes : new HashMap<>();
 			this.attributes.put(name, value);
 			return this;
 		}
@@ -431,8 +431,8 @@ public class HttpRequestValues {
 
 			URI uri = this.uri;
 			UriBuilderFactory uriBuilderFactory = this.uriBuilderFactory;
-			String uriTemplate = (this.uriTemplate != null ? this.uriTemplate : "");
-			Map<String, String> uriVars = (this.uriVars != null ? new HashMap<>(this.uriVars) : Collections.emptyMap());
+			String uriTemplate = this.uriTemplate != null ? this.uriTemplate : "";
+			Map<String, String> uriVars = this.uriVars != null ? new HashMap<>(this.uriVars) : Collections.emptyMap();
 
 			Object bodyValue = this.bodyValue;
 			if (hasParts()) {
@@ -455,7 +455,7 @@ public class HttpRequestValues {
 				}
 				else {
 					// append to URI template
-					uriVars = (uriVars.isEmpty() ? new HashMap<>() : uriVars);
+					uriVars = uriVars.isEmpty() ? new HashMap<>() : uriVars;
 					uriTemplate = appendQueryParams(uriTemplate, uriVars, this.requestParams);
 				}
 			}
@@ -466,11 +466,11 @@ public class HttpRequestValues {
 				headers.putAll(this.headers);
 			}
 
-			MultiValueMap<String, String> cookies = (this.cookies != null ?
-					new LinkedMultiValueMap<>(this.cookies) : EMPTY_COOKIES_MAP);
+			MultiValueMap<String, String> cookies = this.cookies != null ?
+					new LinkedMultiValueMap<>(this.cookies) : EMPTY_COOKIES_MAP;
 
-			Map<String, Object> attributes = (this.attributes != null ?
-					new HashMap<>(this.attributes) : Collections.emptyMap());
+			Map<String, Object> attributes = this.attributes != null ?
+					new HashMap<>(this.attributes) : Collections.emptyMap();
 
 			return createRequestValues(
 					this.httpMethod, uri, uriBuilderFactory, uriTemplate, uriVars,
@@ -478,11 +478,11 @@ public class HttpRequestValues {
 		}
 
 		protected boolean hasParts() {
-			return (this.parts != null);
+			return this.parts != null;
 		}
 
 		protected boolean hasBody() {
-			return (this.bodyValue != null);
+			return this.bodyValue != null;
 		}
 
 		protected Object buildMultipartBody() {
@@ -491,8 +491,8 @@ public class HttpRequestValues {
 		}
 
 		private boolean hasFormDataContentType() {
-			return (this.headers != null &&
-					MediaType.APPLICATION_FORM_URLENCODED.equals(this.headers.getContentType()));
+			return this.headers != null &&
+					MediaType.APPLICATION_FORM_URLENCODED.equals(this.headers.getContentType());
 		}
 
 		private String appendQueryParams(

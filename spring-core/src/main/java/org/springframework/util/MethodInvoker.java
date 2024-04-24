@@ -144,7 +144,7 @@ public class MethodInvoker {
 	 * Return the arguments for the method invocation.
 	 */
 	public Object[] getArguments() {
-		return (this.arguments != null ? this.arguments : EMPTY_ARGUMENTS);
+		return this.arguments != null ? this.arguments : EMPTY_ARGUMENTS;
 	}
 
 
@@ -178,7 +178,7 @@ public class MethodInvoker {
 		Object[] arguments = getArguments();
 		Class<?>[] argTypes = new Class<?>[arguments.length];
 		for (int i = 0; i < arguments.length; ++i) {
-			argTypes[i] = (arguments[i] != null ? arguments[i].getClass() : Object.class);
+			argTypes[i] = arguments[i] != null ? arguments[i].getClass() : Object.class;
 		}
 
 		// Try to get the exact method first.
@@ -261,7 +261,7 @@ public class MethodInvoker {
 	 * i.e. whether it allows access to {@link #getPreparedMethod()} already.
 	 */
 	public boolean isPrepared() {
-		return (this.methodObject != null);
+		return this.methodObject != null;
 	}
 
 	/**

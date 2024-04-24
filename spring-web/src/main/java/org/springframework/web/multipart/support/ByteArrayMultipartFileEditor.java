@@ -52,7 +52,7 @@ public class ByteArrayMultipartFileEditor extends ByteArrayPropertyEditor {
 	@Override
 	public String getAsText() {
 		byte[] value = (byte[]) getValue();
-		return (value != null ? new String(value) : "");
+		return value != null ? new String(value) : "";
 	}
 
 }

@@ -151,7 +151,7 @@ public class SimpAttributes {
 	 * Whether the {@link #sessionCompleted()} was already invoked.
 	 */
 	public boolean isSessionCompleted() {
-		return (this.attributes.get(SESSION_COMPLETED_NAME) != null);
+		return this.attributes.get(SESSION_COMPLETED_NAME) != null;
 	}
 
 	/**

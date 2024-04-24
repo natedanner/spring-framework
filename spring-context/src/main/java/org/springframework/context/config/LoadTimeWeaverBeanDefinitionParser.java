@@ -96,7 +96,7 @@ class LoadTimeWeaverBeanDefinitionParser extends AbstractSingleBeanDefinitionPar
 		else {
 			// Determine default...
 			ClassLoader cl = parserContext.getReaderContext().getBeanClassLoader();
-			return (cl != null && cl.getResource(AspectJWeavingEnabler.ASPECTJ_AOP_XML_RESOURCE) != null);
+			return cl != null && cl.getResource(AspectJWeavingEnabler.ASPECTJ_AOP_XML_RESOURCE) != null;
 		}
 	}
 

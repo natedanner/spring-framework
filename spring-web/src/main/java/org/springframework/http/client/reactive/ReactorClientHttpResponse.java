@@ -99,12 +99,12 @@ class ReactorClientHttpResponse implements ClientHttpResponse {
 	public String getId() {
 		String id = null;
 		if (this.response instanceof ChannelOperationsId operationsId) {
-			id = (logger.isDebugEnabled() ? operationsId.asLongText() : operationsId.asShortText());
+			id = logger.isDebugEnabled() ? operationsId.asLongText() : operationsId.asShortText();
 		}
 		if (id == null && this.response instanceof Connection connection) {
 			id = connection.channel().id().asShortText();
 		}
-		return (id != null ? id : ObjectUtils.getIdentityHexString(this));
+		return id != null ? id : ObjectUtils.getIdentityHexString(this);
 	}
 
 	@Override

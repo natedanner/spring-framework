@@ -119,7 +119,7 @@ public class MailSendException extends MailException {
 	 * or an empty array if no failed messages
 	 */
 	public final Exception[] getMessageExceptions() {
-		return (this.messageExceptions != null ? this.messageExceptions : new Exception[0]);
+		return this.messageExceptions != null ? this.messageExceptions : new Exception[0];
 	}
 
 

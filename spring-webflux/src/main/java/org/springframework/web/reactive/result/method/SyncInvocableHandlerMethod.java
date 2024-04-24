@@ -67,7 +67,7 @@ public class SyncInvocableHandlerMethod extends HandlerMethod {
 	 */
 	public List<SyncHandlerMethodArgumentResolver> getResolvers() {
 		return this.delegate.getResolvers().stream()
-				.map(resolver -> (SyncHandlerMethodArgumentResolver) resolver)
+				.map(SyncHandlerMethodArgumentResolver.class::cast)
 				.toList();
 	}
 

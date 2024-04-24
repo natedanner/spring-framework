@@ -77,7 +77,7 @@ public class SimpMessageTypeMessageCondition extends AbstractMessageCondition<Si
 	@Nullable
 	public SimpMessageTypeMessageCondition getMatchingCondition(Message<?> message) {
 		SimpMessageType actual = SimpMessageHeaderAccessor.getMessageType(message.getHeaders());
-		return (actual != null && actual.equals(this.messageType) ? this : null);
+		return actual != null && actual.equals(this.messageType) ? this : null;
 	}
 
 	@Override

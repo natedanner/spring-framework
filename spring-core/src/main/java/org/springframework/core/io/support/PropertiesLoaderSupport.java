@@ -47,12 +47,12 @@ public abstract class PropertiesLoaderSupport {
 	@Nullable
 	protected Properties[] localProperties;
 
-	protected boolean localOverride = false;
+	protected boolean localOverride;
 
 	@Nullable
 	private Resource[] locations;
 
-	private boolean ignoreResourceNotFound = false;
+	private boolean ignoreResourceNotFound;
 
 	@Nullable
 	private String fileEncoding;
@@ -136,7 +136,7 @@ public abstract class PropertiesLoaderSupport {
 	 */
 	public void setPropertiesPersister(@Nullable PropertiesPersister propertiesPersister) {
 		this.propertiesPersister =
-				(propertiesPersister != null ? propertiesPersister : DefaultPropertiesPersister.INSTANCE);
+				propertiesPersister != null ? propertiesPersister : DefaultPropertiesPersister.INSTANCE;
 	}
 
 

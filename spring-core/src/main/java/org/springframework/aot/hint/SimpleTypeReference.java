@@ -73,7 +73,7 @@ final class SimpleTypeReference extends AbstractTypeReference {
 			return new SimpleTypeReference(className.substring(0, i), className.substring(i + 1), null);
 		}
 		else {
-			String packageName = (isPrimitive(className) ? "java.lang" : "");
+			String packageName = isPrimitive(className) ? "java.lang" : "";
 			return new SimpleTypeReference(packageName, className, null);
 		}
 	}
@@ -101,7 +101,7 @@ final class SimpleTypeReference extends AbstractTypeReference {
 		if (type == null) {
 			return;
 		}
-		String typeName = (type.getEnclosingType() != null ? "." + type.getSimpleName() : type.getSimpleName());
+		String typeName = type.getEnclosingType() != null ? "." + type.getSimpleName() : type.getSimpleName();
 		sb.insert(0, typeName);
 		buildName(type.getEnclosingType(), sb);
 	}

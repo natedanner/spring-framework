@@ -83,7 +83,7 @@ public class ViewResolverRegistry {
 	 * Whether any view resolvers have been registered.
 	 */
 	public boolean hasRegistrations() {
-		return (this.contentNegotiatingResolver != null || !this.viewResolvers.isEmpty());
+		return this.contentNegotiatingResolver != null || !this.viewResolvers.isEmpty();
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class ViewResolverRegistry {
 
 	private ContentNegotiatingViewResolver initContentNegotiatingViewResolver(View[] defaultViews) {
 		// ContentNegotiatingResolver in the registry: elevate its precedence!
-		this.order = (this.order != null ? this.order : Ordered.HIGHEST_PRECEDENCE);
+		this.order = this.order != null ? this.order : Ordered.HIGHEST_PRECEDENCE;
 
 		if (this.contentNegotiatingResolver != null) {
 			if (!ObjectUtils.isEmpty(defaultViews) &&
@@ -255,13 +255,13 @@ public class ViewResolverRegistry {
 
 
 	private boolean checkBeanOfType(Class<?> beanType) {
-		return (this.applicationContext == null ||
+		return this.applicationContext == null ||
 				!ObjectUtils.isEmpty(BeanFactoryUtils.beanNamesForTypeIncludingAncestors(
-						this.applicationContext, beanType, false, false)));
+						this.applicationContext, beanType, false, false));
 	}
 
 	protected int getOrder() {
-		return (this.order != null ? this.order : Ordered.LOWEST_PRECEDENCE);
+		return this.order != null ? this.order : Ordered.LOWEST_PRECEDENCE;
 	}
 
 	protected List<ViewResolver> getViewResolvers() {

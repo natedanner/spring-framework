@@ -45,12 +45,12 @@ public class ReflectiveMethodExecutor implements MethodExecutor {
 	@Nullable
 	private final Integer varargsPosition;
 
-	private boolean computedPublicDeclaringClass = false;
+	private boolean computedPublicDeclaringClass;
 
 	@Nullable
 	private Class<?> publicDeclaringClass;
 
-	private boolean argumentConversionOccurred = false;
+	private boolean argumentConversionOccurred;
 
 
 	/**

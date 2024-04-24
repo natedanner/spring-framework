@@ -209,7 +209,7 @@ public class InterceptorRegistryTests {
 
 	private static class TestWebRequestInterceptor implements WebRequestInterceptor {
 
-		private boolean preHandleInvoked = false;
+		private boolean preHandleInvoked;
 
 		@Override
 		public void preHandle(WebRequest request) {

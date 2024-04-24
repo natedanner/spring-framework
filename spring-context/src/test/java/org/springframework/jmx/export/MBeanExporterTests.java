@@ -704,7 +704,7 @@ class MBeanExporterTests extends AbstractMBeanServerTests {
 
 	private static class InvokeDetectAssembler implements MBeanInfoAssembler {
 
-		private boolean invoked = false;
+		private boolean invoked;
 
 		@Override
 		public ModelMBeanInfo getMBeanInfo(Object managedResource, String beanKey) {

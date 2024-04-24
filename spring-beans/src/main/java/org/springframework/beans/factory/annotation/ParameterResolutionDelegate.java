@@ -82,9 +82,9 @@ public final class ParameterResolutionDelegate {
 	public static boolean isAutowirable(Parameter parameter, int parameterIndex) {
 		Assert.notNull(parameter, "Parameter must not be null");
 		AnnotatedElement annotatedParameter = getEffectiveAnnotatedParameter(parameter, parameterIndex);
-		return (AnnotatedElementUtils.hasAnnotation(annotatedParameter, Autowired.class) ||
+		return AnnotatedElementUtils.hasAnnotation(annotatedParameter, Autowired.class) ||
 				AnnotatedElementUtils.hasAnnotation(annotatedParameter, Qualifier.class) ||
-				AnnotatedElementUtils.hasAnnotation(annotatedParameter, Value.class));
+				AnnotatedElementUtils.hasAnnotation(annotatedParameter, Value.class);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public final class ParameterResolutionDelegate {
 
 		AnnotatedElement annotatedParameter = getEffectiveAnnotatedParameter(parameter, parameterIndex);
 		Autowired autowired = AnnotatedElementUtils.findMergedAnnotation(annotatedParameter, Autowired.class);
-		boolean required = (autowired == null || autowired.required());
+		boolean required = autowired == null || autowired.required();
 
 		MethodParameter methodParameter = SynthesizingMethodParameter.forExecutable(
 				parameter.getDeclaringExecutable(), parameterIndex);
@@ -165,7 +165,7 @@ public final class ParameterResolutionDelegate {
 				executable.getParameterAnnotations().length == executable.getParameterCount() - 1) {
 			// Bug in javac in JDK <9: annotation array excludes enclosing instance parameter
 			// for inner classes, so access it with the actual parameter index lowered by 1
-			return (index == 0 ? EMPTY_ANNOTATED_ELEMENT : executable.getParameters()[index - 1]);
+			return index == 0 ? EMPTY_ANNOTATED_ELEMENT : executable.getParameters()[index - 1];
 		}
 		return parameter;
 	}

@@ -171,10 +171,12 @@ public class CodeEmitter extends LocalVariablesSorter {
     public void if_cmp(Type type, int mode, Label label) {
         int intOp = -1;
         int jumpmode = mode;
-        switch (mode) {
-        case GE: jumpmode = LT; break;
-        case LE: jumpmode = GT; break;
-        }
+		if (mode == GE) {
+			jumpmode = LT;
+		}
+		else if (mode == LE) {
+			jumpmode = GT;
+		}
         switch (type.getSort()) {
         case Type.LONG:
             mv.visitInsn(Constants.LCMP);
@@ -187,14 +189,14 @@ public class CodeEmitter extends LocalVariablesSorter {
             break;
         case Type.ARRAY:
         case Type.OBJECT:
-            switch (mode) {
-            case EQ:
-                mv.visitJumpInsn(Constants.IF_ACMPEQ, label);
-                return;
-            case NE:
-                mv.visitJumpInsn(Constants.IF_ACMPNE, label);
-                return;
-            }
+			if (mode == EQ) {
+				mv.visitJumpInsn(Constants.IF_ACMPEQ, label);
+				return;
+			}
+			else if (mode == NE) {
+				mv.visitJumpInsn(Constants.IF_ACMPNE, label);
+				return;
+			}
             throw new IllegalArgumentException("Bad comparison for type " + type);
         default:
             switch (mode) {
@@ -426,49 +428,49 @@ public class CodeEmitter extends LocalVariablesSorter {
     public void getfield(String name) {
         ClassEmitter.FieldInfo info = ce.getFieldInfo(name);
         int opcode = TypeUtils.isStatic(info.access) ? Constants.GETSTATIC : Constants.GETFIELD;
-        emit_field(opcode, ce.getClassType(), name, info.type);
+        emitField(opcode, ce.getClassType(), name, info.type);
     }
 
     public void putfield(String name) {
         ClassEmitter.FieldInfo info = ce.getFieldInfo(name);
         int opcode = TypeUtils.isStatic(info.access) ? Constants.PUTSTATIC : Constants.PUTFIELD;
-        emit_field(opcode, ce.getClassType(), name, info.type);
+        emitField(opcode, ce.getClassType(), name, info.type);
     }
 
     public void super_getfield(String name, Type type) {
-        emit_field(Constants.GETFIELD, ce.getSuperType(), name, type);
+        emitField(Constants.GETFIELD, ce.getSuperType(), name, type);
     }
 
     public void super_putfield(String name, Type type) {
-        emit_field(Constants.PUTFIELD, ce.getSuperType(), name, type);
+        emitField(Constants.PUTFIELD, ce.getSuperType(), name, type);
     }
 
     public void super_getstatic(String name, Type type) {
-        emit_field(Constants.GETSTATIC, ce.getSuperType(), name, type);
+        emitField(Constants.GETSTATIC, ce.getSuperType(), name, type);
     }
 
     public void super_putstatic(String name, Type type) {
-        emit_field(Constants.PUTSTATIC, ce.getSuperType(), name, type);
+        emitField(Constants.PUTSTATIC, ce.getSuperType(), name, type);
     }
 
     public void getfield(Type owner, String name, Type type) {
-        emit_field(Constants.GETFIELD, owner, name, type);
+        emitField(Constants.GETFIELD, owner, name, type);
     }
 
     public void putfield(Type owner, String name, Type type) {
-        emit_field(Constants.PUTFIELD, owner, name, type);
+        emitField(Constants.PUTFIELD, owner, name, type);
     }
 
     public void getstatic(Type owner, String name, Type type) {
-        emit_field(Constants.GETSTATIC, owner, name, type);
+        emitField(Constants.GETSTATIC, owner, name, type);
     }
 
     public void putstatic(Type owner, String name, Type type) {
-        emit_field(Constants.PUTSTATIC, owner, name, type);
+        emitField(Constants.PUTSTATIC, owner, name, type);
     }
 
     // package-protected for EmitUtils, try to fix
-    void emit_field(int opcode, Type ctype, String name, Type ftype) {
+    void emitField(int opcode, Type ctype, String name, Type ftype) {
         mv.visitFieldInsn(opcode,
                           ctype.getInternalName(),
                           name,
@@ -813,7 +815,8 @@ public class CodeEmitter extends LocalVariablesSorter {
                 push(0f);
                 break;
             case Type.VOID:
-                aconst_null();
+				aconst_null();
+				break;
             default:
                 push(0);
             }

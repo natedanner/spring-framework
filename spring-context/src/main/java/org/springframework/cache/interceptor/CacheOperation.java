@@ -102,7 +102,7 @@ public abstract class CacheOperation implements BasicOperation {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (other instanceof CacheOperation && toString().equals(other.toString()));
+		return other instanceof CacheOperation && toString().equals(other.toString());
 	}
 
 	/**

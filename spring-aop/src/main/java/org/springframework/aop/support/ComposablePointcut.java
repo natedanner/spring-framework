@@ -187,9 +187,9 @@ public class ComposablePointcut implements Pointcut, Serializable {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ComposablePointcut otherPointcut &&
+		return this == other || (other instanceof ComposablePointcut otherPointcut &&
 				this.classFilter.equals(otherPointcut.classFilter) &&
-				this.methodMatcher.equals(otherPointcut.methodMatcher)));
+				this.methodMatcher.equals(otherPointcut.methodMatcher));
 	}
 
 	@Override

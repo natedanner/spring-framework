@@ -359,7 +359,7 @@ class ClassUtilsTests {
 		assertThat(Collections.singletonList(List.class).toString()).isEqualTo("[interface java.util.List]");
 		assertThat(ClassUtils.classNamesToString(List.class)).isEqualTo("[java.util.List]");
 
-		assertThat(Collections.EMPTY_LIST.toString()).isEqualTo("[]");
+		assertThat(Collections.emptyList().toString()).isEqualTo("[]");
 		assertThat(ClassUtils.classNamesToString(Collections.emptyList())).isEqualTo("[]");
 	}
 

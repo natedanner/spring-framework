@@ -91,8 +91,8 @@ public class HotSwappableTargetSource implements TargetSource, Serializable {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof HotSwappableTargetSource that &&
-				this.target.equals(that.target)));
+		return this == other || (other instanceof HotSwappableTargetSource that &&
+				this.target.equals(that.target));
 	}
 
 	@Override

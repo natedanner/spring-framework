@@ -445,11 +445,11 @@ class AutoProxyCreatorTests {
 	 */
 	public static class TestInterceptor implements MethodInterceptor {
 
-		public int nrOfInvocations = 0;
+		public int nrOfInvocations;
 
 		@Override
 		public Object invoke(MethodInvocation invocation) throws Throwable {
-			if (!invocation.getMethod().getName().equals("finalize")) {
+			if (!"finalize".equals(invocation.getMethod().getName())) {
 				this.nrOfInvocations++;
 			}
 			return invocation.proceed();

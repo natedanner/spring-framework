@@ -176,7 +176,7 @@ public class PropertyPathFactoryBean implements FactoryBean<Object>, BeanNameAwa
 			}
 
 			// No other properties specified: check bean name.
-			int dotIndex = (this.beanName != null ? this.beanName.indexOf('.') : -1);
+			int dotIndex = this.beanName != null ? this.beanName.indexOf('.') : -1;
 			if (dotIndex == -1) {
 				throw new IllegalArgumentException(
 						"Neither 'targetObject' nor 'targetBeanName' specified, and PropertyPathFactoryBean " +

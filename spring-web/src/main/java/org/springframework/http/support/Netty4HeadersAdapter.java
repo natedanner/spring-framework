@@ -111,14 +111,14 @@ public final class Netty4HeadersAdapter implements MultiValueMap<String, String>
 
 	@Override
 	public boolean containsKey(Object key) {
-		return (key instanceof String headerName && this.headers.contains(headerName));
+		return key instanceof String headerName && this.headers.contains(headerName);
 	}
 
 	@Override
 	public boolean containsValue(Object value) {
-		return (value instanceof String &&
+		return value instanceof String &&
 				this.headers.entries().stream()
-						.anyMatch(entry -> value.equals(entry.getValue())));
+						.anyMatch(entry -> value.equals(entry.getValue()));
 	}
 
 	@Override

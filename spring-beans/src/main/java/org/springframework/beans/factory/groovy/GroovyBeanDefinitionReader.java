@@ -355,7 +355,7 @@ public class GroovyBeanDefinitionReader extends AbstractBeanDefinitionReader imp
 						this.groovyDslXmlBeanDefinitionReader.getNamespaceHandlerResolver().resolve(uri);
 				if (namespaceHandler == null) {
 					throw new BeanDefinitionParsingException(new Problem("No namespace handler found for URI: " + uri,
-							new Location(new DescriptiveResource(("Groovy")))));
+							new Location(new DescriptiveResource("Groovy"))));
 				}
 				this.namespaces.put(namespace, uri);
 			}
@@ -465,7 +465,7 @@ public class GroovyBeanDefinitionReader extends AbstractBeanDefinitionReader imp
 	 * @return the bean definition wrapper
 	 */
 	private GroovyBeanDefinitionWrapper invokeBeanDefiningMethod(String beanName, Object[] args) {
-		boolean hasClosureArgument = (args[args.length - 1] instanceof Closure);
+		boolean hasClosureArgument = args[args.length - 1] instanceof Closure;
 		if (args[0] instanceof Class<?> beanClass) {
 			if (hasClosureArgument) {
 				if (args.length - 1 != 1) {
@@ -503,11 +503,11 @@ public class GroovyBeanDefinitionReader extends AbstractBeanDefinitionReader imp
 				Map.Entry<?, ?> factoryBeanEntry = namedArgs.entrySet().iterator().next();
 				// If we have a closure body, that will be the last argument.
 				// In between are the constructor args
-				int constructorArgsTest = (hasClosureArgument ? 2 : 1);
+				int constructorArgsTest = hasClosureArgument ? 2 : 1;
 				// If we have more than this number of args, we have constructor args
 				if (args.length > constructorArgsTest){
 					// factory-method requires args
-					int endOfConstructArgs = (hasClosureArgument ? args.length - 1 : args.length);
+					int endOfConstructArgs = hasClosureArgument ? args.length - 1 : args.length;
 					this.currentBeanDefinition = new GroovyBeanDefinitionWrapper(beanName, null,
 							resolveConstructorArguments(args, 1, endOfConstructArgs));
 				}
@@ -700,7 +700,7 @@ public class GroovyBeanDefinitionReader extends AbstractBeanDefinitionReader imp
 		XmlReaderContext readerContext = this.groovyDslXmlBeanDefinitionReader.createReaderContext(
 				new DescriptiveResource("Groovy"));
 		BeanDefinitionParserDelegate delegate = new BeanDefinitionParserDelegate(readerContext);
-		boolean decorating = (this.currentBeanDefinition != null);
+		boolean decorating = this.currentBeanDefinition != null;
 		if (!decorating) {
 			this.currentBeanDefinition = new GroovyBeanDefinitionWrapper(namespace);
 		}
@@ -763,10 +763,10 @@ public class GroovyBeanDefinitionReader extends AbstractBeanDefinitionReader imp
 
 		@Override
 		public Object getProperty(String property) {
-			if (property.equals("beanName")) {
+			if ("beanName".equals(property)) {
 				return getBeanName();
 			}
-			else if (property.equals("source")) {
+			else if ("source".equals(property)) {
 				return getSource();
 			}
 			else if (this.beanDefinition != null) {

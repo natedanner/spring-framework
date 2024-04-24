@@ -99,7 +99,7 @@ abstract class AbstractJCacheKeyOperation<A extends Annotation> extends Abstract
 				annotated.add(allParameter);
 			}
 		}
-		return (annotated.isEmpty() ? all : annotated);
+		return annotated.isEmpty() ? all : annotated;
 	}
 
 }

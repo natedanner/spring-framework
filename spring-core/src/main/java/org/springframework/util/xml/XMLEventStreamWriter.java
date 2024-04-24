@@ -48,7 +48,7 @@ class XMLEventStreamWriter implements XMLStreamWriter {
 
 	private final List<EndElement> endElements = new ArrayList<>();
 
-	private boolean emptyElement = false;
+	private boolean emptyElement;
 
 
 	public XMLEventStreamWriter(XMLEventWriter eventWriter, XMLEventFactory eventFactory) {

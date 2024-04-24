@@ -96,8 +96,8 @@ public class OriginHandshakeInterceptor implements HandshakeInterceptor {
 	 */
 	public Collection<String> getAllowedOrigins() {
 		List<String> allowedOrigins = this.corsConfiguration.getAllowedOrigins();
-		return (CollectionUtils.isEmpty(allowedOrigins) ? Collections.emptySet() :
-				Collections.unmodifiableSet(new LinkedHashSet<>(allowedOrigins)));
+		return CollectionUtils.isEmpty(allowedOrigins) ? Collections.emptySet() :
+				Collections.unmodifiableSet(new LinkedHashSet<>(allowedOrigins));
 	}
 
 	/**
@@ -120,8 +120,8 @@ public class OriginHandshakeInterceptor implements HandshakeInterceptor {
 	 */
 	public Collection<String> getAllowedOriginPatterns() {
 		List<String> allowedOriginPatterns = this.corsConfiguration.getAllowedOriginPatterns();
-		return (CollectionUtils.isEmpty(allowedOriginPatterns) ? Collections.emptySet() :
-				Collections.unmodifiableSet(new LinkedHashSet<>(allowedOriginPatterns)));
+		return CollectionUtils.isEmpty(allowedOriginPatterns) ? Collections.emptySet() :
+				Collections.unmodifiableSet(new LinkedHashSet<>(allowedOriginPatterns));
 	}
 
 

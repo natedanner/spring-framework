@@ -97,7 +97,7 @@ public class SpringValidatorAdapter implements SmartValidator, jakarta.validatio
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return (this.targetValidator != null);
+		return this.targetValidator != null;
 	}
 
 	@Override
@@ -288,9 +288,9 @@ public class SpringValidatorAdapter implements SmartValidator, jakarta.validatio
 	 * @see #getArgumentsForConstraint
 	 */
 	protected MessageSourceResolvable getResolvableField(String objectName, String field) {
-		String[] codes = (StringUtils.hasText(field) ?
+		String[] codes = StringUtils.hasText(field) ?
 				new String[] {objectName + Errors.NESTED_PATH_SEPARATOR + field, field} :
-				new String[] {objectName});
+				new String[] {objectName};
 		return new DefaultMessageSourceResolvable(codes, field);
 	}
 
@@ -348,7 +348,7 @@ public class SpringValidatorAdapter implements SmartValidator, jakarta.validatio
 	}
 
 	private static boolean containsSpringStylePlaceholder(@Nullable String message) {
-		return (message != null && message.contains("{0}"));
+		return message != null && message.contains("{0}");
 	}
 
 
@@ -387,7 +387,7 @@ public class SpringValidatorAdapter implements SmartValidator, jakarta.validatio
 	public <T> T unwrap(@Nullable Class<T> type) {
 		Assert.state(this.targetValidator != null, "No target Validator set");
 		try {
-			return (type != null ? this.targetValidator.unwrap(type) : (T) this.targetValidator);
+			return type != null ? this.targetValidator.unwrap(type) : (T) this.targetValidator;
 		}
 		catch (ValidationException ex) {
 			// Ignore if just being asked for plain JSR-303 Validator
@@ -464,9 +464,9 @@ public class SpringValidatorAdapter implements SmartValidator, jakarta.validatio
 
 		@Override
 		public boolean shouldRenderDefaultMessage() {
-			return (this.adapter != null && this.violation != null ?
+			return this.adapter != null && this.violation != null ?
 					this.adapter.requiresMessageFormat(this.violation) :
-					containsSpringStylePlaceholder(getDefaultMessage()));
+					containsSpringStylePlaceholder(getDefaultMessage());
 		}
 	}
 
@@ -494,9 +494,9 @@ public class SpringValidatorAdapter implements SmartValidator, jakarta.validatio
 
 		@Override
 		public boolean shouldRenderDefaultMessage() {
-			return (this.adapter != null && this.violation != null ?
+			return this.adapter != null && this.violation != null ?
 					this.adapter.requiresMessageFormat(this.violation) :
-					containsSpringStylePlaceholder(getDefaultMessage()));
+					containsSpringStylePlaceholder(getDefaultMessage());
 		}
 	}
 

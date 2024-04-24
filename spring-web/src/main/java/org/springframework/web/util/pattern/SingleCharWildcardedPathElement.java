@@ -77,7 +77,7 @@ class SingleCharWildcardedPathElement extends PathElement {
 		if (this.caseSensitive) {
 			for (int i = 0; i < this.len; i++) {
 				char ch = this.text[i];
-				if ((ch != '?') && (ch != value.charAt((i)))) {
+				if ((ch != '?') && (ch != value.charAt(i))) {
 					return false;
 				}
 			}
@@ -103,14 +103,14 @@ class SingleCharWildcardedPathElement extends PathElement {
 					return true;
 				}
 				else {
-					return (matchingContext.isMatchOptionalTrailingSeparator() &&
+					return matchingContext.isMatchOptionalTrailingSeparator() &&
 							(pathIndex + 1) == matchingContext.pathLength &&
-							matchingContext.isSeparator(pathIndex));
+							matchingContext.isSeparator(pathIndex);
 				}
 			}
 		}
 		else {
-			return (this.next != null && this.next.matches(pathIndex, matchingContext));
+			return this.next != null && this.next.matches(pathIndex, matchingContext);
 		}
 	}
 

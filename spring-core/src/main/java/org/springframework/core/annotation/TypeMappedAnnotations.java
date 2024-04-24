@@ -154,7 +154,7 @@ final class TypeMappedAnnotations implements MergedAnnotations {
 		}
 		MergedAnnotation<A> result = scan(annotationType,
 				new MergedAnnotationFinder<>(annotationType, predicate, selector));
-		return (result != null ? result : MergedAnnotation.missing());
+		return result != null ? result : MergedAnnotation.missing();
 	}
 
 	@Override
@@ -179,7 +179,7 @@ final class TypeMappedAnnotations implements MergedAnnotations {
 		}
 		MergedAnnotation<A> result = scan(annotationType,
 				new MergedAnnotationFinder<>(annotationType, predicate, selector));
-		return (result != null ? result : MergedAnnotation.missing());
+		return result != null ? result : MergedAnnotation.missing();
 	}
 
 	@Override
@@ -275,8 +275,8 @@ final class TypeMappedAnnotations implements MergedAnnotations {
 			AnnotationFilter annotationFilter, @Nullable Object requiredType) {
 
 		Class<? extends Annotation> actualType = mapping.getAnnotationType();
-		return (!annotationFilter.matches(actualType) &&
-				(requiredType == null || actualType == requiredType || actualType.getName().equals(requiredType)));
+		return !annotationFilter.matches(actualType) &&
+				(requiredType == null || actualType == requiredType || actualType.getName().equals(requiredType));
 	}
 
 
@@ -387,7 +387,7 @@ final class TypeMappedAnnotations implements MergedAnnotations {
 
 			this.requiredType = requiredType;
 			this.predicate = predicate;
-			this.selector = (selector != null ? selector : MergedAnnotationSelectors.nearest());
+			this.selector = selector != null ? selector : MergedAnnotationSelectors.nearest();
 		}
 
 		@Override
@@ -440,13 +440,13 @@ final class TypeMappedAnnotations implements MergedAnnotations {
 
 		private void updateLastResult(MergedAnnotation<A> candidate) {
 			MergedAnnotation<A> lastResult = this.result;
-			this.result = (lastResult != null ? this.selector.select(lastResult, candidate) : candidate);
+			this.result = lastResult != null ? this.selector.select(lastResult, candidate) : candidate;
 		}
 
 		@Override
 		@Nullable
 		public MergedAnnotation<A> finish(@Nullable MergedAnnotation<A> result) {
-			return (result != null ? result : this.result);
+			return result != null ? result : this.result;
 		}
 	}
 
@@ -527,7 +527,7 @@ final class TypeMappedAnnotations implements MergedAnnotations {
 		@Nullable
 		AnnotationTypeMapping getMapping(int annotationIndex, int mappingIndex) {
 			AnnotationTypeMappings mappings = getMappings(annotationIndex);
-			return (mappingIndex < mappings.size() ? mappings.get(mappingIndex) : null);
+			return mappingIndex < mappings.size() ? mappings.get(mappingIndex) : null;
 		}
 
 		AnnotationTypeMappings getMappings(int annotationIndex) {

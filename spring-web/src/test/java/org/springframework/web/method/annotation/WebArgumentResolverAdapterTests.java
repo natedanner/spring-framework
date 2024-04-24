@@ -42,11 +42,11 @@ import static org.mockito.Mockito.verify;
  */
 class WebArgumentResolverAdapterTests {
 
-	private WebArgumentResolver adaptee = mock();
+	private final WebArgumentResolver adaptee = mock();
 
-	private TestWebArgumentResolverAdapter adapter = new TestWebArgumentResolverAdapter(adaptee);
+	private final TestWebArgumentResolverAdapter adapter = new TestWebArgumentResolverAdapter(adaptee);
 
-	private NativeWebRequest webRequest = new ServletWebRequest(new MockHttpServletRequest());
+	private final NativeWebRequest webRequest = new ServletWebRequest(new MockHttpServletRequest());
 
 	private MethodParameter parameter;
 

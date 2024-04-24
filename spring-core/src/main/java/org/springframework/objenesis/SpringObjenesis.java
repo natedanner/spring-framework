@@ -66,7 +66,7 @@ public class SpringObjenesis implements Objenesis {
 	 * @param strategy the instantiator strategy to use
 	 */
 	public SpringObjenesis(InstantiatorStrategy strategy) {
-		this.strategy = (strategy != null ? strategy : new StdInstantiatorStrategy());
+		this.strategy = strategy != null ? strategy : new StdInstantiatorStrategy();
 
 		// Evaluate the "spring.objenesis.ignore" property upfront...
 		if (SpringProperties.getFlag(SpringObjenesis.IGNORE_OBJENESIS_PROPERTY_NAME)) {
@@ -83,7 +83,7 @@ public class SpringObjenesis implements Objenesis {
 	 * been set to "true", this method returns {@code false}.
 	 */
 	public boolean isWorthTrying() {
-		return (this.worthTrying != Boolean.FALSE);
+		return this.worthTrying != Boolean.FALSE;
 	}
 
 	/**

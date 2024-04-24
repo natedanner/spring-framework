@@ -217,13 +217,13 @@ class RequestPredicatesTests {
 		ServerRequest request = initRequest("GET", "/path", req -> req.addParameter("foo", "bar"));
 		assertThat(predicate.test(request)).isTrue();
 
-		predicate = RequestPredicates.param("foo", s -> s.equals("bar"));
+		predicate = RequestPredicates.param("foo", "bar"::equals);
 		assertThat(predicate.test(request)).isTrue();
 
 		predicate = RequestPredicates.param("foo", "baz");
 		assertThat(predicate.test(request)).isFalse();
 
-		predicate = RequestPredicates.param("foo", s -> s.equals("baz"));
+		predicate = RequestPredicates.param("foo", "baz"::equals);
 		assertThat(predicate.test(request)).isFalse();
 	}
 

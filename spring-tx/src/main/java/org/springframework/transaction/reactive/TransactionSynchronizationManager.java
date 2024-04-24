@@ -98,7 +98,7 @@ public class TransactionSynchronizationManager {
 	public boolean hasResource(Object key) {
 		Object actualKey = TransactionSynchronizationUtils.unwrapResourceIfNecessary(key);
 		Object value = doGetResource(actualKey);
-		return (value != null);
+		return value != null;
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class TransactionSynchronizationManager {
 	 * @see #registerSynchronization
 	 */
 	public boolean isSynchronizationActive() {
-		return (this.transactionContext.getSynchronizations() != null);
+		return this.transactionContext.getSynchronizations() != null;
 	}
 
 	/**

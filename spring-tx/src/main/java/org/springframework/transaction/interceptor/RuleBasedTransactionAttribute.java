@@ -74,7 +74,7 @@ public class RuleBasedTransactionAttribute extends DefaultTransactionAttribute i
 	 */
 	public RuleBasedTransactionAttribute(RuleBasedTransactionAttribute other) {
 		super(other);
-		this.rollbackRules = (other.rollbackRules != null ? new ArrayList<>(other.rollbackRules) : null);
+		this.rollbackRules = other.rollbackRules != null ? new ArrayList<>(other.rollbackRules) : null;
 	}
 
 	/**
@@ -150,7 +150,7 @@ public class RuleBasedTransactionAttribute extends DefaultTransactionAttribute i
 		StringBuilder result = getAttributeDescription();
 		if (this.rollbackRules != null) {
 			for (RollbackRuleAttribute rule : this.rollbackRules) {
-				String sign = (rule instanceof NoRollbackRuleAttribute ? PREFIX_COMMIT_RULE : PREFIX_ROLLBACK_RULE);
+				String sign = rule instanceof NoRollbackRuleAttribute ? PREFIX_COMMIT_RULE : PREFIX_ROLLBACK_RULE;
 				result.append(',').append(sign).append(rule.getExceptionName());
 			}
 		}

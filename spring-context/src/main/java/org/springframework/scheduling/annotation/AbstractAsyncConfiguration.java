@@ -87,7 +87,7 @@ public abstract class AbstractAsyncConfiguration implements ImportAware {
 	private <T> Supplier<T> adapt(Supplier<AsyncConfigurer> supplier, Function<AsyncConfigurer, T> provider) {
 		return () -> {
 			AsyncConfigurer configurer = supplier.get();
-			return (configurer != null ? provider.apply(configurer) : null);
+			return configurer != null ? provider.apply(configurer) : null;
 		};
 	}
 

@@ -99,14 +99,14 @@ public class BeanPropertyRowMapper<T> implements RowMapper<T> {
 	private Class<T> mappedClass;
 
 	/** Whether we're strictly validating. */
-	private boolean checkFullyPopulated = false;
+	private boolean checkFullyPopulated;
 
 	/**
 	 * Whether {@code NULL} database values should be ignored for primitive
 	 * properties in the target class.
 	 * @see #setPrimitivesDefaultedForNullValue(boolean)
 	 */
-	private boolean primitivesDefaultedForNullValue = false;
+	private boolean primitivesDefaultedForNullValue;
 
 	/** ConversionService for binding JDBC values to bean properties. */
 	@Nullable
@@ -313,12 +313,12 @@ public class BeanPropertyRowMapper<T> implements RowMapper<T> {
 
 		ResultSetMetaData rsmd = rs.getMetaData();
 		int columnCount = rsmd.getColumnCount();
-		Set<String> populatedProperties = (isCheckFullyPopulated() ? new HashSet<>() : null);
+		Set<String> populatedProperties = isCheckFullyPopulated() ? new HashSet<>() : null;
 
 		for (int index = 1; index <= columnCount; index++) {
 			String column = JdbcUtils.lookupColumnName(rsmd, index);
 			String property = lowerCaseName(StringUtils.delete(column, " "));
-			PropertyDescriptor pd = (this.mappedProperties != null ? this.mappedProperties.get(property) : null);
+			PropertyDescriptor pd = this.mappedProperties != null ? this.mappedProperties.get(property) : null;
 			if (pd != null) {
 				try {
 					Object value = getColumnValue(rs, index, pd);

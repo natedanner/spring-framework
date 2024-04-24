@@ -354,7 +354,7 @@ public class ServiceLocatorFactoryBean implements FactoryBean<Object>, BeanFacto
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 			if (ReflectionUtils.isEqualsMethod(method)) {
 				// Only consider equal when proxies are identical.
-				return (proxy == args[0]);
+				return proxy == args[0];
 			}
 			else if (ReflectionUtils.isHashCodeMethod(method)) {
 				// Use hashCode of service locator proxy.

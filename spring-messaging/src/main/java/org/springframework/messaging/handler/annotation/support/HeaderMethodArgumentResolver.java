@@ -83,7 +83,7 @@ public class HeaderMethodArgumentResolver extends AbstractNamedValueMethodArgume
 			}
 		}
 
-		return (headerValue != null ? headerValue : nativeHeaderValue);
+		return headerValue != null ? headerValue : nativeHeaderValue;
 	}
 
 	@Nullable
@@ -96,7 +96,7 @@ public class HeaderMethodArgumentResolver extends AbstractNamedValueMethodArgume
 			return null;
 		}
 		List<?> nativeHeaderValues = nativeHeaders.get(name);
-		return (nativeHeaderValues.size() == 1 ? nativeHeaderValues.get(0) : nativeHeaderValues);
+		return nativeHeaderValues.size() == 1 ? nativeHeaderValues.get(0) : nativeHeaderValues;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -46,7 +46,7 @@ public class InterceptingClientHttpRequestFactory extends AbstractClientHttpRequ
 			@Nullable List<ClientHttpRequestInterceptor> interceptors) {
 
 		super(requestFactory);
-		this.interceptors = (interceptors != null ? interceptors : Collections.emptyList());
+		this.interceptors = interceptors != null ? interceptors : Collections.emptyList();
 	}
 
 

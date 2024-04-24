@@ -64,7 +64,7 @@ class AopUtilsTests {
 		class TestPointcut extends StaticMethodMatcherPointcut {
 			@Override
 			public boolean matches(Method method, @Nullable Class<?> clazz) {
-				return method.getName().equals("hashCode");
+				return "hashCode".equals(method.getName());
 			}
 		}
 

@@ -72,9 +72,9 @@ public interface AsyncHandlerMethodReturnValueHandler extends HandlerMethodRetur
 	default org.springframework.util.concurrent.ListenableFuture<?> toListenableFuture(
 			Object returnValue, MethodParameter returnType) {
 		CompletableFuture<?> result = toCompletableFuture(returnValue, returnType);
-		return (result != null ?
+		return result != null ?
 				new org.springframework.util.concurrent.CompletableToListenableFutureAdapter<>(result) :
-				null);
+				null;
 	}
 
 	/**

@@ -132,7 +132,7 @@ public class DeferredResult<T> {
 	 * expire due to a timeout or network error.
 	 */
 	public final boolean isSetOrExpired() {
-		return (this.result != RESULT_NONE || this.expired);
+		return this.result != RESULT_NONE || this.expired;
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class DeferredResult<T> {
 	 * @since 4.0
 	 */
 	public boolean hasResult() {
-		return (this.result != RESULT_NONE);
+		return this.result != RESULT_NONE;
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class DeferredResult<T> {
 	@Nullable
 	public Object getResult() {
 		Object resultToCheck = this.result;
-		return (resultToCheck != RESULT_NONE ? resultToCheck : null);
+		return resultToCheck != RESULT_NONE ? resultToCheck : null;
 	}
 
 	/**

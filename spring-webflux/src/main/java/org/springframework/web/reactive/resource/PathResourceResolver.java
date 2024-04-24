@@ -191,8 +191,8 @@ public class PathResourceResolver extends AbstractResourceResolver {
 		if (locationPath.equals(resourcePath)) {
 			return true;
 		}
-		locationPath = (locationPath.endsWith("/") || locationPath.isEmpty() ? locationPath : locationPath + "/");
-		return (resourcePath.startsWith(locationPath) && !isInvalidEncodedPath(resourcePath));
+		locationPath = locationPath.endsWith("/") || locationPath.isEmpty() ? locationPath : locationPath + "/";
+		return resourcePath.startsWith(locationPath) && !isInvalidEncodedPath(resourcePath);
 	}
 
 	private boolean isInvalidEncodedPath(String resourcePath) {

@@ -71,7 +71,7 @@ public class ToStringCreator {
 	public ToStringCreator(Object obj, @Nullable ToStringStyler styler) {
 		Assert.notNull(obj, "The object to be styled must not be null");
 		this.object = obj;
-		this.styler = (styler != null ? styler : DEFAULT_TO_STRING_STYLER);
+		this.styler = styler != null ? styler : DEFAULT_TO_STRING_STYLER;
 		this.styler.styleStart(this.buffer, this.object);
 	}
 

@@ -71,7 +71,7 @@ public abstract class AbstractPropertyBindingResult extends AbstractBindingResul
 	 */
 	@Override
 	public PropertyEditorRegistry getPropertyEditorRegistry() {
-		return (getTarget() != null ? getPropertyAccessor() : null);
+		return getTarget() != null ? getPropertyAccessor() : null;
 	}
 
 	/**
@@ -90,8 +90,8 @@ public abstract class AbstractPropertyBindingResult extends AbstractBindingResul
 	@Override
 	@Nullable
 	public Class<?> getFieldType(@Nullable String field) {
-		return (getTarget() != null ? getPropertyAccessor().getPropertyType(fixedField(field)) :
-				super.getFieldType(field));
+		return getTarget() != null ? getPropertyAccessor().getPropertyType(fixedField(field)) :
+				super.getFieldType(field);
 	}
 
 	/**

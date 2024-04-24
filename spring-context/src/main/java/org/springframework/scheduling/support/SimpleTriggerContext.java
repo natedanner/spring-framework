@@ -68,7 +68,7 @@ public class SimpleTriggerContext implements TriggerContext {
 
 	@Nullable
 	private static Instant toInstant(@Nullable Date date) {
-		return (date != null ? date.toInstant() : null);
+		return date != null ? date.toInstant() : null;
 	}
 
 	/**

@@ -38,7 +38,7 @@ public abstract class JCacheOperationSourcePointcut extends StaticMethodMatcherP
 	@Override
 	public boolean matches(Method method, Class<?> targetClass) {
 		JCacheOperationSource cas = getCacheOperationSource();
-		return (cas != null && cas.getCacheOperation(method, targetClass) != null);
+		return cas != null && cas.getCacheOperation(method, targetClass) != null;
 	}
 
 	/**
@@ -51,8 +51,8 @@ public abstract class JCacheOperationSourcePointcut extends StaticMethodMatcherP
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof JCacheOperationSourcePointcut that &&
-				ObjectUtils.nullSafeEquals(getCacheOperationSource(), that.getCacheOperationSource())));
+		return this == other || (other instanceof JCacheOperationSourcePointcut that &&
+				ObjectUtils.nullSafeEquals(getCacheOperationSource(), that.getCacheOperationSource()));
 	}
 
 	@Override

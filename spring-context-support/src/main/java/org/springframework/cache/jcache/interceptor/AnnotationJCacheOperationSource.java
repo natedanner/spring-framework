@@ -81,7 +81,7 @@ public abstract class AnnotationJCacheOperationSource extends AbstractFallbackJC
 		if (annotation != null) {
 			return annotation;
 		}
-		return (targetType != null ? targetType.getAnnotation(CacheDefaults.class) : null);
+		return targetType != null ? targetType.getAnnotation(CacheDefaults.class) : null;
 	}
 
 	protected CacheResultOperation createCacheResultOperation(Method method, @Nullable CacheDefaults defaults, CacheResult ann) {

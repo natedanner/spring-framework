@@ -73,7 +73,7 @@ public abstract class AbstractStompBrokerRelayIntegrationTests {
 	private TestEventPublisher eventPublisher;
 
 	// initial value of zero implies that a random ephemeral port should be used
-	private int port = 0;
+	private int port;
 
 
 	@BeforeEach
@@ -101,7 +101,7 @@ public abstract class AbstractStompBrokerRelayIntegrationTests {
 
 		// Reuse existing ephemeral port on restart (i.e., the next time this method
 		// is invoked) since it will already be configured in the relay
-		this.port = (this.port != 0 ? this.port : stompConnector.getServer().getSocketAddress().getPort());
+		this.port = this.port != 0 ? this.port : stompConnector.getServer().getSocketAddress().getPort();
 	}
 
 	private TransportConnector createStompConnector(int port) throws Exception {
@@ -293,7 +293,7 @@ public abstract class AbstractStompBrokerRelayIntegrationTests {
 
 		public void expectMessages(MessageExchange... messageExchanges) throws InterruptedException {
 			List<MessageExchange> expectedMessages = new ArrayList<>(Arrays.asList(messageExchanges));
-			while (expectedMessages.size() > 0) {
+			while (!expectedMessages.isEmpty()) {
 				Message<?> message = this.queue.poll(10000, TimeUnit.MILLISECONDS);
 				assertThat(message).as("Timed out waiting for messages, expected [" + expectedMessages + "]").isNotNull();
 				MessageExchange match = findMatch(expectedMessages, message);
@@ -496,7 +496,7 @@ public abstract class AbstractStompBrokerRelayIntegrationTests {
 
 		@Override
 		protected boolean matchInternal(StompHeaderAccessor headers, Object payload) {
-			return (this.receiptId.equals(headers.getReceiptId()));
+			return this.receiptId.equals(headers.getReceiptId());
 		}
 
 		@Override
@@ -543,7 +543,7 @@ public abstract class AbstractStompBrokerRelayIntegrationTests {
 		}
 
 		protected String getPayloadAsText() {
-			return (this.payload instanceof byte[]) ?
+			return this.payload instanceof byte[] ?
 					new String((byte[]) this.payload, StandardCharsets.UTF_8) : this.payload.toString();
 		}
 	}

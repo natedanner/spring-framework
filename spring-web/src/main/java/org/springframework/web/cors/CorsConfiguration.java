@@ -158,7 +158,7 @@ public class CorsConfiguration {
 	}
 
 	private String trimTrailingSlash(String origin) {
-		return (origin.endsWith("/") ? origin.substring(0, origin.length() - 1) : origin);
+		return origin.endsWith("/") ? origin.substring(0, origin.length() - 1) : origin;
 	}
 
 	/**
@@ -304,7 +304,7 @@ public class CorsConfiguration {
 	 * See the Spring Framework reference for more on this filter.
 	 */
 	public void setAllowedMethods(@Nullable List<String> allowedMethods) {
-		this.allowedMethods = (allowedMethods != null ? new ArrayList<>(allowedMethods) : null);
+		this.allowedMethods = allowedMethods != null ? new ArrayList<>(allowedMethods) : null;
 		if (!CollectionUtils.isEmpty(allowedMethods)) {
 			this.resolvedMethods = new ArrayList<>(allowedMethods.size());
 			for (String method : allowedMethods) {
@@ -376,7 +376,7 @@ public class CorsConfiguration {
 	 * <p>By default this is not set.
 	 */
 	public void setAllowedHeaders(@Nullable List<String> allowedHeaders) {
-		this.allowedHeaders = (allowedHeaders != null ? new ArrayList<>(allowedHeaders) : null);
+		this.allowedHeaders = allowedHeaders != null ? new ArrayList<>(allowedHeaders) : null;
 	}
 
 	/**
@@ -419,7 +419,7 @@ public class CorsConfiguration {
 	 * <p>By default this is not set.
 	 */
 	public void setExposedHeaders(@Nullable List<String> exposedHeaders) {
-		this.exposedHeaders = (exposedHeaders != null ? new ArrayList<>(exposedHeaders) : null);
+		this.exposedHeaders = exposedHeaders != null ? new ArrayList<>(exposedHeaders) : null;
 	}
 
 	/**
@@ -621,7 +621,7 @@ public class CorsConfiguration {
 		CorsConfiguration config = new CorsConfiguration(this);
 		List<String> origins = combine(getAllowedOrigins(), other.getAllowedOrigins());
 		List<OriginPattern> patterns = combinePatterns(this.allowedOriginPatterns, other.allowedOriginPatterns);
-		config.allowedOrigins = (origins == DEFAULT_PERMIT_ALL && !CollectionUtils.isEmpty(patterns) ? null : origins);
+		config.allowedOrigins = origins == DEFAULT_PERMIT_ALL && !CollectionUtils.isEmpty(patterns) ? null : origins;
 		config.allowedOriginPatterns = patterns;
 		config.setAllowedMethods(combine(getAllowedMethods(), other.getAllowedMethods()));
 		config.setAllowedHeaders(combine(getAllowedHeaders(), other.getAllowedHeaders()));
@@ -643,7 +643,7 @@ public class CorsConfiguration {
 
 	private List<String> combine(@Nullable List<String> source, @Nullable List<String> other) {
 		if (other == null) {
-			return (source != null ? source : Collections.emptyList());
+			return source != null ? source : Collections.emptyList();
 		}
 		if (source == null) {
 			return other;
@@ -667,7 +667,7 @@ public class CorsConfiguration {
 			@Nullable List<OriginPattern> source, @Nullable List<OriginPattern> other) {
 
 		if (other == null) {
-			return (source != null ? source : Collections.emptyList());
+			return source != null ? source : Collections.emptyList();
 		}
 		if (source == null) {
 			return other;
@@ -732,7 +732,7 @@ public class CorsConfiguration {
 		if (this.resolvedMethods == null) {
 			return Collections.singletonList(requestMethod);
 		}
-		return (this.resolvedMethods.contains(requestMethod) ? this.resolvedMethods : null);
+		return this.resolvedMethods.contains(requestMethod) ? this.resolvedMethods : null;
 	}
 
 	/**
@@ -775,7 +775,7 @@ public class CorsConfiguration {
 				}
 			}
 		}
-		return (result.isEmpty() ? null : result);
+		return result.isEmpty() ? null : result;
 	}
 
 
@@ -808,7 +808,7 @@ public class CorsConfiguration {
 			patternValue = patternValue.replace("*", "\\E.*\\Q");
 
 			if (portList != null) {
-				patternValue += (portList.equals(ALL) ? "(:\\d+)?" : ":(" + portList.replace(',', '|') + ")");
+				patternValue += portList.equals(ALL) ? "(:\\d+)?" : ":(" + portList.replace(',', '|') + ")";
 			}
 
 			return Pattern.compile(patternValue);

@@ -103,7 +103,7 @@ public class XhrClientSockJsSession extends AbstractClientSockJsSession {
 	@Override
 	public InetSocketAddress getRemoteAddress() {
 		URI uri = getUri();
-		return (uri != null ? new InetSocketAddress(uri.getHost(), uri.getPort()) : null);
+		return uri != null ? new InetSocketAddress(uri.getHost(), uri.getPort()) : null;
 	}
 
 	@Override

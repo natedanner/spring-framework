@@ -97,18 +97,18 @@ public class HibernateTemplate implements HibernateOperations, InitializingBean 
 	@Nullable
 	private String[] filterNames;
 
-	private boolean exposeNativeSession = false;
+	private boolean exposeNativeSession;
 
 	private boolean checkWriteOperations = true;
 
-	private boolean cacheQueries = false;
+	private boolean cacheQueries;
 
 	@Nullable
 	private String queryCacheRegion;
 
-	private int fetchSize = 0;
+	private int fetchSize;
 
-	private int maxResults = 0;
+	private int maxResults;
 
 
 	/**
@@ -362,7 +362,7 @@ public class HibernateTemplate implements HibernateOperations, InitializingBean 
 		try {
 			enableFilters(session);
 			Session sessionToExpose =
-					(enforceNativeSession || isExposeNativeSession() ? session : createSessionProxy(session));
+					enforceNativeSession || isExposeNativeSession() ? session : createSessionProxy(session);
 			return action.doInHibernate(sessionToExpose);
 		}
 		catch (HibernateException ex) {
@@ -372,10 +372,6 @@ public class HibernateTemplate implements HibernateOperations, InitializingBean 
 			if (ex.getCause() instanceof HibernateException hibernateEx) {
 				throw SessionFactoryUtils.convertHibernateAccessException(hibernateEx);
 			}
-			throw ex;
-		}
-		catch (RuntimeException ex) {
-			// Callback code threw application exception...
 			throw ex;
 		}
 		finally {
@@ -846,8 +842,8 @@ public class HibernateTemplate implements HibernateOperations, InitializingBean 
 
 		Assert.notNull(exampleEntity, "Example entity must not be null");
 		return nonNull(executeWithNativeSession((HibernateCallback<List<T>>) session -> {
-			Criteria executableCriteria = (entityName != null ?
-					session.createCriteria(entityName) : session.createCriteria(exampleEntity.getClass()));
+			Criteria executableCriteria = entityName != null ?
+					session.createCriteria(entityName) : session.createCriteria(exampleEntity.getClass());
 			executableCriteria.add(Example.create(exampleEntity));
 			prepareCriteria(executableCriteria);
 			if (firstResult >= 0) {

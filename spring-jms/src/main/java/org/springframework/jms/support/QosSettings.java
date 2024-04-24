@@ -111,10 +111,10 @@ public class QosSettings {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof QosSettings that &&
+		return this == other || (other instanceof QosSettings that &&
 				this.deliveryMode == that.deliveryMode &&
 				this.priority == that.priority &&
-				this.timeToLive == that.timeToLive));
+				this.timeToLive == that.timeToLive);
 	}
 
 	@Override

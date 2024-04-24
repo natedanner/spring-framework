@@ -357,7 +357,7 @@ class HandlerMappingIntrospectorTests {
 	}
 
 
-	private static class TestHandler implements CorsConfigurationSource {
+	private static final class TestHandler implements CorsConfigurationSource {
 
 		private final CorsConfiguration corsConfig;
 
@@ -372,7 +372,7 @@ class HandlerMappingIntrospectorTests {
 	}
 
 
-	private static class AuthFilter implements Filter {
+	private static final class AuthFilter implements Filter {
 
 		private final HandlerMappingIntrospector introspector;
 

@@ -111,7 +111,7 @@ public class MBeanClientInterceptor
 
 	private boolean connectOnStartup = true;
 
-	private boolean refreshOnConnectFailure = false;
+	private boolean refreshOnConnectFailure;
 
 	@Nullable
 	private ObjectName objectName;
@@ -342,7 +342,7 @@ public class MBeanClientInterceptor
 	 */
 	protected boolean isPrepared() {
 		synchronized (this.preparationMonitor) {
-			return (this.serverToUse != null);
+			return this.serverToUse != null;
 		}
 	}
 
@@ -650,14 +650,14 @@ public class MBeanClientInterceptor
 		 */
 		public MethodCacheKey(String name, @Nullable Class<?>[] parameterTypes) {
 			this.name = name;
-			this.parameterTypes = (parameterTypes != null ? parameterTypes : new Class<?>[0]);
+			this.parameterTypes = parameterTypes != null ? parameterTypes : new Class<?>[0];
 		}
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof MethodCacheKey that &&
+			return this == other || (other instanceof MethodCacheKey that &&
 					this.name.equals(that.name) &&
-					Arrays.equals(this.parameterTypes, that.parameterTypes)));
+					Arrays.equals(this.parameterTypes, that.parameterTypes));
 		}
 
 		@Override

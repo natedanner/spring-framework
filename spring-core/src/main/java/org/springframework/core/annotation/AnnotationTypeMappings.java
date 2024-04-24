@@ -127,9 +127,9 @@ final class AnnotationTypeMappings {
 	}
 
 	private boolean isMappable(AnnotationTypeMapping source, @Nullable Annotation metaAnnotation) {
-		return (metaAnnotation != null && !this.filter.matches(metaAnnotation) &&
+		return metaAnnotation != null && !this.filter.matches(metaAnnotation) &&
 				!AnnotationFilter.PLAIN.matches(source.getAnnotationType()) &&
-				!isAlreadyMapped(source, metaAnnotation));
+				!isAlreadyMapped(source, metaAnnotation);
 	}
 
 	private boolean isAlreadyMapped(AnnotationTypeMapping source, Annotation metaAnnotation) {

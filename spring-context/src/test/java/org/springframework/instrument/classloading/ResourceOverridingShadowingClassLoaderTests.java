@@ -32,9 +32,9 @@ class ResourceOverridingShadowingClassLoaderTests {
 
 	private static final String EXISTING_RESOURCE = "org/springframework/instrument/classloading/testResource.xml";
 
-	private ClassLoader thisClassLoader = getClass().getClassLoader();
+	private final ClassLoader thisClassLoader = getClass().getClassLoader();
 
-	private ResourceOverridingShadowingClassLoader overridingLoader = new ResourceOverridingShadowingClassLoader(thisClassLoader);
+	private final ResourceOverridingShadowingClassLoader overridingLoader = new ResourceOverridingShadowingClassLoader(thisClassLoader);
 
 
 	@Test

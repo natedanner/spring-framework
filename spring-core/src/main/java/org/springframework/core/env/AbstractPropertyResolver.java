@@ -52,7 +52,7 @@ public abstract class AbstractPropertyResolver implements ConfigurablePropertyRe
 	@Nullable
 	private PropertyPlaceholderHelper strictHelper;
 
-	private boolean ignoreUnresolvableNestedPlaceholders = false;
+	private boolean ignoreUnresolvableNestedPlaceholders;
 
 	private String placeholderPrefix = SystemPropertyUtils.PLACEHOLDER_PREFIX;
 
@@ -155,7 +155,7 @@ public abstract class AbstractPropertyResolver implements ConfigurablePropertyRe
 
 	@Override
 	public boolean containsProperty(String key) {
-		return (getProperty(key) != null);
+		return getProperty(key) != null;
 	}
 
 	@Override
@@ -167,13 +167,13 @@ public abstract class AbstractPropertyResolver implements ConfigurablePropertyRe
 	@Override
 	public String getProperty(String key, String defaultValue) {
 		String value = getProperty(key);
-		return (value != null ? value : defaultValue);
+		return value != null ? value : defaultValue;
 	}
 
 	@Override
 	public <T> T getProperty(String key, Class<T> targetType, T defaultValue) {
 		T value = getProperty(key, targetType);
-		return (value != null ? value : defaultValue);
+		return value != null ? value : defaultValue;
 	}
 
 	@Override
@@ -226,8 +226,8 @@ public abstract class AbstractPropertyResolver implements ConfigurablePropertyRe
 		if (value.isEmpty()) {
 			return value;
 		}
-		return (this.ignoreUnresolvableNestedPlaceholders ?
-				resolvePlaceholders(value) : resolveRequiredPlaceholders(value));
+		return this.ignoreUnresolvableNestedPlaceholders ?
+				resolvePlaceholders(value) : resolveRequiredPlaceholders(value);
 	}
 
 	private PropertyPlaceholderHelper createPlaceholderHelper(boolean ignoreUnresolvablePlaceholders) {

@@ -41,11 +41,11 @@ import static org.mockito.Mockito.verify;
  */
 class ServerEndpointExporterTests {
 
-	private ServerContainer serverContainer = mock();
+	private final ServerContainer serverContainer = mock();
 
-	private ServletContext servletContext = new MockServletContext();
+	private final ServletContext servletContext = new MockServletContext();
 
-	private ServerEndpointExporter exporter = new ServerEndpointExporter();
+	private final ServerEndpointExporter exporter = new ServerEndpointExporter();
 
 	private AnnotationConfigWebApplicationContext webAppContext;
 

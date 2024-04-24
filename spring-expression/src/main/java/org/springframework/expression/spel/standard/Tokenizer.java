@@ -503,9 +503,9 @@ class Tokenizer {
 	 * Check if this might be a two character token.
 	 */
 	private boolean isTwoCharToken(TokenKind kind) {
-		return (kind.tokenChars.length == 2 &&
+		return kind.tokenChars.length == 2 &&
 				this.charsToProcess[this.pos] == kind.tokenChars[0] &&
-				this.charsToProcess[this.pos + 1] == kind.tokenChars[1]);
+				this.charsToProcess[this.pos + 1] == kind.tokenChars[1];
 	}
 
 	/**
@@ -573,7 +573,7 @@ class Tokenizer {
 	}
 
 	private boolean isExhausted() {
-		return (this.pos == this.max - 1);
+		return this.pos == this.max - 1;
 	}
 
 	private void raiseParseException(int start, SpelMessage msg, Object... inserts) {

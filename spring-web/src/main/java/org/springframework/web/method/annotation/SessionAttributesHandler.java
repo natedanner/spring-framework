@@ -82,7 +82,7 @@ public class SessionAttributesHandler {
 	 * session attributes through an {@link SessionAttributes} annotation.
 	 */
 	public boolean hasSessionAttributes() {
-		return (!this.attributeNames.isEmpty() || !this.attributeTypes.isEmpty());
+		return !this.attributeNames.isEmpty() || !this.attributeTypes.isEmpty();
 	}
 
 	/**

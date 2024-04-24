@@ -89,8 +89,8 @@ public class ModelAttributeMethodProcessor implements HandlerMethodArgumentResol
 	 */
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		return (parameter.hasParameterAnnotation(ModelAttribute.class) ||
-				(this.annotationNotRequired && !BeanUtils.isSimpleProperty(parameter.getParameterType())));
+		return parameter.hasParameterAnnotation(ModelAttribute.class) ||
+				(this.annotationNotRequired && !BeanUtils.isSimpleProperty(parameter.getParameterType()));
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class ModelAttributeMethodProcessor implements HandlerMethodArgumentResol
 
 	@Nullable
 	private static Object wrapAsOptionalIfNecessary(MethodParameter parameter, @Nullable Object target) {
-		return (parameter.getParameterType() == Optional.class ? Optional.ofNullable(target) : target);
+		return parameter.getParameterType() == Optional.class ? Optional.ofNullable(target) : target;
 	}
 
 	/**
@@ -257,7 +257,7 @@ public class ModelAttributeMethodProcessor implements HandlerMethodArgumentResol
 	protected boolean isBindExceptionRequired(MethodParameter parameter) {
 		int i = parameter.getParameterIndex();
 		Class<?>[] paramTypes = parameter.getExecutable().getParameterTypes();
-		boolean hasBindingResult = (paramTypes.length > (i + 1) && Errors.class.isAssignableFrom(paramTypes[i + 1]));
+		boolean hasBindingResult = paramTypes.length > (i + 1) && Errors.class.isAssignableFrom(paramTypes[i + 1]);
 		return !hasBindingResult;
 	}
 
@@ -268,8 +268,8 @@ public class ModelAttributeMethodProcessor implements HandlerMethodArgumentResol
 	 */
 	@Override
 	public boolean supportsReturnType(MethodParameter returnType) {
-		return (returnType.hasMethodAnnotation(ModelAttribute.class) ||
-				(this.annotationNotRequired && !BeanUtils.isSimpleProperty(returnType.getParameterType())));
+		return returnType.hasMethodAnnotation(ModelAttribute.class) ||
+				(this.annotationNotRequired && !BeanUtils.isSimpleProperty(returnType.getParameterType()));
 	}
 
 	/**

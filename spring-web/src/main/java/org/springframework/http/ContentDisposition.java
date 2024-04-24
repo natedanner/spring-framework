@@ -121,7 +121,7 @@ public final class ContentDisposition {
 	 * @since 5.3
 	 */
 	public boolean isAttachment() {
-		return (this.type != null && this.type.equalsIgnoreCase("attachment"));
+		return "attachment".equalsIgnoreCase(this.type);
 	}
 
 	/**
@@ -129,7 +129,7 @@ public final class ContentDisposition {
 	 * @since 5.3
 	 */
 	public boolean isFormData() {
-		return (this.type != null && this.type.equalsIgnoreCase("form-data"));
+		return "form-data".equalsIgnoreCase(this.type);
 	}
 
 	/**
@@ -137,7 +137,7 @@ public final class ContentDisposition {
 	 * @since 5.3
 	 */
 	public boolean isInline() {
-		return (this.type != null && this.type.equalsIgnoreCase("inline"));
+		return "inline".equalsIgnoreCase(this.type);
 	}
 
 	/**
@@ -227,7 +227,7 @@ public final class ContentDisposition {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ContentDisposition that &&
+		return this == other || (other instanceof ContentDisposition that &&
 				ObjectUtils.nullSafeEquals(this.type, that.type) &&
 				ObjectUtils.nullSafeEquals(this.name, that.name) &&
 				ObjectUtils.nullSafeEquals(this.filename, that.filename) &&
@@ -235,7 +235,7 @@ public final class ContentDisposition {
 				ObjectUtils.nullSafeEquals(this.size, that.size) &&
 				ObjectUtils.nullSafeEquals(this.creationDate, that.creationDate)&&
 				ObjectUtils.nullSafeEquals(this.modificationDate, that.modificationDate)&&
-				ObjectUtils.nullSafeEquals(this.readDate, that.readDate)));
+				ObjectUtils.nullSafeEquals(this.readDate, that.readDate));
 	}
 
 	@Override
@@ -355,13 +355,13 @@ public final class ContentDisposition {
 			int eqIndex = part.indexOf('=');
 			if (eqIndex != -1) {
 				String attribute = part.substring(0, eqIndex);
-				String value = (part.startsWith("\"", eqIndex + 1) && part.endsWith("\"") ?
+				String value = part.startsWith("\"", eqIndex + 1) && part.endsWith("\"") ?
 						part.substring(eqIndex + 2, part.length() - 1) :
-						part.substring(eqIndex + 1));
-				if (attribute.equals("name") ) {
+						part.substring(eqIndex + 1);
+				if ("name".equals(attribute) ) {
 					name = value;
 				}
-				else if (attribute.equals("filename*") ) {
+				else if ("filename*".equals(attribute) ) {
 					int idx1 = value.indexOf('\'');
 					int idx2 = value.indexOf('\'', idx1 + 1);
 					if (idx1 != -1 && idx2 != -1) {
@@ -375,7 +375,7 @@ public final class ContentDisposition {
 						filename = decodeRfc5987Filename(value, StandardCharsets.US_ASCII);
 					}
 				}
-				else if (attribute.equals("filename") && (filename == null)) {
+				else if ("filename".equals(attribute) && (filename == null)) {
 					if (value.startsWith("=?") ) {
 						Matcher matcher = BASE64_ENCODED_PATTERN.matcher(value);
 						if (matcher.find()) {
@@ -415,10 +415,10 @@ public final class ContentDisposition {
 						filename = value;
 					}
 				}
-				else if (attribute.equals("size") ) {
+				else if ("size".equals(attribute) ) {
 					size = Long.parseLong(value);
 				}
-				else if (attribute.equals("creation-date")) {
+				else if ("creation-date".equals(attribute)) {
 					try {
 						creationDate = ZonedDateTime.parse(value, RFC_1123_DATE_TIME);
 					}
@@ -426,7 +426,7 @@ public final class ContentDisposition {
 						// ignore
 					}
 				}
-				else if (attribute.equals("modification-date")) {
+				else if ("modification-date".equals(attribute)) {
 					try {
 						modificationDate = ZonedDateTime.parse(value, RFC_1123_DATE_TIME);
 					}
@@ -434,7 +434,7 @@ public final class ContentDisposition {
 						// ignore
 					}
 				}
-				else if (attribute.equals("read-date")) {
+				else if ("read-date".equals(attribute)) {
 					try {
 						readDate = ZonedDateTime.parse(value, RFC_1123_DATE_TIME);
 					}
@@ -473,7 +473,7 @@ public final class ContentDisposition {
 					else if (!escaped && ch == '"') {
 						quoted = !quoted;
 					}
-					escaped = (!escaped && ch == '\\');
+					escaped = !escaped && ch == '\\';
 					nextIndex++;
 				}
 				String part = headerValue.substring(index + 1, nextIndex).trim();

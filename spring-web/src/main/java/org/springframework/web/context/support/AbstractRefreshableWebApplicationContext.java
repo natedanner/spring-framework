@@ -150,7 +150,7 @@ public abstract class AbstractRefreshableWebApplicationContext extends AbstractR
 
 	@Override
 	public String getApplicationName() {
-		return (this.servletContext != null ? this.servletContext.getContextPath() : "");
+		return this.servletContext != null ? this.servletContext.getContextPath() : "";
 	}
 
 	/**

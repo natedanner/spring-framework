@@ -68,7 +68,7 @@ public class MockHttpSession implements HttpSession {
 
 	private final Map<String, Object> attributes = new LinkedHashMap<>();
 
-	private boolean invalid = false;
+	private boolean invalid;
 
 	private boolean isNew = true;
 
@@ -95,8 +95,8 @@ public class MockHttpSession implements HttpSession {
 	 * @param id a unique identifier for this session
 	 */
 	public MockHttpSession(@Nullable ServletContext servletContext, @Nullable String id) {
-		this.servletContext = (servletContext != null ? servletContext : new MockServletContext());
-		this.id = (id != null ? id : Integer.toString(nextId++));
+		this.servletContext = servletContext != null ? servletContext : new MockServletContext();
+		this.id = id != null ? id : Integer.toString(nextId++);
 	}
 
 

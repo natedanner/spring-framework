@@ -93,8 +93,8 @@ class SpringPersistenceUnitInfo extends MutablePersistenceUnitInfo {
 	 */
 	@Override
 	public ClassLoader getNewTempClassLoader() {
-		ClassLoader tcl = (this.loadTimeWeaver != null ? this.loadTimeWeaver.getThrowawayClassLoader() :
-				new SimpleThrowawayClassLoader(this.classLoader));
+		ClassLoader tcl = this.loadTimeWeaver != null ? this.loadTimeWeaver.getThrowawayClassLoader() :
+				new SimpleThrowawayClassLoader(this.classLoader);
 		String packageToExclude = getPersistenceProviderPackageName();
 		if (packageToExclude != null && tcl instanceof DecoratingClassLoader dcl) {
 			dcl.excludePackage(packageToExclude);

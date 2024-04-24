@@ -152,7 +152,7 @@ class ConfigurationClassAspectIntegrationTests {
 	@Aspect
 	public static class CountingAspect {
 
-		public int count = 0;
+		public int count;
 
 		@After("execution(* java.lang.Runnable.*(..))")
 		public void after(JoinPoint joinPoint) {

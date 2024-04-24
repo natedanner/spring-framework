@@ -103,7 +103,7 @@ class StreamConverter implements ConditionalGenericConverter {
 
 	@Nullable
 	private Object convertFromStream(@Nullable Stream<?> source, TypeDescriptor streamType, TypeDescriptor targetType) {
-		List<Object> content = (source != null ? source.collect(Collectors.<Object>toList()) : Collections.emptyList());
+		List<Object> content = source != null ? source.collect(Collectors.<Object>toList()) : Collections.emptyList();
 		TypeDescriptor listType = TypeDescriptor.collection(List.class, streamType.getElementTypeDescriptor());
 		return this.conversionService.convert(content, listType, targetType);
 	}

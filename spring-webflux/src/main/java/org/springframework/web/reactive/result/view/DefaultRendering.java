@@ -47,9 +47,9 @@ class DefaultRendering implements Rendering {
 
 	DefaultRendering(Object view, @Nullable Model model, @Nullable HttpStatusCode status, @Nullable HttpHeaders headers) {
 		this.view = view;
-		this.model = (model != null ? model.asMap() : Collections.emptyMap());
+		this.model = model != null ? model.asMap() : Collections.emptyMap();
 		this.status = status;
-		this.headers = (headers != null ? headers : EMPTY_HEADERS);
+		this.headers = headers != null ? headers : EMPTY_HEADERS;
 	}
 
 

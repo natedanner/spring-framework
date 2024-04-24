@@ -55,7 +55,7 @@ public abstract class AbstractLazyCreationTargetSource implements TargetSource {
 	 * has already been fetched.
 	 */
 	public synchronized boolean isInitialized() {
-		return (this.lazyTarget != null);
+		return this.lazyTarget != null;
 	}
 
 	/**
@@ -69,7 +69,7 @@ public abstract class AbstractLazyCreationTargetSource implements TargetSource {
 	@Override
 	@Nullable
 	public synchronized Class<?> getTargetClass() {
-		return (this.lazyTarget != null ? this.lazyTarget.getClass() : null);
+		return this.lazyTarget != null ? this.lazyTarget.getClass() : null;
 	}
 
 	/**

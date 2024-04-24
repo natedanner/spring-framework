@@ -175,8 +175,8 @@ public abstract class AbstractBeanFactoryBasedTargetSource implements TargetSour
 			return false;
 		}
 		AbstractBeanFactoryBasedTargetSource otherTargetSource = (AbstractBeanFactoryBasedTargetSource) other;
-		return (ObjectUtils.nullSafeEquals(this.beanFactory, otherTargetSource.beanFactory) &&
-				ObjectUtils.nullSafeEquals(this.targetBeanName, otherTargetSource.targetBeanName));
+		return ObjectUtils.nullSafeEquals(this.beanFactory, otherTargetSource.beanFactory) &&
+				ObjectUtils.nullSafeEquals(this.targetBeanName, otherTargetSource.targetBeanName);
 	}
 
 	@Override

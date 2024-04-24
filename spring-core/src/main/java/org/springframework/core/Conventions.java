@@ -84,7 +84,7 @@ public final class Conventions {
 		}
 
 		String name = ClassUtils.getShortNameAsProperty(valueClass);
-		return (pluralize ? pluralize(name) : name);
+		return pluralize ? pluralize(name) : name;
 	}
 
 	/**
@@ -125,7 +125,7 @@ public final class Conventions {
 		}
 
 		String name = ClassUtils.getShortNameAsProperty(valueClass);
-		return (pluralize ? pluralize(name) : name + reactiveSuffix);
+		return pluralize ? pluralize(name) : name + reactiveSuffix;
 	}
 
 	/**
@@ -207,7 +207,7 @@ public final class Conventions {
 		}
 
 		String name = ClassUtils.getShortNameAsProperty(valueClass);
-		return (pluralize ? pluralize(name) : name + reactiveSuffix);
+		return pluralize ? pluralize(name) : name + reactiveSuffix;
 	}
 
 	/**

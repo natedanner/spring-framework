@@ -107,12 +107,12 @@ public interface DeferredImportSelector extends ImportSelector {
 					return false;
 				}
 				Entry entry = (Entry) other;
-				return (this.metadata.equals(entry.metadata) && this.importClassName.equals(entry.importClassName));
+				return this.metadata.equals(entry.metadata) && this.importClassName.equals(entry.importClassName);
 			}
 
 			@Override
 			public int hashCode() {
-				return (this.metadata.hashCode() * 31 + this.importClassName.hashCode());
+				return this.metadata.hashCode() * 31 + this.importClassName.hashCode();
 			}
 
 			@Override

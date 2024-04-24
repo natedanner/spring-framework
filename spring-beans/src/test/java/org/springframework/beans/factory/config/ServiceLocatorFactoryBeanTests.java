@@ -78,12 +78,10 @@ class ServiceLocatorFactoryBeanTests {
 				genericBeanDefinition(ServiceLocatorFactoryBean.class)
 				.addPropertyValue("serviceLocatorInterface", TestService2Locator.class)
 				.getBeanDefinition());
-		assertThatExceptionOfType(NoSuchBeanDefinitionException.class).as("more than one matching type").isThrownBy(() ->
-			((TestServiceLocator) bf.getBean("factory")).getTestService());
+		assertThatExceptionOfType(NoSuchBeanDefinitionException.class).as("more than one matching type").isThrownBy(((TestServiceLocator) bf.getBean("factory"))::getTestService);
 		assertThatExceptionOfType(NoSuchBeanDefinitionException.class).as("more than one matching type").isThrownBy(() ->
 			((TestServiceLocator2) bf.getBean("factory2")).getTestService(null));
-		assertThatExceptionOfType(NoSuchBeanDefinitionException.class).as("no matching types").isThrownBy(() ->
-			((TestService2Locator) bf.getBean("factory3")).getTestService());
+		assertThatExceptionOfType(NoSuchBeanDefinitionException.class).as("no matching types").isThrownBy(((TestService2Locator) bf.getBean("factory3"))::getTestService);
 	}
 
 	@Test
@@ -105,14 +103,12 @@ class ServiceLocatorFactoryBeanTests {
 				.addPropertyValue("serviceLocatorInterface", TestService2Locator.class)
 				.addPropertyValue("serviceLocatorExceptionClass", CustomServiceLocatorException3.class)
 				.getBeanDefinition());
-		assertThatExceptionOfType(CustomServiceLocatorException1.class).as("more than one matching type").isThrownBy(() ->
-				((TestServiceLocator) bf.getBean("factory")).getTestService())
+		assertThatExceptionOfType(CustomServiceLocatorException1.class).as("more than one matching type").isThrownBy(((TestServiceLocator) bf.getBean("factory"))::getTestService)
 			.withCauseInstanceOf(NoSuchBeanDefinitionException.class);
 		assertThatExceptionOfType(CustomServiceLocatorException2.class).as("more than one matching type").isThrownBy(() ->
 				((TestServiceLocator2) bf.getBean("factory2")).getTestService(null))
 			.withCauseInstanceOf(NoSuchBeanDefinitionException.class);
-		assertThatExceptionOfType(CustomServiceLocatorException3.class).as("no matching type").isThrownBy(() ->
-				((TestService2Locator) bf.getBean("factory3")).getTestService());
+		assertThatExceptionOfType(CustomServiceLocatorException3.class).as("no matching type").isThrownBy(((TestService2Locator) bf.getBean("factory3"))::getTestService);
 	}
 
 	@Test

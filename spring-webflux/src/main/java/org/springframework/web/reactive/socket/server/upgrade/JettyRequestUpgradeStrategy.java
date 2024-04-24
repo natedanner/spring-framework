@@ -62,8 +62,8 @@ public class JettyRequestUpgradeStrategy implements RequestUpgradeStrategy {
 	 * @since 6.1
 	 */
 	public void addWebSocketConfigurer(Consumer<Configurable> webSocketConfigurer) {
-		this.webSocketConfigurer = (this.webSocketConfigurer != null ?
-				this.webSocketConfigurer.andThen(webSocketConfigurer) : webSocketConfigurer);
+		this.webSocketConfigurer = this.webSocketConfigurer != null ?
+				this.webSocketConfigurer.andThen(webSocketConfigurer) : webSocketConfigurer;
 	}
 
 

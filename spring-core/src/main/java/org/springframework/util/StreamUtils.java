@@ -190,7 +190,7 @@ public abstract class StreamUtils {
 				bytesToCopy = 0;
 			}
 		}
-		return (end - start + 1 - bytesToCopy);
+		return end - start + 1 - bytesToCopy;
 	}
 
 	/**

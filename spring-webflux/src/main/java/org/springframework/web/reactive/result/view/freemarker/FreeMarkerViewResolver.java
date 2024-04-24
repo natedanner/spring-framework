@@ -60,7 +60,7 @@ public class FreeMarkerViewResolver extends UrlBasedViewResolver {
 
 	@Override
 	protected AbstractUrlBasedView instantiateView() {
-		return (getViewClass() == FreeMarkerView.class ? new FreeMarkerView() : super.instantiateView());
+		return getViewClass() == FreeMarkerView.class ? new FreeMarkerView() : super.instantiateView();
 	}
 
 }

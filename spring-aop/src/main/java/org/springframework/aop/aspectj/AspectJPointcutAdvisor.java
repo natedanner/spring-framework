@@ -89,8 +89,8 @@ public class AspectJPointcutAdvisor implements PointcutAdvisor, Ordered {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof AspectJPointcutAdvisor that &&
-				this.advice.equals(that.advice)));
+		return this == other || (other instanceof AspectJPointcutAdvisor that &&
+				this.advice.equals(that.advice));
 	}
 
 	@Override

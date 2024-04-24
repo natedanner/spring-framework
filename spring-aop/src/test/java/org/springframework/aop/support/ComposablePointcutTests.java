@@ -45,14 +45,14 @@ class ComposablePointcutTests {
 	public static MethodMatcher GET_AGE_METHOD_MATCHER = new StaticMethodMatcher() {
 		@Override
 		public boolean matches(Method m, @Nullable Class<?> targetClass) {
-			return m.getName().equals("getAge");
+			return "getAge".equals(m.getName());
 		}
 	};
 
 	public static MethodMatcher ABSQUATULATE_METHOD_MATCHER = new StaticMethodMatcher() {
 		@Override
 		public boolean matches(Method m, @Nullable Class<?> targetClass) {
-			return m.getName().equals("absquatulate");
+			return "absquatulate".equals(m.getName());
 		}
 	};
 

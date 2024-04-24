@@ -65,9 +65,9 @@ import org.springframework.web.multipart.MultipartResolver;
  */
 public class StandardServletMultipartResolver implements MultipartResolver {
 
-	private boolean resolveLazily = false;
+	private boolean resolveLazily;
 
-	private boolean strictServletCompliance = false;
+	private boolean strictServletCompliance;
 
 
 	/**

@@ -70,7 +70,7 @@ public class WebSocketClientSockJsSession extends AbstractClientSockJsSession im
 	@Override
 	@Nullable
 	public <T> T getNativeSession(@Nullable Class<T> requiredType) {
-		return (requiredType == null || requiredType.isInstance(this.webSocketSession) ? (T) this.webSocketSession : null);
+		return requiredType == null || requiredType.isInstance(this.webSocketSession) ? (T) this.webSocketSession : null;
 	}
 
 	@Override

@@ -215,7 +215,7 @@ class LocalContainerEntityManagerFactoryBeanTests extends AbstractEntityManagerF
 		given(mockEmf.createEntityManager()).willReturn(sharedEm, mockEm);
 
 		LocalContainerEntityManagerFactoryBean cefb = parseValidPersistenceUnit();
-		MutablePersistenceUnitInfo pui = ((MutablePersistenceUnitInfo) cefb.getPersistenceUnitInfo());
+		MutablePersistenceUnitInfo pui = (MutablePersistenceUnitInfo) cefb.getPersistenceUnitInfo();
 		pui.setTransactionType(PersistenceUnitTransactionType.JTA);
 
 		JpaTransactionManager jpatm = new JpaTransactionManager();

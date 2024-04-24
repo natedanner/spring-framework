@@ -220,7 +220,7 @@ class ScenariosForSpringSecurityExpressionTests extends AbstractExpressionTests 
 
 		@Override
 		public boolean canRead(EvaluationContext context, Object target, String name) {
-			return name.equals("principal");
+			return "principal".equals(name);
 		}
 
 		@Override
@@ -254,7 +254,7 @@ class ScenariosForSpringSecurityExpressionTests extends AbstractExpressionTests 
 
 		@Override
 		public boolean canRead(EvaluationContext context, Object target, String name) {
-			return name.equals("p");
+			return "p".equals(name);
 		}
 
 		@Override
@@ -315,7 +315,7 @@ class ScenariosForSpringSecurityExpressionTests extends AbstractExpressionTests 
 
 		@Override
 		public MethodExecutor resolve(EvaluationContext context, Object targetObject, String name, List<TypeDescriptor> arguments) {
-			if (name.equals("hasRole")) {
+			if ("hasRole".equals(name)) {
 				return new HasRoleExecutor(context.getTypeConverter());
 			}
 			return null;

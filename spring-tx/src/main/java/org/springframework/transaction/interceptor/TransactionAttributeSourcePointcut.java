@@ -52,14 +52,14 @@ final class TransactionAttributeSourcePointcut extends StaticMethodMatcherPointc
 
 	@Override
 	public boolean matches(Method method, Class<?> targetClass) {
-		return (this.transactionAttributeSource == null ||
-				this.transactionAttributeSource.getTransactionAttribute(method, targetClass) != null);
+		return this.transactionAttributeSource == null ||
+				this.transactionAttributeSource.getTransactionAttribute(method, targetClass) != null;
 	}
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof TransactionAttributeSourcePointcut that &&
-				ObjectUtils.nullSafeEquals(this.transactionAttributeSource, that.transactionAttributeSource)));
+		return this == other || (other instanceof TransactionAttributeSourcePointcut that &&
+				ObjectUtils.nullSafeEquals(this.transactionAttributeSource, that.transactionAttributeSource));
 	}
 
 	@Override
@@ -86,7 +86,7 @@ final class TransactionAttributeSourcePointcut extends StaticMethodMatcherPointc
 					PersistenceExceptionTranslator.class.isAssignableFrom(clazz)) {
 				return false;
 			}
-			return (transactionAttributeSource == null || transactionAttributeSource.isCandidateClass(clazz));
+			return transactionAttributeSource == null || transactionAttributeSource.isCandidateClass(clazz);
 		}
 
 		private TransactionAttributeSource getTransactionAttributeSource() {
@@ -95,8 +95,8 @@ final class TransactionAttributeSourcePointcut extends StaticMethodMatcherPointc
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof TransactionAttributeSourceClassFilter that &&
-					ObjectUtils.nullSafeEquals(transactionAttributeSource, that.getTransactionAttributeSource())));
+			return this == other || (other instanceof TransactionAttributeSourceClassFilter that &&
+					ObjectUtils.nullSafeEquals(transactionAttributeSource, that.getTransactionAttributeSource()));
 		}
 
 		@Override

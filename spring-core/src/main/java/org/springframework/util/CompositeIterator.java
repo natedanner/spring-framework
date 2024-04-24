@@ -37,7 +37,7 @@ public class CompositeIterator<E> implements Iterator<E> {
 
 	private final Set<Iterator<E>> iterators = new LinkedHashSet<>();
 
-	private boolean inUse = false;
+	private boolean inUse;
 
 
 	/**

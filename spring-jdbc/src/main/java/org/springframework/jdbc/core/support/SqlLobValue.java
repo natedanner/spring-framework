@@ -94,7 +94,7 @@ public class SqlLobValue implements DisposableSqlTypeValue {
 	 */
 	public SqlLobValue(@Nullable byte[] bytes, LobHandler lobHandler) {
 		this.content = bytes;
-		this.length = (bytes != null ? bytes.length : 0);
+		this.length = bytes != null ? bytes.length : 0;
 		this.lobCreator = lobHandler.getLobCreator();
 	}
 
@@ -115,7 +115,7 @@ public class SqlLobValue implements DisposableSqlTypeValue {
 	 */
 	public SqlLobValue(@Nullable String content, LobHandler lobHandler) {
 		this.content = content;
-		this.length = (content != null ? content.length() : 0);
+		this.length = content != null ? content.length() : 0;
 		this.lobCreator = lobHandler.getLobCreator();
 	}
 

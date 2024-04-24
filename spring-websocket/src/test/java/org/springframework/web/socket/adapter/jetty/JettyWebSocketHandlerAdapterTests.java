@@ -34,13 +34,13 @@ import static org.mockito.Mockito.verify;
  */
 class JettyWebSocketHandlerAdapterTests {
 
-	private Session session = mock();
+	private final Session session = mock();
 
-	private WebSocketHandler webSocketHandler = mock();
+	private final WebSocketHandler webSocketHandler = mock();
 
-	private JettyWebSocketSession webSocketSession = new JettyWebSocketSession(null, null);
+	private final JettyWebSocketSession webSocketSession = new JettyWebSocketSession(null, null);
 
-	private JettyWebSocketHandlerAdapter adapter = new JettyWebSocketHandlerAdapter(this.webSocketHandler, this.webSocketSession);
+	private final JettyWebSocketHandlerAdapter adapter = new JettyWebSocketHandlerAdapter(this.webSocketHandler, this.webSocketSession);
 
 
 	@BeforeEach

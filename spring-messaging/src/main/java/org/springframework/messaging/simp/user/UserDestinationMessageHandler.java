@@ -117,8 +117,8 @@ public class UserDestinationMessageHandler implements MessageHandler, SmartLifec
 	 * @param destination the target destination.
 	 */
 	public void setBroadcastDestination(@Nullable String destination) {
-		this.broadcastHandler = (StringUtils.hasText(destination) ?
-				new BroadcastHandler(this.sendHelper.getMessagingTemplate(), destination) : null);
+		this.broadcastHandler = StringUtils.hasText(destination) ?
+				new BroadcastHandler(this.sendHelper.getMessagingTemplate(), destination) : null;
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class UserDestinationMessageHandler implements MessageHandler, SmartLifec
 	 */
 	@Nullable
 	public String getBroadcastDestination() {
-		return (this.broadcastHandler != null ? this.broadcastHandler.getBroadcastDestination() : null);
+		return this.broadcastHandler != null ? this.broadcastHandler.getBroadcastDestination() : null;
 	}
 
 	/**
@@ -265,10 +265,10 @@ public class UserDestinationMessageHandler implements MessageHandler, SmartLifec
 
 		public void send(UserDestinationResult destinationResult, Message<?> message) throws MessagingException {
 			Set<String> sessionIds = destinationResult.getSessionIds();
-			Iterator<String> itr = (sessionIds != null ? sessionIds.iterator() : null);
+			Iterator<String> itr = sessionIds != null ? sessionIds.iterator() : null;
 
 			for (String target : destinationResult.getTargetDestinations()) {
-				String sessionId = (itr != null ? itr.next() : null);
+				String sessionId = itr != null ? itr.next() : null;
 				getTemplateToUse(sessionId).send(target, message);
 			}
 		}

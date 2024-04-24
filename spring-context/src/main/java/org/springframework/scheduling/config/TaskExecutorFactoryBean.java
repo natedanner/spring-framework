@@ -151,7 +151,7 @@ public class TaskExecutorFactoryBean implements
 
 	@Override
 	public Class<? extends TaskExecutor> getObjectType() {
-		return (this.target != null ? this.target.getClass() : ThreadPoolTaskExecutor.class);
+		return this.target != null ? this.target.getClass() : ThreadPoolTaskExecutor.class;
 	}
 
 	@Override

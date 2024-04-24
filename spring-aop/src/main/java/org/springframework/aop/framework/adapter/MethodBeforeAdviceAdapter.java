@@ -36,7 +36,7 @@ class MethodBeforeAdviceAdapter implements AdvisorAdapter, Serializable {
 
 	@Override
 	public boolean supportsAdvice(Advice advice) {
-		return (advice instanceof MethodBeforeAdvice);
+		return advice instanceof MethodBeforeAdvice;
 	}
 
 	@Override

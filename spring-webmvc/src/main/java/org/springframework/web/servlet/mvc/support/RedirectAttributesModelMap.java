@@ -81,7 +81,7 @@ public class RedirectAttributesModelMap extends ModelMap implements RedirectAttr
 		if (value == null) {
 			return null;
 		}
-		return (this.dataBinder != null ? this.dataBinder.convertIfNecessary(value, String.class) : value.toString());
+		return this.dataBinder != null ? this.dataBinder.convertIfNecessary(value, String.class) : value.toString();
 	}
 
 	/**

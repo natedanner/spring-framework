@@ -73,7 +73,7 @@ public class UrlPathHelper {
 	static volatile Boolean websphereComplianceFlag;
 
 
-	private boolean alwaysUseFullPath = false;
+	private boolean alwaysUseFullPath;
 
 	private boolean urlDecode = true;
 
@@ -81,7 +81,7 @@ public class UrlPathHelper {
 
 	private String defaultEncoding = WebUtils.DEFAULT_CHARACTER_ENCODING;
 
-	private boolean readOnly = false;
+	private boolean readOnly;
 
 
 	/**
@@ -227,7 +227,7 @@ public class UrlPathHelper {
 		if (name != null) {
 			result = (String) request.getAttribute(name);
 		}
-		return (result != null ? result : getLookupPathForRequest(request));
+		return result != null ? result : getLookupPathForRequest(request);
 	}
 
 	/**
@@ -262,9 +262,9 @@ public class UrlPathHelper {
 	 */
 	private boolean ignoreServletPath(HttpServletRequest request) {
 		HttpServletMapping mapping = (HttpServletMapping) request.getAttribute(RequestDispatcher.INCLUDE_MAPPING);
-		mapping = (mapping == null ? request.getHttpServletMapping() : mapping);
+		mapping = mapping == null ? request.getHttpServletMapping() : mapping;
 		MappingMatch match = mapping.getMappingMatch();
-		return (match != null && (!match.equals(MappingMatch.PATH) || mapping.getPattern().equals("/*")));
+		return match != null && (!match.equals(MappingMatch.PATH) || "/*".equals(mapping.getPattern()));
 	}
 
 	/**
@@ -348,7 +348,7 @@ public class UrlPathHelper {
 		String path = getRemainingPath(requestUri, contextPath, true);
 		if (path != null) {
 			// Normal case: URI contains context path.
-			return (StringUtils.hasText(path) ? path : "/");
+			return StringUtils.hasText(path) ? path : "/";
 		}
 		else {
 			return requestUri;
@@ -389,7 +389,7 @@ public class UrlPathHelper {
 		else if (requestUri.charAt(index1) == ';') {
 			index1 = requestUri.indexOf('/', index1);
 		}
-		return (index1 != -1 ? requestUri.substring(index1) : "");
+		return index1 != -1 ? requestUri.substring(index1) : "";
 	}
 
 	/**
@@ -606,8 +606,8 @@ public class UrlPathHelper {
 	 * @return the updated URI string
 	 */
 	public String removeSemicolonContent(String requestUri) {
-		return (this.removeSemicolonContent ?
-				removeSemicolonContentInternal(requestUri) : removeJsessionid(requestUri));
+		return this.removeSemicolonContent ?
+				removeSemicolonContentInternal(requestUri) : removeJsessionid(requestUri);
 	}
 
 	private static String removeSemicolonContentInternal(String requestUri) {

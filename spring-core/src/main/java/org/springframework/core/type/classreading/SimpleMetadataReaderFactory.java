@@ -50,7 +50,7 @@ public class SimpleMetadataReaderFactory implements MetadataReaderFactory {
 	 * (also determines the ClassLoader to use)
 	 */
 	public SimpleMetadataReaderFactory(@Nullable ResourceLoader resourceLoader) {
-		this.resourceLoader = (resourceLoader != null ? resourceLoader : new DefaultResourceLoader());
+		this.resourceLoader = resourceLoader != null ? resourceLoader : new DefaultResourceLoader();
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class SimpleMetadataReaderFactory implements MetadataReaderFactory {
 	 */
 	public SimpleMetadataReaderFactory(@Nullable ClassLoader classLoader) {
 		this.resourceLoader =
-				(classLoader != null ? new DefaultResourceLoader(classLoader) : new DefaultResourceLoader());
+				classLoader != null ? new DefaultResourceLoader(classLoader) : new DefaultResourceLoader();
 	}
 
 

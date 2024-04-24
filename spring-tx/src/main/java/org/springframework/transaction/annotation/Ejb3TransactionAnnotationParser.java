@@ -61,7 +61,7 @@ public class Ejb3TransactionAnnotationParser implements TransactionAnnotationPar
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (other instanceof Ejb3TransactionAnnotationParser);
+		return other instanceof Ejb3TransactionAnnotationParser;
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class Ejb3TransactionAnnotationParser implements TransactionAnnotationPar
 		@Override
 		public boolean rollbackOn(Throwable ex) {
 			ApplicationException ann = ex.getClass().getAnnotation(ApplicationException.class);
-			return (ann != null ? ann.rollback() : super.rollbackOn(ex));
+			return ann != null ? ann.rollback() : super.rollbackOn(ex);
 		}
 	}
 

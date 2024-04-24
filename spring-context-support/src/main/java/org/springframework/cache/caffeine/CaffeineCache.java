@@ -177,7 +177,7 @@ public class CaffeineCache extends AbstractValueAdaptingCache {
 	public ValueWrapper putIfAbsent(Object key, @Nullable Object value) {
 		PutIfAbsentFunction callable = new PutIfAbsentFunction(value);
 		Object result = this.cache.get(key, callable);
-		return (callable.called ? null : toValueWrapper(result));
+		return callable.called ? null : toValueWrapper(result);
 	}
 
 	@Override
@@ -187,7 +187,7 @@ public class CaffeineCache extends AbstractValueAdaptingCache {
 
 	@Override
 	public boolean evictIfPresent(Object key) {
-		return (this.cache.asMap().remove(key) != null);
+		return this.cache.asMap().remove(key) != null;
 	}
 
 	@Override

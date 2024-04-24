@@ -145,7 +145,7 @@ public class ResourceHttpRequestHandler extends WebContentGenerator
 	@Nullable
 	private Function<Resource, String> etagGenerator;
 
-	private boolean optimizeLocations = false;
+	private boolean optimizeLocations;
 
 	@Nullable
 	private StringValueResolver embeddedValueResolver;
@@ -498,7 +498,7 @@ public class ResourceHttpRequestHandler extends WebContentGenerator
 					location = location.substring(endIndex + 1);
 				}
 				Resource resource = applicationContext.getResource(location);
-				if (location.equals("/") && !(resource instanceof ServletContextResource)) {
+				if ("/".equals(location) && !(resource instanceof ServletContextResource)) {
 					throw new IllegalStateException(
 							"The String-based location \"/\" should be relative to the web application root " +
 							"but resolved to a Resource of type: " + resource.getClass() + ". " +
@@ -594,8 +594,8 @@ public class ResourceHttpRequestHandler extends WebContentGenerator
 		checkRequest(request);
 
 		// Header phase
-		String eTagValue = (this.getEtagGenerator() != null) ? this.getEtagGenerator().apply(resource) : null;
-		long lastModified = (this.isUseLastModified()) ? resource.lastModified() : -1;
+		String eTagValue = this.getEtagGenerator() != null ? this.getEtagGenerator().apply(resource) : null;
+		long lastModified = this.isUseLastModified() ? resource.lastModified() : -1;
 		if (new ServletWebRequest(request, response).checkNotModified(eTagValue, lastModified)) {
 			logger.trace("Resource not modified");
 			return;
@@ -705,7 +705,7 @@ public class ResourceHttpRequestHandler extends WebContentGenerator
 				prev = curr;
 			}
 		}
-		return (sb != null ? sb.toString() : path);
+		return sb != null ? sb.toString() : path;
 	}
 
 	private String cleanLeadingSlash(String path) {
@@ -718,10 +718,10 @@ public class ResourceHttpRequestHandler extends WebContentGenerator
 				if (i == 0 || (i == 1 && slash)) {
 					return path;
 				}
-				return (slash ? "/" + path.substring(i) : path.substring(i));
+				return slash ? "/" + path.substring(i) : path.substring(i);
 			}
 		}
-		return (slash ? "/" : "");
+		return slash ? "/" : "";
 	}
 
 	/**
@@ -774,7 +774,7 @@ public class ResourceHttpRequestHandler extends WebContentGenerator
 			return true;
 		}
 		if (path.contains(":/")) {
-			String relativePath = (path.charAt(0) == '/' ? path.substring(1) : path);
+			String relativePath = path.charAt(0) == '/' ? path.substring(1) : path;
 			if (ResourceUtils.isUrl(relativePath) || relativePath.startsWith("url:")) {
 				if (logger.isWarnEnabled()) {
 					logger.warn(LogFormatUtils.formatValue(

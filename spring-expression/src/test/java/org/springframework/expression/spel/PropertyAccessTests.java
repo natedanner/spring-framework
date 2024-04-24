@@ -295,7 +295,7 @@ class PropertyAccessTests extends AbstractExpressionTests {
 			if (!(target instanceof String)) {
 				throw new RuntimeException("Assertion Failed! target should be String");
 			}
-			return (name.equals("flibbles"));
+			return "flibbles".equals(name);
 		}
 
 		@Override
@@ -303,12 +303,12 @@ class PropertyAccessTests extends AbstractExpressionTests {
 			if (!(target instanceof String)) {
 				throw new RuntimeException("Assertion Failed! target should be String");
 			}
-			return (name.equals("flibbles"));
+			return "flibbles".equals(name);
 		}
 
 		@Override
 		public TypedValue read(EvaluationContext context, Object target, String name) {
-			if (!name.equals("flibbles")) {
+			if (!"flibbles".equals(name)) {
 				throw new RuntimeException("Assertion Failed! name should be flibbles");
 			}
 			return new TypedValue(flibbles);
@@ -316,7 +316,7 @@ class PropertyAccessTests extends AbstractExpressionTests {
 
 		@Override
 		public void write(EvaluationContext context, Object target, String name, Object newValue) throws AccessException {
-			if (!name.equals("flibbles")) {
+			if (!"flibbles".equals(name)) {
 				throw new RuntimeException("Assertion Failed! name should be flibbles");
 			}
 			try {

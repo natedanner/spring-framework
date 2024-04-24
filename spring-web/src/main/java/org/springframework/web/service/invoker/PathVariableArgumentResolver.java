@@ -50,8 +50,8 @@ public class PathVariableArgumentResolver extends AbstractNamedValueArgumentReso
 	@Override
 	protected NamedValueInfo createNamedValueInfo(MethodParameter parameter) {
 		PathVariable annot = parameter.getParameterAnnotation(PathVariable.class);
-		return (annot == null ? null :
-				new NamedValueInfo(annot.name(), annot.required(), null, "path variable", false));
+		return annot == null ? null :
+				new NamedValueInfo(annot.name(), annot.required(), null, "path variable", false);
 	}
 
 	@Override

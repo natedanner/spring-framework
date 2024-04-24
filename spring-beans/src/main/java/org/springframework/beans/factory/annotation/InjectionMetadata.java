@@ -116,7 +116,7 @@ public class InjectionMetadata {
 	 * @since 5.2.4
 	 */
 	protected boolean needsRefresh(Class<?> clazz) {
-		return (this.targetClass != clazz);
+		return this.targetClass != clazz;
 	}
 
 	public void checkConfigMembers(RootBeanDefinition beanDefinition) {
@@ -139,7 +139,7 @@ public class InjectionMetadata {
 	public void inject(Object target, @Nullable String beanName, @Nullable PropertyValues pvs) throws Throwable {
 		Collection<InjectedElement> checkedElements = this.checkedElements;
 		Collection<InjectedElement> elementsToIterate =
-				(checkedElements != null ? checkedElements : this.injectedElements);
+				checkedElements != null ? checkedElements : this.injectedElements;
 		if (!elementsToIterate.isEmpty()) {
 			for (InjectedElement element : elementsToIterate) {
 				element.inject(target, beanName, pvs);
@@ -154,7 +154,7 @@ public class InjectionMetadata {
 	public void clear(@Nullable PropertyValues pvs) {
 		Collection<InjectedElement> checkedElements = this.checkedElements;
 		Collection<InjectedElement> elementsToIterate =
-				(checkedElements != null ? checkedElements : this.injectedElements);
+				checkedElements != null ? checkedElements : this.injectedElements;
 		if (!elementsToIterate.isEmpty()) {
 			for (InjectedElement element : elementsToIterate) {
 				element.clearPropertySkipping(pvs);
@@ -171,8 +171,8 @@ public class InjectionMetadata {
 	 * @since 5.2
 	 */
 	public static InjectionMetadata forElements(Collection<InjectedElement> elements, Class<?> clazz) {
-		return (elements.isEmpty() ? new InjectionMetadata(clazz, Collections.emptyList()) :
-				new InjectionMetadata(clazz, elements));
+		return elements.isEmpty() ? new InjectionMetadata(clazz, Collections.emptyList()) :
+				new InjectionMetadata(clazz, elements);
 	}
 
 	/**
@@ -183,7 +183,7 @@ public class InjectionMetadata {
 	 * @see #needsRefresh(Class)
 	 */
 	public static boolean needsRefresh(@Nullable InjectionMetadata metadata, Class<?> clazz) {
-		return (metadata == null || metadata.needsRefresh(clazz));
+		return metadata == null || metadata.needsRefresh(clazz);
 	}
 
 
@@ -204,7 +204,7 @@ public class InjectionMetadata {
 
 		protected InjectedElement(Member member, @Nullable PropertyDescriptor pd) {
 			this.member = member;
-			this.isField = (member instanceof Field);
+			this.isField = member instanceof Field;
 			this.pd = pd;
 		}
 
@@ -234,7 +234,7 @@ public class InjectionMetadata {
 			}
 			else {
 				Class<?> paramType =
-						(this.pd != null ? this.pd.getPropertyType() : ((Method) this.member).getParameterTypes()[0]);
+						this.pd != null ? this.pd.getPropertyType() : ((Method) this.member).getParameterTypes()[0];
 				if (!(resourceType.isAssignableFrom(paramType) || paramType.isAssignableFrom(resourceType))) {
 					throw new IllegalStateException("Specified parameter type [" + paramType +
 							"] is incompatible with resource type [" + resourceType.getName() + "]");
@@ -340,8 +340,8 @@ public class InjectionMetadata {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof InjectedElement that &&
-					this.member.equals(that.member)));
+			return this == other || (other instanceof InjectedElement that &&
+					this.member.equals(that.member));
 		}
 
 		@Override

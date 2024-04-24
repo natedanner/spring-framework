@@ -124,8 +124,8 @@ final class TransactionalOperatorImpl implements TransactionalOperator {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (super.equals(other) && (!(other instanceof TransactionalOperatorImpl toi) ||
-				getTransactionManager() == toi.getTransactionManager())));
+		return this == other || (super.equals(other) && (!(other instanceof TransactionalOperatorImpl toi) ||
+				getTransactionManager() == toi.getTransactionManager()));
 	}
 
 	@Override

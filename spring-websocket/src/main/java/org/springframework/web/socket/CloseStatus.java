@@ -203,13 +203,13 @@ public final class CloseStatus implements Serializable {
 
 
 	public boolean equalsCode(CloseStatus other) {
-		return (this.code == other.code);
+		return this.code == other.code;
 	}
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof CloseStatus that &&
-				this.code == that.code && ObjectUtils.nullSafeEquals(this.reason, that.reason)));
+		return this == other || (other instanceof CloseStatus that &&
+				this.code == that.code && ObjectUtils.nullSafeEquals(this.reason, that.reason));
 	}
 
 	@Override

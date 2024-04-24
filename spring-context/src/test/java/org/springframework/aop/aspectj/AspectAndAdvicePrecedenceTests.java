@@ -101,7 +101,7 @@ class AspectAndAdvicePrecedenceTests {
 			"afterAdviceTwo(highPrecedenceAspect)"					// 18
 		};
 
-		private int adviceInvocationNumber = 0;
+		private int adviceInvocationNumber;
 
 		private void checkAdvice(String whatJustHappened) {
 			//System.out.println("[" + adviceInvocationNumber + "] " + whatJustHappened + " ==> " + EXPECTED[adviceInvocationNumber]);

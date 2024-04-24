@@ -67,7 +67,7 @@ public class TestSimpSession implements SimpSession {
 
 	@Override
 	public boolean equals(@Nullable Object obj) {
-		return (this == obj || (obj instanceof SimpSession that && this.id.equals(that.getId())));
+		return this == obj || (obj instanceof SimpSession that && this.id.equals(that.getId()));
 	}
 
 	@Override

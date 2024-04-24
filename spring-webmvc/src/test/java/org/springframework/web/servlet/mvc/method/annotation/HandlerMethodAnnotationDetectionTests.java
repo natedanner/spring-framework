@@ -533,8 +533,8 @@ class HandlerMethodAnnotationDetectionTests {
 			return new StaticMethodMatcherPointcut() {
 				@Override
 				public boolean matches(Method method, @Nullable Class<?> targetClass) {
-					return ((AnnotationUtils.findAnnotation(targetClass, Controller.class) != null) ||
-							(AnnotationUtils.findAnnotation(targetClass, RequestMapping.class) != null));
+					return (AnnotationUtils.findAnnotation(targetClass, Controller.class) != null) ||
+							(AnnotationUtils.findAnnotation(targetClass, RequestMapping.class) != null);
 				}
 			};
 		}

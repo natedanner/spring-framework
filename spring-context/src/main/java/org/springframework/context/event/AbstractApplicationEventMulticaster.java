@@ -189,7 +189,7 @@ public abstract class AbstractApplicationEventMulticaster
 			ApplicationEvent event, ResolvableType eventType) {
 
 		Object source = event.getSource();
-		Class<?> sourceType = (source != null ? source.getClass() : null);
+		Class<?> sourceType = source != null ? source.getClass() : null;
 		ListenerCacheKey cacheKey = new ListenerCacheKey(eventType, sourceType);
 
 		// Potential new retriever to populate
@@ -233,8 +233,8 @@ public abstract class AbstractApplicationEventMulticaster
 			ResolvableType eventType, @Nullable Class<?> sourceType, @Nullable CachedListenerRetriever retriever) {
 
 		List<ApplicationListener<?>> allListeners = new ArrayList<>();
-		Set<ApplicationListener<?>> filteredListeners = (retriever != null ? new LinkedHashSet<>() : null);
-		Set<String> filteredListenerBeans = (retriever != null ? new LinkedHashSet<>() : null);
+		Set<ApplicationListener<?>> filteredListeners = retriever != null ? new LinkedHashSet<>() : null;
+		Set<String> filteredListenerBeans = retriever != null ? new LinkedHashSet<>() : null;
 
 		Set<ApplicationListener<?>> listeners;
 		Set<String> listenerBeans;
@@ -353,7 +353,7 @@ public abstract class AbstractApplicationEventMulticaster
 		try {
 			BeanDefinition bd = beanFactory.getMergedBeanDefinition(listenerBeanName);
 			ResolvableType genericEventType = bd.getResolvableType().as(ApplicationListener.class).getGeneric();
-			return (genericEventType == ResolvableType.NONE || genericEventType.isAssignableFrom(eventType));
+			return genericEventType == ResolvableType.NONE || genericEventType.isAssignableFrom(eventType);
 		}
 		catch (NoSuchBeanDefinitionException ex) {
 			// Ignore - no need to check resolvable type for manually registered singleton
@@ -374,7 +374,7 @@ public abstract class AbstractApplicationEventMulticaster
 	 */
 	protected boolean supportsEvent(Class<?> listenerType, ResolvableType eventType) {
 		ResolvableType declaredEventType = GenericApplicationListenerAdapter.resolveDeclaredEventType(listenerType);
-		return (declaredEventType == null || declaredEventType.isAssignableFrom(eventType));
+		return declaredEventType == null || declaredEventType.isAssignableFrom(eventType);
 	}
 
 	/**
@@ -392,9 +392,9 @@ public abstract class AbstractApplicationEventMulticaster
 	protected boolean supportsEvent(
 			ApplicationListener<?> listener, ResolvableType eventType, @Nullable Class<?> sourceType) {
 
-		GenericApplicationListener smartListener = (listener instanceof GenericApplicationListener gal ? gal :
-				new GenericApplicationListenerAdapter(listener));
-		return (smartListener.supportsEventType(eventType) && smartListener.supportsSourceType(sourceType));
+		GenericApplicationListener smartListener = listener instanceof GenericApplicationListener gal ? gal :
+				new GenericApplicationListenerAdapter(listener);
+		return smartListener.supportsEventType(eventType) && smartListener.supportsSourceType(sourceType);
 	}
 
 
@@ -416,9 +416,9 @@ public abstract class AbstractApplicationEventMulticaster
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof ListenerCacheKey that &&
+			return this == other || (other instanceof ListenerCacheKey that &&
 					this.eventType.equals(that.eventType) &&
-					ObjectUtils.nullSafeEquals(this.sourceType, that.sourceType)));
+					ObjectUtils.nullSafeEquals(this.sourceType, that.sourceType));
 		}
 
 		@Override
@@ -436,7 +436,7 @@ public abstract class AbstractApplicationEventMulticaster
 			int result = this.eventType.toString().compareTo(other.eventType.toString());
 			if (result == 0) {
 				if (this.sourceType == null) {
-					return (other.sourceType == null ? 0 : -1);
+					return other.sourceType == null ? 0 : -1;
 				}
 				if (other.sourceType == null) {
 					return 1;

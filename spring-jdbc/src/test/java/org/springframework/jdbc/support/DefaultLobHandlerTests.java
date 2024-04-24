@@ -39,13 +39,13 @@ import static org.mockito.Mockito.verify;
  */
 class DefaultLobHandlerTests {
 
-	private ResultSet rs = mock();
+	private final ResultSet rs = mock();
 
-	private PreparedStatement ps = mock();
+	private final PreparedStatement ps = mock();
 
-	private LobHandler lobHandler = new DefaultLobHandler();
+	private final LobHandler lobHandler = new DefaultLobHandler();
 
-	private LobCreator lobCreator = lobHandler.getLobCreator();
+	private final LobCreator lobCreator = lobHandler.getLobCreator();
 
 
 	@Test

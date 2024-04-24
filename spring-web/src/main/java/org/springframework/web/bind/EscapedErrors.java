@@ -204,7 +204,7 @@ public class EscapedErrors implements Errors {
 	@Nullable
 	public Object getFieldValue(String field) {
 		Object value = this.source.getFieldValue(field);
-		return (value instanceof String text ? HtmlUtils.htmlEscape(text) : value);
+		return value instanceof String text ? HtmlUtils.htmlEscape(text) : value;
 	}
 
 	@Override

@@ -399,7 +399,7 @@ class SettableListenableFutureTests {
 
 	private static class InterruptibleSettableListenableFuture extends SettableListenableFuture<String> {
 
-		private boolean interrupted = false;
+		private boolean interrupted;
 
 		@Override
 		protected void interruptTask() {

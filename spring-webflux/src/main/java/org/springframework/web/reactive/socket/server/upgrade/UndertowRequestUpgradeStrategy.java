@@ -57,7 +57,7 @@ public class UndertowRequestUpgradeStrategy implements RequestUpgradeStrategy {
 
 		HttpServerExchange httpExchange = ServerHttpRequestDecorator.getNativeRequest(exchange.getRequest());
 
-		Set<String> protocols = (subProtocol != null ? Collections.singleton(subProtocol) : Collections.emptySet());
+		Set<String> protocols = subProtocol != null ? Collections.singleton(subProtocol) : Collections.emptySet();
 		Hybi13Handshake handshake = new Hybi13Handshake(protocols, false);
 		List<Handshake> handshakes = Collections.singletonList(handshake);
 

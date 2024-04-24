@@ -60,16 +60,16 @@ class Token {
 	}
 
 	public boolean isIdentifier() {
-		return (this.kind == TokenKind.IDENTIFIER);
+		return this.kind == TokenKind.IDENTIFIER;
 	}
 
 	public boolean isNumericRelationalOperator() {
-		return (this.kind == TokenKind.GT || this.kind == TokenKind.GE || this.kind == TokenKind.LT ||
-				this.kind == TokenKind.LE || this.kind == TokenKind.EQ || this.kind == TokenKind.NE);
+		return this.kind == TokenKind.GT || this.kind == TokenKind.GE || this.kind == TokenKind.LT ||
+				this.kind == TokenKind.LE || this.kind == TokenKind.EQ || this.kind == TokenKind.NE;
 	}
 
 	public String stringValue() {
-		return (this.data != null ? this.data : "");
+		return this.data != null ? this.data : "";
 	}
 
 	public Token asInstanceOfToken() {

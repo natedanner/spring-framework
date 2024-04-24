@@ -20,7 +20,7 @@ import org.springframework.asm.MethodVisitor;
 import org.springframework.cglib.core.ClassTransformer;
 
 public class ClassTransformerChain extends AbstractClassTransformer {
-    private ClassTransformer[] chain;
+	private final ClassTransformer[] chain;
 
     public ClassTransformerChain(ClassTransformer[] chain) {
         this.chain = chain.clone();

@@ -135,7 +135,7 @@ public class ProtobufHttpMessageConverter extends AbstractHttpMessageConverter<M
 		setSupportedMediaTypes(Arrays.asList(this.protobufFormatSupport != null ?
 				this.protobufFormatSupport.supportedMediaTypes() : new MediaType[] {PROTOBUF, TEXT_PLAIN}));
 
-		this.extensionRegistry = (extensionRegistry == null ? ExtensionRegistry.newInstance() : extensionRegistry);
+		this.extensionRegistry = extensionRegistry == null ? ExtensionRegistry.newInstance() : extensionRegistry;
 	}
 
 
@@ -199,8 +199,8 @@ public class ProtobufHttpMessageConverter extends AbstractHttpMessageConverter<M
 
 	@Override
 	protected boolean canWrite(@Nullable MediaType mediaType) {
-		return (super.canWrite(mediaType) ||
-				(this.protobufFormatSupport != null && this.protobufFormatSupport.supportsWriteOnly(mediaType)));
+		return super.canWrite(mediaType) ||
+				(this.protobufFormatSupport != null && this.protobufFormatSupport.supportsWriteOnly(mediaType));
 	}
 
 	@SuppressWarnings("deprecation")
@@ -281,8 +281,8 @@ public class ProtobufHttpMessageConverter extends AbstractHttpMessageConverter<M
 		private final JsonFormat.Printer printer;
 
 		public ProtobufJavaUtilSupport(@Nullable JsonFormat.Parser parser, @Nullable JsonFormat.Printer printer) {
-			this.parser = (parser != null ? parser : JsonFormat.parser());
-			this.printer = (printer != null ? printer : JsonFormat.printer());
+			this.parser = parser != null ? parser : JsonFormat.parser();
+			this.printer = printer != null ? printer : JsonFormat.printer();
 		}
 
 		@Override

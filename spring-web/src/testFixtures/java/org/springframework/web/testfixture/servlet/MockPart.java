@@ -75,7 +75,7 @@ public class MockPart implements Part {
 		Assert.hasLength(name, "'name' must not be empty");
 		this.name = name;
 		this.filename = filename;
-		this.content = (content != null ? content : new byte[0]);
+		this.content = content != null ? content : new byte[0];
 		this.headers.setContentDispositionFormData(name, filename);
 		this.headers.setContentType(contentType);
 	}
@@ -96,7 +96,7 @@ public class MockPart implements Part {
 	@Nullable
 	public String getContentType() {
 		MediaType contentType = this.headers.getContentType();
-		return (contentType != null ? contentType.toString() : null);
+		return contentType != null ? contentType.toString() : null;
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public class MockPart implements Part {
 	@Override
 	public Collection<String> getHeaders(String name) {
 		Collection<String> headerValues = this.headers.get(name);
-		return (headerValues != null ? headerValues : Collections.emptyList());
+		return headerValues != null ? headerValues : Collections.emptyList();
 	}
 
 	@Override

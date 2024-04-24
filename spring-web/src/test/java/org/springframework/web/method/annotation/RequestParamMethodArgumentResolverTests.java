@@ -66,11 +66,11 @@ class RequestParamMethodArgumentResolverTests {
 
 	private RequestParamMethodArgumentResolver resolver = new RequestParamMethodArgumentResolver(null, true);
 
-	private MockHttpServletRequest request = new MockHttpServletRequest();
+	private final MockHttpServletRequest request = new MockHttpServletRequest();
 
 	private NativeWebRequest webRequest = new ServletWebRequest(request, new MockHttpServletResponse());
 
-	private ResolvableMethod testMethod = ResolvableMethod.on(getClass()).named("handle").build();
+	private final ResolvableMethod testMethod = ResolvableMethod.on(getClass()).named("handle").build();
 
 
 	@Test

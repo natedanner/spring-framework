@@ -94,7 +94,7 @@ public abstract class AbstractMessagingTemplate<D> extends AbstractMessageReceiv
 
 		Message<?> requestMessage = doConvert(request, headers, postProcessor);
 		Message<?> replyMessage = sendAndReceive(destination, requestMessage);
-		return (replyMessage != null ? (T) getMessageConverter().fromMessage(replyMessage, targetClass) : null);
+		return replyMessage != null ? (T) getMessageConverter().fromMessage(replyMessage, targetClass) : null;
 	}
 
 }

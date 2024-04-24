@@ -134,7 +134,7 @@ public class ServletHttpHandlerAdapter implements Servlet {
 		Collection<String> mappings = registration.getMappings();
 		if (mappings.size() == 1) {
 			String mapping = mappings.iterator().next();
-			if (mapping.equals("/")) {
+			if ("/".equals(mapping)) {
 				return "";
 			}
 			if (mapping.endsWith("/*")) {

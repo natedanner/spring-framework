@@ -98,8 +98,8 @@ public interface MethodValidationResult {
 	 */
 	default List<ParameterErrors> getBeanResults() {
 		return getAllValidationResults().stream()
-				.filter(result -> result instanceof ParameterErrors)
-				.map(result -> (ParameterErrors) result)
+				.filter(ParameterErrors.class::isInstance)
+				.map(ParameterErrors.class::cast)
 				.toList();
 	}
 

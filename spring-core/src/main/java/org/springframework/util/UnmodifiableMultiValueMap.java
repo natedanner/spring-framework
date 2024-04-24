@@ -92,7 +92,7 @@ final class UnmodifiableMultiValueMap<K,V> implements MultiValueMap<K,V>, Serial
 	@Nullable
 	public List<V> get(Object key) {
 		List<V> result = this.delegate.get(key);
-		return (result != null ? Collections.unmodifiableList(result) : null);
+		return result != null ? Collections.unmodifiableList(result) : null;
 	}
 
 	@Override
@@ -122,7 +122,7 @@ final class UnmodifiableMultiValueMap<K,V> implements MultiValueMap<K,V>, Serial
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || this.delegate.equals(other));
+		return this == other || this.delegate.equals(other);
 	}
 
 	@Override
@@ -355,7 +355,7 @@ final class UnmodifiableMultiValueMap<K,V> implements MultiValueMap<K,V>, Serial
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || other instanceof Set<?> that && size() == that.size() && containsAll(that));
+			return this == other || other instanceof Set<?> that && size() == that.size() && containsAll(that);
 		}
 
 		@Override
@@ -493,8 +493,8 @@ final class UnmodifiableMultiValueMap<K,V> implements MultiValueMap<K,V>, Serial
 
 			@Override
 			public boolean equals(@Nullable Object other) {
-				return (this == other || (other instanceof Map.Entry<?, ?> that &&
-						getKey().equals(that.getKey()) && getValue().equals(that.getValue())));
+				return this == other || (other instanceof Map.Entry<?, ?> that &&
+						getKey().equals(that.getKey()) && getValue().equals(that.getValue()));
 			}
 
 			@Override
@@ -602,7 +602,7 @@ final class UnmodifiableMultiValueMap<K,V> implements MultiValueMap<K,V>, Serial
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || this.delegate.equals(other));
+			return this == other || this.delegate.equals(other);
 		}
 
 		@Override

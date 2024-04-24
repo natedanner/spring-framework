@@ -124,9 +124,9 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 
 	private boolean prepareConnection = true;
 
-	private boolean allowResultAccessAfterCompletion = false;
+	private boolean allowResultAccessAfterCompletion;
 
-	private boolean hibernateManagedSession = false;
+	private boolean hibernateManagedSession;
 
 	@Nullable
 	private Consumer<Session> sessionInitializer;
@@ -458,8 +458,8 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 	@Override
 	protected boolean isExistingTransaction(Object transaction) {
 		HibernateTransactionObject txObject = (HibernateTransactionObject) transaction;
-		return (txObject.hasSpringManagedTransaction() ||
-				(this.hibernateManagedSession && txObject.hasHibernateManagedTransaction()));
+		return txObject.hasSpringManagedTransaction() ||
+				(this.hibernateManagedSession && txObject.hasHibernateManagedTransaction());
 	}
 
 	@Override
@@ -479,9 +479,9 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 		try {
 			if (!txObject.hasSessionHolder() || txObject.getSessionHolder().isSynchronizedWithTransaction()) {
 				Interceptor entityInterceptor = getEntityInterceptor();
-				Session newSession = (entityInterceptor != null ?
+				Session newSession = entityInterceptor != null ?
 						obtainSessionFactory().withOptions().interceptor(entityInterceptor).openSession() :
-						obtainSessionFactory().openSession());
+						obtainSessionFactory().openSession();
 				if (this.sessionInitializer != null) {
 					this.sessionInitializer.accept(newSession);
 				}
@@ -493,8 +493,8 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 
 			session = txObject.getSessionHolder().getSession().unwrap(SessionImplementor.class);
 
-			boolean holdabilityNeeded = (this.allowResultAccessAfterCompletion && !txObject.isNewSession());
-			boolean isolationLevelNeeded = (definition.getIsolationLevel() != TransactionDefinition.ISOLATION_DEFAULT);
+			boolean holdabilityNeeded = this.allowResultAccessAfterCompletion && !txObject.isNewSession();
+			boolean isolationLevelNeeded = definition.getIsolationLevel() != TransactionDefinition.ISOLATION_DEFAULT;
 			if (holdabilityNeeded || isolationLevelNeeded || definition.isReadOnly()) {
 				if (this.prepareConnection && ConnectionReleaseMode.ON_CLOSE.equals(
 						session.getJdbcCoordinator().getLogicalConnection().getConnectionHandlingMode().getReleaseMode())) {
@@ -835,7 +835,7 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 		}
 
 		public boolean hasSessionHolder() {
-			return (this.sessionHolder != null);
+			return this.sessionHolder != null;
 		}
 
 		public boolean isNewSessionHolder() {
@@ -864,12 +864,12 @@ public class HibernateTransactionManager extends AbstractPlatformTransactionMana
 		}
 
 		public boolean hasSpringManagedTransaction() {
-			return (this.sessionHolder != null && this.sessionHolder.getTransaction() != null);
+			return this.sessionHolder != null && this.sessionHolder.getTransaction() != null;
 		}
 
 		public boolean hasHibernateManagedTransaction() {
-			return (this.sessionHolder != null &&
-					this.sessionHolder.getSession().getTransaction().getStatus() == TransactionStatus.ACTIVE);
+			return this.sessionHolder != null &&
+					this.sessionHolder.getSession().getTransaction().getStatus() == TransactionStatus.ACTIVE;
 		}
 
 		public void setRollbackOnly() {

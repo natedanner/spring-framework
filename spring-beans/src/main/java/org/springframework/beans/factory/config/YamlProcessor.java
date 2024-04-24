@@ -217,7 +217,7 @@ public abstract class YamlProcessor {
 		catch (IOException ex) {
 			handleProcessError(resource, ex);
 		}
-		return (count > 0);
+		return count > 0;
 	}
 
 	private void handleProcessError(Resource resource, IOException ex) {
@@ -403,7 +403,7 @@ public abstract class YamlProcessor {
 		 * Compare two {@link MatchStatus} items, returning the most specific status.
 		 */
 		public static MatchStatus getMostSpecific(MatchStatus a, MatchStatus b) {
-			return (a.ordinal() < b.ordinal() ? a : b);
+			return a.ordinal() < b.ordinal() ? a : b;
 		}
 	}
 

@@ -72,10 +72,10 @@ class ExceptionHandlerTests {
 
 		@GetMapping("/person/{name}")
 		String show(@PathVariable String name) {
-			if (name.equals("Clyde")) {
+			if ("Clyde".equals(name)) {
 				throw new IllegalArgumentException("simulated exception");
 			}
-			else if (name.equals("Bonnie")) {
+			else if ("Bonnie".equals(name)) {
 				throw new IllegalStateException("simulated exception");
 			}
 			return "person/show";

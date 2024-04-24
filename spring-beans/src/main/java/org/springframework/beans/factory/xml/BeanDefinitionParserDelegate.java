@@ -322,21 +322,21 @@ public class BeanDefinitionParserDelegate {
 		String lazyInit = root.getAttribute(DEFAULT_LAZY_INIT_ATTRIBUTE);
 		if (isDefaultValue(lazyInit)) {
 			// Potentially inherited from outer <beans> sections, otherwise falling back to false.
-			lazyInit = (parentDefaults != null ? parentDefaults.getLazyInit() : FALSE_VALUE);
+			lazyInit = parentDefaults != null ? parentDefaults.getLazyInit() : FALSE_VALUE;
 		}
 		defaults.setLazyInit(lazyInit);
 
 		String merge = root.getAttribute(DEFAULT_MERGE_ATTRIBUTE);
 		if (isDefaultValue(merge)) {
 			// Potentially inherited from outer <beans> sections, otherwise falling back to false.
-			merge = (parentDefaults != null ? parentDefaults.getMerge() : FALSE_VALUE);
+			merge = parentDefaults != null ? parentDefaults.getMerge() : FALSE_VALUE;
 		}
 		defaults.setMerge(merge);
 
 		String autowire = root.getAttribute(DEFAULT_AUTOWIRE_ATTRIBUTE);
 		if (isDefaultValue(autowire)) {
 			// Potentially inherited from outer <beans> sections, otherwise falling back to 'no'.
-			autowire = (parentDefaults != null ? parentDefaults.getAutowire() : AUTOWIRE_NO_VALUE);
+			autowire = parentDefaults != null ? parentDefaults.getAutowire() : AUTOWIRE_NO_VALUE;
 		}
 		defaults.setAutowire(autowire);
 
@@ -391,7 +391,7 @@ public class BeanDefinitionParserDelegate {
 	@Nullable
 	public String[] getAutowireCandidatePatterns() {
 		String candidatePattern = this.defaults.getAutowireCandidates();
-		return (candidatePattern != null ? StringUtils.commaDelimitedListToStringArray(candidatePattern) : null);
+		return candidatePattern != null ? StringUtils.commaDelimitedListToStringArray(candidatePattern) : null;
 	}
 
 
@@ -761,7 +761,7 @@ public class BeanDefinitionParserDelegate {
 				List<Element> argTypeEles = DomUtils.getChildElementsByTagName(replacedMethodEle, ARG_TYPE_ELEMENT);
 				for (Element argTypeEle : argTypeEles) {
 					String match = argTypeEle.getAttribute(ARG_TYPE_MATCH_ATTRIBUTE);
-					match = (StringUtils.hasText(match) ? match : DomUtils.getTextValue(argTypeEle));
+					match = StringUtils.hasText(match) ? match : DomUtils.getTextValue(argTypeEle);
 					if (StringUtils.hasText(match)) {
 						replaceOverride.addTypeIdentifier(match);
 					}
@@ -907,9 +907,9 @@ public class BeanDefinitionParserDelegate {
 	 */
 	@Nullable
 	public Object parsePropertyValue(Element ele, BeanDefinition bd, @Nullable String propertyName) {
-		String elementName = (propertyName != null ?
+		String elementName = propertyName != null ?
 				"<property> element for property '" + propertyName + "'" :
-				"<constructor-arg> element");
+				"<constructor-arg> element";
 
 		// Should only have one child element: ref, value, list, etc.
 		NodeList nl = ele.getChildNodes();
@@ -1537,7 +1537,7 @@ public class BeanDefinitionParserDelegate {
 	}
 
 	private boolean isCandidateElement(Node node) {
-		return (node instanceof Element && (isDefaultNamespace(node) || !isDefaultNamespace(node.getParentNode())));
+		return node instanceof Element && (isDefaultNamespace(node) || !isDefaultNamespace(node.getParentNode()));
 	}
 
 }

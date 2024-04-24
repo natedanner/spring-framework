@@ -156,11 +156,11 @@ class ServletServerHttpRequest extends AbstractServerHttpRequest {
 		if (headerValues.getFirst(HttpHeaders.CONTENT_TYPE) == null) {
 			int contentLength = request.getContentLength();
 			if (contentLength != -1) {
-				headers = (headers != null ? headers : new HttpHeaders(headerValues));
+				headers = headers != null ? headers : new HttpHeaders(headerValues);
 				headers.setContentLength(contentLength);
 			}
 		}
-		return (headers != null ? headers : headerValues);
+		return headers != null ? headers : headerValues;
 	}
 
 	@Override
@@ -196,7 +196,7 @@ class ServletServerHttpRequest extends AbstractServerHttpRequest {
 	@Nullable
 	protected SslInfo initSslInfo() {
 		X509Certificate[] certificates = getX509Certificates();
-		return (certificates != null ? new DefaultSslInfo(getSslSessionId(), certificates) : null);
+		return certificates != null ? new DefaultSslInfo(getSslSessionId(), certificates) : null;
 	}
 
 	@Nullable

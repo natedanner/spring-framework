@@ -131,7 +131,7 @@ public class SimpleServletPostProcessor implements
 
 	@Override
 	public boolean requiresDestruction(Object bean) {
-		return (bean instanceof Servlet);
+		return bean instanceof Servlet;
 	}
 
 

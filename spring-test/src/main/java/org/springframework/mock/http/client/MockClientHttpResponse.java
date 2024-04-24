@@ -92,7 +92,7 @@ public class MockClientHttpResponse extends MockHttpInputMessage implements Clie
 
 	@Override
 	public String getStatusText() {
-		return (this.statusCode instanceof HttpStatus status ? status.getReasonPhrase() : "");
+		return this.statusCode instanceof HttpStatus status ? status.getReasonPhrase() : "";
 	}
 
 	@Override

@@ -210,7 +210,7 @@ public abstract class ConfigurationClassUtils {
 	@Nullable
 	public static Integer getOrder(AnnotationMetadata metadata) {
 		Map<String, Object> orderAttributes = metadata.getAnnotationAttributes(Order.class.getName());
-		return (orderAttributes != null ? ((Integer) orderAttributes.get(AnnotationUtils.VALUE)) : null);
+		return orderAttributes != null ? ((Integer) orderAttributes.get(AnnotationUtils.VALUE)) : null;
 	}
 
 	/**
@@ -223,7 +223,7 @@ public abstract class ConfigurationClassUtils {
 	 */
 	public static int getOrder(BeanDefinition beanDef) {
 		Integer order = (Integer) beanDef.getAttribute(ORDER_ATTRIBUTE);
-		return (order != null ? order : Ordered.LOWEST_PRECEDENCE);
+		return order != null ? order : Ordered.LOWEST_PRECEDENCE;
 	}
 
 }

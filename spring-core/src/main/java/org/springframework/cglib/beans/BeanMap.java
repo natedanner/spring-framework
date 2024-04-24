@@ -41,7 +41,7 @@ import org.springframework.cglib.core.ReflectUtils;
  * @author Chris Nokleberg
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class BeanMap implements Map {
+public abstract class BeanMap implements Map {
 	/**
 	 * Limit the properties reflected in the key set of the map
 	 * to readable properties.
@@ -166,14 +166,14 @@ abstract public class BeanMap implements Map {
 	 * @param bean the JavaBean underlying the map
 	 * @return a new <code>BeanMap</code> instance
 	 */
-	abstract public BeanMap newInstance(Object bean);
+	public abstract BeanMap newInstance(Object bean);
 
 	/**
 	 * Get the type of a property.
 	 * @param name the name of the JavaBean property
 	 * @return the type of the property, or null if the property does not exist
 	 */
-	abstract public Class getPropertyType(String name);
+	public abstract Class getPropertyType(String name);
 
 	protected Object bean;
 
@@ -203,7 +203,7 @@ abstract public class BeanMap implements Map {
 	 * @param key must be a String
 	 * @return the current value, or null if there is no matching property
 	 */
-	abstract public Object get(Object bean, Object key);
+	public abstract Object get(Object bean, Object key);
 
 	/**
 	 * Set the property of a bean. This allows a <code>BeanMap</code>
@@ -212,7 +212,7 @@ abstract public class BeanMap implements Map {
 	 * @param key must be a String
 	 * @return the old value, if there was one, or null
 	 */
-	abstract public Object put(Object bean, Object key, Object value);
+	public abstract Object put(Object bean, Object key, Object value);
 
 	/**
 	 * Change the underlying bean this map should use.
@@ -289,7 +289,7 @@ abstract public class BeanMap implements Map {
 			}
 			Object v1 = get(key);
 			Object v2 = other.get(key);
-			if (!(Objects.equals(v1, v2))) {
+			if (!Objects.equals(v1, v2)) {
 				return false;
 			}
 		}
@@ -301,8 +301,8 @@ abstract public class BeanMap implements Map {
 		int code = 0;
 		for (Object key : keySet()) {
 			Object value = get(key);
-			code += ((key == null) ? 0 : key.hashCode()) ^
-				((value == null) ? 0 : value.hashCode());
+			code += (key == null ? 0 : key.hashCode()) ^
+				(value == null ? 0 : value.hashCode());
 		}
 		return code;
 	}

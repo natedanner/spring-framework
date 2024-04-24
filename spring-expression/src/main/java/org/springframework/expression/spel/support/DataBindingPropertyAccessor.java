@@ -51,7 +51,7 @@ public final class DataBindingPropertyAccessor extends ReflectivePropertyAccesso
 	@Override
 	protected boolean isCandidateForProperty(Method method, Class<?> targetClass) {
 		Class<?> clazz = method.getDeclaringClass();
-		return (clazz != Object.class && clazz != Class.class && !ClassLoader.class.isAssignableFrom(targetClass));
+		return clazz != Object.class && clazz != Class.class && !ClassLoader.class.isAssignableFrom(targetClass);
 	}
 
 

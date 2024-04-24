@@ -86,7 +86,7 @@ public class InMemoryGeneratedFiles implements GeneratedFiles {
 		Assert.notNull(kind, "'kind' must not be null");
 		Assert.hasLength(path, "'path' must not be empty");
 		Map<String, InputStreamSource> paths = this.files.get(kind);
-		return (paths != null ? paths.get(path) : null);
+		return paths != null ? paths.get(path) : null;
 	}
 
 }

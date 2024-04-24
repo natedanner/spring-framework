@@ -144,7 +144,7 @@ public abstract class ResourceElementResolver {
 	boolean isLazyLookup(RegisteredBean registeredBean) {
 		AnnotatedElement ae = getAnnotatedElement(registeredBean);
 		Lazy lazy = ae.getAnnotation(Lazy.class);
-		return (lazy != null && lazy.value());
+		return lazy != null && lazy.value();
 	}
 
 	private Object buildLazyResourceProxy(RegisteredBean registeredBean) {

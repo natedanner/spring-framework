@@ -162,7 +162,7 @@ class SimpleConstructorArgBean {
  */
 abstract class ConstructorInjectedOverrides {
 
-	private ITestBean tb;
+	private final ITestBean tb;
 
 	private String setterString;
 
@@ -446,7 +446,7 @@ abstract class OverrideOneMethodSubclass extends OverrideOneMethod {
  */
 class ProtectedLifecycleBean implements BeanNameAware, BeanFactoryAware, InitializingBean, DisposableBean {
 
-	protected boolean initMethodDeclared = false;
+	protected boolean initMethodDeclared;
 
 	protected String beanName;
 

@@ -75,7 +75,7 @@ public class TestBean implements BeanNameAware, BeanFactoryAware, ITestBean, IOt
 
 	private Date date = new Date();
 
-	private Float myFloat = 0.0f;
+	private Float myFloat = 0.0F;
 
 	private Collection<? super Object> friends = new ArrayList<>();
 
@@ -221,7 +221,7 @@ public class TestBean implements BeanNameAware, BeanFactoryAware, ITestBean, IOt
 
 	@Override
 	public ITestBean[] getSpouses() {
-		return (spouse != null ? new ITestBean[] {spouse} : null);
+		return spouse != null ? new ITestBean[] {spouse} : null;
 	}
 
 	public String getTouchy() {
@@ -466,8 +466,8 @@ public class TestBean implements BeanNameAware, BeanFactoryAware, ITestBean, IOt
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof TestBean that &&
-				ObjectUtils.nullSafeEquals(this.name, that.name) && this.age == that.age));
+		return this == other || (other instanceof TestBean that &&
+				ObjectUtils.nullSafeEquals(this.name, that.name) && this.age == that.age);
 	}
 
 	@Override

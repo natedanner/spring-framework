@@ -187,7 +187,7 @@ public abstract class HandlerResultHandlerSupport implements Ordered {
 			ServerWebExchange exchange, Supplier<List<MediaType>> producibleTypesSupplier) {
 
 		Set<MediaType> mediaTypes = exchange.getAttribute(HandlerMapping.PRODUCIBLE_MEDIA_TYPES_ATTRIBUTE);
-		return (mediaTypes != null ? new ArrayList<>(mediaTypes) : producibleTypesSupplier.get());
+		return mediaTypes != null ? new ArrayList<>(mediaTypes) : producibleTypesSupplier.get();
 	}
 
 	private MediaType selectMoreSpecificMediaType(MediaType acceptable, MediaType producible) {

@@ -59,7 +59,7 @@ public class JndiDestinationResolver extends JndiLocatorSupport implements Cachi
 
 	private boolean cache = true;
 
-	private boolean fallbackToDynamicDestination = false;
+	private boolean fallbackToDynamicDestination;
 
 	private DestinationResolver dynamicDestinationResolver = new DynamicDestinationResolver();
 

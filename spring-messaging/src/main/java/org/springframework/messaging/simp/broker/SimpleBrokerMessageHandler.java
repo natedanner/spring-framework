@@ -370,7 +370,7 @@ public class SimpleBrokerMessageHandler extends AbstractBrokerMessageHandler {
 	private void logMessage(Message<?> message) {
 		if (logger.isDebugEnabled()) {
 			SimpMessageHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, SimpMessageHeaderAccessor.class);
-			accessor = (accessor != null ? accessor : SimpMessageHeaderAccessor.wrap(message));
+			accessor = accessor != null ? accessor : SimpMessageHeaderAccessor.wrap(message);
 			logger.debug("Processing " + accessor.getShortLogMessage(message.getPayload()));
 		}
 	}
@@ -465,10 +465,10 @@ public class SimpleBrokerMessageHandler extends AbstractBrokerMessageHandler {
 			this.user = user;
 			this.clientOutboundChannel = outboundChannel;
 			if (clientHeartbeat != null && serverHeartbeat != null) {
-				this.readInterval = (clientHeartbeat[0] > 0 && serverHeartbeat[1] > 0 ?
-						Math.max(clientHeartbeat[0], serverHeartbeat[1]) * HEARTBEAT_MULTIPLIER : 0);
-				this.writeInterval = (clientHeartbeat[1] > 0 && serverHeartbeat[0] > 0 ?
-						Math.max(clientHeartbeat[1], serverHeartbeat[0]) : 0);
+				this.readInterval = clientHeartbeat[0] > 0 && serverHeartbeat[1] > 0 ?
+						Math.max(clientHeartbeat[0], serverHeartbeat[1]) * HEARTBEAT_MULTIPLIER : 0;
+				this.writeInterval = clientHeartbeat[1] > 0 && serverHeartbeat[0] > 0 ?
+						Math.max(clientHeartbeat[1], serverHeartbeat[0]) : 0;
 			}
 			else {
 				this.readInterval = 0;

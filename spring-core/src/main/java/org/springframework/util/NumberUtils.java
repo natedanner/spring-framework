@@ -277,8 +277,8 @@ public abstract class NumberUtils {
 	 * {@code Integer.valueOf}, etc.
 	 */
 	private static boolean isHexNumber(String value) {
-		int index = (value.startsWith("-") ? 1 : 0);
-		return (value.startsWith("0x", index) || value.startsWith("0X", index) || value.startsWith("#", index));
+		int index = value.startsWith("-") ? 1 : 0;
+		return value.startsWith("0x", index) || value.startsWith("0X", index) || value.startsWith("#", index);
 	}
 
 	/**
@@ -312,7 +312,7 @@ public abstract class NumberUtils {
 		}
 
 		BigInteger result = new BigInteger(value.substring(index), radix);
-		return (negative ? result.negate() : result);
+		return negative ? result.negate() : result;
 	}
 
 }

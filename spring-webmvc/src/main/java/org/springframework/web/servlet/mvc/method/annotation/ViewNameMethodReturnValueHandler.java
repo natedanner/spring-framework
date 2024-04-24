@@ -71,7 +71,7 @@ public class ViewNameMethodReturnValueHandler implements HandlerMethodReturnValu
 	@Override
 	public boolean supportsReturnType(MethodParameter returnType) {
 		Class<?> paramType = returnType.getParameterType();
-		return (void.class == paramType || CharSequence.class.isAssignableFrom(paramType));
+		return void.class == paramType || CharSequence.class.isAssignableFrom(paramType);
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class ViewNameMethodReturnValueHandler implements HandlerMethodReturnValu
 	 * reference; "false" otherwise.
 	 */
 	protected boolean isRedirectViewName(String viewName) {
-		return (PatternMatchUtils.simpleMatch(this.redirectPatterns, viewName) || viewName.startsWith("redirect:"));
+		return PatternMatchUtils.simpleMatch(this.redirectPatterns, viewName) || viewName.startsWith("redirect:");
 	}
 
 }

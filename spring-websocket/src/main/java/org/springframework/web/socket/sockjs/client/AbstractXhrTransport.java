@@ -60,8 +60,8 @@ public abstract class AbstractXhrTransport implements XhrTransport {
 
 	@Override
 	public List<TransportType> getTransportTypes() {
-		return (isXhrStreamingDisabled() ? Collections.singletonList(TransportType.XHR) :
-				Arrays.asList(TransportType.XHR_STREAMING, TransportType.XHR));
+		return isXhrStreamingDisabled() ? Collections.singletonList(TransportType.XHR) :
+				Arrays.asList(TransportType.XHR_STREAMING, TransportType.XHR);
 	}
 
 	/**
@@ -142,7 +142,7 @@ public abstract class AbstractXhrTransport implements XhrTransport {
 			logger.trace("SockJS Info request (url=" + infoUrl + ") response: " + response);
 		}
 		String result = response.getBody();
-		return (result != null ? result : "");
+		return result != null ? result : "";
 	}
 
 	protected abstract ResponseEntity<String> executeInfoRequestInternal(URI infoUrl, HttpHeaders headers);

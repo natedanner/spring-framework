@@ -55,7 +55,7 @@ class RequestContextFilterTests {
 
 		// Expect one invocation by the filter being tested
 		class DummyFilterChain implements FilterChain {
-			public int invocations = 0;
+			public int invocations;
 			@Override
 			public void doFilter(ServletRequest req, ServletResponse resp) throws ServletException {
 				++invocations;

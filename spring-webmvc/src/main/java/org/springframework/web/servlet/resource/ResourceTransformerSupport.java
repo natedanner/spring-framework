@@ -77,7 +77,7 @@ public abstract class ResourceTransformerSupport implements ResourceTransformer 
 		if (resourcePath.startsWith("/")) {
 			// full resource path
 			ResourceUrlProvider urlProvider = findResourceUrlProvider(request);
-			return (urlProvider != null ? urlProvider.getForRequestUrl(request, resourcePath) : null);
+			return urlProvider != null ? urlProvider.getForRequestUrl(request, resourcePath) : null;
 		}
 		else {
 			// try resolving as relative path

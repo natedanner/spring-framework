@@ -64,8 +64,8 @@ public final class RSocketRequestValues {
 			@Nullable ParameterizedTypeReference<?> payloadElementType) {
 
 		this.route = route;
-		this.routeVariables = (routeVariables != null ? routeVariables.toArray() : new Object[0]);
-		this.metadata = (metadataHelper != null ? metadataHelper.toMap() : Collections.emptyMap());
+		this.routeVariables = routeVariables != null ? routeVariables.toArray() : new Object[0];
+		this.metadata = metadataHelper != null ? metadataHelper.toMap() : Collections.emptyMap();
 		this.payloadValue = payloadValue;
 		this.payload = payload;
 		this.payloadElementType = payloadElementType;
@@ -155,7 +155,7 @@ public final class RSocketRequestValues {
 		private ParameterizedTypeReference<?> payloadElementType;
 
 		Builder(@Nullable String route) {
-			this.route = (StringUtils.hasText(route) ? route : null);
+			this.route = StringUtils.hasText(route) ? route : null;
 		}
 
 		/**
@@ -171,7 +171,7 @@ public final class RSocketRequestValues {
 		 * Add a route variable.
 		 */
 		public Builder addRouteVariable(Object variable) {
-			this.routeVariables = (this.routeVariables != null ? this.routeVariables : new ArrayList<>());
+			this.routeVariables = this.routeVariables != null ? this.routeVariables : new ArrayList<>();
 			this.routeVariables.add(variable);
 			return this;
 		}
@@ -181,7 +181,7 @@ public final class RSocketRequestValues {
 		 * This must be followed by a corresponding call to {@link #addMimeType(MimeType)}.
 		 */
 		public Builder addMetadata(Object metadata) {
-			this.metadataHelper = (this.metadataHelper != null ? this.metadataHelper : new MetadataHelper());
+			this.metadataHelper = this.metadataHelper != null ? this.metadataHelper : new MetadataHelper();
 			this.metadataHelper.addMetadata(metadata);
 			return this;
 		}
@@ -191,7 +191,7 @@ public final class RSocketRequestValues {
 		 * This must be preceded by a call to {@link #addMetadata(Object)}.
 		 */
 		public Builder addMimeType(MimeType mimeType) {
-			this.metadataHelper = (this.metadataHelper != null ? this.metadataHelper : new MetadataHelper());
+			this.metadataHelper = this.metadataHelper != null ? this.metadataHelper : new MetadataHelper();
 			this.metadataHelper.addMimeType(mimeType);
 			return this;
 		}

@@ -59,10 +59,10 @@ public abstract class Literal extends SpelNodeImpl {
 	 * @since 6.1
 	 */
 	public boolean isNumberLiteral() {
-		return (this instanceof IntLiteral ||
+		return this instanceof IntLiteral ||
 				this instanceof LongLiteral ||
 				this instanceof FloatLiteral ||
-				this instanceof RealLiteral);
+				this instanceof RealLiteral;
 	}
 
 	@Override

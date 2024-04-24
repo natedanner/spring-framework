@@ -106,7 +106,7 @@ public class MultipartWriterSupport extends LoggingCodecSupport {
 			params.put("charset", charset.name());
 		}
 
-		mediaType = (mediaType != null ? mediaType : MediaType.MULTIPART_FORM_DATA);
+		mediaType = mediaType != null ? mediaType : MediaType.MULTIPART_FORM_DATA;
 		mediaType = new MediaType(mediaType, params);
 		return mediaType;
 	}

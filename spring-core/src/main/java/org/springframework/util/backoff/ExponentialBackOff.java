@@ -229,7 +229,7 @@ public class ExponentialBackOff implements BackOff {
 
 		private long currentInterval = -1;
 
-		private long currentElapsedTime = 0;
+		private long currentElapsedTime;
 
 		private int attempts;
 

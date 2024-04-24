@@ -68,7 +68,7 @@ public abstract class AbstractGenericHttpMessageConverter<T> extends AbstractHtt
 
 	@Override
 	public boolean canRead(Type type, @Nullable Class<?> contextClass, @Nullable MediaType mediaType) {
-		return (type instanceof Class<?> clazz ? canRead(clazz, mediaType) : canRead(mediaType));
+		return type instanceof Class<?> clazz ? canRead(clazz, mediaType) : canRead(mediaType);
 	}
 
 	@Override

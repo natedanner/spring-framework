@@ -55,10 +55,9 @@ class DefaultValueStylerTests {
 		assertThat(styler.style(Map.of())).isEqualTo("map[[empty]]");
 		assertThat(styler.style(Map.of("key", 1))).isEqualTo("map['key' -> 1]");
 
-		Map<String, Integer> map = new LinkedHashMap<>() {{
-			put("key1", 1);
-			put("key2", 2);
-		}};
+		Map<String, Integer> map = new LinkedHashMap<>();
+		map.put("key1", 1);
+		map.put("key2", 2);
 		assertThat(styler.style(map)).isEqualTo("map['key1' -> 1, 'key2' -> 2]");
 	}
 

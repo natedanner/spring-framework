@@ -35,12 +35,12 @@ import org.springframework.lang.Nullable;
  */
 class AttributesTestVisitor implements RouterFunctions.Visitor {
 
-	private Deque<Map<String, Object>> nestedAttributes = new LinkedList<>();
+	private final Deque<Map<String, Object>> nestedAttributes = new LinkedList<>();
 
 	@Nullable
 	private Map<String, Object> attributes;
 
-	private List<List<Map<String, Object>>> routerFunctionsAttributes = new LinkedList<>();
+	private final List<List<Map<String, Object>>> routerFunctionsAttributes = new LinkedList<>();
 
 	private int visitCount;
 

@@ -171,8 +171,8 @@ class TestClassScanner {
 	}
 
 	private boolean isSpringTestClass(Class<?> clazz) {
-		boolean isSpringTestClass = (isJupiterSpringTestClass(clazz) || isJUnit4SpringTestClass(clazz) ||
-				isGenericSpringTestClass(clazz));
+		boolean isSpringTestClass = isJupiterSpringTestClass(clazz) || isJUnit4SpringTestClass(clazz) ||
+				isGenericSpringTestClass(clazz);
 		if (isSpringTestClass && logger.isTraceEnabled()) {
 			logger.trace("Found Spring test class: " + clazz.getName());
 		}
@@ -195,15 +195,15 @@ class TestClassScanner {
 				MergedAnnotations.from(clazz, INHERITED_ANNOTATIONS).get(RUN_WITH_ANNOTATION_NAME);
 		if (mergedAnnotation.isPresent()) {
 			String name = mergedAnnotation.getClass(VALUE).getName();
-			return (SPRING_JUNIT4_CLASS_RUNNER_NAME.equals(name) || SPRING_RUNNER_NAME.equals(name));
+			return SPRING_JUNIT4_CLASS_RUNNER_NAME.equals(name) || SPRING_RUNNER_NAME.equals(name);
 		}
 		return false;
 	}
 
 	private static boolean isGenericSpringTestClass(Class<?> clazz) {
 		MergedAnnotations mergedAnnotations = MergedAnnotations.from(clazz, TYPE_HIERARCHY);
-		return (mergedAnnotations.isPresent(ContextConfiguration.class) ||
-				mergedAnnotations.isPresent(BootstrapWith.class));
+		return mergedAnnotations.isPresent(ContextConfiguration.class) ||
+				mergedAnnotations.isPresent(BootstrapWith.class);
 	}
 
 	private static Set<Path> assertPreconditions(Set<Path> classpathRoots) {

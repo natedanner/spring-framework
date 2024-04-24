@@ -150,7 +150,7 @@ final class HtmlUnitRequestBuilder implements RequestBuilder, Mergeable {
 		request.setPathInfo(null);
 
 		Charset charset = this.webRequest.getCharset();
-		charset = (charset != null ? charset : StandardCharsets.ISO_8859_1);
+		charset = charset != null ? charset : StandardCharsets.ISO_8859_1;
 		request.setCharacterEncoding(charset.name());
 		content(request, charset);
 		contentType(request);
@@ -260,7 +260,7 @@ final class HtmlUnitRequestBuilder implements RequestBuilder, Mergeable {
 
 	private void servletPath(UriComponents uriComponents, MockHttpServletRequest request) {
 		String path = uriComponents.getPath();
-		String requestPath = (path != null ? path : "");
+		String requestPath = path != null ? path : "";
 		String servletPath = requestPath.substring(request.getContextPath().length());
 		servletPath = UriUtils.decode(servletPath, StandardCharsets.UTF_8);
 		request.setServletPath(servletPath);
@@ -384,8 +384,8 @@ final class HtmlUnitRequestBuilder implements RequestBuilder, Mergeable {
 				// getValue() returns the file name (if set) or an empty string.
 				part = new MockPart(pair.getName(), pair.getValue(), pair.getData());
 			}
-			MediaType mediaType = (pair.getMimeType() != null ? MediaType.valueOf(pair.getMimeType()) :
-					MediaType.APPLICATION_OCTET_STREAM);
+			MediaType mediaType = pair.getMimeType() != null ? MediaType.valueOf(pair.getMimeType()) :
+					MediaType.APPLICATION_OCTET_STREAM;
 			part.getHeaders().setContentType(mediaType);
 			request.addPart(part);
 		}

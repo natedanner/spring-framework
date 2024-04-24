@@ -80,21 +80,21 @@ import static org.mockito.Mockito.verify;
  */
 class RequestResponseBodyMethodProcessorMockTests {
 
-	private HttpMessageConverter<String> stringMessageConverter = mock();
+	private final HttpMessageConverter<String> stringMessageConverter = mock();
 
-	private HttpMessageConverter<Resource> resourceMessageConverter = mock();
+	private final HttpMessageConverter<Resource> resourceMessageConverter = mock();
 
-	private HttpMessageConverter<Object> resourceRegionMessageConverter = mock();
+	private final HttpMessageConverter<Object> resourceRegionMessageConverter = mock();
 
 	private RequestResponseBodyMethodProcessor processor;
 
-	private ModelAndViewContainer mavContainer = new ModelAndViewContainer();
+	private final ModelAndViewContainer mavContainer = new ModelAndViewContainer();
 
-	private MockHttpServletRequest servletRequest = new MockHttpServletRequest();
+	private final MockHttpServletRequest servletRequest = new MockHttpServletRequest();
 
-	private MockHttpServletResponse servletResponse = new MockHttpServletResponse();
+	private final MockHttpServletResponse servletResponse = new MockHttpServletResponse();
 
-	private NativeWebRequest webRequest = new ServletWebRequest(servletRequest, servletResponse);
+	private final NativeWebRequest webRequest = new ServletWebRequest(servletRequest, servletResponse);
 
 	private MethodParameter paramRequestBodyString;
 	private MethodParameter paramInt;

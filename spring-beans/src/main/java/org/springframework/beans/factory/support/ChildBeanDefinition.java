@@ -157,8 +157,8 @@ public class ChildBeanDefinition extends AbstractBeanDefinition {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ChildBeanDefinition that &&
-				ObjectUtils.nullSafeEquals(this.parentName, that.parentName) && super.equals(other)));
+		return this == other || (other instanceof ChildBeanDefinition that &&
+				ObjectUtils.nullSafeEquals(this.parentName, that.parentName) && super.equals(other));
 	}
 
 	@Override

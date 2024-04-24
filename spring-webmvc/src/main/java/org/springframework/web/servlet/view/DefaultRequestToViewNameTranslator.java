@@ -77,7 +77,7 @@ public class DefaultRequestToViewNameTranslator implements RequestToViewNameTran
 	 * @param prefix the prefix to prepend to generated view names
 	 */
 	public void setPrefix(@Nullable String prefix) {
-		this.prefix = (prefix != null ? prefix : "");
+		this.prefix = prefix != null ? prefix : "";
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class DefaultRequestToViewNameTranslator implements RequestToViewNameTran
 	 * @param suffix the suffix to append to generated view names
 	 */
 	public void setSuffix(@Nullable String suffix) {
-		this.suffix = (suffix != null ? suffix : "");
+		this.suffix = suffix != null ? suffix : "";
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class DefaultRequestToViewNameTranslator implements RequestToViewNameTran
 	@Override
 	public String getViewName(HttpServletRequest request) {
 		String path = ServletRequestPathUtils.getCachedPathValue(request);
-		return (this.prefix + transformPath(path) + this.suffix);
+		return this.prefix + transformPath(path) + this.suffix;
 	}
 
 	/**

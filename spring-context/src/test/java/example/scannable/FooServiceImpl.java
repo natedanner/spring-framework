@@ -70,7 +70,7 @@ public abstract class FooServiceImpl implements FooService {
 
 	@Autowired public AbstractApplicationContext genericContext;
 
-	private boolean initCalled = false;
+	private boolean initCalled;
 
 
 	@PostConstruct

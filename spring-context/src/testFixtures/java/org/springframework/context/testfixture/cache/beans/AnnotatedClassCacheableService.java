@@ -238,7 +238,7 @@ public class AnnotatedClassCacheableService implements CacheableService<Object> 
 	@Override
 	@CachePut(cacheNames = "primary", key = "#result.id", unless = "#result == null")
 	public TestEntity putEvaluatesUnlessBeforeKey(TestEntity arg1) {
-		return (arg1.getId() != Long.MIN_VALUE ? arg1 : null);
+		return arg1.getId() != Long.MIN_VALUE ? arg1 : null;
 	}
 
 }

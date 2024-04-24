@@ -70,7 +70,7 @@ class ComponentScanAnnotationParser {
 				componentScan.getBoolean("useDefaultFilters"), this.environment, this.resourceLoader);
 
 		Class<? extends BeanNameGenerator> generatorClass = componentScan.getClass("nameGenerator");
-		boolean useInheritedGenerator = (BeanNameGenerator.class == generatorClass);
+		boolean useInheritedGenerator = BeanNameGenerator.class == generatorClass;
 		scanner.setBeanNameGenerator(useInheritedGenerator ? this.beanNameGenerator :
 				BeanUtils.instantiateClass(generatorClass));
 

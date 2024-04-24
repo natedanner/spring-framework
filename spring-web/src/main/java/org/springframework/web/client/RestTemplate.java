@@ -474,7 +474,7 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 
 		RequestCallback requestCallback = httpEntityCallback(request);
 		HttpHeaders headers = execute(url, HttpMethod.POST, requestCallback, headersExtractor(), uriVariables);
-		return (headers != null ? headers.getLocation() : null);
+		return headers != null ? headers.getLocation() : null;
 	}
 
 	@Override
@@ -484,7 +484,7 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 
 		RequestCallback requestCallback = httpEntityCallback(request);
 		HttpHeaders headers = execute(url, HttpMethod.POST, requestCallback, headersExtractor(), uriVariables);
-		return (headers != null ? headers.getLocation() : null);
+		return headers != null ? headers.getLocation() : null;
 	}
 
 	@Override
@@ -492,7 +492,7 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 	public URI postForLocation(URI url, @Nullable Object request) throws RestClientException {
 		RequestCallback requestCallback = httpEntityCallback(request);
 		HttpHeaders headers = execute(url, HttpMethod.POST, requestCallback, headersExtractor());
-		return (headers != null ? headers.getLocation() : null);
+		return headers != null ? headers.getLocation() : null;
 	}
 
 	@Override
@@ -641,21 +641,21 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 	public Set<HttpMethod> optionsForAllow(String url, Object... uriVariables) throws RestClientException {
 		ResponseExtractor<HttpHeaders> headersExtractor = headersExtractor();
 		HttpHeaders headers = execute(url, HttpMethod.OPTIONS, null, headersExtractor, uriVariables);
-		return (headers != null ? headers.getAllow() : Collections.emptySet());
+		return headers != null ? headers.getAllow() : Collections.emptySet();
 	}
 
 	@Override
 	public Set<HttpMethod> optionsForAllow(String url, Map<String, ?> uriVariables) throws RestClientException {
 		ResponseExtractor<HttpHeaders> headersExtractor = headersExtractor();
 		HttpHeaders headers = execute(url, HttpMethod.OPTIONS, null, headersExtractor, uriVariables);
-		return (headers != null ? headers.getAllow() : Collections.emptySet());
+		return headers != null ? headers.getAllow() : Collections.emptySet();
 	}
 
 	@Override
 	public Set<HttpMethod> optionsForAllow(URI url) throws RestClientException {
 		ResponseExtractor<HttpHeaders> headersExtractor = headersExtractor();
 		HttpHeaders headers = execute(url, HttpMethod.OPTIONS, null, headersExtractor);
-		return (headers != null ? headers.getAllow() : Collections.emptySet());
+		return headers != null ? headers.getAllow() : Collections.emptySet();
 	}
 
 
@@ -872,8 +872,7 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 			request = createRequest(url, method);
 		}
 		catch (IOException ex) {
-			ResourceAccessException exception = createResourceAccessException(url, method, ex);
-			throw exception;
+			throw createResourceAccessException(url, method, ex);
 		}
 		ClientRequestObservationContext observationContext = new ClientRequestObservationContext(request);
 		observationContext.setUriTemplate(uriTemplate);
@@ -887,7 +886,7 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 			response = request.execute();
 			observationContext.setResponse(response);
 			handleResponse(url, method, response);
-			return (responseExtractor != null ? responseExtractor.extractData(response) : null);
+			return responseExtractor != null ? responseExtractor.extractData(response) : null;
 		}
 		catch (IOException ex) {
 			ResourceAccessException exception = createResourceAccessException(url, method, ex);
@@ -908,7 +907,7 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 
 	private static ResourceAccessException createResourceAccessException(URI url, HttpMethod method, IOException ex) {
 		String resource = url.toString();
-		resource = (url.getRawQuery() != null ? resource.substring(0, resource.indexOf('?')) : resource);
+		resource = url.getRawQuery() != null ? resource.substring(0, resource.indexOf('?')) : resource;
 		return new ResourceAccessException("I/O error on " + method.name() +
 				" request for \"" + resource + "\": " + ex.getMessage(), ex);
 	}
@@ -1019,7 +1018,7 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 		}
 
 		private boolean canReadResponse(Type responseType, HttpMessageConverter<?> converter) {
-			Class<?> responseClass = (responseType instanceof Class<?> clazz ? clazz : null);
+			Class<?> responseClass = responseType instanceof Class<?> clazz ? clazz : null;
 			if (responseClass != null) {
 				return converter.canRead(responseClass, null);
 			}
@@ -1030,8 +1029,8 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 		}
 
 		private Stream<MediaType> getSupportedMediaTypes(Type type, HttpMessageConverter<?> converter) {
-			Type rawType = (type instanceof ParameterizedType parameterizedType ? parameterizedType.getRawType() : type);
-			Class<?> clazz = (rawType instanceof Class<?> rawClass ? rawClass : null);
+			Type rawType = type instanceof ParameterizedType parameterizedType ? parameterizedType.getRawType() : type;
+			Class<?> clazz = rawType instanceof Class<?> rawClass ? rawClass : null;
 			return (clazz != null ? converter.getSupportedMediaTypes(clazz) : converter.getSupportedMediaTypes())
 					.stream()
 					.map(mediaType -> {
@@ -1087,8 +1086,8 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
 				Class<?> requestBodyClass = requestBody.getClass();
 				// The following pattern variable cannot be named "requestEntity" due to lacking
 				// support in Checkstyle: https://github.com/checkstyle/checkstyle/issues/10969
-				Type requestBodyType = (this.requestEntity instanceof RequestEntity<?> _requestEntity ?
-						_requestEntity.getType() : requestBodyClass);
+				Type requestBodyType = this.requestEntity instanceof RequestEntity<?> _requestEntity ?
+						_requestEntity.getType() : requestBodyClass;
 				HttpHeaders httpHeaders = httpRequest.getHeaders();
 				HttpHeaders requestHeaders = this.requestEntity.getHeaders();
 				MediaType requestContentType = requestHeaders.getContentType();

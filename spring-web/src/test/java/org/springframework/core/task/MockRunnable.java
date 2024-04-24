@@ -21,7 +21,7 @@ package org.springframework.core.task;
  */
 public class MockRunnable implements Runnable {
 
-	private boolean executed = false;
+	private boolean executed;
 
 	@Override
 	public void run() {

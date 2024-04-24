@@ -293,7 +293,7 @@ public abstract class GenericFilterBean implements Filter, BeanNameAware, Enviro
 	 */
 	@Nullable
 	protected String getFilterName() {
-		return (this.filterConfig != null ? this.filterConfig.getFilterName() : this.beanName);
+		return this.filterConfig != null ? this.filterConfig.getFilterName() : this.beanName;
 	}
 
 	/**
@@ -337,8 +337,8 @@ public abstract class GenericFilterBean implements Filter, BeanNameAware, Enviro
 		public FilterConfigPropertyValues(FilterConfig config, Set<String> requiredProperties)
 				throws ServletException {
 
-			Set<String> missingProps = (!CollectionUtils.isEmpty(requiredProperties) ?
-					new HashSet<>(requiredProperties) : null);
+			Set<String> missingProps = CollectionUtils.isEmpty(requiredProperties) ? null :
+					new HashSet<>(requiredProperties);
 
 			Enumeration<String> paramNames = config.getInitParameterNames();
 			while (paramNames.hasMoreElements()) {

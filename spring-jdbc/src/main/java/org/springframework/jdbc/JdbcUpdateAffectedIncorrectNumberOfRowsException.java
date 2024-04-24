@@ -65,7 +65,7 @@ public class JdbcUpdateAffectedIncorrectNumberOfRowsException extends IncorrectU
 
 	@Override
 	public boolean wasDataUpdated() {
-		return (getActualRowsAffected() > 0);
+		return getActualRowsAffected() > 0;
 	}
 
 }

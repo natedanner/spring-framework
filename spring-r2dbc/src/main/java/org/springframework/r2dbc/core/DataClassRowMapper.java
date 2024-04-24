@@ -84,8 +84,8 @@ public class DataClassRowMapper<T> extends BeanPropertyRowMapper<T> {
 
 		this.mappedConstructor = BeanUtils.getResolvableConstructor(mappedClass);
 		int paramCount = this.mappedConstructor.getParameterCount();
-		this.constructorParameterNames = (paramCount > 0 ?
-				BeanUtils.getParameterNames(this.mappedConstructor) : new String[0]);
+		this.constructorParameterNames = paramCount > 0 ?
+				BeanUtils.getParameterNames(this.mappedConstructor) : new String[0];
 		for (String name : this.constructorParameterNames) {
 			suppressProperty(name);
 		}

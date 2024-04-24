@@ -116,7 +116,7 @@ public class FileEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		File value = (File) getValue();
-		return (value != null ? value.getPath() : "");
+		return value != null ? value.getPath() : "";
 	}
 
 }

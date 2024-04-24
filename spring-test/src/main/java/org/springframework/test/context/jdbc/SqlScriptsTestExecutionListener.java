@@ -233,7 +233,7 @@ public class SqlScriptsTestExecutionListener extends AbstractTestExecutionListen
 		if (sqlMergeMode == null) {
 			sqlMergeMode = getSqlMergeModeFor(testContext.getTestClass());
 		}
-		return (sqlMergeMode != null && sqlMergeMode.value() == MergeMode.MERGE);
+		return sqlMergeMode != null && sqlMergeMode.value() == MergeMode.MERGE;
 	}
 
 	/**
@@ -306,7 +306,7 @@ public class SqlScriptsTestExecutionListener extends AbstractTestExecutionListen
 		}
 
 		boolean methodLevel = !classLevel;
-		Method testMethod = (methodLevel ? testContext.getTestMethod() : null);
+		Method testMethod = methodLevel ? testContext.getTestMethod() : null;
 
 		String[] scripts = getScripts(sql, testContext.getTestClass(), testMethod, classLevel);
 		List<Resource> scriptResources = TestContextResourceUtils.convertToResourceList(
@@ -328,7 +328,7 @@ public class SqlScriptsTestExecutionListener extends AbstractTestExecutionListen
 		String tmName = mergedSqlConfig.getTransactionManager();
 		DataSource dataSource = TestContextTransactionUtils.retrieveDataSource(testContext, dsName);
 		PlatformTransactionManager txMgr = TestContextTransactionUtils.retrieveTransactionManager(testContext, tmName);
-		boolean newTxRequired = (mergedSqlConfig.getTransactionMode() == TransactionMode.ISOLATED);
+		boolean newTxRequired = mergedSqlConfig.getTransactionMode() == TransactionMode.ISOLATED;
 
 		if (txMgr == null) {
 			Assert.state(!newTxRequired, () -> String.format("Failed to execute SQL scripts for test context %s: " +
@@ -355,8 +355,8 @@ public class SqlScriptsTestExecutionListener extends AbstractTestExecutionListen
 						testContext, txMgr.getClass().getName(), tmName));
 			}
 			final DataSource finalDataSource = dataSource;
-			int propagation = (newTxRequired ? TransactionDefinition.PROPAGATION_REQUIRES_NEW :
-					TransactionDefinition.PROPAGATION_REQUIRED);
+			int propagation = newTxRequired ? TransactionDefinition.PROPAGATION_REQUIRES_NEW :
+					TransactionDefinition.PROPAGATION_REQUIRED;
 			TransactionAttribute txAttr = TestContextTransactionUtils.createDelegatingTransactionAttribute(
 					testContext, new DefaultTransactionAttribute(propagation), methodLevel);
 			new TransactionTemplate(txMgr, txAttr).executeWithoutResult(s -> populator.execute(finalDataSource));
@@ -417,8 +417,8 @@ public class SqlScriptsTestExecutionListener extends AbstractTestExecutionListen
 	private String detectDefaultScript(Class<?> testClass, @Nullable Method testMethod, boolean classLevel) {
 		Assert.state(classLevel || testMethod != null, "Method-level @Sql requires a testMethod");
 
-		String elementType = (classLevel ? "class" : "method");
-		String elementName = (classLevel ? testClass.getName() : testMethod.toString());
+		String elementType = classLevel ? "class" : "method";
+		String elementName = classLevel ? testClass.getName() : testMethod.toString();
 
 		String resourcePath = ClassUtils.convertClassNameToResourcePath(testClass.getName());
 		if (!classLevel) {
@@ -459,8 +459,8 @@ public class SqlScriptsTestExecutionListener extends AbstractTestExecutionListen
 
 	private static boolean isValidMethodLevelPhase(ExecutionPhase executionPhase) {
 		// Class-level phases cannot be used on methods.
-		return (executionPhase == ExecutionPhase.BEFORE_TEST_METHOD ||
-				executionPhase == ExecutionPhase.AFTER_TEST_METHOD);
+		return executionPhase == ExecutionPhase.BEFORE_TEST_METHOD ||
+				executionPhase == ExecutionPhase.AFTER_TEST_METHOD;
 	}
 
 }

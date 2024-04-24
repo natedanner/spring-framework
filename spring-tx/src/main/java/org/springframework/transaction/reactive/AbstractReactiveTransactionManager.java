@@ -115,7 +115,7 @@ public abstract class AbstractReactiveTransactionManager
 	@Override
 	public final Mono<ReactiveTransaction> getReactiveTransaction(@Nullable TransactionDefinition definition) {
 		// Use defaults if no transaction definition given.
-		TransactionDefinition def = (definition != null ? definition : TransactionDefinition.withDefaults());
+		TransactionDefinition def = definition != null ? definition : TransactionDefinition.withDefaults();
 
 		return TransactionSynchronizationManager.forCurrentTransaction().flatMap(synchronizationManager -> {
 
@@ -305,9 +305,9 @@ public abstract class AbstractReactiveTransactionManager
 		if (synchronizationManager.isSynchronizationActive()) {
 			Mono<List<TransactionSynchronization>> suspendedSynchronizations = doSuspendSynchronization(synchronizationManager);
 			return suspendedSynchronizations.flatMap(synchronizations -> {
-				Mono<Optional<Object>> suspendedResources = (transaction != null ?
+				Mono<Optional<Object>> suspendedResources = transaction != null ?
 						doSuspend(synchronizationManager, transaction).map(Optional::of).defaultIfEmpty(Optional.empty()) :
-						Mono.just(Optional.empty()));
+						Mono.just(Optional.empty());
 				return suspendedResources.map(it -> {
 					String name = synchronizationManager.getCurrentTransactionName();
 					synchronizationManager.setCurrentTransactionName(null);
@@ -743,7 +743,7 @@ public abstract class AbstractReactiveTransactionManager
 				if (status.isDebug()) {
 					logger.debug("Resuming suspended transaction after completion of inner transaction");
 				}
-				Object transaction = (status.hasTransaction() ? status.getTransaction() : null);
+				Object transaction = status.hasTransaction() ? status.getTransaction() : null;
 				return cleanup.then(resume(synchronizationManager, transaction,
 						(SuspendedResourcesHolder) status.getSuspendedResources()));
 			}

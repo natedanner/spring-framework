@@ -104,8 +104,8 @@ public class MethodOverrides {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof MethodOverrides that &&
-				this.overrides.equals(that.overrides)));
+		return this == other || (other instanceof MethodOverrides that &&
+				this.overrides.equals(that.overrides));
 	}
 
 	@Override

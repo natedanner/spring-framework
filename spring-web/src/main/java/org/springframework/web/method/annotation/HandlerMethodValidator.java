@@ -185,9 +185,9 @@ public final class HandlerMethodValidator implements MethodValidator {
 				return Conventions.getVariableNameForParameter(param);
 			}
 			else {
-				return (param.getParameterIndex() != -1 ?
+				return param.getParameterIndex() != -1 ?
 						ModelFactory.getNameForParameter(param) :
-						ModelFactory.getNameForReturnValue(value, param));
+						ModelFactory.getNameForReturnValue(value, param);
 			}
 		}
 	}

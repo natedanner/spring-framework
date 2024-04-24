@@ -35,7 +35,7 @@ class ToStringVisitor implements RouterFunctions.Visitor, RequestPredicates.Visi
 
 	private final StringBuilder builder = new StringBuilder();
 
-	private int indent = 0;
+	private int indent;
 
 
 	// RouterFunctions.Visitor

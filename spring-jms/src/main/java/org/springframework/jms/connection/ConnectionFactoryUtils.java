@@ -114,7 +114,7 @@ public abstract class ConnectionFactoryUtils {
 			return false;
 		}
 		JmsResourceHolder resourceHolder = (JmsResourceHolder) TransactionSynchronizationManager.getResource(cf);
-		return (resourceHolder != null && resourceHolder.containsSession(session));
+		return resourceHolder != null && resourceHolder.containsSession(session);
 	}
 
 
@@ -145,7 +145,7 @@ public abstract class ConnectionFactoryUtils {
 			@Override
 			@Nullable
 			public Connection getConnection(JmsResourceHolder holder) {
-				return (existingCon != null ? existingCon : holder.getConnection());
+				return existingCon != null ? existingCon : holder.getConnection();
 			}
 			@Override
 			public Connection createConnection() throws JMSException {
@@ -190,7 +190,7 @@ public abstract class ConnectionFactoryUtils {
 			@Override
 			@Nullable
 			public Connection getConnection(JmsResourceHolder holder) {
-				return (existingCon != null ? existingCon : holder.getConnection(QueueConnection.class));
+				return existingCon != null ? existingCon : holder.getConnection(QueueConnection.class);
 			}
 			@Override
 			public Connection createConnection() throws JMSException {
@@ -235,7 +235,7 @@ public abstract class ConnectionFactoryUtils {
 			@Override
 			@Nullable
 			public Connection getConnection(JmsResourceHolder holder) {
-				return (existingCon != null ? existingCon : holder.getConnection(TopicConnection.class));
+				return existingCon != null ? existingCon : holder.getConnection(TopicConnection.class);
 			}
 			@Override
 			public Connection createConnection() throws JMSException {
@@ -319,7 +319,7 @@ public abstract class ConnectionFactoryUtils {
 		Connection con = resourceFactory.getConnection(resourceHolderToUse);
 		Session session = null;
 		try {
-			boolean isExistingCon = (con != null);
+			boolean isExistingCon = con != null;
 			if (!isExistingCon) {
 				con = resourceFactory.createConnection();
 				resourceHolderToUse.addConnection(con);

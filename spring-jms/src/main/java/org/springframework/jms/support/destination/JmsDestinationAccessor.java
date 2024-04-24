@@ -57,7 +57,7 @@ public abstract class JmsDestinationAccessor extends JmsAccessor {
 
 	private DestinationResolver destinationResolver = new DynamicDestinationResolver();
 
-	private boolean pubSubDomain = false;
+	private boolean pubSubDomain;
 
 
 	/**

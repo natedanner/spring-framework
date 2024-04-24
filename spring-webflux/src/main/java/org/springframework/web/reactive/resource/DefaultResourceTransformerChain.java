@@ -50,7 +50,7 @@ class DefaultResourceTransformerChain implements ResourceTransformerChain {
 
 		Assert.notNull(resolverChain, "ResourceResolverChain is required");
 		this.resolverChain = resolverChain;
-		transformers = (transformers != null ? transformers : Collections.emptyList());
+		transformers = transformers != null ? transformers : Collections.emptyList();
 		DefaultResourceTransformerChain chain = initTransformerChain(resolverChain, new ArrayList<>(transformers));
 		this.transformer = chain.transformer;
 		this.nextChain = chain.nextChain;
@@ -85,9 +85,9 @@ class DefaultResourceTransformerChain implements ResourceTransformerChain {
 
 	@Override
 	public Mono<Resource> transform(ServerWebExchange exchange, Resource resource) {
-		return (this.transformer != null && this.nextChain != null ?
+		return this.transformer != null && this.nextChain != null ?
 				this.transformer.transform(exchange, resource, this.nextChain) :
-				Mono.just(resource));
+				Mono.just(resource);
 	}
 
 }

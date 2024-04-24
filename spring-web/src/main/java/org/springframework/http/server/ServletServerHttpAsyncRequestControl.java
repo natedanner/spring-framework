@@ -71,7 +71,7 @@ public class ServletServerHttpAsyncRequestControl implements ServerHttpAsyncRequ
 
 	@Override
 	public boolean isStarted() {
-		return (this.asyncContext != null && this.request.getServletRequest().isAsyncStarted());
+		return this.asyncContext != null && this.request.getServletRequest().isAsyncStarted();
 	}
 
 	@Override

@@ -38,12 +38,10 @@ class PropertySourceTests {
 	void equals() {
 		Map<String, Object> map1 = Map.of("a", "b");
 		Map<String, Object> map2 = Map.of("c", "d");
-		Properties props1 = new Properties() {{
-			setProperty("a", "b");
-		}};
-		Properties props2 = new Properties() {{
-			setProperty("c", "d");
-		}};
+		Properties props1 = new Properties();
+		props1.setProperty("a", "b");
+		Properties props2 = new Properties();
+		props2.setProperty("c", "d");
 
 		MapPropertySource mps = new MapPropertySource("mps", map1);
 		assertThat(mps).isEqualTo(mps);

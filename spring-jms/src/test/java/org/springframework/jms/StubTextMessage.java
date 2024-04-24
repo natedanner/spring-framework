@@ -47,9 +47,9 @@ public class StubTextMessage implements TextMessage {
 
 	private long deliveryTime;
 
-	private long timestamp = 0L;
+	private long timestamp;
 
-	private long expiration = 0L;
+	private long expiration;
 
 	private int priority = DEFAULT_PRIORITY;
 
@@ -94,31 +94,31 @@ public class StubTextMessage implements TextMessage {
 	@Override
 	public boolean getBooleanProperty(String name) {
 		Object value = this.properties.get(name);
-		return (value instanceof Boolean b) ? b : false;
+		return value instanceof Boolean b ? b : false;
 	}
 
 	@Override
 	public byte getByteProperty(String name) {
 		Object value = this.properties.get(name);
-		return (value instanceof Byte b) ? b : 0;
+		return value instanceof Byte b ? b : 0;
 	}
 
 	@Override
 	public double getDoubleProperty(String name) {
 		Object value = this.properties.get(name);
-		return (value instanceof Double d) ? d : 0;
+		return value instanceof Double d ? d : 0;
 	}
 
 	@Override
 	public float getFloatProperty(String name) {
 		Object value = this.properties.get(name);
-		return (value instanceof Float f) ? f : 0;
+		return value instanceof Float f ? f : 0;
 	}
 
 	@Override
 	public int getIntProperty(String name) {
 		Object value = this.properties.get(name);
-		return (value instanceof Integer i) ? i : 0;
+		return value instanceof Integer i ? i : 0;
 	}
 
 	@Override
@@ -184,7 +184,7 @@ public class StubTextMessage implements TextMessage {
 	@Override
 	public long getLongProperty(String name) {
 		Object value = this.properties.get(name);
-		return (value instanceof Long l) ? l : 0;
+		return value instanceof Long l ? l : 0;
 	}
 
 	@Override
@@ -200,13 +200,13 @@ public class StubTextMessage implements TextMessage {
 	@Override
 	public short getShortProperty(String name) {
 		Object value = this.properties.get(name);
-		return (value instanceof Short s) ? s : 0;
+		return value instanceof Short s ? s : 0;
 	}
 
 	@Override
 	public String getStringProperty(String name) {
 		Object value = this.properties.get(name);
-		return (value instanceof String text) ? text : null;
+		return value instanceof String text ? text : null;
 	}
 
 	@Override

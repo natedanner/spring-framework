@@ -72,7 +72,7 @@ class GroovyDynamicElementReader extends GroovyObjectSupport {
 	@Nullable
 	public Object invokeMethod(String name, Object obj) {
 		Object[] args = (Object[]) obj;
-		if (name.equals("doCall")) {
+		if ("doCall".equals(name)) {
 			@SuppressWarnings("unchecked")
 			Closure<Object> callable = (Closure<Object>) args[0];
 			callable.setResolveStrategy(Closure.DELEGATE_FIRST);

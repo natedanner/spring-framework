@@ -332,8 +332,8 @@ public class VersionResourceResolver extends AbstractResourceResolver {
 
 		@Override
 		public HttpHeaders getResponseHeaders() {
-			HttpHeaders headers = (this.original instanceof HttpResource httpResource ?
-					httpResource.getResponseHeaders() : new HttpHeaders());
+			HttpHeaders headers = this.original instanceof HttpResource httpResource ?
+					httpResource.getResponseHeaders() : new HttpHeaders();
 			headers.setETag("W/\"" + this.version + "\"");
 			return headers;
 		}

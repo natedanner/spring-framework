@@ -87,8 +87,8 @@ public class MultiServerUserRegistry implements SimpUserRegistry, SmartApplicati
 
 	@Override
 	public int getOrder() {
-		return (this.delegateApplicationEvents ?
-				((SmartApplicationListener) this.localRegistry).getOrder() : Ordered.LOWEST_PRECEDENCE);
+		return this.delegateApplicationEvents ?
+				((SmartApplicationListener) this.localRegistry).getOrder() : Ordered.LOWEST_PRECEDENCE;
 	}
 
 
@@ -96,14 +96,14 @@ public class MultiServerUserRegistry implements SimpUserRegistry, SmartApplicati
 
 	@Override
 	public boolean supportsEventType(Class<? extends ApplicationEvent> eventType) {
-		return (this.delegateApplicationEvents &&
-				((SmartApplicationListener) this.localRegistry).supportsEventType(eventType));
+		return this.delegateApplicationEvents &&
+				((SmartApplicationListener) this.localRegistry).supportsEventType(eventType);
 	}
 
 	@Override
 	public boolean supportsSourceType(@Nullable Class<?> sourceType) {
-		return (this.delegateApplicationEvents &&
-				((SmartApplicationListener) this.localRegistry).supportsSourceType(sourceType));
+		return this.delegateApplicationEvents &&
+				((SmartApplicationListener) this.localRegistry).supportsSourceType(sourceType);
 	}
 
 	@Override
@@ -237,7 +237,7 @@ public class MultiServerUserRegistry implements SimpUserRegistry, SmartApplicati
 		}
 
 		public boolean isExpired(long now) {
-			return (now > this.expirationTime);
+			return now > this.expirationTime;
 		}
 
 		public void init(long expirationPeriod, SessionLookup sessionLookup) {
@@ -371,7 +371,7 @@ public class MultiServerUserRegistry implements SimpUserRegistry, SmartApplicati
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof SimpUser that && this.name.equals(that.getName())));
+			return this == other || (other instanceof SimpUser that && this.name.equals(that.getName()));
 		}
 
 		@Override
@@ -457,7 +457,7 @@ public class MultiServerUserRegistry implements SimpUserRegistry, SmartApplicati
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof SimpSession that && this.id.equals(that.getId())));
+			return this == other || (other instanceof SimpSession that && this.id.equals(that.getId()));
 		}
 
 		@Override
@@ -533,9 +533,9 @@ public class MultiServerUserRegistry implements SimpUserRegistry, SmartApplicati
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof SimpSubscription that &&
+			return this == other || (other instanceof SimpSubscription that &&
 					getId().equals(that.getId()) &&
-					ObjectUtils.nullSafeEquals(getSession(), that.getSession())));
+					ObjectUtils.nullSafeEquals(getSession(), that.getSession()));
 		}
 
 		@Override

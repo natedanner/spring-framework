@@ -218,8 +218,8 @@ public class PayloadMethodArgumentResolver implements HandlerMethodArgumentResol
 
 		ResolvableType targetType = ResolvableType.forMethodParameter(parameter);
 		Class<?> resolvedType = targetType.resolve();
-		ReactiveAdapter adapter = (resolvedType != null ? getAdapterRegistry().getAdapter(resolvedType) : null);
-		ResolvableType elementType = (adapter != null ? targetType.getGeneric() : targetType);
+		ReactiveAdapter adapter = resolvedType != null ? getAdapterRegistry().getAdapter(resolvedType) : null;
+		ResolvableType elementType = adapter != null ? targetType.getGeneric() : targetType;
 		isContentRequired = isContentRequired || (adapter != null && !adapter.supportsEmpty());
 		Consumer<Object> validator = getValidator(message, parameter);
 
@@ -252,7 +252,7 @@ public class PayloadMethodArgumentResolver implements HandlerMethodArgumentResol
 					if (validator != null) {
 						mono = mono.doOnNext(validator);
 					}
-					return (adapter != null ? Mono.just(adapter.fromPublisher(mono)) : Mono.from(mono));
+					return adapter != null ? Mono.just(adapter.fromPublisher(mono)) : Mono.from(mono);
 				}
 			}
 		}

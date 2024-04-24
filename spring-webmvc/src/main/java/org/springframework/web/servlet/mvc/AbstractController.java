@@ -96,7 +96,7 @@ import org.springframework.web.util.WebUtils;
  */
 public abstract class AbstractController extends WebContentGenerator implements Controller {
 
-	private boolean synchronizeOnSession = false;
+	private boolean synchronizeOnSession;
 
 
 	/**

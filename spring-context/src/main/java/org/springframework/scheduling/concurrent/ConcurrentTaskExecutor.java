@@ -65,9 +65,9 @@ import org.springframework.util.concurrent.ListenableFuture;
 @SuppressWarnings("deprecation")
 public class ConcurrentTaskExecutor implements AsyncListenableTaskExecutor, SchedulingTaskExecutor {
 
-	private static final Executor STUB_EXECUTOR = (task -> {
+	private static final Executor STUB_EXECUTOR = task -> {
 		throw new IllegalStateException("Executor not configured");
-	});
+	};
 
 	@Nullable
 	private static Class<?> managedExecutorServiceClass;

@@ -38,7 +38,7 @@ public class HttpCookie {
 	public HttpCookie(String name, @Nullable String value) {
 		Assert.hasLength(name, "'name' is required and must not be empty.");
 		this.name = name;
-		this.value = (value != null ? value : "");
+		this.value = value != null ? value : "";
 	}
 
 	/**
@@ -58,8 +58,8 @@ public class HttpCookie {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof HttpCookie that &&
-				this.name.equalsIgnoreCase(that.getName())));
+		return this == other || (other instanceof HttpCookie that &&
+				this.name.equalsIgnoreCase(that.getName()));
 	}
 
 	@Override

@@ -111,7 +111,7 @@ public class DefaultMessageCodesResolver implements MessageCodesResolver, Serial
 	 * error codes like "validation.typeMismatch.name".
 	 */
 	public void setPrefix(@Nullable String prefix) {
-		this.prefix = (prefix != null ? prefix : "");
+		this.prefix = prefix != null ? prefix : "";
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class DefaultMessageCodesResolver implements MessageCodesResolver, Serial
 	 * @see Format
 	 */
 	public void setMessageCodeFormatter(@Nullable MessageCodeFormatter formatter) {
-		this.formatter = (formatter != null ? formatter : DEFAULT_FORMATTER);
+		this.formatter = formatter != null ? formatter : DEFAULT_FORMATTER;
 	}
 
 

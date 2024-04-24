@@ -35,7 +35,7 @@ class HtmlCharacterEntityDecoder {
 
 	private final StringBuilder decodedMessage;
 
-	private int currentPosition = 0;
+	private int currentPosition;
 
 	private int nextPotentialReferencePosition = -1;
 
@@ -88,8 +88,8 @@ class HtmlCharacterEntityDecoder {
 
 	private void copyCharactersTillPotentialReference() {
 		if (this.nextPotentialReferencePosition != this.currentPosition) {
-			int skipUntilIndex = (this.nextPotentialReferencePosition != -1 ?
-					this.nextPotentialReferencePosition : this.originalMessage.length());
+			int skipUntilIndex = this.nextPotentialReferencePosition != -1 ?
+					this.nextPotentialReferencePosition : this.originalMessage.length();
 			if (skipUntilIndex - this.currentPosition > 3) {
 				this.decodedMessage.append(this.originalMessage, this.currentPosition, skipUntilIndex);
 				this.currentPosition = skipUntilIndex;
@@ -104,7 +104,7 @@ class HtmlCharacterEntityDecoder {
 
 	private void processPossibleReference() {
 		if (this.nextPotentialReferencePosition != -1) {
-			boolean isNumberedReference = (this.originalMessage.charAt(this.currentPosition + 1) == '#');
+			boolean isNumberedReference = this.originalMessage.charAt(this.currentPosition + 1) == '#';
 			boolean wasProcessable = isNumberedReference ? processNumberedReference() : processNamedReference();
 			if (wasProcessable) {
 				this.currentPosition = this.nextSemicolonPosition + 1;
@@ -119,11 +119,11 @@ class HtmlCharacterEntityDecoder {
 
 	private boolean processNumberedReference() {
 		char referenceChar = this.originalMessage.charAt(this.nextPotentialReferencePosition + 2);
-		boolean isHexNumberedReference = (referenceChar == 'x' || referenceChar == 'X');
+		boolean isHexNumberedReference = referenceChar == 'x' || referenceChar == 'X';
 		try {
-			int value = (!isHexNumberedReference ?
-					Integer.parseInt(getReferenceSubstring(2)) :
-					Integer.parseInt(getReferenceSubstring(3), 16));
+			int value = isHexNumberedReference ?
+					Integer.parseInt(getReferenceSubstring(3), 16) :
+					Integer.parseInt(getReferenceSubstring(2));
 			this.decodedMessage.append((char) value);
 			return true;
 		}

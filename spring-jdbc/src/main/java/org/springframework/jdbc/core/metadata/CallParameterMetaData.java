@@ -92,9 +92,9 @@ public class CallParameterMetaData {
 	 * @since 4.3.15
 	 */
 	public boolean isReturnParameter() {
-		return (this.function ? this.parameterType == DatabaseMetaData.functionReturn :
+		return this.function ? this.parameterType == DatabaseMetaData.functionReturn :
 				(this.parameterType == DatabaseMetaData.procedureColumnReturn ||
-						this.parameterType == DatabaseMetaData.procedureColumnResult));
+						this.parameterType == DatabaseMetaData.procedureColumnResult);
 	}
 
 	/**
@@ -104,8 +104,8 @@ public class CallParameterMetaData {
 	 * @since 5.3.31
 	 */
 	public boolean isOutParameter() {
-		return (this.function ? this.parameterType == DatabaseMetaData.functionColumnOut :
-				this.parameterType == DatabaseMetaData.procedureColumnOut);
+		return this.function ? this.parameterType == DatabaseMetaData.functionColumnOut :
+				this.parameterType == DatabaseMetaData.procedureColumnOut;
 	}
 
 	/**
@@ -115,8 +115,8 @@ public class CallParameterMetaData {
 	 * @since 5.3.31
 	 */
 	public boolean isInOutParameter() {
-		return (this.function ? this.parameterType == DatabaseMetaData.functionColumnInOut :
-				this.parameterType == DatabaseMetaData.procedureColumnInOut);
+		return this.function ? this.parameterType == DatabaseMetaData.functionColumnInOut :
+				this.parameterType == DatabaseMetaData.procedureColumnInOut;
 	}
 
 	/**

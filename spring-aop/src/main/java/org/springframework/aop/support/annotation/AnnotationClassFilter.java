@@ -62,15 +62,15 @@ public class AnnotationClassFilter implements ClassFilter {
 
 	@Override
 	public boolean matches(Class<?> clazz) {
-		return (this.checkInherited ? AnnotatedElementUtils.hasAnnotation(clazz, this.annotationType) :
-				clazz.isAnnotationPresent(this.annotationType));
+		return this.checkInherited ? AnnotatedElementUtils.hasAnnotation(clazz, this.annotationType) :
+				clazz.isAnnotationPresent(this.annotationType);
 	}
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof AnnotationClassFilter otherCf &&
+		return this == other || (other instanceof AnnotationClassFilter otherCf &&
 				this.annotationType.equals(otherCf.annotationType) &&
-				this.checkInherited == otherCf.checkInherited));
+				this.checkInherited == otherCf.checkInherited);
 	}
 
 	@Override

@@ -60,7 +60,7 @@ public abstract class AbstractMappingJacksonResponseBodyAdvice implements Respon
 	 * additional serialization instructions) or simply cast it if already wrapped.
 	 */
 	protected MappingJacksonValue getOrCreateContainer(Object body) {
-		return (body instanceof MappingJacksonValue mjv ? mjv : new MappingJacksonValue(body));
+		return body instanceof MappingJacksonValue mjv ? mjv : new MappingJacksonValue(body);
 	}
 
 	/**

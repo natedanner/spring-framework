@@ -43,7 +43,7 @@ public class UriComponentsBuilderMethodArgumentResolver implements HandlerMethod
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		Class<?> type = parameter.getParameterType();
-		return (UriComponentsBuilder.class == type || ServletUriComponentsBuilder.class == type);
+		return UriComponentsBuilder.class == type || ServletUriComponentsBuilder.class == type;
 	}
 
 	@Override

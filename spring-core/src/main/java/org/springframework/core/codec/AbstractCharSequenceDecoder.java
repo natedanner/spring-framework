@@ -162,7 +162,7 @@ public abstract class AbstractCharSequenceDecoder<T extends CharSequence> extend
 				}
 			}
 			while (buffer.readableByteCount() > 0);
-			return (result != null ? result : Collections.emptyList());
+			return result != null ? result : Collections.emptyList();
 		}
 		finally {
 			if (release) {

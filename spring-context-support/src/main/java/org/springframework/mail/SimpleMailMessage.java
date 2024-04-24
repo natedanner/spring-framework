@@ -223,7 +223,7 @@ public class SimpleMailMessage implements MailMessage, Serializable {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof SimpleMailMessage that &&
+		return this == other || (other instanceof SimpleMailMessage that &&
 				ObjectUtils.nullSafeEquals(this.from, that.from) &&
 				ObjectUtils.nullSafeEquals(this.replyTo, that.replyTo) &&
 				ObjectUtils.nullSafeEquals(this.to, that.to) &&
@@ -231,7 +231,7 @@ public class SimpleMailMessage implements MailMessage, Serializable {
 				ObjectUtils.nullSafeEquals(this.bcc, that.bcc) &&
 				ObjectUtils.nullSafeEquals(this.sentDate, that.sentDate) &&
 				ObjectUtils.nullSafeEquals(this.subject, that.subject) &&
-				ObjectUtils.nullSafeEquals(this.text, that.text)));
+				ObjectUtils.nullSafeEquals(this.text, that.text));
 	}
 
 	@Override

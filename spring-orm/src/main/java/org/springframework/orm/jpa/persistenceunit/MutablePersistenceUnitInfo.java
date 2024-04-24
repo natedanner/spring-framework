@@ -73,7 +73,7 @@ public class MutablePersistenceUnitInfo implements SmartPersistenceUnitInfo {
 
 	private final List<String> managedPackages = new ArrayList<>();
 
-	private boolean excludeUnlistedClasses = false;
+	private boolean excludeUnlistedClasses;
 
 	private SharedCacheMode sharedCacheMode = SharedCacheMode.UNSPECIFIED;
 
@@ -117,8 +117,8 @@ public class MutablePersistenceUnitInfo implements SmartPersistenceUnitInfo {
 			return this.transactionType;
 		}
 		else {
-			return (this.jtaDataSource != null ?
-					PersistenceUnitTransactionType.JTA : PersistenceUnitTransactionType.RESOURCE_LOCAL);
+			return this.jtaDataSource != null ?
+					PersistenceUnitTransactionType.JTA : PersistenceUnitTransactionType.RESOURCE_LOCAL;
 		}
 	}
 

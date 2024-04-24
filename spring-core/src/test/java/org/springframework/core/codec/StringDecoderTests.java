@@ -73,7 +73,7 @@ class StringDecoderTests extends AbstractDecoderTests<StringDecoder> {
 		String u = "ü";
 		String e = "é";
 		String o = "ø";
-		String s = String.format("%s\n%s\n%s", u, e, o);
+		String s = String.format("%s%n%s%n%s", u, e, o);
 		Flux<DataBuffer> input = toDataBuffers(s, 1, UTF_8);
 
 		testDecodeAll(input, TYPE, step -> step.expectNext(u, e, o).verifyComplete(), null, null);
@@ -92,7 +92,7 @@ class StringDecoderTests extends AbstractDecoderTests<StringDecoder> {
 		String u = "ü";
 		String e = "é";
 		String o = "ø";
-		String s = String.format("%s\n%s\n%s", u, e, o);
+		String s = String.format("%s%n%s%n%s", u, e, o);
 		Flux<DataBuffer> source = toDataBuffers(s, 2, UTF_16BE);
 		MimeType mimeType = MimeTypeUtils.parseMimeType("text/plain;charset=utf-16be");
 

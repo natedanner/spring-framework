@@ -113,9 +113,9 @@ public class MethodArgumentNotValidException extends BindException implements Er
 	public static List<String> errorsToStringList(
 			List<? extends ObjectError> errors, @Nullable MessageSource messageSource, Locale locale) {
 
-		return (messageSource != null ?
+		return messageSource != null ?
 				BindErrorUtils.resolve(errors, messageSource, locale).values().stream().toList() :
-				BindErrorUtils.resolve(errors).values().stream().toList());
+				BindErrorUtils.resolve(errors).values().stream().toList();
 	}
 
 	/**

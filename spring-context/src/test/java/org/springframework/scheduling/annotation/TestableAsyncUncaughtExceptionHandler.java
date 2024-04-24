@@ -73,7 +73,7 @@ class TestableAsyncUncaughtExceptionHandler
 		}
 	}
 
-	private static class UncaughtExceptionDescriptor {
+	private static final class UncaughtExceptionDescriptor {
 		private final Throwable ex;
 
 		private final Method method;

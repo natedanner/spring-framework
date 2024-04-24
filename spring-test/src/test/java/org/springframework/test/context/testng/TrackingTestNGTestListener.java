@@ -29,13 +29,13 @@ import org.testng.ITestResult;
  */
 public class TrackingTestNGTestListener implements ITestListener {
 
-	public int testStartCount = 0;
+	public int testStartCount;
 
-	public int testSuccessCount = 0;
+	public int testSuccessCount;
 
-	public int testFailureCount = 0;
+	public int testFailureCount;
 
-	public int failedConfigurationsCount = 0;
+	public int failedConfigurationsCount;
 
 
 	@Override

@@ -119,7 +119,7 @@ public class SpringConfigurator extends Configurator {
 		}
 
 		String beanName = beanNamesByType.get(endpointClass);
-		return (NO_VALUE.equals(beanName) ? null : beanName);
+		return NO_VALUE.equals(beanName) ? null : beanName;
 	}
 
 }

@@ -26,7 +26,7 @@ import org.springframework.cglib.core.ReflectUtils;
  * @author Juozas Baliuka
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class BulkBean
+public abstract class BulkBean
 {
 	private static final BulkBeanKey KEY_FACTORY =
 	  (BulkBeanKey)KeyFactory.create(BulkBeanKey.class);
@@ -36,13 +36,14 @@ abstract public class BulkBean
 	}
 
 	protected Class target;
-	protected String[] getters, setters;
+	protected String[] getters;
+	protected String[] setters;
 	protected Class[] types;
 
 	protected BulkBean() { }
 
-	abstract public void getPropertyValues(Object bean, Object[] values);
-	abstract public void setPropertyValues(Object bean, Object[] values);
+	public abstract void getPropertyValues(Object bean, Object[] values);
+	public abstract void setPropertyValues(Object bean, Object[] values);
 
 	public Object[] getPropertyValues(Object bean) {
 		Object[] values = new Object[getters.length];

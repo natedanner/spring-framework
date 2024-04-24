@@ -232,7 +232,7 @@ class OrderedTxCheckAdvisor extends StaticMethodMatcherPointcutAdvisor implement
 	/**
 	 * Should we insist on the presence of a transaction attribute or refuse to accept one?
 	 */
-	private boolean requireTransactionContext = false;
+	private boolean requireTransactionContext;
 
 
 	public void setRequireTransactionContext(boolean requireTransactionContext) {

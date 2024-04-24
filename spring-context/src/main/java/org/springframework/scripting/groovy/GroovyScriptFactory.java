@@ -81,7 +81,7 @@ public class GroovyScriptFactory implements ScriptFactory, BeanFactoryAware, Bea
 
 	private final Object scriptClassMonitor = new Object();
 
-	private boolean wasModifiedForTypeCheck = false;
+	private boolean wasModifiedForTypeCheck;
 
 
 	/**
@@ -185,8 +185,8 @@ public class GroovyScriptFactory implements ScriptFactory, BeanFactoryAware, Bea
 	 * @since 4.3.3
 	 */
 	protected GroovyClassLoader buildGroovyClassLoader(@Nullable ClassLoader classLoader) {
-		return (this.compilerConfiguration != null ?
-				new GroovyClassLoader(classLoader, this.compilerConfiguration) : new GroovyClassLoader(classLoader));
+		return this.compilerConfiguration != null ?
+				new GroovyClassLoader(classLoader, this.compilerConfiguration) : new GroovyClassLoader(classLoader);
 	}
 
 
@@ -244,7 +244,7 @@ public class GroovyScriptFactory implements ScriptFactory, BeanFactoryAware, Bea
 					if (Script.class.isAssignableFrom(this.scriptClass)) {
 						// A Groovy script, probably creating an instance: let's execute it.
 						Object result = executeScript(scriptSource, this.scriptClass);
-						this.scriptResultClass = (result != null ? result.getClass() : null);
+						this.scriptResultClass = result != null ? result.getClass() : null;
 						return result;
 					}
 					else {
@@ -280,7 +280,7 @@ public class GroovyScriptFactory implements ScriptFactory, BeanFactoryAware, Bea
 					if (Script.class.isAssignableFrom(this.scriptClass)) {
 						// A Groovy script, probably creating an instance: let's execute it.
 						Object result = executeScript(scriptSource, this.scriptClass);
-						this.scriptResultClass = (result != null ? result.getClass() : null);
+						this.scriptResultClass = result != null ? result.getClass() : null;
 						this.cachedResult = new CachedResultHolder(result);
 					}
 					else {
@@ -301,7 +301,7 @@ public class GroovyScriptFactory implements ScriptFactory, BeanFactoryAware, Bea
 	@Override
 	public boolean requiresScriptedObjectRefresh(ScriptSource scriptSource) {
 		synchronized (this.scriptClassMonitor) {
-			return (scriptSource.isModified() || this.wasModifiedForTypeCheck);
+			return scriptSource.isModified() || this.wasModifiedForTypeCheck;
 		}
 	}
 

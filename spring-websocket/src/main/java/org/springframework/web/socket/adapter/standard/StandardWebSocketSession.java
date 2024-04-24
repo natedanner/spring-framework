@@ -103,7 +103,7 @@ public class StandardWebSocketSession extends AbstractWebSocketSession<Session> 
 
 		super(attributes);
 		this.id = idGenerator.generateId().toString();
-		headers = (headers != null ? headers : new HttpHeaders());
+		headers = headers != null ? headers : new HttpHeaders();
 		this.handshakeHeaders = HttpHeaders.readOnlyHttpHeaders(headers);
 		this.user = user;
 		this.localAddress = localAddress;

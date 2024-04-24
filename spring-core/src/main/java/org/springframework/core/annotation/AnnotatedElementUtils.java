@@ -825,7 +825,7 @@ public abstract class AnnotatedElementUtils {
 
 	@Nullable
 	private static MultiValueMap<String, Object> nullIfEmpty(MultiValueMap<String, Object> map) {
-		return (map.isEmpty() ? null : map);
+		return map.isEmpty() ? null : map;
 	}
 
 	private static <A extends Annotation> Comparator<MergedAnnotation<A>> highAggregateIndexesFirst() {

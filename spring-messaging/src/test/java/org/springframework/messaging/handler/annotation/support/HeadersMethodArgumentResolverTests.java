@@ -43,7 +43,7 @@ class HeadersMethodArgumentResolverTests {
 
 	private final HeadersMethodArgumentResolver resolver = new HeadersMethodArgumentResolver();
 
-	private Message<byte[]> message =
+	private final Message<byte[]> message =
 			MessageBuilder.withPayload(new byte[0]).copyHeaders(Collections.singletonMap("foo", "bar")).build();
 
 	private final ResolvableMethod resolvable = ResolvableMethod.on(getClass()).named("handleMessage").build();

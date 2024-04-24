@@ -198,7 +198,7 @@ class SimpleMessageListenerContainerTests {
 		messageConsumer.sendMessage(message);
 
 		if (!failure.isEmpty()) {
-			fail(failure.iterator().next().toString());
+			fail(failure.iterator().next());
 		}
 
 		verify(connection).setExceptionListener(this.container);
@@ -456,9 +456,9 @@ class SimpleMessageListenerContainerTests {
 
 	private static class TestMessageListener implements MessageListener {
 
-		public boolean executorInvoked = false;
+		public boolean executorInvoked;
 
-		public boolean listenerInvoked = false;
+		public boolean listenerInvoked;
 
 		@Override
 		public void onMessage(Message message) {

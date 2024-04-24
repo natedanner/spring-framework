@@ -35,7 +35,7 @@ import org.springframework.cglib.core.TypeUtils;
  * @version $Id: ConstructorDelegate.java,v 1.20 2006/03/05 02:43:19 herbyderby Exp $
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class ConstructorDelegate {
+public abstract class ConstructorDelegate {
     private static final ConstructorKey KEY_FACTORY =
       (ConstructorKey)KeyFactory.create(ConstructorKey.class, KeyFactory.CLASS_BY_NAME);
 

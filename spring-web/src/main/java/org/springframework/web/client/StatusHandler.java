@@ -128,7 +128,7 @@ final class StatusHandler {
 			return preface + "[no body]";
 		}
 
-		charset = (charset != null ? charset : StandardCharsets.UTF_8);
+		charset = charset != null ? charset : StandardCharsets.UTF_8;
 
 		String bodyText = new String(responseBody, charset);
 		bodyText = LogFormatUtils.formatValue(bodyText, -1, true);

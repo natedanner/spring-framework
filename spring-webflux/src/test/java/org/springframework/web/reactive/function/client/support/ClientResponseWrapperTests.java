@@ -42,9 +42,9 @@ import static org.mockito.Mockito.mock;
  */
 class ClientResponseWrapperTests {
 
-	private ClientResponse mockResponse = mock();
+	private final ClientResponse mockResponse = mock();
 
-	private ClientResponseWrapper wrapper = new ClientResponseWrapper(mockResponse);
+	private final ClientResponseWrapper wrapper = new ClientResponseWrapper(mockResponse);
 
 
 	@Test

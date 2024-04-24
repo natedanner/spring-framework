@@ -83,10 +83,10 @@ public class CallMetaDataContext {
 	private List<String> outParameterNames = new ArrayList<>();
 
 	// Indicates whether this is a procedure or a function
-	private boolean function = false;
+	private boolean function;
 
 	// Indicates whether this procedure's return value should be included
-	private boolean returnValueRequired = false;
+	private boolean returnValueRequired;
 
 	// Should we access call parameter meta-data info or not
 	private boolean accessCallParameterMetaData = true;
@@ -110,7 +110,7 @@ public class CallMetaDataContext {
 	 * Get the name used for the return value of the function.
 	 */
 	public String getFunctionReturnName() {
-		return (this.actualFunctionReturnName != null ? this.actualFunctionReturnName : "return");
+		return this.actualFunctionReturnName != null ? this.actualFunctionReturnName : "return";
 	}
 
 	/**
@@ -294,7 +294,7 @@ public class CallMetaDataContext {
 			if (this.outParameterNames.size() > 1) {
 				logger.info("Accessing single output value when procedure has more than one output parameter");
 			}
-			return (!this.outParameterNames.isEmpty() ? this.outParameterNames.get(0) : null);
+			return this.outParameterNames.isEmpty() ? null : this.outParameterNames.get(0);
 		}
 	}
 
@@ -418,7 +418,7 @@ public class CallMetaDataContext {
 					}
 					else {
 						String returnNameToUse =
-								(StringUtils.hasLength(paramNameToUse) ? paramNameToUse : getFunctionReturnName());
+								StringUtils.hasLength(paramNameToUse) ? paramNameToUse : getFunctionReturnName();
 						workParams.add(provider.createDefaultOutParameter(returnNameToUse, meta));
 						if (isFunction()) {
 							this.actualFunctionReturnName = returnNameToUse;
@@ -678,11 +678,11 @@ public class CallMetaDataContext {
 	protected String createParameterBinding(SqlParameter parameter) {
 		Assert.state(this.metaDataProvider != null, "No CallMetaDataProvider available");
 
-		return (isNamedBinding() ? this.metaDataProvider.namedParameterBindingToUse(parameter.getName()) : "?");
+		return isNamedBinding() ? this.metaDataProvider.namedParameterBindingToUse(parameter.getName()) : "?";
 	}
 
 	private static String lowerCase(@Nullable String paramName) {
-		return (paramName != null ? paramName.toLowerCase() : "");
+		return paramName != null ? paramName.toLowerCase() : "";
 	}
 
 }

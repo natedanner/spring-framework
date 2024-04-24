@@ -61,8 +61,8 @@ class RequestResponseBodyAdviceChain implements RequestBodyAdvice, ResponseBodyA
 		if (requestResponseBodyAdvice != null) {
 			List<T> result = new ArrayList<>();
 			for (Object advice : requestResponseBodyAdvice) {
-				Class<?> beanType = (advice instanceof ControllerAdviceBean adviceBean ?
-						adviceBean.getBeanType() : advice.getClass());
+				Class<?> beanType = advice instanceof ControllerAdviceBean adviceBean ?
+						adviceBean.getBeanType() : advice.getClass();
 				if (beanType != null && adviceType.isAssignableFrom(beanType)) {
 					result.add((T) advice);
 				}

@@ -38,7 +38,7 @@ public class DelegatingServletInputStream extends ServletInputStream {
 
 	private final InputStream sourceStream;
 
-	private boolean finished = false;
+	private boolean finished;
 
 
 	/**

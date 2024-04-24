@@ -304,7 +304,7 @@ public class RequestContext {
 	 * @see RequestContextUtils#getLocale
 	 */
 	public final Locale getLocale() {
-		return (this.locale != null ? this.locale : getFallbackLocale());
+		return this.locale != null ? this.locale : getFallbackLocale();
 	}
 
 	/**
@@ -315,7 +315,7 @@ public class RequestContext {
 	 */
 	@Nullable
 	public TimeZone getTimeZone() {
-		return (this.timeZone != null ? this.timeZone : getFallbackTimeZone());
+		return this.timeZone != null ? this.timeZone : getFallbackTimeZone();
 	}
 
 	/**
@@ -474,7 +474,7 @@ public class RequestContext {
 	 * Is default HTML escaping active? Falls back to {@code false} in case of no explicit default given.
 	 */
 	public boolean isDefaultHtmlEscape() {
-		return (this.defaultHtmlEscape != null && this.defaultHtmlEscape);
+		return this.defaultHtmlEscape != null && this.defaultHtmlEscape;
 	}
 
 	/**
@@ -493,7 +493,7 @@ public class RequestContext {
 	 * @since 4.1.2
 	 */
 	public boolean isResponseEncodedHtmlEscape() {
-		return (this.responseEncodedHtmlEscape == null || this.responseEncodedHtmlEscape);
+		return this.responseEncodedHtmlEscape == null || this.responseEncodedHtmlEscape;
 	}
 
 	/**
@@ -665,7 +665,7 @@ public class RequestContext {
 		if (msg == null) {
 			return "";
 		}
-		return (htmlEscape ? HtmlUtils.htmlEscape(msg) : msg);
+		return htmlEscape ? HtmlUtils.htmlEscape(msg) : msg;
 	}
 
 	/**
@@ -710,7 +710,7 @@ public class RequestContext {
 	 */
 	public String getMessage(String code, @Nullable Object[] args, boolean htmlEscape) throws NoSuchMessageException {
 		String msg = this.webApplicationContext.getMessage(code, args, getLocale());
-		return (htmlEscape ? HtmlUtils.htmlEscape(msg) : msg);
+		return htmlEscape ? HtmlUtils.htmlEscape(msg) : msg;
 	}
 
 	/**
@@ -732,7 +732,7 @@ public class RequestContext {
 	 */
 	public String getMessage(MessageSourceResolvable resolvable, boolean htmlEscape) throws NoSuchMessageException {
 		String msg = this.webApplicationContext.getMessage(resolvable, getLocale());
-		return (htmlEscape ? HtmlUtils.htmlEscape(msg) : msg);
+		return htmlEscape ? HtmlUtils.htmlEscape(msg) : msg;
 	}
 
 	/**
@@ -747,7 +747,7 @@ public class RequestContext {
 	@Deprecated
 	public String getThemeMessage(String code, String defaultMessage) {
 		String msg = getTheme().getMessageSource().getMessage(code, null, defaultMessage, getLocale());
-		return (msg != null ? msg : "");
+		return msg != null ? msg : "";
 	}
 
 	/**
@@ -763,7 +763,7 @@ public class RequestContext {
 	@Deprecated
 	public String getThemeMessage(String code, @Nullable Object[] args, String defaultMessage) {
 		String msg = getTheme().getMessageSource().getMessage(code, args, defaultMessage, getLocale());
-		return (msg != null ? msg : "");
+		return msg != null ? msg : "";
 	}
 
 	/**
@@ -780,7 +780,7 @@ public class RequestContext {
 	public String getThemeMessage(String code, @Nullable List<?> args, String defaultMessage) {
 		String msg = getTheme().getMessageSource().getMessage(code, (args != null ? args.toArray() : null),
 				defaultMessage, getLocale());
-		return (msg != null ? msg : "");
+		return msg != null ? msg : "";
 	}
 
 	/**
@@ -945,7 +945,7 @@ public class RequestContext {
 					localeObject = Config.get(servletContext, Config.FMT_LOCALE);
 				}
 			}
-			return (localeObject instanceof Locale locale ? locale : null);
+			return localeObject instanceof Locale locale ? locale : null;
 		}
 
 		@Nullable
@@ -960,7 +960,7 @@ public class RequestContext {
 					timeZoneObject = Config.get(servletContext, Config.FMT_TIME_ZONE);
 				}
 			}
-			return (timeZoneObject instanceof TimeZone timeZone ? timeZone : null);
+			return timeZoneObject instanceof TimeZone timeZone ? timeZone : null;
 		}
 	}
 

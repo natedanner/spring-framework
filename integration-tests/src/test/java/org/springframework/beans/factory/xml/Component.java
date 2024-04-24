@@ -22,7 +22,7 @@ import java.util.List;
 public class Component {
 
 	private String name;
-	private List<Component> components = new ArrayList<>();
+	private final List<Component> components = new ArrayList<>();
 
 	// mmm, there is no setter method for the 'components'
 	public void addComponent(Component component) {

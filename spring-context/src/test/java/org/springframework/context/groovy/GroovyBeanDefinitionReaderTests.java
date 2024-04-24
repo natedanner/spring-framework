@@ -675,7 +675,7 @@ class GroovyBeanDefinitionReaderTests {
 		GenericApplicationContext appCtx = new GenericApplicationContext();
 		GroovyBeanDefinitionReader reader = new GroovyBeanDefinitionReader(appCtx);
 
-		reader.loadBeanDefinitions(new ByteArrayResource(("""
+		reader.loadBeanDefinitions(new ByteArrayResource("""
 			package org.springframework.context.groovy
 			beans {
 				jeff(Bean1Impl) {
@@ -688,7 +688,7 @@ class GroovyBeanDefinitionReaderTests {
 					person = 'guillaume'
 				}
 			}
-			""").getBytes()));
+			""".getBytes()));
 
 		appCtx.refresh();
 
@@ -982,7 +982,7 @@ class GroovyBeanDefinitionReaderTests {
 	}
 
 	private static void loadGroovyDsl(GenericApplicationContext context, String script) {
-		new GroovyBeanDefinitionReader(context).loadBeanDefinitions(new ByteArrayResource((script).getBytes()));
+		new GroovyBeanDefinitionReader(context).loadBeanDefinitions(new ByteArrayResource(script.getBytes()));
 		context.refresh();
 	}
 
@@ -1160,7 +1160,7 @@ class Bean3 {
 }
 
 // bean with factory method
-class Bean4 {
+final class Bean4 {
 	private Bean4() {}
 	static Bean4 getInstance() {
 		return new Bean4();

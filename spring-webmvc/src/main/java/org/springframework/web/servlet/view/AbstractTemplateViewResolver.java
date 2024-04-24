@@ -29,13 +29,13 @@ package org.springframework.web.servlet.view;
  */
 public abstract class AbstractTemplateViewResolver extends UrlBasedViewResolver {
 
-	private boolean exposeRequestAttributes = false;
+	private boolean exposeRequestAttributes;
 
-	private boolean allowRequestOverride = false;
+	private boolean allowRequestOverride;
 
-	private boolean exposeSessionAttributes = false;
+	private boolean exposeSessionAttributes;
 
-	private boolean allowSessionOverride = false;
+	private boolean allowSessionOverride;
 
 	private boolean exposeSpringMacroHelpers = true;
 

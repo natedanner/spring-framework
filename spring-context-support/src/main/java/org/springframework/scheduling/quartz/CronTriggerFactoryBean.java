@@ -84,7 +84,7 @@ public class CronTriggerFactoryBean implements FactoryBean<CronTrigger>, BeanNam
 	@Nullable
 	private Date startTime;
 
-	private long startDelay = 0;
+	private long startDelay;
 
 	@Nullable
 	private String cronExpression;

@@ -62,7 +62,7 @@ public class MethodCounter implements Serializable {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (other != null && other.getClass() == this.getClass());
+		return other != null && other.getClass() == this.getClass();
 	}
 
 	@Override

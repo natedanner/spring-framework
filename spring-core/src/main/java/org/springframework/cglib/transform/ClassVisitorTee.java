@@ -24,7 +24,8 @@ import org.springframework.asm.TypePath;
 import org.springframework.cglib.core.Constants;
 
 public class ClassVisitorTee extends ClassVisitor {
-    private ClassVisitor cv1, cv2;
+	private ClassVisitor cv1;
+	private ClassVisitor cv2;
 
     public ClassVisitorTee(ClassVisitor cv1, ClassVisitor cv2) {
 	super(Constants.ASM_API);

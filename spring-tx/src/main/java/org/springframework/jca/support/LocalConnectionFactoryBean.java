@@ -133,7 +133,7 @@ public class LocalConnectionFactoryBean implements FactoryBean<Object>, Initiali
 
 	@Override
 	public Class<?> getObjectType() {
-		return (this.connectionFactory != null ? this.connectionFactory.getClass() : null);
+		return this.connectionFactory != null ? this.connectionFactory.getClass() : null;
 	}
 
 	@Override

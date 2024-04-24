@@ -147,13 +147,13 @@ class PropertyPlaceholderConfigurerTests {
 	 */
 	@Test
 	void twoPlaceholderConfigurers_withConflictingSettings() {
-		String P2 = "p2";
-		String P2_LOCAL_PROPS_VAL = "p2LocalPropsVal";
-		String P2_SYSTEM_PROPS_VAL = "p2SystemPropsVal";
+		String p2 = "p2";
+		String p2LocalPropsVal = "p2LocalPropsVal";
+		String p2SystemPropsVal = "p2SystemPropsVal";
 
 		AbstractBeanDefinition p2BeanDef = rootBeanDefinition(TestBean.class)
 				.addPropertyValue("name", "${" + P1 + "}")
-				.addPropertyValue("country", "${" + P2 + "}")
+				.addPropertyValue("country", "${" + p2 + "}")
 				.getBeanDefinition();
 
 		bf.registerBeanDefinition("p1Bean", p1BeanDef);
@@ -162,16 +162,16 @@ class PropertyPlaceholderConfigurerTests {
 		ppc.setIgnoreUnresolvablePlaceholders(true);
 		ppc.postProcessBeanFactory(bf);
 
-		System.setProperty(P2, P2_SYSTEM_PROPS_VAL);
+		System.setProperty(p2, p2SystemPropsVal);
 		Properties ppc2Properties = new Properties();
-		ppc2Properties.put(P2, P2_LOCAL_PROPS_VAL);
+		ppc2Properties.put(p2, p2LocalPropsVal);
 
 		PropertyPlaceholderConfigurer ppc2 = new PropertyPlaceholderConfigurer();
 		ppc2.setSystemPropertiesMode(PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE);
 		ppc2.setProperties(ppc2Properties);
 
 		ppc2Properties = new Properties();
-		ppc2Properties.setProperty(P2, P2_LOCAL_PROPS_VAL);
+		ppc2Properties.setProperty(p2, p2LocalPropsVal);
 		ppc2.postProcessBeanFactory(bf);
 
 		TestBean p1Bean = bf.getBean("p1Bean", TestBean.class);
@@ -179,9 +179,9 @@ class PropertyPlaceholderConfigurerTests {
 
 		TestBean p2Bean = bf.getBean("p2Bean", TestBean.class);
 		assertThat(p2Bean.getName()).isEqualTo(P1_LOCAL_PROPS_VAL);
-		assertThat(p2Bean.getCountry()).isEqualTo(P2_SYSTEM_PROPS_VAL);
+		assertThat(p2Bean.getCountry()).isEqualTo(p2SystemPropsVal);
 
-		System.clearProperty(P2);
+		System.clearProperty(p2);
 	}
 
 	@Test

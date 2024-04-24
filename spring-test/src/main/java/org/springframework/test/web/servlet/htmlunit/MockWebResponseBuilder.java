@@ -68,8 +68,8 @@ final class MockWebResponseBuilder {
 
 	private WebResponseData webResponseData() throws IOException {
 		List<NameValuePair> responseHeaders = responseHeaders();
-		int statusCode = (this.response.getRedirectedUrl() != null ?
-				HttpStatus.MOVED_PERMANENTLY.value() : this.response.getStatus());
+		int statusCode = this.response.getRedirectedUrl() != null ?
+				HttpStatus.MOVED_PERMANENTLY.value() : this.response.getStatus();
 		String statusMessage = statusMessage(statusCode);
 		return new WebResponseData(this.response.getContentAsByteArray(), statusCode, statusMessage, responseHeaders);
 	}

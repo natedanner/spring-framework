@@ -56,9 +56,9 @@ public abstract class AbstractBeanFactoryTests {
 		TestBean rod = (TestBean) getBeanFactory().getBean("rod");
 		TestBean roderick = (TestBean) getBeanFactory().getBean("roderick");
 		assertThat(rod).as("not == ").isNotSameAs(roderick);
-		assertThat(rod.getName().equals("Rod")).as("rod.name is Rod").isTrue();
+		assertThat("Rod".equals(rod.getName())).as("rod.name is Rod").isTrue();
 		assertThat(rod.getAge()).as("rod.age is 31").isEqualTo(31);
-		assertThat(roderick.getName().equals("Roderick")).as("roderick.name is Roderick").isTrue();
+		assertThat("Roderick".equals(roderick.getName())).as("roderick.name is Roderick").isTrue();
 		assertThat(roderick.getAge()).as("roderick.age was inherited").isEqualTo(rod.getAge());
 	}
 
@@ -98,7 +98,7 @@ public abstract class AbstractBeanFactoryTests {
 	protected void findsValidInstance() {
 		Object o = getBeanFactory().getBean("rod");
 		assertThat(o).isInstanceOfSatisfying(TestBean.class, rod -> {
-			assertThat(rod.getName().equals("Rod")).as("rod.name is Rod").isTrue();
+			assertThat("Rod".equals(rod.getName())).as("rod.name is Rod").isTrue();
 			assertThat(rod.getAge()).as("rod.age is 31").isEqualTo(31);
 		});
 	}
@@ -192,7 +192,7 @@ public abstract class AbstractBeanFactoryTests {
 	@Test
 	protected void grandparentDefinitionFoundInBeanFactory() {
 		TestBean dad = (TestBean) getBeanFactory().getBean("father");
-		assertThat(dad.getName().equals("Albert")).as("Dad has correct name").isTrue();
+		assertThat("Albert".equals(dad.getName())).as("Dad has correct name").isTrue();
 	}
 
 	@Test

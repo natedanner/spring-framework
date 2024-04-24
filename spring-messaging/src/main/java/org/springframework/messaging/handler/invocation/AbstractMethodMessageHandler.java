@@ -321,11 +321,11 @@ public abstract class AbstractMethodMessageHandler<T>
 
 	private String formatMappings(Class<?> userType, Map<Method, T> methods) {
 		String packageName = ClassUtils.getPackageName(userType);
-		String formattedType = (StringUtils.hasText(packageName) ?
+		String formattedType = StringUtils.hasText(packageName) ?
 				Arrays.stream(packageName.split("\\."))
 						.map(packageSegment -> packageSegment.substring(0, 1))
 						.collect(Collectors.joining(".", "", "." + userType.getSimpleName())) :
-				userType.getSimpleName());
+				userType.getSimpleName();
 		Function<Method, String> methodFormatter = method -> Arrays.stream(method.getParameterTypes())
 				.map(Class::getSimpleName)
 				.collect(Collectors.joining(",", "(", ")"));
@@ -601,9 +601,9 @@ public abstract class AbstractMethodMessageHandler<T>
 		}
 		try {
 			Throwable cause = exception.getCause();
-			Object returnValue = (cause != null ?
+			Object returnValue = cause != null ?
 					invocable.invoke(message, exception, cause, handlerMethod) :
-					invocable.invoke(message, exception, handlerMethod));
+					invocable.invoke(message, exception, handlerMethod);
 			MethodParameter returnType = invocable.getReturnType();
 			if (void.class == returnType.getParameterType()) {
 				return;
@@ -731,8 +731,8 @@ public abstract class AbstractMethodMessageHandler<T>
 		}
 
 		private void handleFailure(Throwable throwable) {
-			Exception cause = (throwable instanceof Exception exception ? exception :
-					new IllegalStateException(throwable));
+			Exception cause = throwable instanceof Exception exception ? exception :
+					new IllegalStateException(throwable);
 			processHandlerMethodException(this.handlerMethod, cause, this.message);
 		}
 	}

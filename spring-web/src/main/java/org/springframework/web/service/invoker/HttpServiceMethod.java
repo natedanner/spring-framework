@@ -87,16 +87,16 @@ final class HttpServiceMethod {
 		this.parameters = initMethodParameters(method);
 		this.argumentResolvers = argumentResolvers;
 
-		boolean isReactorAdapter = (REACTOR_PRESENT && adapter instanceof ReactorHttpExchangeAdapter);
+		boolean isReactorAdapter = REACTOR_PRESENT && adapter instanceof ReactorHttpExchangeAdapter;
 
 		this.requestValuesInitializer =
 				HttpRequestValuesInitializer.create(
 						method, containingClass, embeddedValueResolver,
 						(isReactorAdapter ? ReactiveHttpRequestValues::builder : HttpRequestValues::builder));
 
-		this.responseFunction = (isReactorAdapter ?
+		this.responseFunction = isReactorAdapter ?
 				ReactorExchangeResponseFunction.create((ReactorHttpExchangeAdapter) adapter, method) :
-				ExchangeResponseFunction.create(adapter, method));
+				ExchangeResponseFunction.create(adapter, method);
 	}
 
 	private static MethodParameter[] initMethodParameters(Method method) {
@@ -196,7 +196,7 @@ final class HttpServiceMethod {
 							.formatted(containingClass, typeHttpExchanges));
 
 			HttpExchange methodAnnotation = methodHttpExchanges.get(0).httpExchange;
-			HttpExchange typeAnnotation = (!typeHttpExchanges.isEmpty() ? typeHttpExchanges.get(0).httpExchange : null);
+			HttpExchange typeAnnotation = typeHttpExchanges.isEmpty() ? null : typeHttpExchanges.get(0).httpExchange;
 
 			HttpMethod httpMethod = initHttpMethod(typeAnnotation, methodAnnotation);
 			String url = initUrl(typeAnnotation, methodAnnotation, embeddedValueResolver);
@@ -214,7 +214,7 @@ final class HttpServiceMethod {
 				return HttpMethod.valueOf(methodLevelMethod);
 			}
 
-			String typeLevelMethod = (typeAnnotation != null ? typeAnnotation.method() : null);
+			String typeLevelMethod = typeAnnotation != null ? typeAnnotation.method() : null;
 			if (StringUtils.hasText(typeLevelMethod)) {
 				return HttpMethod.valueOf(typeLevelMethod);
 			}
@@ -227,11 +227,11 @@ final class HttpServiceMethod {
 				@Nullable HttpExchange typeAnnotation, HttpExchange methodAnnotation,
 				@Nullable StringValueResolver embeddedValueResolver) {
 
-			String typeLevelUrl = (typeAnnotation != null ? typeAnnotation.url() : null);
+			String typeLevelUrl = typeAnnotation != null ? typeAnnotation.url() : null;
 			String methodLevelUrl = methodAnnotation.url();
 
 			if (embeddedValueResolver != null) {
-				typeLevelUrl = (typeLevelUrl != null ? embeddedValueResolver.resolveStringValue(typeLevelUrl) : null);
+				typeLevelUrl = typeLevelUrl != null ? embeddedValueResolver.resolveStringValue(typeLevelUrl) : null;
 				methodLevelUrl = embeddedValueResolver.resolveStringValue(methodLevelUrl);
 			}
 
@@ -239,14 +239,14 @@ final class HttpServiceMethod {
 			boolean hasMethodLevelUrl = StringUtils.hasText(methodLevelUrl);
 
 			if (hasTypeLevelUrl && hasMethodLevelUrl) {
-				return (typeLevelUrl + (!typeLevelUrl.endsWith("/") && !methodLevelUrl.startsWith("/") ? "/" : "") + methodLevelUrl);
+				return typeLevelUrl + (!typeLevelUrl.endsWith("/") && !methodLevelUrl.startsWith("/") ? "/" : "") + methodLevelUrl;
 			}
 
 			if (!hasTypeLevelUrl && !hasMethodLevelUrl) {
 				return null;
 			}
 
-			return (hasMethodLevelUrl ? methodLevelUrl : typeLevelUrl);
+			return hasMethodLevelUrl ? methodLevelUrl : typeLevelUrl;
 		}
 
 		@Nullable
@@ -256,7 +256,7 @@ final class HttpServiceMethod {
 				return MediaType.parseMediaType(methodLevelContentType);
 			}
 
-			String typeLevelContentType = (typeAnnotation != null ? typeAnnotation.contentType() : null);
+			String typeLevelContentType = typeAnnotation != null ? typeAnnotation.contentType() : null;
 			if (StringUtils.hasText(typeLevelContentType)) {
 				return MediaType.parseMediaType(typeLevelContentType);
 			}
@@ -271,7 +271,7 @@ final class HttpServiceMethod {
 				return MediaType.parseMediaTypes(List.of(methodLevelAccept));
 			}
 
-			String[] typeLevelAccept = (typeAnnotation != null ? typeAnnotation.accept() : null);
+			String[] typeLevelAccept = typeAnnotation != null ? typeAnnotation.accept() : null;
 			if (!ObjectUtils.isEmpty(typeLevelAccept)) {
 				return MediaType.parseMediaTypes(List.of(typeLevelAccept));
 			}
@@ -301,7 +301,7 @@ final class HttpServiceMethod {
 
 			@Override
 			public boolean equals(Object obj) {
-				return (obj instanceof AnnotationDescriptor that && this.httpExchange.equals(that.httpExchange));
+				return obj instanceof AnnotationDescriptor that && this.httpExchange.equals(that.httpExchange);
 			}
 
 			@Override
@@ -407,14 +407,14 @@ final class HttpServiceMethod {
 			}
 
 			if (this.blockForOptional) {
-				return (this.blockTimeout != null ?
+				return this.blockTimeout != null ?
 						((Mono<?>) responsePublisher).blockOptional(this.blockTimeout) :
-						((Mono<?>) responsePublisher).blockOptional());
+						((Mono<?>) responsePublisher).blockOptional();
 			}
 			else {
-				return (this.blockTimeout != null ?
+				return this.blockTimeout != null ?
 						((Mono<?>) responsePublisher).block(this.blockTimeout) :
-						((Mono<?>) responsePublisher).block());
+						((Mono<?>) responsePublisher).block();
 			}
 		}
 
@@ -432,7 +432,7 @@ final class HttpServiceMethod {
 
 			ReactiveAdapter reactiveAdapter = client.getReactiveAdapterRegistry().getAdapter(returnType);
 
-			MethodParameter actualParam = (reactiveAdapter != null ? returnParam.nested() : returnParam.nestedIfOptional());
+			MethodParameter actualParam = reactiveAdapter != null ? returnParam.nested() : returnParam.nestedIfOptional();
 			Class<?> actualType = isSuspending ? actualParam.getParameterType() : actualParam.getNestedParameterType();
 
 			Function<HttpRequestValues, Publisher<?>> responseFunction;
@@ -501,9 +501,9 @@ final class HttpServiceMethod {
 					ParameterizedTypeReference.forType(isSuspending ? methodParam.getGenericParameterType() :
 							methodParam.getNestedGenericParameterType());
 
-			return (reactiveAdapter != null && reactiveAdapter.isMultiValue() ?
+			return reactiveAdapter != null && reactiveAdapter.isMultiValue() ?
 					request -> client.exchangeForBodyFlux(request, bodyType) :
-					request -> client.exchangeForBodyMono(request, bodyType));
+					request -> client.exchangeForBodyMono(request, bodyType);
 		}
 	}
 

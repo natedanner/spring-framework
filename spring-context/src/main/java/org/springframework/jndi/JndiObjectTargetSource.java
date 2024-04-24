@@ -124,7 +124,7 @@ public class JndiObjectTargetSource extends JndiObjectLocator implements TargetS
 
 	@Override
 	public boolean isStatic() {
-		return (this.cachedObject != null);
+		return this.cachedObject != null;
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class JndiObjectTargetSource extends JndiObjectLocator implements TargetS
 	public Object getTarget() {
 		try {
 			if (this.lookupOnStartup || !this.cache) {
-				return (this.cachedObject != null ? this.cachedObject : lookup());
+				return this.cachedObject != null ? this.cachedObject : lookup();
 			}
 			else {
 				synchronized (this) {

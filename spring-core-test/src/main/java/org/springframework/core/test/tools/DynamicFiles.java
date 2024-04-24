@@ -103,7 +103,7 @@ final class DynamicFiles<F extends DynamicFile> implements Iterable<F> {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof DynamicFiles<?> that && this.files.equals(that.files)));
+		return this == other || (other instanceof DynamicFiles<?> that && this.files.equals(that.files));
 	}
 
 	@Override

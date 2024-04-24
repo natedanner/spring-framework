@@ -115,15 +115,15 @@ public class ReflectiveMethodResolver implements MethodResolver {
 
 		try {
 			TypeConverter typeConverter = context.getTypeConverter();
-			Class<?> type = (targetObject instanceof Class<?> clazz ? clazz : targetObject.getClass());
+			Class<?> type = targetObject instanceof Class<?> clazz ? clazz : targetObject.getClass();
 			ArrayList<Method> methods = new ArrayList<>(getMethods(type, targetObject));
 			methods.removeIf(method -> !method.getName().equals(name));
 
 			// If a filter is registered for this type, call it
-			MethodFilter filter = (this.filters != null ? this.filters.get(type) : null);
+			MethodFilter filter = this.filters != null ? this.filters.get(type) : null;
 			if (filter != null) {
 				List<Method> filtered = filter.filter(methods);
-				methods = (filtered instanceof ArrayList<Method> arrayList ? arrayList : new ArrayList<>(filtered));
+				methods = filtered instanceof ArrayList<Method> arrayList ? arrayList : new ArrayList<>(filtered);
 			}
 
 			// Sort methods into a sensible order

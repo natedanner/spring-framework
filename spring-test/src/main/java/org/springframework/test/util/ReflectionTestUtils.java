@@ -332,7 +332,7 @@ public abstract class ReflectionTestUtils {
 	public static void invokeSetterMethod(Object target, String name, @Nullable Object value, @Nullable Class<?> type) {
 		Assert.notNull(target, "Target object must not be null");
 		Assert.hasText(name, "Method name must not be empty");
-		Class<?>[] paramTypes = (type != null ? new Class<?>[] {type} : null);
+		Class<?>[] paramTypes = type != null ? new Class<?>[] {type} : null;
 
 		String setterMethodName = name;
 		if (!name.startsWith(SETTER_PREFIX)) {

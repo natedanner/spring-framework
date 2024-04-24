@@ -75,7 +75,7 @@ public interface ObjectProvider<T> extends ObjectFactory<T>, Iterable<T> {
 	 */
 	default T getIfAvailable(Supplier<T> defaultSupplier) throws BeansException {
 		T dependency = getIfAvailable();
-		return (dependency != null ? dependency : defaultSupplier.get());
+		return dependency != null ? dependency : defaultSupplier.get();
 	}
 
 	/**
@@ -119,7 +119,7 @@ public interface ObjectProvider<T> extends ObjectFactory<T>, Iterable<T> {
 	 */
 	default T getIfUnique(Supplier<T> defaultSupplier) throws BeansException {
 		T dependency = getIfUnique();
-		return (dependency != null ? dependency : defaultSupplier.get());
+		return dependency != null ? dependency : defaultSupplier.get();
 	}
 
 	/**

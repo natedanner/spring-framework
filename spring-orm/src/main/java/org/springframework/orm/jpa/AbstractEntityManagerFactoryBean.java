@@ -362,8 +362,8 @@ public abstract class AbstractEntityManagerFactoryBean implements
 				this.persistenceProvider = jpaVendorAdapter.getPersistenceProvider();
 			}
 			PersistenceUnitInfo pui = getPersistenceUnitInfo();
-			Map<String, ?> vendorPropertyMap = (pui != null ? jpaVendorAdapter.getJpaPropertyMap(pui) :
-					jpaVendorAdapter.getJpaPropertyMap());
+			Map<String, ?> vendorPropertyMap = pui != null ? jpaVendorAdapter.getJpaPropertyMap(pui) :
+					jpaVendorAdapter.getJpaPropertyMap();
 			if (!CollectionUtils.isEmpty(vendorPropertyMap)) {
 				vendorPropertyMap.forEach((key, value) -> {
 					if (!this.jpaPropertyMap.containsKey(key)) {
@@ -486,13 +486,13 @@ public abstract class AbstractEntityManagerFactoryBean implements
 		if (method.getDeclaringClass().isAssignableFrom(EntityManagerFactoryInfo.class)) {
 			return method.invoke(this, args);
 		}
-		else if (method.getName().equals("createEntityManager") && args != null && args.length > 0 &&
+		else if ("createEntityManager".equals(method.getName()) && args != null && args.length > 0 &&
 				args[0] == SynchronizationType.SYNCHRONIZED) {
 			// JPA 2.1's createEntityManager(SynchronizationType, Map)
 			// Redirect to plain createEntityManager and add synchronization semantics through Spring proxy
-			EntityManager rawEntityManager = (args.length > 1 ?
+			EntityManager rawEntityManager = args.length > 1 ?
 					getNativeEntityManagerFactory().createEntityManager((Map<?, ?>) args[1]) :
-					getNativeEntityManagerFactory().createEntityManager());
+					getNativeEntityManagerFactory().createEntityManager();
 			postProcessEntityManager(rawEntityManager);
 			return ExtendedEntityManagerCreator.createApplicationManagedEntityManager(rawEntityManager, this, true);
 		}
@@ -547,8 +547,8 @@ public abstract class AbstractEntityManagerFactoryBean implements
 	@Nullable
 	public DataAccessException translateExceptionIfPossible(RuntimeException ex) {
 		JpaDialect jpaDialect = getJpaDialect();
-		return (jpaDialect != null ? jpaDialect.translateExceptionIfPossible(ex) :
-				EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(ex));
+		return jpaDialect != null ? jpaDialect.translateExceptionIfPossible(ex) :
+				EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(ex);
 	}
 
 	@Override
@@ -579,9 +579,9 @@ public abstract class AbstractEntityManagerFactoryBean implements
 
 	@Override
 	public EntityManager createNativeEntityManager(@Nullable Map<?, ?> properties) {
-		EntityManager rawEntityManager = (!CollectionUtils.isEmpty(properties) ?
-				getNativeEntityManagerFactory().createEntityManager(properties) :
-				getNativeEntityManagerFactory().createEntityManager());
+		EntityManager rawEntityManager = CollectionUtils.isEmpty(properties) ?
+				getNativeEntityManagerFactory().createEntityManager() :
+				getNativeEntityManagerFactory().createEntityManager(properties);
 		postProcessEntityManager(rawEntityManager);
 		return rawEntityManager;
 	}
@@ -631,7 +631,7 @@ public abstract class AbstractEntityManagerFactoryBean implements
 
 	@Override
 	public Class<? extends EntityManagerFactory> getObjectType() {
-		return (this.entityManagerFactory != null ? this.entityManagerFactory.getClass() : EntityManagerFactory.class);
+		return this.entityManagerFactory != null ? this.entityManagerFactory.getClass() : EntityManagerFactory.class;
 	}
 
 	@Override
@@ -713,7 +713,7 @@ public abstract class AbstractEntityManagerFactoryBean implements
 			switch (method.getName()) {
 				case "equals" -> {
 					// Only consider equal when proxies are identical.
-					return (proxy == args[0]);
+					return proxy == args[0];
 				}
 				case "hashCode" -> {
 					// Use hashCode of EntityManagerFactory proxy.

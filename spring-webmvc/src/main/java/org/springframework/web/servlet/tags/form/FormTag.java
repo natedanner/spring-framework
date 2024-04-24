@@ -370,7 +370,7 @@ public class FormTag extends AbstractHtmlElementTag {
 	 * <p>May be a runtime expression.
 	 */
 	public void setAction(@Nullable String action) {
-		this.action = (action != null ? action : "");
+		this.action = action != null ? action : "";
 	}
 
 	/**
@@ -530,7 +530,7 @@ public class FormTag extends AbstractHtmlElementTag {
 	 * Determine if the HTTP method is supported by browsers (i.e. GET or POST).
 	 */
 	protected boolean isMethodBrowserSupported(String method) {
-		return ("get".equalsIgnoreCase(method) || "post".equalsIgnoreCase(method));
+		return "get".equalsIgnoreCase(method) || "post".equalsIgnoreCase(method);
 	}
 
 
@@ -583,7 +583,7 @@ public class FormTag extends AbstractHtmlElementTag {
 	}
 
 	private String getHttpMethod() {
-		return (isMethodBrowserSupported(getMethod()) ? getMethod() : DEFAULT_METHOD);
+		return isMethodBrowserSupported(getMethod()) ? getMethod() : DEFAULT_METHOD;
 	}
 
 	private void assertHttpMethod(String method) {

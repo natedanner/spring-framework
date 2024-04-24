@@ -73,7 +73,7 @@ abstract class AbstractMockWebServerTests {
 
 
 	private MockResponse getRequest(RecordedRequest request, byte[] body, String contentType) {
-		if (request.getMethod().equals("OPTIONS")) {
+		if ("OPTIONS".equals(request.getMethod())) {
 			return new MockResponse().setResponseCode(200).setHeader("Allow", "GET, OPTIONS, HEAD, TRACE");
 		}
 		Buffer buf = new Buffer();
@@ -239,58 +239,58 @@ abstract class AbstractMockWebServerTests {
 			try {
 				byte[] helloWorldBytes = helloWorld.getBytes(StandardCharsets.UTF_8);
 
-				if (request.getPath().equals("/get")) {
+				if ("/get".equals(request.getPath())) {
 					return getRequest(request, helloWorldBytes, textContentType.toString());
 				}
-				else if (request.getPath().equals("/get/nothing")) {
+				else if ("/get/nothing".equals(request.getPath())) {
 					return getRequest(request, new byte[0], textContentType.toString());
 				}
-				else if (request.getPath().equals("/get/nocontenttype")) {
+				else if ("/get/nocontenttype".equals(request.getPath())) {
 					return getRequest(request, helloWorldBytes, null);
 				}
-				else if (request.getPath().equals("/post")) {
+				else if ("/post".equals(request.getPath())) {
 					return postRequest(request, helloWorld, "/post/1", textContentType.toString(), helloWorldBytes);
 				}
-				else if (request.getPath().equals("/jsonpost")) {
+				else if ("/jsonpost".equals(request.getPath())) {
 					return jsonPostRequest(request, "/jsonpost/1", "application/json; charset=utf-8");
 				}
-				else if (request.getPath().equals("/status/nocontent")) {
+				else if ("/status/nocontent".equals(request.getPath())) {
 					return new MockResponse().setResponseCode(204);
 				}
-				else if (request.getPath().equals("/status/notmodified")) {
+				else if ("/status/notmodified".equals(request.getPath())) {
 					return new MockResponse().setResponseCode(304);
 				}
-				else if (request.getPath().equals("/status/notfound")) {
+				else if ("/status/notfound".equals(request.getPath())) {
 					return new MockResponse().setResponseCode(404);
 				}
-				else if (request.getPath().equals("/status/badrequest")) {
+				else if ("/status/badrequest".equals(request.getPath())) {
 					return new MockResponse().setResponseCode(400);
 				}
-				else if (request.getPath().equals("/status/server")) {
+				else if ("/status/server".equals(request.getPath())) {
 					return new MockResponse().setResponseCode(500);
 				}
 				else if (request.getPath().contains("/uri/")) {
 					return new MockResponse().setBody(request.getPath()).setHeader(CONTENT_TYPE, "text/plain");
 				}
-				else if (request.getPath().equals("/multipartFormData")) {
+				else if ("/multipartFormData".equals(request.getPath())) {
 					return multipartFormDataRequest(request);
 				}
-				else if (request.getPath().equals("/multipartMixed")) {
+				else if ("/multipartMixed".equals(request.getPath())) {
 					return multipartMixedRequest(request);
 				}
-				else if (request.getPath().equals("/multipartRelated")) {
+				else if ("/multipartRelated".equals(request.getPath())) {
 					return multipartRelatedRequest(request);
 				}
-				else if (request.getPath().equals("/form")) {
+				else if ("/form".equals(request.getPath())) {
 					return formRequest(request);
 				}
-				else if (request.getPath().equals("/delete")) {
+				else if ("/delete".equals(request.getPath())) {
 					return new MockResponse().setResponseCode(200);
 				}
-				else if (request.getPath().equals("/patch")) {
+				else if ("/patch".equals(request.getPath())) {
 					return patchRequest(request, helloWorld, textContentType.toString(), helloWorldBytes);
 				}
-				else if (request.getPath().equals("/put")) {
+				else if ("/put".equals(request.getPath())) {
 					return putRequest(request, helloWorld);
 				}
 				return new MockResponse().setResponseCode(404);

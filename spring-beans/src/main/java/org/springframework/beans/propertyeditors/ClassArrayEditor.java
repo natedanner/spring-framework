@@ -57,7 +57,7 @@ public class ClassArrayEditor extends PropertyEditorSupport {
 	 * (or pass {@code null} for the thread context {@code ClassLoader})
 	 */
 	public ClassArrayEditor(@Nullable ClassLoader classLoader) {
-		this.classLoader = (classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader());
+		this.classLoader = classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader();
 	}
 
 

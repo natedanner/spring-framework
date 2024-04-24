@@ -134,8 +134,8 @@ public class Selection extends SpelNodeImpl {
 		}
 
 		if (operand instanceof Iterable || ObjectUtils.isArray(operand)) {
-			Iterable<?> data = (operand instanceof Iterable<?> iterable ?
-					iterable : Arrays.asList(ObjectUtils.toObjectArray(operand)));
+			Iterable<?> data = operand instanceof Iterable<?> iterable ?
+					iterable : Arrays.asList(ObjectUtils.toObjectArray(operand));
 
 			List<Object> result = new ArrayList<>();
 			int index = 0;

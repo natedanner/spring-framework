@@ -35,16 +35,16 @@ import org.springframework.transaction.TransactionTimedOutException;
  */
 public abstract class ResourceHolderSupport implements ResourceHolder {
 
-	private boolean synchronizedWithTransaction = false;
+	private boolean synchronizedWithTransaction;
 
-	private boolean rollbackOnly = false;
+	private boolean rollbackOnly;
 
 	@Nullable
 	private Date deadline;
 
-	private int referenceCount = 0;
+	private int referenceCount;
 
-	private boolean isVoid = false;
+	private boolean isVoid;
 
 
 	/**
@@ -106,7 +106,7 @@ public abstract class ResourceHolderSupport implements ResourceHolder {
 	 * Return whether this object has an associated timeout.
 	 */
 	public boolean hasTimeout() {
-		return (this.deadline != null);
+		return this.deadline != null;
 	}
 
 	/**
@@ -176,7 +176,7 @@ public abstract class ResourceHolderSupport implements ResourceHolder {
 	 * Return whether there are still open references to this holder.
 	 */
 	public boolean isOpen() {
-		return (this.referenceCount > 0);
+		return this.referenceCount > 0;
 	}
 
 	/**

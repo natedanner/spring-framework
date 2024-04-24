@@ -58,8 +58,8 @@ public final class SpringProperties {
 	static {
 		try {
 			ClassLoader cl = SpringProperties.class.getClassLoader();
-			URL url = (cl != null ? cl.getResource(PROPERTIES_RESOURCE_LOCATION) :
-					ClassLoader.getSystemResource(PROPERTIES_RESOURCE_LOCATION));
+			URL url = cl != null ? cl.getResource(PROPERTIES_RESOURCE_LOCATION) :
+					ClassLoader.getSystemResource(PROPERTIES_RESOURCE_LOCATION);
 			if (url != null) {
 				try (InputStream is = url.openStream()) {
 					localProperties.load(is);

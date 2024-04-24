@@ -134,7 +134,7 @@ public class InstrumentationLoadTimeWeaver implements LoadTimeWeaver {
 	 * @see #getInstrumentation()
 	 */
 	public static boolean isInstrumentationAvailable() {
-		return (getInstrumentation() != null);
+		return getInstrumentation() != null;
 	}
 
 	/**

@@ -35,8 +35,8 @@ import static org.mockito.Mockito.verify;
 class MethodLocatingFactoryBeanTests {
 
 	private static final String BEAN_NAME = "string";
-	private MethodLocatingFactoryBean factory = new MethodLocatingFactoryBean();
-	private BeanFactory beanFactory = mock();
+	private final MethodLocatingFactoryBean factory = new MethodLocatingFactoryBean();
+	private final BeanFactory beanFactory = mock();
 
 
 	@Test

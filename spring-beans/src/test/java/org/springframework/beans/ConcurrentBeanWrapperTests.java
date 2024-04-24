@@ -42,7 +42,7 @@ class ConcurrentBeanWrapperTests {
 
 	private final Set<TestRun> set = ConcurrentHashMap.newKeySet();
 
-	private Throwable ex = null;
+	private Throwable ex;
 
 	@RepeatedTest(100)
 	void testSingleThread() {

@@ -107,8 +107,8 @@ public class ModuleResource extends AbstractResource {
 
 	@Override
 	public boolean equals(@Nullable Object obj) {
-		return (this == obj || (obj instanceof ModuleResource that &&
-				this.module.equals(that.module) && this.path.equals(that.path)));
+		return this == obj || (obj instanceof ModuleResource that &&
+				this.module.equals(that.module) && this.path.equals(that.path));
 	}
 
 	@Override

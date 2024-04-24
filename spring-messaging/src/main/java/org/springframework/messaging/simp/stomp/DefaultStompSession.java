@@ -216,7 +216,7 @@ public class DefaultStompSession implements ConnectionHandlingStompSession {
 
 	@Override
 	public boolean isConnected() {
-		return (this.connection != null);
+		return this.connection != null;
 	}
 
 	@Override
@@ -342,7 +342,7 @@ public class DefaultStompSession implements ConnectionHandlingStompSession {
 		String receiptId = checkOrAddReceipt(headers);
 		Receiptable receiptable = new ReceiptHandler(receiptId);
 
-		StompCommand command = (consumed ? StompCommand.ACK : StompCommand.NACK);
+		StompCommand command = consumed ? StompCommand.ACK : StompCommand.NACK;
 		StompHeaderAccessor accessor = createHeaderAccessor(command);
 		accessor.addNativeHeaders(headers);
 		Message<byte[]> message = createMessage(accessor, null);

@@ -68,10 +68,10 @@ public class Person {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof Person that &&
+		return this == other || (other instanceof Person that &&
 				ObjectUtils.nullSafeEquals(this.name, that.name) &&
 				ObjectUtils.nullSafeEquals(this.someDouble, that.someDouble) &&
-				ObjectUtils.nullSafeEquals(this.someBoolean, that.someBoolean)));
+				ObjectUtils.nullSafeEquals(this.someBoolean, that.someBoolean));
 	}
 
 	@Override

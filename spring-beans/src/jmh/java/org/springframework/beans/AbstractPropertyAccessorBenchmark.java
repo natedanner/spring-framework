@@ -54,7 +54,7 @@ public class AbstractPropertyAccessorBenchmark {
 		public void setup() {
 			this.target = new PrimitiveArrayBean();
 			this.input = new int[1024];
-			if (this.accessor.equals("DirectFieldAccessor")) {
+			if ("DirectFieldAccessor".equals(this.accessor)) {
 				this.propertyAccessor = new DirectFieldAccessor(this.target);
 			}
 			else {

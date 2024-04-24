@@ -20,7 +20,7 @@
 package org.springframework.messaging.protobuf;
 
 @SuppressWarnings("deprecation")
-public class OuterSample {
+public final class OuterSample {
   private OuterSample() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {

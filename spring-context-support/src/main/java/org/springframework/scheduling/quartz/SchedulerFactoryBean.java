@@ -199,17 +199,17 @@ public class SchedulerFactoryBean extends SchedulerAccessor implements FactoryBe
 	@Nullable
 	private JobFactory jobFactory;
 
-	private boolean jobFactorySet = false;
+	private boolean jobFactorySet;
 
 	private boolean autoStartup = true;
 
-	private int startupDelay = 0;
+	private int startupDelay;
 
 	private int phase = DEFAULT_PHASE;
 
-	private boolean exposeSchedulerInRepository = false;
+	private boolean exposeSchedulerInRepository;
 
-	private boolean waitForJobsToCompleteOnShutdown = false;
+	private boolean waitForJobsToCompleteOnShutdown;
 
 	@Nullable
 	private String beanName;
@@ -667,15 +667,15 @@ public class SchedulerFactoryBean extends SchedulerAccessor implements FactoryBe
 		// Override thread context ClassLoader to work around naive Quartz ClassLoadHelper loading.
 		Thread currentThread = Thread.currentThread();
 		ClassLoader threadContextClassLoader = currentThread.getContextClassLoader();
-		boolean overrideClassLoader = (this.resourceLoader != null &&
-				this.resourceLoader.getClassLoader() != threadContextClassLoader);
+		boolean overrideClassLoader = this.resourceLoader != null &&
+				this.resourceLoader.getClassLoader() != threadContextClassLoader;
 		if (overrideClassLoader) {
 			currentThread.setContextClassLoader(this.resourceLoader.getClassLoader());
 		}
 		try {
 			SchedulerRepository repository = SchedulerRepository.getInstance();
 			synchronized (repository) {
-				Scheduler existingScheduler = (schedulerName != null ? repository.lookup(schedulerName) : null);
+				Scheduler existingScheduler = schedulerName != null ? repository.lookup(schedulerName) : null;
 				Scheduler newScheduler = schedulerFactory.getScheduler();
 				if (newScheduler == existingScheduler) {
 					throw new IllegalStateException("Active Scheduler of name '" + schedulerName + "' already registered " +
@@ -779,7 +779,7 @@ public class SchedulerFactoryBean extends SchedulerAccessor implements FactoryBe
 
 	@Override
 	public Class<? extends Scheduler> getObjectType() {
-		return (this.scheduler != null ? this.scheduler.getClass() : Scheduler.class);
+		return this.scheduler != null ? this.scheduler.getClass() : Scheduler.class;
 	}
 
 	@Override

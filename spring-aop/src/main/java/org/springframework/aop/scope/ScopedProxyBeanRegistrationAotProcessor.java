@@ -74,7 +74,7 @@ class ScopedProxyBeanRegistrationAotProcessor implements BeanRegistrationAotProc
 	@Nullable
 	private String getTargetBeanName(BeanDefinition beanDefinition) {
 		Object value = beanDefinition.getPropertyValues().get("targetBeanName");
-		return (value instanceof String targetBeanName ? targetBeanName : null);
+		return value instanceof String targetBeanName ? targetBeanName : null;
 	}
 
 	@Nullable

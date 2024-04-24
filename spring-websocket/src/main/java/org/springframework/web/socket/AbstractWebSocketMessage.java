@@ -76,8 +76,8 @@ public abstract class AbstractWebSocketMessage<T> implements WebSocketMessage<T>
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof AbstractWebSocketMessage<?> that &&
-				ObjectUtils.nullSafeEquals(this.payload, that.payload)));
+		return this == other || (other instanceof AbstractWebSocketMessage<?> that &&
+				ObjectUtils.nullSafeEquals(this.payload, that.payload));
 	}
 
 	@Override

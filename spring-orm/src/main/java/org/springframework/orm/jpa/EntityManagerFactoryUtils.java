@@ -263,7 +263,7 @@ public abstract class EntityManagerFactoryUtils {
 			}
 		}
 		if (em == null) {
-			em = (!CollectionUtils.isEmpty(properties) ? emf.createEntityManager(properties) : emf.createEntityManager());
+			em = CollectionUtils.isEmpty(properties) ? emf.createEntityManager() : emf.createEntityManager(properties);
 		}
 
 		try {
@@ -454,7 +454,7 @@ public abstract class EntityManagerFactoryUtils {
 
 			super(emHolder, emf);
 			this.transactionData = txData;
-			this.jpaDialect = (emf instanceof EntityManagerFactoryInfo emfInfo ? emfInfo.getJpaDialect() : null);
+			this.jpaDialect = emf instanceof EntityManagerFactoryInfo emfInfo ? emfInfo.getJpaDialect() : null;
 			this.newEntityManager = newEm;
 		}
 

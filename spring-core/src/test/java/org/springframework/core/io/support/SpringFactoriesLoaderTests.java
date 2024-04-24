@@ -373,7 +373,7 @@ class SpringFactoriesLoaderTests {
 			}
 		}
 
-		static class SinglePrivateConstructor {
+		static final class SinglePrivateConstructor {
 
 			private SinglePrivateConstructor(String arg) {
 			}

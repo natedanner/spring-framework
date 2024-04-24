@@ -120,7 +120,7 @@ public class DefaultServerRequestObservationConvention implements ServerRequestO
 		if (context.isConnectionAborted() && (context.getResponse() == null || !context.getResponse().isCommitted())) {
 			return STATUS_UNKNOWN;
 		}
-		return (context.getResponse() != null && context.getResponse().getStatusCode() != null) ?
+		return context.getResponse() != null && context.getResponse().getStatusCode() != null ?
 				KeyValue.of(LowCardinalityKeyNames.STATUS, Integer.toString(context.getResponse().getStatusCode().value())) :
 				STATUS_UNKNOWN;
 	}

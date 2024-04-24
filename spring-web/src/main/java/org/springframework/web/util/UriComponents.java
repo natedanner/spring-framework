@@ -297,11 +297,11 @@ public abstract class UriComponents implements Serializable {
 
 	private static String getVariableName(String match) {
 		int colonIdx = match.indexOf(':');
-		return (colonIdx != -1 ? match.substring(0, colonIdx) : match);
+		return colonIdx != -1 ? match.substring(0, colonIdx) : match;
 	}
 
 	private static String getVariableValueAsString(@Nullable Object variableValue) {
-		return (variableValue != null ? variableValue.toString() : "");
+		return variableValue != null ? variableValue.toString() : "";
 	}
 
 

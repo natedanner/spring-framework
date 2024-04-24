@@ -146,7 +146,7 @@ class ChannelSendOperator<T> extends Mono<Void> implements Scannable {
 		private Throwable error;
 
 		/** Cached onComplete signal before readyToWrite. */
-		private boolean completed = false;
+		private boolean completed;
 
 		/** Recursive demand while emitting cached signals. */
 		private long demandBeforeReadyToWrite;

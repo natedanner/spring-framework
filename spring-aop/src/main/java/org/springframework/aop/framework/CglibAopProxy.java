@@ -215,7 +215,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 			// Generate the proxy class and create a proxy instance.
 			// ProxyCallbackFilter has method introspection capability with Advisor access.
 			try {
-				return (classOnly ? createProxyClass(enhancer) : createProxyClassAndInstance(enhancer, callbacks));
+				return classOnly ? createProxyClass(enhancer) : createProxyClassAndInstance(enhancer, callbacks);
 			}
 			finally {
 				// Reduce ProxyCallbackFilter to key-only state for its class cache role
@@ -242,9 +242,9 @@ class CglibAopProxy implements AopProxy, Serializable {
 	protected Object createProxyClassAndInstance(Enhancer enhancer, Callback[] callbacks) {
 		enhancer.setInterceptDuringConstruction(false);
 		enhancer.setCallbacks(callbacks);
-		return (this.constructorArgs != null && this.constructorArgTypes != null ?
+		return this.constructorArgs != null && this.constructorArgTypes != null ?
 				enhancer.create(this.constructorArgTypes, this.constructorArgs) :
-				enhancer.create());
+				enhancer.create();
 	}
 
 	/**
@@ -316,20 +316,20 @@ class CglibAopProxy implements AopProxy, Serializable {
 		// unadvised but can return this). May be required to expose the proxy.
 		Callback targetInterceptor;
 		if (exposeProxy) {
-			targetInterceptor = (isStatic ?
+			targetInterceptor = isStatic ?
 					new StaticUnadvisedExposedInterceptor(this.advised.getTargetSource().getTarget()) :
-					new DynamicUnadvisedExposedInterceptor(this.advised.getTargetSource()));
+					new DynamicUnadvisedExposedInterceptor(this.advised.getTargetSource());
 		}
 		else {
-			targetInterceptor = (isStatic ?
+			targetInterceptor = isStatic ?
 					new StaticUnadvisedInterceptor(this.advised.getTargetSource().getTarget()) :
-					new DynamicUnadvisedInterceptor(this.advised.getTargetSource()));
+					new DynamicUnadvisedInterceptor(this.advised.getTargetSource());
 		}
 
 		// Choose a "direct to target" dispatcher (used for
 		// unadvised calls to static targets that cannot return this).
-		Callback targetDispatcher = (isStatic ?
-				new StaticDispatcher(this.advised.getTargetSource().getTarget()) : new SerializableNoOp());
+		Callback targetDispatcher = isStatic ?
+				new StaticDispatcher(this.advised.getTargetSource().getTarget()) : new SerializableNoOp();
 
 		Callback[] mainCallbacks = new Callback[] {
 				aopInterceptor,  // for normal advice
@@ -378,8 +378,8 @@ class CglibAopProxy implements AopProxy, Serializable {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof CglibAopProxy that &&
-				AopProxyUtils.equalsInProxy(this.advised, that.advised)));
+		return this == other || (other instanceof CglibAopProxy that &&
+				AopProxyUtils.equalsInProxy(this.advised, that.advised));
 	}
 
 	@Override
@@ -611,8 +611,8 @@ class CglibAopProxy implements AopProxy, Serializable {
 			}
 			if (other instanceof Factory factory) {
 				Callback callback = factory.getCallback(INVOKE_EQUALS);
-				return (callback instanceof EqualsInterceptor that &&
-						AopProxyUtils.equalsInProxy(this.advised, that.advised));
+				return callback instanceof EqualsInterceptor that &&
+						AopProxyUtils.equalsInProxy(this.advised, that.advised);
 			}
 			return false;
 		}
@@ -699,7 +699,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 				}
 				// Get as late as possible to minimize the time we "own" the target, in case it comes from a pool...
 				target = targetSource.getTarget();
-				Class<?> targetClass = (target != null ? target.getClass() : null);
+				Class<?> targetClass = target != null ? target.getClass() : null;
 				List<Object> chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass);
 				Object retVal;
 				// Check whether we only have one InvokerInterceptor: that is,
@@ -731,9 +731,9 @@ class CglibAopProxy implements AopProxy, Serializable {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other ||
+			return this == other ||
 					(other instanceof DynamicAdvisedInterceptor dynamicAdvisedInterceptor &&
-							this.advised.equals(dynamicAdvisedInterceptor.advised)));
+							this.advised.equals(dynamicAdvisedInterceptor.advised));
 		}
 
 		/**
@@ -891,7 +891,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 					}
 					// We know that we are optimizing so we can use the FixedStaticChainInterceptors.
 					int index = this.fixedInterceptorMap.get(method);
-					return (index + this.fixedInterceptorOffset);
+					return index + this.fixedInterceptorOffset;
 				}
 				else {
 					if (logger.isTraceEnabled()) {
@@ -929,14 +929,14 @@ class CglibAopProxy implements AopProxy, Serializable {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof ProxyCallbackFilter that &&
+			return this == other || (other instanceof ProxyCallbackFilter that &&
 					this.advised.getAdvisorKey().equals(that.advised.getAdvisorKey()) &&
 					AopProxyUtils.equalsProxiedInterfaces(this.advised, that.advised) &&
 					ObjectUtils.nullSafeEquals(this.advised.getTargetClass(), that.advised.getTargetClass()) &&
 					this.advised.getTargetSource().isStatic() == that.advised.getTargetSource().isStatic() &&
 					this.advised.isFrozen() == that.advised.isFrozen() &&
 					this.advised.isExposeProxy() == that.advised.isExposeProxy() &&
-					this.advised.isOpaque() == that.advised.isOpaque()));
+					this.advised.isOpaque() == that.advised.isOpaque());
 		}
 
 		@Override

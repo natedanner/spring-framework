@@ -171,8 +171,8 @@ public class SQLStateSQLExceptionTranslator extends AbstractFallbackSQLException
 	 * @param errorCode the error code
 	 */
 	static boolean indicatesDuplicateKey(@Nullable String sqlState, int errorCode) {
-		return ("23505".equals(sqlState) ||
-				("23000".equals(sqlState) && DUPLICATE_KEY_ERROR_CODES.contains(errorCode)));
+		return "23505".equals(sqlState) ||
+				("23000".equals(sqlState) && DUPLICATE_KEY_ERROR_CODES.contains(errorCode));
 	}
 
 	/**

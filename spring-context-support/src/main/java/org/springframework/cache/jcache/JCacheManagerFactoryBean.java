@@ -93,7 +93,7 @@ public class JCacheManagerFactoryBean
 
 	@Override
 	public Class<?> getObjectType() {
-		return (this.cacheManager != null ? this.cacheManager.getClass() : CacheManager.class);
+		return this.cacheManager != null ? this.cacheManager.getClass() : CacheManager.class;
 	}
 
 	@Override

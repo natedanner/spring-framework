@@ -111,7 +111,7 @@ public class ObjectRetrievalFailureException extends DataRetrievalFailureExcepti
 	 */
 	@Nullable
 	public Class<?> getPersistentClass() {
-		return (this.persistentClass instanceof Class<?> clazz ? clazz : null);
+		return this.persistentClass instanceof Class<?> clazz ? clazz : null;
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class ObjectRetrievalFailureException extends DataRetrievalFailureExcepti
 		if (this.persistentClass instanceof Class<?> clazz) {
 			return clazz.getName();
 		}
-		return (this.persistentClass != null ? this.persistentClass.toString() : null);
+		return this.persistentClass != null ? this.persistentClass.toString() : null;
 	}
 
 	/**

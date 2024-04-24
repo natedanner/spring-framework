@@ -86,7 +86,7 @@ public class R2dbcTransactionManager extends AbstractReactiveTransactionManager 
 	@Nullable
 	private ConnectionFactory connectionFactory;
 
-	private boolean enforceReadOnly = false;
+	private boolean enforceReadOnly;
 
 
 	/**
@@ -519,7 +519,7 @@ public class R2dbcTransactionManager extends AbstractReactiveTransactionManager 
 		}
 
 		public boolean hasConnectionHolder() {
-			return (this.connectionHolder != null);
+			return this.connectionHolder != null;
 		}
 
 		public void setMustRestoreAutoCommit(boolean mustRestoreAutoCommit) {
@@ -531,11 +531,11 @@ public class R2dbcTransactionManager extends AbstractReactiveTransactionManager 
 		}
 
 		public boolean isTransactionActive() {
-			return (this.connectionHolder != null && this.connectionHolder.isTransactionActive());
+			return this.connectionHolder != null && this.connectionHolder.isTransactionActive();
 		}
 
 		public boolean hasSavepoint() {
-			return (this.savepointName != null);
+			return this.savepointName != null;
 		}
 
 		public Mono<Void> createSavepoint() {
@@ -555,16 +555,16 @@ public class R2dbcTransactionManager extends AbstractReactiveTransactionManager 
 		}
 
 		public Mono<Void> commit() {
-			return (hasSavepoint() ? Mono.empty() :
-					Mono.from(getConnectionHolder().getConnection().commitTransaction()));
+			return hasSavepoint() ? Mono.empty() :
+					Mono.from(getConnectionHolder().getConnection().commitTransaction());
 		}
 
 		public Mono<Void> rollback() {
 			Connection connection = getConnectionHolder().getConnection();
 			String currentSavepoint = this.savepointName;
-			return (currentSavepoint != null ?
+			return currentSavepoint != null ?
 					Mono.from(connection.rollbackTransactionToSavepoint(currentSavepoint)) :
-					Mono.from(connection.rollbackTransaction()));
+					Mono.from(connection.rollbackTransaction());
 		}
 
 		public void setRollbackOnly() {

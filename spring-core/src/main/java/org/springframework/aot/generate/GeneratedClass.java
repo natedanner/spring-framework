@@ -90,7 +90,7 @@ public final class GeneratedClass {
 	private String generateSequencedMethodName(MethodName name) {
 		int sequence = this.methodNameSequenceGenerator
 				.computeIfAbsent(name, key -> new AtomicInteger()).getAndIncrement();
-		return (sequence > 0 ? name.toString() + sequence : name.toString());
+		return sequence > 0 ? name.toString() + sequence : name.toString();
 	}
 
 	/**

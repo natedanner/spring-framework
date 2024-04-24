@@ -30,7 +30,7 @@ public abstract class NativeDetector {
 	@Nullable
 	private static final String imageCode = System.getProperty("org.graalvm.nativeimage.imagecode");
 
-	private static final boolean inNativeImage = (imageCode != null);
+	private static final boolean inNativeImage = imageCode != null;
 
 
 	/**

@@ -82,23 +82,23 @@ public class StandardClassMetadata implements ClassMetadata {
 
 	@Override
 	public boolean isIndependent() {
-		return (!hasEnclosingClass() ||
+		return !hasEnclosingClass() ||
 				(this.introspectedClass.getDeclaringClass() != null &&
-						Modifier.isStatic(this.introspectedClass.getModifiers())));
+						Modifier.isStatic(this.introspectedClass.getModifiers()));
 	}
 
 	@Override
 	@Nullable
 	public String getEnclosingClassName() {
 		Class<?> enclosingClass = this.introspectedClass.getEnclosingClass();
-		return (enclosingClass != null ? enclosingClass.getName() : null);
+		return enclosingClass != null ? enclosingClass.getName() : null;
 	}
 
 	@Override
 	@Nullable
 	public String getSuperClassName() {
 		Class<?> superClass = this.introspectedClass.getSuperclass();
-		return (superClass != null ? superClass.getName() : null);
+		return superClass != null ? superClass.getName() : null;
 	}
 
 	@Override
@@ -123,8 +123,8 @@ public class StandardClassMetadata implements ClassMetadata {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof StandardClassMetadata that &&
-				getIntrospectedClass().equals(that.getIntrospectedClass())));
+		return this == other || (other instanceof StandardClassMetadata that &&
+				getIntrospectedClass().equals(that.getIntrospectedClass()));
 	}
 
 	@Override

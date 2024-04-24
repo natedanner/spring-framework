@@ -38,7 +38,7 @@ public class InterceptFieldTransformer extends ClassEmitterTransformer {
     private static final Signature ENABLED_GET =
       new Signature("getInterceptFieldCallback", CALLBACK, new Type[0]);
 
-    private InterceptFieldFilter filter;
+	private final InterceptFieldFilter filter;
 
     public InterceptFieldTransformer(InterceptFieldFilter filter) {
         this.filter = filter;
@@ -150,20 +150,18 @@ public class InterceptFieldTransformer extends ClassEmitterTransformer {
             @Override
 			public void visitFieldInsn(int opcode, String owner, String name, String desc) {
                 Type towner = TypeUtils.fromInternalName(owner);
-                switch (opcode) {
-                case Constants.GETFIELD:
-                    if (filter.acceptRead(towner, name)) {
-                        helper(towner, readMethodSig(name, desc));
-                        return;
-                    }
-                    break;
-                case Constants.PUTFIELD:
-                    if (filter.acceptWrite(towner, name)) {
-                        helper(towner, writeMethodSig(name, desc));
-                        return;
-                    }
-                    break;
-                }
+				if (opcode == Constants.GETFIELD) {
+					if (filter.acceptRead(towner, name)) {
+						helper(towner, readMethodSig(name, desc));
+						return;
+					}
+				}
+				else if (opcode == Constants.PUTFIELD) {
+					if (filter.acceptWrite(towner, name)) {
+						helper(towner, writeMethodSig(name, desc));
+						return;
+					}
+				}
                 super.visitFieldInsn(opcode, owner, name, desc);
             }
 
@@ -211,7 +209,7 @@ public class InterceptFieldTransformer extends ClassEmitterTransformer {
     }
 
     private static String callbackName(Type type) {
-        return (type == Constants.TYPE_OBJECT) ?
+        return type == Constants.TYPE_OBJECT ?
             "Object" :
             TypeUtils.upperFirst(TypeUtils.getClassName(type));
     }

@@ -74,7 +74,7 @@ class HttpMessageConverterTests {
 	}
 
 
-	private static class MyHttpMessageConverter<T> extends AbstractHttpMessageConverter<T> {
+	private static final class MyHttpMessageConverter<T> extends AbstractHttpMessageConverter<T> {
 
 		private MyHttpMessageConverter(MediaType supportedMediaType) {
 			super(supportedMediaType);

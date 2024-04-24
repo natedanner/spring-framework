@@ -48,17 +48,17 @@ class InternalPathPatternParser {
 	private int singleCharWildcardCount;
 
 	// Is the path pattern using * characters in a particular path element
-	private boolean wildcard = false;
+	private boolean wildcard;
 
 	// Is the construct {*...} being used in a particular path element
-	private boolean isCaptureTheRestVariable = false;
+	private boolean isCaptureTheRestVariable;
 
 	// Has the parser entered a {...} variable capture block in a particular
 	// path element
-	private boolean insideVariableCapture = false;
+	private boolean insideVariableCapture;
 
 	// How many variable captures are occurring in a particular path element
-	private int variableCaptureCount = 0;
+	private int variableCaptureCount;
 
 	// Start of the most recent path element in a particular path element
 	private int pathElementStart;
@@ -172,8 +172,8 @@ class InternalPathPatternParser {
 								Character.toString(ch));
 
 					}
-					else if ((this.pos > (this.variableCaptureStart + 1 + (this.isCaptureTheRestVariable ? 1 : 0)) &&
-							!Character.isJavaIdentifierPart(ch) && ch != '-')) {
+					else if (this.pos > (this.variableCaptureStart + 1 + (this.isCaptureTheRestVariable ? 1 : 0)) &&
+							!Character.isJavaIdentifierPart(ch) && ch != '-') {
 						throw new PatternParseException(this.pos, this.pathPatternData,
 								PatternMessage.ILLEGAL_CHARACTER_IN_CAPTURE_DESCRIPTOR,
 								Character.toString(ch));
@@ -250,7 +250,7 @@ class InternalPathPatternParser {
 			throw new PatternParseException(this.pos, this.pathPatternData,
 					PatternMessage.NO_MORE_DATA_EXPECTED_AFTER_CAPTURE_THE_REST);
 		}
-		return (this.pos + 3 == this.pathPatternLength);
+		return this.pos + 3 == this.pathPatternLength;
 	}
 
 	/**

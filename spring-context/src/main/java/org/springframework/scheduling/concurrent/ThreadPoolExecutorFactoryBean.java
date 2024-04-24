@@ -71,13 +71,13 @@ public class ThreadPoolExecutorFactoryBean extends ExecutorConfigurationSupport
 
 	private int keepAliveSeconds = 60;
 
-	private boolean allowCoreThreadTimeOut = false;
+	private boolean allowCoreThreadTimeOut;
 
-	private boolean prestartAllCoreThreads = false;
+	private boolean prestartAllCoreThreads;
 
 	private int queueCapacity = Integer.MAX_VALUE;
 
-	private boolean exposeUnconfigurableExecutor = false;
+	private boolean exposeUnconfigurableExecutor;
 
 	@Nullable
 	private ExecutorService exposedExecutor;
@@ -168,8 +168,8 @@ public class ThreadPoolExecutorFactoryBean extends ExecutorConfigurationSupport
 		}
 
 		// Wrap executor with an unconfigurable decorator.
-		this.exposedExecutor = (this.exposeUnconfigurableExecutor ?
-				Executors.unconfigurableExecutorService(executor) : executor);
+		this.exposedExecutor = this.exposeUnconfigurableExecutor ?
+				Executors.unconfigurableExecutorService(executor) : executor;
 
 		return executor;
 	}
@@ -231,7 +231,7 @@ public class ThreadPoolExecutorFactoryBean extends ExecutorConfigurationSupport
 
 	@Override
 	public Class<? extends ExecutorService> getObjectType() {
-		return (this.exposedExecutor != null ? this.exposedExecutor.getClass() : ExecutorService.class);
+		return this.exposedExecutor != null ? this.exposedExecutor.getClass() : ExecutorService.class;
 	}
 
 	@Override

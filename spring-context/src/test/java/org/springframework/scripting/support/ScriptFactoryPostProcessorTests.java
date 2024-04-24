@@ -220,13 +220,13 @@ class ScriptFactoryPostProcessorTests {
 		scriptedBeanBuilder.addConstructorArgValue(DELEGATING_SCRIPT);
 		scriptedBeanBuilder.addPropertyReference("messenger", "messenger");
 
-		final String BEAN_WITH_DEPENDENCY_NAME = "needsMessenger";
-		ctx.registerBeanDefinition(BEAN_WITH_DEPENDENCY_NAME, scriptedBeanBuilder.getBeanDefinition());
+		final String beanWithDependencyName = "needsMessenger";
+		ctx.registerBeanDefinition(beanWithDependencyName, scriptedBeanBuilder.getBeanDefinition());
 		ctx.registerBeanDefinition("scriptProcessor", createScriptFactoryPostProcessor(true));
 		ctx.refresh();
 
-		Messenger messenger1 = (Messenger) ctx.getBean(BEAN_WITH_DEPENDENCY_NAME);
-		Messenger messenger2 = (Messenger) ctx.getBean(BEAN_WITH_DEPENDENCY_NAME);
+		Messenger messenger1 = (Messenger) ctx.getBean(beanWithDependencyName);
+		Messenger messenger2 = (Messenger) ctx.getBean(beanWithDependencyName);
 		assertThat(messenger2).isNotSameAs(messenger1);
 	}
 

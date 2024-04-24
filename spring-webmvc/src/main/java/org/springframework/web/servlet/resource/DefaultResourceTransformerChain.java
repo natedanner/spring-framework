@@ -50,7 +50,7 @@ class DefaultResourceTransformerChain implements ResourceTransformerChain {
 
 		Assert.notNull(resolverChain, "ResourceResolverChain is required");
 		this.resolverChain = resolverChain;
-		transformers = (transformers != null ? transformers : Collections.emptyList());
+		transformers = transformers != null ? transformers : Collections.emptyList();
 		DefaultResourceTransformerChain chain = initTransformerChain(resolverChain, new ArrayList<>(transformers));
 		this.transformer = chain.transformer;
 		this.nextChain = chain.nextChain;
@@ -86,8 +86,8 @@ class DefaultResourceTransformerChain implements ResourceTransformerChain {
 
 	@Override
 	public Resource transform(HttpServletRequest request, Resource resource) throws IOException {
-		return (this.transformer != null && this.nextChain != null ?
-				this.transformer.transform(request, resource, this.nextChain) : resource);
+		return this.transformer != null && this.nextChain != null ?
+				this.transformer.transform(request, resource, this.nextChain) : resource;
 	}
 
 }

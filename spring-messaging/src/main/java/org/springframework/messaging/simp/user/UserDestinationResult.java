@@ -66,7 +66,7 @@ public class UserDestinationResult {
 		this.targetDestinations = targetDestinations;
 		this.subscribeDestination = subscribeDestination;
 		this.user = user;
-		this.sessionIds = (sessionIds != null ? sessionIds : Collections.emptySet());
+		this.sessionIds = sessionIds != null ? sessionIds : Collections.emptySet();
 	}
 
 

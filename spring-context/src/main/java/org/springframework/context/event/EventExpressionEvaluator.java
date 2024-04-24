@@ -55,8 +55,8 @@ class EventExpressionEvaluator extends CachedExpressionEvaluator {
 
 		EventExpressionRootObject rootObject = new EventExpressionRootObject(event, args);
 		EvaluationContext evaluationContext = createEvaluationContext(rootObject, targetMethod, args);
-		return (Boolean.TRUE.equals(getExpression(this.conditionCache, methodKey, conditionExpression).getValue(
-				evaluationContext, Boolean.class)));
+		return Boolean.TRUE.equals(getExpression(this.conditionCache, methodKey, conditionExpression).getValue(
+				evaluationContext, Boolean.class));
 	}
 
 	private EvaluationContext createEvaluationContext(EventExpressionRootObject rootObject,

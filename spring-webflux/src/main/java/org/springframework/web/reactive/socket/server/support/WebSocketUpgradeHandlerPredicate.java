@@ -38,7 +38,7 @@ public class WebSocketUpgradeHandlerPredicate implements BiPredicate<Object, Ser
 		if (handler instanceof WebSocketHandler) {
 			HttpMethod method = exchange.getRequest().getMethod();
 			String header = exchange.getRequest().getHeaders().getUpgrade();
-			return (HttpMethod.GET.equals(method) && header != null && header.equalsIgnoreCase("websocket"));
+			return HttpMethod.GET.equals(method) && header != null && "websocket".equalsIgnoreCase(header);
 		}
 		return true;
 	}

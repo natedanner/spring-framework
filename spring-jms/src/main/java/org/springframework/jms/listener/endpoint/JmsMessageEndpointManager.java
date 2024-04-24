@@ -56,7 +56,7 @@ public class JmsMessageEndpointManager extends GenericMessageEndpointManager
 
 	private final JmsMessageEndpointFactory endpointFactory = new JmsMessageEndpointFactory();
 
-	private boolean messageListenerSet = false;
+	private boolean messageListenerSet;
 
 	private JmsActivationSpecFactory activationSpecFactory = new DefaultJmsActivationSpecFactory();
 
@@ -112,7 +112,7 @@ public class JmsMessageEndpointManager extends GenericMessageEndpointManager
 	 */
 	public void setActivationSpecFactory(@Nullable JmsActivationSpecFactory activationSpecFactory) {
 		this.activationSpecFactory =
-				(activationSpecFactory != null ? activationSpecFactory : new DefaultJmsActivationSpecFactory());
+				activationSpecFactory != null ? activationSpecFactory : new DefaultJmsActivationSpecFactory();
 	}
 
 	/**

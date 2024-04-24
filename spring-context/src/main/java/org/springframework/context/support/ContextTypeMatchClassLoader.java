@@ -86,7 +86,7 @@ class ContextTypeMatchClassLoader extends DecoratingClassLoader implements Smart
 
 	@Override
 	public boolean isClassReloadable(Class<?> clazz) {
-		return (clazz.getClassLoader() instanceof ContextOverridingClassLoader);
+		return clazz.getClassLoader() instanceof ContextOverridingClassLoader;
 	}
 
 	@Override

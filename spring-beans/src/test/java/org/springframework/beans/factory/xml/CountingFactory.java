@@ -24,7 +24,7 @@ import org.springframework.beans.testfixture.beans.TestBean;
  */
 public class CountingFactory implements FactoryBean<String> {
 
-	private static int factoryBeanInstanceCount = 0;
+	private static int factoryBeanInstanceCount;
 
 
 	/**

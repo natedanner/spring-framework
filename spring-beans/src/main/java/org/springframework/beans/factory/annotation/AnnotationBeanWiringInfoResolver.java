@@ -42,7 +42,7 @@ public class AnnotationBeanWiringInfoResolver implements BeanWiringInfoResolver 
 	public BeanWiringInfo resolveWiringInfo(Object beanInstance) {
 		Assert.notNull(beanInstance, "Bean instance must not be null");
 		Configurable annotation = beanInstance.getClass().getAnnotation(Configurable.class);
-		return (annotation != null ? buildWiringInfo(beanInstance, annotation) : null);
+		return annotation != null ? buildWiringInfo(beanInstance, annotation) : null;
 	}
 
 	/**

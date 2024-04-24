@@ -105,11 +105,7 @@ class MergedTestPropertySources {
 		if (!this.descriptors.equals(that.descriptors)) {
 			return false;
 		}
-		if (!Arrays.equals(this.properties, that.properties)) {
-			return false;
-		}
-
-		return true;
+		return !!Arrays.equals(this.properties, that.properties);
 	}
 
 	/**

@@ -193,8 +193,8 @@ public abstract class AbstractNestablePropertyAccessor extends AbstractPropertyA
 	public void setWrappedInstance(Object object, @Nullable String nestedPath, @Nullable Object rootObject) {
 		this.wrappedObject = ObjectUtils.unwrapOptional(object);
 		Assert.notNull(this.wrappedObject, "Target object must not be null");
-		this.nestedPath = (nestedPath != null ? nestedPath : "");
-		this.rootObject = (!this.nestedPath.isEmpty() ? rootObject : this.wrappedObject);
+		this.nestedPath = nestedPath != null ? nestedPath : "";
+		this.rootObject = this.nestedPath.isEmpty() ? this.wrappedObject : rootObject;
 		this.nestedPropertyAccessors = null;
 		this.typeConverterDelegate = new TypeConverterDelegate(this, this.wrappedObject);
 	}
@@ -456,7 +456,7 @@ public abstract class AbstractNestablePropertyAccessor extends AbstractPropertyA
 					valueToApply = convertForProperty(
 							tokens.canonicalName, oldValue, originalValue, ph.toTypeDescriptor());
 				}
-				pv.getOriginalPropertyValue().conversionNecessary = (valueToApply != originalValue);
+				pv.getOriginalPropertyValue().conversionNecessary = valueToApply != originalValue;
 			}
 			ph.setValue(valueToApply);
 		}
@@ -914,11 +914,11 @@ public abstract class AbstractNestablePropertyAccessor extends AbstractPropertyA
 				}
 			}
 			else if (Collection.class.isAssignableFrom(type)) {
-				TypeDescriptor elementDesc = (desc != null ? desc.getElementTypeDescriptor() : null);
+				TypeDescriptor elementDesc = desc != null ? desc.getElementTypeDescriptor() : null;
 				return CollectionFactory.createCollection(type, (elementDesc != null ? elementDesc.getType() : null), 16);
 			}
 			else if (Map.class.isAssignableFrom(type)) {
-				TypeDescriptor keyDesc = (desc != null ? desc.getMapKeyTypeDescriptor() : null);
+				TypeDescriptor keyDesc = desc != null ? desc.getMapKeyTypeDescriptor() : null;
 				return CollectionFactory.createMap(type, (keyDesc != null ? keyDesc.getType() : null), 16);
 			}
 			else {
@@ -977,22 +977,20 @@ public abstract class AbstractNestablePropertyAccessor extends AbstractPropertyA
 		int unclosedPrefixes = 0;
 		int length = propertyName.length();
 		for (int i = startIndex; i < length; i++) {
-			switch (propertyName.charAt(i)) {
-				case PropertyAccessor.PROPERTY_KEY_PREFIX_CHAR -> {
-					// The property name contains opening prefix(es)...
-					unclosedPrefixes++;
+			if (propertyName.charAt(i) == PropertyAccessor.PROPERTY_KEY_PREFIX_CHAR) {
+				// The property name contains opening prefix(es)...
+				unclosedPrefixes++;
+			}
+			else if (propertyName.charAt(i) == PropertyAccessor.PROPERTY_KEY_SUFFIX_CHAR) {
+				if (unclosedPrefixes == 0) {
+					// No unclosed prefix(es) in the property name (left) ->
+					// this is the suffix we are looking for.
+					return i;
 				}
-				case PropertyAccessor.PROPERTY_KEY_SUFFIX_CHAR -> {
-					if (unclosedPrefixes == 0) {
-						// No unclosed prefix(es) in the property name (left) ->
-						// this is the suffix we are looking for.
-						return i;
-					}
-					else {
-						// This suffix does not close the initial prefix but rather
-						// just one that occurred within the property name.
-						unclosedPrefixes--;
-					}
+				else {
+					// This suffix does not close the initial prefix but rather
+					// just one that occurred within the property name.
+					unclosedPrefixes--;
 				}
 			}
 		}

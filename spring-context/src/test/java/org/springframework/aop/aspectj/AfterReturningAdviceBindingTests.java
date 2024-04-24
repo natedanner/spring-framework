@@ -50,7 +50,7 @@ class AfterReturningAdviceBindingTests {
 
 	private TestBean testBeanTarget;
 
-	private AfterReturningAdviceBindingCollaborator mockCollaborator = mock();
+	private final AfterReturningAdviceBindingCollaborator mockCollaborator = mock();
 
 
 	@BeforeEach

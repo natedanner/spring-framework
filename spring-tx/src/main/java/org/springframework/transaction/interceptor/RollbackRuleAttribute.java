@@ -180,8 +180,8 @@ public class RollbackRuleAttribute implements Serializable{
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof RollbackRuleAttribute that &&
-				this.exceptionPattern.equals(that.exceptionPattern)));
+		return this == other || (other instanceof RollbackRuleAttribute that &&
+				this.exceptionPattern.equals(that.exceptionPattern));
 	}
 
 	@Override

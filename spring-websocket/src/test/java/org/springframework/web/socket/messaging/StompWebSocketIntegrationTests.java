@@ -319,7 +319,7 @@ class StompWebSocketIntegrationTests extends AbstractWebSocketIntegrationTests {
 	}
 
 
-	private static class UserFilter implements Filter {
+	private static final class UserFilter implements Filter {
 
 		private final Principal user;
 

@@ -52,15 +52,15 @@ import static org.mockito.Mockito.verify;
  */
 class JpaTransactionManagerTests {
 
-	private EntityManagerFactory factory = mock();
+	private final EntityManagerFactory factory = mock();
 
-	private EntityManager manager = mock();
+	private final EntityManager manager = mock();
 
-	private EntityTransaction tx = mock();
+	private final EntityTransaction tx = mock();
 
-	private JpaTransactionManager tm = new JpaTransactionManager(factory);
+	private final JpaTransactionManager tm = new JpaTransactionManager(factory);
 
-	private TransactionTemplate tt = new TransactionTemplate(tm);
+	private final TransactionTemplate tt = new TransactionTemplate(tm);
 
 
 	@BeforeEach

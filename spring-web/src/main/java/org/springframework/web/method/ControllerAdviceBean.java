@@ -128,8 +128,8 @@ public class ControllerAdviceBean implements Ordered {
 		this.beanOrName = beanName;
 		this.isSingleton = beanFactory.isSingleton(beanName);
 		this.beanType = getBeanType(beanName, beanFactory);
-		this.beanTypePredicate = (controllerAdvice != null ? createBeanTypePredicate(controllerAdvice) :
-				createBeanTypePredicate(this.beanType));
+		this.beanTypePredicate = controllerAdvice != null ? createBeanTypePredicate(controllerAdvice) :
+				createBeanTypePredicate(this.beanType);
 		this.beanFactory = beanFactory;
 	}
 
@@ -257,8 +257,8 @@ public class ControllerAdviceBean implements Ordered {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ControllerAdviceBean that &&
-				this.beanOrName.equals(that.beanOrName) && this.beanFactory == that.beanFactory));
+		return this == other || (other instanceof ControllerAdviceBean that &&
+				this.beanOrName.equals(that.beanOrName) && this.beanFactory == that.beanFactory);
 	}
 
 	@Override
@@ -306,12 +306,12 @@ public class ControllerAdviceBean implements Ordered {
 	@Nullable
 	private static Class<?> getBeanType(String beanName, BeanFactory beanFactory) {
 		Class<?> beanType = beanFactory.getType(beanName);
-		return (beanType != null ? ClassUtils.getUserClass(beanType) : null);
+		return beanType != null ? ClassUtils.getUserClass(beanType) : null;
 	}
 
 	private static HandlerTypePredicate createBeanTypePredicate(@Nullable Class<?> beanType) {
-		ControllerAdvice controllerAdvice = (beanType != null ?
-				AnnotatedElementUtils.findMergedAnnotation(beanType, ControllerAdvice.class) : null);
+		ControllerAdvice controllerAdvice = beanType != null ?
+				AnnotatedElementUtils.findMergedAnnotation(beanType, ControllerAdvice.class) : null;
 		return createBeanTypePredicate(controllerAdvice);
 	}
 

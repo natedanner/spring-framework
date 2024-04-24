@@ -79,9 +79,9 @@ class ListenerReadPublisherTests {
 
 	private static final class TestListenerReadPublisher extends AbstractListenerReadPublisher<DataBuffer> {
 
-		private int readCalls = 0;
+		private int readCalls;
 
-		private int discardCalls = 0;
+		private int discardCalls;
 
 
 		public TestListenerReadPublisher() {

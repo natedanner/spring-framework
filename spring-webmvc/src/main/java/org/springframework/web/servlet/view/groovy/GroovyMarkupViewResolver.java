@@ -68,7 +68,7 @@ public class GroovyMarkupViewResolver extends AbstractTemplateViewResolver {
 
 	@Override
 	protected AbstractUrlBasedView instantiateView() {
-		return (getViewClass() == GroovyMarkupView.class ? new GroovyMarkupView() : super.instantiateView());
+		return getViewClass() == GroovyMarkupView.class ? new GroovyMarkupView() : super.instantiateView();
 	}
 
 	/**

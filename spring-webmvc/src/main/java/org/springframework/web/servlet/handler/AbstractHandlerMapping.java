@@ -288,8 +288,8 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	 */
 	@Nullable
 	public final HandlerInterceptor[] getAdaptedInterceptors() {
-		return (!this.adaptedInterceptors.isEmpty() ?
-				this.adaptedInterceptors.toArray(new HandlerInterceptor[0]) : null);
+		return this.adaptedInterceptors.isEmpty() ? null :
+				this.adaptedInterceptors.toArray(new HandlerInterceptor[0]);
 	}
 
 	/**
@@ -304,7 +304,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 				mappedInterceptors.add(mappedInterceptor);
 			}
 		}
-		return (!mappedInterceptors.isEmpty() ? mappedInterceptors.toArray(new MappedInterceptor[0]) : null);
+		return mappedInterceptors.isEmpty() ? null : mappedInterceptors.toArray(new MappedInterceptor[0]);
 	}
 
 	/**
@@ -401,7 +401,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	}
 
 	protected String formatMappingName() {
-		return (this.beanName != null ? "'" + this.beanName + "'" : getClass().getName());
+		return this.beanName != null ? "'" + this.beanName + "'" : getClass().getName();
 	}
 
 
@@ -536,7 +536,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 			CorsConfiguration config = getCorsConfiguration(handler, request);
 			if (getCorsConfigurationSource() != null) {
 				CorsConfiguration globalConfig = getCorsConfigurationSource().getCorsConfiguration(request);
-				config = (globalConfig != null ? globalConfig.combine(config) : config);
+				config = globalConfig != null ? globalConfig.combine(config) : config;
 			}
 			if (config != null) {
 				config.validateAllowCredentials();
@@ -594,9 +594,9 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	private RequestPath getRequestPath(HttpServletRequest request) {
 		// Expect pre-parsed path with DispatcherServlet,
 		// but otherwise parse per handler lookup + cache for handling
-		return (request.getAttribute(DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE) != null ?
+		return request.getAttribute(DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE) != null ?
 				ServletRequestPathUtils.getParsedRequestPath(request) :
-				ServletRequestPathUtils.parseAndCache(request));
+				ServletRequestPathUtils.parseAndCache(request);
 	}
 
 	/**
@@ -620,8 +620,8 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	 * @see #getAdaptedInterceptors()
 	 */
 	protected HandlerExecutionChain getHandlerExecutionChain(Object handler, HttpServletRequest request) {
-		HandlerExecutionChain chain = (handler instanceof HandlerExecutionChain handlerExecutionChain ?
-				handlerExecutionChain : new HandlerExecutionChain(handler));
+		HandlerExecutionChain chain = handler instanceof HandlerExecutionChain handlerExecutionChain ?
+				handlerExecutionChain : new HandlerExecutionChain(handler);
 
 		for (HandlerInterceptor interceptor : this.adaptedInterceptors) {
 			if (interceptor instanceof MappedInterceptor mappedInterceptor) {
@@ -644,7 +644,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 		if (handler instanceof HandlerExecutionChain handlerExecutionChain) {
 			handler = handlerExecutionChain.getHandler();
 		}
-		return (handler instanceof CorsConfigurationSource || this.corsConfigurationSource != null);
+		return handler instanceof CorsConfigurationSource || this.corsConfigurationSource != null;
 	}
 
 	/**

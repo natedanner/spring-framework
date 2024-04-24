@@ -107,7 +107,7 @@ public class JettyWebSocketHandlerAdapter {
 	public void onWebSocketFrame(Frame frame, Callback callback) {
 		if (this.delegateSession != null) {
 			if (OpCode.PONG == frame.getOpCode()) {
-				ByteBuffer byteBuffer = (frame.getPayload() != null ? frame.getPayload() : EMPTY_PAYLOAD);
+				ByteBuffer byteBuffer = frame.getPayload() != null ? frame.getPayload() : EMPTY_PAYLOAD;
 				DataBuffer buffer = this.delegateSession.bufferFactory().wrap(byteBuffer);
 				buffer = new JettyDataBuffer(buffer, callback);
 				WebSocketMessage webSocketMessage = new WebSocketMessage(Type.PONG, buffer);

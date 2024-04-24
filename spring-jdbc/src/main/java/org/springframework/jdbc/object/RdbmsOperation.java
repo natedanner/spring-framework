@@ -69,9 +69,9 @@ public abstract class RdbmsOperation implements InitializingBean {
 
 	private int resultSetType = ResultSet.TYPE_FORWARD_ONLY;
 
-	private boolean updatableResults = false;
+	private boolean updatableResults;
 
-	private boolean returnGeneratedKeys = false;
+	private boolean returnGeneratedKeys;
 
 	@Nullable
 	private String[] generatedKeysColumnNames;
@@ -415,7 +415,7 @@ public abstract class RdbmsOperation implements InitializingBean {
 	 */
 	protected void validateNamedParameters(@Nullable Map<String, ?> parameters) throws InvalidDataAccessApiUsageException {
 		checkCompiled();
-		Map<String, ?> paramsToUse = (parameters != null ? parameters : Collections.<String, Object> emptyMap());
+		Map<String, ?> paramsToUse = parameters != null ? parameters : Collections.<String, Object> emptyMap();
 		int declaredInParameters = 0;
 		for (SqlParameter param : this.declaredParameters) {
 			if (param.isInputValueProvided()) {

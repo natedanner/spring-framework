@@ -77,11 +77,11 @@ class StompSubProtocolHandlerTests {
 
 	private static final byte[] EMPTY_PAYLOAD = new byte[0];
 
-	private StompSubProtocolHandler protocolHandler = new StompSubProtocolHandler();
+	private final StompSubProtocolHandler protocolHandler = new StompSubProtocolHandler();
 
-	private TestWebSocketSession session = new TestWebSocketSession();
+	private final TestWebSocketSession session = new TestWebSocketSession();
 
-	private MessageChannel channel = mock();
+	private final MessageChannel channel = mock();
 
 	@SuppressWarnings("rawtypes")
 	private ArgumentCaptor<Message> messageCaptor = ArgumentCaptor.forClass(Message.class);
@@ -532,7 +532,7 @@ class StompSubProtocolHandlerTests {
 	}
 
 
-	private static class UniqueUser extends TestPrincipal implements DestinationUserNameProvider {
+	private static final class UniqueUser extends TestPrincipal implements DestinationUserNameProvider {
 
 		private UniqueUser(String name) {
 			super(name);

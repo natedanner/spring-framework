@@ -165,9 +165,9 @@ public class AnnotationCacheOperationSource extends AbstractFallbackCacheOperati
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof AnnotationCacheOperationSource otherCos &&
+		return this == other || (other instanceof AnnotationCacheOperationSource otherCos &&
 				this.annotationParsers.equals(otherCos.annotationParsers) &&
-				this.publicMethodsOnly == otherCos.publicMethodsOnly));
+				this.publicMethodsOnly == otherCos.publicMethodsOnly);
 	}
 
 	@Override

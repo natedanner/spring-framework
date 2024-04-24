@@ -121,9 +121,9 @@ public class AnnotationMatchingPointcut implements Pointcut {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof AnnotationMatchingPointcut otherPointcut &&
+		return this == other || (other instanceof AnnotationMatchingPointcut otherPointcut &&
 				this.classFilter.equals(otherPointcut.classFilter) &&
-				this.methodMatcher.equals(otherPointcut.methodMatcher)));
+				this.methodMatcher.equals(otherPointcut.methodMatcher));
 	}
 
 	@Override
@@ -179,8 +179,8 @@ public class AnnotationMatchingPointcut implements Pointcut {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof AnnotationCandidateClassFilter that &&
-					this.annotationType.equals(that.annotationType)));
+			return this == other || (other instanceof AnnotationCandidateClassFilter that &&
+					this.annotationType.equals(that.annotationType));
 		}
 
 		@Override

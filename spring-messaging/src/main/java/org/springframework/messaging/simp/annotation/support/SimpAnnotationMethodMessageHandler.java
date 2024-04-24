@@ -221,7 +221,7 @@ public class SimpAnnotationMethodMessageHandler extends AbstractMethodMessageHan
 	public void setPathMatcher(PathMatcher pathMatcher) {
 		Assert.notNull(pathMatcher, "PathMatcher must not be null");
 		this.pathMatcher = pathMatcher;
-		this.slashPathSeparator = this.pathMatcher.combine("a", "a").equals("a/a");
+		this.slashPathSeparator = "a/a".equals(this.pathMatcher.combine("a", "a"));
 	}
 
 	/**
@@ -305,8 +305,8 @@ public class SimpAnnotationMethodMessageHandler extends AbstractMethodMessageHan
 	@Override
 	protected List<HandlerMethodArgumentResolver> initArgumentResolvers() {
 		ApplicationContext context = getApplicationContext();
-		ConfigurableBeanFactory beanFactory = (context instanceof ConfigurableApplicationContext cac ?
-				cac.getBeanFactory() : null);
+		ConfigurableBeanFactory beanFactory = context instanceof ConfigurableApplicationContext cac ?
+				cac.getBeanFactory() : null;
 
 		List<HandlerMethodArgumentResolver> resolvers = new ArrayList<>();
 

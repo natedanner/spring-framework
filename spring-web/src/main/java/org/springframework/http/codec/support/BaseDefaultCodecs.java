@@ -337,8 +337,8 @@ class BaseDefaultCodecs implements CodecConfigurer.DefaultCodecs, CodecConfigure
 
 	@Override
 	public void configureDefaultCodec(Consumer<Object> codecConsumer) {
-		this.codecConsumer = (this.codecConsumer != null ?
-				this.codecConsumer.andThen(codecConsumer) : codecConsumer);
+		this.codecConsumer = this.codecConsumer != null ?
+				this.codecConsumer.andThen(codecConsumer) : codecConsumer;
 		initReaders();
 		initWriters();
 	}

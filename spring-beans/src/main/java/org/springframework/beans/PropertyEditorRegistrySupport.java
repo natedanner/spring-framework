@@ -95,9 +95,9 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
 	@Nullable
 	private ConversionService conversionService;
 
-	private boolean defaultEditorsActive = false;
+	private boolean defaultEditorsActive;
 
-	private boolean configValueEditorsActive = false;
+	private boolean configValueEditorsActive;
 
 	@Nullable
 	private Map<Class<?>, PropertyEditor> defaultEditors;
@@ -357,7 +357,7 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
 			}
 		}
 		// No property-specific editor -> check type-specific editor.
-		return (elementType != null && this.customEditors != null && this.customEditors.containsKey(elementType));
+		return elementType != null && this.customEditors != null && this.customEditors.containsKey(elementType);
 	}
 
 	/**
@@ -385,8 +385,8 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
 	@Nullable
 	private PropertyEditor getCustomEditor(String propertyName, @Nullable Class<?> requiredType) {
 		CustomEditorHolder holder =
-				(this.customEditorsForPath != null ? this.customEditorsForPath.get(propertyName) : null);
-		return (holder != null ? holder.getPropertyEditor(requiredType) : null);
+				this.customEditorsForPath != null ? this.customEditorsForPath.get(propertyName) : null;
+		return holder != null ? holder.getPropertyEditor(requiredType) : null;
 	}
 
 	/**
@@ -465,7 +465,7 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
 	 */
 	protected void copyCustomEditorsTo(PropertyEditorRegistry target, @Nullable String nestedProperty) {
 		String actualPropertyName =
-				(nestedProperty != null ? PropertyAccessorUtils.getPropertyName(nestedProperty) : null);
+				nestedProperty != null ? PropertyAccessorUtils.getPropertyName(nestedProperty) : null;
 		if (this.customEditors != null) {
 			this.customEditors.forEach(target::registerCustomEditor);
 		}

@@ -77,7 +77,7 @@ public class HttpMessageConverterExtractor<T> implements ResponseExtractor<T> {
 		Assert.notEmpty(messageConverters, "'messageConverters' must not be empty");
 		Assert.noNullElements(messageConverters, "'messageConverters' must not contain null elements");
 		this.responseType = responseType;
-		this.responseClass = (responseType instanceof Class clazz ? clazz : null);
+		this.responseClass = responseType instanceof Class clazz ? clazz : null;
 		this.messageConverters = messageConverters;
 		this.logger = logger;
 	}

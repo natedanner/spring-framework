@@ -131,7 +131,7 @@ class TestScenarioCreator {
 	// in test expressions
 
 	public static String isEven(int i) {
-		return ((i % 2) == 0 ? "y" : "n");
+		return (i % 2) == 0 ? "y" : "n";
 	}
 
 	public static int[] reverseInt(int i, int j, int k) {

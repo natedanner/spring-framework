@@ -87,7 +87,7 @@ public abstract class AbstractPollingMessageListenerContainer extends AbstractMe
 	private final MessageListenerContainerResourceFactory transactionalResourceFactory =
 			new MessageListenerContainerResourceFactory();
 
-	private boolean sessionTransactedCalled = false;
+	private boolean sessionTransactedCalled;
 
 	@Nullable
 	private PlatformTransactionManager transactionManager;
@@ -293,7 +293,7 @@ public abstract class AbstractPollingMessageListenerContainer extends AbstractMe
 			if (sessionToUse == null) {
 				sessionToUse = ConnectionFactoryUtils.doGetTransactionalSession(
 						obtainConnectionFactory(), this.transactionalResourceFactory, true);
-				transactional = (sessionToUse != null);
+				transactional = sessionToUse != null;
 			}
 			if (sessionToUse == null) {
 				Connection conToUse;
@@ -315,8 +315,8 @@ public abstract class AbstractPollingMessageListenerContainer extends AbstractMe
 			}
 			Message message = receiveMessage(consumerToUse);
 			if (message != null) {
-				boolean exposeResource = (!transactional && isExposeListenerSession() &&
-						!TransactionSynchronizationManager.hasResource(obtainConnectionFactory()));
+				boolean exposeResource = !transactional && isExposeListenerSession() &&
+						!TransactionSynchronizationManager.hasResource(obtainConnectionFactory());
 				Observation observation = createObservation(message).start();
 				Observation.Scope scope = observation.openScope();
 				if (logger.isDebugEnabled()) {
@@ -390,8 +390,8 @@ public abstract class AbstractPollingMessageListenerContainer extends AbstractMe
 		}
 		JmsResourceHolder resourceHolder =
 				(JmsResourceHolder) TransactionSynchronizationManager.getResource(obtainConnectionFactory());
-		return (resourceHolder == null || resourceHolder instanceof LocallyExposedJmsResourceHolder ||
-				!resourceHolder.containsSession(session));
+		return resourceHolder == null || resourceHolder instanceof LocallyExposedJmsResourceHolder ||
+				!resourceHolder.containsSession(session);
 	}
 
 	/**

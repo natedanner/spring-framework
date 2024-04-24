@@ -378,7 +378,7 @@ class ImportAwareTests {
 
 		@Override
 		public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-			return (context.getBeanFactory().getBeanNamesForType(MetadataHolder.class, true, false).length == 0);
+			return context.getBeanFactory().getBeanNamesForType(MetadataHolder.class, true, false).length == 0;
 		}
 
 		@Override

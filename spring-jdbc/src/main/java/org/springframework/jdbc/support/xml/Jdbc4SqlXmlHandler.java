@@ -57,42 +57,42 @@ public class Jdbc4SqlXmlHandler implements SqlXmlHandler {
 	@Nullable
 	public String getXmlAsString(ResultSet rs, String columnName) throws SQLException {
 		SQLXML xmlObject = rs.getSQLXML(columnName);
-		return (xmlObject != null ? xmlObject.getString() : null);
+		return xmlObject != null ? xmlObject.getString() : null;
 	}
 
 	@Override
 	@Nullable
 	public String getXmlAsString(ResultSet rs, int columnIndex) throws SQLException {
 		SQLXML xmlObject = rs.getSQLXML(columnIndex);
-		return (xmlObject != null ? xmlObject.getString() : null);
+		return xmlObject != null ? xmlObject.getString() : null;
 	}
 
 	@Override
 	@Nullable
 	public InputStream getXmlAsBinaryStream(ResultSet rs, String columnName) throws SQLException {
 		SQLXML xmlObject = rs.getSQLXML(columnName);
-		return (xmlObject != null ? xmlObject.getBinaryStream() : null);
+		return xmlObject != null ? xmlObject.getBinaryStream() : null;
 	}
 
 	@Override
 	@Nullable
 	public InputStream getXmlAsBinaryStream(ResultSet rs, int columnIndex) throws SQLException {
 		SQLXML xmlObject = rs.getSQLXML(columnIndex);
-		return (xmlObject != null ? xmlObject.getBinaryStream() : null);
+		return xmlObject != null ? xmlObject.getBinaryStream() : null;
 	}
 
 	@Override
 	@Nullable
 	public Reader getXmlAsCharacterStream(ResultSet rs, String columnName) throws SQLException {
 		SQLXML xmlObject = rs.getSQLXML(columnName);
-		return (xmlObject != null ? xmlObject.getCharacterStream() : null);
+		return xmlObject != null ? xmlObject.getCharacterStream() : null;
 	}
 
 	@Override
 	@Nullable
 	public Reader getXmlAsCharacterStream(ResultSet rs, int columnIndex) throws SQLException {
 		SQLXML xmlObject = rs.getSQLXML(columnIndex);
-		return (xmlObject != null ? xmlObject.getCharacterStream() : null);
+		return xmlObject != null ? xmlObject.getCharacterStream() : null;
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public class Jdbc4SqlXmlHandler implements SqlXmlHandler {
 		if (xmlObject == null) {
 			return null;
 		}
-		return (sourceClass != null ? xmlObject.getSource(sourceClass) : xmlObject.getSource(DOMSource.class));
+		return sourceClass != null ? xmlObject.getSource(sourceClass) : xmlObject.getSource(DOMSource.class);
 	}
 
 	@Override
@@ -116,7 +116,7 @@ public class Jdbc4SqlXmlHandler implements SqlXmlHandler {
 		if (xmlObject == null) {
 			return null;
 		}
-		return (sourceClass != null ? xmlObject.getSource(sourceClass) : xmlObject.getSource(DOMSource.class));
+		return sourceClass != null ? xmlObject.getSource(sourceClass) : xmlObject.getSource(DOMSource.class);
 	}
 
 

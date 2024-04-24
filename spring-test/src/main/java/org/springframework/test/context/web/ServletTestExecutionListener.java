@@ -175,8 +175,8 @@ public class ServletTestExecutionListener extends AbstractTestExecutionListener 
 	}
 
 	private boolean isActivated(TestContext testContext) {
-		return (Boolean.TRUE.equals(testContext.getAttribute(ACTIVATE_LISTENER)) ||
-				AnnotatedElementUtils.hasAnnotation(testContext.getTestClass(), WebAppConfiguration.class));
+		return Boolean.TRUE.equals(testContext.getAttribute(ACTIVATE_LISTENER)) ||
+				AnnotatedElementUtils.hasAnnotation(testContext.getTestClass(), WebAppConfiguration.class);
 	}
 
 	private boolean alreadyPopulatedRequestContextHolder(TestContext testContext) {

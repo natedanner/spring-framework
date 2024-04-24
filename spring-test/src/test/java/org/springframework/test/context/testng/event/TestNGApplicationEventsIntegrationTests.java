@@ -47,7 +47,7 @@ class TestNGApplicationEventsIntegrationTests extends AbstractTestNGSpringContex
 	@Autowired
 	ApplicationEvents applicationEvents;
 
-	private boolean testAlreadyExecuted = false;
+	private boolean testAlreadyExecuted;
 
 
 	@BeforeMethod

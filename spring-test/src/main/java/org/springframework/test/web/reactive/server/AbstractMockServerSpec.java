@@ -56,7 +56,7 @@ abstract class AbstractMockServerSpec<B extends WebTestClient.MockServerSpec<B>>
 	@Override
 	public <T extends B> T webFilter(WebFilter... filters) {
 		if (filters.length > 0) {
-			this.filters = (this.filters != null ? this.filters : new ArrayList<>(4));
+			this.filters = this.filters != null ? this.filters : new ArrayList<>(4);
 			this.filters.addAll(Arrays.asList(filters));
 		}
 		return self();
@@ -71,7 +71,7 @@ abstract class AbstractMockServerSpec<B extends WebTestClient.MockServerSpec<B>>
 	@Override
 	public <T extends B> T apply(MockServerConfigurer configurer) {
 		configurer.afterConfigureAdded(this);
-		this.configurers = (this.configurers != null ? this.configurers : new ArrayList<>(4));
+		this.configurers = this.configurers != null ? this.configurers : new ArrayList<>(4);
 		this.configurers.add(configurer);
 		return self();
 	}

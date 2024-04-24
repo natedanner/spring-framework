@@ -170,14 +170,14 @@ class HandlerMethodValidationExceptionTests {
 
 		@Override
 		public boolean test(MethodParameter param) {
-			return (param.hasParameterAnnotation(this.type) ||
-					(isDefaultParameter(param) && !hasMvcAnnotation(param)));
+			return param.hasParameterAnnotation(this.type) ||
+					(isDefaultParameter(param) && !hasMvcAnnotation(param));
 		}
 
 		private boolean isDefaultParameter(MethodParameter param) {
 			boolean simpleType = BeanUtils.isSimpleValueType(param.getParameterType());
-			return ((this.type.equals(RequestParam.class) && simpleType) ||
-					(this.type.equals(ModelAttribute.class) && !simpleType));
+			return (this.type.equals(RequestParam.class) && simpleType) ||
+					(this.type.equals(ModelAttribute.class) && !simpleType);
 		}
 
 		private boolean hasMvcAnnotation(MethodParameter param) {

@@ -32,7 +32,7 @@ import org.springframework.lang.Nullable;
  */
 public class ForkJoinPoolFactoryBean implements FactoryBean<ForkJoinPool>, InitializingBean, DisposableBean {
 
-	private boolean commonPool = false;
+	private boolean commonPool;
 
 	private int parallelism = Runtime.getRuntime().availableProcessors();
 
@@ -41,9 +41,9 @@ public class ForkJoinPoolFactoryBean implements FactoryBean<ForkJoinPool>, Initi
 	@Nullable
 	private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
 
-	private boolean asyncMode = false;
+	private boolean asyncMode;
 
-	private int awaitTerminationSeconds = 0;
+	private int awaitTerminationSeconds;
 
 	@Nullable
 	private ForkJoinPool forkJoinPool;
@@ -122,8 +122,8 @@ public class ForkJoinPoolFactoryBean implements FactoryBean<ForkJoinPool>, Initi
 
 	@Override
 	public void afterPropertiesSet() {
-		this.forkJoinPool = (this.commonPool ? ForkJoinPool.commonPool() :
-				new ForkJoinPool(this.parallelism, this.threadFactory, this.uncaughtExceptionHandler, this.asyncMode));
+		this.forkJoinPool = this.commonPool ? ForkJoinPool.commonPool() :
+				new ForkJoinPool(this.parallelism, this.threadFactory, this.uncaughtExceptionHandler, this.asyncMode);
 	}
 
 

@@ -58,7 +58,7 @@ public class JmsActivationSpecConfig {
 	@Nullable
 	private String destinationName;
 
-	private boolean pubSubDomain = false;
+	private boolean pubSubDomain;
 
 	@Nullable
 	private Boolean replyPubSubDomain;
@@ -66,9 +66,9 @@ public class JmsActivationSpecConfig {
 	@Nullable
 	private QosSettings replyQosSettings;
 
-	private boolean subscriptionDurable = false;
+	private boolean subscriptionDurable;
 
-	private boolean subscriptionShared = false;
+	private boolean subscriptionShared;
 
 	@Nullable
 	private String subscriptionName;
@@ -161,12 +161,12 @@ public class JmsActivationSpecConfig {
 
 	public void setDurableSubscriptionName(@Nullable String durableSubscriptionName) {
 		this.subscriptionName = durableSubscriptionName;
-		this.subscriptionDurable = (durableSubscriptionName != null);
+		this.subscriptionDurable = durableSubscriptionName != null;
 	}
 
 	@Nullable
 	public String getDurableSubscriptionName() {
-		return (this.subscriptionDurable ? this.subscriptionName : null);
+		return this.subscriptionDurable ? this.subscriptionName : null;
 	}
 
 	public void setClientId(@Nullable String clientId) {

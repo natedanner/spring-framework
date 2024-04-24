@@ -146,7 +146,7 @@ public abstract class AbstractMessageConverterMethodArgumentResolver implements 
 			Type targetType) throws IOException, HttpMediaTypeNotSupportedException, HttpMessageNotReadableException {
 
 		Class<?> contextClass = parameter.getContainingClass();
-		Class<T> targetClass = (targetType instanceof Class clazz ? clazz : null);
+		Class<T> targetClass = targetType instanceof Class clazz ? clazz : null;
 		if (targetClass == null) {
 			ResolvableType resolvableType = ResolvableType.forMethodParameter(parameter);
 			targetClass = (Class<T>) resolvableType.resolve();
@@ -166,7 +166,7 @@ public abstract class AbstractMessageConverterMethodArgumentResolver implements 
 			contentType = MediaType.APPLICATION_OCTET_STREAM;
 		}
 
-		HttpMethod httpMethod = (inputMessage instanceof HttpRequest httpRequest ? httpRequest.getMethod() : null);
+		HttpMethod httpMethod = inputMessage instanceof HttpRequest httpRequest ? httpRequest.getMethod() : null;
 		Object body = NO_VALUE;
 
 		EmptyBodyCheckingHttpInputMessage message = null;
@@ -175,14 +175,14 @@ public abstract class AbstractMessageConverterMethodArgumentResolver implements 
 			for (HttpMessageConverter<?> converter : this.messageConverters) {
 				Class<HttpMessageConverter<?>> converterType = (Class<HttpMessageConverter<?>>) converter.getClass();
 				GenericHttpMessageConverter<?> genericConverter =
-						(converter instanceof GenericHttpMessageConverter ghmc ? ghmc : null);
+						converter instanceof GenericHttpMessageConverter ghmc ? ghmc : null;
 				if (genericConverter != null ? genericConverter.canRead(targetType, contextClass, contentType) :
 						(targetClass != null && converter.canRead(targetClass, contentType))) {
 					if (message.hasBody()) {
 						HttpInputMessage msgToUse =
 								getAdvice().beforeBodyRead(message, parameter, targetType, converterType);
-						body = (genericConverter != null ? genericConverter.read(targetType, contextClass, msgToUse) :
-								((HttpMessageConverter<T>) converter).read(targetClass, msgToUse));
+						body = genericConverter != null ? genericConverter.read(targetType, contextClass, msgToUse) :
+								((HttpMessageConverter<T>) converter).read(targetClass, msgToUse);
 						body = getAdvice().afterBodyRead(body, msgToUse, parameter, targetType, converterType);
 					}
 					else {
@@ -265,7 +265,7 @@ public abstract class AbstractMessageConverterMethodArgumentResolver implements 
 	protected boolean isBindExceptionRequired(WebDataBinder binder, MethodParameter parameter) {
 		int i = parameter.getParameterIndex();
 		Class<?>[] paramTypes = parameter.getExecutable().getParameterTypes();
-		boolean hasBindingResult = (paramTypes.length > (i + 1) && Errors.class.isAssignableFrom(paramTypes[i + 1]));
+		boolean hasBindingResult = paramTypes.length > (i + 1) && Errors.class.isAssignableFrom(paramTypes[i + 1]);
 		return !hasBindingResult;
 	}
 
@@ -327,7 +327,7 @@ public abstract class AbstractMessageConverterMethodArgumentResolver implements 
 			InputStream inputStream = inputMessage.getBody();
 			if (inputStream.markSupported()) {
 				inputStream.mark(1);
-				this.body = (inputStream.read() != -1 ? inputStream : null);
+				this.body = inputStream.read() != -1 ? inputStream : null;
 				inputStream.reset();
 			}
 			else {
@@ -350,11 +350,11 @@ public abstract class AbstractMessageConverterMethodArgumentResolver implements 
 
 		@Override
 		public InputStream getBody() {
-			return (this.body != null ? this.body : InputStream.nullInputStream());
+			return this.body != null ? this.body : InputStream.nullInputStream();
 		}
 
 		public boolean hasBody() {
-			return (this.body != null);
+			return this.body != null;
 		}
 	}
 

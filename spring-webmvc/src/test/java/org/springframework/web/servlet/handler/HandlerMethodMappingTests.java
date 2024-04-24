@@ -317,7 +317,7 @@ public class HandlerMethodMappingTests {
 
 		@Override
 		protected Set<String> getDirectPaths(String mapping) {
-			return (pathMatcher.isPattern(mapping) ? Collections.emptySet() : Collections.singleton(mapping));
+			return pathMatcher.isPattern(mapping) ? Collections.emptySet() : Collections.singleton(mapping);
 		}
 
 		@Override
@@ -340,7 +340,7 @@ public class HandlerMethodMappingTests {
 		@Override
 		protected String getMatchingMapping(String pattern, HttpServletRequest request) {
 			String lookupPath = this.pathHelper.getLookupPathForRequest(request);
-			String match = (this.pathMatcher.match(pattern, lookupPath) ? pattern : null);
+			String match = this.pathMatcher.match(pattern, lookupPath) ? pattern : null;
 			if (match != null) {
 				this.matches.add(match);
 			}

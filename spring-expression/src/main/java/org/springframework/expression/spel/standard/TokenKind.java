@@ -130,7 +130,7 @@ enum TokenKind {
 
 	private TokenKind(String tokenString) {
 		this.tokenChars = tokenString.toCharArray();
-		this.hasPayload = (this.tokenChars.length == 0);
+		this.hasPayload = this.tokenChars.length == 0;
 	}
 
 	private TokenKind() {
@@ -140,7 +140,7 @@ enum TokenKind {
 
 	@Override
 	public String toString() {
-		return (name() + (this.tokenChars.length !=0 ? "(" + new String(this.tokenChars) +")" : ""));
+		return name() + (this.tokenChars.length !=0 ? "(" + new String(this.tokenChars) +")" : "");
 	}
 
 	public boolean hasPayload() {

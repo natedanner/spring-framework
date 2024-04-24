@@ -352,7 +352,9 @@ class PathPatternParserTests {
 
 	@Test
 	void compareTests() {
-		PathPattern p1, p2, p3;
+		PathPattern p1;
+		PathPattern p2;
+		PathPattern p3;
 
 		// Based purely on number of captures
 		p1 = parse("{a}");

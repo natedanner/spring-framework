@@ -56,9 +56,9 @@ class AsyncExecutionTests {
 
 	private static String originalThreadName;
 
-	private static volatile int listenerCalled = 0;
+	private static volatile int listenerCalled;
 
-	private static int listenerConstructed = 0;
+	private static int listenerConstructed;
 
 
 	@BeforeEach

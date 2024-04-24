@@ -82,7 +82,7 @@ public class DefaultMultipartHttpServletRequest extends AbstractMultipartHttpSer
 	public String getParameter(String name) {
 		String[] values = getMultipartParameters().get(name);
 		if (values != null) {
-			return (values.length > 0 ? values[0] : null);
+			return values.length > 0 ? values[0] : null;
 		}
 		return super.getParameter(name);
 	}

@@ -201,7 +201,7 @@ public class SpringFactoriesLoader {
 		List<String> implementationNames = loadFactoryNames(factoryType);
 		logger.trace(LogMessage.format("Loaded [%s] names: %s", factoryType.getName(), implementationNames));
 		List<T> result = new ArrayList<>(implementationNames.size());
-		FailureHandler failureHandlerToUse = (failureHandler != null) ? failureHandler : THROWING_FAILURE_HANDLER;
+		FailureHandler failureHandlerToUse = failureHandler != null ? failureHandler : THROWING_FAILURE_HANDLER;
 		for (String implementationName : implementationNames) {
 			T factory = instantiateFactory(implementationName, factoryType, argumentResolver, failureHandlerToUse);
 			if (factory != null) {
@@ -325,8 +325,8 @@ public class SpringFactoriesLoader {
 	 */
 	public static SpringFactoriesLoader forResourceLocation(String resourceLocation, @Nullable ClassLoader classLoader) {
 		Assert.hasText(resourceLocation, "'resourceLocation' must not be empty");
-		ClassLoader resourceClassLoader = (classLoader != null ? classLoader :
-				SpringFactoriesLoader.class.getClassLoader());
+		ClassLoader resourceClassLoader = classLoader != null ? classLoader :
+				SpringFactoriesLoader.class.getClassLoader();
 		Map<String, SpringFactoriesLoader> loaders = cache.computeIfAbsent(
 				resourceClassLoader, key -> new ConcurrentReferenceHashMap<>());
 		return loaders.computeIfAbsent(resourceLocation, key ->
@@ -384,9 +384,9 @@ public class SpringFactoriesLoader {
 
 		private Object[] resolveArgs(@Nullable ArgumentResolver argumentResolver) {
 			Class<?>[] types = this.constructor.getParameterTypes();
-			return (argumentResolver != null ?
+			return argumentResolver != null ?
 					Arrays.stream(types).map(argumentResolver::resolve).toArray() :
-					new Object[types.length]);
+					new Object[types.length];
 		}
 
 		@SuppressWarnings("unchecked")
@@ -401,19 +401,19 @@ public class SpringFactoriesLoader {
 		private static Constructor<?> findConstructor(Class<?> factoryImplementationClass) {
 			// Same algorithm as BeanUtils.getResolvableConstructor
 			Constructor<?> constructor = findPrimaryKotlinConstructor(factoryImplementationClass);
-			constructor = (constructor != null ? constructor :
-					findSingleConstructor(factoryImplementationClass.getConstructors()));
-			constructor = (constructor != null ? constructor :
-					findSingleConstructor(factoryImplementationClass.getDeclaredConstructors()));
-			constructor = (constructor != null ? constructor :
-					findDeclaredConstructor(factoryImplementationClass));
+			constructor = constructor != null ? constructor :
+					findSingleConstructor(factoryImplementationClass.getConstructors());
+			constructor = constructor != null ? constructor :
+					findSingleConstructor(factoryImplementationClass.getDeclaredConstructors());
+			constructor = constructor != null ? constructor :
+					findDeclaredConstructor(factoryImplementationClass);
 			return constructor;
 		}
 
 		@Nullable
 		private static Constructor<?> findPrimaryKotlinConstructor(Class<?> factoryImplementationClass) {
-			return (isKotlinType(factoryImplementationClass) ?
-					KotlinDelegate.findPrimaryConstructor(factoryImplementationClass) : null);
+			return isKotlinType(factoryImplementationClass) ?
+					KotlinDelegate.findPrimaryConstructor(factoryImplementationClass) : null;
 		}
 
 		private static boolean isKotlinType(Class<?> factoryImplementationClass) {
@@ -422,7 +422,7 @@ public class SpringFactoriesLoader {
 
 		@Nullable
 		private static Constructor<?> findSingleConstructor(Constructor<?>[] constructors) {
-			return (constructors.length == 1 ? constructors[0] : null);
+			return constructors.length == 1 ? constructors[0] : null;
 		}
 
 		@Nullable
@@ -472,8 +472,8 @@ public class SpringFactoriesLoader {
 
 		private static <T> void makeAccessible(Constructor<T> constructor,
 				KFunction<T> kotlinConstructor) {
-			if ((!Modifier.isPublic(constructor.getModifiers())
-					|| !Modifier.isPublic(constructor.getDeclaringClass().getModifiers()))) {
+			if (!Modifier.isPublic(constructor.getModifiers())
+					|| !Modifier.isPublic(constructor.getDeclaringClass().getModifiers())) {
 				KCallablesJvm.setAccessible(kotlinConstructor, true);
 			}
 		}
@@ -548,7 +548,7 @@ public class SpringFactoriesLoader {
 		default ArgumentResolver and(ArgumentResolver argumentResolver) {
 			return from(type -> {
 				Object resolved = resolve(type);
-				return (resolved != null ? resolved : argumentResolver.resolve(type));
+				return resolved != null ? resolved : argumentResolver.resolve(type);
 			});
 		}
 

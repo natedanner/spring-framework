@@ -86,7 +86,7 @@ public class ServletRequestMethodArgumentResolver implements HandlerMethodArgume
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		Class<?> paramType = parameter.getParameterType();
-		return (WebRequest.class.isAssignableFrom(paramType) ||
+		return WebRequest.class.isAssignableFrom(paramType) ||
 				ServletRequest.class.isAssignableFrom(paramType) ||
 				MultipartRequest.class.isAssignableFrom(paramType) ||
 				HttpSession.class.isAssignableFrom(paramType) ||
@@ -97,7 +97,7 @@ public class ServletRequestMethodArgumentResolver implements HandlerMethodArgume
 				HttpMethod.class == paramType ||
 				Locale.class == paramType ||
 				TimeZone.class == paramType ||
-				ZoneId.class == paramType);
+				ZoneId.class == paramType;
 	}
 
 	@Override
@@ -178,11 +178,11 @@ public class ServletRequestMethodArgumentResolver implements HandlerMethodArgume
 		}
 		else if (TimeZone.class == paramType) {
 			TimeZone timeZone = RequestContextUtils.getTimeZone(request);
-			return (timeZone != null ? timeZone : TimeZone.getDefault());
+			return timeZone != null ? timeZone : TimeZone.getDefault();
 		}
 		else if (ZoneId.class == paramType) {
 			TimeZone timeZone = RequestContextUtils.getTimeZone(request);
-			return (timeZone != null ? timeZone.toZoneId() : ZoneId.systemDefault());
+			return timeZone != null ? timeZone.toZoneId() : ZoneId.systemDefault();
 		}
 
 		// Should never happen...

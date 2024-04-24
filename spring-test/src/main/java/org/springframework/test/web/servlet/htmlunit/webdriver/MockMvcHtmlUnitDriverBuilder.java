@@ -149,8 +149,8 @@ public class MockMvcHtmlUnitDriverBuilder extends MockMvcWebConnectionBuilderSup
 	 * @see #withDelegate(WebConnectionHtmlUnitDriver)
 	 */
 	public HtmlUnitDriver build() {
-		return (this.driver != null ? this.driver :
-				withDelegate(new WebConnectionHtmlUnitDriver(BrowserVersion.CHROME)).build());
+		return this.driver != null ? this.driver :
+				withDelegate(new WebConnectionHtmlUnitDriver(BrowserVersion.CHROME)).build();
 	}
 
 }

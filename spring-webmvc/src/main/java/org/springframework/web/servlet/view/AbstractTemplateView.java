@@ -52,13 +52,13 @@ public abstract class AbstractTemplateView extends AbstractUrlBasedView {
 	public static final String SPRING_MACRO_REQUEST_CONTEXT_ATTRIBUTE = "springMacroRequestContext";
 
 
-	private boolean exposeRequestAttributes = false;
+	private boolean exposeRequestAttributes;
 
-	private boolean allowRequestOverride = false;
+	private boolean allowRequestOverride;
 
-	private boolean exposeSessionAttributes = false;
+	private boolean exposeSessionAttributes;
 
-	private boolean allowSessionOverride = false;
+	private boolean allowSessionOverride;
 
 	private boolean exposeSpringMacroHelpers = true;
 
@@ -128,7 +128,7 @@ public abstract class AbstractTemplateView extends AbstractUrlBasedView {
 				}
 				Object attributeValue = request.getAttribute(attribute);
 				if (logger.isDebugEnabled()) {
-					exposed = (exposed != null ? exposed : new LinkedHashMap<>());
+					exposed = exposed != null ? exposed : new LinkedHashMap<>();
 					exposed.put(attribute, attributeValue);
 				}
 				model.put(attribute, attributeValue);
@@ -150,7 +150,7 @@ public abstract class AbstractTemplateView extends AbstractUrlBasedView {
 					}
 					Object attributeValue = session.getAttribute(attribute);
 					if (logger.isDebugEnabled()) {
-						exposed = (exposed != null ? exposed : new LinkedHashMap<>());
+						exposed = exposed != null ? exposed : new LinkedHashMap<>();
 						exposed.put(attribute, attributeValue);
 					}
 					model.put(attribute, attributeValue);

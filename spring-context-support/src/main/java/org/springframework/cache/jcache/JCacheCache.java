@@ -105,7 +105,7 @@ public class JCacheCache extends AbstractValueAdaptingCache {
 	@Nullable
 	public ValueWrapper putIfAbsent(Object key, @Nullable Object value) {
 		Object previous = this.cache.invoke(key, PutIfAbsentEntryProcessor.INSTANCE, toStoreValue(value));
-		return (previous != null ? toValueWrapper(previous) : null);
+		return previous != null ? toValueWrapper(previous) : null;
 	}
 
 	@Override

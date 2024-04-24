@@ -131,7 +131,7 @@ public abstract class StompClientSupport {
 	 */
 	public boolean isDefaultHeartbeatEnabled() {
 		long[] heartbeat = getDefaultHeartbeat();
-		return (heartbeat[0] != 0 && heartbeat[1] != 0);
+		return heartbeat[0] != 0 && heartbeat[1] != 0;
 	}
 
 	/**
@@ -175,7 +175,7 @@ public abstract class StompClientSupport {
 	 * @return the modified headers
 	 */
 	protected StompHeaders processConnectHeaders(@Nullable StompHeaders connectHeaders) {
-		connectHeaders = (connectHeaders != null ? connectHeaders : new StompHeaders());
+		connectHeaders = connectHeaders != null ? connectHeaders : new StompHeaders();
 		if (connectHeaders.getHeartbeat() == null) {
 			connectHeaders.setHeartbeat(getDefaultHeartbeat());
 		}

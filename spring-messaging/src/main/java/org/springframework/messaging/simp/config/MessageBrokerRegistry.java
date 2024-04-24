@@ -113,14 +113,14 @@ public class MessageBrokerRegistry {
 
 	@Nullable
 	protected String getUserDestinationBroadcast() {
-		return (this.brokerRelayRegistration != null ?
-				this.brokerRelayRegistration.getUserDestinationBroadcast() : null);
+		return this.brokerRelayRegistration != null ?
+				this.brokerRelayRegistration.getUserDestinationBroadcast() : null;
 	}
 
 	@Nullable
 	protected String getUserRegistryBroadcast() {
-		return (this.brokerRelayRegistration != null ?
-				this.brokerRelayRegistration.getUserRegistryBroadcast() : null);
+		return this.brokerRelayRegistration != null ?
+				this.brokerRelayRegistration.getUserRegistryBroadcast() : null;
 	}
 
 	/**
@@ -140,8 +140,8 @@ public class MessageBrokerRegistry {
 
 	@Nullable
 	protected Collection<String> getApplicationDestinationPrefixes() {
-		return (this.applicationDestinationPrefixes != null ?
-				Arrays.asList(this.applicationDestinationPrefixes) : null);
+		return this.applicationDestinationPrefixes != null ?
+				Arrays.asList(this.applicationDestinationPrefixes) : null;
 	}
 
 	/**

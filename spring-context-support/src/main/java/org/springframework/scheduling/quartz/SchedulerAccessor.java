@@ -61,7 +61,7 @@ public abstract class SchedulerAccessor implements ResourceLoaderAware {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	private boolean overwriteExistingJobs = false;
+	private boolean overwriteExistingJobs;
 
 	@Nullable
 	private String[] jobSchedulingDataLocations;
@@ -297,7 +297,7 @@ public abstract class SchedulerAccessor implements ResourceLoaderAware {
 	 * @see #setOverwriteExistingJobs
 	 */
 	private boolean addTriggerToScheduler(Trigger trigger) throws SchedulerException {
-		boolean triggerExists = (getScheduler().getTrigger(trigger.getKey()) != null);
+		boolean triggerExists = getScheduler().getTrigger(trigger.getKey()) != null;
 		if (triggerExists && !this.overwriteExistingJobs) {
 			return false;
 		}

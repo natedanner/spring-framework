@@ -132,7 +132,7 @@ public final class PathPatternsRequestCondition extends AbstractRequestCondition
 		Set<String> result = Collections.emptySet();
 		for (PathPattern pattern : this.patterns) {
 			if (!pattern.hasPatternSyntax()) {
-				result = (result.isEmpty() ? new HashSet<>(1) : result);
+				result = result.isEmpty() ? new HashSet<>(1) : result;
 				result.add(pattern.getPatternString());
 			}
 		}
@@ -143,8 +143,8 @@ public final class PathPatternsRequestCondition extends AbstractRequestCondition
 	 * Return the {@link #getPatterns()} mapped to Strings.
 	 */
 	public Set<String> getPatternValues() {
-		return (isEmptyPathMapping() ? EMPTY_PATH :
-				getPatterns().stream().map(PathPattern::getPatternString).collect(Collectors.toSet()));
+		return isEmptyPathMapping() ? EMPTY_PATH :
+				getPatterns().stream().map(PathPattern::getPatternString).collect(Collectors.toSet());
 	}
 
 	/**
@@ -191,7 +191,7 @@ public final class PathPatternsRequestCondition extends AbstractRequestCondition
 	public PathPatternsRequestCondition getMatchingCondition(HttpServletRequest request) {
 		PathContainer path = ServletRequestPathUtils.getParsedRequestPath(request).pathWithinApplication();
 		SortedSet<PathPattern> matches = getMatchingPatterns(path);
-		return (matches != null ? new PathPatternsRequestCondition(matches) : null);
+		return matches != null ? new PathPatternsRequestCondition(matches) : null;
 	}
 
 	@Nullable
@@ -199,7 +199,7 @@ public final class PathPatternsRequestCondition extends AbstractRequestCondition
 		TreeSet<PathPattern> result = null;
 		for (PathPattern pattern : this.patterns) {
 			if (pattern.matches(path)) {
-				result = (result != null ? result : new TreeSet<>());
+				result = result != null ? result : new TreeSet<>();
 				result.add(pattern);
 			}
 		}

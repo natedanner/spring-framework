@@ -75,7 +75,7 @@ public class DefaultPointcutAdvisor extends AbstractGenericPointcutAdvisor imple
 	 * @see #setAdvice
 	 */
 	public void setPointcut(@Nullable Pointcut pointcut) {
-		this.pointcut = (pointcut != null ? pointcut : Pointcut.TRUE);
+		this.pointcut = pointcut != null ? pointcut : Pointcut.TRUE;
 	}
 
 	@Override

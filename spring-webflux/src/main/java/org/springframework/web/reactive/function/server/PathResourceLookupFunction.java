@@ -98,7 +98,7 @@ class PathResourceLookupFunction implements Function<ServerRequest, Mono<Resourc
 				return path;
 			}
 		}
-		return (slash ? "/" : "");
+		return slash ? "/" : "";
 	}
 
 	private boolean isInvalidPath(String path) {
@@ -106,15 +106,12 @@ class PathResourceLookupFunction implements Function<ServerRequest, Mono<Resourc
 			return true;
 		}
 		if (path.contains(":/")) {
-			String relativePath = (path.charAt(0) == '/' ? path.substring(1) : path);
+			String relativePath = path.charAt(0) == '/' ? path.substring(1) : path;
 			if (ResourceUtils.isUrl(relativePath) || relativePath.startsWith("url:")) {
 				return true;
 			}
 		}
-		if (path.contains("..") && StringUtils.cleanPath(path).contains("../")) {
-			return true;
-		}
-		return false;
+		return path.contains("..") && StringUtils.cleanPath(path).contains("../");
 	}
 
 	private boolean isResourceUnderLocation(Resource resource) throws IOException {
@@ -141,14 +138,11 @@ class PathResourceLookupFunction implements Function<ServerRequest, Mono<Resourc
 		if (locationPath.equals(resourcePath)) {
 			return true;
 		}
-		locationPath = (locationPath.endsWith("/") || locationPath.isEmpty() ? locationPath : locationPath + "/");
+		locationPath = locationPath.endsWith("/") || locationPath.isEmpty() ? locationPath : locationPath + "/";
 		if (!resourcePath.startsWith(locationPath)) {
 			return false;
 		}
-		if (resourcePath.contains("%") && StringUtils.uriDecode(resourcePath, StandardCharsets.UTF_8).contains("../")) {
-			return false;
-		}
-		return true;
+		return !(resourcePath.contains("%") && StringUtils.uriDecode(resourcePath, StandardCharsets.UTF_8).contains("../"));
 	}
 
 

@@ -40,7 +40,7 @@ class DynamicValuesPropertySource extends EnumerablePropertySource<Map<String, S
 	@Override
 	public Object getProperty(String name) {
 		Supplier<Object> valueSupplier = this.source.get(name);
-		return (valueSupplier != null ? valueSupplier.get() : null);
+		return valueSupplier != null ? valueSupplier.get() : null;
 	}
 
 	@Override

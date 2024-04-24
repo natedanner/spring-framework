@@ -46,7 +46,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class NotificationPublisherTests extends AbstractMBeanServerTests {
 
-	private CountingNotificationListener listener = new CountingNotificationListener();
+	private final CountingNotificationListener listener = new CountingNotificationListener();
 
 	@Test
 	void testSimpleBean() throws Exception {

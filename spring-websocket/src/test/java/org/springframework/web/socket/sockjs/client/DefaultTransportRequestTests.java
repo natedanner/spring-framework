@@ -47,15 +47,15 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
  */
 class DefaultTransportRequestTests {
 
-	private final Jackson2SockJsMessageCodec CODEC = new Jackson2SockJsMessageCodec();
+	private final Jackson2SockJsMessageCodec codec = new Jackson2SockJsMessageCodec();
 
-	private CompletableFuture<WebSocketSession> connectFuture = new CompletableFuture<>();
+	private final CompletableFuture<WebSocketSession> connectFuture = new CompletableFuture<>();
 
-	private BiConsumer<WebSocketSession, Throwable> connectCallback = mock();
+	private final BiConsumer<WebSocketSession, Throwable> connectCallback = mock();
 
-	private TestTransport webSocketTransport = new TestTransport("WebSocketTestTransport");
+	private final TestTransport webSocketTransport = new TestTransport("WebSocketTestTransport");
 
-	private TestTransport xhrTransport = new TestTransport("XhrTestTransport");
+	private final TestTransport xhrTransport = new TestTransport("XhrTestTransport");
 
 
 	@BeforeEach
@@ -119,7 +119,7 @@ class DefaultTransportRequestTests {
 
 	protected DefaultTransportRequest createTransportRequest(Transport transport, TransportType type) {
 		SockJsUrlInfo urlInfo = new SockJsUrlInfo(URI.create("https://example.com"));
-		return new DefaultTransportRequest(urlInfo, new HttpHeaders(), new HttpHeaders(), transport, type, CODEC);
+		return new DefaultTransportRequest(urlInfo, new HttpHeaders(), new HttpHeaders(), transport, type, codec);
 	}
 
 }

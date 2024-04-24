@@ -200,19 +200,19 @@ public class Indexer extends SpelNodeImpl {
 	@Override
 	public boolean isCompilable() {
 		if (this.indexedType == IndexedType.ARRAY) {
-			return (this.exitTypeDescriptor != null);
+			return this.exitTypeDescriptor != null;
 		}
 		else if (this.indexedType == IndexedType.LIST) {
 			return this.children[0].isCompilable();
 		}
 		else if (this.indexedType == IndexedType.MAP) {
-			return (this.children[0] instanceof PropertyOrFieldReference || this.children[0].isCompilable());
+			return this.children[0] instanceof PropertyOrFieldReference || this.children[0].isCompilable();
 		}
 		else if (this.indexedType == IndexedType.OBJECT) {
 			// If the string name is changing the accessor is clearly going to change (so no compilation possible)
-			return (this.cachedReadAccessor != null &&
+			return this.cachedReadAccessor != null &&
 					this.cachedReadAccessor instanceof ReflectivePropertyAccessor.OptimalPropertyAccessor &&
-					getChild(0) instanceof StringLiteral);
+					getChild(0) instanceof StringLiteral;
 		}
 		return false;
 	}
@@ -280,7 +280,7 @@ public class Indexer extends SpelNodeImpl {
 			mv.visitTypeInsn(CHECKCAST, "java/util/Map");
 			// Special case when the key is an unquoted string literal that will be parsed as
 			// a property/field reference
-			if ((this.children[0] instanceof PropertyOrFieldReference reference)) {
+			if (this.children[0] instanceof PropertyOrFieldReference reference) {
 				String mapKeyName = reference.getName();
 				mv.visitLdcInsn(mapKeyName);
 			}

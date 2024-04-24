@@ -116,7 +116,7 @@ public abstract class AbstractJsonMessageConverter extends AbstractMessageConver
 
 	private Charset getCharsetToUse(@Nullable MessageHeaders headers) {
 		MimeType mimeType = getMimeType(headers);
-		return (mimeType != null && mimeType.getCharset() != null ? mimeType.getCharset() : DEFAULT_CHARSET);
+		return mimeType != null && mimeType.getCharset() != null ? mimeType.getCharset() : DEFAULT_CHARSET;
 	}
 
 

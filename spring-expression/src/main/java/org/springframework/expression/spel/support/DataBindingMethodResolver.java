@@ -62,7 +62,7 @@ public final class DataBindingMethodResolver extends ReflectiveMethodResolver {
 			return false;
 		}
 		Class<?> clazz = method.getDeclaringClass();
-		return (clazz != Object.class && clazz != Class.class && !ClassLoader.class.isAssignableFrom(targetClass));
+		return clazz != Object.class && clazz != Class.class && !ClassLoader.class.isAssignableFrom(targetClass);
 	}
 
 

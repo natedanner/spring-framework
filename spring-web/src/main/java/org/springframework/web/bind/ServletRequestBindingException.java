@@ -97,8 +97,8 @@ public class ServletRequestBindingException extends ServletException implements 
 	}
 
 	private String initMessageDetailCode(@Nullable String messageDetailCode) {
-		return (messageDetailCode != null ?
-				messageDetailCode : ErrorResponse.getDefaultDetailMessageCode(getClass(), null));
+		return messageDetailCode != null ?
+				messageDetailCode : ErrorResponse.getDefaultDetailMessageCode(getClass(), null);
 	}
 
 

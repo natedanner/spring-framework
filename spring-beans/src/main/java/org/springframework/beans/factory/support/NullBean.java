@@ -41,7 +41,7 @@ final class NullBean {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || other == null);
+		return this == other || other == null;
 	}
 
 	@Override

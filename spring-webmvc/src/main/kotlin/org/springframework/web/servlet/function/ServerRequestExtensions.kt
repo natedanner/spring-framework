@@ -69,7 +69,10 @@ fun ServerRequest.principalOrNull(): Principal? = principal().orElse(null)
  * @author Sebastien Deleuze
  * @since 5.2
  */
-fun ServerRequest.Headers.contentLengthOrNull(): Long? = contentLength().let { if (it.isPresent) it.asLong else null }
+fun ServerRequest.Headers.contentLengthOrNull(): Long? = contentLength().let { if (it.isPresent) {
+    it.asLong
+} else { null
+} }
 
 /**
  * Nullable variant of [ServerRequest.Headers.contentType]

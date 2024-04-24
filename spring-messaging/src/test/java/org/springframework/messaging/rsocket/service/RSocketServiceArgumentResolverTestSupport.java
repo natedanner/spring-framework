@@ -53,7 +53,7 @@ public abstract class RSocketServiceArgumentResolverTestSupport {
 	}
 
 	protected RSocketRequestValues getRequestValues() {
-		this.requestValues = (this.requestValues != null ? this.requestValues : this.requestValuesBuilder.build());
+		this.requestValues = this.requestValues != null ? this.requestValues : this.requestValuesBuilder.build();
 		return this.requestValues;
 	}
 

@@ -176,12 +176,12 @@ public class SpringExtension implements BeforeAllCallback, AfterAllCallback, Tes
 		String errorMessage = store.getOrComputeIfAbsent(context.getRequiredTestClass(), testClass -> {
 				Method[] methodsWithErrors =
 						ReflectionUtils.getUniqueDeclaredMethods(testClass, autowiredTestOrLifecycleMethodFilter);
-				return (methodsWithErrors.length == 0 ? NO_VIOLATIONS_DETECTED :
+				return methodsWithErrors.length == 0 ? NO_VIOLATIONS_DETECTED :
 						String.format(
 								"Test methods and test lifecycle methods must not be annotated with @Autowired. " +
 								"You should instead annotate individual method parameters with @Autowired, " +
 								"@Qualifier, or @Value. Offending methods in test class %s: %s",
-								testClass.getName(), Arrays.toString(methodsWithErrors)));
+								testClass.getName(), Arrays.toString(methodsWithErrors));
 			}, String.class);
 
 		if (!errorMessage.isEmpty()) {
@@ -310,10 +310,10 @@ public class SpringExtension implements BeforeAllCallback, AfterAllCallback, Tes
 		Class<?> testClass = extensionContext.getRequiredTestClass();
 		PropertyProvider junitPropertyProvider = propertyName ->
 				extensionContext.getConfigurationParameter(propertyName).orElse(null);
-		return (TestConstructorUtils.isAutowirableConstructor(executable, testClass, junitPropertyProvider) ||
+		return TestConstructorUtils.isAutowirableConstructor(executable, testClass, junitPropertyProvider) ||
 				ApplicationContext.class.isAssignableFrom(parameter.getType()) ||
 				supportsApplicationEvents(parameterContext) ||
-				ParameterResolutionDelegate.isAutowirable(parameter, parameterContext.getIndex()));
+				ParameterResolutionDelegate.isAutowirable(parameter, parameterContext.getIndex());
 	}
 
 	private boolean supportsApplicationEvents(ParameterContext parameterContext) {

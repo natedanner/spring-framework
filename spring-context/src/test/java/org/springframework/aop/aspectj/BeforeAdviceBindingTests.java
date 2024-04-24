@@ -42,7 +42,7 @@ class BeforeAdviceBindingTests {
 
 	private ClassPathXmlApplicationContext ctx;
 
-	private AdviceBindingCollaborator mockCollaborator = mock();
+	private final AdviceBindingCollaborator mockCollaborator = mock();
 
 	private ITestBean testBeanProxy;
 

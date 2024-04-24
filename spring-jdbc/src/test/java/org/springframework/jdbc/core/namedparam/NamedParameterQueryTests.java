@@ -46,17 +46,17 @@ import static org.mockito.Mockito.verify;
  */
 class NamedParameterQueryTests {
 
-	private Connection connection = mock();
+	private final Connection connection = mock();
 
-	private DataSource dataSource = mock();
+	private final DataSource dataSource = mock();
 
-	private PreparedStatement preparedStatement = mock();
+	private final PreparedStatement preparedStatement = mock();
 
-	private ResultSet resultSet = mock();
+	private final ResultSet resultSet = mock();
 
-	private ResultSetMetaData resultSetMetaData = mock();
+	private final ResultSetMetaData resultSetMetaData = mock();
 
-	private NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(dataSource);
+	private final NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(dataSource);
 
 
 	@BeforeEach

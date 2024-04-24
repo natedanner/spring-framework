@@ -49,8 +49,8 @@ final class ForwardRequestPostProcessor implements RequestPostProcessor {
 	private String initServletPath(String contextPath) {
 		if (StringUtils.hasText(contextPath)) {
 			Assert.state(this.forwardedUrl.startsWith(contextPath), "Forward supported to same contextPath only");
-			return (this.forwardedUrl.length() > contextPath.length() ?
-					this.forwardedUrl.substring(contextPath.length()) : "");
+			return this.forwardedUrl.length() > contextPath.length() ?
+					this.forwardedUrl.substring(contextPath.length()) : "";
 		}
 		else {
 			return this.forwardedUrl;

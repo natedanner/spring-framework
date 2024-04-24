@@ -42,11 +42,11 @@ import static org.mockito.Mockito.verify;
  */
 class HttpSendingTransportHandlerTests extends AbstractHttpRequestTests {
 
-	private WebSocketHandler webSocketHandler = mock();
+	private final WebSocketHandler webSocketHandler = mock();
 
-	private TaskScheduler taskScheduler = mock();
+	private final TaskScheduler taskScheduler = mock();
 
-	private StubSockJsServiceConfig sockJsConfig = new StubSockJsServiceConfig();
+	private final StubSockJsServiceConfig sockJsConfig = new StubSockJsServiceConfig();
 
 
 	@BeforeEach

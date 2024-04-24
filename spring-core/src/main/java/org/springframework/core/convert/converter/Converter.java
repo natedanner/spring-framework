@@ -60,7 +60,7 @@ public interface Converter<S, T> {
 		Assert.notNull(after, "'after' Converter must not be null");
 		return (S s) -> {
 			T initialResult = convert(s);
-			return (initialResult != null ? after.convert(initialResult) : null);
+			return initialResult != null ? after.convert(initialResult) : null;
 		};
 	}
 

@@ -127,7 +127,7 @@ public class FieldRetrievingFactoryBean
 	 * @see #setTargetObject
 	 */
 	public void setTargetField(@Nullable String targetField) {
-		this.targetField = (targetField != null ? StringUtils.trimAllWhitespace(targetField) : null);
+		this.targetField = targetField != null ? StringUtils.trimAllWhitespace(targetField) : null;
 	}
 
 	/**
@@ -203,7 +203,7 @@ public class FieldRetrievingFactoryBean
 		}
 
 		// Try to get the exact method first.
-		Class<?> targetClass = (this.targetObject != null ? this.targetObject.getClass() : this.targetClass);
+		Class<?> targetClass = this.targetObject != null ? this.targetObject.getClass() : this.targetClass;
 		this.fieldObject = targetClass.getField(this.targetField);
 	}
 
@@ -227,7 +227,7 @@ public class FieldRetrievingFactoryBean
 
 	@Override
 	public Class<?> getObjectType() {
-		return (this.fieldObject != null ? this.fieldObject.getType() : null);
+		return this.fieldObject != null ? this.fieldObject.getType() : null;
 	}
 
 	@Override

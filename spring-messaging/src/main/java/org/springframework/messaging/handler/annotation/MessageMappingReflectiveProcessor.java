@@ -114,8 +114,8 @@ public class MessageMappingReflectiveProcessor implements ReflectiveProcessor {
 	@Nullable
 	protected Type getMessageType(MethodParameter parameter) {
 		MethodParameter nestedParameter = parameter.nested();
-		return (nestedParameter.getNestedParameterType() == nestedParameter.getParameterType() ?
-				null : nestedParameter.getNestedParameterType());
+		return nestedParameter.getNestedParameterType() == nestedParameter.getParameterType() ?
+				null : nestedParameter.getNestedParameterType();
 	}
 
 }

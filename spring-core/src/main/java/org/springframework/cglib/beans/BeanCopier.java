@@ -39,7 +39,7 @@ import org.springframework.cglib.core.TypeUtils;
  * @author Chris Nokleberg
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class BeanCopier
+public abstract class BeanCopier
 {
 	private static final BeanCopierKey KEY_FACTORY =
 	  (BeanCopierKey)KeyFactory.create(BeanCopierKey.class);
@@ -64,7 +64,7 @@ abstract public class BeanCopier
 		return gen.create();
 	}
 
-	abstract public void copy(Object from, Object to, Converter converter);
+	public abstract void copy(Object from, Object to, Converter converter);
 
 	public static class Generator extends AbstractClassGenerator {
 		private static final Source SOURCE = new Source(BeanCopier.class.getName());

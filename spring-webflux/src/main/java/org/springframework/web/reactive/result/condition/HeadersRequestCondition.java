@@ -65,11 +65,11 @@ public final class HeadersRequestCondition extends AbstractRequestCondition<Head
 				if ("Accept".equalsIgnoreCase(expr.name) || "Content-Type".equalsIgnoreCase(expr.name)) {
 					continue;
 				}
-				result = (result != null ? result : new LinkedHashSet<>(headers.length));
+				result = result != null ? result : new LinkedHashSet<>(headers.length);
 				result.add(expr);
 			}
 		}
-		return (result != null ? result : Collections.emptySet());
+		return result != null ? result : Collections.emptySet();
 	}
 
 	private HeadersRequestCondition(Set<HeaderExpression> conditions) {
@@ -184,12 +184,12 @@ public final class HeadersRequestCondition extends AbstractRequestCondition<Head
 
 		@Override
 		protected boolean matchName(ServerWebExchange exchange) {
-			return (exchange.getRequest().getHeaders().get(this.name) != null);
+			return exchange.getRequest().getHeaders().get(this.name) != null;
 		}
 
 		@Override
 		protected boolean matchValue(ServerWebExchange exchange) {
-			return (this.value != null && this.value.equals(exchange.getRequest().getHeaders().getFirst(this.name)));
+			return this.value != null && this.value.equals(exchange.getRequest().getHeaders().getFirst(this.name));
 		}
 	}
 

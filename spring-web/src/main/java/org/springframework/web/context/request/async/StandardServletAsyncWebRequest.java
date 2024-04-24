@@ -97,7 +97,7 @@ public class StandardServletAsyncWebRequest extends ServletWebRequest implements
 
 	@Override
 	public boolean isAsyncStarted() {
-		return (this.asyncContext != null && getRequest().isAsyncStarted());
+		return this.asyncContext != null && getRequest().isAsyncStarted();
 	}
 
 	/**

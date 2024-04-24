@@ -121,7 +121,7 @@ public class TransactionAwareConnectionFactoryProxy extends DelegatingConnection
 
 		private final ConnectionFactory targetConnectionFactory;
 
-		private boolean closed = false;
+		private boolean closed;
 
 		TransactionAwareInvocationHandler(Connection connection, ConnectionFactory targetConnectionFactory) {
 			this.connection = connection;
@@ -136,7 +136,7 @@ public class TransactionAwareConnectionFactoryProxy extends DelegatingConnection
 					return proxyToString(proxy);
 				}
 				if (ReflectionUtils.isEqualsMethod(method)) {
-					return (proxy == args[0]);
+					return proxy == args[0];
 				}
 				if (ReflectionUtils.isHashCodeMethod(method)) {
 					return System.identityHashCode(proxy);

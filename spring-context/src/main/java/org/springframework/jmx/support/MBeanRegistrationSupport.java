@@ -164,7 +164,7 @@ public class MBeanRegistrationSupport {
 			}
 
 			// Track registration and notify listeners.
-			actualObjectName = (registeredBean != null ? registeredBean.getObjectName() : null);
+			actualObjectName = registeredBean != null ? registeredBean.getObjectName() : null;
 			if (actualObjectName == null) {
 				actualObjectName = objectName;
 			}

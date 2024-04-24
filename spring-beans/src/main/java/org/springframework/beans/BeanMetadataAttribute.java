@@ -82,10 +82,10 @@ public class BeanMetadataAttribute implements BeanMetadataElement {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other ||(other instanceof BeanMetadataAttribute that &&
+		return this == other ||(other instanceof BeanMetadataAttribute that &&
 				this.name.equals(that.name) &&
 				ObjectUtils.nullSafeEquals(this.value, that.value) &&
-				ObjectUtils.nullSafeEquals(this.source, that.source)));
+				ObjectUtils.nullSafeEquals(this.source, that.source));
 	}
 
 	@Override

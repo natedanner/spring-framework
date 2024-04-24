@@ -40,7 +40,7 @@ abstract class FormatHelper {
 	static String formatMethodForMessage(String name, List<TypeDescriptor> argumentTypes) {
 		StringJoiner sj = new StringJoiner(",", "(", ")");
 		for (TypeDescriptor typeDescriptor : argumentTypes) {
-			String className = (typeDescriptor != null ? formatClassNameForMessage(typeDescriptor.getType()) : "null");
+			String className = typeDescriptor != null ? formatClassNameForMessage(typeDescriptor.getType()) : "null";
 			sj.add(className);
 		}
 		return name + sj;
@@ -54,7 +54,7 @@ abstract class FormatHelper {
 	 * @see ClassUtils#getQualifiedName(Class)
 	 */
 	static String formatClassNameForMessage(@Nullable Class<?> clazz) {
-		return (clazz != null ? ClassUtils.getQualifiedName(clazz) : "null");
+		return clazz != null ? ClassUtils.getQualifiedName(clazz) : "null";
 	}
 
 }

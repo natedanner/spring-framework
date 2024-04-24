@@ -157,7 +157,7 @@ public class UndertowTestServer implements WebSocketTestServer {
 	}
 
 
-	private static class FilterInstanceFactory implements InstanceFactory<Filter> {
+	private static final class FilterInstanceFactory implements InstanceFactory<Filter> {
 
 		private final Filter filter;
 

@@ -56,9 +56,9 @@ public class CacheEvictOperation extends CacheOperation {
 	 */
 	public static class Builder extends CacheOperation.Builder {
 
-		private boolean cacheWide = false;
+		private boolean cacheWide;
 
-		private boolean beforeInvocation = false;
+		private boolean beforeInvocation;
 
 		public void setCacheWide(boolean cacheWide) {
 			this.cacheWide = cacheWide;

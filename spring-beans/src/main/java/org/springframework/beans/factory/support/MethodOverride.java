@@ -106,9 +106,9 @@ public abstract class MethodOverride implements BeanMetadataElement {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof MethodOverride that &&
+		return this == other || (other instanceof MethodOverride that &&
 				ObjectUtils.nullSafeEquals(this.methodName, that.methodName) &&
-				ObjectUtils.nullSafeEquals(this.source, that.source)));
+				ObjectUtils.nullSafeEquals(this.source, that.source));
 	}
 
 	@Override

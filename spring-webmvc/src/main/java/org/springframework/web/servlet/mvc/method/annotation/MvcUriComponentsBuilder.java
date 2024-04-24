@@ -183,7 +183,7 @@ public class MvcUriComponentsBuilder {
 		builder.path(prefix);
 
 		String mapping = getClassMapping(controllerType);
-		mapping = (!StringUtils.hasText(prefix + mapping) ? "/" : mapping);
+		mapping = StringUtils.hasText(prefix + mapping) ? mapping : "/";
 		builder.path(mapping);
 
 		return builder;
@@ -611,7 +611,7 @@ public class MvcUriComponentsBuilder {
 		MethodFilter selector = method -> {
 			String name = method.getName();
 			int argLength = method.getParameterCount();
-			return (name.equals(methodName) && argLength == args.length);
+			return name.equals(methodName) && argLength == args.length;
 		};
 		Set<Method> methods = MethodIntrospector.selectMethods(controllerType, selector);
 		if (methods.size() == 1) {
@@ -752,7 +752,7 @@ public class MvcUriComponentsBuilder {
 						this.argumentValues = args;
 						Class<?> returnType = method.getReturnType();
 						try {
-							return (returnType == void.class ? null : returnType.cast(initProxy(returnType, this)));
+							return returnType == void.class ? null : returnType.cast(initProxy(returnType, this));
 						}
 						catch (Throwable ex) {
 							throw new IllegalStateException(
@@ -791,8 +791,8 @@ public class MvcUriComponentsBuilder {
 		private static <T> T initProxy(
 				Class<?> controllerType, @Nullable ControllerMethodInvocationInterceptor interceptor) {
 
-			interceptor = (interceptor != null ?
-					interceptor : new ControllerMethodInvocationInterceptor(controllerType));
+			interceptor = interceptor != null ?
+					interceptor : new ControllerMethodInvocationInterceptor(controllerType);
 
 			if (controllerType == Object.class) {
 				return (T) interceptor;
@@ -887,7 +887,7 @@ public class MvcUriComponentsBuilder {
 		public MethodArgumentBuilder(@Nullable UriComponentsBuilder baseUrl, Class<?> controllerType, Method method) {
 			Assert.notNull(controllerType, "'controllerType' is required");
 			Assert.notNull(method, "'method' is required");
-			this.baseUrl = (baseUrl != null ? baseUrl : UriComponentsBuilder.fromPath(getPath()));
+			this.baseUrl = baseUrl != null ? baseUrl : UriComponentsBuilder.fromPath(getPath());
 			this.controllerType = controllerType;
 			this.method = method;
 			this.argumentValues = new Object[method.getParameterCount()];
@@ -896,7 +896,7 @@ public class MvcUriComponentsBuilder {
 		private static String getPath() {
 			UriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentServletMapping();
 			String path = builder.build().getPath();
-			return (path != null ? path : "");
+			return path != null ? path : "";
 		}
 
 		public MethodArgumentBuilder arg(int index, Object value) {

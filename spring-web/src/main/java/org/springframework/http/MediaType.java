@@ -577,7 +577,7 @@ public class MediaType extends MimeType implements Serializable {
 	 */
 	public double getQualityValue() {
 		String qualityFactor = getParameter(PARAM_QUALITY_FACTOR);
-		return (qualityFactor != null ? Double.parseDouble(unquote(qualityFactor)) : 1D);
+		return qualityFactor != null ? Double.parseDouble(unquote(qualityFactor)) : 1D;
 	}
 
 	/**

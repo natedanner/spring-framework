@@ -42,9 +42,9 @@ public abstract class AbstractJpaVendorAdapter implements JpaVendorAdapter {
 	@Nullable
 	private String databasePlatform;
 
-	private boolean generateDdl = false;
+	private boolean generateDdl;
 
-	private boolean showSql = false;
+	private boolean showSql;
 
 
 	/**

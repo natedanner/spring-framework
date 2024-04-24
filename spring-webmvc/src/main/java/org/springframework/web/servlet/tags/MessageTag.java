@@ -174,7 +174,7 @@ public class MessageTag extends HtmlEscapingAwareTag implements ArgumentAware {
 
 	private String scope = TagUtils.SCOPE_PAGE;
 
-	private boolean javaScriptEscape = false;
+	private boolean javaScriptEscape;
 
 
 	/**
@@ -326,7 +326,7 @@ public class MessageTag extends HtmlEscapingAwareTag implements ArgumentAware {
 				// We have a fallback text to consider.
 				String msg = messageSource.getMessage(
 						this.code, argumentsArray, this.text, getRequestContext().getLocale());
-				return (msg != null ? msg : "");
+				return msg != null ? msg : "";
 			}
 			else {
 				// We have no fallback text to consider.

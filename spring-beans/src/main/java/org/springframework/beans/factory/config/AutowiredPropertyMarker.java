@@ -53,7 +53,7 @@ public final class AutowiredPropertyMarker implements Serializable {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other);
+		return this == other;
 	}
 
 	@Override

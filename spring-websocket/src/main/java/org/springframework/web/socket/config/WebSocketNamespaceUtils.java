@@ -89,7 +89,7 @@ abstract class WebSocketNamespaceUtils {
 			Element transportHandlersElement = DomUtils.getChildElementByTagName(sockJsElement, "transport-handlers");
 			if (transportHandlersElement != null) {
 				String registerDefaults = transportHandlersElement.getAttribute("register-defaults");
-				if (registerDefaults.equals("false")) {
+				if ("false".equals(registerDefaults)) {
 					sockJsServiceDef.setBeanClass(TransportHandlingSockJsService.class);
 				}
 				ManagedList<?> transportHandlers = parseBeanSubElements(transportHandlersElement, context);

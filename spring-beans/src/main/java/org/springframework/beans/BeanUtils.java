@@ -201,7 +201,7 @@ public abstract class BeanUtils {
 				for (int i = 0 ; i < args.length; i++) {
 					if (args[i] == null) {
 						Class<?> parameterType = parameterTypes[i];
-						argsWithDefaultValues[i] = (parameterType.isPrimitive() ? DEFAULT_TYPE_VALUES.get(parameterType) : null);
+						argsWithDefaultValues[i] = parameterType.isPrimitive() ? DEFAULT_TYPE_VALUES.get(parameterType) : null;
 					}
 					else {
 						argsWithDefaultValues[i] = args[i];
@@ -637,7 +637,7 @@ public abstract class BeanUtils {
 	 */
 	public static String[] getParameterNames(Constructor<?> ctor) {
 		ConstructorProperties cp = ctor.getAnnotation(ConstructorProperties.class);
-		String[] paramNames = (cp != null ? cp.value() : parameterNameDiscoverer.getParameterNames(ctor));
+		String[] paramNames = cp != null ? cp.value() : parameterNameDiscoverer.getParameterNames(ctor);
 		Assert.state(paramNames != null, () -> "Cannot resolve parameter names for constructor " + ctor);
 		Assert.state(paramNames.length == ctor.getParameterCount(),
 				() -> "Invalid number of parameter names: " + paramNames.length + " for constructor " + ctor);
@@ -787,15 +787,15 @@ public abstract class BeanUtils {
 			actualEditable = editable;
 		}
 		PropertyDescriptor[] targetPds = getPropertyDescriptors(actualEditable);
-		Set<String> ignoredProps = (ignoreProperties != null ? new HashSet<>(Arrays.asList(ignoreProperties)) : null);
-		CachedIntrospectionResults sourceResults = (actualEditable != source.getClass() ?
-				CachedIntrospectionResults.forClass(source.getClass()) : null);
+		Set<String> ignoredProps = ignoreProperties != null ? new HashSet<>(Arrays.asList(ignoreProperties)) : null;
+		CachedIntrospectionResults sourceResults = actualEditable != source.getClass() ?
+				CachedIntrospectionResults.forClass(source.getClass()) : null;
 
 		for (PropertyDescriptor targetPd : targetPds) {
 			Method writeMethod = targetPd.getWriteMethod();
 			if (writeMethod != null && (ignoredProps == null || !ignoredProps.contains(targetPd.getName()))) {
-				PropertyDescriptor sourcePd = (sourceResults != null ?
-						sourceResults.getPropertyDescriptor(targetPd.getName()) : targetPd);
+				PropertyDescriptor sourcePd = sourceResults != null ?
+						sourceResults.getPropertyDescriptor(targetPd.getName()) : targetPd;
 				if (sourcePd != null) {
 					Method readMethod = sourcePd.getReadMethod();
 					if (readMethod != null) {
@@ -831,9 +831,9 @@ public abstract class BeanUtils {
 			ResolvableType sourceType = ((GenericTypeAwarePropertyDescriptor) sourcePd).getReadMethodType();
 			ResolvableType targetType = ((GenericTypeAwarePropertyDescriptor) targetPd).getWriteMethodType();
 			// Ignore generic types in assignable check if either ResolvableType has unresolvable generics.
-			return (sourceType.hasUnresolvableGenerics() || targetType.hasUnresolvableGenerics() ?
+			return sourceType.hasUnresolvableGenerics() || targetType.hasUnresolvableGenerics() ?
 					ClassUtils.isAssignable(writeMethod.getParameterTypes()[0], readMethod.getReturnType()) :
-					targetType.isAssignableFrom(sourceType));
+					targetType.isAssignableFrom(sourceType);
 		}
 	}
 
@@ -891,7 +891,7 @@ public abstract class BeanUtils {
 				return ctor.newInstance(args);
 			}
 
-			if ((!Modifier.isPublic(ctor.getModifiers()) || !Modifier.isPublic(ctor.getDeclaringClass().getModifiers()))) {
+			if (!Modifier.isPublic(ctor.getModifiers()) || !Modifier.isPublic(ctor.getDeclaringClass().getModifiers())) {
 				KCallablesJvm.setAccessible(kotlinConstructor, true);
 			}
 

@@ -215,20 +215,20 @@ public class StaticListableBeanFactory implements ListableBeanFactory {
 	public boolean isPrototype(String name) throws NoSuchBeanDefinitionException {
 		Object bean = getBean(name);
 		// In case of FactoryBean, return prototype status of created object.
-		return ((bean instanceof SmartFactoryBean<?> smartFactoryBean && smartFactoryBean.isPrototype()) ||
-				(bean instanceof FactoryBean<?> factoryBean && !factoryBean.isSingleton()));
+		return (bean instanceof SmartFactoryBean<?> smartFactoryBean && smartFactoryBean.isPrototype()) ||
+				(bean instanceof FactoryBean<?> factoryBean && !factoryBean.isSingleton());
 	}
 
 	@Override
 	public boolean isTypeMatch(String name, ResolvableType typeToMatch) throws NoSuchBeanDefinitionException {
 		Class<?> type = getType(name);
-		return (type != null && typeToMatch.isAssignableFrom(type));
+		return type != null && typeToMatch.isAssignableFrom(type);
 	}
 
 	@Override
 	public boolean isTypeMatch(String name, @Nullable Class<?> typeToMatch) throws NoSuchBeanDefinitionException {
 		Class<?> type = getType(name);
-		return (typeToMatch == null || (type != null && typeToMatch.isAssignableFrom(type)));
+		return typeToMatch == null || (type != null && typeToMatch.isAssignableFrom(type));
 	}
 
 	@Override
@@ -358,7 +358,7 @@ public class StaticListableBeanFactory implements ListableBeanFactory {
 	public String[] getBeanNamesForType(@Nullable ResolvableType type,
 			boolean includeNonSingletons, boolean allowEagerInit) {
 
-		Class<?> resolved = (type != null ? type.resolve() : null);
+		Class<?> resolved = type != null ? type.resolve() : null;
 		boolean isFactoryType = resolved != null && FactoryBean.class.isAssignableFrom(resolved);
 		List<String> matches = new ArrayList<>();
 
@@ -401,7 +401,7 @@ public class StaticListableBeanFactory implements ListableBeanFactory {
 	public <T> Map<String, T> getBeansOfType(@Nullable Class<T> type, boolean includeNonSingletons, boolean allowEagerInit)
 			throws BeansException {
 
-		boolean isFactoryType = (type != null && FactoryBean.class.isAssignableFrom(type));
+		boolean isFactoryType = type != null && FactoryBean.class.isAssignableFrom(type);
 		Map<String, T> matches = new LinkedHashMap<>();
 
 		for (Map.Entry<String, Object> entry : this.beans.entrySet()) {
@@ -469,7 +469,7 @@ public class StaticListableBeanFactory implements ListableBeanFactory {
 			throws NoSuchBeanDefinitionException {
 
 		Class<?> beanType = getType(beanName, allowFactoryBeanInit);
-		return (beanType != null ? AnnotatedElementUtils.findMergedAnnotation(beanType, annotationType) : null);
+		return beanType != null ? AnnotatedElementUtils.findMergedAnnotation(beanType, annotationType) : null;
 	}
 
 	@Override
@@ -477,8 +477,8 @@ public class StaticListableBeanFactory implements ListableBeanFactory {
 			String beanName, Class<A> annotationType, boolean allowFactoryBeanInit) throws NoSuchBeanDefinitionException {
 
 		Class<?> beanType = getType(beanName, allowFactoryBeanInit);
-		return (beanType != null ?
-				AnnotatedElementUtils.findAllMergedAnnotations(beanType, annotationType) : Collections.emptySet());
+		return beanType != null ?
+				AnnotatedElementUtils.findAllMergedAnnotations(beanType, annotationType) : Collections.emptySet();
 	}
 
 }

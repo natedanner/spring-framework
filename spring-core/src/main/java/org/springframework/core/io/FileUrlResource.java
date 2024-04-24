@@ -90,7 +90,7 @@ public class FileUrlResource extends UrlResource implements WritableResource {
 	public boolean isWritable() {
 		try {
 			File file = getFile();
-			return (file.canWrite() && !file.isDirectory());
+			return file.canWrite() && !file.isDirectory();
 		}
 		catch (IOException ex) {
 			return false;

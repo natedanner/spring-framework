@@ -174,8 +174,8 @@ public abstract class ExtendedEntityManagerCreator {
 			return createProxy(rawEntityManager, emfInfo, true, synchronizedWithTransaction);
 		}
 		else {
-			EntityManager rawEntityManager = (!CollectionUtils.isEmpty(properties) ?
-					emf.createEntityManager(properties) : emf.createEntityManager());
+			EntityManager rawEntityManager = CollectionUtils.isEmpty(properties) ? emf.createEntityManager() :
+					emf.createEntityManager(properties);
 			return createProxy(rawEntityManager, null, null, null, null, true, synchronizedWithTransaction);
 		}
 	}
@@ -198,7 +198,7 @@ public abstract class ExtendedEntityManagerCreator {
 		Assert.notNull(emfInfo, "EntityManagerFactoryInfo must not be null");
 		JpaDialect jpaDialect = emfInfo.getJpaDialect();
 		PersistenceUnitInfo pui = emfInfo.getPersistenceUnitInfo();
-		Boolean jta = (pui != null ? pui.getTransactionType() == PersistenceUnitTransactionType.JTA : null);
+		Boolean jta = pui != null ? pui.getTransactionType() == PersistenceUnitTransactionType.JTA : null;
 		return createProxy(rawEntityManager, emfInfo.getEntityManagerInterface(),
 				emfInfo.getBeanClassLoader(), jpaDialect, jta, containerManaged, synchronizedWithTransaction);
 	}
@@ -275,7 +275,7 @@ public abstract class ExtendedEntityManagerCreator {
 
 			this.target = target;
 			this.exceptionTranslator = exceptionTranslator;
-			this.jta = (jta != null ? jta : isJtaEntityManager());
+			this.jta = jta != null ? jta : isJtaEntityManager();
 			this.containerManaged = containerManaged;
 			this.synchronizedWithTransaction = synchronizedWithTransaction;
 		}
@@ -299,7 +299,7 @@ public abstract class ExtendedEntityManagerCreator {
 			switch (method.getName()) {
 				case "equals" -> {
 					// Only consider equal when proxies are identical.
-					return (proxy == args[0]);
+					return proxy == args[0];
 				}
 				case "hashCode" -> {
 					// Use hashCode of EntityManager proxy.
@@ -505,10 +505,10 @@ public abstract class ExtendedEntityManagerCreator {
 		}
 
 		private RuntimeException convertException(RuntimeException ex) {
-			DataAccessException dae = (this.exceptionTranslator != null) ?
+			DataAccessException dae = this.exceptionTranslator != null ?
 					this.exceptionTranslator.translateExceptionIfPossible(ex) :
 					EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(ex);
-			return (dae != null ? dae : ex);
+			return dae != null ? dae : ex;
 		}
 	}
 

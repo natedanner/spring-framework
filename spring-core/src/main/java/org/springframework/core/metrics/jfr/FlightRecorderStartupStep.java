@@ -122,7 +122,7 @@ class FlightRecorderStartupStep implements StartupStep {
 
 		private class TagsIterator implements Iterator<Tag> {
 
-			private int idx = 0;
+			private int idx;
 
 			@Override
 			public boolean hasNext() {

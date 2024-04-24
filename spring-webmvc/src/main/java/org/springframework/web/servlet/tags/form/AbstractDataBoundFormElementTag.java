@@ -86,7 +86,7 @@ public abstract class AbstractDataBoundFormElementTag extends AbstractFormTag im
 	 */
 	protected final String getPath() throws JspException {
 		String resolvedPath = (String) evaluate("path", this.path);
-		return (resolvedPath != null ? resolvedPath : "");
+		return resolvedPath != null ? resolvedPath : "";
 	}
 
 	/**
@@ -134,7 +134,7 @@ public abstract class AbstractDataBoundFormElementTag extends AbstractFormTag im
 		Object id = evaluate("id", getId());
 		if (id != null) {
 			String idString = id.toString();
-			return (StringUtils.hasText(idString) ? idString : null);
+			return StringUtils.hasText(idString) ? idString : null;
 		}
 		return autogenerateId();
 	}
@@ -147,7 +147,7 @@ public abstract class AbstractDataBoundFormElementTag extends AbstractFormTag im
 	@Nullable
 	protected String autogenerateId() throws JspException {
 		String name = getName();
-		return (name != null ? StringUtils.deleteAny(name, "[]") : null);
+		return name != null ? StringUtils.deleteAny(name, "[]") : null;
 	}
 
 	/**
@@ -171,7 +171,7 @@ public abstract class AbstractDataBoundFormElementTag extends AbstractFormTag im
 		if (this.bindStatus == null) {
 			// HTML escaping in tags is performed by the ValueFormatter class.
 			String nestedPath = getNestedPath();
-			String pathToUse = (nestedPath != null ? nestedPath + getPath() : getPath());
+			String pathToUse = nestedPath != null ? nestedPath + getPath() : getPath();
 			if (pathToUse.endsWith(PropertyAccessor.NESTED_PROPERTY_SEPARATOR)) {
 				pathToUse = pathToUse.substring(0, pathToUse.length() - 1);
 			}
@@ -197,7 +197,7 @@ public abstract class AbstractDataBoundFormElementTag extends AbstractFormTag im
 	 */
 	protected String getPropertyPath() throws JspException {
 		String expression = getBindStatus().getExpression();
-		return (expression != null ? expression : "");
+		return expression != null ? expression : "";
 	}
 
 	/**
@@ -232,7 +232,7 @@ public abstract class AbstractDataBoundFormElementTag extends AbstractFormTag im
 	 * that the BindStatus may have registered for the value's Class.
 	 */
 	protected String convertToDisplayString(@Nullable Object value) throws JspException {
-		PropertyEditor editor = (value != null ? getBindStatus().findEditor(value.getClass()) : null);
+		PropertyEditor editor = value != null ? getBindStatus().findEditor(value.getClass()) : null;
 		return getDisplayString(value, editor);
 	}
 

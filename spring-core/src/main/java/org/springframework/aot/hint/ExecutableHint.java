@@ -44,7 +44,7 @@ public final class ExecutableHint extends MemberHint implements Comparable<Execu
 	private ExecutableHint(Builder builder) {
 		super(builder.name);
 		this.parameterTypes = List.copyOf(builder.parameterTypes);
-		this.mode = (builder.mode != null ? builder.mode : ExecutableMode.INVOKE);
+		this.mode = builder.mode != null ? builder.mode : ExecutableMode.INVOKE;
 	}
 
 	/**

@@ -119,7 +119,7 @@ abstract class ScheduledAnnotationReactiveSupport {
 	public static Runnable createSubscriptionRunnable(Method method, Object targetBean, Scheduled scheduled,
 			Supplier<ObservationRegistry> observationRegistrySupplier, List<Runnable> subscriptionTrackerRegistry) {
 
-		boolean shouldBlock = (scheduled.fixedDelay() > 0 || StringUtils.hasText(scheduled.fixedDelayString()));
+		boolean shouldBlock = scheduled.fixedDelay() > 0 || StringUtils.hasText(scheduled.fixedDelayString());
 		Publisher<?> publisher = getPublisherFor(method, targetBean);
 		Supplier<ScheduledTaskObservationContext> contextSupplier =
 				() -> new ScheduledTaskObservationContext(targetBean, method);

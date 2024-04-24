@@ -80,7 +80,7 @@ public class SystemEnvironmentPropertySource extends MapPropertySource {
 	 */
 	@Override
 	public boolean containsProperty(String name) {
-		return (getProperty(name) != null);
+		return getProperty(name) != null;
 	}
 
 	/**

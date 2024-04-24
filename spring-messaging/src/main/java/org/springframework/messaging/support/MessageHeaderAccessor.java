@@ -114,11 +114,11 @@ public class MessageHeaderAccessor {
 
 	private final MutableMessageHeaders headers;
 
-	private boolean leaveMutable = false;
+	private boolean leaveMutable;
 
-	private boolean modified = false;
+	private boolean modified;
 
-	private boolean enableTimestamp = false;
+	private boolean enableTimestamp;
 
 	@Nullable
 	private IdGenerator idGenerator;
@@ -404,7 +404,7 @@ public class MessageHeaderAccessor {
 	}
 
 	protected boolean isReadOnly(String headerName) {
-		return (MessageHeaders.ID.equals(headerName) || MessageHeaders.TIMESTAMP.equals(headerName));
+		return MessageHeaders.ID.equals(headerName) || MessageHeaders.TIMESTAMP.equals(headerName);
 	}
 
 
@@ -416,7 +416,7 @@ public class MessageHeaderAccessor {
 		if (value == null) {
 			return null;
 		}
-		return (value instanceof UUID uuid ? uuid : UUID.fromString(value.toString()));
+		return value instanceof UUID uuid ? uuid : UUID.fromString(value.toString());
 	}
 
 	@Nullable
@@ -425,7 +425,7 @@ public class MessageHeaderAccessor {
 		if (value == null) {
 			return null;
 		}
-		return (value instanceof Long num ? num : Long.parseLong(value.toString()));
+		return value instanceof Long num ? num : Long.parseLong(value.toString());
 	}
 
 	public void setContentType(MimeType contentType) {
@@ -438,13 +438,13 @@ public class MessageHeaderAccessor {
 		if (value == null) {
 			return null;
 		}
-		return (value instanceof MimeType mimeType ? mimeType : MimeType.valueOf(value.toString()));
+		return value instanceof MimeType mimeType ? mimeType : MimeType.valueOf(value.toString());
 	}
 
 	private Charset getCharset() {
 		MimeType contentType = getContentType();
-		Charset charset = (contentType != null ? contentType.getCharset() : null);
-		return (charset != null ? charset : DEFAULT_CHARSET);
+		Charset charset = contentType != null ? contentType.getCharset() : null;
+		return charset != null ? charset : DEFAULT_CHARSET;
 	}
 
 	public void setReplyChannelName(String replyChannelName) {
@@ -496,13 +496,13 @@ public class MessageHeaderAccessor {
 
 	protected String getShortPayloadLogMessage(Object payload) {
 		if (payload instanceof String payloadText) {
-			return (payloadText.length() < 80) ?
+			return payloadText.length() < 80 ?
 				" payload=" + payloadText :
 				" payload=" + payloadText.substring(0, 80) + "...(truncated)";
 		}
 		else if (payload instanceof byte[] bytes) {
 			if (isReadableContentType()) {
-				return (bytes.length < 80) ?
+				return bytes.length < 80 ?
 						" payload=" + new String(bytes, getCharset()) :
 						" payload=" + new String(Arrays.copyOf(bytes, 80), getCharset()) + "...(truncated)";
 			}
@@ -512,7 +512,7 @@ public class MessageHeaderAccessor {
 		}
 		else {
 			String payloadText = payload.toString();
-			return (payloadText.length() < 80) ?
+			return payloadText.length() < 80 ?
 					" payload=" + payloadText :
 					" payload=" + ObjectUtils.identityToString(payload);
 		}
@@ -619,7 +619,7 @@ public class MessageHeaderAccessor {
 	public static MessageHeaderAccessor getMutableAccessor(Message<?> message) {
 		if (message.getHeaders() instanceof MutableMessageHeaders mutableHeaders) {
 			MessageHeaderAccessor accessor = mutableHeaders.getAccessor();
-			return (accessor.isMutable() ? accessor : accessor.createAccessor(message));
+			return accessor.isMutable() ? accessor : accessor.createAccessor(message);
 		}
 		return new MessageHeaderAccessor(message);
 	}
@@ -651,8 +651,8 @@ public class MessageHeaderAccessor {
 			}
 
 			if (getId() == null) {
-				IdGenerator idGenerator = (MessageHeaderAccessor.this.idGenerator != null ?
-						MessageHeaderAccessor.this.idGenerator : MessageHeaders.getIdGenerator());
+				IdGenerator idGenerator = MessageHeaderAccessor.this.idGenerator != null ?
+						MessageHeaderAccessor.this.idGenerator : MessageHeaders.getIdGenerator();
 				UUID id = idGenerator.generateId();
 				if (id != MessageHeaders.ID_VALUE_NONE) {
 					getRawHeaders().put(ID, id);

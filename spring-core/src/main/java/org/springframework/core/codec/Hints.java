@@ -93,7 +93,7 @@ public abstract class Hints {
 	 * @return the log prefix
 	 */
 	public static String getLogPrefix(@Nullable Map<String, Object> hints) {
-		return (hints != null ? (String) hints.getOrDefault(LOG_PREFIX_HINT, "") : "");
+		return hints != null ? (String) hints.getOrDefault(LOG_PREFIX_HINT, "") : "";
 	}
 
 	/**
@@ -102,7 +102,7 @@ public abstract class Hints {
 	 * @return whether logging of data is allowed
 	 */
 	public static boolean isLoggingSuppressed(@Nullable Map<String, Object> hints) {
-		return (hints != null && (boolean) hints.getOrDefault(SUPPRESS_LOGGING_HINT, false));
+		return hints != null && (boolean) hints.getOrDefault(SUPPRESS_LOGGING_HINT, false);
 	}
 
 	/**
@@ -119,7 +119,7 @@ public abstract class Hints {
 			return Collections.emptyMap();
 		}
 		else if (ObjectUtils.isEmpty(hints2)) {
-			return (hints1 != null ? hints1 : Collections.emptyMap());
+			return hints1 != null ? hints1 : Collections.emptyMap();
 		}
 		else if (ObjectUtils.isEmpty(hints1)) {
 			return hints2;

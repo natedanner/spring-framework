@@ -100,11 +100,11 @@ final class RSocketServiceMethod {
 
 		Assert.notNull(annot2, "Expected RSocketExchange annotation");
 
-		String route1 = (annot1 != null ? annot1.value() : null);
+		String route1 = annot1 != null ? annot1.value() : null;
 		String route2 = annot2.value();
 
 		if (embeddedValueResolver != null) {
-			route1 = (route1 != null ? embeddedValueResolver.resolveStringValue(route1) : null);
+			route1 = route1 != null ? embeddedValueResolver.resolveStringValue(route1) : null;
 			route2 = embeddedValueResolver.resolveStringValue(route2);
 		}
 
@@ -119,7 +119,7 @@ final class RSocketServiceMethod {
 			return null;
 		}
 
-		return (hasRoute2 ? route2 : route1);
+		return hasRoute2 ? route2 : route1;
 	}
 
 	private static Function<RSocketRequestValues, Object> initResponseFunction(
@@ -130,7 +130,7 @@ final class RSocketServiceMethod {
 		Class<?> returnType = returnParam.getParameterType();
 		ReactiveAdapter reactiveAdapter = reactiveRegistry.getAdapter(returnType);
 
-		MethodParameter actualParam = (reactiveAdapter != null ? returnParam.nested() : returnParam.nestedIfOptional());
+		MethodParameter actualParam = reactiveAdapter != null ? returnParam.nested() : returnParam.nestedIfOptional();
 		Class<?> actualType = actualParam.getNestedParameterType();
 
 		Function<RSocketRequestValues, Publisher<?>> responseFunction;
@@ -139,8 +139,8 @@ final class RSocketServiceMethod {
 
 			responseFunction = values -> {
 				RSocketRequester.RetrieveSpec retrieveSpec = initRequest(requester, values);
-				return (values.getPayload() == null && values.getPayloadValue() == null ?
-						((RSocketRequester.RequestSpec) retrieveSpec).sendMetadata() : retrieveSpec.send());
+				return values.getPayload() == null && values.getPayloadValue() == null ?
+						((RSocketRequester.RequestSpec) retrieveSpec).sendMetadata() : retrieveSpec.send();
 			};
 		}
 		else if (reactiveAdapter == null) {
@@ -163,14 +163,14 @@ final class RSocketServiceMethod {
 				return reactiveAdapter.fromPublisher(responsePublisher);
 			}
 			if (blockForOptional) {
-				return (blockTimeout != null ?
+				return blockTimeout != null ?
 						((Mono<?>) responsePublisher).blockOptional(blockTimeout) :
-						((Mono<?>) responsePublisher).blockOptional());
+						((Mono<?>) responsePublisher).blockOptional();
 			}
 			else {
-				return (blockTimeout != null ?
+				return blockTimeout != null ?
 						((Mono<?>) responsePublisher).block(blockTimeout) :
-						((Mono<?>) responsePublisher).block());
+						((Mono<?>) responsePublisher).block();
 			}
 		});
 	}

@@ -50,8 +50,8 @@ public class BeanExpressionContext {
 
 
 	public boolean containsObject(String key) {
-		return (this.beanFactory.containsBean(key) ||
-				(this.scope != null && this.scope.resolveContextualObject(key) != null));
+		return this.beanFactory.containsBean(key) ||
+				(this.scope != null && this.scope.resolveContextualObject(key) != null);
 	}
 
 	@Nullable
@@ -70,8 +70,8 @@ public class BeanExpressionContext {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof BeanExpressionContext that &&
-				this.beanFactory == that.beanFactory && this.scope == that.scope));
+		return this == other || (other instanceof BeanExpressionContext that &&
+				this.beanFactory == that.beanFactory && this.scope == that.scope);
 	}
 
 	@Override

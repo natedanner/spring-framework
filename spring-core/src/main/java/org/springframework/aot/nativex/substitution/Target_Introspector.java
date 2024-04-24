@@ -42,10 +42,10 @@ final class Target_Introspector {
 				Class<?> c = type;
 				do {
 					c = c.getSuperclass();
-					if (c.getName().equals("java.awt.Component")) {
+					if ("java.awt.Component".equals(c.getName())) {
 						return type;
 					}
-				} while (!c.getName().equals("java.lang.Object"));
+				} while (!"java.lang.Object".equals(c.getName()));
 			}
 		}
 		catch (Exception exception) {

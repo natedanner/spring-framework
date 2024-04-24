@@ -59,9 +59,9 @@ public class GenericReactiveTransaction implements ReactiveTransaction {
 	@Nullable
 	private final Object suspendedResources;
 
-	private boolean rollbackOnly = false;
+	private boolean rollbackOnly;
 
-	private boolean completed = false;
+	private boolean completed;
 
 
 	/**
@@ -106,7 +106,7 @@ public class GenericReactiveTransaction implements ReactiveTransaction {
 
 	@Override
 	public String getTransactionName() {
-		return (this.transactionName != null ? this.transactionName : "");
+		return this.transactionName != null ? this.transactionName : "";
 	}
 
 	/**
@@ -120,12 +120,12 @@ public class GenericReactiveTransaction implements ReactiveTransaction {
 
 	@Override
 	public boolean hasTransaction() {
-		return (this.transaction != null);
+		return this.transaction != null;
 	}
 
 	@Override
 	public boolean isNewTransaction() {
-		return (hasTransaction() && this.newTransaction);
+		return hasTransaction() && this.newTransaction;
 	}
 
 	/**

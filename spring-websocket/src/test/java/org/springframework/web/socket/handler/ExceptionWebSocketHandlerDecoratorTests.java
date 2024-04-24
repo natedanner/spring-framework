@@ -33,11 +33,11 @@ import static org.mockito.Mockito.mock;
  */
 class ExceptionWebSocketHandlerDecoratorTests {
 
-	private TestWebSocketSession session = new TestWebSocketSession(true);
+	private final TestWebSocketSession session = new TestWebSocketSession(true);
 
-	private WebSocketHandler delegate = mock();
+	private final WebSocketHandler delegate = mock();
 
-	private ExceptionWebSocketHandlerDecorator decorator = new ExceptionWebSocketHandlerDecorator(this.delegate);
+	private final ExceptionWebSocketHandlerDecorator decorator = new ExceptionWebSocketHandlerDecorator(this.delegate);
 
 
 	@Test

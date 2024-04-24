@@ -116,7 +116,7 @@ public abstract class PropertySource<T> {
 	 * @param name the property name to find
 	 */
 	public boolean containsProperty(String name) {
-		return (getProperty(name) != null);
+		return getProperty(name) != null;
 	}
 
 	/**
@@ -139,8 +139,8 @@ public abstract class PropertySource<T> {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof PropertySource<?> that &&
-				ObjectUtils.nullSafeEquals(getName(), that.getName())));
+		return this == other || (other instanceof PropertySource<?> that &&
+				ObjectUtils.nullSafeEquals(getName(), that.getName()));
 	}
 
 	/**

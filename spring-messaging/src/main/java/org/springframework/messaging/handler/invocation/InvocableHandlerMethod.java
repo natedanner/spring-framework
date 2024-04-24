@@ -170,7 +170,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 		}
 		catch (IllegalArgumentException ex) {
 			assertTargetBean(getBridgedMethod(), getBean(), args);
-			String text = (ex.getMessage() == null || ex.getCause() instanceof NullPointerException) ?
+			String text = ex.getMessage() == null || ex.getCause() instanceof NullPointerException ?
 					"Illegal argument": ex.getMessage();
 			throw new IllegalStateException(formatInvokeError(text, args), ex);
 		}

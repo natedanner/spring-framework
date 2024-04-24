@@ -50,9 +50,9 @@ class ClientSockJsSessionTests {
 
 	private static final Jackson2SockJsMessageCodec CODEC = new Jackson2SockJsMessageCodec();
 
-	private WebSocketHandler handler = mock();
+	private final WebSocketHandler handler = mock();
 
-	private CompletableFuture<WebSocketSession> connectFuture = new CompletableFuture<>();
+	private final CompletableFuture<WebSocketSession> connectFuture = new CompletableFuture<>();
 
 	private TestClientSockJsSession session;
 

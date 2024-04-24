@@ -136,7 +136,7 @@ public class ResourceAdapterFactoryBean implements FactoryBean<ResourceAdapter>,
 
 	@Override
 	public Class<? extends ResourceAdapter> getObjectType() {
-		return (this.resourceAdapter != null ? this.resourceAdapter.getClass() : ResourceAdapter.class);
+		return this.resourceAdapter != null ? this.resourceAdapter.getClass() : ResourceAdapter.class;
 	}
 
 	@Override

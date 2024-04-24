@@ -208,7 +208,7 @@ public class StompSubProtocolHandler implements SubProtocolHandler, ApplicationE
 	 * @since 6.1
 	 */
 	public void setPreserveReceiveOrder(boolean preserveReceiveOrder) {
-		this.orderedHandlingMessageChannels = (preserveReceiveOrder ? new ConcurrentHashMap<>() : null);
+		this.orderedHandlingMessageChannels = preserveReceiveOrder ? new ConcurrentHashMap<>() : null;
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class StompSubProtocolHandler implements SubProtocolHandler, ApplicationE
 	 * @since 6.1
 	 */
 	public boolean isPreserveReceiveOrder() {
-		return (this.orderedHandlingMessageChannels != null);
+		return this.orderedHandlingMessageChannels != null;
 	}
 
 	@Override
@@ -380,7 +380,7 @@ public class StompSubProtocolHandler implements SubProtocolHandler, ApplicationE
 	@Nullable
 	private Principal getUser(WebSocketSession session) {
 		Principal user = this.stompAuthentications.get(session.getId());
-		return (user != null ? user : session.getPrincipal());
+		return user != null ? user : session.getPrincipal();
 	}
 
 	private void handleError(WebSocketSession session, Throwable ex, @Nullable Message<byte[]> clientMessage) {
@@ -520,8 +520,8 @@ public class StompSubProtocolHandler implements SubProtocolHandler, ApplicationE
 		StompCommand command = stompAccessor.getCommand();
 		try {
 			byte[] bytes = this.stompEncoder.encode(stompAccessor.getMessageHeaders(), payload);
-			boolean useBinary = (payload.length > 0 && !(session instanceof SockJsSession) &&
-					MimeTypeUtils.APPLICATION_OCTET_STREAM.isCompatibleWith(stompAccessor.getContentType()));
+			boolean useBinary = payload.length > 0 && !(session instanceof SockJsSession) &&
+					MimeTypeUtils.APPLICATION_OCTET_STREAM.isCompatibleWith(stompAccessor.getContentType());
 			if (useBinary) {
 				session.sendMessage(new BinaryMessage(bytes));
 			}
@@ -633,7 +633,7 @@ public class StompSubProtocolHandler implements SubProtocolHandler, ApplicationE
 	}
 
 	protected StompHeaderAccessor toMutableAccessor(StompHeaderAccessor headerAccessor, Message<?> message) {
-		return (headerAccessor.isMutable() ? headerAccessor : StompHeaderAccessor.wrap(message));
+		return headerAccessor.isMutable() ? headerAccessor : StompHeaderAccessor.wrap(message);
 	}
 
 	private StompHeaderAccessor afterStompSessionConnected(Message<?> message, StompHeaderAccessor accessor,

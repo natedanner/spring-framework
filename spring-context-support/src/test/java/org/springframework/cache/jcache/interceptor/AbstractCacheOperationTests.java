@@ -67,7 +67,7 @@ public abstract class AbstractCacheOperationTests<O extends JCacheOperation<?>> 
 
 	private static String getCacheName(Annotation annotation) {
 		Object cacheName = AnnotationUtils.getValue(annotation, "cacheName");
-		return (cacheName != null ? cacheName.toString() : "test");
+		return cacheName != null ? cacheName.toString() : "test";
 	}
 
 }

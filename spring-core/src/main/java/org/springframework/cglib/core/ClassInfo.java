@@ -18,15 +18,15 @@ package org.springframework.cglib.core;
 
 import org.springframework.asm.Type;
 
-abstract public class ClassInfo {
+public abstract class ClassInfo {
 
     protected ClassInfo() {
     }
 
-    abstract public Type getType();
-    abstract public Type getSuperType();
-    abstract public Type[] getInterfaces();
-    abstract public int getModifiers();
+    public abstract Type getType();
+    public abstract Type getSuperType();
+    public abstract Type[] getInterfaces();
+    public abstract int getModifiers();
 
 	@Override
 	public boolean equals(Object o) {

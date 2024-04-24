@@ -78,9 +78,9 @@ import static org.assertj.core.api.InstanceOfAssertFactories.LIST;
 @SuppressWarnings("unused")
 class ExceptionHandlerExceptionResolverTests {
 
-	private static int DEFAULT_RESOLVER_COUNT;
+	private static int defaultResolverCount;
 
-	private static int DEFAULT_HANDLER_COUNT;
+	private static int defaultHandlerCount;
 
 	private ExceptionHandlerExceptionResolver resolver;
 
@@ -93,8 +93,8 @@ class ExceptionHandlerExceptionResolverTests {
 	static void setupOnce() {
 		ExceptionHandlerExceptionResolver resolver = new ExceptionHandlerExceptionResolver();
 		resolver.afterPropertiesSet();
-		DEFAULT_RESOLVER_COUNT = resolver.getArgumentResolvers().getResolvers().size();
-		DEFAULT_HANDLER_COUNT = resolver.getReturnValueHandlers().getHandlers().size();
+		defaultResolverCount = resolver.getArgumentResolvers().getResolvers().size();
+		defaultHandlerCount = resolver.getReturnValueHandlers().getHandlers().size();
 	}
 
 	@BeforeEach
@@ -122,7 +122,7 @@ class ExceptionHandlerExceptionResolverTests {
 		this.resolver.afterPropertiesSet();
 
 		assertThat(this.resolver.getArgumentResolvers().getResolvers()).contains(argumentResolver);
-		assertMethodProcessorCount(DEFAULT_RESOLVER_COUNT + 1, DEFAULT_HANDLER_COUNT);
+		assertMethodProcessorCount(defaultResolverCount + 1, defaultHandlerCount);
 	}
 
 	@Test
@@ -131,7 +131,7 @@ class ExceptionHandlerExceptionResolverTests {
 		this.resolver.setArgumentResolvers(Collections.singletonList(argumentResolver));
 		this.resolver.afterPropertiesSet();
 
-		assertMethodProcessorCount(1, DEFAULT_HANDLER_COUNT);
+		assertMethodProcessorCount(1, defaultHandlerCount);
 	}
 
 	@Test
@@ -141,7 +141,7 @@ class ExceptionHandlerExceptionResolverTests {
 		this.resolver.afterPropertiesSet();
 
 		assertThat(this.resolver.getReturnValueHandlers().getHandlers()).contains(handler);
-		assertMethodProcessorCount(DEFAULT_RESOLVER_COUNT, DEFAULT_HANDLER_COUNT + 1);
+		assertMethodProcessorCount(defaultResolverCount, defaultHandlerCount + 1);
 	}
 
 	@Test
@@ -158,7 +158,7 @@ class ExceptionHandlerExceptionResolverTests {
 		this.resolver.setReturnValueHandlers(Collections.singletonList(handler));
 		this.resolver.afterPropertiesSet();
 
-		assertMethodProcessorCount(DEFAULT_RESOLVER_COUNT, 1);
+		assertMethodProcessorCount(defaultResolverCount, 1);
 	}
 
 	@Test

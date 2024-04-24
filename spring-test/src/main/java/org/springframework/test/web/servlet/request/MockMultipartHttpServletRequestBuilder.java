@@ -156,8 +156,8 @@ public class MockMultipartHttpServletRequestBuilder extends MockHttpServletReque
 	@Override
 	protected final MockHttpServletRequest createServletRequest(ServletContext servletContext) {
 		MockMultipartHttpServletRequest request = new MockMultipartHttpServletRequest(servletContext);
-		Charset defaultCharset = (request.getCharacterEncoding() != null ?
-				Charset.forName(request.getCharacterEncoding()) : StandardCharsets.UTF_8);
+		Charset defaultCharset = request.getCharacterEncoding() != null ?
+				Charset.forName(request.getCharacterEncoding()) : StandardCharsets.UTF_8;
 
 		this.files.forEach(request::addFile);
 		this.parts.values().stream().flatMap(Collection::stream).forEach(part -> {

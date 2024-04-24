@@ -52,9 +52,9 @@ public final class AnnotatedElementKey implements Comparable<AnnotatedElementKey
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof AnnotatedElementKey that &&
+		return this == other || (other instanceof AnnotatedElementKey that &&
 				this.element.equals(that.element) &&
-				ObjectUtils.nullSafeEquals(this.targetClass, that.targetClass)));
+				ObjectUtils.nullSafeEquals(this.targetClass, that.targetClass));
 	}
 
 	@Override

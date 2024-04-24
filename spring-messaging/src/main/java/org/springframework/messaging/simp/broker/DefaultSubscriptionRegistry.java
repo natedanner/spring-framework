@@ -140,7 +140,7 @@ public class DefaultSubscriptionRegistry extends AbstractSubscriptionRegistry {
 	 * @since 4.2
 	 */
 	public void setSelectorHeaderName(@Nullable String selectorHeaderName) {
-		this.selectorHeaderName = (StringUtils.hasText(selectorHeaderName) ? selectorHeaderName : null);
+		this.selectorHeaderName = StringUtils.hasText(selectorHeaderName) ? selectorHeaderName : null;
 	}
 
 	/**
@@ -372,7 +372,7 @@ public class DefaultSubscriptionRegistry extends AbstractSubscriptionRegistry {
 					}
 					subscriptionIds = new ArrayList<>(subscriptionIds);
 					subscriptionIds.remove(subscriptionId);
-					return (subscriptionIds.isEmpty() ? null : subscriptionIds);
+					return subscriptionIds.isEmpty() ? null : subscriptionIds;
 				});
 				return sessionIdToSubscriptionIds;
 			});
@@ -482,7 +482,7 @@ public class DefaultSubscriptionRegistry extends AbstractSubscriptionRegistry {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof Subscription that && this.id.equals(that.id)));
+			return this == other || (other instanceof Subscription that && this.id.equals(that.id));
 		}
 
 		@Override
@@ -514,7 +514,7 @@ public class DefaultSubscriptionRegistry extends AbstractSubscriptionRegistry {
 		public TypedValue read(EvaluationContext context, @Nullable Object target, String name) {
 			Object value;
 			if (target instanceof Message message) {
-				value = name.equals("headers") ? message.getHeaders() : null;
+				value = "headers".equals(name) ? message.getHeaders() : null;
 			}
 			else if (target instanceof MessageHeaders headers) {
 				SimpMessageHeaderAccessor accessor =

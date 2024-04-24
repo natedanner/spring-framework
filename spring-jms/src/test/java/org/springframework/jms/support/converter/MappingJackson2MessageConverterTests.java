@@ -51,9 +51,9 @@ import static org.mockito.Mockito.verify;
  */
 class MappingJackson2MessageConverterTests {
 
-	private MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+	private final MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
 
-	private Session sessionMock = mock();
+	private final Session sessionMock = mock();
 
 
 	@BeforeEach

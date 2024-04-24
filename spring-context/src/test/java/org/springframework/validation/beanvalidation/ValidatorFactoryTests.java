@@ -356,7 +356,7 @@ class ValidatorFactoryTests {
 		@Valid
 		private Set<ValidAddress> addressSet = new LinkedHashSet<>();
 
-		public boolean expectsAutowiredValidator = false;
+		public boolean expectsAutowiredValidator;
 
 		public String getName() {
 			return name;
@@ -434,7 +434,7 @@ class ValidatorFactoryTests {
 			if (value.expectsAutowiredValidator) {
 				assertThat(this.environment).isNotNull();
 			}
-			boolean valid = (value.name == null || !value.address.street.contains(value.name));
+			boolean valid = value.name == null || !value.address.street.contains(value.name);
 			if (!valid && "Phil".equals(value.name)) {
 				context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
 						.addPropertyNode("address").addConstraintViolation().disableDefaultConstraintViolation();

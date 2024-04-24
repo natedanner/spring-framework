@@ -91,13 +91,13 @@ public abstract class AbstractRequestLoggingFilter extends OncePerRequestFilter 
 	private static final int DEFAULT_MAX_PAYLOAD_LENGTH = 50;
 
 
-	private boolean includeQueryString = false;
+	private boolean includeQueryString;
 
-	private boolean includeClientInfo = false;
+	private boolean includeClientInfo;
 
-	private boolean includeHeaders = false;
+	private boolean includeHeaders;
 
-	private boolean includePayload = false;
+	private boolean includePayload;
 
 	@Nullable
 	private Predicate<String> headerPredicate;

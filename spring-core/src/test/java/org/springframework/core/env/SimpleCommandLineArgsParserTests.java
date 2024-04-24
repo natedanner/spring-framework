@@ -45,7 +45,7 @@ class SimpleCommandLineArgsParserTests {
 	void withSingleOptionAndNoValue() {
 		CommandLineArgs args = parser.parse("--o1");
 		assertThat(args.containsOption("o1")).isTrue();
-		assertThat(args.getOptionValues("o1")).isEqualTo(Collections.EMPTY_LIST);
+		assertThat(args.getOptionValues("o1")).isEqualTo(Collections.emptyList());
 	}
 
 	@Test
@@ -62,7 +62,7 @@ class SimpleCommandLineArgsParserTests {
 		assertThat(args.containsOption("o2")).isTrue();
 		assertThat(args.containsOption("o3")).isFalse();
 		assertThat(args.getOptionValues("o1")).containsExactly("v1");
-		assertThat(args.getOptionValues("o2")).isEqualTo(Collections.EMPTY_LIST);
+		assertThat(args.getOptionValues("o2")).isEqualTo(Collections.emptyList());
 		assertThat(args.getOptionValues("o3")).isNull();
 	}
 

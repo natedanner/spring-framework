@@ -60,8 +60,8 @@ public class ChannelRegistration {
 	 */
 	public TaskExecutorRegistration taskExecutor(@Nullable ThreadPoolTaskExecutor taskExecutor) {
 		if (this.registration == null) {
-			this.registration = (taskExecutor != null ? new TaskExecutorRegistration(taskExecutor) :
-					new TaskExecutorRegistration());
+			this.registration = taskExecutor != null ? new TaskExecutorRegistration(taskExecutor) :
+					new TaskExecutorRegistration();
 		}
 		return this.registration;
 	}
@@ -90,7 +90,7 @@ public class ChannelRegistration {
 
 
 	protected boolean hasTaskExecutor() {
-		return (this.registration != null || this.executor != null);
+		return this.registration != null || this.executor != null;
 	}
 
 	protected boolean hasInterceptors() {

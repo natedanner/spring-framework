@@ -205,9 +205,9 @@ public abstract class AbstractDispatcherServletInitializer extends AbstractConte
 	}
 
 	private EnumSet<DispatcherType> getDispatcherTypes() {
-		return (isAsyncSupported() ?
+		return isAsyncSupported() ?
 				EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE, DispatcherType.ASYNC) :
-				EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE));
+				EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE);
 	}
 
 	/**

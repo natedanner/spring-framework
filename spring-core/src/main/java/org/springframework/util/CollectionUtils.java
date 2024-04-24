@@ -48,7 +48,7 @@ public abstract class CollectionUtils {
 	 * @see #newHashMap(int)
 	 * @see #newLinkedHashMap(int)
 	 */
-	static final float DEFAULT_LOAD_FACTOR = 0.75f;
+	static final float DEFAULT_LOAD_FACTOR = 0.75F;
 
 
 	/**
@@ -58,7 +58,7 @@ public abstract class CollectionUtils {
 	 * @return whether the given Collection is empty
 	 */
 	public static boolean isEmpty(@Nullable Collection<?> collection) {
-		return (collection == null || collection.isEmpty());
+		return collection == null || collection.isEmpty();
 	}
 
 	/**
@@ -68,7 +68,7 @@ public abstract class CollectionUtils {
 	 * @return whether the given Map is empty
 	 */
 	public static boolean isEmpty(@Nullable Map<?, ?> map) {
-		return (map == null || map.isEmpty());
+		return map == null || map.isEmpty();
 	}
 
 	/**
@@ -448,7 +448,7 @@ public abstract class CollectionUtils {
 	 * @return the adapted {@code Iterator}
 	 */
 	public static <E> Iterator<E> toIterator(@Nullable Enumeration<E> enumeration) {
-		return (enumeration != null ? enumeration.asIterator() : Collections.emptyIterator());
+		return enumeration != null ? enumeration.asIterator() : Collections.emptyIterator();
 	}
 
 	/**

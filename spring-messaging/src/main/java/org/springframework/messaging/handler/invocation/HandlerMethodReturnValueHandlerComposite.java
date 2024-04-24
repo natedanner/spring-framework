@@ -129,8 +129,8 @@ public class HandlerMethodReturnValueHandlerComposite implements AsyncHandlerMet
 	@Override
 	public boolean isAsyncReturnValue(Object returnValue, MethodParameter returnType) {
 		HandlerMethodReturnValueHandler handler = getReturnValueHandler(returnType);
-		return (handler instanceof AsyncHandlerMethodReturnValueHandler asyncHandler &&
-				asyncHandler.isAsyncReturnValue(returnValue, returnType));
+		return handler instanceof AsyncHandlerMethodReturnValueHandler asyncHandler &&
+				asyncHandler.isAsyncReturnValue(returnValue, returnType);
 	}
 
 	@Override

@@ -71,7 +71,7 @@ public class MatrixVariableMapMethodArgumentResolver extends HandlerMethodArgume
 		Map<String, MultiValueMap<String, String>> matrixVariables =
 				exchange.getAttribute(HandlerMapping.MATRIX_VARIABLES_ATTRIBUTE);
 		MultiValueMap<String, String> map = mapMatrixVariables(parameter, matrixVariables);
-		return (isSingleValueMap(parameter) ? map.toSingleValueMap() : map);
+		return isSingleValueMap(parameter) ? map.toSingleValueMap() : map;
 	}
 
 	private MultiValueMap<String,String> mapMatrixVariables(MethodParameter parameter,

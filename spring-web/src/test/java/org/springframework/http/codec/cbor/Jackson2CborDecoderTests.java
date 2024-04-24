@@ -44,11 +44,11 @@ class Jackson2CborDecoderTests extends AbstractDecoderTests<Jackson2CborDecoder>
 
 	private static final MimeType CBOR_MIME_TYPE = new MimeType("application", "cbor");
 
-	private Pojo pojo1 = new Pojo("f1", "b1");
+	private final Pojo pojo1 = new Pojo("f1", "b1");
 
-	private Pojo pojo2 = new Pojo("f2", "b2");
+	private final Pojo pojo2 = new Pojo("f2", "b2");
 
-	private ObjectMapper mapper = Jackson2ObjectMapperBuilder.cbor().build();
+	private final ObjectMapper mapper = Jackson2ObjectMapperBuilder.cbor().build();
 
 	public Jackson2CborDecoderTests() {
 		super(new Jackson2CborDecoder());

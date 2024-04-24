@@ -62,15 +62,15 @@ import static org.mockito.Mockito.verify;
  */
 class DataSourceJtaTransactionTests {
 
-	private DataSource dataSource = mock();
+	private final DataSource dataSource = mock();
 
-	private Connection connection = mock();
+	private final Connection connection = mock();
 
-	private UserTransaction userTransaction = mock();
+	private final UserTransaction userTransaction = mock();
 
-	private TransactionManager transactionManager = mock();
+	private final TransactionManager transactionManager = mock();
 
-	private Transaction transaction = mock();
+	private final Transaction transaction = mock();
 
 
 	@BeforeEach
@@ -570,7 +570,7 @@ class DataSourceJtaTransactionTests {
 
 		given(userTransaction.getStatus()).willReturn(Status.STATUS_ACTIVE);
 		for (int i = 0; i < 3; i++) {
-			final boolean releaseCon = (i != 1);
+			final boolean releaseCon = i != 1;
 
 			tt.execute(new TransactionCallbackWithoutResult() {
 				@Override

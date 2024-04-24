@@ -49,7 +49,7 @@ class LobSupportTests {
 		given(ps.executeUpdate()).willReturn(3);
 
 		class SetValuesCalled {
-			boolean b = false;
+			boolean b;
 		}
 
 		final SetValuesCalled svc = new SetValuesCalled();

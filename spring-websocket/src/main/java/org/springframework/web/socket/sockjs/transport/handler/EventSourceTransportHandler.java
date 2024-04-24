@@ -50,7 +50,7 @@ public class EventSourceTransportHandler extends AbstractHttpSendingTransportHan
 
 	@Override
 	public boolean checkSessionType(SockJsSession session) {
-		return (session instanceof EventSourceStreamingSockJsSession);
+		return session instanceof EventSourceStreamingSockJsSession;
 	}
 
 	@Override

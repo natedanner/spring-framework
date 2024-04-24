@@ -176,7 +176,7 @@ public class ScriptFactoryPostProcessor implements SmartInstantiationAwareBeanPo
 
 	private long defaultRefreshCheckDelay = -1;
 
-	private boolean defaultProxyTargetClass = false;
+	private boolean defaultProxyTargetClass;
 
 	@Nullable
 	private ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();
@@ -233,8 +233,7 @@ public class ScriptFactoryPostProcessor implements SmartInstantiationAwareBeanPo
 
 		// Filter out BeanPostProcessors that are part of the AOP infrastructure,
 		// since those are only meant to apply to beans defined in the original factory.
-		this.scriptBeanFactory.getBeanPostProcessors().removeIf(beanPostProcessor ->
-				beanPostProcessor instanceof AopInfrastructureBean);
+		this.scriptBeanFactory.getBeanPostProcessors().removeIf(AopInfrastructureBean.class::isInstance);
 	}
 
 	@Override
@@ -273,7 +272,7 @@ public class ScriptFactoryPostProcessor implements SmartInstantiationAwareBeanPo
 				return scriptedType;
 			}
 			else if (!ObjectUtils.isEmpty(interfaces)) {
-				return (interfaces.length == 1 ? interfaces[0] : createCompositeInterface(interfaces));
+				return interfaces.length == 1 ? interfaces[0] : createCompositeInterface(interfaces);
 			}
 			else {
 				if (bd.isSingleton()) {
@@ -339,7 +338,7 @@ public class ScriptFactoryPostProcessor implements SmartInstantiationAwareBeanPo
 					scriptedObjectBeanName, scriptFactory, scriptSource, isFactoryBean);
 			boolean proxyTargetClass = resolveProxyTargetClass(bd);
 			String language = (String) bd.getAttribute(LANGUAGE_ATTRIBUTE);
-			if (proxyTargetClass && (language == null || !language.equals("groovy"))) {
+			if (proxyTargetClass && (language == null || !"groovy".equals(language))) {
 				throw new BeanDefinitionValidationException(
 						"Cannot use proxyTargetClass=true with script beans where language is not 'groovy': '" +
 						language + "'");

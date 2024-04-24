@@ -34,13 +34,13 @@ import org.springframework.lang.Nullable;
  */
 public class GsonFactoryBean implements FactoryBean<Gson>, InitializingBean {
 
-	private boolean base64EncodeByteArrays = false;
+	private boolean base64EncodeByteArrays;
 
-	private boolean serializeNulls = false;
+	private boolean serializeNulls;
 
-	private boolean prettyPrinting = false;
+	private boolean prettyPrinting;
 
-	private boolean disableHtmlEscaping = false;
+	private boolean disableHtmlEscaping;
 
 	@Nullable
 	private String dateFormatPattern;
@@ -110,8 +110,8 @@ public class GsonFactoryBean implements FactoryBean<Gson>, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() {
-		GsonBuilder builder = (this.base64EncodeByteArrays ?
-				GsonBuilderUtils.gsonBuilderWithBase64EncodedByteArrays() : new GsonBuilder());
+		GsonBuilder builder = this.base64EncodeByteArrays ?
+				GsonBuilderUtils.gsonBuilderWithBase64EncodedByteArrays() : new GsonBuilder();
 		if (this.serializeNulls) {
 			builder.serializeNulls();
 		}

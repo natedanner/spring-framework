@@ -174,7 +174,7 @@ class HandlersBeanDefinitionParser implements BeanDefinitionParser {
 			RuntimeBeanReference requestHandlerRef = new RuntimeBeanReference(requestHandlerName);
 
 			for (String mapping : mappings) {
-				String pathPattern = (mapping.endsWith("/") ? mapping + "**" : mapping + "/**");
+				String pathPattern = mapping.endsWith("/") ? mapping + "**" : mapping + "/**";
 				urlMap.put(pathPattern, requestHandlerRef);
 			}
 		}

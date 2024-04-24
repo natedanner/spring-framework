@@ -191,10 +191,10 @@ public class BindingContext {
 	}
 
 	private boolean isBindingCandidate(String name, @Nullable Object value) {
-		return (!name.startsWith(BindingResult.MODEL_KEY_PREFIX) && value != null &&
+		return !name.startsWith(BindingResult.MODEL_KEY_PREFIX) && value != null &&
 				!value.getClass().isArray() && !(value instanceof Collection) && !(value instanceof Map) &&
 				this.reactiveAdapterRegistry.getAdapter(null, value) == null &&
-				!BeanUtils.isSimpleValueType(value.getClass()));
+				!BeanUtils.isSimpleValueType(value.getClass());
 	}
 
 
@@ -224,7 +224,7 @@ public class BindingContext {
 		public static void initBinder(DataBinder binder, MethodParameter parameter) {
 			if (ReactiveAdapterRegistry.getSharedInstance().getAdapter(parameter.getParameterType()) == null) {
 				for (Annotation annotation : parameter.getParameterAnnotations()) {
-					if (annotation.annotationType().getName().equals("jakarta.validation.Valid")) {
+					if ("jakarta.validation.Valid".equals(annotation.annotationType().getName())) {
 						binder.setExcludedValidators(v -> v instanceof jakarta.validation.Validator ||
 								v instanceof SmartValidator sv && sv.unwrap(jakarta.validation.Validator.class) != null);
 					}

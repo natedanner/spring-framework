@@ -124,7 +124,7 @@ public abstract class StaxUtils {
 	 * custom StAX Source; {@code false} otherwise
 	 */
 	public static boolean isStaxSource(Source source) {
-		return (source instanceof StAXSource || source instanceof StaxSource);
+		return source instanceof StAXSource || source instanceof StaxSource;
 	}
 
 	/**
@@ -210,7 +210,7 @@ public abstract class StaxUtils {
 	 * custom StAX Result; {@code false} otherwise
 	 */
 	public static boolean isStaxResult(Result result) {
-		return (result instanceof StAXResult || result instanceof StaxResult);
+		return result instanceof StAXResult || result instanceof StaxResult;
 	}
 
 	/**

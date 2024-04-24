@@ -44,7 +44,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
  */
 public class PathMatchConfigurer {
 
-	private boolean preferPathMatcher = false;
+	private boolean preferPathMatcher;
 
 	@Nullable
 	private PathPatternParser patternParser;
@@ -99,7 +99,7 @@ public class PathMatchConfigurer {
 	 */
 	public PathMatchConfigurer setPatternParser(@Nullable PathPatternParser patternParser) {
 		this.patternParser = patternParser;
-		this.preferPathMatcher = (patternParser == null);
+		this.preferPathMatcher = patternParser == null;
 		return this;
 	}
 
@@ -153,7 +153,7 @@ public class PathMatchConfigurer {
 	@Deprecated
 	public PathMatchConfigurer setUseSuffixPatternMatch(@Nullable Boolean suffixPatternMatch) {
 		this.suffixPatternMatch = suffixPatternMatch;
-		this.preferPathMatcher |= (suffixPatternMatch != null && suffixPatternMatch);
+		this.preferPathMatcher |= suffixPatternMatch != null && suffixPatternMatch;
 		return this;
 	}
 
@@ -175,7 +175,7 @@ public class PathMatchConfigurer {
 	@Deprecated
 	public PathMatchConfigurer setUseRegisteredSuffixPatternMatch(@Nullable Boolean registeredSuffixPatternMatch) {
 		this.registeredSuffixPatternMatch = registeredSuffixPatternMatch;
-		this.preferPathMatcher |= (registeredSuffixPatternMatch != null && registeredSuffixPatternMatch);
+		this.preferPathMatcher |= registeredSuffixPatternMatch != null && registeredSuffixPatternMatch;
 		return this;
 	}
 
@@ -220,7 +220,7 @@ public class PathMatchConfigurer {
 	 * @since 6.0
 	 */
 	protected boolean preferPathMatcher() {
-		return (this.patternParser == null && this.preferPathMatcher);
+		return this.patternParser == null && this.preferPathMatcher;
 	}
 
 	/**

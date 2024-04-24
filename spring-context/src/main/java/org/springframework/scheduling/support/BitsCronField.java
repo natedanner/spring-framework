@@ -37,7 +37,7 @@ final class BitsCronField extends CronField {
 
 
 	@Nullable
-	private static BitsCronField zeroNanos = null;
+	private static BitsCronField zeroNanos;
 
 
 	// we store at most 60 bits, for seconds and minutes, so a 64-bit long suffices
@@ -110,7 +110,7 @@ final class BitsCronField extends CronField {
 
 
 	private static BitsCronField parseDate(String value, BitsCronField.Type type) {
-		if (value.equals("?")) {
+		if ("?".equals(value)) {
 			value = "*";
 		}
 		return BitsCronField.parseField(value, type);
@@ -151,7 +151,7 @@ final class BitsCronField extends CronField {
 	}
 
 	private static ValueRange parseRange(String value, Type type) {
-		if (value.equals("*")) {
+		if ("*".equals(value)) {
 			return type.range();
 		}
 		else {
@@ -227,7 +227,7 @@ final class BitsCronField extends CronField {
 		else {
 			long minMask = MASK << range.getMinimum();
 			long maxMask = MASK >>> - (range.getMaximum() + 1);
-			this.bits |= (minMask & maxMask);
+			this.bits |= minMask & maxMask;
 		}
 	}
 
@@ -243,7 +243,7 @@ final class BitsCronField extends CronField {
 	}
 
 	private void setBit(int index) {
-		this.bits |= (1L << index);
+		this.bits |= 1L << index;
 	}
 
 	private void clearBit(int index) {

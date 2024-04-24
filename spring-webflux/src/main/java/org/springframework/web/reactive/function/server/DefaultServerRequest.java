@@ -214,8 +214,8 @@ class DefaultServerRequest implements ServerRequest {
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T> Flux<T> bodyToFlux(Class<? extends T> elementClass) {
-		Flux<T> flux = (elementClass.equals(DataBuffer.class) ?
-				(Flux<T>) request().getBody() : body(BodyExtractors.toFlux(elementClass)));
+		Flux<T> flux = elementClass.equals(DataBuffer.class) ?
+				(Flux<T>) request().getBody() : body(BodyExtractors.toFlux(elementClass));
 		return flux.onErrorMap(UnsupportedMediaTypeException.class, ERROR_MAPPER)
 				.onErrorMap(DecodingException.class, DECODING_MAPPER);
 	}
@@ -328,7 +328,7 @@ class DefaultServerRequest implements ServerRequest {
 		@Override
 		public OptionalLong contentLength() {
 			long value = this.httpHeaders.getContentLength();
-			return (value != -1 ? OptionalLong.of(value) : OptionalLong.empty());
+			return value != -1 ? OptionalLong.of(value) : OptionalLong.empty();
 		}
 
 		@Override
@@ -349,7 +349,7 @@ class DefaultServerRequest implements ServerRequest {
 		@Override
 		public List<String> header(String headerName) {
 			List<String> headerValues = this.httpHeaders.get(headerName);
-			return (headerValues != null ? headerValues : Collections.emptyList());
+			return headerValues != null ? headerValues : Collections.emptyList();
 		}
 
 		@Override

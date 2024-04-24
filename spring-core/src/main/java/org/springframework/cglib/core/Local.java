@@ -19,8 +19,8 @@ import org.springframework.asm.Type;
 
 public class Local
 {
-    private Type type;
-    private int index;
+	private final Type type;
+	private final int index;
 
     public Local(int index, Type type) {
         this.type = type;

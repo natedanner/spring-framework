@@ -116,7 +116,7 @@ public abstract class ForwardedHeaderUtils {
 
 	private static boolean isForwardedSslOn(HttpHeaders headers) {
 		String forwardedSsl = headers.getFirst("X-Forwarded-Ssl");
-		return StringUtils.hasText(forwardedSsl) && forwardedSsl.equalsIgnoreCase("on");
+		return StringUtils.hasText(forwardedSsl) && "on".equalsIgnoreCase(forwardedSsl);
 	}
 
 	private static void adaptForwardedHost(UriComponentsBuilder uriComponentsBuilder, String rawValue) {
@@ -149,8 +149,8 @@ public abstract class ForwardedHeaderUtils {
 	public static InetSocketAddress parseForwardedFor(
 			URI uri, HttpHeaders headers, @Nullable InetSocketAddress remoteAddress) {
 
-		int port = (remoteAddress != null ?
-				remoteAddress.getPort() : "https".equals(uri.getScheme()) ? 443 : 80);
+		int port = remoteAddress != null ?
+				remoteAddress.getPort() : "https".equals(uri.getScheme()) ? 443 : 80;
 
 		String forwardedHeader = headers.getFirst("Forwarded");
 		if (StringUtils.hasText(forwardedHeader)) {

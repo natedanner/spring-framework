@@ -93,12 +93,12 @@ public class CharacterEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		Object value = getValue();
-		return (value != null ? value.toString() : "");
+		return value != null ? value.toString() : "";
 	}
 
 
 	private boolean isUnicodeCharacterSequence(String sequence) {
-		return (sequence.startsWith(UNICODE_PREFIX) && sequence.length() == UNICODE_LENGTH);
+		return sequence.startsWith(UNICODE_PREFIX) && sequence.length() == UNICODE_LENGTH;
 	}
 
 	private void setAsUnicode(String text) {

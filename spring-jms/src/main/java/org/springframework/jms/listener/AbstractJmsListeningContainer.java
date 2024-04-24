@@ -75,11 +75,11 @@ public abstract class AbstractJmsListeningContainer extends JmsDestinationAccess
 	@Nullable
 	private Connection sharedConnection;
 
-	private boolean sharedConnectionStarted = false;
+	private boolean sharedConnectionStarted;
 
 	protected final Object sharedConnectionMonitor = new Object();
 
-	private boolean active = false;
+	private boolean active;
 
 	private volatile boolean running;
 
@@ -340,7 +340,7 @@ public abstract class AbstractJmsListeningContainer extends JmsDestinationAccess
 	 */
 	@Override
 	public final boolean isRunning() {
-		return (this.running && runningAllowed());
+		return this.running && runningAllowed();
 	}
 
 	/**

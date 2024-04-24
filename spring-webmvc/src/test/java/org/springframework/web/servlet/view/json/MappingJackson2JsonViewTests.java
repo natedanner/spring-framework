@@ -63,15 +63,15 @@ import static org.mockito.Mockito.mock;
  */
 class MappingJackson2JsonViewTests {
 
-	private MappingJackson2JsonView view = new MappingJackson2JsonView();
+	private final MappingJackson2JsonView view = new MappingJackson2JsonView();
 
-	private MockHttpServletRequest request = new MockHttpServletRequest();
+	private final MockHttpServletRequest request = new MockHttpServletRequest();
 
-	private MockHttpServletResponse response = new MockHttpServletResponse();
+	private final MockHttpServletResponse response = new MockHttpServletResponse();
 
-	private Context jsContext = ContextFactory.getGlobal().enterContext();
+	private final Context jsContext = ContextFactory.getGlobal().enterContext();
 
-	private ScriptableObject jsScope = jsContext.initStandardObjects();
+	private final ScriptableObject jsScope = jsContext.initStandardObjects();
 
 
 	@Test
@@ -338,7 +338,7 @@ class MappingJackson2JsonViewTests {
 		@JsonView(MyJacksonView1.class)
 		private String property1 = "foo";
 
-		private boolean test = false;
+		private boolean test;
 
 		@JsonView(MyJacksonView2.class)
 		private String property2 = "boo";
@@ -376,9 +376,9 @@ class MappingJackson2JsonViewTests {
 
 		private String value = "bar";
 
-		private String baz = null;
+		private String baz;
 
-		private TestBeanSimple parent = null;
+		private TestBeanSimple parent;
 
 		public String getValue() {
 			return value;

@@ -51,11 +51,11 @@ import static org.mockito.Mockito.mock;
  */
 class SessionAttributeMethodArgumentResolverTests {
 
-	private WebSession session = mock();
+	private final WebSession session = mock();
 
-	private ServerWebExchange exchange = MockServerWebExchange.builder(MockServerHttpRequest.get("/")).session(this.session).build();
+	private final ServerWebExchange exchange = MockServerWebExchange.builder(MockServerHttpRequest.get("/")).session(this.session).build();
 
-	private Method handleMethod = ReflectionUtils.findMethod(getClass(), "handleWithSessionAttribute", (Class<?>[]) null);
+	private final Method handleMethod = ReflectionUtils.findMethod(getClass(), "handleWithSessionAttribute", (Class<?>[]) null);
 
 	private SessionAttributeMethodArgumentResolver resolver;
 

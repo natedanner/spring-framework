@@ -60,7 +60,7 @@ class ConfigurableJtaPlatform implements JtaPlatform {
 
 		Assert.notNull(tm, "TransactionManager reference must not be null");
 		this.transactionManager = tm;
-		this.userTransaction = (ut != null ? ut : new UserTransactionAdapter(tm));
+		this.userTransaction = ut != null ? ut : new UserTransactionAdapter(tm);
 		this.transactionSynchronizationRegistry = tsr;
 	}
 
@@ -83,7 +83,7 @@ class ConfigurableJtaPlatform implements JtaPlatform {
 	@Override
 	public boolean canRegisterSynchronization() {
 		try {
-			return (this.transactionManager.getStatus() == Status.STATUS_ACTIVE);
+			return this.transactionManager.getStatus() == Status.STATUS_ACTIVE;
 		}
 		catch (SystemException ex) {
 			throw new TransactionException("Could not determine JTA transaction status", ex);

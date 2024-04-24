@@ -51,7 +51,7 @@ class CacheResultOperation extends AbstractJCacheKeyOperation<CacheResult> {
 		CacheResult ann = methodDetails.getCacheAnnotation();
 		this.exceptionTypeFilter = createExceptionTypeFilter(ann.cachedExceptions(), ann.nonCachedExceptions());
 		this.exceptionCacheResolver = exceptionCacheResolver;
-		this.exceptionCacheName = (StringUtils.hasText(ann.exceptionCacheName()) ? ann.exceptionCacheName() : null);
+		this.exceptionCacheName = StringUtils.hasText(ann.exceptionCacheName()) ? ann.exceptionCacheName() : null;
 	}
 
 

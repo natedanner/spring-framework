@@ -437,7 +437,7 @@ class ResourceTests {
 
 			@Override
 			public MockResponse dispatch(RecordedRequest request) {
-				if (request.getPath().equals("/resource")) {
+				if ("/resource".equals(request.getPath())) {
 					return switch (request.getMethod()) {
 						case "HEAD" -> new MockResponse()
 									.addHeader("Content-Length", "6");

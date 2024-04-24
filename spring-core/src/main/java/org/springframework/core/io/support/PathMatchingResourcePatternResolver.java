@@ -342,8 +342,8 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 		else {
 			// Generally only look for a pattern after a prefix here,
 			// and on Tomcat only after the "*/" separator for its "war:" protocol.
-			int prefixEnd = (locationPattern.startsWith("war:") ? locationPattern.indexOf("*/") + 1 :
-					locationPattern.indexOf(':') + 1);
+			int prefixEnd = locationPattern.startsWith("war:") ? locationPattern.indexOf("*/") + 1 :
+					locationPattern.indexOf(':') + 1;
 			if (getPathMatcher().isPattern(locationPattern.substring(prefixEnd))) {
 				// a file pattern
 				return findPathMatchingResources(locationPattern);
@@ -384,7 +384,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 	protected Set<Resource> doFindAllClassPathResources(String path) throws IOException {
 		Set<Resource> result = new LinkedHashSet<>(16);
 		ClassLoader cl = getClassLoader();
-		Enumeration<URL> resourceUrls = (cl != null ? cl.getResources(path) : ClassLoader.getSystemResources(path));
+		Enumeration<URL> resourceUrls = cl != null ? cl.getResources(path) : ClassLoader.getSystemResources(path);
 		while (resourceUrls.hasMoreElements()) {
 			URL url = resourceUrls.nextElement();
 			result.add(convertClassLoaderURL(url));
@@ -439,9 +439,9 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 			try {
 				for (URL url : urlClassLoader.getURLs()) {
 					try {
-						UrlResource jarResource = (ResourceUtils.URL_PROTOCOL_JAR.equals(url.getProtocol()) ?
+						UrlResource jarResource = ResourceUtils.URL_PROTOCOL_JAR.equals(url.getProtocol()) ?
 								new UrlResource(url) :
-								new UrlResource(ResourceUtils.JAR_URL_PREFIX + url + ResourceUtils.JAR_URL_SEPARATOR));
+								new UrlResource(ResourceUtils.JAR_URL_PREFIX + url + ResourceUtils.JAR_URL_SEPARATOR);
 						if (jarResource.exists()) {
 							result.add(jarResource);
 						}
@@ -538,7 +538,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 		if (result.isEmpty()) {
 			return false;
 		}
-		String duplicatePath = (filePath.startsWith("/") ? filePath.substring(1) : "/" + filePath);
+		String duplicatePath = filePath.startsWith("/") ? filePath.substring(1) : "/" + filePath;
 		try {
 			return result.contains(new UrlResource(ResourceUtils.JAR_URL_PREFIX + ResourceUtils.FILE_URL_PREFIX +
 					duplicatePath + ResourceUtils.JAR_URL_SEPARATOR));
@@ -683,7 +683,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 			jarFile = jarCon.getJarFile();
 			jarFileUrl = jarCon.getJarFileURL().toExternalForm();
 			JarEntry jarEntry = jarCon.getJarEntry();
-			rootEntryPath = (jarEntry != null ? jarEntry.getName() : "");
+			rootEntryPath = jarEntry != null ? jarEntry.getName() : "";
 			closeJarFile = !jarCon.getUseCaches();
 		}
 		else {
@@ -894,9 +894,9 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 		}
 
 		String resourcePattern = stripLeadingSlash(locationPattern);
-		Predicate<String> resourcePatternMatches = (getPathMatcher().isPattern(resourcePattern) ?
+		Predicate<String> resourcePatternMatches = getPathMatcher().isPattern(resourcePattern) ?
 				path -> getPathMatcher().match(resourcePattern, path) :
-				resourcePattern::equals);
+				resourcePattern::equals;
 
 		try {
 			ModuleLayer.boot().configuration().modules().stream()
@@ -949,12 +949,12 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 	 * for the same path discovered via class path scanning.
 	 */
 	private Resource convertModuleSystemURI(URI uri) {
-		return (ResourceUtils.URL_PROTOCOL_FILE.equals(uri.getScheme()) ?
-				new FileSystemResource(uri.getPath()) : UrlResource.from(uri));
+		return ResourceUtils.URL_PROTOCOL_FILE.equals(uri.getScheme()) ?
+				new FileSystemResource(uri.getPath()) : UrlResource.from(uri);
 	}
 
 	private static String stripLeadingSlash(String path) {
-		return (path.startsWith("/") ? path.substring(1) : path);
+		return path.startsWith("/") ? path.substring(1) : path;
 	}
 
 
@@ -992,7 +992,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 		public PatternVirtualFileVisitor(String rootPath, String subPattern, PathMatcher pathMatcher) {
 			this.subPattern = subPattern;
 			this.pathMatcher = pathMatcher;
-			this.rootPath = (rootPath.isEmpty() || rootPath.endsWith("/") ? rootPath : rootPath + "/");
+			this.rootPath = rootPath.isEmpty() || rootPath.endsWith("/") ? rootPath : rootPath + "/";
 		}
 
 		@Override
@@ -1000,12 +1000,12 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 			String methodName = method.getName();
 			if (Object.class == method.getDeclaringClass()) {
-				switch(methodName) {
-					case "equals":
-						// Only consider equal when proxies are identical.
-						return (proxy == args[0]);
-					case "hashCode":
-						return System.identityHashCode(proxy);
+				if ("equals".equals(methodName)) {
+					// Only consider equal when proxies are identical.
+					return proxy == args[0];
+				}
+				else if ("hashCode".equals(methodName)) {
+					return System.identityHashCode(proxy);
 				}
 			}
 			return switch(methodName) {

@@ -32,13 +32,13 @@ class TestTransactionManager extends AbstractPlatformTransactionManager {
 
 	private final boolean canCreateTransaction;
 
-	protected boolean begin = false;
+	protected boolean begin;
 
-	protected boolean commit = false;
+	protected boolean commit;
 
-	protected boolean rollback = false;
+	protected boolean rollback;
 
-	protected boolean rollbackOnly = false;
+	protected boolean rollbackOnly;
 
 	protected TestTransactionManager(boolean existingTransaction, boolean canCreateTransaction) {
 		this.existingTransaction = existingTransaction;

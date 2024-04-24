@@ -466,32 +466,32 @@ public enum HttpStatus implements HttpStatusCode {
 
 	@Override
 	public boolean is1xxInformational() {
-		return (series() == Series.INFORMATIONAL);
+		return series() == Series.INFORMATIONAL;
 	}
 
 	@Override
 	public boolean is2xxSuccessful() {
-		return (series() == Series.SUCCESSFUL);
+		return series() == Series.SUCCESSFUL;
 	}
 
 	@Override
 	public boolean is3xxRedirection() {
-		return (series() == Series.REDIRECTION);
+		return series() == Series.REDIRECTION;
 	}
 
 	@Override
 	public boolean is4xxClientError() {
-		return (series() == Series.CLIENT_ERROR);
+		return series() == Series.CLIENT_ERROR;
 	}
 
 	@Override
 	public boolean is5xxServerError() {
-		return (series() == Series.SERVER_ERROR);
+		return series() == Series.SERVER_ERROR;
 	}
 
 	@Override
 	public boolean isError() {
-		return (is4xxClientError() || is5xxServerError());
+		return is4xxClientError() || is5xxServerError();
 	}
 
 	/**

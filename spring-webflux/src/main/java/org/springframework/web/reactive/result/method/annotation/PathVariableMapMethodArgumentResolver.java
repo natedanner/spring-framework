@@ -53,7 +53,7 @@ public class PathVariableMapMethodArgumentResolver extends HandlerMethodArgument
 	}
 
 	private boolean allVariables(PathVariable pathVariable, Class<?> type) {
-		return (Map.class.isAssignableFrom(type) && !StringUtils.hasText(pathVariable.value()));
+		return Map.class.isAssignableFrom(type) && !StringUtils.hasText(pathVariable.value());
 	}
 
 

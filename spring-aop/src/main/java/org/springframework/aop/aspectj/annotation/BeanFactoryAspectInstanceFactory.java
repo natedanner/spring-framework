@@ -93,8 +93,8 @@ public class BeanFactoryAspectInstanceFactory implements MetadataAwareAspectInst
 	@Override
 	@Nullable
 	public ClassLoader getAspectClassLoader() {
-		return (this.beanFactory instanceof ConfigurableBeanFactory cbf ?
-				cbf.getBeanClassLoader() : ClassUtils.getDefaultClassLoader());
+		return this.beanFactory instanceof ConfigurableBeanFactory cbf ?
+				cbf.getBeanClassLoader() : ClassUtils.getDefaultClassLoader();
 	}
 
 	@Override

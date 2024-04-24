@@ -286,7 +286,7 @@ class CoRouterFunctionDslTests {
 	}
 
 	private fun sampleRouter() = coRouter {
-		(GET("/foo/") or GET("/foos/")) { req -> handle(req) }
+		(gET("/foo/") or gET("/foos/")) { req -> handle(req) }
 		"/api".nest {
 			POST("/foo/", ::handleFromClass)
 			POST("/bar/", contentType(APPLICATION_JSON), ::handleFromClass)

@@ -104,14 +104,14 @@ class ServletServerHttpResponse extends AbstractListenerServerHttpResponse {
 	@Override
 	public HttpStatusCode getStatusCode() {
 		HttpStatusCode status = super.getStatusCode();
-		return (status != null ? status : HttpStatusCode.valueOf(this.response.getStatus()));
+		return status != null ? status : HttpStatusCode.valueOf(this.response.getStatus());
 	}
 
 	@Override
 	@Deprecated
 	public Integer getRawStatusCode() {
 		Integer status = super.getRawStatusCode();
-		return (status != null ? status : this.response.getStatus());
+		return status != null ? status : this.response.getStatus();
 	}
 
 	@Override
@@ -146,7 +146,7 @@ class ServletServerHttpResponse extends AbstractListenerServerHttpResponse {
 			this.response.setContentType(contentType.toString());
 		}
 
-		Charset charset = (contentType != null ? contentType.getCharset() : null);
+		Charset charset = contentType != null ? contentType.getCharset() : null;
 		if (this.response.getCharacterEncoding() == null && charset != null) {
 			this.response.setCharacterEncoding(charset.name());
 		}
@@ -259,7 +259,7 @@ class ServletServerHttpResponse extends AbstractListenerServerHttpResponse {
 		@Override
 		public void onTimeout(AsyncEvent event) {
 			Throwable ex = event.getThrowable();
-			ex = (ex != null ? ex : new IllegalStateException("Async operation timeout."));
+			ex = ex != null ? ex : new IllegalStateException("Async operation timeout.");
 			handleError(ex);
 		}
 

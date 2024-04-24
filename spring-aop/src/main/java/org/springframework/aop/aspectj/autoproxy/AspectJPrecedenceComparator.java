@@ -89,7 +89,7 @@ class AspectJPrecedenceComparator implements Comparator<Advisor> {
 
 	private int comparePrecedenceWithinAspect(Advisor advisor1, Advisor advisor2) {
 		boolean oneOrOtherIsAfterAdvice =
-				(AspectJAopUtils.isAfterAdvice(advisor1) || AspectJAopUtils.isAfterAdvice(advisor2));
+				AspectJAopUtils.isAfterAdvice(advisor1) || AspectJAopUtils.isAfterAdvice(advisor2);
 		int adviceDeclarationOrderDelta = getAspectDeclarationOrder(advisor1) - getAspectDeclarationOrder(advisor2);
 
 		if (oneOrOtherIsAfterAdvice) {
@@ -123,13 +123,13 @@ class AspectJPrecedenceComparator implements Comparator<Advisor> {
 	}
 
 	private boolean declaredInSameAspect(Advisor advisor1, Advisor advisor2) {
-		return (hasAspectName(advisor1) && hasAspectName(advisor2) &&
-				getAspectName(advisor1).equals(getAspectName(advisor2)));
+		return hasAspectName(advisor1) && hasAspectName(advisor2) &&
+				getAspectName(advisor1).equals(getAspectName(advisor2));
 	}
 
 	private boolean hasAspectName(Advisor advisor) {
-		return (advisor instanceof AspectJPrecedenceInformation ||
-				advisor.getAdvice() instanceof AspectJPrecedenceInformation);
+		return advisor instanceof AspectJPrecedenceInformation ||
+				advisor.getAdvice() instanceof AspectJPrecedenceInformation;
 	}
 
 	// pre-condition is that hasAspectName returned true
@@ -141,7 +141,7 @@ class AspectJPrecedenceComparator implements Comparator<Advisor> {
 
 	private int getAspectDeclarationOrder(Advisor advisor) {
 		AspectJPrecedenceInformation precedenceInfo = AspectJAopUtils.getAspectJPrecedenceInformationFor(advisor);
-		return (precedenceInfo != null ? precedenceInfo.getDeclarationOrder() : 0);
+		return precedenceInfo != null ? precedenceInfo.getDeclarationOrder() : 0;
 	}
 
 }

@@ -81,7 +81,7 @@ public class SimpMessagingTemplate extends AbstractMessageSendingTemplate<String
 	 */
 	public void setUserDestinationPrefix(String prefix) {
 		Assert.hasText(prefix, "User destination prefix must not be empty");
-		this.destinationPrefix = (prefix.endsWith("/") ? prefix : prefix + "/");
+		this.destinationPrefix = prefix.endsWith("/") ? prefix : prefix + "/";
 
 	}
 
@@ -183,7 +183,7 @@ public class SimpMessagingTemplate extends AbstractMessageSendingTemplate<String
 		Assert.notNull(destination, "Destination header required");
 
 		long timeout = this.sendTimeout;
-		boolean sent = (timeout >= 0 ? this.messageChannel.send(message, timeout) : this.messageChannel.send(message));
+		boolean sent = timeout >= 0 ? this.messageChannel.send(message, timeout) : this.messageChannel.send(message);
 
 		if (!sent) {
 			throw new MessageDeliveryException(message,

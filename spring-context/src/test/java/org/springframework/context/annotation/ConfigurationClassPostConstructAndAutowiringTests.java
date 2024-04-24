@@ -81,7 +81,7 @@ class ConfigurationClassPostConstructAndAutowiringTests {
 	@Configuration
 	static class Config1 {
 
-		int beanMethodCallCount = 0;
+		int beanMethodCallCount;
 
 		@PostConstruct
 		public void init() {

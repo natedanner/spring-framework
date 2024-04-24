@@ -62,7 +62,7 @@ public final class HttpComponentsHeadersAdapter implements MultiValueMap<String,
 	@Nullable
 	public String getFirst(String key) {
 		Header header = this.message.getFirstHeader(key);
-		return (header != null ? header.getValue() : null);
+		return header != null ? header.getValue() : null;
 	}
 
 	@Override
@@ -104,18 +104,18 @@ public final class HttpComponentsHeadersAdapter implements MultiValueMap<String,
 
 	@Override
 	public boolean isEmpty() {
-		return (this.message.getHeaders().length == 0);
+		return this.message.getHeaders().length == 0;
 	}
 
 	@Override
 	public boolean containsKey(Object key) {
-		return (key instanceof String headerName && this.message.containsHeader(headerName));
+		return key instanceof String headerName && this.message.containsHeader(headerName);
 	}
 
 	@Override
 	public boolean containsValue(Object value) {
-		return (value instanceof String &&
-				Arrays.stream(this.message.getHeaders()).anyMatch(h -> h.getValue().equals(value)));
+		return value instanceof String &&
+				Arrays.stream(this.message.getHeaders()).anyMatch(h -> h.getValue().equals(value));
 	}
 
 	@Nullable

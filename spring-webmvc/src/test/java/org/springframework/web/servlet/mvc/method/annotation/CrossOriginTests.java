@@ -395,7 +395,7 @@ class CrossOriginTests {
 		}
 		else {
 			for (HandlerInterceptor interceptor : chain.getInterceptorList()) {
-				if (interceptor.getClass().getSimpleName().equals("CorsInterceptor")) {
+				if ("CorsInterceptor".equals(interceptor.getClass().getSimpleName())) {
 					DirectFieldAccessor accessor = new DirectFieldAccessor(interceptor);
 					return (CorsConfiguration) accessor.getPropertyValue("config");
 				}

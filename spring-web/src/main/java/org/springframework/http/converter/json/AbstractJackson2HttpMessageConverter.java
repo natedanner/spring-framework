@@ -199,19 +199,19 @@ public abstract class AbstractJackson2HttpMessageConverter extends AbstractGener
 		List<MediaType> result = null;
 		for (Map.Entry<Class<?>, Map<MediaType, ObjectMapper>> entry : getObjectMapperRegistrations().entrySet()) {
 			if (entry.getKey().isAssignableFrom(clazz)) {
-				result = (result != null ? result : new ArrayList<>(entry.getValue().size()));
+				result = result != null ? result : new ArrayList<>(entry.getValue().size());
 				result.addAll(entry.getValue().keySet());
 			}
 		}
 		if (!CollectionUtils.isEmpty(result)) {
 			return result;
 		}
-		return (ProblemDetail.class.isAssignableFrom(clazz) ?
-				getMediaTypesForProblemDetail() : getSupportedMediaTypes());
+		return ProblemDetail.class.isAssignableFrom(clazz) ?
+				getMediaTypesForProblemDetail() : getSupportedMediaTypes();
 	}
 
 	private Map<Class<?>, Map<MediaType, ObjectMapper>> getObjectMapperRegistrations() {
-		return (this.objectMapperRegistrations != null ? this.objectMapperRegistrations : Collections.emptyMap());
+		return this.objectMapperRegistrations != null ? this.objectMapperRegistrations : Collections.emptyMap();
 	}
 
 	/**
@@ -329,7 +329,7 @@ public abstract class AbstractJackson2HttpMessageConverter extends AbstractGener
 		}
 
 		// Do not log warning for serializer not found (note: different message wording on Jackson 2.9)
-		boolean debugLevel = (cause instanceof JsonMappingException && cause.getMessage().startsWith("Cannot find"));
+		boolean debugLevel = cause instanceof JsonMappingException && cause.getMessage().startsWith("Cannot find");
 
 		if (debugLevel ? logger.isDebugEnabled() : logger.isWarnEnabled()) {
 			String msg = "Failed to evaluate Jackson " + (type instanceof JavaType ? "de" : "") +
@@ -443,8 +443,8 @@ public abstract class AbstractJackson2HttpMessageConverter extends AbstractGener
 		MediaType contentType = outputMessage.getHeaders().getContentType();
 		JsonEncoding encoding = getJsonEncoding(contentType);
 
-		Class<?> clazz = (object instanceof MappingJacksonValue mappingJacksonValue ?
-				mappingJacksonValue.getValue().getClass() : object.getClass());
+		Class<?> clazz = object instanceof MappingJacksonValue mappingJacksonValue ?
+				mappingJacksonValue.getValue().getClass() : object.getClass();
 		ObjectMapper objectMapper = selectObjectMapper(clazz, contentType);
 		Assert.state(objectMapper != null, () -> "No ObjectMapper for " + clazz.getName());
 
@@ -466,8 +466,8 @@ public abstract class AbstractJackson2HttpMessageConverter extends AbstractGener
 				javaType = getJavaType(type, null);
 			}
 
-			ObjectWriter objectWriter = (serializationView != null ?
-					objectMapper.writerWithView(serializationView) : objectMapper.writer());
+			ObjectWriter objectWriter = serializationView != null ?
+					objectMapper.writerWithView(serializationView) : objectMapper.writer();
 			if (filters != null) {
 				objectWriter = objectWriter.with(filters);
 			}

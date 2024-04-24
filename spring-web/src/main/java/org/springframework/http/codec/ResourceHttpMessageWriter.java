@@ -209,7 +209,7 @@ public class ResourceHttpMessageWriter implements HttpMessageWriter<Resource> {
 				long pos = region != null ? region.getPosition() : 0;
 				long count = region != null ? region.getCount() : file.length();
 				if (logger.isDebugEnabled()) {
-					String formatted = region != null ? "region " + pos + "-" + (count) + " of " : "";
+					String formatted = region != null ? "region " + pos + "-" + count + " of " : "";
 					logger.debug(Hints.getLogPrefix(hints) + "Zero-copy " + formatted + "[" + resource + "]");
 				}
 				return zeroCopyHttpOutputMessage.writeWith(file, pos, count);

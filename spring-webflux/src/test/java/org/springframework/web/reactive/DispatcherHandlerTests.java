@@ -60,8 +60,8 @@ class DispatcherHandlerTests {
 		HandlerMapping hm2 = mock(HandlerMapping.class, withSettings().extraInterfaces(Ordered.class));
 		given(((Ordered) hm1).getOrder()).willReturn(1);
 		given(((Ordered) hm2).getOrder()).willReturn(2);
-		given((hm1).getHandler(any())).willReturn(Mono.just((Supplier<String>) () -> "1"));
-		given((hm2).getHandler(any())).willReturn(Mono.just((Supplier<String>) () -> "2"));
+		given(hm1.getHandler(any())).willReturn(Mono.just((Supplier<String>) () -> "1"));
+		given(hm2.getHandler(any())).willReturn(Mono.just((Supplier<String>) () -> "2"));
 
 		StaticApplicationContext context = new StaticApplicationContext();
 		context.registerBean("b2", HandlerMapping.class, () -> hm2);
@@ -80,7 +80,7 @@ class DispatcherHandlerTests {
 	void preFlightRequest() {
 		WebHandler webHandler = mock();
 		HandlerMapping handlerMapping = mock();
-		given((handlerMapping).getHandler(any())).willReturn(Mono.just(webHandler));
+		given(handlerMapping.getHandler(any())).willReturn(Mono.just(webHandler));
 
 		StaticApplicationContext context = new StaticApplicationContext();
 		context.registerBean("handlerMapping", HandlerMapping.class, () -> handlerMapping);

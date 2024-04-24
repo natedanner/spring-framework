@@ -157,9 +157,9 @@ class TransactionAspectTests {
 		}
 		finally {
 			assertThat(txManager.begun).isEqualTo(1);
-			long expected1 = (rollback ? 0 : 1);
+			long expected1 = rollback ? 0 : 1;
 			assertThat(txManager.commits).isEqualTo(expected1);
-			long expected = (rollback ? 1 : 0);
+			long expected = rollback ? 1 : 0;
 			assertThat(txManager.rollbacks).isEqualTo(expected);
 		}
 	}

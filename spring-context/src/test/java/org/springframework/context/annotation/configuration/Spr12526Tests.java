@@ -63,7 +63,7 @@ class Spr12526Tests {
 		@Bean
 		@Scope(SCOPE_PROTOTYPE)
 		Service service(CustomCondition condition) {
-			return (condition.check() ? new FirstService() : new SecondService());
+			return condition.check() ? new FirstService() : new SecondService();
 		}
 
 		@Bean

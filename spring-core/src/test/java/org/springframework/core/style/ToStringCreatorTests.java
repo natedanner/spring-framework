@@ -150,11 +150,10 @@ class ToStringCreatorTests {
 
 	@Test
 	void appendMap() {
-		Map<String, String> map = new LinkedHashMap<>() {{
-			put("Keri", "Softball");
-			put("Scot", "Fishing");
-			put("Keith", "Flag Football");
-		}};
+		Map<String, String> map = new LinkedHashMap<>();
+		map.put("Keri", "Softball");
+		map.put("Scot", "Fishing");
+		map.put("Keith", "Flag Football");
 		Object stringy = new Object() {
 			@Override
 			public String toString() {

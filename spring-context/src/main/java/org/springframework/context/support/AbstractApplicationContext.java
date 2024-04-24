@@ -1450,8 +1450,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	@Nullable
 	protected BeanFactory getInternalParentBeanFactory() {
-		return (getParent() instanceof ConfigurableApplicationContext cac ?
-				cac.getBeanFactory() : getParent());
+		return getParent() instanceof ConfigurableApplicationContext cac ?
+				cac.getBeanFactory() : getParent();
 	}
 
 
@@ -1493,8 +1493,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	@Nullable
 	protected MessageSource getInternalParentMessageSource() {
-		return (getParent() instanceof AbstractApplicationContext abstractApplicationContext ?
-				abstractApplicationContext.messageSource : getParent());
+		return getParent() instanceof AbstractApplicationContext abstractApplicationContext ?
+				abstractApplicationContext.messageSource : getParent();
 	}
 
 
@@ -1526,7 +1526,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 	@Override
 	public boolean isRunning() {
-		return (this.lifecycleProcessor != null && this.lifecycleProcessor.isRunning());
+		return this.lifecycleProcessor != null && this.lifecycleProcessor.isRunning();
 	}
 
 

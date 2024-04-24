@@ -99,7 +99,7 @@ class PassThroughClob implements Clob {
 				return new ByteArrayInputStream(tempContent.getBytes(StandardCharsets.US_ASCII));
 			}
 			else {
-				return (this.asciiStream != null ? this.asciiStream : InputStream.nullInputStream());
+				return this.asciiStream != null ? this.asciiStream : InputStream.nullInputStream();
 			}
 		}
 		catch (IOException ex) {

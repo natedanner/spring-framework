@@ -64,7 +64,7 @@ public class LocalizedResourceHelper {
 	 * Default is an underscore ("_").
 	 */
 	public void setSeparator(@Nullable String separator) {
-		this.separator = (separator != null ? separator : DEFAULT_SEPARATOR);
+		this.separator = separator != null ? separator : DEFAULT_SEPARATOR;
 	}
 
 

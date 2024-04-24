@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 @Component class Dependency {
 
-	private int value = 0;
+	private int value;
 
 	public void method() {
 		value++;

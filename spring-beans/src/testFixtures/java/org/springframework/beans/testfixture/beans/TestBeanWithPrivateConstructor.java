@@ -16,7 +16,7 @@
 
 package org.springframework.beans.testfixture.beans;
 
-public class TestBeanWithPrivateConstructor {
+public final class TestBeanWithPrivateConstructor {
 
 	private TestBeanWithPrivateConstructor() {
 	}

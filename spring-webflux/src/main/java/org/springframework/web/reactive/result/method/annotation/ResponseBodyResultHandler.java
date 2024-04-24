@@ -78,8 +78,8 @@ public class ResponseBodyResultHandler extends AbstractMessageWriterResultHandle
 	public boolean supports(HandlerResult result) {
 		MethodParameter returnType = result.getReturnTypeSource();
 		Class<?> containingClass = returnType.getContainingClass();
-		return (AnnotatedElementUtils.hasAnnotation(containingClass, ResponseBody.class) ||
-				returnType.hasMethodAnnotation(ResponseBody.class));
+		return AnnotatedElementUtils.hasAnnotation(containingClass, ResponseBody.class) ||
+				returnType.hasMethodAnnotation(ResponseBody.class);
 	}
 
 	@Override

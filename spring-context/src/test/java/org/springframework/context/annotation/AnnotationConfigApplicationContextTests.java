@@ -177,11 +177,11 @@ class AnnotationConfigApplicationContextTests {
 		context.getBeanFactory().addBeanPostProcessor(new BeanPostProcessor() {
 			@Override
 			public Object postProcessBeforeInitialization(Object bean, String beanName) {
-				return (bean instanceof TestBean ? null : bean);
+				return bean instanceof TestBean ? null : bean;
 			}
 			@Override
 			public Object postProcessAfterInitialization(Object bean, String beanName) {
-				return (bean instanceof TestBean ? null : bean);
+				return bean instanceof TestBean ? null : bean;
 			}
 		});
 		// 3rd BPP never gets invoked with a TestBean
@@ -727,7 +727,7 @@ class TestBean {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof TestBean that && Objects.equals(this.name, that.name)));
+		return this == other || (other instanceof TestBean that && Objects.equals(this.name, that.name));
 	}
 
 	@Override

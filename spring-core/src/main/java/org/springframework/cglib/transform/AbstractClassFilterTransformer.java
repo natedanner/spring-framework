@@ -22,8 +22,8 @@ import org.springframework.asm.FieldVisitor;
 import org.springframework.asm.MethodVisitor;
 import org.springframework.cglib.core.ClassTransformer;
 
-abstract public class AbstractClassFilterTransformer extends AbstractClassTransformer {
-    private ClassTransformer pass;
+public abstract class AbstractClassFilterTransformer extends AbstractClassTransformer {
+	private final ClassTransformer pass;
     private ClassVisitor target;
 
     @Override
@@ -36,7 +36,7 @@ abstract public class AbstractClassFilterTransformer extends AbstractClassTransf
         this.pass = pass;
     }
 
-    abstract protected boolean accept(int version, int access, String name, String signature, String superName, String[] interfaces);
+    protected abstract boolean accept(int version, int access, String name, String signature, String superName, String[] interfaces);
 
     @Override
 	public void visit(int version,

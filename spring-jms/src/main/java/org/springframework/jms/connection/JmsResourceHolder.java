@@ -56,7 +56,7 @@ public class JmsResourceHolder extends ResourceHolderSupport {
 	@Nullable
 	private ConnectionFactory connectionFactory;
 
-	private boolean frozen = false;
+	private boolean frozen;
 
 	private final Deque<Connection> connections = new ArrayDeque<>();
 
@@ -224,7 +224,7 @@ public class JmsResourceHolder extends ResourceHolderSupport {
 	@Nullable
 	public <S extends Session> S getSession(Class<S> sessionType, @Nullable Connection connection) {
 		Deque<Session> sessions =
-				(connection != null ? this.sessionsPerConnection.get(connection) : this.sessions);
+				connection != null ? this.sessionsPerConnection.get(connection) : this.sessions;
 		return CollectionUtils.findValueOfType(sessions, sessionType);
 	}
 

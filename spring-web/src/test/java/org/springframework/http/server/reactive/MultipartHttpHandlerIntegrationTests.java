@@ -93,7 +93,7 @@ class MultipartHttpHandlerIntegrationTests extends AbstractHttpHandlerIntegratio
 
 		@Override
 		public Mono<Void> handle(ServerWebExchange exchange) {
-			if (exchange.getRequest().getURI().getPath().equals("/form-parts")) {
+			if ("/form-parts".equals(exchange.getRequest().getURI().getPath())) {
 				return assertGetFormParts(exchange);
 			}
 			return Mono.error(new AssertionError());

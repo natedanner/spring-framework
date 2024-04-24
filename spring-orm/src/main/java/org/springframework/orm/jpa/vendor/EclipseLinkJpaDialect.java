@@ -56,7 +56,7 @@ import org.springframework.transaction.TransactionException;
 @SuppressWarnings("serial")
 public class EclipseLinkJpaDialect extends DefaultJpaDialect {
 
-	private boolean lazyDatabaseTransaction = false;
+	private boolean lazyDatabaseTransaction;
 
 
 	/**

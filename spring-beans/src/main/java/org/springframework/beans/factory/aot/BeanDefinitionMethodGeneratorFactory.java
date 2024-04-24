@@ -139,7 +139,7 @@ class BeanDefinitionMethodGeneratorFactory {
 		}
 		if (BeanRegistrationAotProcessor.class.isAssignableFrom(beanClass)) {
 			BeanRegistrationAotProcessor processor = this.aotProcessors.findByBeanName(registeredBean.getBeanName());
-			return (processor == null || processor.isBeanExcludedFromAotProcessing());
+			return processor == null || processor.isBeanExcludedFromAotProcessing();
 		}
 		return false;
 	}

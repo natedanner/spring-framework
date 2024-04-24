@@ -387,8 +387,8 @@ public class ExceptionHandlerExceptionResolver extends AbstractHandlerMethodExce
 
 	@Override
 	protected boolean shouldApplyTo(HttpServletRequest request, @Nullable Object handler) {
-		return (handler instanceof ResourceHttpRequestHandler ?
-				hasGlobalExceptionHandlers() : super.shouldApplyTo(request, handler));
+		return handler instanceof ResourceHttpRequestHandler ?
+				hasGlobalExceptionHandlers() : super.shouldApplyTo(request, handler);
 	}
 
 	/**
@@ -424,7 +424,7 @@ public class ExceptionHandlerExceptionResolver extends AbstractHandlerMethodExce
 			while (exToExpose != null) {
 				exceptions.add(exToExpose);
 				Throwable cause = exToExpose.getCause();
-				exToExpose = (cause != exToExpose ? cause : null);
+				exToExpose = cause != exToExpose ? cause : null;
 			}
 			Object[] arguments = new Object[exceptions.size() + 1];
 			exceptions.toArray(arguments);  // efficient arraycopy call in ArrayList

@@ -61,9 +61,9 @@ public class JobDetailFactoryBean
 
 	private JobDataMap jobDataMap = new JobDataMap();
 
-	private boolean durability = false;
+	private boolean durability;
 
-	private boolean requestsRecovery = false;
+	private boolean requestsRecovery;
 
 	@Nullable
 	private String description;

@@ -409,7 +409,7 @@ public class WebSocketStompClient extends StompClientSupport implements SmartLif
 
 		@Override
 		public void handleMessage(WebSocketSession session, WebSocketMessage<?> webSocketMessage) {
-			this.lastReadTime = (this.lastReadTime != -1 ? System.currentTimeMillis() : -1);
+			this.lastReadTime = this.lastReadTime != -1 ? System.currentTimeMillis() : -1;
 			List<Message<byte[]>> messages;
 			try {
 				messages = this.codec.decode(webSocketMessage);
@@ -580,11 +580,11 @@ public class WebSocketStompClient extends StompClientSupport implements SmartLif
 			byte[] payload = message.getPayload();
 			byte[] bytes = ENCODER.encode(accessor.getMessageHeaders(), payload);
 
-			boolean useBinary = (payload.length > 0 &&
-					!(SockJsSession.class.isAssignableFrom(sessionType)) &&
-					MimeTypeUtils.APPLICATION_OCTET_STREAM.isCompatibleWith(accessor.getContentType()));
+			boolean useBinary = payload.length > 0 &&
+					!SockJsSession.class.isAssignableFrom(sessionType) &&
+					MimeTypeUtils.APPLICATION_OCTET_STREAM.isCompatibleWith(accessor.getContentType());
 
-			return (useBinary ? new BinaryMessage(bytes) : new TextMessage(bytes));
+			return useBinary ? new BinaryMessage(bytes) : new TextMessage(bytes);
 		}
 	}
 

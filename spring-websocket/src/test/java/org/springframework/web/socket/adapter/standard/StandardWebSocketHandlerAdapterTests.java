@@ -41,13 +41,13 @@ import static org.mockito.Mockito.verify;
  */
 class StandardWebSocketHandlerAdapterTests {
 
-	private WebSocketHandler webSocketHandler = mock();
+	private final WebSocketHandler webSocketHandler = mock();
 
-	private Session session = mock();
+	private final Session session = mock();
 
-	private StandardWebSocketSession webSocketSession = new StandardWebSocketSession(null, null, null, null);
+	private final StandardWebSocketSession webSocketSession = new StandardWebSocketSession(null, null, null, null);
 
-	private StandardWebSocketHandlerAdapter adapter = new StandardWebSocketHandlerAdapter(this.webSocketHandler, this.webSocketSession);
+	private final StandardWebSocketHandlerAdapter adapter = new StandardWebSocketHandlerAdapter(this.webSocketHandler, this.webSocketSession);
 
 
 	@Test

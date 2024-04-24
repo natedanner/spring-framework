@@ -172,7 +172,7 @@ public class ContextConfigurationAttributes {
 		this.inheritLocations = inheritLocations;
 		this.initializers = initializers;
 		this.inheritInitializers = inheritInitializers;
-		this.name = (StringUtils.hasText(name) ? name : null);
+		this.name = StringUtils.hasText(name) ? name : null;
 		this.contextLoaderClass = contextLoaderClass;
 	}
 
@@ -218,7 +218,7 @@ public class ContextConfigurationAttributes {
 	 * @see #hasLocations()
 	 */
 	public boolean hasClasses() {
-		return (getClasses().length > 0);
+		return getClasses().length > 0;
 	}
 
 	/**
@@ -253,7 +253,7 @@ public class ContextConfigurationAttributes {
 	 * @see #hasClasses()
 	 */
 	public boolean hasLocations() {
-		return (getLocations().length > 0);
+		return getLocations().length > 0;
 	}
 
 	/**
@@ -265,7 +265,7 @@ public class ContextConfigurationAttributes {
 	 * @see #hasClasses()
 	 */
 	public boolean hasResources() {
-		return (hasLocations() || hasClasses());
+		return hasLocations() || hasClasses();
 	}
 
 	/**
@@ -334,7 +334,7 @@ public class ContextConfigurationAttributes {
 	 */
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ContextConfigurationAttributes that &&
+		return this == other || (other instanceof ContextConfigurationAttributes that &&
 				ObjectUtils.nullSafeEquals(this.declaringClass, that.declaringClass) &&
 				Arrays.equals(this.classes, that.classes)) &&
 				Arrays.equals(this.locations, that.locations) &&
@@ -342,7 +342,7 @@ public class ContextConfigurationAttributes {
 				Arrays.equals(this.initializers, that.initializers) &&
 				this.inheritInitializers == that.inheritInitializers &&
 				ObjectUtils.nullSafeEquals(this.name, that.name) &&
-				ObjectUtils.nullSafeEquals(this.contextLoaderClass, that.contextLoaderClass));
+				ObjectUtils.nullSafeEquals(this.contextLoaderClass, that.contextLoaderClass);
 	}
 
 	/**

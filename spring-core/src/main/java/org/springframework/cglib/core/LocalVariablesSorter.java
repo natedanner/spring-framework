@@ -66,7 +66,7 @@ public class LocalVariablesSorter extends MethodVisitor {
         super(Constants.ASM_API, mv);
         state = new State();
         Type[] args = Type.getArgumentTypes(desc);
-        state.nextLocal = ((Opcodes.ACC_STATIC & access) != 0) ? 0 : 1;
+        state.nextLocal = (Opcodes.ACC_STATIC & access) != 0 ? 0 : 1;
         for (Type arg : args) {
             state.nextLocal += arg.getSize();
         }

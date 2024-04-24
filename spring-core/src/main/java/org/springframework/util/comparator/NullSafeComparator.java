@@ -102,9 +102,9 @@ public class NullSafeComparator<T> implements Comparator<T> {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof NullSafeComparator<?> that &&
+		return this == other || (other instanceof NullSafeComparator<?> that &&
 				this.nonNullComparator.equals(that.nonNullComparator) &&
-				this.nullsLow == that.nullsLow));
+				this.nullsLow == that.nullsLow);
 	}
 
 	@Override

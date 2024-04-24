@@ -372,8 +372,7 @@ class SelectionAndProjectionTests {
 		}
 
 		static Iterable<IntegerTestBean> createIterable() {
-			final Set<IntegerTestBean> set = createSet();
-			return set;
+			return createSet();
 		}
 
 		static IntegerTestBean[] createArray() {

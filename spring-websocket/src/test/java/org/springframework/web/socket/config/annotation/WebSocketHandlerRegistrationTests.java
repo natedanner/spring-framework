@@ -44,9 +44,9 @@ import static org.mockito.Mockito.mock;
  */
 class WebSocketHandlerRegistrationTests {
 
-	private TestWebSocketHandlerRegistration registration = new TestWebSocketHandlerRegistration();
+	private final TestWebSocketHandlerRegistration registration = new TestWebSocketHandlerRegistration();
 
-	private TaskScheduler taskScheduler = mock();
+	private final TaskScheduler taskScheduler = mock();
 
 
 	@Test

@@ -307,7 +307,7 @@ public abstract class DataSourceUtils {
 			return false;
 		}
 		ConnectionHolder conHolder = (ConnectionHolder) TransactionSynchronizationManager.getResource(dataSource);
-		return (conHolder != null && connectionEquals(conHolder, con));
+		return conHolder != null && connectionEquals(conHolder, con);
 	}
 
 	/**
@@ -424,8 +424,8 @@ public abstract class DataSourceUtils {
 		Connection heldCon = conHolder.getConnection();
 		// Explicitly check for identity too: for Connection handles that do not implement
 		// "equals" properly, such as the ones Commons DBCP exposes).
-		return (heldCon == passedInCon || heldCon.equals(passedInCon) ||
-				getTargetConnection(heldCon).equals(passedInCon));
+		return heldCon == passedInCon || heldCon.equals(passedInCon) ||
+				getTargetConnection(heldCon).equals(passedInCon);
 	}
 
 	/**

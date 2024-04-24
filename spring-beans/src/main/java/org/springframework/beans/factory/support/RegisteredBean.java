@@ -130,8 +130,8 @@ public final class RegisteredBean {
 		Assert.notNull(parent, "'parent' must not be null");
 		Assert.notNull(innerBeanDefinition, "'innerBeanDefinition' must not be null");
 		InnerBeanResolver resolver = new InnerBeanResolver(parent, innerBeanName, innerBeanDefinition);
-		Supplier<String> beanName = (StringUtils.hasLength(innerBeanName) ?
-				() -> innerBeanName : resolver::resolveBeanName);
+		Supplier<String> beanName = StringUtils.hasLength(innerBeanName) ?
+				() -> innerBeanName : resolver::resolveBeanName;
 		return new RegisteredBean(parent.getBeanFactory(), beanName,
 				innerBeanName == null, resolver::resolveMergedBeanDefinition, parent);
 	}

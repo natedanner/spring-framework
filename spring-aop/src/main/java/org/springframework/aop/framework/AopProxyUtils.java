@@ -88,7 +88,7 @@ public abstract class AopProxyUtils {
 			current = getSingletonTarget(current);
 		}
 		if (result == null) {
-			result = (AopUtils.isCglibProxy(candidate) ? candidate.getClass().getSuperclass() : candidate.getClass());
+			result = AopUtils.isCglibProxy(candidate) ? candidate.getClass().getSuperclass() : candidate.getClass();
 		}
 		return result;
 	}
@@ -225,8 +225,8 @@ public abstract class AopProxyUtils {
 	 * rather, equality of interfaces, advisors and target sources.
 	 */
 	public static boolean equalsInProxy(AdvisedSupport a, AdvisedSupport b) {
-		return (a == b ||
-				(equalsProxiedInterfaces(a, b) && equalsAdvisors(a, b) && a.getTargetSource().equals(b.getTargetSource())));
+		return a == b ||
+				(equalsProxiedInterfaces(a, b) && equalsAdvisors(a, b) && a.getTargetSource().equals(b.getTargetSource()));
 	}
 
 	/**

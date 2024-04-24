@@ -244,12 +244,12 @@ public class MimeType implements Comparable<MimeType>, Serializable {
 			return false;
 		}
 		else {
-			return ((s.startsWith("\"") && s.endsWith("\"")) || (s.startsWith("'") && s.endsWith("'")));
+			return (s.startsWith("\"") && s.endsWith("\"")) || (s.startsWith("'") && s.endsWith("'"));
 		}
 	}
 
 	protected String unquote(String s) {
-		return (isQuotedString(s) ? s.substring(1, s.length() - 1) : s);
+		return isQuotedString(s) ? s.substring(1, s.length() - 1) : s;
 	}
 
 	/**
@@ -268,7 +268,7 @@ public class MimeType implements Comparable<MimeType>, Serializable {
 	 */
 	public boolean isWildcardSubtype() {
 		String subtype = getSubtype();
-		return (WILDCARD_TYPE.equals(subtype) || subtype.startsWith("*+"));
+		return WILDCARD_TYPE.equals(subtype) || subtype.startsWith("*+");
 	}
 
 	/**
@@ -406,10 +406,10 @@ public class MimeType implements Comparable<MimeType>, Serializable {
 					return true;
 				}
 				else if (isWildcardSubtype() && thisSuffix != null) {
-					return (thisSuffix.equals(other.getSubtype()) || thisSuffix.equals(otherSuffix));
+					return thisSuffix.equals(other.getSubtype()) || thisSuffix.equals(otherSuffix);
 				}
 				else if (other.isWildcardSubtype() && otherSuffix != null) {
-					return (getSubtype().equals(otherSuffix) || otherSuffix.equals(thisSuffix));
+					return getSubtype().equals(otherSuffix) || otherSuffix.equals(thisSuffix);
 				}
 			}
 		}
@@ -450,10 +450,10 @@ public class MimeType implements Comparable<MimeType>, Serializable {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof MimeType otherType &&
+		return this == other || (other instanceof MimeType otherType &&
 				this.type.equalsIgnoreCase(otherType.type) &&
 				this.subtype.equalsIgnoreCase(otherType.subtype) &&
-				parametersAreEqual(otherType)));
+				parametersAreEqual(otherType));
 	}
 
 	/**

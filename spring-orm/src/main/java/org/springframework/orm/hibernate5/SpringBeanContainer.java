@@ -209,9 +209,9 @@ public final class SpringBeanContainer implements BeanContainer {
 				}
 			}
 			else {
-				return (this.beanFactory.containsBean(name) ?
+				return this.beanFactory.containsBean(name) ?
 						new SpringContainedBean<>(this.beanFactory.getBean(name, beanType)) :
-						new SpringContainedBean<>(this.beanFactory.getBean(beanType)));
+						new SpringContainedBean<>(this.beanFactory.getBean(beanType));
 			}
 		}
 		catch (BeansException ex) {

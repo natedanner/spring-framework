@@ -46,14 +46,14 @@ class WebJarsResourceResolverTests {
 	private static final Duration TIMEOUT = Duration.ofSeconds(1);
 
 
-	private List<Resource> locations = List.of(new ClassPathResource("/META-INF/resources/webjars"));
+	private final List<Resource> locations = List.of(new ClassPathResource("/META-INF/resources/webjars"));
 
 	// for this to work, an actual WebJar must be on the test classpath
-	private WebJarsResourceResolver resolver = new WebJarsResourceResolver();
+	private final WebJarsResourceResolver resolver = new WebJarsResourceResolver();
 
-	private ResourceResolverChain chain = mock();
+	private final ResourceResolverChain chain = mock();
 
-	private ServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.get(""));
+	private final ServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.get(""));
 
 
 	@Test

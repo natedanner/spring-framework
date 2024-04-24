@@ -199,7 +199,7 @@ public class DefaultCorsProcessor implements CorsProcessor {
 
 	@Nullable
 	private HttpMethod getMethodToUse(ServerHttpRequest request, boolean isPreFlight) {
-		return (isPreFlight ? request.getHeaders().getAccessControlRequestMethod() : request.getMethod());
+		return isPreFlight ? request.getHeaders().getAccessControlRequestMethod() : request.getMethod();
 	}
 
 	/**
@@ -214,7 +214,7 @@ public class DefaultCorsProcessor implements CorsProcessor {
 
 	private List<String> getHeadersToUse(ServerHttpRequest request, boolean isPreFlight) {
 		HttpHeaders headers = request.getHeaders();
-		return (isPreFlight ? headers.getAccessControlRequestHeaders() : new ArrayList<>(headers.keySet()));
+		return isPreFlight ? headers.getAccessControlRequestHeaders() : new ArrayList<>(headers.keySet());
 	}
 
 }

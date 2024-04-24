@@ -237,12 +237,12 @@ public class DefaultUriBuilderFactory implements UriBuilderFactory {
 		private UriComponentsBuilder initUriComponentsBuilder(String uriTemplate) {
 			UriComponentsBuilder result;
 			if (!StringUtils.hasLength(uriTemplate)) {
-				result = (baseUri != null ? baseUri.cloneBuilder() : UriComponentsBuilder.newInstance());
+				result = baseUri != null ? baseUri.cloneBuilder() : UriComponentsBuilder.newInstance();
 			}
 			else if (baseUri != null) {
 				UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(uriTemplate);
 				UriComponents uri = builder.build();
-				result = (uri.getHost() == null ? baseUri.cloneBuilder().uriComponents(uri) : builder);
+				result = uri.getHost() == null ? baseUri.cloneBuilder().uriComponents(uri) : builder;
 			}
 			else {
 				result = UriComponentsBuilder.fromUriString(uriTemplate);

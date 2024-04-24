@@ -23,7 +23,7 @@ import org.springframework.asm.ClassVisitor;
 
 // TODO: optimize (ClassReader buffers entire class before accept)
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class ClassNameReader {
+public final class ClassNameReader {
 
 	private ClassNameReader() {
 	}

@@ -65,9 +65,9 @@ public class ReactorResourceFactory implements InitializingBean, DisposableBean,
 	@Nullable
 	private LoopResources loopResources;
 
-	private boolean manageConnectionProvider = false;
+	private boolean manageConnectionProvider;
 
-	private boolean manageLoopResources = false;
+	private boolean manageLoopResources;
 
 	private Duration shutdownQuietPeriod = Duration.ofSeconds(LoopResources.DEFAULT_SHUTDOWN_QUIET_PERIOD);
 
@@ -108,8 +108,8 @@ public class ReactorResourceFactory implements InitializingBean, DisposableBean,
 	 */
 	public void addGlobalResourcesConsumer(Consumer<HttpResources> consumer) {
 		this.useGlobalResources = true;
-		this.globalResourcesConsumer = (this.globalResourcesConsumer != null ?
-				this.globalResourcesConsumer.andThen(consumer) : consumer);
+		this.globalResourcesConsumer = this.globalResourcesConsumer != null ?
+				this.globalResourcesConsumer.andThen(consumer) : consumer;
 	}
 
 	/**

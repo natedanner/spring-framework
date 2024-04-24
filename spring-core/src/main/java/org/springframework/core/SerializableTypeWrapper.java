@@ -93,7 +93,7 @@ final class SerializableTypeWrapper {
 		if (type instanceof SerializableTypeProxy proxy) {
 			unwrapped = proxy.getTypeProvider().getType();
 		}
-		return (unwrapped != null ? (T) unwrapped : type);
+		return unwrapped != null ? (T) unwrapped : type;
 	}
 
 	/**
@@ -218,7 +218,7 @@ final class SerializableTypeWrapper {
 			}
 
 			Type type = this.provider.getType();
-			if (type instanceof TypeVariable<?> tv && method.getName().equals("getName")) {
+			if (type instanceof TypeVariable<?> tv && "getName".equals(method.getName())) {
 				// Avoid reflection for common comparison of type variables
 				return tv.getName();
 			}
@@ -285,7 +285,7 @@ final class SerializableTypeWrapper {
 		private transient MethodParameter methodParameter;
 
 		public MethodParameterTypeProvider(MethodParameter methodParameter) {
-			this.methodName = (methodParameter.getMethod() != null ? methodParameter.getMethod().getName() : null);
+			this.methodName = methodParameter.getMethod() != null ? methodParameter.getMethod().getName() : null;
 			this.parameterTypes = methodParameter.getExecutable().getParameterTypes();
 			this.declaringClass = methodParameter.getDeclaringClass();
 			this.parameterIndex = methodParameter.getParameterIndex();
@@ -358,7 +358,7 @@ final class SerializableTypeWrapper {
 				// Cache the result for further calls to getType()
 				this.result = result;
 			}
-			return (result instanceof Type[] results ? results[this.index] : (Type) result);
+			return result instanceof Type[] results ? results[this.index] : (Type) result;
 		}
 
 		@Override

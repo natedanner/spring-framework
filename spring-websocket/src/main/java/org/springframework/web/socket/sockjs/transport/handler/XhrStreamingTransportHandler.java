@@ -59,7 +59,7 @@ public class XhrStreamingTransportHandler extends AbstractHttpSendingTransportHa
 
 	@Override
 	public boolean checkSessionType(SockJsSession session) {
-		return (session instanceof XhrStreamingSockJsSession);
+		return session instanceof XhrStreamingSockJsSession;
 	}
 
 	@Override

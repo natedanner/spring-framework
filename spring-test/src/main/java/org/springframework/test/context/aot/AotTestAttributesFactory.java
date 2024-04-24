@@ -50,7 +50,7 @@ final class AotTestAttributesFactory {
 			synchronized (AotTestAttributesFactory.class) {
 				attrs = attributes;
 				if (attrs == null) {
-					attrs = (AotDetector.useGeneratedArtifacts() ? loadAttributesMap() : new ConcurrentHashMap<>());
+					attrs = AotDetector.useGeneratedArtifacts() ? loadAttributesMap() : new ConcurrentHashMap<>();
 					attributes = attrs;
 				}
 			}

@@ -273,7 +273,7 @@ public class ForwardedHeaderFilter extends OncePerRequestFilter {
 			this.scheme = uriComponents.getScheme();
 			this.secure = "https".equals(this.scheme) || "wss".equals(this.scheme);
 			this.host = uriComponents.getHost();
-			this.port = (port == -1 ? (this.secure ? 443 : 80) : port);
+			this.port = port == -1 ? (this.secure ? 443 : 80) : port;
 
 			this.remoteAddress = ForwardedHeaderUtils.parseForwardedFor(uri, headers, request.getRemoteAddress());
 
@@ -324,18 +324,18 @@ public class ForwardedHeaderFilter extends OncePerRequestFilter {
 		@Override
 		@Nullable
 		public String getRemoteHost() {
-			return (this.remoteAddress != null ? this.remoteAddress.getHostString() : super.getRemoteHost());
+			return this.remoteAddress != null ? this.remoteAddress.getHostString() : super.getRemoteHost();
 		}
 
 		@Override
 		@Nullable
 		public String getRemoteAddr() {
-			return (this.remoteAddress != null ? this.remoteAddress.getHostString() : super.getRemoteAddr());
+			return this.remoteAddress != null ? this.remoteAddress.getHostString() : super.getRemoteAddr();
 		}
 
 		@Override
 		public int getRemotePort() {
-			return (this.remoteAddress != null ? this.remoteAddress.getPort() : super.getRemotePort());
+			return this.remoteAddress != null ? this.remoteAddress.getPort() : super.getRemotePort();
 		}
 
 		@SuppressWarnings("DataFlowIssue")
@@ -423,12 +423,12 @@ public class ForwardedHeaderFilter extends OncePerRequestFilter {
 		}
 
 		private String initRequestUrl() {
-			return (this.baseUrl + (this.requestUri != null ? this.requestUri : this.delegate.get().getRequestURI()));
+			return this.baseUrl + (this.requestUri != null ? this.requestUri : this.delegate.get().getRequestURI());
 		}
 
 
 		public String getContextPath() {
-			return (this.forwardedPrefix != null ? this.forwardedPrefix : this.delegate.get().getContextPath());
+			return this.forwardedPrefix != null ? this.forwardedPrefix : this.delegate.get().getContextPath();
 		}
 
 		public String getRequestUri() {
@@ -500,8 +500,8 @@ public class ForwardedHeaderFilter extends OncePerRequestFilter {
 			String path = uriComponents.getPath();
 			if (path != null) {
 				// Relative to Servlet container root or to current request
-				path = (path.startsWith(FOLDER_SEPARATOR) ? path :
-						StringUtils.applyRelativePath(this.request.getRequestURI(), path));
+				path = path.startsWith(FOLDER_SEPARATOR) ? path :
+						StringUtils.applyRelativePath(this.request.getRequestURI(), path);
 			}
 
 			ServletServerHttpRequest httpRequest = new ServletServerHttpRequest(this.request);

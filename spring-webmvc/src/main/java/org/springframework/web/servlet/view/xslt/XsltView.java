@@ -141,7 +141,7 @@ public class XsltView extends AbstractUrlBasedView {
 	 * @see org.springframework.util.xml.SimpleTransformErrorListener
 	 */
 	public void setErrorListener(@Nullable ErrorListener errorListener) {
-		this.errorListener = (errorListener != null ? errorListener : new SimpleTransformErrorListener(logger));
+		this.errorListener = errorListener != null ? errorListener : new SimpleTransformErrorListener(logger);
 	}
 
 	/**
@@ -285,7 +285,7 @@ public class XsltView extends AbstractUrlBasedView {
 			return convertSource(model.get(this.sourceKey));
 		}
 		Object source = CollectionUtils.findValueOfType(model.values(), getSourceTypes());
-		return (source != null ? convertSource(source) : null);
+		return source != null ? convertSource(source) : null;
 	}
 
 	/**
@@ -427,8 +427,7 @@ public class XsltView extends AbstractUrlBasedView {
 	private Templates loadTemplates() throws ApplicationContextException {
 		Source stylesheetSource = getStylesheetSource();
 		try {
-			Templates templates = getTransformerFactory().newTemplates(stylesheetSource);
-			return templates;
+			return getTransformerFactory().newTemplates(stylesheetSource);
 		}
 		catch (TransformerConfigurationException ex) {
 			throw new ApplicationContextException("Can't load stylesheet from '" + getUrl() + "'", ex);

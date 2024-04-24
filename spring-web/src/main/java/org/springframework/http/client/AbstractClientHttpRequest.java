@@ -34,7 +34,7 @@ public abstract class AbstractClientHttpRequest implements ClientHttpRequest {
 
 	private final HttpHeaders headers = new HttpHeaders();
 
-	private boolean executed = false;
+	private boolean executed;
 
 	@Nullable
 	private HttpHeaders readOnlyHeaders;

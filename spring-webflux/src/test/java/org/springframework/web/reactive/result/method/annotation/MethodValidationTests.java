@@ -427,7 +427,7 @@ class MethodValidationTests {
 
 		@Override
 		public boolean supports(Class<?> clazz) {
-			return (clazz == Person.class);
+			return clazz == Person.class;
 		}
 
 		@Override
@@ -443,7 +443,7 @@ class MethodValidationTests {
 	/**
 	 * Intercept and count number of method validation calls.
 	 */
-	private static class InvocationCountingValidator implements jakarta.validation.Validator, Validator {
+	private static final class InvocationCountingValidator implements jakarta.validation.Validator, Validator {
 
 		private final SpringValidatorAdapter delegate;
 

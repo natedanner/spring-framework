@@ -40,9 +40,9 @@ import static org.mockito.Mockito.mock;
  */
 class RelativeRedirectFilterTests {
 
-	private RelativeRedirectFilter filter = new RelativeRedirectFilter();
+	private final RelativeRedirectFilter filter = new RelativeRedirectFilter();
 
-	private HttpServletResponse response = mock();
+	private final HttpServletResponse response = mock();
 
 
 	@Test

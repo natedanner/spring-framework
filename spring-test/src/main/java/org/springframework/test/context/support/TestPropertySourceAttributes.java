@@ -257,7 +257,7 @@ class TestPropertySourceAttributes {
 	}
 
 	boolean isEmpty() {
-		return (hasNoLocations(this.descriptors) && this.properties.isEmpty());
+		return hasNoLocations(this.descriptors) && this.properties.isEmpty();
 	}
 
 	@Override
@@ -279,11 +279,7 @@ class TestPropertySourceAttributes {
 		if (this.inheritLocations != that.inheritLocations) {
 			return false;
 		}
-		if (this.inheritProperties != that.inheritProperties) {
-			return false;
-		}
-
-		return true;
+		return !(this.inheritProperties != that.inheritProperties);
 	}
 
 	@Override

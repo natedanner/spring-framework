@@ -150,14 +150,14 @@ public final class WebAsyncManager {
 	 * processing of the concurrent result.
 	 */
 	public boolean isConcurrentHandlingStarted() {
-		return (this.asyncWebRequest != null && this.asyncWebRequest.isAsyncStarted());
+		return this.asyncWebRequest != null && this.asyncWebRequest.isAsyncStarted();
 	}
 
 	/**
 	 * Whether a result value exists as a result of concurrent handling.
 	 */
 	public boolean hasConcurrentResult() {
-		return (this.concurrentResult != RESULT_NONE);
+		return this.concurrentResult != RESULT_NONE;
 	}
 
 	/**
@@ -328,7 +328,7 @@ public final class WebAsyncManager {
 					logger.debug("Async request error for " + formatRequestUri() + ": " + ex);
 				}
 				Object result = interceptorChain.triggerAfterError(this.asyncWebRequest, callable, ex);
-				result = (result != CallableProcessingInterceptor.RESULT_NONE ? result : ex);
+				result = result != CallableProcessingInterceptor.RESULT_NONE ? result : ex;
 				setConcurrentResultAndDispatch(result);
 			}
 		});
@@ -372,7 +372,7 @@ public final class WebAsyncManager {
 				return;
 			}
 			this.concurrentResult = result;
-			this.errorHandlingInProgress = (result instanceof Throwable);
+			this.errorHandlingInProgress = result instanceof Throwable;
 		}
 
 		if (this.asyncWebRequest.isAsyncComplete()) {

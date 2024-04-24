@@ -263,8 +263,8 @@ public final class CronExpression {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof CronExpression that &&
-				Arrays.equals(this.fields, that.fields)));
+		return this == other || (other instanceof CronExpression that &&
+				Arrays.equals(this.fields, that.fields));
 	}
 
 	@Override

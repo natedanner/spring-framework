@@ -213,8 +213,8 @@ public class EventListenerMethodProcessor
 	 * @since 5.1
 	 */
 	private static boolean isSpringContainerClass(Class<?> clazz) {
-		return (clazz.getName().startsWith("org.springframework.") &&
-				!AnnotatedElementUtils.isAnnotated(ClassUtils.getUserClass(clazz), Component.class));
+		return clazz.getName().startsWith("org.springframework.") &&
+				!AnnotatedElementUtils.isAnnotated(ClassUtils.getUserClass(clazz), Component.class);
 	}
 
 }

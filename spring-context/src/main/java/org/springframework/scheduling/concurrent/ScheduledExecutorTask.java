@@ -44,13 +44,13 @@ public class ScheduledExecutorTask {
 	@Nullable
 	private Runnable runnable;
 
-	private long delay = 0;
+	private long delay;
 
 	private long period = -1;
 
 	private TimeUnit timeUnit = TimeUnit.MILLISECONDS;
 
-	private boolean fixedRate = false;
+	private boolean fixedRate;
 
 
 	/**
@@ -160,7 +160,7 @@ public class ScheduledExecutorTask {
 	 * @see #getPeriod()
 	 */
 	public boolean isOneTimeTask() {
-		return (this.period <= 0);
+		return this.period <= 0;
 	}
 
 	/**
@@ -170,7 +170,7 @@ public class ScheduledExecutorTask {
 	 * @see java.util.concurrent.TimeUnit#SECONDS
 	 */
 	public void setTimeUnit(@Nullable TimeUnit timeUnit) {
-		this.timeUnit = (timeUnit != null ? timeUnit : TimeUnit.MILLISECONDS);
+		this.timeUnit = timeUnit != null ? timeUnit : TimeUnit.MILLISECONDS;
 	}
 
 	/**

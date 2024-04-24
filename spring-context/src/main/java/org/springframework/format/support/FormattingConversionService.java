@@ -181,7 +181,7 @@ public class FormattingConversionService extends GenericConversionService
 
 		@Override
 		public String toString() {
-			return (this.fieldType.getName() + " -> " + String.class.getName() + " : " + this.printer);
+			return this.fieldType.getName() + " -> " + String.class.getName() + " : " + this.printer;
 		}
 	}
 
@@ -231,7 +231,7 @@ public class FormattingConversionService extends GenericConversionService
 
 		@Override
 		public String toString() {
-			return (String.class.getName() + " -> " + this.fieldType.getName() + ": " + this.parser);
+			return String.class.getName() + " -> " + this.fieldType.getName() + ": " + this.parser;
 		}
 	}
 
@@ -285,8 +285,8 @@ public class FormattingConversionService extends GenericConversionService
 
 		@Override
 		public String toString() {
-			return ("@" + this.annotationType.getName() + " " + this.fieldType.getName() + " -> " +
-					String.class.getName() + ": " + this.annotationFormatterFactory);
+			return "@" + this.annotationType.getName() + " " + this.fieldType.getName() + " -> " +
+					String.class.getName() + ": " + this.annotationFormatterFactory;
 		}
 	}
 
@@ -340,8 +340,8 @@ public class FormattingConversionService extends GenericConversionService
 
 		@Override
 		public String toString() {
-			return (String.class.getName() + " -> @" + this.annotationType.getName() + " " +
-					this.fieldType.getName() + ": " + this.annotationFormatterFactory);
+			return String.class.getName() + " -> @" + this.annotationType.getName() + " " +
+					this.fieldType.getName() + ": " + this.annotationFormatterFactory;
 		}
 	}
 
@@ -367,13 +367,13 @@ public class FormattingConversionService extends GenericConversionService
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof AnnotationConverterKey that &&
-					this.fieldType == that.fieldType && this.annotation.equals(that.annotation)));
+			return this == other || (other instanceof AnnotationConverterKey that &&
+					this.fieldType == that.fieldType && this.annotation.equals(that.annotation));
 		}
 
 		@Override
 		public int hashCode() {
-			return (this.fieldType.hashCode() * 29 + this.annotation.hashCode());
+			return this.fieldType.hashCode() * 29 + this.annotation.hashCode();
 		}
 	}
 

@@ -60,7 +60,7 @@ public abstract class AbstractFallbackJCacheOperationSource implements JCacheOpe
 		Object cached = this.cache.get(cacheKey);
 
 		if (cached != null) {
-			return (cached != NULL_CACHING_ATTRIBUTE ? (JCacheOperation<?>) cached : null);
+			return cached != NULL_CACHING_ATTRIBUTE ? (JCacheOperation<?>) cached : null;
 		}
 		else {
 			JCacheOperation<?> operation = computeCacheOperation(method, targetClass);

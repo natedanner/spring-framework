@@ -92,7 +92,7 @@ public class ResponseStatusExceptionHandler implements WebExceptionHandler {
 	private boolean updateResponse(ServerHttpResponse response, Throwable ex) {
 		boolean result = false;
 		HttpStatusCode statusCode = determineStatus(ex);
-		int code = (statusCode != null ? statusCode.value() : determineRawStatusCode(ex));
+		int code = statusCode != null ? statusCode.value() : determineRawStatusCode(ex);
 		if (code != -1) {
 			if (response.setStatusCode(statusCode)) {
 				if (ex instanceof ResponseStatusException responseStatusException) {

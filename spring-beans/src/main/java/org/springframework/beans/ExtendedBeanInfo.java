@@ -148,9 +148,9 @@ class ExtendedBeanInfo implements BeanInfo {
 	public static boolean isCandidateWriteMethod(Method method) {
 		String methodName = method.getName();
 		int nParams = method.getParameterCount();
-		return (methodName.length() > 3 && methodName.startsWith("set") && Modifier.isPublic(method.getModifiers()) &&
+		return methodName.length() > 3 && methodName.startsWith("set") && Modifier.isPublic(method.getModifiers()) &&
 				(!void.class.isAssignableFrom(method.getReturnType()) || Modifier.isStatic(method.getModifiers())) &&
-				(nParams == 1 || (nParams == 2 && int.class == method.getParameterTypes()[0])));
+				(nParams == 1 || (nParams == 2 && int.class == method.getParameterTypes()[0]));
 	}
 
 	private void handleCandidateWriteMethod(Method method) throws IntrospectionException {
@@ -340,8 +340,8 @@ class ExtendedBeanInfo implements BeanInfo {
 
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof PropertyDescriptor that &&
-					PropertyDescriptorUtils.equals(this, that)));
+			return this == other || (other instanceof PropertyDescriptor that &&
+					PropertyDescriptorUtils.equals(this, that));
 		}
 
 		@Override
@@ -492,11 +492,11 @@ class ExtendedBeanInfo implements BeanInfo {
 		 */
 		@Override
 		public boolean equals(@Nullable Object other) {
-			return (this == other || (other instanceof IndexedPropertyDescriptor that &&
+			return this == other || (other instanceof IndexedPropertyDescriptor that &&
 					ObjectUtils.nullSafeEquals(getIndexedReadMethod(), that.getIndexedReadMethod()) &&
 					ObjectUtils.nullSafeEquals(getIndexedWriteMethod(), that.getIndexedWriteMethod()) &&
 					ObjectUtils.nullSafeEquals(getIndexedPropertyType(), that.getIndexedPropertyType()) &&
-					PropertyDescriptorUtils.equals(this, that)));
+					PropertyDescriptorUtils.equals(this, that));
 		}
 
 		@Override

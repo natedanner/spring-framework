@@ -120,7 +120,7 @@ public final class ClassFiles implements Iterable<ClassFile> {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof ClassFiles that && this.files.equals(that.files)));
+		return this == other || (other instanceof ClassFiles that && this.files.equals(that.files));
 	}
 
 	@Override

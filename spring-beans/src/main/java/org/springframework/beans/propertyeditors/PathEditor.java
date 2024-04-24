@@ -81,7 +81,7 @@ public class PathEditor extends PropertyEditorSupport {
 				String scheme = uri.getScheme();
 				if (scheme != null) {
 					// No NIO candidate except for "C:" style drive letters
-					nioPathCandidate = (scheme.length() == 1);
+					nioPathCandidate = scheme.length() == 1;
 					// Let's try NIO file system providers via Paths.get(URI)
 					setValue(Paths.get(uri).normalize());
 					return;
@@ -120,7 +120,7 @@ public class PathEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
 		Path value = (Path) getValue();
-		return (value != null ? value.toString() : "");
+		return value != null ? value.toString() : "";
 	}
 
 }

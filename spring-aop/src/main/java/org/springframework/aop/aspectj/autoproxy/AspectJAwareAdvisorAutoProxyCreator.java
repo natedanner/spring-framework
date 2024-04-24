@@ -148,7 +148,7 @@ public class AspectJAwareAdvisorAutoProxyCreator extends AbstractAdvisorAutoProx
 				appended = true;
 			}
 			if (advice instanceof AbstractAspectJAdvice ajAdvice) {
-				sb.append(!appended ? ": " : ", ");
+				sb.append(appended ? ", " : ": ");
 				sb.append("aspect name = ");
 				sb.append(ajAdvice.getAspectName());
 				sb.append(", declaration order = ");

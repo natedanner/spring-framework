@@ -107,7 +107,7 @@ public class PayloadMethodArgumentResolver implements HandlerMethodArgumentResol
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		return (parameter.hasParameterAnnotation(Payload.class) || this.useDefaultResolution);
+		return parameter.hasParameterAnnotation(Payload.class) || this.useDefaultResolution;
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class PayloadMethodArgumentResolver implements HandlerMethodArgumentResol
 			throw new IllegalStateException("@Payload SpEL expressions not supported by this resolver");
 		}
 
-		boolean isOptionalTargetClass = (parameter.getParameterType() == Optional.class);
+		boolean isOptionalTargetClass = parameter.getParameterType() == Optional.class;
 		Object payload = message.getPayload();
 		if (isEmptyPayload(payload)) {
 			if ((ann == null || ann.required()) && !isOptionalTargetClass) {
@@ -128,7 +128,7 @@ public class PayloadMethodArgumentResolver implements HandlerMethodArgumentResol
 				throw new MethodArgumentNotValidException(message, parameter, bindingResult);
 			}
 			else {
-				return (isOptionalTargetClass ? Optional.empty() : null);
+				return isOptionalTargetClass ? Optional.empty() : null;
 			}
 		}
 
@@ -152,12 +152,12 @@ public class PayloadMethodArgumentResolver implements HandlerMethodArgumentResol
 			}
 		}
 		validate(message, parameter, payload);
-		return (isOptionalTargetClass ? Optional.of(payload) : payload);
+		return isOptionalTargetClass ? Optional.of(payload) : payload;
 	}
 
 	private String getParameterName(MethodParameter param) {
 		String paramName = param.getParameterName();
-		return (paramName != null ? paramName : "Arg " + param.getParameterIndex());
+		return paramName != null ? paramName : "Arg " + param.getParameterIndex();
 	}
 
 	/**

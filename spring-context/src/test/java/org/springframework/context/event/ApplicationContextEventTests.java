@@ -139,7 +139,7 @@ class ApplicationContextEventTests extends AbstractApplicationEventListenerTests
 		else {
 			smc.multicastEvent(event);
 		}
-		int invocation = (match ? 1 : 0);
+		int invocation = match ? 1 : 0;
 		verify(listener, times(invocation)).onApplicationEvent(event);
 	}
 
@@ -461,7 +461,7 @@ class ApplicationContextEventTests extends AbstractApplicationEventListenerTests
 	void anonymousClassAsListener() {
 		final Set<MyEvent> seenEvents = new HashSet<>();
 		StaticApplicationContext context = new StaticApplicationContext();
-		context.addApplicationListener((MyEvent event) -> seenEvents.add(event));
+		context.addApplicationListener(seenEvents::add);
 		context.refresh();
 
 		MyEvent event1 = new MyEvent(context);

@@ -43,7 +43,7 @@ class ClassFileTransformerAdapter implements ClassFileTransformer {
 
 	private final ClassTransformer classTransformer;
 
-	private boolean currentlyTransforming = false;
+	private boolean currentlyTransforming;
 
 
 	public ClassFileTransformerAdapter(ClassTransformer classTransformer) {

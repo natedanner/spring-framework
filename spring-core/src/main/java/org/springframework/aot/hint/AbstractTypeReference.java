@@ -49,8 +49,8 @@ public abstract class AbstractTypeReference implements TypeReference {
 	public String getName() {
 		TypeReference enclosingType = getEnclosingType();
 		String simpleName = getSimpleName();
-		return (enclosingType != null ? (enclosingType.getName() + '$' + simpleName) :
-				addPackageIfNecessary(simpleName));
+		return enclosingType != null ? (enclosingType.getName() + '$' + simpleName) :
+				addPackageIfNecessary(simpleName);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public abstract class AbstractTypeReference implements TypeReference {
 
 	protected String addPackageIfNecessary(String part) {
 		if (this.packageName.isEmpty() ||
-				(this.packageName.equals("java.lang") && isPrimitive())) {
+				("java.lang".equals(this.packageName) && isPrimitive())) {
 			return part;
 		}
 		return this.packageName + '.' + part;
@@ -86,8 +86,8 @@ public abstract class AbstractTypeReference implements TypeReference {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof TypeReference that &&
-				getCanonicalName().equals(that.getCanonicalName())));
+		return this == other || (other instanceof TypeReference that &&
+				getCanonicalName().equals(that.getCanonicalName()));
 	}
 
 	@Override

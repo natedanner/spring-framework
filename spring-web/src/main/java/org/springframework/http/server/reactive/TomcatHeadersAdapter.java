@@ -100,13 +100,13 @@ class TomcatHeadersAdapter implements MultiValueMap<String, String> {
 
 	@Override
 	public boolean isEmpty() {
-		return (this.headers.size() == 0);
+		return this.headers.size() == 0;
 	}
 
 	@Override
 	public boolean containsKey(Object key) {
 		if (key instanceof String headerName) {
-			return (this.headers.findHeader(headerName, 0) != -1);
+			return this.headers.findHeader(headerName, 0) != -1;
 		}
 		return false;
 	}

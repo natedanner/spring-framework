@@ -80,7 +80,7 @@ class BodyExtractorsTests {
 
 	private Map<String, Object> hints;
 
-	private Optional<ServerHttpResponse> serverResponse = Optional.empty();
+	private final Optional<ServerHttpResponse> serverResponse = Optional.empty();
 
 
 	@BeforeEach

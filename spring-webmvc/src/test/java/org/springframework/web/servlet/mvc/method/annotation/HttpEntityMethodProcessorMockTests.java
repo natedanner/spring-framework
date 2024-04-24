@@ -102,13 +102,13 @@ class HttpEntityMethodProcessorMockTests {
 
 	private HttpEntityMethodProcessor processor;
 
-	private HttpMessageConverter<String> stringHttpMessageConverter = mock();
+	private final HttpMessageConverter<String> stringHttpMessageConverter = mock();
 
-	private HttpMessageConverter<Resource> resourceMessageConverter = mock();
+	private final HttpMessageConverter<Resource> resourceMessageConverter = mock();
 
-	private HttpMessageConverter<Object> resourceRegionMessageConverter = mock();
+	private final HttpMessageConverter<Object> resourceRegionMessageConverter = mock();
 
-	private HttpMessageConverter<Object> jsonMessageConverter = mock();
+	private final HttpMessageConverter<Object> jsonMessageConverter = mock();
 
 	private MethodParameter paramHttpEntity;
 
@@ -134,13 +134,13 @@ class HttpEntityMethodProcessorMockTests {
 
 	private MethodParameter returnTypeProblemDetail;
 
-	private ModelAndViewContainer mavContainer = new ModelAndViewContainer();
+	private final ModelAndViewContainer mavContainer = new ModelAndViewContainer();
 
-	private MockHttpServletRequest servletRequest = new MockHttpServletRequest("GET", "/foo");
+	private final MockHttpServletRequest servletRequest = new MockHttpServletRequest("GET", "/foo");
 
-	private MockHttpServletResponse servletResponse = new MockHttpServletResponse();
+	private final MockHttpServletResponse servletResponse = new MockHttpServletResponse();
 
-	private ServletWebRequest webRequest = new ServletWebRequest(servletRequest, servletResponse);
+	private final ServletWebRequest webRequest = new ServletWebRequest(servletRequest, servletResponse);
 
 
 	@BeforeEach

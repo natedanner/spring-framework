@@ -115,7 +115,7 @@ abstract class ActiveProfilesUtils {
 				profileArrays.add(0, profiles);
 			}
 
-			descriptor = (annotation.inheritProfiles() ? descriptor.next() : null);
+			descriptor = annotation.inheritProfiles() ? descriptor.next() : null;
 		}
 
 		Set<String> activeProfiles = new LinkedHashSet<>();

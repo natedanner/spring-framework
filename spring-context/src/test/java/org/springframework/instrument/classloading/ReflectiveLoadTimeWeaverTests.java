@@ -83,7 +83,7 @@ class ReflectiveLoadTimeWeaverTests {
 
 	public static class JustAddTransformerClassLoader extends ClassLoader {
 
-		private int numTimesAddTransformerCalled = 0;
+		private int numTimesAddTransformerCalled;
 
 		public int getNumTimesGetThrowawayClassLoaderCalled() {
 			return this.numTimesAddTransformerCalled;
@@ -97,7 +97,7 @@ class ReflectiveLoadTimeWeaverTests {
 
 	public static final class TotallyCompliantClassLoader extends JustAddTransformerClassLoader {
 
-		private int numTimesGetThrowawayClassLoaderCalled = 0;
+		private int numTimesGetThrowawayClassLoaderCalled;
 
 		@Override
 		public int getNumTimesGetThrowawayClassLoaderCalled() {

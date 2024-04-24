@@ -171,7 +171,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Nullable
 	private String scope = SCOPE_DEFAULT;
 
-	private boolean abstractFlag = false;
+	private boolean abstractFlag;
 
 	@Nullable
 	private Boolean lazyInit;
@@ -185,7 +185,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 
 	private boolean autowireCandidate = true;
 
-	private boolean primary = false;
+	private boolean primary;
 
 	private final Map<String, AutowireCandidateQualifier> qualifiers = new LinkedHashMap<>();
 
@@ -220,7 +220,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 
 	private boolean enforceDestroyMethod = true;
 
-	private boolean synthetic = false;
+	private boolean synthetic;
 
 	private int role = BeanDefinition.ROLE_APPLICATION;
 
@@ -418,7 +418,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Nullable
 	public String getBeanClassName() {
 		Object beanClassObject = this.beanClass;  // defensive access to volatile beanClass field
-		return (beanClassObject instanceof Class<?> clazz ? clazz.getName() : (String) beanClassObject);
+		return beanClassObject instanceof Class<?> clazz ? clazz.getName() : (String) beanClassObject;
 	}
 
 	/**
@@ -469,7 +469,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 * @see #resolveBeanClass(ClassLoader)
 	 */
 	public boolean hasBeanClass() {
-		return (this.beanClass instanceof Class);
+		return this.beanClass instanceof Class;
 	}
 
 	/**
@@ -498,7 +498,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 */
 	@Override
 	public ResolvableType getResolvableType() {
-		return (hasBeanClass() ? ResolvableType.forClass(getBeanClass()) : ResolvableType.NONE);
+		return hasBeanClass() ? ResolvableType.forClass(getBeanClass()) : ResolvableType.NONE;
 	}
 
 	/**
@@ -581,7 +581,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 */
 	@Override
 	public boolean isLazyInit() {
-		return (this.lazyInit != null && this.lazyInit);
+		return this.lazyInit != null && this.lazyInit;
 	}
 
 	/**
@@ -894,7 +894,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 */
 	@Override
 	public boolean hasConstructorArgumentValues() {
-		return (this.constructorArgumentValues != null && !this.constructorArgumentValues.isEmpty());
+		return this.constructorArgumentValues != null && !this.constructorArgumentValues.isEmpty();
 	}
 
 	/**
@@ -923,7 +923,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 */
 	@Override
 	public boolean hasPropertyValues() {
-		return (this.propertyValues != null && !this.propertyValues.isEmpty());
+		return this.propertyValues != null && !this.propertyValues.isEmpty();
 	}
 
 	/**
@@ -976,7 +976,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 */
 	@Override
 	public void setInitMethodName(@Nullable String initMethodName) {
-		this.initMethodNames = (initMethodName != null ? new String[] {initMethodName} : null);
+		this.initMethodNames = initMethodName != null ? new String[] {initMethodName} : null;
 	}
 
 	/**
@@ -985,7 +985,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Override
 	@Nullable
 	public String getInitMethodName() {
-		return (!ObjectUtils.isEmpty(this.initMethodNames) ? this.initMethodNames[0] : null);
+		return ObjectUtils.isEmpty(this.initMethodNames) ? null : this.initMethodNames[0];
 	}
 
 	/**
@@ -1035,7 +1035,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 */
 	@Override
 	public void setDestroyMethodName(@Nullable String destroyMethodName) {
-		this.destroyMethodNames = (destroyMethodName != null ? new String[] {destroyMethodName} : null);
+		this.destroyMethodNames = destroyMethodName != null ? new String[] {destroyMethodName} : null;
 	}
 
 	/**
@@ -1044,7 +1044,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Override
 	@Nullable
 	public String getDestroyMethodName() {
-		return (!ObjectUtils.isEmpty(this.destroyMethodNames) ? this.destroyMethodNames[0] : null);
+		return ObjectUtils.isEmpty(this.destroyMethodNames) ? null : this.destroyMethodNames[0];
 	}
 
 	/**
@@ -1139,7 +1139,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	 * came from (for the purpose of showing context in case of errors).
 	 */
 	public void setResourceDescription(@Nullable String resourceDescription) {
-		this.resource = (resourceDescription != null ? new DescriptiveResource(resourceDescription) : null);
+		this.resource = resourceDescription != null ? new DescriptiveResource(resourceDescription) : null;
 	}
 
 	/**
@@ -1149,7 +1149,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Override
 	@Nullable
 	public String getResourceDescription() {
-		return (this.resource != null ? this.resource.getDescription() : null);
+		return this.resource != null ? this.resource.getDescription() : null;
 	}
 
 	/**
@@ -1168,7 +1168,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Override
 	@Nullable
 	public BeanDefinition getOriginatingBeanDefinition() {
-		return (this.resource instanceof BeanDefinitionResource bdr ? bdr.getBeanDefinition() : null);
+		return this.resource instanceof BeanDefinitionResource bdr ? bdr.getBeanDefinition() : null;
 	}
 
 	/**
@@ -1238,7 +1238,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof AbstractBeanDefinition that &&
+		return this == other || (other instanceof AbstractBeanDefinition that &&
 				ObjectUtils.nullSafeEquals(getBeanClassName(), that.getBeanClassName()) &&
 				ObjectUtils.nullSafeEquals(this.scope, that.scope) &&
 				this.abstractFlag == that.abstractFlag &&
@@ -1262,7 +1262,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 				this.enforceDestroyMethod == that.enforceDestroyMethod &&
 				this.synthetic == that.synthetic &&
 				this.role == that.role &&
-				super.equals(other)));
+				super.equals(other));
 	}
 
 	private boolean equalsConstructorArgumentValues(AbstractBeanDefinition other) {

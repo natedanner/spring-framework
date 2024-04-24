@@ -133,15 +133,15 @@ public abstract class AbstractEncoderMethodReturnValueHandler implements Handler
 		if (adapter != null) {
 			publisher = adapter.toPublisher(content);
 			Method method = returnType.getMethod();
-			boolean isUnwrapped = (method != null && KotlinDetector.isSuspendingFunction(method) &&
-					!COROUTINES_FLOW_CLASS_NAME.equals(returnValueType.toClass().getName()));
-			ResolvableType genericType = (isUnwrapped ? returnValueType : returnValueType.getGeneric());
+			boolean isUnwrapped = method != null && KotlinDetector.isSuspendingFunction(method) &&
+					!COROUTINES_FLOW_CLASS_NAME.equals(returnValueType.toClass().getName());
+			ResolvableType genericType = isUnwrapped ? returnValueType : returnValueType.getGeneric();
 			elementType = getElementType(adapter, genericType);
 		}
 		else {
 			publisher = Mono.justOrEmpty(content);
-			elementType = (returnValueType.toClass() == Object.class && content != null ?
-					ResolvableType.forInstance(content) : returnValueType);
+			elementType = returnValueType.toClass() == Object.class && content != null ?
+					ResolvableType.forInstance(content) : returnValueType;
 		}
 
 		if (elementType.resolve() == void.class || elementType.resolve() == Void.class) {

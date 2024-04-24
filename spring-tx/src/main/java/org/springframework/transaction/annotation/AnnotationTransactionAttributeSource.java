@@ -191,9 +191,9 @@ public class AnnotationTransactionAttributeSource extends AbstractFallbackTransa
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof AnnotationTransactionAttributeSource otherTas &&
+		return this == other || (other instanceof AnnotationTransactionAttributeSource otherTas &&
 				this.annotationParsers.equals(otherTas.annotationParsers) &&
-				this.publicMethodsOnly == otherTas.publicMethodsOnly));
+				this.publicMethodsOnly == otherTas.publicMethodsOnly);
 	}
 
 	@Override

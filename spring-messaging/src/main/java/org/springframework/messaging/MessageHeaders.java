@@ -135,7 +135,7 @@ public class MessageHeaders implements Map<String, Object>, Serializable {
 	 * @param timestamp the {@link #TIMESTAMP} header value
 	 */
 	protected MessageHeaders(@Nullable Map<String, Object> headers, @Nullable UUID id, @Nullable Long timestamp) {
-		this.headers = (headers != null ? new HashMap<>(headers) : new HashMap<>());
+		this.headers = headers != null ? new HashMap<>(headers) : new HashMap<>();
 
 		if (id == null) {
 			this.headers.put(ID, getIdGenerator().generateId());
@@ -180,7 +180,7 @@ public class MessageHeaders implements Map<String, Object>, Serializable {
 
 	protected static IdGenerator getIdGenerator() {
 		IdGenerator generator = idGenerator;
-		return (generator != null ? generator : defaultIdGenerator);
+		return generator != null ? generator : defaultIdGenerator;
 	}
 
 	@Nullable
@@ -334,7 +334,7 @@ public class MessageHeaders implements Map<String, Object>, Serializable {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof MessageHeaders that && this.headers.equals(that.headers)));
+		return this == other || (other instanceof MessageHeaders that && this.headers.equals(that.headers));
 	}
 
 	@Override

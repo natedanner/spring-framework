@@ -119,7 +119,7 @@ public final class MediaTypeFactory {
 		if (ext != null) {
 			mediaTypes = fileExtensionToMediaTypes.get(ext.toLowerCase(Locale.ENGLISH));
 		}
-		return (mediaTypes != null ? mediaTypes : Collections.emptyList());
+		return mediaTypes != null ? mediaTypes : Collections.emptyList();
 	}
 
 }

@@ -380,7 +380,7 @@ public abstract class ServletRequestUtils {
 		if (request.getParameter(name) == null) {
 			return null;
 		}
-		return (getRequiredBooleanParameter(request, name));
+		return getRequiredBooleanParameter(request, name);
 	}
 
 	/**
@@ -480,7 +480,7 @@ public abstract class ServletRequestUtils {
 	 */
 	public static String getStringParameter(ServletRequest request, String name, String defaultVal) {
 		String val = request.getParameter(name);
-		return (val != null ? val : defaultVal);
+		return val != null ? val : defaultVal;
 	}
 
 	/**
@@ -669,8 +669,8 @@ public abstract class ServletRequestUtils {
 
 		@Override
 		protected Boolean doParse(String parameter) throws NumberFormatException {
-			return (parameter.equalsIgnoreCase("true") || parameter.equalsIgnoreCase("on") ||
-					parameter.equalsIgnoreCase("yes") || parameter.equals("1"));
+			return "true".equalsIgnoreCase(parameter) || "on".equalsIgnoreCase(parameter) ||
+					"yes".equalsIgnoreCase(parameter) || "1".equals(parameter);
 		}
 
 		public boolean parseBoolean(String name, String parameter) throws ServletRequestBindingException {

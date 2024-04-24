@@ -124,8 +124,8 @@ public class WebRequestDataBinder extends WebDataBinder {
 	@Override
 	protected boolean shouldConstructArgument(MethodParameter param) {
 		Class<?> type = param.nestedIfOptional().getNestedParameterType();
-		return (super.shouldConstructArgument(param) &&
-				!MultipartFile.class.isAssignableFrom(type) && !Part.class.isAssignableFrom(type));
+		return super.shouldConstructArgument(param) &&
+				!MultipartFile.class.isAssignableFrom(type) && !Part.class.isAssignableFrom(type);
 	}
 
 	/**

@@ -92,7 +92,7 @@ public class SchedulerAccessorBean extends SchedulerAccessor implements BeanFact
 	@Override
 	public void afterPropertiesSet() throws SchedulerException {
 		if (this.scheduler == null) {
-			this.scheduler = (this.schedulerName != null ? findScheduler(this.schedulerName) : findDefaultScheduler());
+			this.scheduler = this.schedulerName != null ? findScheduler(this.schedulerName) : findDefaultScheduler();
 		}
 		registerListeners();
 		registerJobsAndTriggers();

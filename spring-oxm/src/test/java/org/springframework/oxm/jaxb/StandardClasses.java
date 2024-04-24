@@ -47,7 +47,7 @@ public class StandardClasses {
 
 	private static final QName NAME = new QName("https://springframework.org/oxm-test", "standard-classes");
 
-	private DatatypeFactory factory;
+	private final DatatypeFactory factory;
 
 	public StandardClasses() throws DatatypeConfigurationException {
 		factory = DatatypeFactory.newInstance();

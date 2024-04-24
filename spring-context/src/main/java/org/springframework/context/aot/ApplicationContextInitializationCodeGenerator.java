@@ -144,7 +144,7 @@ class ApplicationContextInitializationCodeGenerator implements BeanFactoryInitia
 		@Override
 		@Nullable
 		public CodeBlock apply(TypeName typeName) {
-			return (typeName instanceof ClassName className ? apply(className) : null);
+			return typeName instanceof ClassName className ? apply(className) : null;
 		}
 
 		@Nullable

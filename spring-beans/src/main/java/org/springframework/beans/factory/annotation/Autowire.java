@@ -67,7 +67,7 @@ public enum Autowire {
 	 * (either BY_NAME or BY_TYPE)
 	 */
 	public boolean isAutowire() {
-		return (this == BY_NAME || this == BY_TYPE);
+		return this == BY_NAME || this == BY_TYPE;
 	}
 
 }

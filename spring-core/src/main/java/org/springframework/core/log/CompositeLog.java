@@ -79,7 +79,7 @@ final class CompositeLog implements Log {
 	}
 
 	private boolean isEnabled(Predicate<Log> predicate) {
-		return (getLogger(predicate) != NO_OP_LOG);
+		return getLogger(predicate) != NO_OP_LOG;
 	}
 
 	@Override

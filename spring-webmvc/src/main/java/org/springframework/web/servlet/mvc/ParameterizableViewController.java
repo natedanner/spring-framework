@@ -95,7 +95,7 @@ public class ParameterizableViewController extends AbstractController {
 	 */
 	@Nullable
 	public View getView() {
-		return (this.view instanceof View v ? v : null);
+		return this.view instanceof View v ? v : null;
 	}
 
 	/**

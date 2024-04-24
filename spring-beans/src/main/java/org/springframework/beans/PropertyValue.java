@@ -47,9 +47,9 @@ public class PropertyValue extends BeanMetadataAttributeAccessor implements Seri
 	@Nullable
 	private final Object value;
 
-	private boolean optional = false;
+	private boolean optional;
 
-	private boolean converted = false;
+	private boolean converted;
 
 	@Nullable
 	private Object convertedValue;
@@ -189,10 +189,10 @@ public class PropertyValue extends BeanMetadataAttributeAccessor implements Seri
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof PropertyValue that &&
+		return this == other || (other instanceof PropertyValue that &&
 				this.name.equals(that.name) &&
 				ObjectUtils.nullSafeEquals(this.value, that.value) &&
-				ObjectUtils.nullSafeEquals(getSource(), that.getSource())));
+				ObjectUtils.nullSafeEquals(getSource(), that.getSource()));
 	}
 
 	@Override

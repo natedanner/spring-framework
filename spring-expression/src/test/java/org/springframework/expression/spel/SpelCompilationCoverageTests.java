@@ -1641,7 +1641,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		expression = parse("1 == 3.0d");
 		assertCantCompile(expression);
 
-		Double d = 3.0d;
+		Double d = 3.0D;
 		expression = parse("#root==3.0d");
 		assertThat((Boolean) expression.getValue(d)).isTrue();
 		assertCanCompile(expression);
@@ -1653,7 +1653,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		assertCanCompile(expression);
 		assertThat((Boolean) expression.getValue(i)).isTrue();
 
-		Float f = 3.0f;
+		Float f = 3.0F;
 		expression = parse("#root==3.0f");
 		assertThat((Boolean) expression.getValue(f)).isTrue();
 		assertCanCompile(expression);
@@ -5547,7 +5547,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 	public static class FooObject {
 
-		static boolean doFooInvoked = false;
+		static boolean doFooInvoked;
 
 		public Object getObject() { return "hello"; }
 		public void doFoo() { doFooInvoked = true; }
@@ -5578,10 +5578,10 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		String var2 = "def";
 
 		public Object getField(String name) {
-			if (name.equals("var1")) {
+			if ("var1".equals(name)) {
 				return var1;
 			}
-			else if (name.equals("var2")) {
+			else if ("var2".equals(name)) {
 				return var2;
 			}
 			return null;
@@ -5647,7 +5647,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 	public static class Three {
 
-		double four = 0.04d;
+		double four = 0.04D;
 
 		public double getFour() {
 			return four;
@@ -5706,7 +5706,8 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 	public static class TestClass4 {
 
-		public boolean a,b;
+		public boolean a;
+		public boolean b;
 		public boolean gettrue() { return true; }
 		public boolean getfalse() { return false; }
 		public boolean getA() { return a; }
@@ -5716,7 +5717,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 	public static class TestClass10 {
 
-		public String s = null;
+		public String s;
 
 		public void reset() {
 			s = null;
@@ -5758,10 +5759,10 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 	public static class TestClass5 {
 
-		public int i = 0;
-		public String s = null;
-		public static int _i = 0;
-		public static String _s = null;
+		public int i;
+		public String s;
+		public static int _i;
+		public static String _s;
 
 		public static short s1 = (short)1;
 		public static short s2 = (short)2;
@@ -5771,9 +5772,9 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		public static long l2 = 2L;
 		public static long l3 = 3L;
 
-		public static float f1 = 1f;
-		public static float f2 = 2f;
-		public static float f3 = 3f;
+		public static float f1 = 1F;
+		public static float f2 = 2F;
+		public static float f3 = 3F;
 
 		public static char c1 = 'a';
 		public static char c2 = 'b';
@@ -5786,9 +5787,9 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 		public static String[] stringArray = new String[] {"aaa","bbb","ccc"};
 		public static int[] intArray = new int[] {11,22,33};
 
-		public Object obj = null;
+		public Object obj;
 
-		public String field = null;
+		public String field;
 
 		public void reset() {
 			i = 0;
@@ -6277,7 +6278,7 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 	public static class Apple implements Comparable<Apple> {
 
-		public Object gotComparedTo = null;
+		public Object gotComparedTo;
 		public int i;
 
 		public Apple(int i) {
@@ -6347,10 +6348,14 @@ public class SpelCompilationCoverageTests extends AbstractExpressionTests {
 
 	public class Reg {
 
-		private Integer _value,_value2;
-		private Long _valueL,_valueL2;
-		private Double _valueD,_valueD2;
-		private Float _valueF,_valueF2;
+		private Integer _value;
+		private Integer _value2;
+		private Long _valueL;
+		private Long _valueL2;
+		private Double _valueD;
+		private Double _valueD2;
+		private Float _valueF;
+		private Float _valueF2;
 
 		public Reg(int v) {
 			this._value = v;

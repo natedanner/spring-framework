@@ -78,7 +78,7 @@ class JdkClientHttpResponse extends AbstractClientHttpResponse {
 		return response.headers().allValues(HttpHeaders.SET_COOKIE).stream()
 				.flatMap(header -> {
 					Matcher matcher = SAME_SITE_PATTERN.matcher(header);
-					String sameSite = (matcher.matches() ? matcher.group(1) : null);
+					String sameSite = matcher.matches() ? matcher.group(1) : null;
 					return HttpCookie.parse(header).stream().map(cookie -> toResponseCookie(cookie, sameSite));
 				})
 				.collect(LinkedMultiValueMap::new,

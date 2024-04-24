@@ -69,7 +69,7 @@ public class GroovyScriptEvaluator implements ScriptEvaluator, BeanClassLoaderAw
 	 */
 	public void setCompilerConfiguration(@Nullable CompilerConfiguration compilerConfiguration) {
 		this.compilerConfiguration =
-				(compilerConfiguration != null ? compilerConfiguration : new CompilerConfiguration());
+				compilerConfiguration != null ? compilerConfiguration : new CompilerConfiguration();
 	}
 
 	/**
@@ -109,8 +109,8 @@ public class GroovyScriptEvaluator implements ScriptEvaluator, BeanClassLoaderAw
 		GroovyShell groovyShell = new GroovyShell(
 				this.classLoader, new Binding(arguments), this.compilerConfiguration);
 		try {
-			String filename = (script instanceof ResourceScriptSource resourceScriptSource ?
-					resourceScriptSource.getResource().getFilename() : null);
+			String filename = script instanceof ResourceScriptSource resourceScriptSource ?
+					resourceScriptSource.getResource().getFilename() : null;
 			if (filename != null) {
 				return groovyShell.evaluate(script.getScriptAsString(), filename);
 			}

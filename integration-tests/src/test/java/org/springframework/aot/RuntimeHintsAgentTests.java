@@ -85,7 +85,7 @@ class RuntimeHintsAgentTests {
 						throw new RuntimeException(e);
 					}
 				}, MethodReference.of(Class.class, "forName")),
-				Arguments.of((Runnable) () -> String.class.getClasses(), MethodReference.of(Class.class, "getClasses")),
+				Arguments.of((Runnable) String.class::getClasses, MethodReference.of(Class.class, "getClasses")),
 				Arguments.of((Runnable) () -> {
 					try {
 						String.class.getConstructor();
@@ -94,8 +94,8 @@ class RuntimeHintsAgentTests {
 						throw new RuntimeException(e);
 					}
 				}, MethodReference.of(Class.class, "getConstructor")),
-				Arguments.of((Runnable) () -> String.class.getConstructors(), MethodReference.of(Class.class, "getConstructors")),
-				Arguments.of((Runnable) () -> String.class.getDeclaredClasses(), MethodReference.of(Class.class, "getDeclaredClasses")),
+				Arguments.of((Runnable) String.class::getConstructors, MethodReference.of(Class.class, "getConstructors")),
+				Arguments.of((Runnable) String.class::getDeclaredClasses, MethodReference.of(Class.class, "getDeclaredClasses")),
 				Arguments.of((Runnable) () -> {
 					try {
 						String.class.getDeclaredConstructor();
@@ -104,7 +104,7 @@ class RuntimeHintsAgentTests {
 						throw new RuntimeException(e);
 					}
 				}, MethodReference.of(Class.class, "getDeclaredConstructor")),
-				Arguments.of((Runnable) () -> String.class.getDeclaredConstructors(), MethodReference.of(Class.class, "getDeclaredConstructors")),
+				Arguments.of((Runnable) String.class::getDeclaredConstructors, MethodReference.of(Class.class, "getDeclaredConstructors")),
 				Arguments.of((Runnable) () -> {
 					try {
 						String.class.getDeclaredField("value");
@@ -113,7 +113,7 @@ class RuntimeHintsAgentTests {
 						throw new RuntimeException(e);
 					}
 				}, MethodReference.of(Class.class, "getDeclaredField")),
-				Arguments.of((Runnable) () -> String.class.getDeclaredFields(), MethodReference.of(Class.class, "getDeclaredFields")),
+				Arguments.of((Runnable) String.class::getDeclaredFields, MethodReference.of(Class.class, "getDeclaredFields")),
 				Arguments.of((Runnable) () -> {
 					try {
 						String.class.getDeclaredMethod("toString");
@@ -122,7 +122,7 @@ class RuntimeHintsAgentTests {
 						throw new RuntimeException(e);
 					}
 				}, MethodReference.of(Class.class, "getDeclaredMethod")),
-				Arguments.of((Runnable) () -> String.class.getDeclaredMethods(), MethodReference.of(Class.class, "getDeclaredMethods")),
+				Arguments.of((Runnable) String.class::getDeclaredMethods, MethodReference.of(Class.class, "getDeclaredMethods")),
 				Arguments.of((Runnable) () -> {
 					try {
 						String.class.getField("value");
@@ -130,7 +130,7 @@ class RuntimeHintsAgentTests {
 					catch (NoSuchFieldException e) {
 					}
 				}, MethodReference.of(Class.class, "getField")),
-				Arguments.of((Runnable) () -> String.class.getFields(), MethodReference.of(Class.class, "getFields")),
+				Arguments.of((Runnable) String.class::getFields, MethodReference.of(Class.class, "getFields")),
 				Arguments.of((Runnable) () -> {
 					try {
 						String.class.getMethod("toString");
@@ -139,7 +139,7 @@ class RuntimeHintsAgentTests {
 						throw new RuntimeException(e);
 					}
 				}, MethodReference.of(Class.class, "getMethod")),
-				Arguments.of((Runnable) () -> String.class.getMethods(), MethodReference.of(Class.class, "getMethods")),
+				Arguments.of((Runnable) String.class::getMethods, MethodReference.of(Class.class, "getMethods")),
 				Arguments.of((Runnable) () -> {
 					try {
 						classLoader.loadClass("java.lang.String");

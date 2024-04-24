@@ -58,7 +58,7 @@ public final class Netty5HeadersAdapter implements MultiValueMap<String, String>
 	@Nullable
 	public String getFirst(String key) {
 		CharSequence value = this.headers.get(key);
-		return (value != null ? value.toString() : null);
+		return value != null ? value.toString() : null;
 	}
 
 	@Override
@@ -110,14 +110,14 @@ public final class Netty5HeadersAdapter implements MultiValueMap<String, String>
 
 	@Override
 	public boolean containsKey(Object key) {
-		return (key instanceof String headerName && this.headers.contains(headerName));
+		return key instanceof String headerName && this.headers.contains(headerName);
 	}
 
 	@Override
 	public boolean containsValue(Object value) {
-		return (value instanceof String &&
+		return value instanceof String &&
 				StreamSupport.stream(this.headers.spliterator(), false)
-						.anyMatch(entry -> value.equals(entry.getValue())));
+						.anyMatch(entry -> value.equals(entry.getValue()));
 	}
 
 	@Override
@@ -227,7 +227,7 @@ public final class Netty5HeadersAdapter implements MultiValueMap<String, String>
 		@Override
 		public List<String> getValue() {
 			List<String> values = get(this.key);
-			return (values != null ? values : Collections.emptyList());
+			return values != null ? values : Collections.emptyList();
 		}
 
 		@Override

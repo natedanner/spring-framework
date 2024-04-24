@@ -74,7 +74,7 @@ public class MessageSourceAccessor {
 	 * @see org.springframework.context.i18n.LocaleContextHolder#getLocale()
 	 */
 	protected Locale getDefaultLocale() {
-		return (this.defaultLocale != null ? this.defaultLocale : LocaleContextHolder.getLocale());
+		return this.defaultLocale != null ? this.defaultLocale : LocaleContextHolder.getLocale();
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class MessageSourceAccessor {
 	 */
 	public String getMessage(String code, String defaultMessage) {
 		String msg = this.messageSource.getMessage(code, null, defaultMessage, getDefaultLocale());
-		return (msg != null ? msg : "");
+		return msg != null ? msg : "";
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class MessageSourceAccessor {
 	 */
 	public String getMessage(String code, String defaultMessage, Locale locale) {
 		String msg = this.messageSource.getMessage(code, null, defaultMessage, locale);
-		return (msg != null ? msg : "");
+		return msg != null ? msg : "";
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class MessageSourceAccessor {
 	 */
 	public String getMessage(String code, @Nullable Object[] args, String defaultMessage) {
 		String msg = this.messageSource.getMessage(code, args, defaultMessage, getDefaultLocale());
-		return (msg != null ? msg : "");
+		return msg != null ? msg : "";
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class MessageSourceAccessor {
 	 */
 	public String getMessage(String code, @Nullable Object[] args, String defaultMessage, Locale locale) {
 		String msg = this.messageSource.getMessage(code, args, defaultMessage, locale);
-		return (msg != null ? msg : "");
+		return msg != null ? msg : "";
 	}
 
 	/**

@@ -79,7 +79,7 @@ public abstract class JdbcDaoSupport extends DaoSupport {
 	 */
 	@Nullable
 	public final DataSource getDataSource() {
-		return (this.jdbcTemplate != null ? this.jdbcTemplate.getDataSource() : null);
+		return this.jdbcTemplate != null ? this.jdbcTemplate.getDataSource() : null;
 	}
 
 	/**

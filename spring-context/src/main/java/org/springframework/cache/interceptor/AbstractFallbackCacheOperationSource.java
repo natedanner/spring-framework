@@ -93,7 +93,7 @@ public abstract class AbstractFallbackCacheOperationSource implements CacheOpera
 		Collection<CacheOperation> cached = this.attributeCache.get(cacheKey);
 
 		if (cached != null) {
-			return (cached != NULL_CACHING_ATTRIBUTE ? cached : null);
+			return cached != NULL_CACHING_ATTRIBUTE ? cached : null;
 		}
 		else {
 			Collection<CacheOperation> cacheOps = computeCacheOperations(method, targetClass);

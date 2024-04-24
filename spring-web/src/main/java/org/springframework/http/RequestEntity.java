@@ -206,8 +206,8 @@ public class RequestEntity<T> extends HttpEntity<T> {
 			return false;
 		}
 		RequestEntity<?> otherEntity = (RequestEntity<?>) other;
-		return (ObjectUtils.nullSafeEquals(this.method, otherEntity.method) &&
-				ObjectUtils.nullSafeEquals(this.url, otherEntity.url));
+		return ObjectUtils.nullSafeEquals(this.method, otherEntity.method) &&
+				ObjectUtils.nullSafeEquals(this.url, otherEntity.url);
 	}
 
 	@Override
@@ -737,14 +737,14 @@ public class RequestEntity<T> extends HttpEntity<T> {
 				return false;
 			}
 			UriTemplateRequestEntity<?> otherEntity = (UriTemplateRequestEntity<?>) other;
-			return (ObjectUtils.nullSafeEquals(this.uriTemplate, otherEntity.uriTemplate) &&
+			return ObjectUtils.nullSafeEquals(this.uriTemplate, otherEntity.uriTemplate) &&
 					ObjectUtils.nullSafeEquals(this.uriVarsArray, otherEntity.uriVarsArray) &&
-					ObjectUtils.nullSafeEquals(this.uriVarsMap, otherEntity.uriVarsMap));
+					ObjectUtils.nullSafeEquals(this.uriVarsMap, otherEntity.uriVarsMap);
 		}
 
 		@Override
 		public int hashCode() {
-			return (29 * super.hashCode() + ObjectUtils.nullSafeHashCode(this.uriTemplate));
+			return 29 * super.hashCode() + ObjectUtils.nullSafeHashCode(this.uriTemplate);
 		}
 
 		@Override

@@ -184,7 +184,7 @@ public abstract class AbstractMultiCheckedElementTag extends AbstractCheckedElem
 		Object id = evaluate("id", getId());
 		if (id != null) {
 			String idString = id.toString();
-			return (StringUtils.hasText(idString) ? TagIdGenerator.nextId(idString, this.pageContext) : null);
+			return StringUtils.hasText(idString) ? TagIdGenerator.nextId(idString, this.pageContext) : null;
 		}
 		return autogenerateId();
 	}
@@ -198,14 +198,14 @@ public abstract class AbstractMultiCheckedElementTag extends AbstractCheckedElem
 	@SuppressWarnings("rawtypes")
 	protected int writeTagContent(TagWriter tagWriter) throws JspException {
 		Object items = getItems();
-		Object itemsObject = (items instanceof String ? evaluate("items", items) : items);
+		Object itemsObject = items instanceof String ? evaluate("items", items) : items;
 
 		String itemValue = getItemValue();
 		String itemLabel = getItemLabel();
 		String valueProperty =
-				(itemValue != null ? ObjectUtils.getDisplayString(evaluate("itemValue", itemValue)) : null);
+				itemValue != null ? ObjectUtils.getDisplayString(evaluate("itemValue", itemValue)) : null;
 		String labelProperty =
-				(itemLabel != null ? ObjectUtils.getDisplayString(evaluate("itemLabel", itemLabel)) : null);
+				itemLabel != null ? ObjectUtils.getDisplayString(evaluate("itemLabel", itemLabel)) : null;
 
 		Class<?> boundType = getBindStatus().getValueType();
 		if (itemsObject == null && boundType != null && boundType.isEnum()) {
@@ -258,7 +258,7 @@ public abstract class AbstractMultiCheckedElementTag extends AbstractCheckedElem
 		else {
 			renderValue = item;
 		}
-		Object renderLabel = (labelProperty != null ? wrapper.getPropertyValue(labelProperty) : item);
+		Object renderLabel = labelProperty != null ? wrapper.getPropertyValue(labelProperty) : item;
 		writeElementTag(tagWriter, item, renderValue, renderLabel, itemIndex);
 	}
 
@@ -269,10 +269,10 @@ public abstract class AbstractMultiCheckedElementTag extends AbstractCheckedElem
 		Object mapValue = entry.getValue();
 		BeanWrapper mapKeyWrapper = PropertyAccessorFactory.forBeanPropertyAccess(mapKey);
 		BeanWrapper mapValueWrapper = PropertyAccessorFactory.forBeanPropertyAccess(mapValue);
-		Object renderValue = (valueProperty != null ?
-				mapKeyWrapper.getPropertyValue(valueProperty) : mapKey.toString());
-		Object renderLabel = (labelProperty != null ?
-				mapValueWrapper.getPropertyValue(labelProperty) : mapValue.toString());
+		Object renderValue = valueProperty != null ?
+				mapKeyWrapper.getPropertyValue(valueProperty) : mapKey.toString();
+		Object renderLabel = labelProperty != null ?
+				mapValueWrapper.getPropertyValue(labelProperty) : mapValue.toString();
 		writeElementTag(tagWriter, mapKey, renderValue, renderLabel, itemIndex);
 	}
 

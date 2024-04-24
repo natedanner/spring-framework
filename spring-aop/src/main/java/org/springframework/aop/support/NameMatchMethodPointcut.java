@@ -111,8 +111,8 @@ public class NameMatchMethodPointcut extends StaticMethodMatcherPointcut impleme
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof NameMatchMethodPointcut that &&
-				this.mappedNamePatterns.equals(that.mappedNamePatterns)));
+		return this == other || (other instanceof NameMatchMethodPointcut that &&
+				this.mappedNamePatterns.equals(that.mappedNamePatterns));
 	}
 
 	@Override

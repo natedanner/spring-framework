@@ -45,7 +45,7 @@ final class AttributeMethods {
 		if (m1 != null && m2 != null) {
 			return m1.getName().compareTo(m2.getName());
 		}
-		return (m1 != null ? -1 : 1);
+		return m1 != null ? -1 : 1;
 	};
 
 
@@ -77,7 +77,7 @@ final class AttributeMethods {
 				foundNestedAnnotation = true;
 			}
 			ReflectionUtils.makeAccessible(method);
-			this.canThrowTypeNotPresentException[i] = (type == Class.class || type == Class[].class || type.isEnum());
+			this.canThrowTypeNotPresentException[i] = type == Class.class || type == Class[].class || type.isEnum();
 		}
 		this.hasDefaultValueMethod = foundDefaultValueMethod;
 		this.hasNestedAnnotation = foundNestedAnnotation;
@@ -158,7 +158,7 @@ final class AttributeMethods {
 	@Nullable
 	Method get(String name) {
 		int index = indexOf(name);
-		return (index != -1 ? this.attributeMethods[index] : null);
+		return index != -1 ? this.attributeMethods[index] : null;
 	}
 
 	/**
@@ -269,7 +269,7 @@ final class AttributeMethods {
 	}
 
 	private static boolean isAttributeMethod(Method method) {
-		return (method.getParameterCount() == 0 && method.getReturnType() != void.class);
+		return method.getParameterCount() == 0 && method.getReturnType() != void.class;
 	}
 
 	/**
@@ -296,7 +296,7 @@ final class AttributeMethods {
 		if (attributeName == null) {
 			return "(none)";
 		}
-		String in = (annotationType != null ? " in annotation [" + annotationType.getName() + "]" : "");
+		String in = annotationType != null ? " in annotation [" + annotationType.getName() + "]" : "";
 		return "attribute '" + attributeName + "'" + in;
 	}
 

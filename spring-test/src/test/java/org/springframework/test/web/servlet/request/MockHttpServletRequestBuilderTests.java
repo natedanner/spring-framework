@@ -564,19 +564,19 @@ class MockHttpServletRequestBuilderTests {
 	@Test  // SPR-12945
 	void mergeInvokesDefaultRequestPostProcessorFirst() {
 		final String ATTR = "ATTR";
-		final String EXPECTED = "override";
+		final String expected = "override";
 
 		MockHttpServletRequestBuilder defaultBuilder =
 				new MockHttpServletRequestBuilder(GET, "/foo/bar")
 						.with(requestAttr(ATTR).value("default"))
-						.with(requestAttr(ATTR).value(EXPECTED));
+						.with(requestAttr(ATTR).value(expected));
 
 		builder.merge(defaultBuilder);
 
 		MockHttpServletRequest request = builder.buildRequest(servletContext);
 		request = builder.postProcessRequest(request);
 
-		assertThat(request.getAttribute(ATTR)).isEqualTo(EXPECTED);
+		assertThat(request.getAttribute(ATTR)).isEqualTo(expected);
 	}
 
 	@Test  // SPR-13719

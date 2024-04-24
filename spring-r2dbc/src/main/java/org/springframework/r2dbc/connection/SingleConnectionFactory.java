@@ -129,7 +129,7 @@ public class SingleConnectionFactory extends DelegatingConnectionFactory
 		this.target.set(target);
 		this.connectionEmitter = Mono.just(target);
 		this.suppressClose = suppressClose;
-		this.connection = (suppressClose ? getCloseSuppressingConnectionProxy(target) : target);
+		this.connection = suppressClose ? getCloseSuppressingConnectionProxy(target) : target;
 	}
 
 
@@ -175,7 +175,7 @@ public class SingleConnectionFactory extends DelegatingConnectionFactory
 			if (connection == null) {
 				this.target.compareAndSet(null, connectionToUse);
 				this.connection =
-						(isSuppressClose() ? getCloseSuppressingConnectionProxy(connectionToUse) : connectionToUse);
+						isSuppressClose() ? getCloseSuppressingConnectionProxy(connectionToUse) : connectionToUse;
 			}
 			return this.connection;
 		}).flatMap(this::prepareConnection);

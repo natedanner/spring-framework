@@ -45,7 +45,7 @@ public class DefaultBeanFactoryPointcutAdvisor extends AbstractBeanFactoryPointc
 	 * @see #setAdviceBeanName
 	 */
 	public void setPointcut(@Nullable Pointcut pointcut) {
-		this.pointcut = (pointcut != null ? pointcut : Pointcut.TRUE);
+		this.pointcut = pointcut != null ? pointcut : Pointcut.TRUE;
 	}
 
 	@Override

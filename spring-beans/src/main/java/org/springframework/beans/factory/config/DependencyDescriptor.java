@@ -287,9 +287,9 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 	public ResolvableType getResolvableType() {
 		ResolvableType resolvableType = this.resolvableType;
 		if (resolvableType == null) {
-			resolvableType = (this.field != null ?
+			resolvableType = this.field != null ?
 					ResolvableType.forField(this.field, this.nestingLevel, this.containingClass) :
-					ResolvableType.forMethodParameter(obtainMethodParameter()));
+					ResolvableType.forMethodParameter(obtainMethodParameter());
 			this.resolvableType = resolvableType;
 		}
 		return resolvableType;
@@ -302,9 +302,9 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 	public TypeDescriptor getTypeDescriptor() {
 		TypeDescriptor typeDescriptor = this.typeDescriptor;
 		if (typeDescriptor == null) {
-			typeDescriptor = (this.field != null ?
+			typeDescriptor = this.field != null ?
 					new TypeDescriptor(getResolvableType(), getDependencyType(), getAnnotations()) :
-					new TypeDescriptor(obtainMethodParameter()));
+					new TypeDescriptor(obtainMethodParameter());
 			this.typeDescriptor = typeDescriptor;
 		}
 		return typeDescriptor;
@@ -353,7 +353,7 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 	 */
 	@Nullable
 	public String getDependencyName() {
-		return (this.field != null ? this.field.getName() : obtainMethodParameter().getParameterName());
+		return this.field != null ? this.field.getName() : obtainMethodParameter().getParameterName();
 	}
 
 	/**
@@ -364,7 +364,7 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 		if (this.field != null) {
 			if (this.nestingLevel > 1) {
 				Class<?> clazz = getResolvableType().getRawClass();
-				return (clazz != null ? clazz : Object.class);
+				return clazz != null ? clazz : Object.class;
 			}
 			else {
 				return this.field.getType();
@@ -395,13 +395,13 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 			return false;
 		}
 		DependencyDescriptor otherDesc = (DependencyDescriptor) other;
-		return (this.required == otherDesc.required && this.eager == otherDesc.eager &&
-				this.nestingLevel == otherDesc.nestingLevel && this.containingClass == otherDesc.containingClass);
+		return this.required == otherDesc.required && this.eager == otherDesc.eager &&
+				this.nestingLevel == otherDesc.nestingLevel && this.containingClass == otherDesc.containingClass;
 	}
 
 	@Override
 	public int hashCode() {
-		return (31 * super.hashCode() + ObjectUtils.nullSafeHashCode(this.containingClass));
+		return 31 * super.hashCode() + ObjectUtils.nullSafeHashCode(this.containingClass);
 	}
 
 
@@ -448,7 +448,7 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 		 */
 		public static boolean isNullable(Field field) {
 			KProperty<?> property = ReflectJvmMapping.getKotlinProperty(field);
-			return (property != null && property.getReturnType().isMarkedNullable());
+			return property != null && property.getReturnType().isMarkedNullable();
 		}
 	}
 

@@ -319,9 +319,9 @@ public class SockJsServiceRegistration {
 		Assert.state(this.scheduler != null, "No TaskScheduler available");
 		Assert.state(this.transportHandlers.isEmpty() || this.transportHandlerOverrides.isEmpty(),
 				"Specify either TransportHandlers or TransportHandler overrides, not both");
-		return (!this.transportHandlers.isEmpty() ?
-				new TransportHandlingSockJsService(this.scheduler, this.transportHandlers) :
-				new DefaultSockJsService(this.scheduler, this.transportHandlerOverrides));
+		return this.transportHandlers.isEmpty() ?
+				new DefaultSockJsService(this.scheduler, this.transportHandlerOverrides) :
+				new TransportHandlingSockJsService(this.scheduler, this.transportHandlers);
 	}
 
 }

@@ -1652,7 +1652,10 @@ class XmlBeanFactoryTests {
 
 		public static boolean constructed;
 
-		public boolean afterPropertiesSetInvoked, initMethodInvoked, destroyed, customDestroyed;
+		public boolean afterPropertiesSetInvoked;
+		public boolean initMethodInvoked;
+		public boolean destroyed;
+		public boolean customDestroyed;
 
 		public InitAndIB() {
 			constructed = true;
@@ -1697,9 +1700,9 @@ class XmlBeanFactoryTests {
 
 	static class PreparingBean1 implements DisposableBean {
 
-		public static boolean prepared = false;
+		public static boolean prepared;
 
-		public static boolean destroyed = false;
+		public static boolean destroyed;
 
 		public PreparingBean1() {
 			prepared = true;
@@ -1714,9 +1717,9 @@ class XmlBeanFactoryTests {
 
 	static class PreparingBean2 implements DisposableBean {
 
-		public static boolean prepared = false;
+		public static boolean prepared;
 
-		public static boolean destroyed = false;
+		public static boolean destroyed;
 
 		public PreparingBean2() {
 			prepared = true;
@@ -1731,9 +1734,9 @@ class XmlBeanFactoryTests {
 
 	static class DependingBean implements InitializingBean, DisposableBean {
 
-		public static int destroyCount = 0;
+		public static int destroyCount;
 
-		public boolean destroyed = false;
+		public boolean destroyed;
 
 		public DependingBean() {
 		}
@@ -1780,11 +1783,11 @@ class XmlBeanFactoryTests {
 
 	static class HoldingBean implements DisposableBean {
 
-		public static int destroyCount = 0;
+		public static int destroyCount;
 
 		private DependingBean dependingBean;
 
-		public boolean destroyed = false;
+		public boolean destroyed;
 
 		public void setDependingBean(DependingBean dependingBean) {
 			this.dependingBean = dependingBean;

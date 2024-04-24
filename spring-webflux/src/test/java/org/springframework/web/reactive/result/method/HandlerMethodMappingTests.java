@@ -207,8 +207,8 @@ class HandlerMethodMappingTests {
 
 		@Override
 		protected Set<String> getDirectPaths(String mapping) {
-			return (parser.parse(mapping).hasPatternSyntax() ?
-					Collections.emptySet() : Collections.singleton(mapping));
+			return parser.parse(mapping).hasPatternSyntax() ?
+					Collections.emptySet() : Collections.singleton(mapping);
 		}
 
 		@Override

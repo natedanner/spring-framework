@@ -66,7 +66,7 @@ public class ConcreteTransactionalJUnit4SpringContextTests extends AbstractTrans
 
 	private String beanName;
 
-	private boolean beanInitialized = false;
+	private boolean beanInitialized;
 
 
 	@Autowired
@@ -92,13 +92,13 @@ public class ConcreteTransactionalJUnit4SpringContextTests extends AbstractTrans
 
 	@Before
 	public void setUp() {
-		long expected = (isActualTransactionActive() ? 2 : 1);
+		long expected = isActualTransactionActive() ? 2 : 1;
 		assertThat(countRowsInPersonTable()).as("Verifying the number of rows in the person table before a test method.").isEqualTo(expected);
 	}
 
 	@After
 	public void tearDown() {
-		long expected = (isActualTransactionActive() ? 4 : 1);
+		long expected = isActualTransactionActive() ? 4 : 1;
 		assertThat(countRowsInPersonTable()).as("Verifying the number of rows in the person table after a test method.").isEqualTo(expected);
 	}
 

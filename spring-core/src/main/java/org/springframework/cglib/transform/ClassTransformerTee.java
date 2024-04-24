@@ -20,7 +20,7 @@ import org.springframework.cglib.core.ClassTransformer;
 import org.springframework.cglib.core.Constants;
 
 public class ClassTransformerTee extends ClassTransformer {
-    private ClassVisitor branch;
+	private final ClassVisitor branch;
 
     public ClassTransformerTee(ClassVisitor branch) {
         super(Constants.ASM_API);

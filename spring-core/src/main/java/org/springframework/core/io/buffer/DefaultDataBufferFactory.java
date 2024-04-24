@@ -92,9 +92,9 @@ public class DefaultDataBufferFactory implements DataBufferFactory {
 
 	@Override
 	public DefaultDataBuffer allocateBuffer(int initialCapacity) {
-		ByteBuffer byteBuffer = (this.preferDirect ?
+		ByteBuffer byteBuffer = this.preferDirect ?
 				ByteBuffer.allocateDirect(initialCapacity) :
-				ByteBuffer.allocate(initialCapacity));
+				ByteBuffer.allocate(initialCapacity);
 		return DefaultDataBuffer.fromEmptyByteBuffer(this, byteBuffer);
 	}
 

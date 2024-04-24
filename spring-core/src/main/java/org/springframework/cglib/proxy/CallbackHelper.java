@@ -27,7 +27,7 @@ import org.springframework.cglib.core.ReflectUtils;
  * @version $Id: CallbackHelper.java,v 1.2 2004/06/24 21:15:20 herbyderby Exp $
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-abstract public class CallbackHelper
+public abstract class CallbackHelper
 implements CallbackFilter
 {
     private Map methodMap = new HashMap();
@@ -60,10 +60,10 @@ implements CallbackFilter
         }
     }
 
-    abstract protected Object getCallback(Method method);
+    protected abstract Object getCallback(Method method);
 
     public Callback[] getCallbacks() {
-        if (callbacks.size() == 0) {
+        if (callbacks.isEmpty()) {
             return new Callback[0];
         }
         if (callbacks.get(0) instanceof Callback) {
@@ -75,7 +75,7 @@ implements CallbackFilter
     }
 
     public Class[] getCallbackTypes() {
-        if (callbacks.size() == 0) {
+        if (callbacks.isEmpty()) {
             return new Class[0];
         }
         if (callbacks.get(0) instanceof Callback) {

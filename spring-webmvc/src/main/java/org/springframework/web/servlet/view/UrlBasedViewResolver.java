@@ -171,7 +171,7 @@ public class UrlBasedViewResolver extends AbstractCachingViewResolver implements
 	 * Set the prefix that gets prepended to view names when building a URL.
 	 */
 	public void setPrefix(@Nullable String prefix) {
-		this.prefix = (prefix != null ? prefix : "");
+		this.prefix = prefix != null ? prefix : "";
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class UrlBasedViewResolver extends AbstractCachingViewResolver implements
 	 * Set the suffix that gets appended to view names when building a URL.
 	 */
 	public void setSuffix(@Nullable String suffix) {
-		this.suffix = (suffix != null ? suffix : "");
+		this.suffix = suffix != null ? suffix : "";
 	}
 
 	/**
@@ -503,7 +503,7 @@ public class UrlBasedViewResolver extends AbstractCachingViewResolver implements
 	 */
 	protected boolean canHandle(String viewName, Locale locale) {
 		String[] viewNames = getViewNames();
-		return (viewNames == null || PatternMatchUtils.simpleMatch(viewNames, viewName));
+		return viewNames == null || PatternMatchUtils.simpleMatch(viewNames, viewName);
 	}
 
 	/**
@@ -548,7 +548,7 @@ public class UrlBasedViewResolver extends AbstractCachingViewResolver implements
 	protected View loadView(String viewName, Locale locale) throws Exception {
 		AbstractUrlBasedView view = buildView(viewName);
 		View result = applyLifecycleMethods(viewName, view);
-		return (view.checkResource(locale) ? result : null);
+		return view.checkResource(locale) ? result : null;
 	}
 
 	/**

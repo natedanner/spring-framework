@@ -50,7 +50,7 @@ public class InitBinderDataBinderFactory extends DefaultDataBinderFactory {
 			@Nullable WebBindingInitializer initializer) {
 
 		super(initializer);
-		this.binderMethods = (binderMethods != null ? binderMethods : Collections.emptyList());
+		this.binderMethods = binderMethods != null ? binderMethods : Collections.emptyList();
 	}
 
 
@@ -83,7 +83,7 @@ public class InitBinderDataBinderFactory extends DefaultDataBinderFactory {
 		InitBinder ann = initBinderMethod.getMethodAnnotation(InitBinder.class);
 		Assert.state(ann != null, "No InitBinder annotation");
 		String[] names = ann.value();
-		return (ObjectUtils.isEmpty(names) || ObjectUtils.containsElement(names, dataBinder.getObjectName()));
+		return ObjectUtils.isEmpty(names) || ObjectUtils.containsElement(names, dataBinder.getObjectName());
 	}
 
 }

@@ -149,16 +149,16 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	@Nullable
 	private AbstractPropertyBindingResult bindingResult;
 
-	private boolean directFieldAccess = false;
+	private boolean directFieldAccess;
 
 	@Nullable
 	private ExtendedTypeConverter typeConverter;
 
-	private boolean declarativeBinding = false;
+	private boolean declarativeBinding;
 
 	private boolean ignoreUnknownFields = true;
 
-	private boolean ignoreInvalidFields = false;
+	private boolean ignoreInvalidFields;
 
 	private boolean autoGrowNestedPaths = true;
 
@@ -365,8 +365,8 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	 */
 	protected AbstractPropertyBindingResult getInternalBindingResult() {
 		if (this.bindingResult == null) {
-			this.bindingResult = (this.directFieldAccess ?
-					createDirectFieldBindingResult(): createBeanPropertyBindingResult());
+			this.bindingResult = this.directFieldAccess ?
+					createDirectFieldBindingResult(): createBeanPropertyBindingResult();
 		}
 		return this.bindingResult;
 	}
@@ -725,7 +725,7 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	 */
 	@Nullable
 	public Validator getValidator() {
-		return (!this.validators.isEmpty() ? this.validators.get(0) : null);
+		return this.validators.isEmpty() ? null : this.validators.get(0);
 	}
 
 	/**
@@ -742,9 +742,9 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	 * @since 6.1
 	 */
 	public List<Validator> getValidatorsToApply() {
-		return (this.excludedValidators != null ?
+		return this.excludedValidators != null ?
 				this.validators.stream().filter(validator -> !this.excludedValidators.test(validator)).toList() :
-				Collections.unmodifiableList(this.validators));
+				Collections.unmodifiableList(this.validators);
 	}
 
 
@@ -913,8 +913,8 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	@Nullable
 	private Object createObject(ResolvableType objectType, String nestedPath, ValueResolver valueResolver) {
 		Class<?> clazz = objectType.resolve();
-		boolean isOptional = (clazz == Optional.class);
-		clazz = (isOptional ? objectType.resolveGeneric(0) : clazz);
+		boolean isOptional = clazz == Optional.class;
+		clazz = isOptional ? objectType.resolveGeneric(0) : clazz;
 		if (clazz == null) {
 			throw new IllegalStateException(
 					"Insufficient type information to create instance of " + objectType);
@@ -955,7 +955,7 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 				else {
 					try {
 						if (value == null && (param.isOptional() || getBindingResult().hasErrors())) {
-							args[i] = (param.getParameterType() == Optional.class ? Optional.empty() : null);
+							args[i] = param.getParameterType() == Optional.class ? Optional.empty() : null;
 						}
 						else {
 							args[i] = convertIfNecessary(value, paramType, param);
@@ -1005,7 +1005,7 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 			}
 		}
 
-		return (isOptional && !nestedPath.isEmpty() ? Optional.ofNullable(result) : result);
+		return isOptional && !nestedPath.isEmpty() ? Optional.ofNullable(result) : result;
 	}
 
 	/**
@@ -1082,8 +1082,8 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 		if (shouldNotBindPropertyValues()) {
 			return;
 		}
-		MutablePropertyValues mpvs = (pvs instanceof MutablePropertyValues mutablePropertyValues ?
-				mutablePropertyValues : new MutablePropertyValues(pvs));
+		MutablePropertyValues mpvs = pvs instanceof MutablePropertyValues mutablePropertyValues ?
+				mutablePropertyValues : new MutablePropertyValues(pvs);
 		doBind(mpvs);
 	}
 
@@ -1094,7 +1094,7 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	 * @since 6.1
 	 */
 	protected boolean shouldNotBindPropertyValues() {
-		return (isDeclarativeBinding() && ObjectUtils.isEmpty(this.allowedFields));
+		return isDeclarativeBinding() && ObjectUtils.isEmpty(this.allowedFields);
 	}
 
 	/**
@@ -1156,8 +1156,8 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	protected boolean isAllowed(String field) {
 		String[] allowed = getAllowedFields();
 		String[] disallowed = getDisallowedFields();
-		return ((ObjectUtils.isEmpty(allowed) || PatternMatchUtils.simpleMatch(allowed, field)) &&
-				(ObjectUtils.isEmpty(disallowed) || !PatternMatchUtils.simpleMatch(disallowed, field.toLowerCase())));
+		return (ObjectUtils.isEmpty(allowed) || PatternMatchUtils.simpleMatch(allowed, field)) &&
+				(ObjectUtils.isEmpty(disallowed) || !PatternMatchUtils.simpleMatch(disallowed, field.toLowerCase()));
 	}
 
 	/**
@@ -1179,13 +1179,13 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 			}
 			for (String field : requiredFields) {
 				PropertyValue pv = propertyValues.get(field);
-				boolean empty = (pv == null || pv.getValue() == null);
+				boolean empty = pv == null || pv.getValue() == null;
 				if (!empty) {
 					if (pv.getValue() instanceof String text) {
 						empty = !StringUtils.hasText(text);
 					}
 					else if (pv.getValue() instanceof String[] values) {
-						empty = (values.length == 0 || !StringUtils.hasText(values[0]));
+						empty = values.length == 0 || !StringUtils.hasText(values[0]);
 					}
 				}
 				if (empty) {

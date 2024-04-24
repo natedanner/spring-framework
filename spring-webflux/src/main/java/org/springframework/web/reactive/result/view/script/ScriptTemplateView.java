@@ -334,7 +334,7 @@ public class ScriptTemplateView extends AbstractUrlBasedView {
 	public boolean checkResourceExists(Locale locale) throws Exception {
 		String url = getUrl();
 		Assert.state(url != null, "'url' not set");
-		return (getResource(url) != null);
+		return getResource(url) != null;
 	}
 
 	@Override

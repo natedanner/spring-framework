@@ -112,8 +112,8 @@ public class PrintingResultHandler implements ResultHandler {
 	 * Print the request.
 	 */
 	protected void printRequest(MockHttpServletRequest request) throws Exception {
-		String body = (request.getCharacterEncoding() != null ?
-				request.getContentAsString() : MISSING_CHARACTER_ENCODING);
+		String body = request.getCharacterEncoding() != null ?
+				request.getContentAsString() : MISSING_CHARACTER_ENCODING;
 
 		this.printer.printValue("HTTP Method", request.getMethod());
 		this.printer.printValue("Request URI", request.getRequestURI());
@@ -207,8 +207,8 @@ public class PrintingResultHandler implements ResultHandler {
 	 * Print the ModelAndView.
 	 */
 	protected void printModelAndView(@Nullable ModelAndView mav) throws Exception {
-		this.printer.printValue("View name", (mav != null) ? mav.getViewName() : null);
-		this.printer.printValue("View", (mav != null) ? mav.getView() : null);
+		this.printer.printValue("View name", mav != null ? mav.getViewName() : null);
+		this.printer.printValue("View", mav != null ? mav.getView() : null);
 		if (mav == null || mav.getModel().size() == 0) {
 			this.printer.printValue("Model", null);
 		}
@@ -250,8 +250,8 @@ public class PrintingResultHandler implements ResultHandler {
 		this.printer.printValue("Error message", response.getErrorMessage());
 		this.printer.printValue("Headers", getResponseHeaders(response));
 		this.printer.printValue("Content type", response.getContentType());
-		String body = (MediaType.APPLICATION_JSON_VALUE.equals(response.getContentType()) ?
-				response.getContentAsString(StandardCharsets.UTF_8) : response.getContentAsString());
+		String body = MediaType.APPLICATION_JSON_VALUE.equals(response.getContentType()) ?
+				response.getContentAsString(StandardCharsets.UTF_8) : response.getContentAsString();
 		this.printer.printValue("Body", body);
 		this.printer.printValue("Forwarded URL", response.getForwardedUrl());
 		this.printer.printValue("Redirected URL", response.getRedirectedUrl());

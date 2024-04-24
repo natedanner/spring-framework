@@ -270,7 +270,8 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 		Payload payload = new Payload();
 		Expression expression = parser.parseExpression("DR[0].DRFixedSection.duration lt 0.1");
 		boolean b = false;
-		long iTotal = 0,cTotal = 0;
+		long iTotal = 0;
+		long cTotal = 0;
 
 		// warmup
 		for (int i = 0; i < count; i++) {
@@ -284,7 +285,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				b = expression.getValue(payload, Boolean.TYPE);
 			}
 			long etime = System.currentTimeMillis();
-			long interpretedSpeed = (etime - stime);
+			long interpretedSpeed = etime - stime;
 			iTotal += interpretedSpeed;
 			log(interpretedSpeed + "ms ");
 		}
@@ -300,7 +301,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				bc = expression.getValue(payload, Boolean.TYPE);
 			}
 			long etime = System.currentTimeMillis();
-			long compiledSpeed = (etime - stime);
+			long compiledSpeed = etime - stime;
 			cTotal += compiledSpeed;
 			log(compiledSpeed + "ms ");
 		}
@@ -328,9 +329,12 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 
 	@Test
 	void compilingMethodReference() {
-		long interpretedTotal = 0, compiledTotal = 0;
-		long stime,etime;
-		String interpretedResult = null,compiledResult = null;
+		long interpretedTotal = 0;
+		long compiledTotal = 0;
+		long stime;
+		long etime;
+		String interpretedResult = null;
+		String compiledResult = null;
 
 		HW testdata = new HW();
 		Expression expression = parser.parseExpression("hello()");
@@ -347,7 +351,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				interpretedResult = expression.getValue(testdata, String.class);
 			}
 			etime = System.currentTimeMillis();
-			long interpretedSpeed = (etime - stime);
+			long interpretedSpeed = etime - stime;
 			interpretedTotal += interpretedSpeed;
 			log(interpretedSpeed + "ms ");
 		}
@@ -363,7 +367,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				compiledResult = expression.getValue(testdata, String.class);
 			}
 			etime = System.currentTimeMillis();
-			long compiledSpeed = (etime - stime);
+			long compiledSpeed = etime - stime;
 			compiledTotal += compiledSpeed;
 			log(compiledSpeed + "ms ");
 		}
@@ -381,8 +385,12 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 
 	@Test
 	void compilingPropertyReferenceField() {
-		long interpretedTotal = 0, compiledTotal = 0, stime, etime;
-		String interpretedResult = null, compiledResult = null;
+		long interpretedTotal = 0;
+		long compiledTotal = 0;
+		long stime;
+		long etime;
+		String interpretedResult = null;
+		String compiledResult = null;
 
 		TestClass2 testdata = new TestClass2();
 		Expression expression = parser.parseExpression("name");
@@ -399,7 +407,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				interpretedResult = expression.getValue(testdata, String.class);
 			}
 			etime = System.currentTimeMillis();
-			long interpretedSpeed = (etime - stime);
+			long interpretedSpeed = etime - stime;
 			interpretedTotal += interpretedSpeed;
 			log(interpretedSpeed + "ms ");
 		}
@@ -415,7 +423,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				compiledResult = expression.getValue(testdata, String.class);
 			}
 			etime = System.currentTimeMillis();
-			long compiledSpeed = (etime - stime);
+			long compiledSpeed = etime - stime;
 			compiledTotal += compiledSpeed;
 			log(compiledSpeed + "ms ");
 		}
@@ -427,8 +435,12 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 
 	@Test
 	void compilingPropertyReferenceNestedField() {
-		long interpretedTotal = 0, compiledTotal = 0, stime, etime;
-		String interpretedResult = null, compiledResult = null;
+		long interpretedTotal = 0;
+		long compiledTotal = 0;
+		long stime;
+		long etime;
+		String interpretedResult = null;
+		String compiledResult = null;
 
 		TestClass2 testdata = new TestClass2();
 		Expression expression = parser.parseExpression("foo.bar.boo");
@@ -445,7 +457,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				interpretedResult = expression.getValue(testdata, String.class);
 			}
 			etime = System.currentTimeMillis();
-			long interpretedSpeed = (etime - stime);
+			long interpretedSpeed = etime - stime;
 			interpretedTotal += interpretedSpeed;
 			log(interpretedSpeed + "ms ");
 		}
@@ -461,7 +473,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				compiledResult = expression.getValue(testdata, String.class);
 			}
 			etime = System.currentTimeMillis();
-			long compiledSpeed = (etime - stime);
+			long compiledSpeed = etime - stime;
 			compiledTotal += compiledSpeed;
 			log(compiledSpeed + "ms ");
 		}
@@ -473,8 +485,12 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 
 	@Test
 	void compilingPropertyReferenceNestedMixedFieldGetter() {
-		long interpretedTotal = 0, compiledTotal = 0, stime, etime;
-		String interpretedResult = null, compiledResult = null;
+		long interpretedTotal = 0;
+		long compiledTotal = 0;
+		long stime;
+		long etime;
+		String interpretedResult = null;
+		String compiledResult = null;
 
 		TestClass2 testdata = new TestClass2();
 		Expression expression = parser.parseExpression("foo.baz.boo");
@@ -490,7 +506,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				interpretedResult = expression.getValue(testdata, String.class);
 			}
 			etime = System.currentTimeMillis();
-			long interpretedSpeed = (etime - stime);
+			long interpretedSpeed = etime - stime;
 			interpretedTotal += interpretedSpeed;
 			log(interpretedSpeed + "ms ");
 		}
@@ -506,7 +522,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				compiledResult = expression.getValue(testdata, String.class);
 			}
 			etime = System.currentTimeMillis();
-			long compiledSpeed = (etime - stime);
+			long compiledSpeed = etime - stime;
 			compiledTotal += compiledSpeed;
 			log(compiledSpeed + "ms ");
 		}
@@ -518,8 +534,12 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 
 	@Test
 	void compilingNestedMixedFieldPropertyReferenceMethodReference() {
-		long interpretedTotal = 0, compiledTotal = 0, stime, etime;
-		String interpretedResult = null, compiledResult = null;
+		long interpretedTotal = 0;
+		long compiledTotal = 0;
+		long stime;
+		long etime;
+		String interpretedResult = null;
+		String compiledResult = null;
 
 		TestClass2 testdata = new TestClass2();
 		Expression expression = parser.parseExpression("foo.bay().boo");
@@ -536,7 +556,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				interpretedResult = expression.getValue(testdata, String.class);
 			}
 			etime = System.currentTimeMillis();
-			long interpretedSpeed = (etime - stime);
+			long interpretedSpeed = etime - stime;
 			interpretedTotal += interpretedSpeed;
 			log(interpretedSpeed + "ms ");
 		}
@@ -552,7 +572,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				compiledResult = expression.getValue(testdata, String.class);
 			}
 			etime = System.currentTimeMillis();
-			long compiledSpeed = (etime - stime);
+			long compiledSpeed = etime - stime;
 			compiledTotal += compiledSpeed;
 			log(compiledSpeed + "ms ");
 
@@ -565,8 +585,12 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 
 	@Test
 	void compilingPropertyReferenceGetter() {
-		long interpretedTotal = 0, compiledTotal = 0, stime, etime;
-		String interpretedResult = null, compiledResult = null;
+		long interpretedTotal = 0;
+		long compiledTotal = 0;
+		long stime;
+		long etime;
+		String interpretedResult = null;
+		String compiledResult = null;
 
 		TestClass2 testdata = new TestClass2();
 		Expression expression = parser.parseExpression("name2");
@@ -583,7 +607,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				interpretedResult = expression.getValue(testdata, String.class);
 			}
 			etime = System.currentTimeMillis();
-			long interpretedSpeed = (etime - stime);
+			long interpretedSpeed = etime - stime;
 			interpretedTotal += interpretedSpeed;
 			log(interpretedSpeed + "ms ");
 		}
@@ -600,7 +624,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 				compiledResult = expression.getValue(testdata, String.class);
 			}
 			etime = System.currentTimeMillis();
-			long compiledSpeed = (etime - stime);
+			long compiledSpeed = etime - stime;
 			compiledTotal += compiledSpeed;
 			log(compiledSpeed + "ms ");
 
@@ -674,7 +698,7 @@ public class SpelCompilationPerformanceTests extends AbstractExpressionTests {
 
 	public static class Three {
 
-		double duration = 0.4d;
+		double duration = 0.4D;
 
 		public double getDuration() {
 			return duration;

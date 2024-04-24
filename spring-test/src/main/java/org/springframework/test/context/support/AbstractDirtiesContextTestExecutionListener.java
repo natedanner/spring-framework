@@ -98,10 +98,10 @@ public abstract class AbstractDirtiesContextTestExecutionListener extends Abstra
 
 		DirtiesContext methodAnn = AnnotatedElementUtils.findMergedAnnotation(testMethod, DirtiesContext.class);
 		DirtiesContext classAnn = TestContextAnnotationUtils.findMergedAnnotation(testClass, DirtiesContext.class);
-		boolean methodAnnotated = (methodAnn != null);
-		boolean classAnnotated = (classAnn != null);
-		MethodMode methodMode = (methodAnnotated ? methodAnn.methodMode() : null);
-		ClassMode classMode = (classAnnotated ? classAnn.classMode() : null);
+		boolean methodAnnotated = methodAnn != null;
+		boolean classAnnotated = classAnn != null;
+		MethodMode methodMode = methodAnnotated ? methodAnn.methodMode() : null;
+		ClassMode classMode = classAnnotated ? classAnn.classMode() : null;
 
 		if (logger.isTraceEnabled()) {
 			logger.trace("""
@@ -119,7 +119,7 @@ public abstract class AbstractDirtiesContextTestExecutionListener extends Abstra
 		}
 
 		if ((methodMode == requiredMethodMode) || (classMode == requiredClassMode)) {
-			HierarchyMode hierarchyMode = (methodAnnotated ? methodAnn.hierarchyMode() : classAnn.hierarchyMode());
+			HierarchyMode hierarchyMode = methodAnnotated ? methodAnn.hierarchyMode() : classAnn.hierarchyMode();
 			dirtyContext(testContext, hierarchyMode);
 		}
 	}
@@ -143,8 +143,8 @@ public abstract class AbstractDirtiesContextTestExecutionListener extends Abstra
 		Assert.notNull(testClass, "The test class of the supplied TestContext must not be null");
 
 		DirtiesContext dirtiesContext = TestContextAnnotationUtils.findMergedAnnotation(testClass, DirtiesContext.class);
-		boolean classAnnotated = (dirtiesContext != null);
-		ClassMode classMode = (classAnnotated ? dirtiesContext.classMode() : null);
+		boolean classAnnotated = dirtiesContext != null;
+		ClassMode classMode = classAnnotated ? dirtiesContext.classMode() : null;
 
 		if (logger.isTraceEnabled()) {
 			logger.trace("%s test class: context %s, class annotated with @DirtiesContext [%s] with mode [%s]"
@@ -161,11 +161,11 @@ public abstract class AbstractDirtiesContextTestExecutionListener extends Abstra
 	}
 
 	private static String getPhase(ClassMode classMode) {
-		return (classMode.name().startsWith("BEFORE") ? "Before" : "After");
+		return classMode.name().startsWith("BEFORE") ? "Before" : "After";
 	}
 
 	private static String getPhase(MethodMode methodMode) {
-		return (methodMode.name().startsWith("BEFORE") ? "Before" : "After");
+		return methodMode.name().startsWith("BEFORE") ? "Before" : "After";
 	}
 
 }

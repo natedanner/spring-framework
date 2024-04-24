@@ -51,7 +51,7 @@ public class MockSessionCookieConfig implements SessionCookieConfig {
 
 	private int maxAge = -1;
 
-	private Map<String, String> attributes = new LinkedHashMap<>();
+	private final Map<String, String> attributes = new LinkedHashMap<>();
 
 
 	@Override

@@ -185,16 +185,16 @@ public class HandlerMethod extends AnnotatedMethod {
 	 */
 	private HandlerMethod(HandlerMethod handlerMethod, @Nullable Object handler, boolean initValidateFlags) {
 		super(handlerMethod);
-		this.bean = (handler != null ? handler : handlerMethod.bean);
+		this.bean = handler != null ? handler : handlerMethod.bean;
 		this.beanFactory = handlerMethod.beanFactory;
 		this.messageSource = handlerMethod.messageSource;
 		this.beanType = handlerMethod.beanType;
-		this.validateArguments = (initValidateFlags ?
+		this.validateArguments = initValidateFlags ?
 				MethodValidationInitializer.checkArguments(this.beanType, getMethodParameters()) :
-				handlerMethod.validateArguments);
-		this.validateReturnValue = (initValidateFlags ?
+				handlerMethod.validateArguments;
+		this.validateReturnValue = initValidateFlags ?
 				MethodValidationInitializer.checkReturnValue(this.beanType, getBridgedMethod()) :
-				handlerMethod.validateReturnValue);
+				handlerMethod.validateReturnValue;
 		this.responseStatus = handlerMethod.responseStatus;
 		this.responseStatusReason = handlerMethod.responseStatusReason;
 		this.resolvedFromHandlerMethod = handlerMethod;
@@ -209,9 +209,9 @@ public class HandlerMethod extends AnnotatedMethod {
 		}
 		if (annotation != null) {
 			String reason = annotation.reason();
-			String resolvedReason = (StringUtils.hasText(reason) && this.messageSource != null ?
+			String resolvedReason = StringUtils.hasText(reason) && this.messageSource != null ?
 					this.messageSource.getMessage(reason, null, reason, LocaleContextHolder.getLocale()) :
-					reason);
+					reason;
 
 			this.responseStatus = annotation.code();
 			this.responseStatusReason = resolvedReason;
@@ -342,12 +342,12 @@ public class HandlerMethod extends AnnotatedMethod {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (super.equals(other) && this.bean.equals(((HandlerMethod) other).bean)));
+		return this == other || (super.equals(other) && this.bean.equals(((HandlerMethod) other).bean));
 	}
 
 	@Override
 	public int hashCode() {
-		return (this.bean.hashCode() * 31 + super.hashCode());
+		return this.bean.hashCode() * 31 + super.hashCode();
 	}
 
 	@Override
@@ -438,8 +438,8 @@ public class HandlerMethod extends AnnotatedMethod {
 			// Index or key-based containers only, or MethodValidationAdapter cannot access
 			// the element given what is exposed in ConstraintViolation.
 
-			return (List.class.isAssignableFrom(type) || Object[].class.isAssignableFrom(type) ||
-					Map.class.isAssignableFrom(type));
+			return List.class.isAssignableFrom(type) || Object[].class.isAssignableFrom(type) ||
+					Map.class.isAssignableFrom(type);
 		}
 
 		/**
@@ -452,12 +452,12 @@ public class HandlerMethod extends AnnotatedMethod {
 			if (method != null && method.getAnnotatedParameterTypes()[i] instanceof AnnotatedParameterizedType apt) {
 				for (AnnotatedType type : apt.getAnnotatedActualTypeArguments()) {
 					for (Annotation annot : type.getAnnotations()) {
-						result = (result != null ? result : new ArrayList<>());
+						result = result != null ? result : new ArrayList<>();
 						result.add(annot);
 					}
 				}
 			}
-			result = (result != null ? result : Collections.emptyList());
+			result = result != null ? result : Collections.emptyList();
 			return result.toArray(new Annotation[0]);
 		}
 

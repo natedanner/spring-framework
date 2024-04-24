@@ -28,9 +28,9 @@ import org.springframework.web.socket.TextMessage;
  *
  * @author Rossen Stoyanchev
  */
-public class StompTextMessageBuilder {
+public final class StompTextMessageBuilder {
 
-	private StompCommand command;
+	private final StompCommand command;
 
 	private final List<String> headerLines = new ArrayList<>();
 

@@ -136,7 +136,7 @@ public class MethodValidationAdapter implements MethodValidator {
 	private static Supplier<SpringValidatorAdapter> initValidatorAdapter(Supplier<Validator> validatorSupplier) {
 		return SingletonSupplier.of(() -> {
 			Validator validator = validatorSupplier.get();
-			return (validator instanceof SpringValidatorAdapter sva ? sva : new SpringValidatorAdapter(validator));
+			return validator instanceof SpringValidatorAdapter sva ? sva : new SpringValidatorAdapter(validator);
 		});
 	}
 
@@ -229,7 +229,7 @@ public class MethodValidationAdapter implements MethodValidator {
 				validatedAnn = AnnotationUtils.findAnnotation(target.getClass(), Validated.class);
 			}
 		}
-		return (validatedAnn != null ? validatedAnn.value() : new Class<?>[0]);
+		return validatedAnn != null ? validatedAnn.value() : new Class<?>[0];
 	}
 
 	@Override
@@ -393,7 +393,7 @@ public class MethodValidationAdapter implements MethodValidator {
 			Object target, MethodParameter parameter, ConstraintViolation<Object> violation) {
 
 		String objectName = Conventions.getVariableName(target) + "#" + parameter.getExecutable().getName();
-		String paramName = (parameter.getParameterName() != null ? parameter.getParameterName() : "");
+		String paramName = parameter.getParameterName() != null ? parameter.getParameterName() : "";
 		Class<?> parameterType = parameter.getParameterType();
 
 		ConstraintDescriptor<?> descriptor = violation.getConstraintDescriptor();
@@ -553,7 +553,7 @@ public class MethodValidationAdapter implements MethodValidator {
 			}
 			if (objectName == null) {
 				int index = parameter.getParameterIndex();
-				objectName = (parameter.getExecutable().getName() + (index != -1 ? ".arg" + index : ".returnValue"));
+				objectName = parameter.getExecutable().getName() + (index != -1 ? ".arg" + index : ".returnValue");
 			}
 			return objectName;
 		}

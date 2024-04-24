@@ -318,7 +318,7 @@ public class WebDataBinder extends DataBinder {
 	 */
 	@Nullable
 	protected Object getEmptyValue(String field, @Nullable Class<?> fieldType) {
-		return (fieldType != null ? getEmptyValue(fieldType) : null);
+		return fieldType != null ? getEmptyValue(fieldType) : null;
 	}
 
 	/**

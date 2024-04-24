@@ -154,9 +154,9 @@ public final class MappedInterceptor implements HandlerInterceptor {
 	 */
 	@Nullable
 	public String[] getIncludePathPatterns() {
-		return (!ObjectUtils.isEmpty(this.includePatterns) ?
-				Arrays.stream(this.includePatterns).map(PatternAdapter::getPatternString).toArray(String[]::new) :
-				null);
+		return ObjectUtils.isEmpty(this.includePatterns) ?
+				null :
+				Arrays.stream(this.includePatterns).map(PatternAdapter::getPatternString).toArray(String[]::new);
 	}
 
 	/**
@@ -166,9 +166,9 @@ public final class MappedInterceptor implements HandlerInterceptor {
 	 */
 	@Nullable
 	public String[] getExcludePathPatterns() {
-		return (!ObjectUtils.isEmpty(this.excludePatterns) ?
-				Arrays.stream(this.excludePatterns).map(PatternAdapter::getPatternString).toArray(String[]::new) :
-				null);
+		return ObjectUtils.isEmpty(this.excludePatterns) ?
+				null :
+				Arrays.stream(this.excludePatterns).map(PatternAdapter::getPatternString).toArray(String[]::new);
 	}
 
 	/**
@@ -213,7 +213,7 @@ public final class MappedInterceptor implements HandlerInterceptor {
 		if (this.pathMatcher != defaultPathMatcher) {
 			path = path.toString();
 		}
-		boolean isPathContainer = (path instanceof PathContainer);
+		boolean isPathContainer = path instanceof PathContainer;
 		if (!ObjectUtils.isEmpty(this.excludePatterns)) {
 			for (PatternAdapter adapter : this.excludePatterns) {
 				if (adapter.match(path, isPathContainer, this.pathMatcher)) {
@@ -241,7 +241,7 @@ public final class MappedInterceptor implements HandlerInterceptor {
 	 */
 	@Deprecated(since = "5.3")
 	public boolean matches(String lookupPath, PathMatcher pathMatcher) {
-		pathMatcher = (this.pathMatcher != defaultPathMatcher ? this.pathMatcher : pathMatcher);
+		pathMatcher = this.pathMatcher != defaultPathMatcher ? this.pathMatcher : pathMatcher;
 		if (!ObjectUtils.isEmpty(this.excludePatterns)) {
 			for (PatternAdapter adapter : this.excludePatterns) {
 				if (pathMatcher.match(adapter.getPatternString(), lookupPath)) {

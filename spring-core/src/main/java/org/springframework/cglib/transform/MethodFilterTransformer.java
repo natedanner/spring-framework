@@ -20,8 +20,8 @@ import org.springframework.asm.MethodVisitor;
 import org.springframework.cglib.core.ClassTransformer;
 
 public class MethodFilterTransformer extends AbstractClassTransformer {
-    private MethodFilter filter;
-    private ClassTransformer pass;
+	private final MethodFilter filter;
+	private final ClassTransformer pass;
     private ClassVisitor direct;
 
     public MethodFilterTransformer(MethodFilter filter, ClassTransformer pass) {

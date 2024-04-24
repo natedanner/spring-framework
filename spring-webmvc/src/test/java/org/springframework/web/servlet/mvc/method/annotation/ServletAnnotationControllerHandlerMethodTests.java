@@ -813,7 +813,7 @@ class ServletAnnotationControllerHandlerMethodTests extends AbstractServletHandl
 		request = new MockHttpServletRequest("GET", "/myApp/surprise.do");
 		response = new MockHttpServletResponse();
 		getServlet().service(request, response);
-		assertThat(response.getContentAsString()).isEqualTo(!usePathPatterns ? "mySurpriseView" : "myView");
+		assertThat(response.getContentAsString()).isEqualTo(usePathPatterns ? "myView" : "mySurpriseView");
 	}
 
 	@PathPatternsParameterizedTest
@@ -4324,7 +4324,7 @@ class ServletAnnotationControllerHandlerMethodTests extends AbstractServletHandl
 		@RequestMapping("/bind")
 		public String handle(NestedDataClass data) {
 			DataClass nestedParam2 = data.nestedParam2;
-			return (data.param1 + "-" + nestedParam2.param1 + "-" + nestedParam2.param2 + "-" + nestedParam2.param3);
+			return data.param1 + "-" + nestedParam2.param1 + "-" + nestedParam2.param2 + "-" + nestedParam2.param3;
 		}
 	}
 

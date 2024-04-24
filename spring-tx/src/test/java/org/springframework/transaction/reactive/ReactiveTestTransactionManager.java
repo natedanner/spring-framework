@@ -46,15 +46,15 @@ class ReactiveTestTransactionManager extends AbstractReactiveTransactionManager 
 	@Nullable
 	private Function<String, RuntimeException> forceFailOnRollback;
 
-	protected boolean begin = false;
+	protected boolean begin;
 
-	protected boolean commit = false;
+	protected boolean commit;
 
-	protected boolean rollback = false;
+	protected boolean rollback;
 
-	protected boolean rollbackOnly = false;
+	protected boolean rollbackOnly;
 
-	protected boolean cleanup = false;
+	protected boolean cleanup;
 
 
 	ReactiveTestTransactionManager(boolean existingTransaction, boolean canCreateTransaction) {

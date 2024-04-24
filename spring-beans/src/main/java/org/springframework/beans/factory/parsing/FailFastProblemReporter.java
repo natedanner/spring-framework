@@ -48,7 +48,7 @@ public class FailFastProblemReporter implements ProblemReporter {
 	 * @param logger the {@link Log logger} that is to be used to report warnings
 	 */
 	public void setLogger(@Nullable Log logger) {
-		this.logger = (logger != null ? logger : LogFactory.getLog(getClass()));
+		this.logger = logger != null ? logger : LogFactory.getLog(getClass());
 	}
 
 

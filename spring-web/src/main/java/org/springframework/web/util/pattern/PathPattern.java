@@ -136,7 +136,7 @@ public class PathPattern implements Comparable<PathPattern> {
 	/**
 	 * Does the pattern end with '&lt;separator&gt;'.
 	 */
-	private boolean endsWithSeparatorWildcard = false;
+	private boolean endsWithSeparatorWildcard;
 
 	/**
 	 * Score is used to quickly compare patterns. Different pattern components are given different
@@ -149,7 +149,7 @@ public class PathPattern implements Comparable<PathPattern> {
 	private int score;
 
 	/** Does the pattern end with {*...}. */
-	private boolean catchAll = false;
+	private boolean catchAll;
 
 
 	@SuppressWarnings("deprecation")
@@ -192,7 +192,7 @@ public class PathPattern implements Comparable<PathPattern> {
 	 * @since 5.2
 	 */
 	public boolean hasPatternSyntax() {
-		return (this.score > 0 || this.catchAll || this.patternString.indexOf('?') != -1);
+		return this.score > 0 || this.catchAll || this.patternString.indexOf('?') != -1;
 	}
 
 	/**
@@ -226,9 +226,9 @@ public class PathPattern implements Comparable<PathPattern> {
 	@Nullable
 	public PathMatchInfo matchAndExtract(PathContainer pathContainer) {
 		if (this.head == null) {
-			return (hasLength(pathContainer) &&
+			return hasLength(pathContainer) &&
 					!(this.matchOptionalTrailingSeparator && pathContainerIsJustSeparator(pathContainer)) ?
-					null : PathMatchInfo.EMPTY);
+					null : PathMatchInfo.EMPTY;
 		}
 		else if (!hasLength(pathContainer)) {
 			if (this.head instanceof WildcardTheRestPathElement || this.head instanceof CaptureTheRestPathElement) {
@@ -369,8 +369,8 @@ public class PathPattern implements Comparable<PathPattern> {
 	@Override
 	public int compareTo(@Nullable PathPattern otherPattern) {
 		int result = SPECIFICITY_COMPARATOR.compare(this, otherPattern);
-		return (result == 0 && otherPattern != null ?
-				this.patternString.compareTo(otherPattern.patternString) : result);
+		return result == 0 && otherPattern != null ?
+				this.patternString.compareTo(otherPattern.patternString) : result;
 	}
 
 	/**
@@ -420,10 +420,10 @@ public class PathPattern implements Comparable<PathPattern> {
 		String firstExtension = this.patternString.substring(starDotPos1 + 1);  // looking for the first extension
 		String p2string = pattern2string.patternString;
 		int dotPos2 = p2string.indexOf('.');
-		String file2 = (dotPos2 == -1 ? p2string : p2string.substring(0, dotPos2));
-		String secondExtension = (dotPos2 == -1 ? "" : p2string.substring(dotPos2));
-		boolean firstExtensionWild = (firstExtension.equals(".*") || firstExtension.isEmpty());
-		boolean secondExtensionWild = (secondExtension.equals(".*") || secondExtension.isEmpty());
+		String file2 = dotPos2 == -1 ? p2string : p2string.substring(0, dotPos2);
+		String secondExtension = dotPos2 == -1 ? "" : p2string.substring(dotPos2);
+		boolean firstExtensionWild = ".*".equals(firstExtension) || firstExtension.isEmpty();
+		boolean secondExtensionWild = ".*".equals(secondExtension) || secondExtension.isEmpty();
 		if (!firstExtensionWild && !secondExtensionWild) {
 			throw new IllegalArgumentException(
 					"Cannot combine patterns: " + this.patternString + " and " + pattern2string);
@@ -433,10 +433,10 @@ public class PathPattern implements Comparable<PathPattern> {
 
 	@Override
 	public boolean equals(@Nullable Object other) {
-		return (this == other || (other instanceof PathPattern that &&
+		return this == other || (other instanceof PathPattern that &&
 				this.patternString.equals(that.getPatternString()) &&
 				getSeparator() == that.getSeparator() &&
-				this.caseSensitive == that.caseSensitive));
+				this.caseSensitive == that.caseSensitive);
 	}
 
 	@Override
@@ -514,8 +514,8 @@ public class PathPattern implements Comparable<PathPattern> {
 	 * @return joined path that may include separator if necessary
 	 */
 	private String concat(String path1, String path2) {
-		boolean path1EndsWithSeparator = (path1.charAt(path1.length() - 1) == getSeparator());
-		boolean path2StartsWithSeparator = (path2.charAt(0) == getSeparator());
+		boolean path1EndsWithSeparator = path1.charAt(path1.length() - 1) == getSeparator();
+		boolean path2StartsWithSeparator = path2.charAt(0) == getSeparator();
 		if (path1EndsWithSeparator && path2StartsWithSeparator) {
 			return path1 + path2.substring(1);
 		}
@@ -533,7 +533,7 @@ public class PathPattern implements Comparable<PathPattern> {
 	 * @return {@code true} has more than zero elements
 	 */
 	private boolean hasLength(@Nullable PathContainer container) {
-		return container != null && container.elements().size() > 0;
+		return container != null && !container.elements().isEmpty();
 	}
 
 	private static int scoreByNormalizedLength(PathPattern pattern) {
@@ -560,8 +560,8 @@ public class PathPattern implements Comparable<PathPattern> {
 
 		PathMatchInfo(Map<String, String> uriVars, @Nullable Map<String, MultiValueMap<String, String>> matrixVars) {
 			this.uriVariables = Collections.unmodifiableMap(uriVars);
-			this.matrixVariables = (matrixVars != null ?
-					Collections.unmodifiableMap(matrixVars) : Collections.emptyMap());
+			this.matrixVariables = matrixVars != null ?
+					Collections.unmodifiableMap(matrixVars) : Collections.emptyMap();
 		}
 
 		/**
@@ -663,7 +663,7 @@ public class PathPattern implements Comparable<PathPattern> {
 
 		boolean extractingVariables;
 
-		boolean determineRemainingPath = false;
+		boolean determineRemainingPath;
 
 		// if determineRemaining is true, this is set to the position in
 		// the candidate where the pattern finished matching - i.e. it
@@ -723,8 +723,8 @@ public class PathPattern implements Comparable<PathPattern> {
 		 * @return the decoded value
 		 */
 		String pathElementValue(int pathIndex) {
-			Element element = (pathIndex < this.pathLength) ? this.pathElements.get(pathIndex) : null;
-			return (element instanceof PathSegment pathSegment ? pathSegment.valueToMatch() : "");
+			Element element = pathIndex < this.pathLength ? this.pathElements.get(pathIndex) : null;
+			return element instanceof PathSegment pathSegment ? pathSegment.valueToMatch() : "";
 		}
 	}
 

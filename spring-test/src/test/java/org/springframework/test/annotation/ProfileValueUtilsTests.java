@@ -291,7 +291,7 @@ class ProfileValueUtilsTests {
 
 		@Override
 		public String get(final String key) {
-			return (key.equals(NAME) ? "42" : null);
+			return key.equals(NAME) ? "42" : null;
 		}
 	}
 

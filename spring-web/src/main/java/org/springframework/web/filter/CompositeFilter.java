@@ -93,7 +93,7 @@ public class CompositeFilter implements Filter {
 
 		private final List<? extends Filter> additionalFilters;
 
-		private int currentPosition = 0;
+		private int currentPosition;
 
 		public VirtualFilterChain(FilterChain chain, List<? extends Filter> additionalFilters) {
 			this.originalChain = chain;

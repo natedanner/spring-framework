@@ -114,8 +114,8 @@ public class ContentCachingResponseWrapper extends HttpServletResponseWrapper {
 	public PrintWriter getWriter() throws IOException {
 		if (this.writer == null) {
 			String characterEncoding = getCharacterEncoding();
-			this.writer = (characterEncoding != null ? new ResponsePrintWriter(characterEncoding) :
-					new ResponsePrintWriter(WebUtils.DEFAULT_CHARACTER_ENCODING));
+			this.writer = characterEncoding != null ? new ResponsePrintWriter(characterEncoding) :
+					new ResponsePrintWriter(WebUtils.DEFAULT_CHARACTER_ENCODING);
 		}
 		return this.writer;
 	}
@@ -220,7 +220,7 @@ public class ContentCachingResponseWrapper extends HttpServletResponseWrapper {
 	@Nullable
 	public String getHeader(String name) {
 		if (HttpHeaders.CONTENT_LENGTH.equalsIgnoreCase(name)) {
-			return (this.contentLength != null) ? this.contentLength.toString() : null;
+			return this.contentLength != null ? this.contentLength.toString() : null;
 		}
 		else if (HttpHeaders.CONTENT_TYPE.equalsIgnoreCase(name)) {
 			return this.contentType;

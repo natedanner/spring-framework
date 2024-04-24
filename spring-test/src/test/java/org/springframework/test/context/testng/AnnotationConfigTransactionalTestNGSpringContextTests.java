@@ -64,10 +64,10 @@ class AnnotationConfigTransactionalTestNGSpringContextTests
 	private static final int NUM_TESTS = 2;
 	private static final int NUM_TX_TESTS = 1;
 
-	private static int numSetUpCalls = 0;
-	private static int numSetUpCallsInTransaction = 0;
-	private static int numTearDownCalls = 0;
-	private static int numTearDownCallsInTransaction = 0;
+	private static int numSetUpCalls;
+	private static int numSetUpCallsInTransaction;
+	private static int numTearDownCalls;
+	private static int numTearDownCallsInTransaction;
 
 	@Autowired
 	private Employee employee;

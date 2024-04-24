@@ -46,7 +46,7 @@ public abstract class MessageSourceSupport {
 	/** Logger available to subclasses. */
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	private boolean alwaysUseMessageFormat = false;
+	private boolean alwaysUseMessageFormat;
 
 	/**
 	 * Cache to hold already generated MessageFormats per message.
@@ -159,7 +159,7 @@ public abstract class MessageSourceSupport {
 	 * @return the resolved argument array
 	 */
 	protected Object[] resolveArguments(@Nullable Object[] args, Locale locale) {
-		return (args != null ? args : new Object[0]);
+		return args != null ? args : new Object[0];
 	}
 
 }

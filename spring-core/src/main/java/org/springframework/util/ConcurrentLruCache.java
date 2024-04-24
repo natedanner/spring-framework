@@ -414,8 +414,8 @@ public final class ConcurrentLruCache<K, V> {
 			this.recordedCount.lazySet(bufferIndex, writeCount + 1);
 			final int index = (int) (writeCount & BUFFER_INDEX_MASK);
 			this.buffers[bufferIndex].lazySet(index, node);
-			final long pending = (writeCount - this.processedCount.get(bufferIndex));
-			return (pending < MAX_PENDING_OPERATIONS);
+			final long pending = writeCount - this.processedCount.get(bufferIndex);
+			return pending < MAX_PENDING_OPERATIONS;
 		}
 
 		@SuppressWarnings("deprecation")  // for Thread.getId() on JDK 19

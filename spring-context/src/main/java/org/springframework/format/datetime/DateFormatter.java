@@ -81,7 +81,7 @@ public class DateFormatter implements Formatter<Date> {
 	@Nullable
 	private TimeZone timeZone;
 
-	private boolean lenient = false;
+	private boolean lenient;
 
 
 	/**

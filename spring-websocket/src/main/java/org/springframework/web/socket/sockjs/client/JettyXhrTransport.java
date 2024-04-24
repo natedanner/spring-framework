@@ -153,20 +153,19 @@ public class JettyXhrTransport extends AbstractXhrTransport implements Lifecycle
 		}
 		HttpStatusCode status = HttpStatusCode.valueOf(response.getStatus());
 		HttpHeaders responseHeaders = toHttpHeaders(response.getHeaders());
-		return (response.getContent() != null ?
+		return response.getContent() != null ?
 				new ResponseEntity<>(response.getContentAsString(), responseHeaders, status) :
-				new ResponseEntity<>(responseHeaders, status));
+				new ResponseEntity<>(responseHeaders, status);
 	}
 
 
 	private static void addHttpHeaders(Request request, HttpHeaders headers) {
-		request.headers(fields -> {
+		request.headers(fields ->
 			headers.forEach((key, values) -> {
 				for (String value : values) {
 					fields.add(key, value);
 				}
-			});
-		});
+			}));
 	}
 
 	private static HttpHeaders toHttpHeaders(HttpFields httpFields) {

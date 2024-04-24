@@ -204,8 +204,8 @@ public abstract class AbstractMethodMessageHandler<T>
 	}
 
 	public String getBeanName() {
-		return (this.beanName != null ? this.beanName :
-				getClass().getSimpleName() + "@" + ObjectUtils.getIdentityHexString(this));
+		return this.beanName != null ? this.beanName :
+				getClass().getSimpleName() + "@" + ObjectUtils.getIdentityHexString(this);
 	}
 
 	/**
@@ -343,11 +343,11 @@ public abstract class AbstractMethodMessageHandler<T>
 
 	private String formatMappings(Class<?> userType, Map<Method, T> methods) {
 		String packageName = ClassUtils.getPackageName(userType);
-		String formattedType = (StringUtils.hasText(packageName) ?
+		String formattedType = StringUtils.hasText(packageName) ?
 				Arrays.stream(packageName.split("\\."))
 						.map(packageSegment -> packageSegment.substring(0, 1))
 						.collect(Collectors.joining(".", "", "." + userType.getSimpleName())) :
-				userType.getSimpleName());
+				userType.getSimpleName();
 		Function<Method, String> methodFormatter = method -> Arrays.stream(method.getParameterTypes())
 				.map(Class::getSimpleName)
 				.collect(Collectors.joining(",", "(", ")"));
@@ -466,7 +466,7 @@ public abstract class AbstractMethodMessageHandler<T>
 		List<Match<T>> matches = new ArrayList<>();
 
 		RouteMatcher.Route destination = getDestination(message);
-		List<T> mappingsByUrl = (destination != null ? this.destinationLookup.get(destination.value()) : null);
+		List<T> mappingsByUrl = destination != null ? this.destinationLookup.get(destination.value()) : null;
 		if (mappingsByUrl != null) {
 			addMatchesToCollection(mappingsByUrl, message, matches);
 		}

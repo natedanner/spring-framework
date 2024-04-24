@@ -45,7 +45,7 @@ public abstract class AbstractMonitoringInterceptor extends AbstractTraceInterce
 
 	private String suffix = "";
 
-	private boolean logTargetClassInvocation = false;
+	private boolean logTargetClassInvocation;
 
 
 	/**
@@ -53,7 +53,7 @@ public abstract class AbstractMonitoringInterceptor extends AbstractTraceInterce
 	 * <p>Default is none.
 	 */
 	public void setPrefix(@Nullable String prefix) {
-		this.prefix = (prefix != null ? prefix : "");
+		this.prefix = prefix != null ? prefix : "";
 	}
 
 	/**
@@ -68,7 +68,7 @@ public abstract class AbstractMonitoringInterceptor extends AbstractTraceInterce
 	 * <p>Default is none.
 	 */
 	public void setSuffix(@Nullable String suffix) {
-		this.suffix = (suffix != null ? suffix : "");
+		this.suffix = suffix != null ? suffix : "";
 	}
 
 	/**

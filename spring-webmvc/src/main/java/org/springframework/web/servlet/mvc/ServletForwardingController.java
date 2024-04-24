@@ -163,7 +163,7 @@ public class ServletForwardingController extends AbstractController implements B
 	 * @see org.springframework.web.util.WebUtils#isIncludeRequest
 	 */
 	protected boolean useInclude(HttpServletRequest request, HttpServletResponse response) {
-		return (WebUtils.isIncludeRequest(request) || response.isCommitted());
+		return WebUtils.isIncludeRequest(request) || response.isCommitted();
 	}
 
 }

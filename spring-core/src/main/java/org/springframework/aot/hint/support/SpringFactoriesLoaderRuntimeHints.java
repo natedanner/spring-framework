@@ -48,8 +48,8 @@ class SpringFactoriesLoaderRuntimeHints implements RuntimeHintsRegistrar {
 
 	@Override
 	public void registerHints(RuntimeHints hints, @Nullable ClassLoader classLoader) {
-		ClassLoader classLoaderToUse = (classLoader != null ? classLoader
-				: SpringFactoriesLoaderRuntimeHints.class.getClassLoader());
+		ClassLoader classLoaderToUse = classLoader != null ? classLoader
+				: SpringFactoriesLoaderRuntimeHints.class.getClassLoader();
 		for (String resourceLocation : RESOURCE_LOCATIONS) {
 			registerHints(hints, classLoaderToUse, resourceLocation);
 		}

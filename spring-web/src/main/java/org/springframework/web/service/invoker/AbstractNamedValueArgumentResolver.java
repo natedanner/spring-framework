@@ -85,7 +85,7 @@ public abstract class AbstractNamedValueArgumentResolver implements HttpServiceA
 		if (Map.class.isAssignableFrom(parameter.getParameterType())) {
 			Assert.isInstanceOf(Map.class, argument);
 			parameter = parameter.nested(1);
-			argument = (argument != null ? argument : Collections.emptyMap());
+			argument = argument != null ? argument : Collections.emptyMap();
 			for (Map.Entry<String, ?> entry : ((Map<String, ?>) argument).entrySet()) {
 				addSingleOrMultipleValues(
 						entry.getKey(), entry.getValue(), false, null, info.label, info.multiValued,
@@ -133,8 +133,8 @@ public abstract class AbstractNamedValueArgumentResolver implements HttpServiceA
 							.formatted(parameter.getNestedParameterType().getName()));
 			}
 		}
-		boolean required = (info.required && !parameter.getParameterType().equals(Optional.class));
-		String defaultValue = (ValueConstants.DEFAULT_NONE.equals(info.defaultValue) ? null : info.defaultValue);
+		boolean required = info.required && !parameter.getParameterType().equals(Optional.class);
+		String defaultValue = ValueConstants.DEFAULT_NONE.equals(info.defaultValue) ? null : info.defaultValue;
 		return info.update(name, required, defaultValue);
 	}
 
@@ -181,9 +181,9 @@ public abstract class AbstractNamedValueArgumentResolver implements HttpServiceA
 		if (this.conversionService != null && !(value instanceof String)) {
 			parameter = parameter.nestedIfOptional();
 			Class<?> type = parameter.getNestedParameterType();
-			value = (type != Object.class && !type.isArray() ?
+			value = type != Object.class && !type.isArray() ?
 					this.conversionService.convert(value, new TypeDescriptor(parameter), STRING_TARGET_TYPE) :
-					this.conversionService.convert(value, String.class));
+					this.conversionService.convert(value, String.class);
 		}
 
 		if (value == null) {

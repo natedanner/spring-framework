@@ -91,7 +91,7 @@ class SimpleBeforeAdviceAdapter implements AdvisorAdapter, Serializable {
 
 	@Override
 	public boolean supportsAdvice(Advice advice) {
-		return (advice instanceof SimpleBeforeAdvice);
+		return advice instanceof SimpleBeforeAdvice;
 	}
 
 	@Override
@@ -121,7 +121,7 @@ class SimpleBeforeAdviceImpl implements SimpleBeforeAdvice {
 
 final class SimpleBeforeAdviceInterceptor implements MethodInterceptor {
 
-	private SimpleBeforeAdvice advice;
+	private final SimpleBeforeAdvice advice;
 
 	public SimpleBeforeAdviceInterceptor(SimpleBeforeAdvice advice) {
 		this.advice = advice;

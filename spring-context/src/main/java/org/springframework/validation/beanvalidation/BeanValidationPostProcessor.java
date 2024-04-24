@@ -45,7 +45,7 @@ public class BeanValidationPostProcessor implements BeanPostProcessor, Initializ
 	@Nullable
 	private Validator validator;
 
-	private boolean afterInitialization = false;
+	private boolean afterInitialization;
 
 
 	/**

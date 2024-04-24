@@ -66,7 +66,7 @@ final class DefaultErrorResponseBuilder implements ErrorResponse.Builder {
 
 	@Override
 	public ErrorResponse.Builder header(String headerName, String... headerValues) {
-		this.headers = (this.headers != null ? this.headers : new HttpHeaders());
+		this.headers = this.headers != null ? this.headers : new HttpHeaders();
 		for (String headerValue : headerValues) {
 			this.headers.add(headerName, headerValue);
 		}
@@ -172,7 +172,7 @@ final class DefaultErrorResponseBuilder implements ErrorResponse.Builder {
 
 			this.exception = ex;
 			this.statusCode = statusCode;
-			this.headers = (headers != null ? headers : HttpHeaders.EMPTY);
+			this.headers = headers != null ? headers : HttpHeaders.EMPTY;
 			this.problemDetail = problemDetail;
 			this.typeMessageCode = typeMessageCode;
 			this.titleMessageCode = titleMessageCode;

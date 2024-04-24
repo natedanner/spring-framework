@@ -92,7 +92,7 @@ public class DelegatingFilterProxy extends GenericFilterBean {
 	@Nullable
 	private String targetBeanName;
 
-	private boolean targetFilterLifecycle = false;
+	private boolean targetFilterLifecycle;
 
 	@Nullable
 	private volatile Filter delegate;

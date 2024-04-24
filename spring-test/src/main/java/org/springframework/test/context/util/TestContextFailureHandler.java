@@ -37,7 +37,7 @@ class TestContextFailureHandler implements FailureHandler {
 
 	@Override
 	public void handleFailure(Class<?> factoryType, String factoryImplementationName, Throwable failure) {
-		Throwable ex = (failure instanceof InvocationTargetException ite ? ite.getTargetException() : failure);
+		Throwable ex = failure instanceof InvocationTargetException ite ? ite.getTargetException() : failure;
 		if (ex instanceof ClassNotFoundException || ex instanceof NoClassDefFoundError) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("""

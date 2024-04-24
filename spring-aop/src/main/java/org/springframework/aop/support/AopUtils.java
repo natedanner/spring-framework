@@ -74,8 +74,8 @@ public abstract class AopUtils {
 	 * @see #isCglibProxy
 	 */
 	public static boolean isAopProxy(@Nullable Object object) {
-		return (object instanceof SpringProxy && (Proxy.isProxyClass(object.getClass()) ||
-				object.getClass().getName().contains(ClassUtils.CGLIB_CLASS_SEPARATOR)));
+		return object instanceof SpringProxy && (Proxy.isProxyClass(object.getClass()) ||
+				object.getClass().getName().contains(ClassUtils.CGLIB_CLASS_SEPARATOR));
 	}
 
 	/**
@@ -87,7 +87,7 @@ public abstract class AopUtils {
 	 * @see java.lang.reflect.Proxy#isProxyClass
 	 */
 	public static boolean isJdkDynamicProxy(@Nullable Object object) {
-		return (object instanceof SpringProxy && Proxy.isProxyClass(object.getClass()));
+		return object instanceof SpringProxy && Proxy.isProxyClass(object.getClass());
 	}
 
 	/**
@@ -99,8 +99,8 @@ public abstract class AopUtils {
 	 * @see ClassUtils#isCglibProxy(Object)
 	 */
 	public static boolean isCglibProxy(@Nullable Object object) {
-		return (object instanceof SpringProxy &&
-				object.getClass().getName().contains(ClassUtils.CGLIB_CLASS_SEPARATOR));
+		return object instanceof SpringProxy &&
+				object.getClass().getName().contains(ClassUtils.CGLIB_CLASS_SEPARATOR);
 	}
 
 	/**
@@ -119,7 +119,7 @@ public abstract class AopUtils {
 			result = targetClassAware.getTargetClass();
 		}
 		if (result == null) {
-			result = (isCglibProxy(candidate) ? candidate.getClass().getSuperclass() : candidate.getClass());
+			result = isCglibProxy(candidate) ? candidate.getClass().getSuperclass() : candidate.getClass();
 		}
 		return result;
 	}
@@ -180,8 +180,8 @@ public abstract class AopUtils {
 	 * @see java.lang.Object#finalize()
 	 */
 	public static boolean isFinalizeMethod(@Nullable Method method) {
-		return (method != null && method.getName().equals("finalize") &&
-				method.getParameterCount() == 0);
+		return method != null && "finalize".equals(method.getName()) &&
+				method.getParameterCount() == 0;
 	}
 
 	/**
@@ -202,7 +202,7 @@ public abstract class AopUtils {
 	 * @see org.springframework.core.BridgeMethodResolver#getMostSpecificMethod
 	 */
 	public static Method getMostSpecificMethod(Method method, @Nullable Class<?> targetClass) {
-		Class<?> specificTargetClass = (targetClass != null ? ClassUtils.getUserClass(targetClass) : null);
+		Class<?> specificTargetClass = targetClass != null ? ClassUtils.getUserClass(targetClass) : null;
 		return BridgeMethodResolver.getMostSpecificMethod(method, specificTargetClass);
 	}
 
